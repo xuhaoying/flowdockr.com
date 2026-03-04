@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Revision Policy Template | FlowDockr",
+    "description": "A freelancer-ready revision policy template to control scope creep."
+  },
+  "page": {
+    "title": "Revision Policy Template",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Revision Policy Template",
+        "description": "Use this structure to define included revisions, out-of-scope handling, and approval steps.",
+        "buttons": [
+          {
+            "title": "Apply in Scope Module",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Template blocks",
+        "description": "Copy and customize before sending.",
+        "items": [
+          {
+            "title": "Included revision rounds",
+            "description": "State exact number and what counts as a revision.",
+            "icon": "ListChecks"
+          },
+          {
+            "title": "Out-of-scope changes",
+            "description": "Define quote-first or hourly change policy.",
+            "icon": "BadgeDollarSign"
+          },
+          {
+            "title": "Confirmation line",
+            "description": "Ask for explicit client approval before proceeding.",
+            "icon": "MessageSquareReply"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Need client-ready wording fast?",
+        "description": "Use Scope Guard to generate tailored policy text in minutes.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "Client Asking for Extra Work | FlowDockr Guide",
+    "description": "Handle out-of-scope requests without damaging relationship quality."
+  },
+  "page": {
+    "title": "Client Asking for Extra Work",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Extra work requests need a scope rule, not a quick yes.",
+        "description": "Protect delivery quality and timeline with change-request language.",
+        "buttons": [
+          {
+            "title": "Generate your revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Guide",
+        "title": "Problem -> Why -> Solution",
+        "description": "Separate approved scope from add-on requests.",
+        "items": [
+          {
+            "title": "Problem",
+            "description": "Clients request additional deliverables after work starts.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Why it happens",
+            "description": "No explicit wording exists for in-scope vs new tasks.",
+            "icon": "Search"
+          },
+          {
+            "title": "Solution",
+            "description": "Use a fixed scope rule and quote add-ons before execution.",
+            "icon": "ShieldCheck"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy ->",
+        "description": "Convert extra-work pressure into clear project terms.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope#scope-generator",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

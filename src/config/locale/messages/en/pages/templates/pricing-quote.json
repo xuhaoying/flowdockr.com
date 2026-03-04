@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Pricing Quote Template | FlowDockr",
+    "description": "A structured quote template for freelance pricing conversations."
+  },
+  "page": {
+    "title": "Pricing Quote Template",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Pricing Quote Template",
+        "description": "Use this format to present scope, timeline, and package options with confidence.",
+        "buttons": [
+          {
+            "title": "Apply in Pricing Module",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Template blocks",
+        "description": "Clarify what the client gets at each level.",
+        "items": [
+          {
+            "title": "Scope definition",
+            "description": "List deliverables and revision boundaries.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Package ladder",
+            "description": "Offer good, better, best options with clear differences.",
+            "icon": "Layers"
+          },
+          {
+            "title": "Decision CTA",
+            "description": "Ask for package selection and kickoff confirmation.",
+            "icon": "ArrowRightCircle"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Quote faster with less ambiguity.",
+        "description": "Use Pricing Coach to generate project-specific structure.",
+        "buttons": [
+          {
+            "title": "Open Pricing Coach",
+            "url": "/pricing",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

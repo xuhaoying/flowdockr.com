@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "title": "Client Asking for Discount | FlowDockr Guide",
+    "description": "How freelancers can respond to discount requests without collapsing margin."
+  },
+  "page": {
+    "title": "Client Asking for Discount",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "A discount request is a negotiation signal.",
+        "description": "Respond with structured options instead of immediate price cuts.",
+        "buttons": [
+          {
+            "title": "Open Deal Module",
+            "url": "/deal",
+            "icon": "Handshake",
+            "variant": "default"
+          },
+          {
+            "title": "Open Pricing Module",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Playbook",
+        "title": "3-step objection response",
+        "description": "Keep control while preserving relationship quality.",
+        "items": [
+          {
+            "title": "Acknowledge budget",
+            "description": "Confirm constraints without agreeing to reduce immediately.",
+            "icon": "MessageSquare"
+          },
+          {
+            "title": "Reframe by outcomes",
+            "description": "Link pricing to risk reduction and deliverable impact.",
+            "icon": "TrendingUp"
+          },
+          {
+            "title": "Offer conditional options",
+            "description": "Trade scope, speed, or terms instead of pure price cuts.",
+            "icon": "Scale"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate a negotiation-ready reply.",
+        "description": "Use wording that protects value and moves to a decision.",
+        "buttons": [
+          {
+            "title": "Go to Deal Module",
+            "url": "/deal",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "title": "FlowDockr for Copywriters",
+    "description": "Negotiation, scope, and pricing workflows tailored for freelance copywriters."
+  },
+  "page": {
+    "title": "FlowDockr for Copywriters",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Copywriting projects need stronger intent and revision guardrails.",
+        "description": "Use Deal to align value, Scope to control rewrites, and Pricing to package outcomes.",
+        "buttons": [
+          {
+            "title": "Open Deal",
+            "url": "/deal",
+            "icon": "Handshake",
+            "variant": "default"
+          },
+          {
+            "title": "Open Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Copywriter risk map",
+        "description": "Where margin and project clarity usually drop.",
+        "items": [
+          {
+            "title": "Unlimited rewrites",
+            "description": "Separate refinement rounds from strategic repositioning.",
+            "icon": "RotateCcw"
+          },
+          {
+            "title": "Strategy requests outside brief",
+            "description": "Treat new channels and audiences as change requests.",
+            "icon": "Lightbulb"
+          },
+          {
+            "title": "Price pressure on word count",
+            "description": "Frame pricing around business outcomes, not character volume.",
+            "icon": "BadgeDollarSign"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Set project rules before draft one.",
+        "description": "Strong early boundaries reduce rewrite loops later.",
+        "buttons": [
+          {
+            "title": "Use Pricing Quote Template",
+            "url": "/templates/pricing-quote",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

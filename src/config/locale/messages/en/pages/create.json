@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "title": "Elyra Deal Strategy Pack",
+    "description": "Generate a structured response for price objections."
+  },
+  "page": {
+    "title": "Deal Strategy Pack Generator",
+    "description": "Input the live deal context and get actionable reply scripts in English, Chinese, or Spanish."
+  },
+  "generator": {
+    "title": "Generate Negotiation Strategy Pack",
+    "description": "Input the live deal context and get actionable reply scripts in English, Chinese, or Spanish.",
+    "tabs": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "form": {
+      "provider": "Provider",
+      "model": "Model",
+      "select_provider": "Select Provider",
+      "select_model": "Select Model",
+      "prompt": "Deal Context",
+      "prompt_placeholder": "Include client need, your quote, objection (too expensive / lower budget / competitor cheaper), and your floor price.",
+      "reference_image": "Reference Image",
+      "reference_image_placeholder": "Upload reference images, support multiple images",
+      "some_images_failed_to_upload": "Some images failed to upload, please delete them and re-upload",
+      "prompt_too_long": "Prompt is too long, please delete some content"
+    },
+    "generate": "Generate Strategy Pack",
+    "checking_account": "Checking Account...",
+    "loading": "Loading...",
+    "generating": "Generating...",
+    "sign_in_to_generate": "Sign In to Generate Image",
+    "credits_cost": "Cost {credits} credits",
+    "credits_remaining": "Remaining {credits} credits",
+    "buy_credits": "Buy Credits",
+    "progress": "Progress",
+    "generated_images": "Image Preview",
+    "ready_to_generate": "Ready to Generate",
+    "ready_for_generating": "Ready for Generating",
+    "no_images_generated": "No Strategy Generated Yet"
+  },
+  "deal_strategy": {
+    "title": "Deal Strategy Pack Generator",
+    "description": "Focus on price objections: too expensive, limited budget, cheaper competitor.",
+    "fields": {
+      "client_need": "Client Need",
+      "client_need_placeholder": "What does the client want to buy and what result do they expect?",
+      "your_quote": "Your Current Quote",
+      "your_quote_placeholder": "e.g. 1500",
+      "your_floor_price": "Your Floor Price",
+      "your_floor_price_placeholder": "e.g. 900",
+      "client_objection": "Client Objection",
+      "client_objection_placeholder": "e.g. Too expensive. Another provider is cheaper."
+    },
+    "actions": {
+      "generate": "Generate Strategy Pack",
+      "generating": "Generating...",
+      "copy": "Copy",
+      "unlock": "Unlock Full Strategy (1 Credit)",
+      "unlocking": "Unlocking...",
+      "buy_credits": "Buy Credits",
+      "save_feedback": "Submit Feedback",
+      "saving": "Saving..."
+    },
+    "errors": {
+      "invalid_input": "Please complete all required fields with valid prices.",
+      "request_failed": "Request failed, please try again.",
+      "copy_failed": "Copy failed. Please copy manually.",
+      "sign_in_required": "Please sign in first.",
+      "unlock_failed": "Unlock failed, please try again.",
+      "insufficient_credits": "Insufficient credits. Please buy credits first.",
+      "feedback_failed": "Feedback submit failed, please try again."
+    },
+    "messages": {
+      "generated": "Strategy pack generated.",
+      "copied": "Copied to clipboard.",
+      "unlocked": "Full strategy unlocked.",
+      "feedback_saved": "Feedback saved."
+    },
+    "credits_remaining": "Credits remaining: {credits}",
+    "paywall": {
+      "description": "Preview generated. Unlock full scripts, logic and actions with 1 credit."
+    },
+    "feedback": {
+      "title": "Result Feedback",
+      "adopted_script": "Which script did you send?",
+      "script_instant": "One-line immediate reply",
+      "script_strong": "Strong version",
+      "script_warm": "Warm version",
+      "script_concession": "Conditional concession",
+      "script_none": "Did not send",
+      "outcome": "Current outcome",
+      "outcome_pending": "Pending",
+      "outcome_won": "Won",
+      "outcome_lost": "Lost",
+      "rating_optional": "Quality rating (optional)",
+      "note_optional": "Notes (optional)"
+    },
+    "result": {
+      "title": "Negotiation Strategy Output",
+      "subtitle": "Structured output with clear action steps.",
+      "instant_reply": "One-Line Immediate Reply",
+      "psychology": "Client Psychology",
+      "price_range": "Suggested Price Range",
+      "ideal_price": "Ideal Price",
+      "negotiable_price": "Negotiable Price",
+      "bottom_price": "Bottom Price",
+      "scripts": "Reply Scripts",
+      "script_strong": "Strong Version",
+      "script_warm": "Warm Version",
+      "script_concession": "Conditional Concession Version",
+      "logic": "Decision Logic",
+      "risks": "Risk Alerts",
+      "next_actions": "Next Actions"
+    }
+  }
+}

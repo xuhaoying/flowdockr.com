@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "title": "FlowDockr Industries",
+    "description": "Playbooks and workflows tailored to different freelancer professions."
+  },
+  "page": {
+    "title": "FlowDockr Industries",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Workflows by freelancer industry.",
+        "description": "Choose your field to see the most common client risks and recommended module order.",
+        "buttons": [
+          {
+            "title": "Designers",
+            "url": "/industries/designers",
+            "icon": "PenTool",
+            "variant": "default"
+          },
+          {
+            "title": "Video Editors",
+            "url": "/industries/video-editors",
+            "icon": "Clapperboard",
+            "variant": "outline"
+          },
+          {
+            "title": "Copywriters",
+            "url": "/industries/copywriters",
+            "icon": "FilePenLine",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Industry fit",
+        "description": "Each path starts from the highest-frequency problem in that workflow.",
+        "items": [
+          {
+            "title": "Designers",
+            "description": "Start with Scope, then Pricing for package discipline.",
+            "icon": "PenTool"
+          },
+          {
+            "title": "Video Editors",
+            "description": "Start with Scope, then Payment for milestone protection.",
+            "icon": "Clapperboard"
+          },
+          {
+            "title": "Copywriters",
+            "description": "Start with Deal, then Scope for revision and intent clarity.",
+            "icon": "FilePenLine"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Choose your industry and run the first workflow.",
+        "description": "Then expand across modules as client complexity grows.",
+        "buttons": [
+          {
+            "title": "Open Scope Module",
+            "url": "/scope",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "title": "FlowDockr Templates",
+    "description": "Copy-ready templates for revision policy, payment reminders, and pricing quotes."
+  },
+  "page": {
+    "title": "FlowDockr Templates",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Templates you can send today.",
+        "description": "Use structured language for scope, payment, and pricing conversations.",
+        "buttons": [
+          {
+            "title": "Revision Policy",
+            "url": "/templates/revision-policy",
+            "icon": "FileCheck2",
+            "variant": "default"
+          },
+          {
+            "title": "Payment Reminder",
+            "url": "/templates/payment-reminder",
+            "icon": "Mail",
+            "variant": "outline"
+          },
+          {
+            "title": "Pricing Quote",
+            "url": "/templates/pricing-quote",
+            "icon": "BadgeDollarSign",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Template categories",
+        "description": "Built to reduce rewrite time during high-pressure client communication.",
+        "items": [
+          {
+            "title": "Scope templates",
+            "description": "Set revision boundaries and change-request rules.",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Payment templates",
+            "description": "Follow up on overdue invoices with clear deadlines.",
+            "icon": "CreditCard"
+          },
+          {
+            "title": "Pricing templates",
+            "description": "Present quote options with structured logic.",
+            "icon": "BadgeDollarSign"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Pick one template and send it within 5 minutes.",
+        "description": "Then systemize the same workflow in the related module.",
+        "buttons": [
+          {
+            "title": "Open Scope Module",
+            "url": "/scope",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "Scope Creep Freelancer Guide | FlowDockr",
+    "description": "A practical scope creep playbook for freelancers."
+  },
+  "page": {
+    "title": "Scope Creep Freelancer",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Scope creep is a pricing leak, not just a workflow issue.",
+        "description": "Protect margin with revision limits and out-of-scope rules.",
+        "buttons": [
+          {
+            "title": "Generate your revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Guide",
+        "title": "Problem -> Why -> Solution",
+        "description": "Prevent rework before it starts.",
+        "items": [
+          {
+            "title": "Problem",
+            "description": "New tasks are added but still treated like included work.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Why it happens",
+            "description": "No boundary language exists in client communication.",
+            "icon": "Search"
+          },
+          {
+            "title": "Solution",
+            "description": "State revision count and quote-first rule for extra requests.",
+            "icon": "ShieldCheck"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy ->",
+        "description": "Use Scope Guard to apply this workflow instantly.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope#scope-generator",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "metadata": {
+    "title": "FlowDockr Scope",
+    "description": "Stop scope creep with clear revision policies and client-ready replies."
+  },
+  "page": {
+    "title": "FlowDockr Scope",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Stop scope creep in client projects.",
+        "description": "Generate a clear revision policy and scope rule in under 30 seconds.",
+        "buttons": [
+          {
+            "title": "Generate revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "What Scope solves",
+        "description": "Protect deliverables, timeline, and pricing in client communication.",
+        "items": [
+          {
+            "title": "Unlimited revisions",
+            "description": "Define included rounds and extra-round pricing in plain language.",
+            "icon": "RotateCcw"
+          },
+          {
+            "title": "New requests mid-project",
+            "description": "Separate in-scope and out-of-scope work with explicit approval steps.",
+            "icon": "ListChecks"
+          },
+          {
+            "title": "Last-minute scope changes",
+            "description": "Anchor timeline impact and change-fee logic before rework starts.",
+            "icon": "Clock3"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Workflow",
+        "title": "Control scope in 3 steps",
+        "description": "A repeatable system you can apply to every project.",
+        "items": [
+          {
+            "title": "Define baseline",
+            "description": "List deliverables, included revision rounds, and timeline.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Issue policy",
+            "description": "Generate a client-facing revision policy and reply message.",
+            "icon": "FileCheck2"
+          },
+          {
+            "title": "Request confirmation",
+            "description": "Get written sign-off before applying any extra work.",
+            "icon": "MessageSquareReply"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Start with Scope Guard.",
+        "description": "Then connect Payment Protection to reduce late-payment risk.",
+        "buttons": [
+          {
+            "title": "Open Payment Module",
+            "url": "/payment",
+            "icon": "CreditCard"
+          },
+          {
+            "title": "View Pricing Module",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  },
+  "scope_guard": {
+    "title": "Scope Policy Generator",
+    "description": "Describe your project, generate a clear revision policy, and send it to your client in under 30 seconds.",
+    "steps": {
+      "describe": "Step 1: Describe your project",
+      "generate": "Step 2: Generate policy",
+      "copy": "Step 3: Copy and send to client"
+    },
+    "fields": {
+      "project_type": "Project type",
+      "project_type_placeholder": "Select project type",
+      "project_price": "Project price (USD)",
+      "project_price_placeholder": "e.g. 1200",
+      "revision_count": "How many revisions included",
+      "revision_count_placeholder": "Select revisions",
+      "extra_revision_price": "Extra revision price (optional)",
+      "extra_revision_price_placeholder": "e.g. 80",
+      "client_type": "Client type",
+      "client_type_placeholder": "Select client type"
+    },
+    "options": {
+      "project_type": {
+        "logo": "Logo design",
+        "website": "Website design",
+        "video": "Video editing",
+        "writing": "Copywriting",
+        "marketing": "Marketing",
+        "other": "Other"
+      },
+      "client_type": {
+        "startup": "Startup",
+        "small_business": "Small business",
+        "agency": "Agency",
+        "enterprise": "Enterprise"
+      }
+    },
+    "actions": {
+      "generate": "Generate your revision policy",
+      "generating": "Generating...",
+      "copy": "Copy",
+      "copy_all": "Copy all",
+      "upgrade": "Upgrade to Pro"
+    },
+    "errors": {
+      "invalid_input": "Please complete all required fields with valid values.",
+      "request_failed": "Generation failed. Please try again.",
+      "copy_failed": "Copy failed. Please copy manually."
+    },
+    "messages": {
+      "generated": "Revision policy generated.",
+      "copied": "Copied to clipboard."
+    },
+    "usage": {
+      "free_left": "Free generations left: {remaining} / {limit}",
+      "paid": "Pro access: unlimited generations",
+      "limit_reached": "Free plan limit reached. Upgrade to continue generating."
+    },
+    "result": {
+      "title": "Your Scope Guard Output",
+      "subtitle": "Copy each block directly into chat, email, or contract.",
+      "revision_policy": "Revision Policy",
+      "scope_rule": "Scope Rule",
+      "client_message": "Client Explanation Message",
+      "contract_clause": "Contract Clause"
+    }
+  }
+}

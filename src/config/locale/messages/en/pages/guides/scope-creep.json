@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "title": "Scope Creep Freelancer Guide | FlowDockr",
+    "description": "How to handle revision overload and out-of-scope requests without damaging client trust."
+  },
+  "page": {
+    "title": "Scope Creep Guide",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Stop scope creep before it becomes unpaid labor.",
+        "description": "Use revision limits, change rules, and confirmation language to keep projects profitable.",
+        "buttons": [
+          {
+            "title": "Generate Revision Policy",
+            "url": "/templates/revision-policy",
+            "icon": "FileCheck2",
+            "variant": "default"
+          },
+          {
+            "title": "Open Scope Module",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Playbook",
+        "title": "3-step scope control",
+        "description": "Create clear boundaries and get explicit client agreement.",
+        "items": [
+          {
+            "title": "Set revision rounds",
+            "description": "Define exactly how many rounds are included.",
+            "icon": "ListChecks"
+          },
+          {
+            "title": "Define change fee rule",
+            "description": "State how out-of-scope requests are quoted and approved.",
+            "icon": "BadgeDollarSign"
+          },
+          {
+            "title": "Request confirmation",
+            "description": "Ask the client to confirm policy before continuing work.",
+            "icon": "MessageSquareReply"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy.",
+        "description": "Use copy-ready wording you can send today.",
+        "buttons": [
+          {
+            "title": "Open Revision Policy Template",
+            "url": "/templates/revision-policy",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

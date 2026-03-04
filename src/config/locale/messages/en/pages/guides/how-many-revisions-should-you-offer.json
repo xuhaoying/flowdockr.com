@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "How Many Revisions Should You Offer | FlowDockr Guide",
+    "description": "Set revision rounds based on project price and risk."
+  },
+  "page": {
+    "title": "How Many Revisions Should You Offer",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Most freelancers under-price revisions.",
+        "description": "Use a clear revision-round framework tied to project value.",
+        "buttons": [
+          {
+            "title": "Generate your revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Guide",
+        "title": "Problem -> Why -> Solution",
+        "description": "Choose revision count with intent, not guesswork.",
+        "items": [
+          {
+            "title": "Problem",
+            "description": "Unlimited revisions turn fixed-price jobs into open-ended work.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Why it happens",
+            "description": "No upfront revision cap is communicated or signed off.",
+            "icon": "Search"
+          },
+          {
+            "title": "Solution",
+            "description": "Offer 1-5 rounds and attach explicit extra-round pricing.",
+            "icon": "ListChecks"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy ->",
+        "description": "Get a client-ready revision structure in one click.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope#scope-generator",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

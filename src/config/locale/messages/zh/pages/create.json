@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "title": "Elyra 谈单策略包",
+    "description": "生成结构化价格异议应对方案。"
+  },
+  "page": {
+    "title": "谈单策略包生成器",
+    "description": "输入当前谈单信息，获取英文/中文/西语可执行回复方案。"
+  },
+  "generator": {
+    "title": "生成谈单应对策略包",
+    "description": "输入当前谈单信息，获取英文/中文/西语可执行回复方案。",
+    "tabs": {
+      "text-to-image": "文生图",
+      "image-to-image": "图生图"
+    },
+    "form": {
+      "provider": "服务商",
+      "model": "模型",
+      "select_provider": "选择服务商",
+      "select_model": "选择模型",
+      "prompt": "谈单上下文",
+      "prompt_placeholder": "请填写客户需求、你的报价、客户异议（太贵/预算有限/别人更便宜）和你的最低可接受价。",
+      "reference_image": "参考图片",
+      "reference_image_placeholder": "上传参考图片，支持多张图片",
+      "some_images_failed_to_upload": "部分图片上传失败，请删除后重新上传",
+      "prompt_too_long": "提示词过长，请删除部分内容"
+    },
+    "generate": "生成策略包",
+    "checking_account": "正在检查账户...",
+    "loading": "加载中...",
+    "generating": "生成中...",
+    "sign_in_to_generate": "登录后开始生成",
+    "credits_cost": "消耗 {credits} 积分",
+    "credits_remaining": "剩余 {credits} 积分",
+    "buy_credits": "购买积分",
+    "progress": "进度",
+    "generated_images": "图片预览",
+    "ready_to_generate": "准备生成",
+    "ready_for_generating": "准备生成中",
+    "no_images_generated": "暂未生成策略"
+  },
+  "deal_strategy": {
+    "title": "谈单策略包生成器",
+    "description": "聚焦价格异议：太贵了、预算有限、别人更便宜。",
+    "fields": {
+      "client_need": "客户需求",
+      "client_need_placeholder": "客户想买什么，目标结果是什么？",
+      "your_quote": "你的当前报价",
+      "your_quote_placeholder": "例如 1500",
+      "your_floor_price": "你的最低可接受价",
+      "your_floor_price_placeholder": "例如 900",
+      "client_objection": "客户异议",
+      "client_objection_placeholder": "例如：太贵了，别人更便宜。"
+    },
+    "actions": {
+      "generate": "生成策略包",
+      "generating": "生成中...",
+      "copy": "复制",
+      "unlock": "解锁完整策略（1积分）",
+      "unlocking": "解锁中...",
+      "buy_credits": "购买积分",
+      "save_feedback": "提交反馈",
+      "saving": "保存中..."
+    },
+    "errors": {
+      "invalid_input": "请完整填写必填项，并输入有效金额。",
+      "request_failed": "请求失败，请稍后重试。",
+      "copy_failed": "复制失败，请手动复制。",
+      "sign_in_required": "请先登录。",
+      "unlock_failed": "解锁失败，请稍后重试。",
+      "insufficient_credits": "积分不足，请先购买积分。",
+      "feedback_failed": "反馈提交失败，请稍后重试。"
+    },
+    "messages": {
+      "generated": "策略包已生成。",
+      "copied": "已复制到剪贴板。",
+      "unlocked": "已解锁完整策略。",
+      "feedback_saved": "反馈已保存。"
+    },
+    "credits_remaining": "剩余积分：{credits}",
+    "paywall": {
+      "description": "当前为预览内容，消耗 1 积分可解锁完整话术、逻辑和动作。"
+    },
+    "feedback": {
+      "title": "结果反馈",
+      "adopted_script": "你采用了哪条话术？",
+      "script_instant": "一句话立即回复",
+      "script_strong": "强势版",
+      "script_warm": "温和版",
+      "script_concession": "有条件让步版",
+      "script_none": "未采用",
+      "outcome": "当前结果",
+      "outcome_pending": "待结果",
+      "outcome_won": "成交",
+      "outcome_lost": "未成交",
+      "rating_optional": "质量评分（可选）",
+      "note_optional": "补充说明（可选）"
+    },
+    "result": {
+      "title": "谈单策略输出",
+      "subtitle": "结构化判断 + 明确执行动作。",
+      "instant_reply": "一句话立即回复",
+      "psychology": "客户心理判断",
+      "price_range": "建议报价区间",
+      "ideal_price": "理想价",
+      "negotiable_price": "可谈价",
+      "bottom_price": "底线价",
+      "scripts": "回复话术",
+      "script_strong": "强势版",
+      "script_warm": "温和版",
+      "script_concession": "有条件让步版",
+      "logic": "决策逻辑",
+      "risks": "风险提示",
+      "next_actions": "下一步动作"
+    }
+  }
+}

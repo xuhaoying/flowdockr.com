@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "title": "FlowDockr for Video Editors",
+    "description": "Scope and payment workflows tailored for freelance video editors."
+  },
+  "page": {
+    "title": "FlowDockr for Video Editors",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Video workflows break when revision and payment terms are vague.",
+        "description": "Use Scope for revision control and Payment for milestone collection.",
+        "buttons": [
+          {
+            "title": "Open Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "default"
+          },
+          {
+            "title": "Open Payment",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Video editor risk map",
+        "description": "Common issues in post-production client management.",
+        "items": [
+          {
+            "title": "Revision loops after final cut",
+            "description": "Define included edit rounds and timeline impact.",
+            "icon": "RotateCcw"
+          },
+          {
+            "title": "Last-minute format requests",
+            "description": "Quote additional export or platform variants separately.",
+            "icon": "MonitorPlay"
+          },
+          {
+            "title": "Final payment delays",
+            "description": "Set delivery-release terms tied to payment completion.",
+            "icon": "AlarmClock"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Lock revision and payment language before project starts.",
+        "description": "This prevents most post-delivery disputes.",
+        "buttons": [
+          {
+            "title": "Use Payment Reminder Template",
+            "url": "/templates/payment-reminder",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

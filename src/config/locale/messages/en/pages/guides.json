@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "title": "FlowDockr Guides",
+    "description": "Scope creep playbooks for freelancers with direct policy-generation CTAs."
+  },
+  "page": {
+    "title": "FlowDockr Guides",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Scope creep playbooks for freelancers.",
+        "description": "Read a focused guide, then generate your revision policy instantly.",
+        "buttons": [
+          {
+            "title": "Client keeps asking for revisions",
+            "url": "/guides/client-keeps-asking-for-revisions",
+            "icon": "MessageCircleWarning",
+            "variant": "default"
+          },
+          {
+            "title": "Scope creep freelancer",
+            "url": "/guides/scope-creep-freelancer",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          },
+          {
+            "title": "How many revisions should you offer",
+            "url": "/guides/how-many-revisions-should-you-offer",
+            "icon": "ListChecks",
+            "variant": "outline"
+          },
+          {
+            "title": "Client asking for extra work",
+            "url": "/guides/client-asking-for-extra-work",
+            "icon": "Layers",
+            "variant": "outline"
+          },
+          {
+            "title": "Freelance revision policy",
+            "url": "/guides/freelance-revision-policy",
+            "icon": "FileText",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "All guides map to one action",
+        "description": "Problem -> reason -> solution -> generate policy CTA.",
+        "items": [
+          {
+            "title": "Problem-first",
+            "description": "Each page starts from a real client situation freelancers face weekly.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Practical scripts",
+            "description": "Actionable language that can be sent to clients today.",
+            "icon": "MessageSquare"
+          },
+          {
+            "title": "Direct conversion",
+            "description": "Every guide pushes to Scope Guard generation.",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy.",
+        "description": "Use Scope Guard to turn advice into a client-ready response.",
+        "buttons": [
+          {
+            "title": "Go to Scope Guard",
+            "url": "/scope",
+            "icon": "Zap"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

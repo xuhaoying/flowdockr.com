@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Pricing",
+    "description": "Simple pricing for freelancers: start free, upgrade when client complexity grows."
+  },
+  "page": {
+    "title": "FlowDockr Pricing",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Simple pricing for freelancer workflows.",
+        "description": "Start with Scope Guard for free, then upgrade when your client volume and complexity increase.",
+        "buttons": [
+          {
+            "title": "Start with Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "default"
+          },
+          {
+            "title": "Browse Templates",
+            "url": "/templates",
+            "icon": "FileText",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Pricing tiers",
+        "description": "Designed for solo freelancers first.",
+        "items": [
+          {
+            "title": "Free",
+            "description": "2 Scope Policy generations. Basic templates and guides.",
+            "icon": "Leaf"
+          },
+          {
+            "title": "Pro - $9/month",
+            "description": "Unlimited Scope Policy generations.",
+            "icon": "Sparkles"
+          },
+          {
+            "title": "Lifetime - $19",
+            "description": "One-time payment. Unlimited Scope Policy generations.",
+            "icon": "Rocket"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Upgrade Logic",
+        "title": "When to upgrade",
+        "description": "Upgrade based on workflow volume, not vanity features.",
+        "items": [
+          {
+            "title": "Start free",
+            "description": "Validate output quality in real client scenarios.",
+            "icon": "CirclePlay"
+          },
+          {
+            "title": "Upgrade to Pro",
+            "description": "When monthly generation needs exceed free limits.",
+            "icon": "ArrowUpCircle"
+          },
+          {
+            "title": "Choose Lifetime",
+            "description": "If you want one-time payment instead of monthly subscription.",
+            "icon": "Layers"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Your business model deserves infrastructure.",
+        "description": "FlowDockr helps protect margin before problems become disputes.",
+        "buttons": [
+          {
+            "title": "Go to Deal",
+            "url": "/deal",
+            "icon": "Handshake"
+          },
+          {
+            "title": "Go to Payment",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

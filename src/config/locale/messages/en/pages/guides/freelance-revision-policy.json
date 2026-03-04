@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "Freelance Revision Policy Guide | FlowDockr",
+    "description": "Build a revision policy that is clear, fair, and enforceable."
+  },
+  "page": {
+    "title": "Freelance Revision Policy",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "A strong revision policy protects both you and the client.",
+        "description": "Use consistent language across proposal, chat, and contract.",
+        "buttons": [
+          {
+            "title": "Generate your revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Guide",
+        "title": "Problem -> Why -> Solution",
+        "description": "Standardize your policy so each project starts clean.",
+        "items": [
+          {
+            "title": "Problem",
+            "description": "Policy language changes each project and creates ambiguity.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Why it happens",
+            "description": "Freelancers rewrite from scratch under client pressure.",
+            "icon": "Search"
+          },
+          {
+            "title": "Solution",
+            "description": "Generate a fixed 4-block scope policy and reuse it consistently.",
+            "icon": "FileCheck2"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy ->",
+        "description": "Get the exact wording for client message and contract clause.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope#scope-generator",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

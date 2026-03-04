@@ -1,0 +1,263 @@
+{
+  "header": {
+    "id": "header",
+    "brand": {
+      "title": "FlowDockr",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "FlowDockr"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Scope",
+          "url": "/scope",
+          "icon": "ShieldCheck"
+        },
+        {
+          "title": "Payment",
+          "url": "/payment",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "BadgeDollarSign"
+        },
+        {
+          "title": "Deal",
+          "url": "/deal",
+          "icon": "Handshake"
+        },
+        {
+          "title": "Guides",
+          "url": "/guides",
+          "icon": "BookOpen"
+        }
+      ]
+    },
+    "buttons": [
+      {
+        "title": "Generate revision policy",
+        "url": "/scope#scope-generator",
+        "icon": "Zap",
+        "variant": "default"
+      }
+    ],
+    "user_nav": {
+      "show_name": true,
+      "show_credits": true,
+      "show_sign_out": true,
+      "items": []
+    },
+    "show_sign": false,
+    "show_theme": true,
+    "show_locale": true
+  },
+  "hero": {
+    "id": "hero",
+    "title": "Stop scope creep in client projects.",
+    "description": "Generate a clear revision policy and scope rule in seconds.",
+    "buttons": [
+      {
+        "title": "Generate revision policy",
+        "icon": "Zap",
+        "url": "/scope#scope-generator",
+        "target": "_self",
+        "variant": "default"
+      }
+    ],
+    "show_avatars": false,
+    "show_award": false,
+    "background_image": {
+      "src": "/imgs/bg/tree.jpg",
+      "alt": "FlowDockr background"
+    }
+  },
+  "features": {
+    "id": "features",
+    "title": "FlowDockr modules",
+    "description": "Scope is live. Payment, Pricing, and Deal are next.",
+    "items": [
+      {
+        "title": "Scope",
+        "description": "Live now: generate revision policy and scope rules.",
+        "icon": "ShieldCheck"
+      },
+      {
+        "title": "Payment",
+        "description": "Coming soon: late-payment reminders and term protection.",
+        "icon": "CreditCard"
+      },
+      {
+        "title": "Pricing",
+        "description": "Coming soon: quote structure and pricing strategy support.",
+        "icon": "BadgeDollarSign"
+      },
+      {
+        "title": "Deal",
+        "description": "Coming soon: negotiation replies for discount pressure.",
+        "icon": "Handshake"
+      }
+    ],
+    "className": "bg-muted/50"
+  },
+  "trust": {
+    "block": "features",
+    "id": "trust",
+    "title": "Built for freelancers in",
+    "description": "Design, video editing, copywriting, marketing, and consulting.",
+    "items": [
+      {
+        "title": "Design",
+        "description": "Revision-heavy visual projects.",
+        "icon": "PenTool"
+      },
+      {
+        "title": "Video Editing",
+        "description": "Scope control across edit rounds.",
+        "icon": "Clapperboard"
+      },
+      {
+        "title": "Copywriting",
+        "description": "Clear boundary language for rewrites.",
+        "icon": "FilePenLine"
+      },
+      {
+        "title": "Marketing",
+        "description": "Campaign scope and change-request management.",
+        "icon": "Megaphone"
+      },
+      {
+        "title": "Consulting",
+        "description": "Boundary-setting for add-on requests.",
+        "icon": "BriefcaseBusiness"
+      }
+    ]
+  },
+  "cta": {
+    "id": "cta",
+    "title": "Generate your revision policy.",
+    "description": "30-second workflow: describe project -> generate -> copy and send.",
+    "buttons": [
+      {
+        "title": "Open Scope Guard",
+        "url": "/scope#scope-generator",
+        "target": "_self",
+        "icon": "ArrowRight"
+      }
+    ],
+    "className": "bg-muted/50"
+  },
+  "showcases-flow": {
+    "hidden": true
+  },
+  "logos": {
+    "hidden": true
+  },
+  "introduce": {
+    "hidden": true
+  },
+  "benefits": {
+    "hidden": true
+  },
+  "usage": {
+    "hidden": true
+  },
+  "stats": {
+    "hidden": true
+  },
+  "testimonials": {
+    "hidden": true
+  },
+  "faq": {
+    "hidden": true
+  },
+  "subscribe": {
+    "hidden": true
+  },
+  "footer": {
+    "id": "footer",
+    "brand": {
+      "title": "FlowDockr",
+      "description": "Freelancer Business OS starting with Scope Guard.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "FlowDockr"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Product",
+          "children": [
+            {
+              "title": "Scope",
+              "url": "/scope"
+            },
+            {
+              "title": "Payment",
+              "url": "/payment"
+            },
+            {
+              "title": "Pricing",
+              "url": "/pricing"
+            },
+            {
+              "title": "Deal",
+              "url": "/deal"
+            }
+          ]
+        },
+        {
+          "title": "Resources",
+          "children": [
+            {
+              "title": "Guides",
+              "url": "/guides"
+            },
+            {
+              "title": "Templates",
+              "url": "/templates"
+            },
+            {
+              "title": "Industries",
+              "url": "/industries"
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "children": [
+            {
+              "title": "Terms",
+              "url": "/terms-of-service"
+            },
+            {
+              "title": "Privacy",
+              "url": "/privacy-policy"
+            }
+          ]
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service"
+        },
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy"
+        }
+      ]
+    },
+    "show_theme": true,
+    "show_locale": true,
+    "show_built_with": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Payment Reminder Template | FlowDockr",
+    "description": "A clear payment reminder structure for overdue freelance invoices."
+  },
+  "page": {
+    "title": "Payment Reminder Template",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Payment Reminder Template",
+        "description": "Use this sequence to follow up professionally and increase payment response rate.",
+        "buttons": [
+          {
+            "title": "Apply in Payment Module",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Template blocks",
+        "description": "Keep reminders concise and action-oriented.",
+        "items": [
+          {
+            "title": "Invoice reference",
+            "description": "Include amount, invoice number, and due date.",
+            "icon": "FileText"
+          },
+          {
+            "title": "Direct payment request",
+            "description": "Ask for payment confirmation with specific timeline.",
+            "icon": "Mail"
+          },
+          {
+            "title": "Escalation note",
+            "description": "State next step if payment is not received.",
+            "icon": "ShieldAlert"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Turn reminders into a repeatable workflow.",
+        "description": "Use Payment Protection to standardize your sequence.",
+        "buttons": [
+          {
+            "title": "Open Payment Protection",
+            "url": "/payment",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

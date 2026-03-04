@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "title": "FlowDockr for Designers",
+    "description": "Scope and pricing workflows tailored for freelance designers."
+  },
+  "page": {
+    "title": "FlowDockr for Designers",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Design projects need clear revision boundaries.",
+        "description": "Use Scope first to control rounds, then Pricing to package add-ons.",
+        "buttons": [
+          {
+            "title": "Open Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "default"
+          },
+          {
+            "title": "Open Pricing",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Designer risk map",
+        "description": "Most frequent friction points in client design work.",
+        "items": [
+          {
+            "title": "Concept expansion after approval",
+            "description": "Treat new directions as out-of-scope add-ons.",
+            "icon": "Layers"
+          },
+          {
+            "title": "Unlimited polish loops",
+            "description": "Limit rounds and define completion criteria.",
+            "icon": "RotateCcw"
+          },
+          {
+            "title": "Discount requests",
+            "description": "Trade scope for price, not quality for price.",
+            "icon": "Handshake"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Start with a revision policy before the next kickoff.",
+        "description": "This alone can reduce rework and protect margin.",
+        "buttons": [
+          {
+            "title": "Use Revision Policy Template",
+            "url": "/templates/revision-policy",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

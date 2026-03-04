@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Payment",
+    "description": "Send stronger payment reminders and reduce outstanding invoices."
+  },
+  "page": {
+    "title": "FlowDockr Payment",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Get paid without awkward follow-ups.",
+        "description": "FlowDockr Payment gives you structured reminder messages and payment term language for late invoices.",
+        "buttons": [
+          {
+            "title": "Use Payment Reminder Template",
+            "url": "/templates/payment-reminder",
+            "icon": "FileText",
+            "variant": "default"
+          },
+          {
+            "title": "Read Client Not Paying Guide",
+            "url": "/guides/client-not-paying",
+            "icon": "BookOpen",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "What Payment solves",
+        "description": "Standardize follow-up and protect payment terms from day one.",
+        "items": [
+          {
+            "title": "Late final payment",
+            "description": "Use firm, professional reminders tied to agreed terms.",
+            "icon": "AlarmClock"
+          },
+          {
+            "title": "Unclear payment deadlines",
+            "description": "Clarify due date windows and next actions in one message.",
+            "icon": "CalendarClock"
+          },
+          {
+            "title": "Need escalation path",
+            "description": "Move from friendly reminder to formal follow-up with consistency.",
+            "icon": "ShieldAlert"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Workflow",
+        "title": "Recover payment in 3 steps",
+        "description": "Keep tone professional while increasing response rate.",
+        "items": [
+          {
+            "title": "Capture invoice context",
+            "description": "Amount, due date, and delivery status.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Generate reminder",
+            "description": "Create an email-ready follow-up with clear ask and deadline.",
+            "icon": "Mail"
+          },
+          {
+            "title": "Escalate with structure",
+            "description": "Use tiered follow-ups if payment remains overdue.",
+            "icon": "ArrowUpRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Pair Payment with Scope for stronger terms.",
+        "description": "Clear scope + clear payment terms = fewer disputes and faster collections.",
+        "buttons": [
+          {
+            "title": "Open Scope Module",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Open Deal Module",
+            "url": "/deal",
+            "icon": "Handshake",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

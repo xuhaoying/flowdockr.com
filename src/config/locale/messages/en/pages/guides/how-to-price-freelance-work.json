@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "title": "How to Price Freelance Work | FlowDockr Guide",
+    "description": "A practical pricing framework for freelancers to quote with confidence."
+  },
+  "page": {
+    "title": "How to Price Freelance Work",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Price by scope, risk, and outcome.",
+        "description": "Move beyond guesswork with a repeatable quote structure.",
+        "buttons": [
+          {
+            "title": "Generate Pricing Quote Template",
+            "url": "/templates/pricing-quote",
+            "icon": "FileText",
+            "variant": "default"
+          },
+          {
+            "title": "Open Pricing Module",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Playbook",
+        "title": "3-step quote framework",
+        "description": "Align scope detail with margin protection.",
+        "items": [
+          {
+            "title": "Define deliverables",
+            "description": "Clarify outputs, rounds, and timeline assumptions.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Add risk-adjusted pricing",
+            "description": "Include revision, urgency, and communication overhead.",
+            "icon": "Shield"
+          },
+          {
+            "title": "Present package options",
+            "description": "Offer good/better/best with clear trade-offs.",
+            "icon": "Layers"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate pricing strategy.",
+        "description": "Create a quote structure you can reuse per project type.",
+        "buttons": [
+          {
+            "title": "Open Pricing Quote Template",
+            "url": "/templates/pricing-quote",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

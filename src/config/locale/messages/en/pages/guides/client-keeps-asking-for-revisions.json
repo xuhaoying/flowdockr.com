@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "Client Keeps Asking for Revisions | FlowDockr Guide",
+    "description": "How to respond when revision requests never stop in freelance projects."
+  },
+  "page": {
+    "title": "Client Keeps Asking for Revisions",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Your client keeps asking for revisions.",
+        "description": "Set a clear boundary without sounding defensive.",
+        "buttons": [
+          {
+            "title": "Generate your revision policy",
+            "url": "/scope#scope-generator",
+            "icon": "Zap",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Guide",
+        "title": "Problem -> Why -> Solution",
+        "description": "Use this sequence before adding more unpaid rounds.",
+        "items": [
+          {
+            "title": "Problem",
+            "description": "Revision loops continue because limits were never explicit.",
+            "icon": "CircleAlert"
+          },
+          {
+            "title": "Why it happens",
+            "description": "Clients treat flexibility as unlimited unless terms are visible.",
+            "icon": "Search"
+          },
+          {
+            "title": "Solution",
+            "description": "Set included rounds and extra-round pricing in one message.",
+            "icon": "ShieldCheck"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Generate your revision policy ->",
+        "description": "Turn this guide into client-ready wording in seconds.",
+        "buttons": [
+          {
+            "title": "Open Scope Guard",
+            "url": "/scope#scope-generator",
+            "icon": "ArrowRight"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "title": "Client Not Paying Invoice | FlowDockr Guide",
+    "description": "A practical sequence to follow when a client misses payment deadlines."
+  },
+  "page": {
+    "title": "Client Not Paying Invoice",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Client not paying invoice? Use a structured reminder sequence.",
+        "description": "Protect relationship and cash flow with clear terms, clear deadlines, and escalation logic.",
+        "buttons": [
+          {
+            "title": "Generate Payment Reminder",
+            "url": "/templates/payment-reminder",
+            "icon": "Mail",
+            "variant": "default"
+          },
+          {
+            "title": "Open Payment Module",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Playbook",
+        "title": "3-step late-payment workflow",
+        "description": "Escalate tone gradually while keeping evidence and next steps explicit.",
+        "items": [
+          {
+            "title": "Friendly reminder",
+            "description": "Reference invoice number, due date, and payment method.",
+            "icon": "MessageCircle"
+          },
+          {
+            "title": "Firm follow-up",
+            "description": "Set a specific response and payment deadline.",
+            "icon": "BellRing"
+          },
+          {
+            "title": "Escalation notice",
+            "description": "Pause deliverables and ask for confirmation of payment timeline.",
+            "icon": "ShieldAlert"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Use the payment reminder template now.",
+        "description": "Send a clear message in minutes instead of rewriting from scratch.",
+        "buttons": [
+          {
+            "title": "Open Template",
+            "url": "/templates/payment-reminder",
+            "icon": "FileText"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

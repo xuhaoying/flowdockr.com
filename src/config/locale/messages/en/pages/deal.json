@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Deal",
+    "description": "Handle client discount pressure with structured negotiation replies and clear pricing boundaries."
+  },
+  "page": {
+    "title": "FlowDockr Deal",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Handle price objections without dropping your value.",
+        "description": "FlowDockr Deal helps freelancers respond to discount requests with confidence, clarity, and a clear next step.",
+        "buttons": [
+          {
+            "title": "See Scope Module",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          },
+          {
+            "title": "View Negotiation Guide",
+            "url": "/guides/client-asking-for-discount",
+            "icon": "BookOpen",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "What Deal solves",
+        "description": "Built for real client conversations where margin and positioning are at risk.",
+        "items": [
+          {
+            "title": "Client says it's too expensive",
+            "description": "Generate responses that defend value before discussing concessions.",
+            "icon": "MessageSquareWarning"
+          },
+          {
+            "title": "Competitor is cheaper",
+            "description": "Reframe by outcomes, risk reduction, and delivery reliability.",
+            "icon": "Scale"
+          },
+          {
+            "title": "Need to close with boundaries",
+            "description": "Use conditional concessions tied to scope or timeline.",
+            "icon": "Shield"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Workflow",
+        "title": "Resolve the negotiation in 3 steps",
+        "description": "Simple structure for faster, more controlled deal outcomes.",
+        "items": [
+          {
+            "title": "Capture context",
+            "description": "Record your quote, floor price, and the exact objection.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Generate response",
+            "description": "Get instant reply options with clear negotiation logic.",
+            "icon": "Sparkles"
+          },
+          {
+            "title": "Close next step",
+            "description": "Ask for confirmation and move the deal forward.",
+            "icon": "ArrowRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Negotiation pressure is normal. Improvised replies are optional.",
+        "description": "Use Scope and Payment modules together to protect both delivery and revenue.",
+        "buttons": [
+          {
+            "title": "Open Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Open Payment",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

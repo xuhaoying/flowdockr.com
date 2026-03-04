@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "title": "Elyra Paquete de Estrategia Comercial",
+    "description": "Genera una respuesta estructurada para objeciones de precio."
+  },
+  "page": {
+    "title": "Generador de Paquete de Estrategia",
+    "description": "Ingresa el contexto del trato y obtén respuestas accionables en inglés, chino o español."
+  },
+  "generator": {
+    "title": "Generar Estrategia de Negociación",
+    "description": "Ingresa el contexto del trato y obtén respuestas accionables en inglés, chino o español.",
+    "tabs": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "form": {
+      "provider": "Provider",
+      "model": "Model",
+      "select_provider": "Select Provider",
+      "select_model": "Select Model",
+      "prompt": "Contexto del Trato",
+      "prompt_placeholder": "Incluye necesidad del cliente, tu cotización, objeción (caro / presupuesto limitado / competidor más barato) y tu precio mínimo.",
+      "reference_image": "Reference Image",
+      "reference_image_placeholder": "Upload reference images, support multiple images",
+      "some_images_failed_to_upload": "Some images failed to upload, please delete them and re-upload",
+      "prompt_too_long": "Prompt is too long, please delete some content"
+    },
+    "generate": "Generar Estrategia",
+    "checking_account": "Checking Account...",
+    "loading": "Loading...",
+    "generating": "Generating...",
+    "sign_in_to_generate": "Sign In to Generate Image",
+    "credits_cost": "Cost {credits} credits",
+    "credits_remaining": "Remaining {credits} credits",
+    "buy_credits": "Buy Credits",
+    "progress": "Progress",
+    "generated_images": "Image Preview",
+    "ready_to_generate": "Ready to Generate",
+    "ready_for_generating": "Ready for Generating",
+    "no_images_generated": "Aún no hay estrategia generada"
+  },
+  "deal_strategy": {
+    "title": "Generador de Estrategia Comercial",
+    "description": "Enfoque en objeciones de precio: caro, presupuesto limitado, competidor más barato.",
+    "fields": {
+      "client_need": "Necesidad del Cliente",
+      "client_need_placeholder": "¿Qué quiere comprar y qué resultado espera?",
+      "your_quote": "Tu Cotización Actual",
+      "your_quote_placeholder": "ej. 1500",
+      "your_floor_price": "Tu Precio Mínimo",
+      "your_floor_price_placeholder": "ej. 900",
+      "client_objection": "Objeción del Cliente",
+      "client_objection_placeholder": "ej. Es muy caro. Otro proveedor es más barato."
+    },
+    "actions": {
+      "generate": "Generar Estrategia",
+      "generating": "Generando...",
+      "copy": "Copiar",
+      "unlock": "Desbloquear Estrategia Completa (1 crédito)",
+      "unlocking": "Desbloqueando...",
+      "buy_credits": "Comprar créditos",
+      "save_feedback": "Enviar feedback",
+      "saving": "Guardando..."
+    },
+    "errors": {
+      "invalid_input": "Completa todos los campos requeridos con precios válidos.",
+      "request_failed": "La solicitud falló. Inténtalo de nuevo.",
+      "copy_failed": "No se pudo copiar. Copia manualmente.",
+      "sign_in_required": "Inicia sesión primero.",
+      "unlock_failed": "Error al desbloquear. Inténtalo de nuevo.",
+      "insufficient_credits": "Créditos insuficientes. Compra créditos primero.",
+      "feedback_failed": "No se pudo enviar el feedback."
+    },
+    "messages": {
+      "generated": "Estrategia generada.",
+      "copied": "Copiado al portapapeles.",
+      "unlocked": "Estrategia completa desbloqueada.",
+      "feedback_saved": "Feedback guardado."
+    },
+    "credits_remaining": "Créditos restantes: {credits}",
+    "paywall": {
+      "description": "Vista previa generada. Desbloquea guiones, lógica y acciones completas con 1 crédito."
+    },
+    "feedback": {
+      "title": "Feedback de resultado",
+      "adopted_script": "¿Qué guion usaste?",
+      "script_instant": "Respuesta inmediata de una línea",
+      "script_strong": "Versión firme",
+      "script_warm": "Versión cercana",
+      "script_concession": "Concesión condicionada",
+      "script_none": "No envié ninguno",
+      "outcome": "Resultado actual",
+      "outcome_pending": "Pendiente",
+      "outcome_won": "Ganado",
+      "outcome_lost": "Perdido",
+      "rating_optional": "Calificación de calidad (opcional)",
+      "note_optional": "Nota (opcional)"
+    },
+    "result": {
+      "title": "Salida de Estrategia de Negociación",
+      "subtitle": "Respuesta estructurada con acciones claras.",
+      "instant_reply": "Respuesta Inmediata de Una Línea",
+      "psychology": "Psicología del Cliente",
+      "price_range": "Rango de Precio Recomendado",
+      "ideal_price": "Precio Ideal",
+      "negotiable_price": "Precio Negociable",
+      "bottom_price": "Precio Mínimo",
+      "scripts": "Guiones de Respuesta",
+      "script_strong": "Versión Firme",
+      "script_warm": "Versión Cercana",
+      "script_concession": "Versión con Concesión Condicionada",
+      "logic": "Lógica de Decisión",
+      "risks": "Riesgos",
+      "next_actions": "Próximos Pasos"
+    }
+  }
+}
