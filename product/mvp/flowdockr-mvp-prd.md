@@ -294,3 +294,4 @@ Implemented in current codebase:
 - Free cap logic with upgrade signal
 - Pricing copy aligned to Free/Pro/Lifetime
 - SEO guide structure and routes in progress under `/guides/*`
+- UI implementation contract documented in `product/mvp/ui-wireframe-spec.md`

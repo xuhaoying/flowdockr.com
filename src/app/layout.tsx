@@ -1,6 +1,5 @@
 import '@/config/style/global.css';
 
-import { Inter, JetBrains_Mono, Merriweather } from 'next/font/google';
 import { getLocale, setRequestLocale } from 'next-intl/server';
 import NextTopLoader from 'nextjs-toploader';
 
@@ -12,28 +11,6 @@ import { getAdsService } from '@/shared/services/ads';
 import { getAffiliateService } from '@/shared/services/affiliate';
 import { getAnalyticsService } from '@/shared/services/analytics';
 import { getCustomerService } from '@/shared/services/customer_service';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-  preload: true,
-});
-
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-serif',
-  display: 'swap',
-  preload: true,
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  preload: true,
-});
 
 export default async function RootLayout({
   children,
@@ -102,11 +79,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html
-      lang={locale}
-      className={`${inter.variable} ${merriweather.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} className="font-sans" suppressHydrationWarning>
       <head>
         <link rel="icon" href={envConfigs.app_favicon || "/favicon.ico"} />
         <link rel="alternate icon" href="/favicon.ico" />

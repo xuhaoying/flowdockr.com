@@ -8,11 +8,11 @@
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Stop scope creep in client projects.",
-        "description": "Generate a clear revision policy and scope rule in under 30 seconds.",
+        "title": "Stop unlimited revisions.",
+        "description": "Create a clear revision policy for your client project.",
         "buttons": [
           {
-            "title": "Generate revision policy",
+            "title": "Generate your revision policy",
             "url": "/scope#scope-generator",
             "icon": "Zap",
             "variant": "default"
@@ -91,7 +91,7 @@
   },
   "scope_guard": {
     "title": "Scope Policy Generator",
-    "description": "Describe your project, generate a clear revision policy, and send it to your client in under 30 seconds.",
+    "description": "Describe your project, generate policy, then copy and send it to your client.",
     "steps": {
       "describe": "Step 1: Describe your project",
       "generate": "Step 2: Generate policy",
@@ -127,8 +127,9 @@
     },
     "actions": {
       "generate": "Generate your revision policy",
-      "generating": "Generating...",
+      "generating": "Generating policy...",
       "copy": "Copy",
+      "copied": "Copied",
       "copy_all": "Copy all",
       "upgrade": "Upgrade to Pro"
     },
@@ -147,7 +148,7 @@
       "limit_reached": "Free plan limit reached. Upgrade to continue generating."
     },
     "result": {
-      "title": "Your Scope Guard Output",
+      "title": "Your revision policy",
       "subtitle": "Copy each block directly into chat, email, or contract.",
       "revision_policy": "Revision Policy",
       "scope_rule": "Scope Rule",

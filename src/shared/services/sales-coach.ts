@@ -106,6 +106,50 @@ function inferObjection(objection: string): string {
   return 'implicit';
 }
 
+function summarizeNeed(clientNeed: string): string {
+  const cleaned = clientNeed.replace(/\s+/g, ' ').trim();
+  if (!cleaned) return 'project outcome';
+  if (cleaned.length <= 72) return cleaned;
+  return `${cleaned.slice(0, 69)}...`;
+}
+
+function extractTimeline(clientNeed: string, clientObjection: string): string {
+  const merged = `${clientNeed} ${clientObjection}`.toLowerCase();
+  const explicit = merged.match(/(\d+\s*(day|days|week|weeks|month|months))/);
+  if (explicit) return explicit[1];
+  if (/(urgent|asap|rush|soon|today|tomorrow|this week)/.test(merged)) {
+    return 'urgent timeline';
+  }
+  return 'agreed timeline';
+}
+
+function objectionLabel(objection: string, locale: SupportedLocale): string {
+  if (locale === 'zh') {
+    if (objection === 'price') return '预算/价格';
+    if (objection === 'timing') return '时机/优先级';
+    if (objection === 'trust') return '信任/案例证明';
+    if (objection === 'decision_authority') return '决策权限';
+    if (objection === 'need_fit') return '需求匹配';
+    return '隐性顾虑';
+  }
+
+  if (locale === 'es') {
+    if (objection === 'price') return 'precio/presupuesto';
+    if (objection === 'timing') return 'timing/prioridad';
+    if (objection === 'trust') return 'confianza/prueba';
+    if (objection === 'decision_authority') return 'autoridad de decisión';
+    if (objection === 'need_fit') return 'encaje de necesidad';
+    return 'objeción implícita';
+  }
+
+  if (objection === 'price') return 'price/budget';
+  if (objection === 'timing') return 'timing/priority';
+  if (objection === 'trust') return 'trust/proof';
+  if (objection === 'decision_authority') return 'decision authority';
+  if (objection === 'need_fit') return 'need-fit';
+  return 'implicit objection';
+}
+
 function scoreCard(card: CoachCard, stage: string, objection: string): number {
   let score = 0;
   if (card.stage === stage) score += 4;
@@ -148,43 +192,49 @@ function pickCards(stage: string, objection: string): CoachCard[] {
 function buildMessages(
   locale: SupportedLocale,
   cards: CoachCard[],
-  range: ReturnType<typeof computePriceRange>
+  range: ReturnType<typeof computePriceRange>,
+  context: {
+    needSummary: string;
+    timeline: string;
+    objection: string;
+  }
 ) {
   const tacticNames = cards.map((card) => card.tactic.replaceAll('_', ' '));
   const primary = tacticNames[0] || 'diagnostic questioning';
   const secondary = tacticNames[1] || 'value anchoring';
   const third = tacticNames[2] || 'next-step commitment';
+  const objection = objectionLabel(context.objection, locale);
 
   if (locale === 'zh') {
     return {
-      instant_reply: `我理解你现在对预算会更谨慎。先不急着谈便宜与否，我们先看这件事能不能在短周期内带来明确结果；当前建议先按 ${range.ideal_price} 的价值框架沟通。`,
-      client_psychology: `对方不是完全拒绝，而是在用风险和时机测试你是否有把握。优先用「${primary}」确认真实卡点，再用「${secondary}」提升价值感。`,
+      instant_reply: `我理解你现在会更谨慎，尤其在「${objection}」这个点上。针对“${context.needSummary}”，先不急着降价，先确认可验证结果；当前建议按 ${range.ideal_price} 作为价值锚点。`,
+      client_psychology: `对方不是完全拒绝，而是在测试风险、时机与可控性。优先用「${primary}」确认真实卡点，再用「${secondary}」把价值和结果说清楚。`,
       scripts: {
-        strong: `我理解你在看预算，但我更关心的是这笔投入能不能换来确定结果。我们先把 30 天内要达成的目标讲清楚，如果这个目标成立，按 ${range.ideal_price} 推进才是合理决策。`,
-        warm: `你谨慎是正常的。我们先不急着做最终决定，先对齐一个最近 30 天能验证的小目标；如果这个目标成立，你觉得 ${range.negotiable_price} 这个区间会不会更容易接受？`,
-        concession: `如果你今天预算确实卡得紧，我可以做条件式让步：先按 ${range.negotiable_price} 进入第一阶段，只保留最核心交付；低于 ${range.bottom_price} 我不建议做，因为会直接影响结果。`,
+        strong: `我理解你对预算敏感，但“${context.needSummary}”的决策核心不是便宜，而是结果可靠。先把 ${context.timeline} 内要达成的目标讲清楚，如果目标成立，按 ${range.ideal_price} 推进才合理。`,
+        warm: `你谨慎很正常。我们先不做“是否合作”的结论，先对齐一个 ${context.timeline} 可验证的小目标；如果目标成立，${range.negotiable_price} 这个区间是否更容易接受？`,
+        concession: `如果你今天预算确实受限，我可以做条件式让步：按 ${range.negotiable_price} 进入第一阶段，只保留核心交付并保持 ${context.timeline}；低于 ${range.bottom_price} 会直接影响结果，我不建议。`,
       },
       decision_logic: [
         `优先顺序：${primary} -> ${secondary} -> ${third}`,
-        '先厘清真实异议，再讨论价格，不要先降价。',
+        `先厘清「${objection}」这个真实异议，再谈价格，不先降价。`,
         '让步必须绑定范围或时间条件，避免形成无底线砍价。',
       ],
       next_actions: [
-        '先发一条共情 + 诊断式回复，不直接让价。',
-        '补一个明确的结果目标和时间节点。',
-        '把下一步推进成具体时间承诺，而不是模糊跟进。',
+        `先发一条共情 + 诊断式回复，明确围绕“${context.needSummary}”推进。`,
+        `补一个 ${context.timeline} 内可验证的结果目标和衡量标准。`,
+        '把下一步推进成具体时间承诺，不做模糊跟进。',
       ],
     };
   }
 
   if (locale === 'es') {
     return {
-      instant_reply: `Es razonable cuidar el presupuesto. Antes de negociar precio, validemos si esto puede mover un resultado concreto; por ahora conviene sostener ${range.ideal_price} como ancla de valor.`,
-      client_psychology: `No es un rechazo total. El comprador está midiendo riesgo, confianza y urgencia. Conviene abrir con ${primary} y luego reforzar con ${secondary}.`,
+      instant_reply: `Es razonable cuidar presupuesto, sobre todo por la objeción de ${objection}. Para “${context.needSummary}”, antes de bajar precio validemos un resultado concreto; por ahora conviene sostener ${range.ideal_price} como ancla de valor.`,
+      client_psychology: `No es un rechazo total. El comprador está midiendo riesgo, confianza y urgencia. Abre con ${primary} y refuerza con ${secondary}.`,
       scripts: {
-        strong: `Entiendo el punto de precio, pero la decisión correcta no es “lo más barato”, sino el resultado más fiable. Si alineamos un objetivo claro a 30 días, mantener ${range.ideal_price} tiene sentido.`,
-        warm: `Tiene sentido ser prudente. En lugar de decidir sí o no ahora, validemos un objetivo concreto de 30 días. Si ese objetivo queda claro, ¿${range.negotiable_price} sería un rango razonable para avanzar?`,
-        concession: `Si hoy el presupuesto está ajustado, puedo hacer una concesión condicionada: ${range.negotiable_price} para una primera fase más acotada. No recomiendo ir por debajo de ${range.bottom_price} porque cae la calidad de ejecución.`,
+        strong: `Entiendo el punto de precio, pero para “${context.needSummary}” la decisión correcta no es lo más barato, sino el resultado más fiable. Si alineamos un objetivo claro en ${context.timeline}, mantener ${range.ideal_price} tiene sentido.`,
+        warm: `Tiene sentido ser prudente. En lugar de decidir sí o no ahora, validemos un objetivo concreto en ${context.timeline}. Si ese objetivo queda claro, ¿${range.negotiable_price} sería razonable para avanzar?`,
+        concession: `Si hoy el presupuesto está ajustado, puedo hacer una concesión condicionada: ${range.negotiable_price} para una primera fase más acotada y manteniendo ${context.timeline}. No recomiendo bajar de ${range.bottom_price} porque cae la calidad.`,
       },
       decision_logic: [
         `Secuencia recomendada: ${primary}, ${secondary}, ${third}`,
@@ -200,22 +250,23 @@ function buildMessages(
   }
 
   return {
-    instant_reply: `Totally fair to be careful on budget. Before we negotiate price, let’s test whether this can move one concrete outcome; for now, keep ${range.ideal_price} as the value anchor.`,
-    client_psychology: `This is not a hard no. The buyer is testing risk, trust, and urgency. Lead with ${primary}, then reinforce with ${secondary}.`,
+    instant_reply: `Totally fair to be careful on budget, especially around ${objection}. For ${context.needSummary}, before we negotiate price let’s validate one concrete outcome; for now, keep ${range.ideal_price} as the value anchor.`,
+    client_psychology: `This is not a hard no. The buyer is testing risk, trust, and urgency on this specific project. Lead with ${primary}, then reinforce with ${secondary}.`,
     scripts: {
-      strong: `I hear the price concern, but the right decision is not “cheapest”; it is the most reliable outcome. If we align on one clear 30-day goal, holding at ${range.ideal_price} is the right frame.`,
-      warm: `Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable 30-day target. If that target is real, would ${range.negotiable_price} feel reasonable to move forward?`,
-      concession: `If budget is tight today, I can offer a conditional concession to ${range.negotiable_price} for a narrower first milestone. I do not recommend going below ${range.bottom_price} because delivery quality will drop.`,
+      strong: `I hear the price concern, but for ${context.needSummary} the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear ${context.timeline} goal, holding at ${range.ideal_price} is the right frame.`,
+      warm: `Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the ${context.timeline} window. If that target is real, would ${range.negotiable_price} feel reasonable to move forward?`,
+      concession: `If budget is tight today, I can offer a conditional concession to ${range.negotiable_price} for a narrower first milestone while keeping the ${context.timeline} timeline. I do not recommend going below ${range.bottom_price} because delivery quality will drop.`,
     },
     decision_logic: [
       `Recommended sequence: ${primary}, ${secondary}, ${third}`,
+      `Frame price to the project outcome: ${context.needSummary}.`,
       'Anchor value before discount.',
       'Any concession must trade for scope, timing, or commitment.',
     ],
     next_actions: [
-      'Reply with empathy plus one diagnostic question today.',
-      'Define one measurable short-cycle outcome.',
-      'Close on a calendar-bound next step, not vague follow-up.',
+      `Reply today with empathy plus one diagnostic question about ${context.needSummary}.`,
+      `Define one measurable outcome for the ${context.timeline} window.`,
+      'Close on a calendar-bound next step with two options (full scope vs reduced scope).',
     ],
   };
 }
@@ -226,7 +277,11 @@ export function generateDealStrategy(input: DealInput): CoachStrategyResult {
   const objection = inferObjection(input.client_objection);
   const cards = pickCards(stage, objection);
   const range = computePriceRange(input.your_quote, input.your_floor_price);
-  const messages = buildMessages(locale, cards, range);
+  const messages = buildMessages(locale, cards, range, {
+    needSummary: summarizeNeed(input.client_need),
+    timeline: extractTimeline(input.client_need, input.client_objection),
+    objection,
+  });
 
   return {
     ...messages,

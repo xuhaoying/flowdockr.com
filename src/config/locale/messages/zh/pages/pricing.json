@@ -76,18 +76,18 @@
       },
       "cta": {
         "id": "cta",
-        "title": "Your business model deserves infrastructure.",
-        "description": "FlowDockr helps protect margin before problems become disputes.",
+        "title": "Start with Scope Guard.",
+        "description": "Validate value first, then expand to more modules.",
         "buttons": [
           {
-            "title": "Go to Deal",
-            "url": "/deal",
-            "icon": "Handshake"
+            "title": "Open Scope Guard",
+            "url": "/scope",
+            "icon": "ShieldCheck"
           },
           {
-            "title": "Go to Payment",
-            "url": "/payment",
-            "icon": "CreditCard",
+            "title": "Read Guides",
+            "url": "/guides",
+            "icon": "BookOpen",
             "variant": "outline"
           }
         ],

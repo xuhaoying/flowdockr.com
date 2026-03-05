@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-03-04T00:00:00Z",
+  "source": {
+    "intents": "product/seo/factory/intents.v2.json",
+    "assets": "product/seo/factory/assets.v2.json",
+    "pillars": "product/seo/factory/pillars.v2.json",
+    "tools": "product/seo/factory/tools.v2.json"
+  },
+  "pages": [
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-asking-for-discount",
+      "intent_id": "NEG-001",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-says-my-price-is-too-high",
+      "intent_id": "NEG-003",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-asking-for-cheaper-rate",
+      "intent_id": "NEG-004",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-says-budget-is-low",
+      "intent_id": "NEG-005",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-says-other-freelancer-cheaper",
+      "intent_id": "NEG-009",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/client-asking-for-price-reduction",
+      "intent_id": "NEG-011",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/how-to-reply-when-client-says-too-expensive",
+      "intent_id": "NEG-015",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/freelancer-negotiation-script",
+      "intent_id": "NEG-016",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/freelance-price-negotiation-email",
+      "intent_id": "NEG-017",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/negotiation/how-to-respond-to-budget-objection",
+      "intent_id": "NEG-020",
+      "cluster": "negotiation-discount",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/freelance-pricing-strategy",
+      "intent_id": "PRI-001",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/how-to-price-freelance-work",
+      "intent_id": "PRI-002",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/how-to-charge-clients-freelancer",
+      "intent_id": "PRI-003",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/freelance-rate-calculator",
+      "intent_id": "PRI-004",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/how-to-calculate-freelance-rate",
+      "intent_id": "PRI-005",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/freelancer-hourly-vs-project-pricing",
+      "intent_id": "PRI-006",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/how-to-quote-freelance-project",
+      "intent_id": "PRI-007",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/pricing/freelance-pricing-formula",
+      "intent_id": "PRI-008",
+      "cluster": "pricing-strategy",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/client-not-responding-freelancer",
+      "intent_id": "COM-001",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/client-ghosting-freelancer",
+      "intent_id": "COM-002",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/how-to-follow-up-client-freelancer",
+      "intent_id": "COM-003",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/freelancer-follow-up-email",
+      "intent_id": "COM-006",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/client-not-replying-message",
+      "intent_id": "COM-008",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/follow-up-email-after-proposal",
+      "intent_id": "COM-012",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/client-communication/freelancer-follow-up-script",
+      "intent_id": "COM-016",
+      "cluster": "client-communication",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "problem",
+      "route": "/proposals/freelance-proposal-template",
+      "intent_id": "PRO-001",
+      "cluster": "proposal-and-close",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "problem",
+      "route": "/proposals/freelance-proposal-email",
+      "intent_id": "PRO-004",
+      "cluster": "proposal-and-close",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "problem",
+      "route": "/proposals/freelance-pitch-template",
+      "intent_id": "PRO-006",
+      "cluster": "proposal-and-close",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "problem",
+      "route": "/proposals/client-proposal-script",
+      "intent_id": "PRO-008",
+      "cluster": "proposal-and-close",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "problem",
+      "route": "/proposals/freelancer-pitch-email",
+      "intent_id": "PRO-011",
+      "cluster": "proposal-and-close",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/negotiation",
+      "pillar_id": "PIL-NEGOTIATION",
+      "cluster": "negotiation-discount"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/pricing/playbooks",
+      "pillar_id": "PIL-PRICING",
+      "cluster": "pricing-strategy"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/client-communication",
+      "pillar_id": "PIL-COMMUNICATION",
+      "cluster": "client-communication"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/proposals",
+      "pillar_id": "PIL-PROPOSALS",
+      "cluster": "proposal-and-close"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/objections-handling",
+      "pillar_id": "PIL-OBJECTIONS",
+      "cluster": "negotiation-discount"
+    },
+    {
+      "page_type": "pillar",
+      "route": "/email-scripts",
+      "pillar_id": "PIL-SCRIPTS",
+      "cluster": "client-communication"
+    },
+    {
+      "page_type": "tool",
+      "route": "/tools/discount-reply-generator",
+      "tool_id": "TOOL-DISCOUNT-REPLY",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "tool",
+      "route": "/tools/low-offer-reply-generator",
+      "tool_id": "TOOL-LOW-OFFER",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "tool",
+      "route": "/tools/follow-up-email-generator",
+      "tool_id": "TOOL-FOLLOW-UP",
+      "cta_type": "reply"
+    },
+    {
+      "page_type": "tool",
+      "route": "/tools/freelance-rate-calculator",
+      "tool_id": "TOOL-RATE-CALC",
+      "cta_type": "pricing"
+    },
+    {
+      "page_type": "tool",
+      "route": "/tools/proposal-generator",
+      "tool_id": "TOOL-PROPOSAL",
+      "cta_type": "proposal"
+    },
+    {
+      "page_type": "tool_hub",
+      "route": "/tools"
+    },
+    {
+      "page_type": "cluster_hub",
+      "route": "/rate-increase",
+      "cluster": "rate-increase-negotiation"
+    }
+  ]
+}

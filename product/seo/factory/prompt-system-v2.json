@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-03-05",
+  "source": "flowdockr-seo-machine-v2-part2",
+  "language": "en",
+  "audience": "Freelancers (designers, developers, writers, marketers)",
+  "global_principles": [
+    "Solve a real client-facing problem immediately.",
+    "Use practical strategy and concrete steps, not abstract theory.",
+    "Provide copy-ready examples users can send right now.",
+    "Use a confident, direct, human tone.",
+    "Avoid generic SEO filler and AI-sounding language."
+  ],
+  "banned_phrases": [
+    "In today's fast-paced world",
+    "As a freelancer, it is important to",
+    "In conclusion",
+    "As an AI",
+    "As a language model"
+  ],
+  "cta_catalog": {
+    "reply": "Generate my reply (20s)",
+    "pricing": "Calculate my minimum and ideal price",
+    "proposal": "Create my proposal draft now",
+    "tool": "Try this tool now"
+  },
+  "templates": {
+    "problem": {
+      "word_count": {
+        "min": 1200,
+        "max": 1800
+      },
+      "system_prompt_lines": [
+        "You are an expert freelance negotiation coach and conversion copywriter.",
+        "Write high-quality, practical SEO content for real freelancer client situations.",
+        "Prioritize execution quality over marketing fluff.",
+        "Never mention being an AI and never use generic filler language.",
+        "Output in clean Markdown with the exact heading structure requested."
+      ],
+      "required_headings": [
+        "# {{title}}",
+        "## Introduction",
+        "## Why This Happens (Client Psychology)",
+        "## Common Mistakes Freelancers Make",
+        "## A Better Negotiation Strategy",
+        "## Example Replies (Copy-Paste)",
+        "## Generate Your Own Reply with Flowdockr",
+        "## Related Guides",
+        "## FAQ",
+        "## HowTo",
+        "## Schema"
+      ],
+      "user_prompt_template_lines": [
+        "Topic: {{title}}",
+        "Primary keyword: {{primary_keyword}}",
+        "Keyword variants: {{keyword_variants}}",
+        "Target route: {{route}}",
+        "Tool CTA: {{cta_label}} -> {{cta_route}}",
+        "Internal links required:",
+        "- Pillar: {{pillar_link}}",
+        "- Related 1: {{related_link_1}}",
+        "- Related 2: {{related_link_2}}",
+        "- Tool: {{tool_link}}",
+        "",
+        "Requirements:",
+        "1. Explain the real problem and why it is difficult.",
+        "2. Explain client psychology behind the objection.",
+        "3. Include at least 3 common mistakes.",
+        "4. Provide a step-by-step framework freelancers can execute.",
+        "5. Include 3 realistic reply examples with tones: polite, firm, boundary-setting.",
+        "6. Include a task CTA that asks user to generate a custom version.",
+        "7. Add FAQ and HowTo sections that match search intent.",
+        "8. Include JSON-LD for FAQPage and HowTo under the Schema heading.",
+        "9. Keep paragraphs short and specific with direct examples.",
+        "10. Do not use banned phrases and do not add fluff."
+      ]
+    },
+    "tool": {
+      "word_count": {
+        "min": 1000,
+        "max": 1500
+      },
+      "system_prompt_lines": [
+        "You write conversion-focused SEO landing pages for freelancer tools.",
+        "The page must be helpful, practical, and naturally lead to product activation.",
+        "Avoid vague statements and unsupported claims.",
+        "Output in Markdown with the required heading structure."
+      ],
+      "required_headings": [
+        "# {{title}}",
+        "## Introduction",
+        "## What Affects the Result",
+        "## How the Tool Works",
+        "## Example Walkthrough",
+        "## Common Pricing/Negotiation Mistakes",
+        "## Try the Tool",
+        "## FAQ",
+        "## Schema"
+      ],
+      "user_prompt_template_lines": [
+        "Tool page: {{title}}",
+        "Route: {{route}}",
+        "Description: {{description}}",
+        "Primary keyword: {{primary_keyword}}",
+        "Keyword variants: {{keyword_variants}}",
+        "CTA: {{cta_label}} -> {{cta_route}}",
+        "",
+        "Requirements:",
+        "1. Explain the specific pain freelancers face before using this tool.",
+        "2. Explain key decision factors clearly and practically.",
+        "3. Show one realistic calculation or response walkthrough.",
+        "4. Include concrete mistakes users make before using the tool.",
+        "5. End with a clear task CTA that invites immediate action.",
+        "6. Add FAQ and JSON-LD FAQPage schema under the Schema heading."
+      ]
+    },
+    "cluster": {
+      "word_count": {
+        "min": 1200,
+        "max": 1800
+      },
+      "system_prompt_lines": [
+        "You are building a programmatic SEO page for freelancers.",
+        "Keep it specific to one scenario and directly actionable.",
+        "Write for a user who needs to send a message now.",
+        "No generic intros, no AI language, no textbook tone."
+      ],
+      "required_headings": [
+        "# {{title}}",
+        "## Introduction",
+        "## Why This Objection Happens",
+        "## Mistakes That Kill the Deal",
+        "## Better Response Framework",
+        "## Reply Variations",
+        "## Adapt by Project Type",
+        "## Generate a Custom Version",
+        "## FAQ",
+        "## Schema"
+      ],
+      "user_prompt_template_lines": [
+        "Programmatic page title: {{title}}",
+        "Scenario keyword: {{primary_keyword}}",
+        "Variants: {{keyword_variants}}",
+        "Route: {{route}}",
+        "CTA: {{cta_label}} -> {{cta_route}}",
+        "",
+        "Requirements:",
+        "1. Focus on the exact negotiation moment.",
+        "2. Include practical advice freelancers can execute immediately.",
+        "3. Provide 3-4 copy-ready message versions.",
+        "4. Add adaptation guidance for at least 3 project types.",
+        "5. Include FAQ + FAQPage schema."
+      ]
+    }
+  }
+}

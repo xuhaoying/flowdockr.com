@@ -5,7 +5,7 @@ Generated: 2026-03-04
 ## Product
 - [ ] `/` -> `/scope` -> output generation flow works end-to-end on mobile and desktop
 - [ ] Hero problem-entry buttons map to correct module routes
-- [ ] SEO page CTA opens Scope form with prefilled context
+- [ ] SEO page CTA opens Scope form directly
 
 ## Quality
 - [ ] P0 defects = 0
@@ -13,7 +13,7 @@ Generated: 2026-03-04
 - [ ] Smoke tests pass for generation, copy, and signup path
 
 ## Metrics
-- [ ] Events validated: `scope_form_started`, `scope_output_generated`, `scope_block_copied`, `signup_started`, `signup_completed`
+- [ ] Events validated: `scope_form_started`, `scope_output_generated`, `scope_block_copied`, `scope_upgrade_clicked`
 - [ ] Basic dashboard/query ready for daily activation and weekly retention
 
 ## Operations

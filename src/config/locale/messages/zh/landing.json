@@ -17,21 +17,6 @@
           "icon": "ShieldCheck"
         },
         {
-          "title": "Payment",
-          "url": "/payment",
-          "icon": "CreditCard"
-        },
-        {
-          "title": "Pricing",
-          "url": "/pricing",
-          "icon": "BadgeDollarSign"
-        },
-        {
-          "title": "Deal",
-          "url": "/deal",
-          "icon": "Handshake"
-        },
-        {
           "title": "Guides",
           "url": "/guides",
           "icon": "BookOpen"
@@ -41,7 +26,7 @@
     "buttons": [
       {
         "title": "Generate revision policy",
-        "url": "/scope#scope-generator",
+        "url": "/scope",
         "icon": "Zap",
         "variant": "default"
       }
@@ -54,52 +39,46 @@
     },
     "show_sign": false,
     "show_theme": true,
-    "show_locale": true
+    "show_locale": false
   },
   "hero": {
     "id": "hero",
-    "title": "Stop scope creep in client projects.",
-    "description": "Generate a clear revision policy and scope rule in seconds.",
+    "title": "Stop client chaos.",
+    "description": "Handle scope creep in minutes.",
     "buttons": [
       {
         "title": "Generate revision policy",
         "icon": "Zap",
-        "url": "/scope#scope-generator",
+        "url": "/scope",
         "target": "_self",
         "variant": "default"
       }
     ],
     "show_avatars": false,
-    "show_award": false,
-    "background_image": {
-      "src": "/imgs/bg/tree.jpg",
-      "alt": "FlowDockr background"
-    }
+    "show_award": false
   },
   "features": {
     "id": "features",
-    "title": "FlowDockr modules",
-    "description": "Scope is live. Payment, Pricing, and Deal are next.",
+    "title": "Common situations",
+    "description": "Start with Scope Guard for the issue you need to solve right now.",
     "items": [
       {
-        "title": "Scope",
-        "description": "Live now: generate revision policy and scope rules.",
-        "icon": "ShieldCheck"
+        "title": "Client keeps asking for revisions",
+        "description": "Generate a revision boundary and avoid unpaid extra rounds.",
+        "icon": "RotateCcw",
+        "url": "/scope"
       },
       {
-        "title": "Payment",
-        "description": "Coming soon: late-payment reminders and term protection.",
-        "icon": "CreditCard"
+        "title": "Client wants extra work",
+        "description": "Set out-of-scope rules before accepting additional tasks.",
+        "icon": "ListPlus",
+        "url": "/scope"
       },
       {
-        "title": "Pricing",
-        "description": "Coming soon: quote structure and pricing strategy support.",
-        "icon": "BadgeDollarSign"
-      },
-      {
-        "title": "Deal",
-        "description": "Coming soon: negotiation replies for discount pressure.",
-        "icon": "Handshake"
+        "title": "Client changes project scope",
+        "description": "Keep the original brief and timeline protected.",
+        "icon": "ArrowLeftRight",
+        "url": "/scope"
       }
     ],
     "className": "bg-muted/50"
@@ -144,7 +123,7 @@
     "buttons": [
       {
         "title": "Open Scope Guard",
-        "url": "/scope#scope-generator",
+        "url": "/scope",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -199,16 +178,8 @@
               "url": "/scope"
             },
             {
-              "title": "Payment",
-              "url": "/payment"
-            },
-            {
               "title": "Pricing",
               "url": "/pricing"
-            },
-            {
-              "title": "Deal",
-              "url": "/deal"
             }
           ]
         },
@@ -218,14 +189,6 @@
             {
               "title": "Guides",
               "url": "/guides"
-            },
-            {
-              "title": "Templates",
-              "url": "/templates"
-            },
-            {
-              "title": "Industries",
-              "url": "/industries"
             }
           ]
         },
@@ -257,7 +220,7 @@
       ]
     },
     "show_theme": true,
-    "show_locale": true,
+    "show_locale": false,
     "show_built_with": false
   }
 }

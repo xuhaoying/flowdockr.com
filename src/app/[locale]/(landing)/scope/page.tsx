@@ -26,9 +26,6 @@ export default async function ScopePage({
       generator: {
         component: <ScopePolicyGenerator />,
       },
-      features: t.raw('page.sections.features'),
-      usage: t.raw('page.sections.usage'),
-      cta: t.raw('page.sections.cta'),
     },
   };
 

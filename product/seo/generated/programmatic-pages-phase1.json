@@ -1,0 +1,340 @@
+{
+  "generatedAt": "2026-03-04T00:00:00Z",
+  "sourceQueue": "product/seo/flowdockr-phase1-queue-30.csv",
+  "pageCount": 30,
+  "hubCount": 6,
+  "pages": [
+    {
+      "id": "NEG-016",
+      "keyword": "freelancer negotiation script",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/freelancer-negotiation-script",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-017",
+      "keyword": "freelance price negotiation email",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/freelance-price-negotiation-email",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-001",
+      "keyword": "client asking for discount",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-asking-for-discount",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-003",
+      "keyword": "client says my price is too high",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-says-my-price-is-too-high",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRI-004",
+      "keyword": "freelance rate calculator",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/freelance-rate-calculator",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRI-001",
+      "keyword": "freelance pricing strategy",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/freelance-pricing-strategy",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "PRI-002",
+      "keyword": "how to price freelance work",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/how-to-price-freelance-work",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "COM-006",
+      "keyword": "freelancer follow up email",
+      "cluster": "client-communication",
+      "route": "/communication/freelancer-follow-up-email",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "COM-012",
+      "keyword": "follow up email after proposal",
+      "cluster": "client-communication",
+      "route": "/communication/follow-up-email-after-proposal",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRO-001",
+      "keyword": "freelance proposal template",
+      "cluster": "proposal-and-close",
+      "route": "/proposals/freelance-proposal-template",
+      "hubRoute": "/proposals",
+      "targetRoute": "/scope",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-004",
+      "keyword": "client asking for cheaper rate",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-asking-for-cheaper-rate",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-005",
+      "keyword": "client says budget is low",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-says-budget-is-low",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-009",
+      "keyword": "client says other freelancer cheaper",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-says-other-freelancer-cheaper",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRI-003",
+      "keyword": "how to charge clients freelancer",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/how-to-charge-clients-freelancer",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "PRI-005",
+      "keyword": "how to calculate freelance rate",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/how-to-calculate-freelance-rate",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "PRI-006",
+      "keyword": "freelancer hourly vs project pricing",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/freelancer-hourly-vs-project-pricing",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "COM-016",
+      "keyword": "freelancer follow up script",
+      "cluster": "client-communication",
+      "route": "/communication/freelancer-follow-up-script",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "COM-001",
+      "keyword": "client not responding freelancer",
+      "cluster": "client-communication",
+      "route": "/communication/client-not-responding-freelancer",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRO-004",
+      "keyword": "freelance proposal email",
+      "cluster": "proposal-and-close",
+      "route": "/proposals/freelance-proposal-email",
+      "hubRoute": "/proposals",
+      "targetRoute": "/scope",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRO-006",
+      "keyword": "freelance pitch template",
+      "cluster": "proposal-and-close",
+      "route": "/proposals/freelance-pitch-template",
+      "hubRoute": "/proposals",
+      "targetRoute": "/scope",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-011",
+      "keyword": "client asking for price reduction",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/client-asking-for-price-reduction",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-015",
+      "keyword": "how to reply when client says too expensive",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/how-to-reply-when-client-says-too-expensive",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "NEG-020",
+      "keyword": "how to respond to budget objection",
+      "cluster": "negotiation-discount",
+      "route": "/negotiation/how-to-respond-to-budget-objection",
+      "hubRoute": "/negotiation",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRI-007",
+      "keyword": "how to quote freelance project",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/how-to-quote-freelance-project",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "PRI-008",
+      "keyword": "freelance pricing formula",
+      "cluster": "pricing-strategy",
+      "route": "/pricing/freelance-pricing-formula",
+      "hubRoute": "/pricing/playbooks",
+      "targetRoute": "/pricing",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "COM-002",
+      "keyword": "client ghosting freelancer",
+      "cluster": "client-communication",
+      "route": "/communication/client-ghosting-freelancer",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "COM-008",
+      "keyword": "client not replying message",
+      "cluster": "client-communication",
+      "route": "/communication/client-not-replying-message",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "COM-003",
+      "keyword": "how to follow up client freelancer",
+      "cluster": "client-communication",
+      "route": "/communication/how-to-follow-up-client-freelancer",
+      "hubRoute": "/communication",
+      "targetRoute": "/deal",
+      "source": "user_seed",
+      "priority": "P2"
+    },
+    {
+      "id": "PRO-008",
+      "keyword": "client proposal script",
+      "cluster": "proposal-and-close",
+      "route": "/proposals/client-proposal-script",
+      "hubRoute": "/proposals",
+      "targetRoute": "/scope",
+      "source": "user_seed",
+      "priority": "P1"
+    },
+    {
+      "id": "PRO-011",
+      "keyword": "freelancer pitch email",
+      "cluster": "proposal-and-close",
+      "route": "/proposals/freelancer-pitch-email",
+      "hubRoute": "/proposals",
+      "targetRoute": "/scope",
+      "source": "user_seed",
+      "priority": "P1"
+    }
+  ],
+  "hubs": [
+    {
+      "route": "/negotiation",
+      "cluster": "negotiation-discount",
+      "title": "Freelance Negotiation Playbooks"
+    },
+    {
+      "route": "/pricing/playbooks",
+      "cluster": "pricing-strategy",
+      "title": "Freelance Pricing Playbooks"
+    },
+    {
+      "route": "/communication",
+      "cluster": "client-communication",
+      "title": "Client Communication Playbooks"
+    },
+    {
+      "route": "/proposals",
+      "cluster": "proposal-and-close",
+      "title": "Proposal And Close Playbooks"
+    },
+    {
+      "route": "/rate-increase",
+      "cluster": "rate-increase-negotiation",
+      "title": "Rate Increase Playbooks"
+    },
+    {
+      "route": "/email-scripts",
+      "cluster": "cross-cluster-template",
+      "title": "Freelance Email Scripts"
+    }
+  ]
+}

@@ -1,0 +1,745 @@
+{
+  "generated_at": "2026-03-05",
+  "source": "prompt-jobs",
+  "totals": {
+    "targets": 41,
+    "passed": 0,
+    "failed": 41
+  },
+  "passed_routes": [],
+  "failed_routes": [
+    {
+      "route": "/negotiation/client-asks-discount",
+      "profile": "problem",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1200-1800, got 77"
+        },
+        {
+          "code": "missing_task_cta"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"HowTo\""
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Polite"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Firm"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Boundary-Setting"
+        },
+        {
+          "code": "insufficient_mistake_items",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_reply_variants",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_related_links",
+          "detail": "expected >= 4, got 0"
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-says-price-too-high",
+      "profile": "problem",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1200-1800, got 81"
+        },
+        {
+          "code": "missing_task_cta"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"HowTo\""
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Polite"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Firm"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Boundary-Setting"
+        },
+        {
+          "code": "insufficient_mistake_items",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_reply_variants",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_related_links",
+          "detail": "expected >= 4, got 0"
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-compares-freelancers",
+      "profile": "problem",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1200-1800, got 77"
+        },
+        {
+          "code": "missing_task_cta"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"HowTo\""
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Polite"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Firm"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Boundary-Setting"
+        },
+        {
+          "code": "insufficient_mistake_items",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_reply_variants",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_related_links",
+          "detail": "expected >= 4, got 0"
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-says-budget-too-low",
+      "profile": "problem",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1200-1800, got 81"
+        },
+        {
+          "code": "missing_task_cta"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"HowTo\""
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Polite"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Firm"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Boundary-Setting"
+        },
+        {
+          "code": "insufficient_mistake_items",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_reply_variants",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_related_links",
+          "detail": "expected >= 4, got 0"
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asks-cheaper-option",
+      "profile": "problem",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1200-1800, got 78"
+        },
+        {
+          "code": "missing_task_cta"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"HowTo\""
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Polite"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Firm"
+        },
+        {
+          "code": "missing_reply_tone",
+          "detail": "### Boundary-Setting"
+        },
+        {
+          "code": "insufficient_mistake_items",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_reply_variants",
+          "detail": "expected >= 3, got 0"
+        },
+        {
+          "code": "insufficient_related_links",
+          "detail": "expected >= 4, got 0"
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-wants-lower-rate",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-wants-lower-rate.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-negotiating-project-price",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-negotiating-project-price.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asks-price-reduction",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-asks-price-reduction.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-pushing-cheaper-deal",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-pushing-cheaper-deal.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asking-free-work",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-asking-free-work.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asking-free-trial",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-asking-free-trial.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-requesting-revision-without-pay",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-requesting-revision-without-pay.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asking-scope-expansion",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-asking-scope-expansion.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-delaying-payment-negotiation",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-delaying-payment-negotiation.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-rejecting-proposal-price",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-rejecting-proposal-price.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-requesting-partial-discount",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-requesting-partial-discount.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-wants-hourly-reduction",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-wants-hourly-reduction.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-negotiating-contract-rate",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-negotiating-contract-rate.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-asking-bundle-discount",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-asking-bundle-discount.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/negotiation/client-questioning-value",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/negotiation/client-questioning-value.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-not-responding",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-not-responding.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-ghosting",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-ghosting.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-delayed-reply",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-delayed-reply.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-rejecting-proposal",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-rejecting-proposal.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-requesting-changes",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-requesting-changes.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-asking-many-revisions",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-asking-many-revisions.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-unclear-requirements",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-unclear-requirements.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-communication-breakdown",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-communication-breakdown.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-delaying-feedback",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-delaying-feedback.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication/client-asking-urgent-delivery",
+      "profile": "problem",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication/client-asking-urgent-delivery.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/tools/freelance-rate-calculator",
+      "profile": "tool",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1000-1500, got 86"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Introduction"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## What Affects the Result"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## How the Tool Works"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Example Walkthrough"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Common Pricing/Negotiation Mistakes"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Try the Tool"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## FAQ"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Schema"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/tools/client-negotiation-reply-generator",
+      "profile": "tool",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/tools/client-negotiation-reply-generator.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/tools/follow-up-email-generator",
+      "profile": "tool",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1000-1500, got 85"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Introduction"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## What Affects the Result"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## How the Tool Works"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Example Walkthrough"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Common Pricing/Negotiation Mistakes"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Try the Tool"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## FAQ"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Schema"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/tools/proposal-generator",
+      "profile": "tool",
+      "quality_score": 0,
+      "issues": [
+        {
+          "code": "word_count_out_of_range",
+          "detail": "expected 1000-1500, got 80"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Introduction"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## What Affects the Result"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## How the Tool Works"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Example Walkthrough"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Common Pricing/Negotiation Mistakes"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Try the Tool"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## FAQ"
+        },
+        {
+          "code": "missing_heading",
+          "detail": "## Schema"
+        },
+        {
+          "code": "missing_schema_term",
+          "detail": "\"@type\": \"FAQPage\""
+        },
+        {
+          "code": "insufficient_faq_questions",
+          "detail": "expected >= 2, got 0"
+        }
+      ]
+    },
+    {
+      "route": "/tools/scope-creep-response-generator",
+      "profile": "tool",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/tools/scope-creep-response-generator.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/freelance-negotiation-guide",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/freelance-negotiation-guide.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/freelance-pricing-guide",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/freelance-pricing-guide.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/client-communication-guide",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/client-communication-guide.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/freelance-proposal-guide",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/freelance-proposal-guide.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/freelance-email-templates",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/freelance-email-templates.mdx"
+        }
+      ]
+    },
+    {
+      "route": "/how-to-raise-freelance-rates",
+      "profile": "cluster",
+      "issues": [
+        {
+          "code": "file_missing",
+          "detail": "content/pages/how-to-raise-freelance-rates.mdx"
+        }
+      ]
+    }
+  ]
+}

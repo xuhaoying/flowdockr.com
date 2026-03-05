@@ -1,0 +1,344 @@
+{
+  "generated_at": "2026-03-04",
+  "source": "flowdockr-seo-machine-v2-part1",
+  "top_level_hubs": [
+    "/negotiation",
+    "/pricing",
+    "/client-communication",
+    "/proposals",
+    "/email-scripts",
+    "/rate-increase",
+    "/objections",
+    "/tools"
+  ],
+  "dimensions": {
+    "profession": [
+      "designer",
+      "copywriter",
+      "developer",
+      "video editor",
+      "illustrator",
+      "motion designer",
+      "marketing consultant",
+      "SEO specialist",
+      "UX designer",
+      "brand designer"
+    ],
+    "country": [
+      "US",
+      "UK",
+      "Canada",
+      "Australia",
+      "Germany",
+      "France",
+      "Netherlands",
+      "Singapore",
+      "India",
+      "Philippines"
+    ],
+    "industry": [
+      "SaaS",
+      "Ecommerce",
+      "Agency",
+      "Healthcare",
+      "Finance",
+      "Education",
+      "Real Estate",
+      "Nonprofit",
+      "Creator Economy",
+      "B2B Services"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster_id": "negotiation",
+      "template_id": "negotiation-situation",
+      "page_type": "problem",
+      "cta_type": "reply",
+      "template_title": "How to respond when client {situation}",
+      "variable_key": "situation",
+      "expected_count": 20,
+      "variables": [
+        "client asks for discount",
+        "client says price too high",
+        "client compares other freelancers",
+        "client says budget too low",
+        "client asks cheaper option",
+        "client wants lower rate",
+        "client negotiating project price",
+        "client asks price reduction",
+        "client pushing for cheaper deal",
+        "client asking for free work",
+        "client asking free trial",
+        "client requesting revision without pay",
+        "client asking scope expansion",
+        "client delaying payment negotiation",
+        "client rejecting proposal price",
+        "client requesting partial discount",
+        "client wants hourly reduction",
+        "client negotiating contract rate",
+        "client asking bundle discount",
+        "client questioning value"
+      ]
+    },
+    {
+      "cluster_id": "pricing",
+      "template_id": "pricing-service",
+      "page_type": "cluster",
+      "cta_type": "pricing",
+      "template_title": "How to price freelance {service}",
+      "variable_key": "service",
+      "expected_count": 10,
+      "variables": [
+        "design",
+        "copywriting",
+        "web development",
+        "video editing",
+        "illustration",
+        "social media",
+        "marketing consulting",
+        "UX design",
+        "logo design",
+        "SEO consulting"
+      ]
+    },
+    {
+      "cluster_id": "pricing",
+      "template_id": "pricing-profession",
+      "page_type": "cluster",
+      "cta_type": "pricing",
+      "template_title": "Freelance rate for {profession}",
+      "variable_key": "profession",
+      "expected_count": 10,
+      "variables": [
+        "designer",
+        "copywriter",
+        "developer",
+        "video editor",
+        "illustrator",
+        "motion designer",
+        "marketing consultant",
+        "SEO specialist",
+        "UX designer",
+        "brand designer"
+      ]
+    },
+    {
+      "cluster_id": "pricing",
+      "template_id": "pricing-country",
+      "page_type": "cluster",
+      "cta_type": "pricing",
+      "template_title": "Freelance pricing in {country}",
+      "variable_key": "country",
+      "expected_count": 10,
+      "variables": [
+        "US",
+        "UK",
+        "Canada",
+        "Australia",
+        "Germany",
+        "France",
+        "Netherlands",
+        "Singapore",
+        "India",
+        "Philippines"
+      ]
+    },
+    {
+      "cluster_id": "client-communication",
+      "template_id": "communication-problem",
+      "page_type": "problem",
+      "cta_type": "reply",
+      "template_title": "How to handle {problem}",
+      "variable_key": "problem",
+      "expected_count": 15,
+      "variables": [
+        "client not responding",
+        "client ghosting",
+        "client delayed reply",
+        "client rejecting proposal",
+        "client requesting changes",
+        "client asking many revisions",
+        "client unclear requirements",
+        "client communication breakdown",
+        "client delaying feedback",
+        "client asking urgent delivery",
+        "client changing scope",
+        "client misunderstanding deliverables",
+        "client refusing contract",
+        "client ignoring invoice",
+        "client pushing deadlines"
+      ]
+    },
+    {
+      "cluster_id": "email-scripts",
+      "template_id": "email-script",
+      "page_type": "problem",
+      "cta_type": "reply",
+      "template_title": "Email template for {situation}",
+      "variable_key": "situation",
+      "expected_count": 10,
+      "variables": [
+        "follow up proposal",
+        "price negotiation",
+        "late payment reminder",
+        "project confirmation",
+        "proposal reminder",
+        "scope change request",
+        "client onboarding",
+        "proposal rejection response",
+        "meeting scheduling",
+        "contract signing"
+      ]
+    },
+    {
+      "cluster_id": "proposals",
+      "template_id": "proposal-service",
+      "page_type": "cluster",
+      "cta_type": "proposal",
+      "template_title": "Freelance proposal for {service}",
+      "variable_key": "service",
+      "expected_count": 10,
+      "variables": [
+        "web design",
+        "copywriting",
+        "SEO consulting",
+        "branding",
+        "logo design",
+        "marketing strategy",
+        "UX design",
+        "video production",
+        "landing page design",
+        "social media management"
+      ]
+    },
+    {
+      "cluster_id": "rate-increase",
+      "template_id": "rate-increase-service",
+      "page_type": "cluster",
+      "cta_type": "pricing",
+      "template_title": "How to raise freelance rate for {service}",
+      "variable_key": "service",
+      "expected_count": 8,
+      "variables": [
+        "design",
+        "copywriting",
+        "development",
+        "video editing",
+        "consulting",
+        "SEO services",
+        "marketing",
+        "branding"
+      ]
+    },
+    {
+      "cluster_id": "objections",
+      "template_id": "objection-scenario",
+      "page_type": "problem",
+      "cta_type": "reply",
+      "template_title": "How to respond when client says {objection}",
+      "variable_key": "objection",
+      "expected_count": 7,
+      "variables": [
+        "too expensive",
+        "budget too small",
+        "not sure yet",
+        "need to compare others",
+        "need approval",
+        "maybe later",
+        "too busy now"
+      ]
+    },
+    {
+      "cluster_id": "tools",
+      "template_id": "tools-core",
+      "page_type": "tool",
+      "cta_type": "tool",
+      "expected_count": 8,
+      "pages": [
+        {
+          "title": "Freelance Rate Calculator",
+          "route": "/tools/freelance-rate-calculator"
+        },
+        {
+          "title": "Client Negotiation Reply Generator",
+          "route": "/tools/client-negotiation-reply-generator"
+        },
+        {
+          "title": "Follow-up Email Generator",
+          "route": "/tools/follow-up-email-generator"
+        },
+        {
+          "title": "Proposal Generator",
+          "route": "/tools/proposal-generator"
+        },
+        {
+          "title": "Scope Creep Response Generator",
+          "route": "/tools/scope-creep-response-generator"
+        },
+        {
+          "title": "Late Payment Reminder Generator",
+          "route": "/tools/late-payment-reminder-generator"
+        },
+        {
+          "title": "Client Objection Response Generator",
+          "route": "/tools/client-objection-response-generator"
+        },
+        {
+          "title": "Freelance Pricing Calculator",
+          "route": "/tools/freelance-pricing-calculator"
+        }
+      ]
+    },
+    {
+      "cluster_id": "pillars",
+      "template_id": "pillars-core",
+      "page_type": "pillar",
+      "cta_type": "pillar",
+      "expected_count": 6,
+      "pages": [
+        {
+          "title": "Freelance Negotiation Guide",
+          "route": "/freelance-negotiation-guide"
+        },
+        {
+          "title": "Freelance Pricing Guide",
+          "route": "/freelance-pricing-guide"
+        },
+        {
+          "title": "Client Communication Guide",
+          "route": "/client-communication-guide"
+        },
+        {
+          "title": "Freelance Proposal Guide",
+          "route": "/freelance-proposal-guide"
+        },
+        {
+          "title": "Freelance Email Templates",
+          "route": "/freelance-email-templates"
+        },
+        {
+          "title": "How To Raise Freelance Rates",
+          "route": "/how-to-raise-freelance-rates"
+        }
+      ]
+    }
+  ],
+  "expansion_rules": [
+    {
+      "rule_id": "EXP-PRICING-SERVICE-PROFESSION",
+      "source_template_id": "pricing-service",
+      "dimension": "profession"
+    },
+    {
+      "rule_id": "EXP-PRICING-PROFESSION-COUNTRY",
+      "source_template_id": "pricing-profession",
+      "dimension": "country"
+    },
+    {
+      "rule_id": "EXP-PRICING-COUNTRY-INDUSTRY",
+      "source_template_id": "pricing-country",
+      "dimension": "industry"
+    }
+  ]
+}

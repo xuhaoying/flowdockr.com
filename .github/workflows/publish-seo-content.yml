@@ -1,0 +1,51 @@
+name: Publish SEO Content
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "content/**"
+      - "src/**"
+      - "scripts/**"
+      - "product/seo/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate sitemap v2
+        run: pnpm seo:factory:sitemap
+
+      - name: Build
+        run: pnpm build
+
+      - name: Upload build logs context
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-publish-context
+          path: |
+            product/seo/generated
+            public/sitemap.xml
+
+      - name: Vercel deploy placeholder
+        run: echo "Add Vercel deploy integration step here (project-specific token/project id)."

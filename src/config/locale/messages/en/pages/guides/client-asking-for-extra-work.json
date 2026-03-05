@@ -13,7 +13,7 @@
         "buttons": [
           {
             "title": "Generate your revision policy",
-            "url": "/scope#scope-generator",
+            "url": "/scope",
             "icon": "Zap",
             "variant": "default"
           }
@@ -52,7 +52,7 @@
         "buttons": [
           {
             "title": "Open Scope Guard",
-            "url": "/scope#scope-generator",
+            "url": "/scope",
             "icon": "ArrowRight"
           }
         ],

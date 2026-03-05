@@ -1,0 +1,47 @@
+[
+  {
+    "tool_id": "TOOL-DISCOUNT-REPLY",
+    "route": "/tools/discount-reply-generator",
+    "title": "Discount Reply Generator",
+    "description": "Generate 3 ready-to-send replies when a client asks for discount.",
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "quick_inputs": ["quoted_price", "client_budget", "deadline", "relationship_stage"]
+  },
+  {
+    "tool_id": "TOOL-LOW-OFFER",
+    "route": "/tools/low-offer-reply-generator",
+    "title": "Low Offer Reply Generator",
+    "description": "Create boundary-safe responses for low offers without killing the deal.",
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "quick_inputs": ["offer_amount", "minimum_price", "scope", "revision_limit"]
+  },
+  {
+    "tool_id": "TOOL-FOLLOW-UP",
+    "route": "/tools/follow-up-email-generator",
+    "title": "Follow-up Email Generator",
+    "description": "Generate follow-up messages for silent leads and delayed proposal responses.",
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "quick_inputs": ["days_since_last_reply", "proposal_type", "next_step", "tone"]
+  },
+  {
+    "tool_id": "TOOL-RATE-CALC",
+    "route": "/tools/freelance-rate-calculator",
+    "title": "Freelance Rate Calculator",
+    "description": "Estimate minimum, target, and premium freelance rates by scope and risk.",
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "quick_inputs": ["monthly_income_goal", "billable_hours", "project_complexity", "revision_risk"]
+  },
+  {
+    "tool_id": "TOOL-PROPOSAL",
+    "route": "/tools/proposal-generator",
+    "title": "Proposal Generator",
+    "description": "Generate proposal structure, scope boundaries, and close-ready messaging.",
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "quick_inputs": ["deliverables", "timeline", "budget", "change_request_policy"]
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "pillar_id": "PIL-NEGOTIATION",
+    "route": "/negotiation",
+    "title": "Freelance Negotiation",
+    "description": "Negotiation frameworks for discount requests, budget objections, and price pressure in freelance deals.",
+    "cluster": "negotiation-discount",
+    "tool_cta_type": "reply",
+    "target_route": "/deal"
+  },
+  {
+    "pillar_id": "PIL-PRICING",
+    "route": "/pricing/playbooks",
+    "title": "Freelance Pricing",
+    "description": "Pricing methods, quote structures, and rate decisions for profitable freelance work.",
+    "cluster": "pricing-strategy",
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing"
+  },
+  {
+    "pillar_id": "PIL-COMMUNICATION",
+    "route": "/client-communication",
+    "title": "Client Communication",
+    "description": "Follow-up and message playbooks for client silence, delay, and unclear feedback.",
+    "cluster": "client-communication",
+    "tool_cta_type": "reply",
+    "target_route": "/deal"
+  },
+  {
+    "pillar_id": "PIL-PROPOSALS",
+    "route": "/proposals",
+    "title": "Proposals And Scope",
+    "description": "Proposal and scope control playbooks to close projects without margin leakage.",
+    "cluster": "proposal-and-close",
+    "tool_cta_type": "proposal",
+    "target_route": "/scope"
+  },
+  {
+    "pillar_id": "PIL-OBJECTIONS",
+    "route": "/objections-handling",
+    "title": "Objections Handling",
+    "description": "Practical handling of common freelance objections: price, timing, trust, and delivery risk.",
+    "cluster": "negotiation-discount",
+    "tool_cta_type": "reply",
+    "target_route": "/deal"
+  },
+  {
+    "pillar_id": "PIL-SCRIPTS",
+    "route": "/email-scripts",
+    "title": "Email And Message Scripts",
+    "description": "Copy-ready scripts for pricing, follow-up, proposal, and boundary-setting conversations.",
+    "cluster": "client-communication",
+    "tool_cta_type": "reply",
+    "target_route": "/deal"
+  }
+]

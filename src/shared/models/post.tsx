@@ -254,7 +254,14 @@ export async function getLocalPage({
   slug: string;
   locale: string;
 }): Promise<BlogPostType | null> {
-  const localPage = await pagesSource.getPage([slug], locale);
+  // Support nested static pages like /negotiation/client-asks-discount
+  // by splitting route segments before querying fumadocs loader.
+  const slugSegments = slug
+    .split('/')
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+
+  const localPage = await pagesSource.getPage(slugSegments, locale);
   if (!localPage) {
     return null;
   }

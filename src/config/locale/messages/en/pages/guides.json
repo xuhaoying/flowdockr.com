@@ -8,38 +8,14 @@
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Scope creep playbooks for freelancers.",
-        "description": "Read a focused guide, then generate your revision policy instantly.",
+        "title": "Freelancer scope guides.",
+        "description": "Read one problem-focused guide, then generate your revision policy.",
         "buttons": [
           {
-            "title": "Client keeps asking for revisions",
-            "url": "/guides/client-keeps-asking-for-revisions",
-            "icon": "MessageCircleWarning",
+            "title": "Generate revision policy",
+            "url": "/scope",
+            "icon": "Zap",
             "variant": "default"
-          },
-          {
-            "title": "Scope creep freelancer",
-            "url": "/guides/scope-creep-freelancer",
-            "icon": "ShieldCheck",
-            "variant": "outline"
-          },
-          {
-            "title": "How many revisions should you offer",
-            "url": "/guides/how-many-revisions-should-you-offer",
-            "icon": "ListChecks",
-            "variant": "outline"
-          },
-          {
-            "title": "Client asking for extra work",
-            "url": "/guides/client-asking-for-extra-work",
-            "icon": "Layers",
-            "variant": "outline"
-          },
-          {
-            "title": "Freelance revision policy",
-            "url": "/guides/freelance-revision-policy",
-            "icon": "FileText",
-            "variant": "outline"
           }
         ],
         "show_avatars": false,
@@ -47,36 +23,38 @@
       },
       "features": {
         "id": "features",
-        "title": "All guides map to one action",
-        "description": "Problem -> reason -> solution -> generate policy CTA.",
+        "title": "Choose your situation",
+        "description": "Every guide follows: problem -> why it happens -> fix -> generate policy.",
         "items": [
           {
-            "title": "Problem-first",
-            "description": "Each page starts from a real client situation freelancers face weekly.",
-            "icon": "CircleAlert"
+            "title": "Client keeps asking for revisions",
+            "description": "Set revision boundaries without sounding defensive.",
+            "icon": "RotateCcw",
+            "url": "/guides/client-keeps-asking-for-revisions"
           },
           {
-            "title": "Practical scripts",
-            "description": "Actionable language that can be sent to clients today.",
-            "icon": "MessageSquare"
+            "title": "Scope creep freelancer",
+            "description": "Prevent scope expansion before it affects timeline and margin.",
+            "icon": "ShieldCheck",
+            "url": "/guides/scope-creep-freelancer"
           },
           {
-            "title": "Direct conversion",
-            "description": "Every guide pushes to Scope Guard generation.",
-            "icon": "ArrowRight"
-          }
-        ],
-        "className": "bg-muted/50"
-      },
-      "cta": {
-        "id": "cta",
-        "title": "Generate your revision policy.",
-        "description": "Use Scope Guard to turn advice into a client-ready response.",
-        "buttons": [
+            "title": "How many revisions should you offer",
+            "description": "Choose revision limits that protect quality and speed.",
+            "icon": "ListChecks",
+            "url": "/guides/how-many-revisions-should-you-offer"
+          },
           {
-            "title": "Go to Scope Guard",
-            "url": "/scope",
-            "icon": "Zap"
+            "title": "Client asking for extra work",
+            "description": "Handle add-on requests with clear scope and price rules.",
+            "icon": "Layers",
+            "url": "/guides/client-asking-for-extra-work"
+          },
+          {
+            "title": "Freelance revision policy",
+            "description": "Use a reusable policy format for proposals and contracts.",
+            "icon": "FileText",
+            "url": "/guides/freelance-revision-policy"
           }
         ],
         "className": "bg-muted/50"

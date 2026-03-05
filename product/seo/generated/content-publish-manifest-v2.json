@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-03-05",
+  "source_drafts": "product/seo/generated/content-drafts-v2.jsonl",
+  "source_jobs": "product/seo/generated/content-prompt-jobs-v2.jsonl",
+  "totals": {
+    "drafts": 3,
+    "published": 3,
+    "skipped_missing_job": 0,
+    "skipped_missing_markdown": 0
+  },
+  "published_pages": [
+    {
+      "job_id": "PROMPT-0001",
+      "seo_page_id": "SEO-0001",
+      "route": "/negotiation/client-asks-discount",
+      "output_path": "content/pages/negotiation/client-asks-discount.mdx",
+      "profile": "problem"
+    },
+    {
+      "job_id": "PROMPT-0002",
+      "seo_page_id": "SEO-0002",
+      "route": "/negotiation/client-says-price-too-high",
+      "output_path": "content/pages/negotiation/client-says-price-too-high.mdx",
+      "profile": "problem"
+    },
+    {
+      "job_id": "PROMPT-0003",
+      "seo_page_id": "SEO-0003",
+      "route": "/negotiation/client-compares-freelancers",
+      "output_path": "content/pages/negotiation/client-compares-freelancers.mdx",
+      "profile": "problem"
+    }
+  ],
+  "skipped": []
+}

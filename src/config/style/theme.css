@@ -1,22 +1,23 @@
 :root {
-  --background: #f8fafc;
+  --background: #f9fafb;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
-  --primary: #6366f1;
+  --primary: #111827;
   --primary-foreground: #ffffff;
-  --secondary: #e2e8f0;
+  --secondary: #f3f4f6;
   --secondary-foreground: #0f172a;
-  --muted: #eef2ff;
+  --muted: #f3f4f6;
   --muted-foreground: #334155;
-  --accent: #e0e7ff;
-  --accent-foreground: #312e81;
+  --accent: #eef2ff;
+  --accent-foreground: #3730a3;
+  --success: #10b981;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #cbd5e1;
-  --input: #cbd5e1;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
   --ring: #6366f1;
   --chart-1: #6366f1;
   --chart-2: #0f172a;
@@ -68,6 +69,7 @@
   --muted-foreground: #94a3b8;
   --accent: #1e1b4b;
   --accent-foreground: #e0e7ff;
+  --success: #10b981;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #1e293b;
@@ -121,6 +123,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);

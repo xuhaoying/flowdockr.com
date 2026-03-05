@@ -1,0 +1,4562 @@
+[
+  {
+    "intent_id": "NEG-001",
+    "cluster": "negotiation-discount",
+    "situation": "client asking for discount",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client asking for discount",
+      "variants": [
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate",
+        "client says budget is low"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-asking-for-discount",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate",
+        "/negotiation/client-says-budget-is-low"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-002",
+    "cluster": "negotiation-discount",
+    "situation": "client wants lower price",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client wants lower price",
+      "variants": [
+        "client asking for discount",
+        "client says my price is too high",
+        "client asking for cheaper rate",
+        "client says budget is low"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-wants-lower-price",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate",
+        "/negotiation/client-says-budget-is-low"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-003",
+    "cluster": "negotiation-discount",
+    "situation": "client says my price is too high",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client says my price is too high",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client asking for cheaper rate",
+        "client says budget is low"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-says-my-price-is-too-high",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-asking-for-cheaper-rate",
+        "/negotiation/client-says-budget-is-low"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-004",
+    "cluster": "negotiation-discount",
+    "situation": "client asking for cheaper rate",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client asking for cheaper rate",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client says budget is low"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-asking-for-cheaper-rate",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-says-budget-is-low"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-005",
+    "cluster": "negotiation-discount",
+    "situation": "client says budget is low",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client says budget is low",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-says-budget-is-low",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-006",
+    "cluster": "negotiation-discount",
+    "situation": "client negotiating price freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client negotiating price freelancer",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-negotiating-price-freelancer",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-007",
+    "cluster": "negotiation-discount",
+    "situation": "client wants to pay less",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client wants to pay less",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-wants-to-pay-less",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-008",
+    "cluster": "negotiation-discount",
+    "situation": "client comparing freelancers price",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client comparing freelancers price",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-comparing-freelancers-price",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-009",
+    "cluster": "negotiation-discount",
+    "situation": "client says other freelancer cheaper",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client says other freelancer cheaper",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-says-other-freelancer-cheaper",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-010",
+    "cluster": "negotiation-discount",
+    "situation": "client pushing for lower rate",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client pushing for lower rate",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-pushing-for-lower-rate",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-011",
+    "cluster": "negotiation-discount",
+    "situation": "client asking for price reduction",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client asking for price reduction",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-asking-for-price-reduction",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-012",
+    "cluster": "negotiation-discount",
+    "situation": "client requesting discount freelancer",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client requesting discount freelancer",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-requesting-discount-freelancer",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-013",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond to client discount request",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to respond to client discount request",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-to-client-discount-request",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-014",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond to low offer client",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to respond to low offer client",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-to-low-offer-client",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-015",
+    "cluster": "negotiation-discount",
+    "situation": "how to reply when client says too expensive",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to reply when client says too expensive",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-reply-when-client-says-too-expensive",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-016",
+    "cluster": "negotiation-discount",
+    "situation": "freelancer negotiation script",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelancer negotiation script",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/freelancer-negotiation-script",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-017",
+    "cluster": "negotiation-discount",
+    "situation": "freelance price negotiation email",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance price negotiation email",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/freelance-price-negotiation-email",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-018",
+    "cluster": "negotiation-discount",
+    "situation": "how to say no to client discount",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to say no to client discount",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-say-no-to-client-discount",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-019",
+    "cluster": "negotiation-discount",
+    "situation": "how to negotiate freelance price",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to negotiate freelance price",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-negotiate-freelance-price",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-020",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond to budget objection",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to respond to budget objection",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-to-budget-objection",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-021",
+    "cluster": "negotiation-discount",
+    "situation": "client wants cheaper quote",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client wants cheaper quote",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/client-wants-cheaper-quote",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-022",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond when client asks for discount",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to respond when client asks for discount",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-when-client-asks-for-discount",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "NEG-023",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond when client says budget is low",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to respond when client says budget is low",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-when-client-says-budget-is-low",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "NEG-024",
+    "cluster": "negotiation-discount",
+    "situation": "how to respond when client compares freelancers",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to respond when client compares freelancers",
+      "variants": [
+        "client asking for discount",
+        "client wants lower price",
+        "client says my price is too high",
+        "client asking for cheaper rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/negotiation/how-to-respond-when-client-compares-freelancers",
+    "internal_links": {
+      "pillar": "/negotiation",
+      "related": [
+        "/negotiation/client-asking-for-discount",
+        "/negotiation/client-wants-lower-price",
+        "/negotiation/client-says-my-price-is-too-high",
+        "/negotiation/client-asking-for-cheaper-rate"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-001",
+    "cluster": "pricing-strategy",
+    "situation": "freelance pricing strategy",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance pricing strategy",
+      "variants": [
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator",
+        "how to calculate freelance rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-pricing-strategy",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator",
+        "/pricing/how-to-calculate-freelance-rate"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-002",
+    "cluster": "pricing-strategy",
+    "situation": "how to price freelance work",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to price freelance work",
+      "variants": [
+        "freelance pricing strategy",
+        "how to charge clients freelancer",
+        "freelance rate calculator",
+        "how to calculate freelance rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-price-freelance-work",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator",
+        "/pricing/how-to-calculate-freelance-rate"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-003",
+    "cluster": "pricing-strategy",
+    "situation": "how to charge clients freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to charge clients freelancer",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "freelance rate calculator",
+        "how to calculate freelance rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-charge-clients-freelancer",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/freelance-rate-calculator",
+        "/pricing/how-to-calculate-freelance-rate"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-004",
+    "cluster": "pricing-strategy",
+    "situation": "freelance rate calculator",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance rate calculator",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "how to calculate freelance rate"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-rate-calculator",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/how-to-calculate-freelance-rate"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRI-005",
+    "cluster": "pricing-strategy",
+    "situation": "how to calculate freelance rate",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to calculate freelance rate",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-calculate-freelance-rate",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-006",
+    "cluster": "pricing-strategy",
+    "situation": "freelancer hourly vs project pricing",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelancer hourly vs project pricing",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelancer-hourly-vs-project-pricing",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-007",
+    "cluster": "pricing-strategy",
+    "situation": "how to quote freelance project",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to quote freelance project",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-quote-freelance-project",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-008",
+    "cluster": "pricing-strategy",
+    "situation": "freelance pricing formula",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance pricing formula",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-pricing-formula",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-009",
+    "cluster": "pricing-strategy",
+    "situation": "freelance pricing model",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance pricing model",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-pricing-model",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-010",
+    "cluster": "pricing-strategy",
+    "situation": "how much should I charge freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how much should I charge freelancer",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-much-should-i-charge-freelancer",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-011",
+    "cluster": "pricing-strategy",
+    "situation": "freelance project pricing",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance project pricing",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-project-pricing",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-012",
+    "cluster": "pricing-strategy",
+    "situation": "freelance rate benchmark",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance rate benchmark",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-rate-benchmark",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-013",
+    "cluster": "pricing-strategy",
+    "situation": "freelance design pricing",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance design pricing",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-design-pricing",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-014",
+    "cluster": "pricing-strategy",
+    "situation": "freelance copywriting pricing",
+    "audience": "copywriter",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance copywriting pricing",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-copywriting-pricing",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-015",
+    "cluster": "pricing-strategy",
+    "situation": "freelance developer rates",
+    "audience": "developer",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance developer rates",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-developer-rates",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-016",
+    "cluster": "pricing-strategy",
+    "situation": "pricing freelance services",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "pricing freelance services",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/pricing-freelance-services",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-017",
+    "cluster": "pricing-strategy",
+    "situation": "how to set freelance rates",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to set freelance rates",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-set-freelance-rates",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-018",
+    "cluster": "pricing-strategy",
+    "situation": "increase freelance pricing",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "increase freelance pricing",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/increase-freelance-pricing",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-019",
+    "cluster": "pricing-strategy",
+    "situation": "freelancer price guide",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelancer price guide",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelancer-price-guide",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-020",
+    "cluster": "pricing-strategy",
+    "situation": "how to avoid underpricing freelance",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to avoid underpricing freelance",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-avoid-underpricing-freelance",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-021",
+    "cluster": "pricing-strategy",
+    "situation": "freelance pricing template",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance pricing template",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-pricing-template",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRI-022",
+    "cluster": "pricing-strategy",
+    "situation": "how to build a freelance pricing package",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to build a freelance pricing package",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/how-to-build-a-freelance-pricing-package",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-023",
+    "cluster": "pricing-strategy",
+    "situation": "project based pricing for freelancers",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "project based pricing for freelancers",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/project-based-pricing-for-freelancers",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRI-024",
+    "cluster": "pricing-strategy",
+    "situation": "freelance quote calculator",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance quote calculator",
+      "variants": [
+        "freelance pricing strategy",
+        "how to price freelance work",
+        "how to charge clients freelancer",
+        "freelance rate calculator"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/pricing/freelance-quote-calculator",
+    "internal_links": {
+      "pillar": "/pricing",
+      "related": [
+        "/pricing/freelance-pricing-strategy",
+        "/pricing/how-to-price-freelance-work",
+        "/pricing/how-to-charge-clients-freelancer",
+        "/pricing/freelance-rate-calculator"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-001",
+    "cluster": "client-communication",
+    "situation": "client not responding freelancer",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client not responding freelancer",
+      "variants": [
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal",
+        "client slow to respond"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-not-responding-freelancer",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal",
+        "/client-communication/client-slow-to-respond"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-002",
+    "cluster": "client-communication",
+    "situation": "client ghosting freelancer",
+    "audience": "freelancer-general",
+    "urgency": "high",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client ghosting freelancer",
+      "variants": [
+        "client not responding freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal",
+        "client slow to respond"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-ghosting-freelancer",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal",
+        "/client-communication/client-slow-to-respond"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-003",
+    "cluster": "client-communication",
+    "situation": "how to follow up client freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "how to follow up client freelancer",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "client ignoring proposal",
+        "client slow to respond"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-follow-up-client-freelancer",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/client-ignoring-proposal",
+        "/client-communication/client-slow-to-respond"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-004",
+    "cluster": "client-communication",
+    "situation": "client ignoring proposal",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client ignoring proposal",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client slow to respond"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-ignoring-proposal",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-slow-to-respond"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-005",
+    "cluster": "client-communication",
+    "situation": "client slow to respond",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client slow to respond",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-slow-to-respond",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-006",
+    "cluster": "client-communication",
+    "situation": "freelancer follow up email",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelancer follow up email",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/freelancer-follow-up-email",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-007",
+    "cluster": "client-communication",
+    "situation": "how to follow up client after quote",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to follow up client after quote",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-follow-up-client-after-quote",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-008",
+    "cluster": "client-communication",
+    "situation": "client not replying message",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client not replying message",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-not-replying-message",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-009",
+    "cluster": "client-communication",
+    "situation": "how to remind client politely",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to remind client politely",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-remind-client-politely",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-010",
+    "cluster": "client-communication",
+    "situation": "freelance client communication",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance client communication",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/freelance-client-communication",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-011",
+    "cluster": "client-communication",
+    "situation": "how to ask client decision",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to ask client decision",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-ask-client-decision",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-012",
+    "cluster": "client-communication",
+    "situation": "follow up email after proposal",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "follow up email after proposal",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/follow-up-email-after-proposal",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-013",
+    "cluster": "client-communication",
+    "situation": "how to message potential client",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to message potential client",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-message-potential-client",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-014",
+    "cluster": "client-communication",
+    "situation": "client delayed response freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client delayed response freelancer",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-delayed-response-freelancer",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-015",
+    "cluster": "client-communication",
+    "situation": "client taking too long to reply",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client taking too long to reply",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-taking-too-long-to-reply",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-016",
+    "cluster": "client-communication",
+    "situation": "freelancer follow up script",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelancer follow up script",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/freelancer-follow-up-script",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-017",
+    "cluster": "client-communication",
+    "situation": "how to ask client feedback",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to ask client feedback",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-ask-client-feedback",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-018",
+    "cluster": "client-communication",
+    "situation": "freelance communication tips",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance communication tips",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/freelance-communication-tips",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-019",
+    "cluster": "client-communication",
+    "situation": "how to restart conversation client",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to restart conversation client",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-restart-conversation-client",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-020",
+    "cluster": "client-communication",
+    "situation": "client stopped responding freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client stopped responding freelancer",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-stopped-responding-freelancer",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-021",
+    "cluster": "client-communication",
+    "situation": "follow up message when client stops replying",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "follow up message when client stops replying",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/follow-up-message-when-client-stops-replying",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-022",
+    "cluster": "client-communication",
+    "situation": "email script when client ignores proposal",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "email script when client ignores proposal",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/email-script-when-client-ignores-proposal",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "COM-023",
+    "cluster": "client-communication",
+    "situation": "how to follow up without sounding pushy",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to follow up without sounding pushy",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/how-to-follow-up-without-sounding-pushy",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "COM-024",
+    "cluster": "client-communication",
+    "situation": "client communication script for freelancers",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "client communication script for freelancers",
+      "variants": [
+        "client not responding freelancer",
+        "client ghosting freelancer",
+        "how to follow up client freelancer",
+        "client ignoring proposal"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "deadline",
+      "scope",
+      "client_type",
+      "relationship_stage"
+    ],
+    "canonical_url": "/client-communication/client-communication-script-for-freelancers",
+    "internal_links": {
+      "pillar": "/client-communication",
+      "related": [
+        "/client-communication/client-not-responding-freelancer",
+        "/client-communication/client-ghosting-freelancer",
+        "/client-communication/how-to-follow-up-client-freelancer",
+        "/client-communication/client-ignoring-proposal"
+      ]
+    },
+    "tool_cta_type": "reply",
+    "target_route": "/deal",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-001",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal template",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance proposal template",
+      "variants": [
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email",
+        "winning freelance proposal"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-template",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email",
+        "/proposals/winning-freelance-proposal"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-002",
+    "cluster": "proposal-and-close",
+    "situation": "how to write freelance proposal",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to write freelance proposal",
+      "variants": [
+        "freelance proposal template",
+        "freelance proposal example",
+        "freelance proposal email",
+        "winning freelance proposal"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/how-to-write-freelance-proposal",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email",
+        "/proposals/winning-freelance-proposal"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-003",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal example",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance proposal example",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal email",
+        "winning freelance proposal"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-example",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-email",
+        "/proposals/winning-freelance-proposal"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-004",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal email",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance proposal email",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "winning freelance proposal"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-email",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/winning-freelance-proposal"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-005",
+    "cluster": "proposal-and-close",
+    "situation": "winning freelance proposal",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "winning freelance proposal",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/winning-freelance-proposal",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-006",
+    "cluster": "proposal-and-close",
+    "situation": "freelance pitch template",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelance pitch template",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-pitch-template",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-007",
+    "cluster": "proposal-and-close",
+    "situation": "proposal example freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal example freelancer",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-example-freelancer",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-008",
+    "cluster": "proposal-and-close",
+    "situation": "client proposal script",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "client proposal script",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/client-proposal-script",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-009",
+    "cluster": "proposal-and-close",
+    "situation": "how to send freelance quote",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to send freelance quote",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/how-to-send-freelance-quote",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-010",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal structure",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance proposal structure",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-structure",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-011",
+    "cluster": "proposal-and-close",
+    "situation": "freelancer pitch email",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "problem",
+    "keywords": {
+      "primary": "freelancer pitch email",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelancer-pitch-email",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-012",
+    "cluster": "proposal-and-close",
+    "situation": "how to convince client freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to convince client freelancer",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/how-to-convince-client-freelancer",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-013",
+    "cluster": "proposal-and-close",
+    "situation": "proposal writing freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal writing freelancer",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-writing-freelancer",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-014",
+    "cluster": "proposal-and-close",
+    "situation": "how to present freelance quote",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to present freelance quote",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/how-to-present-freelance-quote",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-015",
+    "cluster": "proposal-and-close",
+    "situation": "proposal negotiation freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal negotiation freelancer",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-negotiation-freelancer",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-016",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal tips",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance proposal tips",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-tips",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-017",
+    "cluster": "proposal-and-close",
+    "situation": "freelance bid template",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance bid template",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-bid-template",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-018",
+    "cluster": "proposal-and-close",
+    "situation": "freelance project proposal example",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance project proposal example",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-project-proposal-example",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-019",
+    "cluster": "proposal-and-close",
+    "situation": "proposal follow up email",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal follow up email",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-follow-up-email",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-020",
+    "cluster": "proposal-and-close",
+    "situation": "proposal response script",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal response script",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-response-script",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-021",
+    "cluster": "proposal-and-close",
+    "situation": "freelance proposal outline",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance proposal outline",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-proposal-outline",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-022",
+    "cluster": "proposal-and-close",
+    "situation": "proposal template for freelance clients",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "proposal template for freelance clients",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/proposal-template-for-freelance-clients",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "PRO-023",
+    "cluster": "proposal-and-close",
+    "situation": "how to write a winning proposal freelancer",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to write a winning proposal freelancer",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/how-to-write-a-winning-proposal-freelancer",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "PRO-024",
+    "cluster": "proposal-and-close",
+    "situation": "freelance quote email template",
+    "audience": "freelancer-general",
+    "urgency": "medium",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance quote email template",
+      "variants": [
+        "freelance proposal template",
+        "how to write freelance proposal",
+        "freelance proposal example",
+        "freelance proposal email"
+      ]
+    },
+    "variables_needed": [
+      "deliverables",
+      "timeline_days",
+      "revision_limit",
+      "client_type",
+      "payment_terms"
+    ],
+    "canonical_url": "/proposals/freelance-quote-email-template",
+    "internal_links": {
+      "pillar": "/proposals",
+      "related": [
+        "/proposals/freelance-proposal-template",
+        "/proposals/how-to-write-freelance-proposal",
+        "/proposals/freelance-proposal-example",
+        "/proposals/freelance-proposal-email"
+      ]
+    },
+    "tool_cta_type": "proposal",
+    "target_route": "/scope",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "RAT-001",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to raise freelance rates",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to raise freelance rates",
+      "variants": [
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics",
+        "freelancer salary negotiation"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-raise-freelance-rates",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics",
+        "/rate-increase/freelancer-salary-negotiation"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-002",
+    "cluster": "rate-increase-negotiation",
+    "situation": "increase freelance rate",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "increase freelance rate",
+      "variants": [
+        "how to raise freelance rates",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics",
+        "freelancer salary negotiation"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/increase-freelance-rate",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics",
+        "/rate-increase/freelancer-salary-negotiation"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-003",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to charge more freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to charge more freelancer",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "freelancer negotiation tactics",
+        "freelancer salary negotiation"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-charge-more-freelancer",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/freelancer-negotiation-tactics",
+        "/rate-increase/freelancer-salary-negotiation"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-004",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelancer negotiation tactics",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelancer negotiation tactics",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer salary negotiation"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelancer-negotiation-tactics",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-salary-negotiation"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-005",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelancer salary negotiation",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelancer salary negotiation",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelancer-salary-negotiation",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-006",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to justify higher rate",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to justify higher rate",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-justify-higher-rate",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-007",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to charge premium freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to charge premium freelancer",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-charge-premium-freelancer",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-008",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelance rate increase email",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance rate increase email",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelance-rate-increase-email",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "RAT-009",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to renegotiate freelance contract",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to renegotiate freelance contract",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-renegotiate-freelance-contract",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-010",
+    "cluster": "rate-increase-negotiation",
+    "situation": "negotiating freelance contract",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "negotiating freelance contract",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/negotiating-freelance-contract",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-011",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to ask for higher pay freelance",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to ask for higher pay freelance",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-ask-for-higher-pay-freelance",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-012",
+    "cluster": "rate-increase-negotiation",
+    "situation": "increase freelance pricing strategy",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "increase freelance pricing strategy",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/increase-freelance-pricing-strategy",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-013",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelance value pricing",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance value pricing",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelance-value-pricing",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-014",
+    "cluster": "rate-increase-negotiation",
+    "situation": "premium freelance pricing",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "premium freelance pricing",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/premium-freelance-pricing",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-015",
+    "cluster": "rate-increase-negotiation",
+    "situation": "negotiating project rate",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "negotiating project rate",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/negotiating-project-rate",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-016",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to increase freelance income",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to increase freelance income",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-increase-freelance-income",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-017",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to position premium freelancer",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to position premium freelancer",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-position-premium-freelancer",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-018",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelance price objection handling",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance price objection handling",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelance-price-objection-handling",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-019",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelance negotiation framework",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance negotiation framework",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelance-negotiation-framework",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-020",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to charge more clients",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to charge more clients",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-charge-more-clients",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "user_seed",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-021",
+    "cluster": "rate-increase-negotiation",
+    "situation": "rate increase script for freelance clients",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "rate increase script for freelance clients",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/rate-increase-script-for-freelance-clients",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "RAT-022",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to announce freelance rate increase",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to announce freelance rate increase",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-announce-freelance-rate-increase",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  },
+  {
+    "intent_id": "RAT-023",
+    "cluster": "rate-increase-negotiation",
+    "situation": "freelance contract renegotiation email",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "freelance contract renegotiation email",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/freelance-contract-renegotiation-email",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P1"
+  },
+  {
+    "intent_id": "RAT-024",
+    "cluster": "rate-increase-negotiation",
+    "situation": "how to raise rates without losing clients",
+    "audience": "freelancer-general",
+    "urgency": "low",
+    "page_type": "cluster_backlog",
+    "keywords": {
+      "primary": "how to raise rates without losing clients",
+      "variants": [
+        "how to raise freelance rates",
+        "increase freelance rate",
+        "how to charge more freelancer",
+        "freelancer negotiation tactics"
+      ]
+    },
+    "variables_needed": [
+      "quoted_price",
+      "minimum_price",
+      "timeline_days",
+      "deliverables",
+      "client_type"
+    ],
+    "canonical_url": "/rate-increase/how-to-raise-rates-without-losing-clients",
+    "internal_links": {
+      "pillar": "/rate-increase",
+      "related": [
+        "/rate-increase/how-to-raise-freelance-rates",
+        "/rate-increase/increase-freelance-rate",
+        "/rate-increase/how-to-charge-more-freelancer",
+        "/rate-increase/freelancer-negotiation-tactics"
+      ]
+    },
+    "tool_cta_type": "pricing",
+    "target_route": "/pricing",
+    "source": "programmatic_expand",
+    "priority": "P2"
+  }
+]

@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-03-05",
+  "benchmark": "flowdockr-deal-strategy-v1",
+  "total_scenarios": 5,
+  "average_score": 93,
+  "scenarios_below_80": 0,
+  "scenario_reports": [
+    {
+      "scenario_id": "S1-price-too-high-1200-700",
+      "input": {
+        "id": "S1-price-too-high-1200-700",
+        "locale": "en",
+        "client_need": "Client needs a landing page redesign for Q2 launch in 2 weeks",
+        "client_objection": "Your price is too high. Budget is around 700",
+        "your_quote": 1200,
+        "your_floor_price": 700
+      },
+      "score": 97,
+      "breakdown": {
+        "structure": 30,
+        "human_tone": 20,
+        "grounding": 27,
+        "actionability": 10,
+        "pricing_logic": 10
+      },
+      "issues": [],
+      "output_sample": {
+        "instant_reply": "Totally fair to be careful on budget, especially around price/budget. For Client needs a landing page redesign for Q2 launch in 2 weeks, before we negotiate price let’s validate one concrete outcome; for now, keep 1200 as the value anchor.",
+        "strong": "I hear the price concern, but for Client needs a landing page redesign for Q2 launch in 2 weeks the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear 2 week goal, holding at 1200 is the right frame.",
+        "warm": "Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the 2 week window. If that target is real, would 825 feel reasonable to move forward?",
+        "concession": "If budget is tight today, I can offer a conditional concession to 825 for a narrower first milestone while keeping the 2 week timeline. I do not recommend going below 700 because delivery quality will drop."
+      }
+    },
+    {
+      "scenario_id": "S2-cheaper-competitor-2000-1400",
+      "input": {
+        "id": "S2-cheaper-competitor-2000-1400",
+        "locale": "en",
+        "client_need": "SaaS onboarding email sequence with analytics tracking setup",
+        "client_objection": "Another freelancer can do this for less",
+        "your_quote": 2000,
+        "your_floor_price": 1400
+      },
+      "score": 91,
+      "breakdown": {
+        "structure": 30,
+        "human_tone": 20,
+        "grounding": 21,
+        "actionability": 10,
+        "pricing_logic": 10
+      },
+      "issues": [],
+      "output_sample": {
+        "instant_reply": "Totally fair to be careful on budget, especially around implicit objection. For SaaS onboarding email sequence with analytics tracking setup, before we negotiate price let’s validate one concrete outcome; for now, keep 2000 as the value anchor.",
+        "strong": "I hear the price concern, but for SaaS onboarding email sequence with analytics tracking setup the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear agreed timeline goal, holding at 2000 is the right frame.",
+        "warm": "Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the agreed timeline window. If that target is real, would 1568 feel reasonable to move forward?",
+        "concession": "If budget is tight today, I can offer a conditional concession to 1568 for a narrower first milestone while keeping the agreed timeline timeline. I do not recommend going below 1400 because delivery quality will drop."
+      }
+    },
+    {
+      "scenario_id": "S3-follow-up-silent-900-650",
+      "input": {
+        "id": "S3-follow-up-silent-900-650",
+        "locale": "en",
+        "client_need": "Follow up after proposal for social media ad creatives",
+        "client_objection": "We need to wait and think",
+        "your_quote": 900,
+        "your_floor_price": 650
+      },
+      "score": 91,
+      "breakdown": {
+        "structure": 30,
+        "human_tone": 20,
+        "grounding": 21,
+        "actionability": 10,
+        "pricing_logic": 10
+      },
+      "issues": [],
+      "output_sample": {
+        "instant_reply": "Totally fair to be careful on budget, especially around timing/priority. For Follow up after proposal for social media ad creatives, before we negotiate price let’s validate one concrete outcome; for now, keep 900 as the value anchor.",
+        "strong": "I hear the price concern, but for Follow up after proposal for social media ad creatives the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear agreed timeline goal, holding at 900 is the right frame.",
+        "warm": "Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the agreed timeline window. If that target is real, would 728 feel reasonable to move forward?",
+        "concession": "If budget is tight today, I can offer a conditional concession to 728 for a narrower first milestone while keeping the agreed timeline timeline. I do not recommend going below 650 because delivery quality will drop."
+      }
+    },
+    {
+      "scenario_id": "S4-decision-authority-1500-1000",
+      "input": {
+        "id": "S4-decision-authority-1500-1000",
+        "locale": "en",
+        "client_need": "Website copy refresh across 8 service pages",
+        "client_objection": "I need approval from my boss first",
+        "your_quote": 1500,
+        "your_floor_price": 1000
+      },
+      "score": 93,
+      "breakdown": {
+        "structure": 30,
+        "human_tone": 20,
+        "grounding": 23,
+        "actionability": 10,
+        "pricing_logic": 10
+      },
+      "issues": [],
+      "output_sample": {
+        "instant_reply": "Totally fair to be careful on budget, especially around decision authority. For Website copy refresh across 8 service pages, before we negotiate price let’s validate one concrete outcome; for now, keep 1500 as the value anchor.",
+        "strong": "I hear the price concern, but for Website copy refresh across 8 service pages the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear agreed timeline goal, holding at 1500 is the right frame.",
+        "warm": "Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the agreed timeline window. If that target is real, would 1125 feel reasonable to move forward?",
+        "concession": "If budget is tight today, I can offer a conditional concession to 1125 for a narrower first milestone while keeping the agreed timeline timeline. I do not recommend going below 1000 because delivery quality will drop."
+      }
+    },
+    {
+      "scenario_id": "S5-timeline-risk-1800-1200",
+      "input": {
+        "id": "S5-timeline-risk-1800-1200",
+        "locale": "en",
+        "client_need": "Logo + mini brand guide with urgent 7-day deadline",
+        "client_objection": "Can you lower the price and still keep the same timeline?",
+        "your_quote": 1800,
+        "your_floor_price": 1200
+      },
+      "score": 93,
+      "breakdown": {
+        "structure": 30,
+        "human_tone": 20,
+        "grounding": 23,
+        "actionability": 10,
+        "pricing_logic": 10
+      },
+      "issues": [],
+      "output_sample": {
+        "instant_reply": "Totally fair to be careful on budget, especially around price/budget. For Logo + mini brand guide with urgent 7-day deadline, before we negotiate price let’s validate one concrete outcome; for now, keep 1800 as the value anchor.",
+        "strong": "I hear the price concern, but for Logo + mini brand guide with urgent 7-day deadline the right decision is not “cheapest”; it is the most reliable outcome. If we align one clear urgent timeline goal, holding at 1800 is the right frame.",
+        "warm": "Budget caution makes sense. Instead of deciding yes or no today, let’s pressure-test one measurable target for the urgent timeline window. If that target is real, would 1350 feel reasonable to move forward?",
+        "concession": "If budget is tight today, I can offer a conditional concession to 1350 for a narrower first milestone while keeping the urgent timeline timeline. I do not recommend going below 1200 because delivery quality will drop."
+      }
+    }
+  ]
+}

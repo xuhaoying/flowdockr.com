@@ -1,0 +1,106 @@
+{
+  "generated_at": "2026-03-05",
+  "source": "flowdockr-seo-machine-v2-part2",
+  "banned_phrases": [
+    "In today's fast-paced world",
+    "As a freelancer, it is important to",
+    "In conclusion",
+    "As an AI",
+    "As a language model"
+  ],
+  "problem": {
+    "word_count": {
+      "min": 1200,
+      "max": 1800
+    },
+    "required_headings": [
+      "## Introduction",
+      "## Why This Happens (Client Psychology)",
+      "## Common Mistakes Freelancers Make",
+      "## A Better Negotiation Strategy",
+      "## Example Replies (Copy-Paste)",
+      "## Generate Your Own Reply with Flowdockr",
+      "## Related Guides",
+      "## FAQ",
+      "## HowTo",
+      "## Schema"
+    ],
+    "minimums": {
+      "mistake_bullets": 3,
+      "reply_subheadings": 3,
+      "related_links": 4,
+      "faq_questions": 2
+    },
+    "required_reply_tones": [
+      "### Polite",
+      "### Firm",
+      "### Boundary-Setting"
+    ],
+    "required_cta_patterns": [
+      "Generate my reply (20s)",
+      "Calculate my minimum and ideal price",
+      "Create my proposal draft now"
+    ],
+    "required_schema_terms": [
+      "\"@type\": \"FAQPage\"",
+      "\"@type\": \"HowTo\""
+    ]
+  },
+  "tool": {
+    "word_count": {
+      "min": 1000,
+      "max": 1500
+    },
+    "required_headings": [
+      "## Introduction",
+      "## What Affects the Result",
+      "## How the Tool Works",
+      "## Example Walkthrough",
+      "## Common Pricing/Negotiation Mistakes",
+      "## Try the Tool",
+      "## FAQ",
+      "## Schema"
+    ],
+    "minimums": {
+      "faq_questions": 2
+    },
+    "required_cta_patterns": [
+      "Try this tool now",
+      "Generate my reply (20s)",
+      "Calculate my minimum and ideal price",
+      "Create my proposal draft now"
+    ],
+    "required_schema_terms": [
+      "\"@type\": \"FAQPage\""
+    ]
+  },
+  "cluster": {
+    "word_count": {
+      "min": 1200,
+      "max": 1800
+    },
+    "required_headings": [
+      "## Introduction",
+      "## Why This Objection Happens",
+      "## Mistakes That Kill the Deal",
+      "## Better Response Framework",
+      "## Reply Variations",
+      "## Adapt by Project Type",
+      "## Generate a Custom Version",
+      "## FAQ",
+      "## Schema"
+    ],
+    "minimums": {
+      "reply_subheadings": 3,
+      "faq_questions": 2
+    },
+    "required_cta_patterns": [
+      "Generate my reply (20s)",
+      "Calculate my minimum and ideal price",
+      "Create my proposal draft now"
+    ],
+    "required_schema_terms": [
+      "\"@type\": \"FAQPage\""
+    ]
+  }
+}
