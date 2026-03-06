@@ -12,21 +12,31 @@
     "nav": {
       "items": [
         {
-          "title": "Scope",
+          "title": "范围管理",
           "url": "/scope",
           "icon": "ShieldCheck"
         },
         {
-          "title": "Guides",
-          "url": "/guides",
-          "icon": "BookOpen"
+          "title": "谈判场景",
+          "url": "/scenarios",
+          "icon": "Handshake"
+        },
+        {
+          "title": "回款管理",
+          "url": "/payment",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "定价",
+          "url": "/pricing",
+          "icon": "BadgeDollarSign"
         }
       ]
     },
     "buttons": [
       {
-        "title": "Generate revision policy",
-        "url": "/scope",
+        "title": "打开场景模块",
+        "url": "/scenarios",
         "icon": "Zap",
         "variant": "default"
       }
@@ -43,13 +53,13 @@
   },
   "hero": {
     "id": "hero",
-    "title": "Stop client chaos.",
-    "description": "Handle scope creep in minutes.",
+    "title": "告别客户协作混乱。",
+    "description": "几分钟内处理范围蔓延（scope creep）。",
     "buttons": [
       {
-        "title": "Generate revision policy",
+        "title": "立即试用场景 Demo",
         "icon": "Zap",
-        "url": "/scope",
+        "url": "/scenarios",
         "target": "_self",
         "variant": "default"
       }
@@ -59,24 +69,24 @@
   },
   "features": {
     "id": "features",
-    "title": "Common situations",
-    "description": "Start with Scope Guard for the issue you need to solve right now.",
+    "title": "常见场景",
+    "description": "从 Scope Guard 开始，先解决你当下最紧急的问题。",
     "items": [
       {
-        "title": "Client keeps asking for revisions",
-        "description": "Generate a revision boundary and avoid unpaid extra rounds.",
+        "title": "客户不断要求修改",
+        "description": "生成清晰的修订边界，避免无偿加班返工。",
         "icon": "RotateCcw",
         "url": "/scope"
       },
       {
-        "title": "Client wants extra work",
-        "description": "Set out-of-scope rules before accepting additional tasks.",
+        "title": "客户临时加需求",
+        "description": "在接受新增任务前，先明确超出范围规则。",
         "icon": "ListPlus",
         "url": "/scope"
       },
       {
-        "title": "Client changes project scope",
-        "description": "Keep the original brief and timeline protected.",
+        "title": "客户变更项目范围",
+        "description": "保护原始需求与交付时间线。",
         "icon": "ArrowLeftRight",
         "url": "/scope"
       }
@@ -86,43 +96,43 @@
   "trust": {
     "block": "features",
     "id": "trust",
-    "title": "Built for freelancers in",
-    "description": "Design, video editing, copywriting, marketing, and consulting.",
+    "title": "为以下自由职业场景打造",
+    "description": "设计、视频剪辑、文案、营销和咨询。",
     "items": [
       {
-        "title": "Design",
-        "description": "Revision-heavy visual projects.",
+        "title": "设计",
+        "description": "高频修改的视觉项目。",
         "icon": "PenTool"
       },
       {
-        "title": "Video Editing",
-        "description": "Scope control across edit rounds.",
+        "title": "视频剪辑",
+        "description": "多轮剪辑中的范围控制。",
         "icon": "Clapperboard"
       },
       {
-        "title": "Copywriting",
-        "description": "Clear boundary language for rewrites.",
+        "title": "文案写作",
+        "description": "重写需求的边界表达。",
         "icon": "FilePenLine"
       },
       {
-        "title": "Marketing",
-        "description": "Campaign scope and change-request management.",
+        "title": "营销",
+        "description": "活动范围与变更请求管理。",
         "icon": "Megaphone"
       },
       {
-        "title": "Consulting",
-        "description": "Boundary-setting for add-on requests.",
+        "title": "咨询",
+        "description": "附加需求的边界设定。",
         "icon": "BriefcaseBusiness"
       }
     ]
   },
   "cta": {
     "id": "cta",
-    "title": "Generate your revision policy.",
-    "description": "30-second workflow: describe project -> generate -> copy and send.",
+    "title": "立即生成你的修订政策。",
+    "description": "30 秒流程：描述项目 -> 生成内容 -> 复制发送。",
     "buttons": [
       {
-        "title": "Open Scope Guard",
+        "title": "打开 Scope Guard",
         "url": "/scope",
         "target": "_self",
         "icon": "ArrowRight"
@@ -161,7 +171,7 @@
     "id": "footer",
     "brand": {
       "title": "FlowDockr",
-      "description": "Freelancer Business OS starting with Scope Guard.",
+      "description": "面向自由职业者的业务系统，从 Scope Guard 开始。",
       "logo": {
         "src": "/logo.png",
         "alt": "FlowDockr"
@@ -171,36 +181,36 @@
     "nav": {
       "items": [
         {
-          "title": "Product",
+          "title": "产品",
           "children": [
             {
-              "title": "Scope",
+              "title": "范围管理",
               "url": "/scope"
             },
             {
-              "title": "Pricing",
+              "title": "价格",
               "url": "/pricing"
             }
           ]
         },
         {
-          "title": "Resources",
+          "title": "资源",
           "children": [
             {
-              "title": "Guides",
+              "title": "指南",
               "url": "/guides"
             }
           ]
         },
         {
-          "title": "Company",
+          "title": "公司",
           "children": [
             {
-              "title": "Terms",
+              "title": "服务条款",
               "url": "/terms-of-service"
             },
             {
-              "title": "Privacy",
+              "title": "隐私政策",
               "url": "/privacy-policy"
             }
           ]
@@ -210,11 +220,11 @@
     "agreement": {
       "items": [
         {
-          "title": "Terms of Service",
+          "title": "服务条款",
           "url": "/terms-of-service"
         },
         {
-          "title": "Privacy Policy",
+          "title": "隐私政策",
           "url": "/privacy-policy"
         }
       ]

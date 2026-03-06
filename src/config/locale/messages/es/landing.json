@@ -17,16 +17,26 @@
           "icon": "ShieldCheck"
         },
         {
-          "title": "Guides",
-          "url": "/guides",
-          "icon": "BookOpen"
+          "title": "Escenarios",
+          "url": "/scenarios",
+          "icon": "Handshake"
+        },
+        {
+          "title": "Payment",
+          "url": "/payment",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "BadgeDollarSign"
         }
       ]
     },
     "buttons": [
       {
-        "title": "Generate revision policy",
-        "url": "/scope",
+        "title": "Abrir escenarios",
+        "url": "/scenarios",
         "icon": "Zap",
         "variant": "default"
       }
@@ -43,13 +53,13 @@
   },
   "hero": {
     "id": "hero",
-    "title": "Stop client chaos.",
-    "description": "Handle scope creep in minutes.",
+    "title": "Detén el caos con clientes.",
+    "description": "Controla el scope creep en minutos.",
     "buttons": [
       {
-        "title": "Generate revision policy",
+        "title": "Probar demo de escenarios",
         "icon": "Zap",
-        "url": "/scope",
+        "url": "/scenarios",
         "target": "_self",
         "variant": "default"
       }
@@ -59,24 +69,24 @@
   },
   "features": {
     "id": "features",
-    "title": "Common situations",
-    "description": "Start with Scope Guard for the issue you need to solve right now.",
+    "title": "Situaciones comunes",
+    "description": "Empieza con Scope Guard según el problema que necesites resolver ahora.",
     "items": [
       {
-        "title": "Client keeps asking for revisions",
-        "description": "Generate a revision boundary and avoid unpaid extra rounds.",
+        "title": "El cliente sigue pidiendo revisiones",
+        "description": "Genera un límite de revisiones y evita rondas extra sin pago.",
         "icon": "RotateCcw",
         "url": "/scope"
       },
       {
-        "title": "Client wants extra work",
-        "description": "Set out-of-scope rules before accepting additional tasks.",
+        "title": "El cliente pide trabajo adicional",
+        "description": "Define reglas fuera de alcance antes de aceptar tareas nuevas.",
         "icon": "ListPlus",
         "url": "/scope"
       },
       {
-        "title": "Client changes project scope",
-        "description": "Keep the original brief and timeline protected.",
+        "title": "El cliente cambia el alcance del proyecto",
+        "description": "Protege el brief original y el cronograma.",
         "icon": "ArrowLeftRight",
         "url": "/scope"
       }
@@ -86,43 +96,43 @@
   "trust": {
     "block": "features",
     "id": "trust",
-    "title": "Built for freelancers in",
-    "description": "Design, video editing, copywriting, marketing, and consulting.",
+    "title": "Diseñado para freelancers en",
+    "description": "diseño, edición de video, copywriting, marketing y consultoría.",
     "items": [
       {
-        "title": "Design",
-        "description": "Revision-heavy visual projects.",
+        "title": "Diseño",
+        "description": "Proyectos visuales con muchas revisiones.",
         "icon": "PenTool"
       },
       {
-        "title": "Video Editing",
-        "description": "Scope control across edit rounds.",
+        "title": "Edición de video",
+        "description": "Control del alcance entre rondas de edición.",
         "icon": "Clapperboard"
       },
       {
         "title": "Copywriting",
-        "description": "Clear boundary language for rewrites.",
+        "description": "Lenguaje claro para limitar reescrituras.",
         "icon": "FilePenLine"
       },
       {
         "title": "Marketing",
-        "description": "Campaign scope and change-request management.",
+        "description": "Gestión del alcance de campañas y cambios.",
         "icon": "Megaphone"
       },
       {
-        "title": "Consulting",
-        "description": "Boundary-setting for add-on requests.",
+        "title": "Consultoría",
+        "description": "Límites claros para solicitudes adicionales.",
         "icon": "BriefcaseBusiness"
       }
     ]
   },
   "cta": {
     "id": "cta",
-    "title": "Generate your revision policy.",
-    "description": "30-second workflow: describe project -> generate -> copy and send.",
+    "title": "Genera tu política de revisiones.",
+    "description": "Flujo en 30 segundos: describe el proyecto -> genera -> copia y envía.",
     "buttons": [
       {
-        "title": "Open Scope Guard",
+        "title": "Abrir Scope Guard",
         "url": "/scope",
         "target": "_self",
         "icon": "ArrowRight"
@@ -161,7 +171,7 @@
     "id": "footer",
     "brand": {
       "title": "FlowDockr",
-      "description": "Freelancer Business OS starting with Scope Guard.",
+      "description": "Sistema operativo para freelancers, empezando por Scope Guard.",
       "logo": {
         "src": "/logo.png",
         "alt": "FlowDockr"
@@ -171,36 +181,36 @@
     "nav": {
       "items": [
         {
-          "title": "Product",
+          "title": "Producto",
           "children": [
             {
-              "title": "Scope",
+              "title": "Alcance",
               "url": "/scope"
             },
             {
-              "title": "Pricing",
+              "title": "Precios",
               "url": "/pricing"
             }
           ]
         },
         {
-          "title": "Resources",
+          "title": "Recursos",
           "children": [
             {
-              "title": "Guides",
+              "title": "Guías",
               "url": "/guides"
             }
           ]
         },
         {
-          "title": "Company",
+          "title": "Compañía",
           "children": [
             {
-              "title": "Terms",
+              "title": "Términos",
               "url": "/terms-of-service"
             },
             {
-              "title": "Privacy",
+              "title": "Privacidad",
               "url": "/privacy-policy"
             }
           ]
@@ -210,11 +220,11 @@
     "agreement": {
       "items": [
         {
-          "title": "Terms of Service",
+          "title": "Términos del servicio",
           "url": "/terms-of-service"
         },
         {
-          "title": "Privacy Policy",
+          "title": "Política de privacidad",
           "url": "/privacy-policy"
         }
       ]

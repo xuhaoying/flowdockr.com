@@ -17,16 +17,26 @@
           "icon": "ShieldCheck"
         },
         {
-          "title": "Guides",
-          "url": "/guides",
-          "icon": "BookOpen"
+          "title": "Scenarios",
+          "url": "/scenarios",
+          "icon": "Handshake"
+        },
+        {
+          "title": "Payment",
+          "url": "/payment",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "BadgeDollarSign"
         }
       ]
     },
     "buttons": [
       {
-        "title": "Generate revision policy",
-        "url": "/scope",
+        "title": "Open Scenarios",
+        "url": "/scenarios",
         "icon": "Zap",
         "variant": "default"
       }
@@ -47,9 +57,9 @@
     "description": "Handle scope creep in minutes.",
     "buttons": [
       {
-        "title": "Generate revision policy",
+        "title": "Try Scenario Demo",
         "icon": "Zap",
-        "url": "/scope",
+        "url": "/scenarios",
         "target": "_self",
         "variant": "default"
       }
