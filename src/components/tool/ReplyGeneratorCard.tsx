@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { Sparkles } from 'lucide-react';
 
 import { trackEvent } from '@/lib/analytics-client';
 import { CreditPackageId } from '@/types/billing';
@@ -13,6 +14,7 @@ import { OutputPanel } from '@/components/tool/OutputPanel';
 import { PaywallModal } from '@/components/tool/PaywallModal';
 import { ServiceTypeSelect } from '@/components/tool/ServiceTypeSelect';
 import { ToneSelect } from '@/components/tool/ToneSelect';
+import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import {
   Card,
@@ -33,6 +35,31 @@ type UsageState = {
 type ReplyGeneratorCardProps = {
   scenarioSlug: string;
   defaultTone?: 'professional_firm' | 'warm_confident' | 'direct' | 'diplomatic';
+};
+
+const DEFAULT_SUGGESTIONS = [
+  'We can only do $300 for this. Can you lower your rate?',
+  'Another freelancer quoted lower. Can you match it?',
+  'Could you include this extra deliverable for free?',
+] as const;
+
+const SUGGESTIONS_BY_SCENARIO: Record<string, string[]> = {
+  'how-to-respond-to-a-lowball-offer': [
+    'We only have $200 for this project. Can you make it work?',
+    'Your quote is above our budget. We expected something much lower.',
+  ],
+  'client-asks-for-a-discount': [
+    'Can you do 20% off if we start this week?',
+    'If you can reduce the price, I can approve today.',
+  ],
+  'client-says-another-freelancer-is-cheaper': [
+    'Another freelancer offered half your rate for similar work.',
+    'Why should we pay your price when someone else is cheaper?',
+  ],
+  'client-asks-for-free-sample-work': [
+    'Can you do a quick sample first so we can evaluate fit?',
+    'Please send a free test task before we commit.',
+  ],
 };
 
 export function ReplyGeneratorCard({
@@ -154,6 +181,13 @@ export function ReplyGeneratorCard({
     return usage.remainingFreeGenerations <= 0;
   }, [usage]);
 
+  const suggestionRows =
+    SUGGESTIONS_BY_SCENARIO[scenarioSlug] || Array.from(DEFAULT_SUGGESTIONS);
+
+  const usageHelperText = usage.loggedIn
+    ? `${Math.max(0, usage.creditsBalance)} credits available`
+    : `${Math.max(0, usage.remainingFreeGenerations)} free replies left`;
+
   const handleClientMessageChange = (value: string) => {
     if (!inputStarted && value.trim().length > 0) {
       setInputStarted(true);
@@ -163,6 +197,10 @@ export function ReplyGeneratorCard({
       });
     }
     setClientMessage(value);
+  };
+
+  const applySuggestion = (message: string) => {
+    handleClientMessageChange(message);
   };
 
   const handleGenerate = async () => {
@@ -319,14 +357,14 @@ export function ReplyGeneratorCard({
   };
 
   return (
-    <div className="space-y-4" data-component="reply-generator">
-      <Card>
-        <CardHeader>
+    <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]" data-component="reply-generator">
+      <Card className="border-foreground/10">
+        <CardHeader className="space-y-3">
           <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <CardTitle>Generate your reply</CardTitle>
+            <div className="space-y-1">
+              <CardTitle className="text-xl">Generate your reply</CardTitle>
               <CardDescription>
-                Free 2 replies. Then unlock credits.
+                Paste real client wording, then send a strategy-grade response.
               </CardDescription>
             </div>
             <CreditsBadge
@@ -335,12 +373,35 @@ export function ReplyGeneratorCard({
               remainingFreeGenerations={usage.remainingFreeGenerations}
             />
           </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <Badge variant="secondary" className="gap-1 rounded-full px-2.5">
+              <Sparkles className="size-3" />
+              Scenario tuned
+            </Badge>
+            <span>{usageHelperText}</span>
+          </div>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <ClientMessageInput
-            value={clientMessage}
-            onChange={handleClientMessageChange}
-          />
+
+        <CardContent className="space-y-5">
+          <ClientMessageInput value={clientMessage} onChange={handleClientMessageChange} />
+
+          <div className="space-y-2">
+            <p className="text-xs font-medium text-muted-foreground">Quick start examples</p>
+            <div className="flex flex-wrap gap-2">
+              {suggestionRows.map((item) => (
+                <Button
+                  key={item}
+                  type="button"
+                  variant="outline"
+                  className="h-8 max-w-full px-3 text-xs"
+                  onClick={() => applySuggestion(item)}
+                >
+                  {truncateForChip(item)}
+                </Button>
+              ))}
+            </div>
+          </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             <ServiceTypeSelect value={serviceType} onValueChange={setServiceType} />
@@ -366,9 +427,9 @@ export function ReplyGeneratorCard({
             />
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button type="button" onClick={handleGenerate} disabled={!canGenerate}>
-              {isGenerating ? 'Generating...' : 'Generate reply'}
+              {isGenerating ? 'Generating...' : 'Generate strategic reply'}
             </Button>
 
             {isExhausted ? (
@@ -377,16 +438,16 @@ export function ReplyGeneratorCard({
               </Button>
             ) : null}
           </div>
+
+          {error ? (
+            <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {error}
+            </div>
+          ) : null}
         </CardContent>
       </Card>
 
-      {error ? (
-        <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-          {error}
-        </div>
-      ) : null}
-
-      <OutputPanel result={result} />
+      <OutputPanel result={result} isGenerating={isGenerating} />
 
       <PaywallModal
         open={paywallOpen}
@@ -399,4 +460,12 @@ export function ReplyGeneratorCard({
       />
     </div>
   );
+}
+
+function truncateForChip(input: string) {
+  if (input.length <= 58) {
+    return input;
+  }
+
+  return `${input.slice(0, 55)}...`;
 }

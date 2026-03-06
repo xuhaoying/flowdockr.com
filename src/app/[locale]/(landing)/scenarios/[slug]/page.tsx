@@ -15,18 +15,15 @@ import {
   buildScenarioFaqSchema,
   getScenarioCanonicalUrl,
 } from '@/lib/seo';
-import { getRelatedScenarios, getScenarioBySlug, scenarios } from '@/lib/scenarios';
+import { getRelatedScenarios, getScenarioBySlug } from '@/lib/scenarios';
 
 type ScenarioPageParams = {
   locale: string;
   slug: string;
 };
 
-export async function generateStaticParams() {
-  return scenarios.map((scenario) => ({
-    slug: scenario.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({
   params,
@@ -81,8 +78,8 @@ export default async function ScenarioPage({
   const breadcrumbSchema = buildScenarioBreadcrumbSchema(scenario);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
-      <article className="space-y-10">
+    <main className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+      <article className="space-y-8">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -99,7 +96,9 @@ export default async function ScenarioPage({
         <ScenarioHero scenario={scenario} />
 
         <section id="tool" className="space-y-3">
-          <h2 className="text-2xl font-semibold tracking-tight">Generate your reply</h2>
+          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+            Generate your reply
+          </h2>
           <ReplyGeneratorCard
             scenarioSlug={scenario.slug}
             defaultTone={
@@ -112,7 +111,10 @@ export default async function ScenarioPage({
           />
         </section>
 
-        <section id="quick-answer" className="space-y-3">
+        <section
+          id="quick-answer"
+          className="space-y-3 rounded-2xl border border-foreground/10 bg-muted/20 p-5 md:p-6"
+        >
           <h2 className="text-2xl font-semibold tracking-tight">Best way to respond</h2>
           <p className="text-muted-foreground">{scenario.problemSummary}</p>
           <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground md:text-base">

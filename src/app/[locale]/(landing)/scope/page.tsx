@@ -1,13 +1,14 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { redirect } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
 
-import { getThemePage } from '@/core/theme';
-import { ScopePolicyGenerator } from '@/shared/blocks/scope-guard/generator';
+import { defaultLocale } from '@/config/locale';
 import { getMetadata } from '@/shared/lib/seo';
-import { DynamicPage } from '@/shared/types/blocks/landing';
 
 export const generateMetadata = getMetadata({
-  metadataKey: 'pages.scope.metadata',
-  canonicalUrl: '/scope',
+  title: 'Scenario-Driven Freelance Negotiation | Flowdockr',
+  description:
+    'Open a real client negotiation scenario and generate a strategic reply instantly.',
+  canonicalUrl: '/scenarios/how-to-respond-to-a-lowball-offer',
 });
 
 export default async function ScopePage({
@@ -18,18 +19,9 @@ export default async function ScopePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('pages.scope');
-
-  const page: DynamicPage = {
-    sections: {
-      hero: t.raw('page.sections.hero'),
-      generator: {
-        component: <ScopePolicyGenerator />,
-      },
-    },
-  };
-
-  const Page = await getThemePage('dynamic-page');
-
-  return <Page locale={locale} page={page} />;
+  redirect(
+    locale === defaultLocale
+      ? '/scenarios/how-to-respond-to-a-lowball-offer'
+      : `/${locale}/scenarios/how-to-respond-to-a-lowball-offer`
+  );
 }
