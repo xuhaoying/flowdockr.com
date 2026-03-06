@@ -1,5 +1,5 @@
 import { Link } from '@/core/i18n/navigation';
-import { scenarioCatalog } from '@/lib/promptTemplates';
+import { scenarios } from '@/lib/scenarios';
 import {
   Card,
   CardContent,
@@ -27,14 +27,14 @@ export function ScenarioHubContent() {
       <section className="space-y-3">
         <h2 className="text-2xl font-semibold tracking-tight">Choose your negotiation scenario</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {scenarioCatalog.map((scenario) => (
+          {scenarios.map((scenario) => (
             <Link key={scenario.slug} href={`/scenarios/${scenario.slug}`}>
               <Card className="h-full transition-colors hover:border-primary/60">
                 <CardHeader>
                   <CardTitle className="text-lg">{scenario.h1}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{scenario.shortExplanation}</CardDescription>
+                  <CardDescription>{scenario.seoDescription}</CardDescription>
                 </CardContent>
               </Card>
             </Link>

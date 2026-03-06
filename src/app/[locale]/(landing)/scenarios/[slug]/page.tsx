@@ -2,18 +2,20 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-import { envConfigs } from '@/config';
-import { defaultLocale } from '@/config/locale';
 import {
-  getRelatedScenarios,
-  getScenarioBySlug,
-  scenarioCatalog,
-} from '@/lib/promptTemplates';
+  RelatedScenarios,
+  ScenarioExamples,
+  ScenarioFAQ,
+  ScenarioHero,
+} from '@/components/seo';
+import { ReplyGeneratorCard } from '@/components/tool';
 import {
-  NegotiationTool,
-  ScenarioHeader,
-  ScenarioLinks,
-} from '@/shared/blocks/scenarios';
+  buildScenarioArticleSchema,
+  buildScenarioBreadcrumbSchema,
+  buildScenarioFaqSchema,
+  getScenarioCanonicalUrl,
+} from '@/lib/seo';
+import { getRelatedScenarios, getScenarioBySlug, scenarios } from '@/lib/scenarios';
 
 type ScenarioPageParams = {
   locale: string;
@@ -21,7 +23,7 @@ type ScenarioPageParams = {
 };
 
 export async function generateStaticParams() {
-  return scenarioCatalog.map((scenario) => ({
+  return scenarios.map((scenario) => ({
     slug: scenario.slug,
   }));
 }
@@ -31,7 +33,7 @@ export async function generateMetadata({
 }: {
   params: Promise<ScenarioPageParams>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const scenario = getScenarioBySlug(slug);
 
   if (!scenario) {
@@ -44,20 +46,16 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalPath = `/scenarios/${scenario.slug}`;
-  const canonicalUrl = `${envConfigs.app_url}${
-    locale === defaultLocale ? '' : `/${locale}`
-  }${canonicalPath}`;
-
+  const canonicalUrl = getScenarioCanonicalUrl(scenario.slug);
   return {
-    title: scenario.pageTitle,
-    description: scenario.metaDescription,
+    title: `${scenario.seoTitle} | Flowdockr`,
+    description: scenario.seoDescription,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: scenario.pageTitle,
-      description: scenario.metaDescription,
+      title: `${scenario.seoTitle} | Flowdockr`,
+      description: scenario.seoDescription,
       url: canonicalUrl,
       type: 'article',
     },
@@ -78,71 +76,70 @@ export default async function ScenarioPage({
   }
 
   const relatedScenarios = getRelatedScenarios(scenario.slug);
-
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: scenario.h1,
-    description: scenario.shortExplanation,
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: 'Paste client message',
-        text: 'Paste the exact client message into the tool input.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Generate reply',
-        text: 'Click Generate reply and get a professional negotiation response.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Send and continue',
-        text: 'Use the response as-is or adjust the tone before sending to the client.',
-      },
-    ],
-  };
+  const faqSchema = buildScenarioFaqSchema(scenario);
+  const articleSchema = buildScenarioArticleSchema(scenario);
+  const breadcrumbSchema = buildScenarioBreadcrumbSchema(scenario);
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+    <main className="mx-auto max-w-6xl px-4 py-10">
+      <article className="space-y-10">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
 
-      <ScenarioHeader scenario={scenario} />
+        <ScenarioHero scenario={scenario} />
 
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold tracking-tight">Why clients say this</h2>
-        <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground md:text-base">
-          {scenario.whyClientsSayThis.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+        <section id="tool" className="space-y-3">
+          <h2 className="text-2xl font-semibold tracking-tight">Generate your reply</h2>
+          <ReplyGeneratorCard
+            scenarioSlug={scenario.slug}
+            defaultTone={
+              scenario.promptContext.defaultTone as
+                | 'professional_firm'
+                | 'warm_confident'
+                | 'direct'
+                | 'diplomatic'
+            }
+          />
+        </section>
 
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold tracking-tight">Common mistakes freelancers make</h2>
-        <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground md:text-base">
-          {scenario.commonMistakes.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+        <section id="quick-answer" className="space-y-3">
+          <h2 className="text-2xl font-semibold tracking-tight">Best way to respond</h2>
+          <p className="text-muted-foreground">{scenario.problemSummary}</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground md:text-base">
+            {scenario.bullets.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
 
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold tracking-tight">Example of the situation</h2>
-        <div className="rounded-md border bg-muted/40 p-4 text-sm leading-relaxed md:text-base">
-          {scenario.situationExample}
-        </div>
-      </section>
+        <ScenarioExamples scenario={scenario} />
 
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold tracking-tight">Generate a professional reply</h2>
-        <NegotiationTool scenarioSlug={scenario.slug} />
-      </section>
+        <section id="mistakes" className="space-y-3">
+          <h2 className="text-2xl font-semibold tracking-tight">Mistakes to avoid</h2>
+          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground md:text-base">
+            {scenario.mistakes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
 
-      <ScenarioLinks items={relatedScenarios} />
+        <ScenarioFAQ scenario={scenario} />
+
+        <RelatedScenarios
+          relatedScenarios={relatedScenarios}
+          currentScenarioSlug={scenario.slug}
+        />
+      </article>
     </main>
   );
 }

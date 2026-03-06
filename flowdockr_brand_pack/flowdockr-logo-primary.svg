@@ -1,0 +1,27 @@
+<svg width="1400" height="320" viewBox="0 0 1400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1400" height="320" rx="32" fill="#FFFFFF"/>
+<g transform="translate(32,32)">
+
+    <rect width="256" height="256" rx="56.3" fill="#FFFFFF"/>
+    <path d="M43.52,46.08 H94.72000000000001 A17.92,17.92 0 0 1 112.64000000000001,64.0 V99.84 A17.92,17.92 0 0 1 94.72000000000001,117.76 H43.52 A17.92,17.92 0 0 1 25.6,99.84 V64.0 A17.92,17.92 0 0 1 43.52,46.08 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="7.7"/>
+    <path d="M51.2,117.76 L64.0,138.24 L71.68,117.76 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="7.7" stroke-linejoin="round"/>
+    <path d="M161.28000000000003,46.08 H212.48000000000002 A17.92,17.92 0 0 1 230.40000000000003,64.0 V99.84 A17.92,17.92 0 0 1 212.48000000000002,117.76 H161.28000000000003 A17.92,17.92 0 0 1 143.36,99.84 V64.0 A17.92,17.92 0 0 1 161.28000000000003,46.08 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="7.7"/>
+    <path d="M204.80000000000004,117.76 L192.00000000000003,138.24 L184.32000000000005,117.76 Z" fill="#EEF2FF" stroke="#4F46E5" stroke-width="7.7" stroke-linejoin="round"/>
+    <circle cx="56.3" cy="79.4" r="4.6" fill="#4F46E5"/>
+    <circle cx="71.7" cy="79.4" r="4.6" fill="#4F46E5"/>
+    <circle cx="87.0" cy="79.4" r="4.6" fill="#4F46E5"/>
+    <circle cx="174.1" cy="79.4" r="4.6" fill="#4F46E5"/>
+    <circle cx="189.4" cy="79.4" r="4.6" fill="#4F46E5"/>
+    <circle cx="204.8" cy="79.4" r="4.6" fill="#4F46E5"/>
+    
+    <path d="M107.52,153.6 H148.48" stroke="#4F46E5" stroke-width="11.5" stroke-linecap="round"/>
+    <path d="M107.52,153.6 l10.2,-10.2" stroke="#4F46E5" stroke-width="7.7" stroke-linecap="round" fill="none"/>
+    <path d="M107.52,153.6 l10.2,10.2" stroke="#4F46E5" stroke-width="7.7" stroke-linecap="round" fill="none"/>
+    <path d="M148.48,153.6 l-10.2,-10.2" stroke="#4F46E5" stroke-width="7.7" stroke-linecap="round" fill="none"/>
+    <path d="M148.48,153.6 l-10.2,10.2" stroke="#4F46E5" stroke-width="7.7" stroke-linecap="round" fill="none"/>
+    
+    
+</g>
+<text x="330" y="140" font-family="DejaVu Sans, Arial, sans-serif" font-size="94" font-weight="700" fill="#111827">Flowdockr</text>
+<text x="334" y="205" font-family="DejaVu Sans, Arial, sans-serif" font-size="34" font-weight="400" fill="#6B7280">AI negotiation copilot for freelancers</text>
+</svg>

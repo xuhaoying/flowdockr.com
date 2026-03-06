@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 import { envConfigs } from '@/config';
-import { scenarioCatalog } from '@/lib/promptTemplates';
+import { scenarios } from '@/lib/scenarios';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = envConfigs.app_url.replace(/\/$/, '');
@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const scenarioRoutes: MetadataRoute.Sitemap = scenarioCatalog.map((scenario) => ({
+  const scenarioRoutes: MetadataRoute.Sitemap = scenarios.map((scenario) => ({
     url: `${baseUrl}/scenarios/${scenario.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',

@@ -27,6 +27,9 @@ export const user = table(
     email: text('email').notNull().unique(),
     emailVerified: boolean('email_verified').default(false).notNull(),
     image: text('image'),
+    creditsBalance: integer('credits_balance').default(0).notNull(),
+    stripeCustomerId: text('stripe_customer_id').unique(),
+    magicLinkEnabled: boolean('magic_link_enabled').default(true).notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
@@ -42,6 +45,8 @@ export const user = table(
     index('idx_user_name').on(table.name),
     // Order users by registration time for latest users list
     index('idx_user_created_at').on(table.createdAt),
+    // Credits-heavy pages query by balance threshold
+    index('idx_user_credits_balance').on(table.creditsBalance),
   ]
 );
 
@@ -352,6 +357,119 @@ export const credit = table(
     index('idx_credit_order_no').on(table.orderNo),
     // Query credits by subscription number
     index('idx_credit_subscription_no').on(table.subscriptionNo),
+  ]
+);
+
+export const generation = table(
+  'generation',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    userId: text('user_id').references(() => user.id, { onDelete: 'set null' }),
+    anonymousSessionId: text('anonymous_session_id'),
+    scenarioSlug: text('scenario_slug').notNull(),
+    clientMessage: text('client_message').notNull(),
+    serviceType: text('service_type').notNull(),
+    tone: text('tone').notNull(),
+    goal: text('goal').notNull(),
+    userRateContext: text('user_rate_context'),
+    recommendedReply: text('recommended_reply').notNull(),
+    alternativeReply: text('alternative_reply').notNull(),
+    strategyJson: text('strategy_json').notNull(),
+    confidence: text('confidence').notNull(),
+    caution: text('caution'),
+    creditsCharged: integer('credits_charged').notNull().default(0),
+    isFreeGeneration: boolean('is_free_generation').notNull().default(false),
+    ipHash: text('ip_hash'),
+    userAgentHash: text('user_agent_hash'),
+  },
+  (table) => [
+    index('idx_generation_user_created').on(table.userId, table.createdAt),
+    index('idx_generation_anon_created').on(
+      table.anonymousSessionId,
+      table.createdAt
+    ),
+    index('idx_generation_scenario_created').on(table.scenarioSlug, table.createdAt),
+  ]
+);
+
+export const purchase = table(
+  'purchase',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    userId: text('user_id').references(() => user.id, { onDelete: 'set null' }),
+    stripeCheckoutSessionId: text('stripe_checkout_session_id').notNull().unique(),
+    stripePaymentIntentId: text('stripe_payment_intent_id'),
+    stripeCustomerId: text('stripe_customer_id'),
+    email: text('email').notNull(),
+    packageId: text('package_id').notNull(),
+    creditsGranted: integer('credits_granted').notNull(),
+    amountUsdCents: integer('amount_usd_cents').notNull(),
+    currency: text('currency').notNull().default('usd'),
+    status: text('status').notNull(),
+    metadata: text('metadata'),
+  },
+  (table) => [
+    index('idx_purchase_user_created').on(table.userId, table.createdAt),
+    index('idx_purchase_email_created').on(table.email, table.createdAt),
+    index('idx_purchase_status_created').on(table.status, table.createdAt),
+  ]
+);
+
+export const creditTransaction = table(
+  'credit_transaction',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    type: text('type').notNull(),
+    amount: integer('amount').notNull(),
+    balanceAfter: integer('balance_after').notNull(),
+    reason: text('reason').notNull(),
+    purchaseId: text('purchase_id'),
+    metadata: text('metadata'),
+  },
+  (table) => [
+    index('idx_credit_tx_user_created').on(table.userId, table.createdAt),
+    index('idx_credit_tx_type_created').on(table.type, table.createdAt),
+    index('idx_credit_tx_purchase').on(table.purchaseId),
+  ]
+);
+
+export const anonymousUsage = table(
+  'anonymous_usage',
+  {
+    id: text('id').primaryKey(),
+    anonymousSessionId: text('anonymous_session_id').notNull().unique(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+    freeGenerationsUsed: integer('free_generations_used').default(0).notNull(),
+    ipHash: text('ip_hash'),
+    userAgentHash: text('user_agent_hash'),
+    lastScenarioSlug: text('last_scenario_slug'),
+  },
+  (table) => [index('idx_anon_usage_updated').on(table.updatedAt)]
+);
+
+export const anonymousLinkSession = table(
+  'anonymous_link_session',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    anonymousSessionId: text('anonymous_session_id').notNull(),
+  },
+  (table) => [
+    index('idx_anon_link_user').on(table.userId),
+    index('idx_anon_link_session').on(table.anonymousSessionId),
   ]
 );
 

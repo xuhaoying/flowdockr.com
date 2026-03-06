@@ -1,5 +1,5 @@
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { oneTap } from 'better-auth/plugins';
+import { magicLink, oneTap } from 'better-auth/plugins';
 import { getLocale } from 'next-intl/server';
 
 import { db } from '@/core/db';
@@ -74,6 +74,37 @@ const authOptions = {
 export async function getAuthOptions(configs: Record<string, string>) {
   const emailVerificationEnabled =
     configs.email_verification_enabled === 'true' && !!configs.resend_api_key;
+
+  const authPlugins: any[] = [
+    magicLink({
+      expiresIn: 60 * 30,
+      sendMagicLink: async ({ email, url }) => {
+        const emailService = await getEmailService(configs as any);
+        await emailService.sendEmail({
+          to: email,
+          subject: `Your secure sign-in link - ${envConfigs.app_name}`,
+          text: `Sign in to ${envConfigs.app_name}: ${url}`,
+          html: `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #111;">
+              <h2 style="margin: 0 0 12px;">Sign in to ${envConfigs.app_name}</h2>
+              <p style="margin: 0 0 12px;">Use this secure link to sign in:</p>
+              <p style="margin: 0 0 20px;">
+                <a href="${url}" style="display:inline-block;padding:10px 14px;background:#111;color:#fff;text-decoration:none;border-radius:8px;">
+                  Sign in
+                </a>
+              </p>
+              <p style="margin: 0; color: #555; font-size: 14px;">If the button does not work, paste this URL into your browser:</p>
+              <p style="margin: 4px 0 0; font-size: 14px; word-break: break-all;">${url}</p>
+            </div>
+          `,
+        });
+      },
+    }),
+  ];
+
+  if (configs.google_client_id && configs.google_one_tap_enabled === 'true') {
+    authPlugins.push(oneTap());
+  }
 
   return {
     ...authOptions,
@@ -201,10 +232,7 @@ export async function getAuthOptions(configs: Record<string, string>) {
         }
       : {}),
     socialProviders: await getSocialProviders(configs),
-    plugins:
-      configs.google_client_id && configs.google_one_tap_enabled === 'true'
-        ? [oneTap()]
-        : [],
+    plugins: authPlugins,
   };
 }
 
