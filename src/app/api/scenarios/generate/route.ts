@@ -6,7 +6,18 @@ import {
   NEGOTIATION_SYSTEM_PROMPT,
   ScenarioSlug,
 } from '@/lib/promptTemplates';
-import { getUuid, md5 } from '@/shared/lib/hash';
+import {
+  attachBrowserIdCookie,
+  getBrowserIdFromRequest,
+  getClientIp,
+  getFreeUsage,
+  getPaidRemaining,
+  SCENARIO_FREE_LIMIT,
+  SCENARIO_PACK_PRICE_CENTS,
+  SCENARIO_PACK_SIZE,
+  setFreeUsage,
+  setPaidRemaining,
+} from '@/shared/lib/scenario-quota';
 
 type GenerateScenarioInput = {
   scenario: string;
@@ -19,10 +30,17 @@ type Framework = {
 };
 
 type PlanQuota = {
-  plan: 'free';
-  used: number;
-  limit: number;
-  remaining: number;
+  active_plan: 'free' | 'paid_pack';
+  free: {
+    used: number;
+    limit: number;
+    remaining: number;
+  };
+  paid_pack: {
+    remaining: number;
+    pack_size: number;
+    price_usd: number;
+  };
 };
 
 type GenerateScenarioOutput = {
@@ -69,10 +87,6 @@ type OpenAIChatResponse = {
 const REQUEST_TIMEOUT_MS = 20_000;
 const RATE_LIMIT_MAX = 10;
 const RATE_LIMIT_WINDOW_MS = 60_000;
-const FREE_GENERATION_LIMIT = 2;
-const FREE_COUNT_COOKIE = 'flowdockr_scenario_free_count';
-const BROWSER_ID_COOKIE = 'flowdockr_scenario_browser_id';
-const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365 * 10;
 
 const MODEL_RESPONSE_JSON_SCHEMA = {
   name: 'flowdockr_scenario_reply',
@@ -134,7 +148,6 @@ class UpstreamGenerationError extends Error {
 
 declare global {
   var __flowdockrScenarioRateLimitStore: Map<string, number[]> | undefined;
-  var __flowdockrScenarioQuotaStore: Map<string, number> | undefined;
 }
 
 export async function POST(request: NextRequest) {
@@ -142,9 +155,10 @@ export async function POST(request: NextRequest) {
 
   try {
     enforceRateLimit(request);
-    const browserId = getOrCreateBrowserId(request);
+    const browserId = getBrowserIdFromRequest(request);
+    const paidRemaining = getPaidRemaining(request, browserId);
     const freeUsed = getFreeUsage(request, browserId);
-    if (freeUsed >= FREE_GENERATION_LIMIT) {
+    if (paidRemaining <= 0 && freeUsed >= SCENARIO_FREE_LIMIT) {
       throw new FreeQuotaError(
         'Free quota reached. Buy reply pack: $5 for 20 replies (no subscription).'
       );
@@ -174,15 +188,23 @@ export async function POST(request: NextRequest) {
       deadline,
     });
 
-    const nextFreeUsed = Math.min(FREE_GENERATION_LIMIT, freeUsed + 1);
+    const usingPaidPack = paidRemaining > 0;
+    const nextPaidRemaining = usingPaidPack
+      ? Math.max(0, paidRemaining - 1)
+      : paidRemaining;
+    const nextFreeUsed = usingPaidPack
+      ? freeUsed
+      : Math.min(SCENARIO_FREE_LIMIT, freeUsed + 1);
+
     const output = finalizeOutput(
       draft,
       scenario.slug,
       scenario.h1,
       nextFreeUsed,
-      FREE_GENERATION_LIMIT
+      SCENARIO_FREE_LIMIT,
+      nextPaidRemaining,
+      usingPaidPack
     );
-    setFreeUsage(request, browserId, nextFreeUsed);
 
     const response = NextResponse.json(output, {
       status: 200,
@@ -191,22 +213,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    response.cookies.set({
-      name: FREE_COUNT_COOKIE,
-      value: String(nextFreeUsed),
-      maxAge: COOKIE_MAX_AGE_SECONDS,
-      path: '/',
-      sameSite: 'lax',
-      httpOnly: false,
-    });
-    response.cookies.set({
-      name: BROWSER_ID_COOKIE,
-      value: browserId,
-      maxAge: COOKIE_MAX_AGE_SECONDS,
-      path: '/',
-      sameSite: 'lax',
-      httpOnly: false,
-    });
+    attachBrowserIdCookie(response, browserId);
+    if (usingPaidPack) {
+      setPaidRemaining(response, browserId, nextPaidRemaining);
+    } else {
+      setFreeUsage(request, response, browserId, nextFreeUsed);
+    }
 
     return response;
   } catch (error) {
@@ -437,7 +449,9 @@ function finalizeOutput(
   scenarioSlug: ScenarioSlug,
   scenarioTitle: string,
   freeUsed: number,
-  freeLimit: number
+  freeLimit: number,
+  paidRemaining: number,
+  usingPaidPack: boolean
 ): GenerateScenarioOutput {
   const framework: Framework = {
     label: clampText(String(draft.framework?.label || FALLBACK_FRAMEWORK.label), 2, 80),
@@ -468,10 +482,17 @@ function finalizeOutput(
       title: scenarioTitle,
     },
     quota: {
-      plan: 'free',
-      used: freeUsed,
-      limit: freeLimit,
-      remaining: Math.max(0, freeLimit - freeUsed),
+      active_plan: usingPaidPack ? 'paid_pack' : 'free',
+      free: {
+        used: freeUsed,
+        limit: freeLimit,
+        remaining: Math.max(0, freeLimit - freeUsed),
+      },
+      paid_pack: {
+        remaining: Math.max(0, paidRemaining),
+        pack_size: SCENARIO_PACK_SIZE,
+        price_usd: SCENARIO_PACK_PRICE_CENTS / 100,
+      },
     },
   };
 }
@@ -561,15 +582,7 @@ function enforceRateLimit(request: NextRequest): void {
 }
 
 function getClientKey(request: NextRequest): string {
-  const xff = request.headers.get('x-forwarded-for');
-  const ipFromXff = xff?.split(',')[0]?.trim();
-
-  return (
-    ipFromXff ||
-    request.headers.get('cf-connecting-ip') ||
-    request.headers.get('x-real-ip') ||
-    'unknown'
-  );
+  return getClientIp(request);
 }
 
 function getRateLimitStore(): Map<string, number[]> {
@@ -577,55 +590,6 @@ function getRateLimitStore(): Map<string, number[]> {
     globalThis.__flowdockrScenarioRateLimitStore = new Map<string, number[]>();
   }
   return globalThis.__flowdockrScenarioRateLimitStore;
-}
-
-function getFreeUsage(request: NextRequest, browserId: string): number {
-  const store = getQuotaStore();
-  const raw = request.cookies.get(FREE_COUNT_COOKIE)?.value || '0';
-  const parsed = Number(raw);
-  const browserUsed = store.get(`browser:${browserId}`) || 0;
-  const networkUsed = store.get(`network:${getNetworkFingerprint(request)}`) || 0;
-  const cookieUsed =
-    !Number.isFinite(parsed) || parsed <= 0
-      ? 0
-      : Math.floor(Math.min(parsed, FREE_GENERATION_LIMIT));
-
-  return Math.max(cookieUsed, browserUsed, networkUsed);
-}
-
-function setFreeUsage(
-  request: NextRequest,
-  browserId: string,
-  used: number
-): void {
-  const store = getQuotaStore();
-  const normalized = Math.max(0, Math.min(FREE_GENERATION_LIMIT, Math.floor(used)));
-  store.set(`browser:${browserId}`, normalized);
-  store.set(`network:${getNetworkFingerprint(request)}`, normalized);
-}
-
-function getOrCreateBrowserId(request: NextRequest): string {
-  const existing = String(request.cookies.get(BROWSER_ID_COOKIE)?.value || '').trim();
-  if (existing.length >= 12 && existing.length <= 80) {
-    return existing;
-  }
-
-  return `anon_${getUuid().replace(/-/g, '')}`;
-}
-
-function getNetworkFingerprint(request: NextRequest): string {
-  const ip = getClientKey(request);
-  const userAgent = request.headers.get('user-agent') || '';
-  const acceptLanguage = request.headers.get('accept-language') || '';
-
-  return md5(`${ip}|${userAgent}|${acceptLanguage}`);
-}
-
-function getQuotaStore(): Map<string, number> {
-  if (!globalThis.__flowdockrScenarioQuotaStore) {
-    globalThis.__flowdockrScenarioQuotaStore = new Map<string, number>();
-  }
-  return globalThis.__flowdockrScenarioQuotaStore;
 }
 
 function getErrorStatus(error: unknown): number {

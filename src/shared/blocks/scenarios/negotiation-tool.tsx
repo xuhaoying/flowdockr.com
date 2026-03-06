@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Check, Copy, Loader2, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
-import { Link } from '@/core/i18n/navigation';
 import { ScenarioSlug } from '@/lib/promptTemplates';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -33,10 +32,17 @@ type GenerateScenarioResponse = {
     title: string;
   };
   quota: {
-    plan: 'free';
-    used: number;
-    limit: number;
-    remaining: number;
+    active_plan: 'free' | 'paid_pack';
+    free: {
+      used: number;
+      limit: number;
+      remaining: number;
+    };
+    paid_pack: {
+      remaining: number;
+      pack_size: number;
+      price_usd: number;
+    };
   };
 };
 
@@ -44,11 +50,18 @@ type NegotiationToolProps = {
   scenarioSlug: ScenarioSlug;
 };
 
+type PackCheckoutResponse = {
+  checkout_url: string;
+};
+
 const MAX_MESSAGE_LENGTH = 1200;
 const MIN_MESSAGE_LENGTH = 10;
 const FREE_LIMIT = 2;
+const PACK_SIZE = 20;
+const PACK_PRICE_USD = 5;
 const COPY_TIMEOUT_MS = 1500;
 const FREE_COUNT_KEY = 'flowdockr_scenario_free_count';
+const PAID_REMAINING_KEY = 'flowdockr_scenario_paid_remaining_hint';
 
 export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
   const [clientMessage, setClientMessage] = useState('');
@@ -57,19 +70,61 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
   const [freeUsed, setFreeUsed] = useState(0);
+  const [paidRemaining, setPaidRemaining] = useState(0);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   useEffect(() => {
-    const raw = window.localStorage.getItem(FREE_COUNT_KEY);
-    const parsed = Number(raw);
+    const freeParsed = parseSafeInt(window.localStorage.getItem(FREE_COUNT_KEY), 0, FREE_LIMIT);
+    setFreeUsed(freeParsed);
 
-    if (Number.isFinite(parsed) && parsed > 0) {
-      setFreeUsed(Math.min(FREE_LIMIT, Math.floor(parsed)));
+    const paidFromCookie = parseSafeInt(
+      getCookieValue(PAID_REMAINING_KEY),
+      0,
+      10_000
+    );
+    const paidFromStorage = parseSafeInt(
+      window.localStorage.getItem(PAID_REMAINING_KEY),
+      0,
+      10_000
+    );
+    setPaidRemaining(Math.max(paidFromCookie, paidFromStorage));
+  }, []);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const packPaid = searchParams.get('pack_paid');
+    const packError = searchParams.get('pack_error');
+
+    if (packPaid === '1') {
+      const paidFromCookie = parseSafeInt(
+        getCookieValue(PAID_REMAINING_KEY),
+        0,
+        10_000
+      );
+      setPaidRemaining((prev) => {
+        const nextValue = Math.max(prev, paidFromCookie);
+        window.localStorage.setItem(PAID_REMAINING_KEY, String(nextValue));
+        return nextValue;
+      });
+      toast.success('Reply pack activated.');
+      searchParams.delete('pack_paid');
+    }
+
+    if (packError) {
+      toast.error('Pack checkout was not completed.');
+      searchParams.delete('pack_error');
+    }
+
+    if (packPaid === '1' || packError) {
+      const nextQuery = searchParams.toString();
+      const nextUrl = `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ''}${window.location.hash}`;
+      window.history.replaceState({}, '', nextUrl);
     }
   }, []);
 
   const messageLength = clientMessage.trim().length;
   const freeRemaining = Math.max(0, FREE_LIMIT - freeUsed);
-  const freeExhausted = freeRemaining <= 0;
+  const quotaExhausted = freeRemaining <= 0 && paidRemaining <= 0;
 
   const validationMessage = useMemo(() => {
     if (messageLength < MIN_MESSAGE_LENGTH) {
@@ -80,12 +135,12 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
       return `Client message must be ${MAX_MESSAGE_LENGTH} characters or fewer.`;
     }
 
-    if (freeExhausted) {
+    if (quotaExhausted) {
       return 'Free quota reached. Buy reply pack: $5 for 20 replies (no subscription).';
     }
 
     return '';
-  }, [freeExhausted, messageLength]);
+  }, [messageLength, quotaExhausted]);
 
   const canSubmit = !loading && !validationMessage;
 
@@ -118,7 +173,9 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
       if (!response.ok) {
         if (response.status === 402) {
           setFreeUsed(FREE_LIMIT);
+          setPaidRemaining(0);
           window.localStorage.setItem(FREE_COUNT_KEY, String(FREE_LIMIT));
+          window.localStorage.setItem(PAID_REMAINING_KEY, '0');
         }
         throw new Error(payload.message || 'Failed to generate a reply. Please retry.');
       }
@@ -129,12 +186,21 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
 
       setResult(payload);
 
-      const nextFreeUsed = Math.min(
-        payload.quota.limit,
-        Math.max(0, Math.floor(payload.quota.used))
+      const nextFreeUsed = parseSafeInt(
+        String(payload.quota.free.used),
+        0,
+        payload.quota.free.limit || FREE_LIMIT
       );
+      const nextPaidRemaining = parseSafeInt(
+        String(payload.quota.paid_pack.remaining),
+        0,
+        10_000
+      );
+
       setFreeUsed(nextFreeUsed);
+      setPaidRemaining(nextPaidRemaining);
       window.localStorage.setItem(FREE_COUNT_KEY, String(nextFreeUsed));
+      window.localStorage.setItem(PAID_REMAINING_KEY, String(nextPaidRemaining));
 
       toast.success('Reply generated.');
     } catch (requestError) {
@@ -163,6 +229,42 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
       }, COPY_TIMEOUT_MS);
     } catch {
       toast.error('Copy failed. Please try again.');
+    }
+  };
+
+  const onBuyPack = async () => {
+    setCheckoutLoading(true);
+    setError('');
+
+    try {
+      const returnPath = `${window.location.pathname}${window.location.search}`;
+      const response = await fetch('/api/scenarios/pack/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          return_to: returnPath,
+        }),
+      });
+
+      const payload = (await response.json()) as Partial<PackCheckoutResponse> & {
+        message?: string;
+      };
+      if (!response.ok || !payload.checkout_url) {
+        throw new Error(payload.message || 'Failed to start pack checkout.');
+      }
+
+      window.location.assign(payload.checkout_url);
+    } catch (checkoutError) {
+      const message =
+        checkoutError instanceof Error
+          ? checkoutError.message
+          : 'Failed to start pack checkout.';
+      setError(message);
+      toast.error(message);
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
@@ -198,29 +300,44 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
             <p>
               Free: {freeRemaining}/{FREE_LIMIT} total replies left (no login)
             </p>
+            <p>Paid pack remaining: {paidRemaining}/{PACK_SIZE} replies</p>
             <p className="text-muted-foreground">
               Paid pack: $5 for 20 replies (one-time, no subscription)
             </p>
           </div>
 
-          <Button onClick={onGenerate} disabled={!canSubmit} className="w-full sm:w-auto">
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Generating...
-              </>
-            ) : (
-              'Generate reply'
-            )}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button onClick={onGenerate} disabled={!canSubmit} className="w-full sm:w-auto">
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                'Generate reply'
+              )}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onBuyPack}
+              disabled={checkoutLoading}
+              className="w-full sm:w-auto"
+            >
+              {checkoutLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Redirecting...
+                </>
+              ) : (
+                `Buy $${PACK_PRICE_USD} pack (${PACK_SIZE} replies)`
+              )}
+            </Button>
+          </div>
 
-          {freeExhausted ? (
+          {quotaExhausted ? (
             <p className="text-sm text-muted-foreground">
-              Free quota reached. Continue with{' '}
-              <Link href="/pricing" className="underline">
-                $5 / 20 reply pack
-              </Link>
-              .
+              Free quota reached. Buy a $5 pack to continue (20 replies, no subscription).
             </p>
           ) : null}
         </CardContent>
@@ -291,9 +408,35 @@ function isGenerateScenarioResponse(value: unknown): value is GenerateScenarioRe
     typeof data.quality?.avoids_defensive_tone === 'boolean' &&
     typeof data.scenario?.slug === 'string' &&
     typeof data.scenario?.title === 'string' &&
-    data.quota?.plan === 'free' &&
-    typeof data.quota?.used === 'number' &&
-    typeof data.quota?.limit === 'number' &&
-    typeof data.quota?.remaining === 'number'
+    (data.quota?.active_plan === 'free' || data.quota?.active_plan === 'paid_pack') &&
+    typeof data.quota?.free?.used === 'number' &&
+    typeof data.quota?.free?.limit === 'number' &&
+    typeof data.quota?.free?.remaining === 'number' &&
+    typeof data.quota?.paid_pack?.remaining === 'number' &&
+    typeof data.quota?.paid_pack?.pack_size === 'number' &&
+    typeof data.quota?.paid_pack?.price_usd === 'number'
   );
+}
+
+function parseSafeInt(value: string | null, min: number, max: number): number {
+  if (!value) {
+    return min;
+  }
+
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return min;
+  }
+
+  return Math.max(min, Math.min(max, Math.floor(parsed)));
+}
+
+function getCookieValue(name: string): string | null {
+  const entries = document.cookie.split(';');
+  const matched = entries.find((item) => item.trim().startsWith(`${name}=`));
+  if (!matched) {
+    return null;
+  }
+
+  return matched.split('=').slice(1).join('=').trim();
 }
