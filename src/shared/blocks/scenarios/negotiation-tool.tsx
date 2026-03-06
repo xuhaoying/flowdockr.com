@@ -81,7 +81,7 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
     }
 
     if (freeExhausted) {
-      return 'Free quota reached. Upgrade to Pro for 20 replies.';
+      return 'Free quota reached. Buy reply pack: $5 for 20 replies (no subscription).';
     }
 
     return '';
@@ -196,9 +196,11 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
 
           <div className="rounded-md border bg-muted/40 px-3 py-2 text-sm">
             <p>
-              Free: {freeRemaining}/{FREE_LIMIT} replies left
+              Free: {freeRemaining}/{FREE_LIMIT} total replies left (no login)
             </p>
-            <p className="text-muted-foreground">Pro: $5 for 20 replies</p>
+            <p className="text-muted-foreground">
+              Paid pack: $5 for 20 replies (one-time, no subscription)
+            </p>
           </div>
 
           <Button onClick={onGenerate} disabled={!canSubmit} className="w-full sm:w-auto">
@@ -216,7 +218,7 @@ export function NegotiationTool({ scenarioSlug }: NegotiationToolProps) {
             <p className="text-sm text-muted-foreground">
               Free quota reached. Continue with{' '}
               <Link href="/pricing" className="underline">
-                Pro plan
+                $5 / 20 reply pack
               </Link>
               .
             </p>

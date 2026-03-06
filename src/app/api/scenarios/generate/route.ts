@@ -6,6 +6,7 @@ import {
   NEGOTIATION_SYSTEM_PROMPT,
   ScenarioSlug,
 } from '@/lib/promptTemplates';
+import { getUuid, md5 } from '@/shared/lib/hash';
 
 type GenerateScenarioInput = {
   scenario: string;
@@ -70,7 +71,8 @@ const RATE_LIMIT_MAX = 10;
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const FREE_GENERATION_LIMIT = 2;
 const FREE_COUNT_COOKIE = 'flowdockr_scenario_free_count';
-const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
+const BROWSER_ID_COOKIE = 'flowdockr_scenario_browser_id';
+const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365 * 10;
 
 const MODEL_RESPONSE_JSON_SCHEMA = {
   name: 'flowdockr_scenario_reply',
@@ -132,6 +134,7 @@ class UpstreamGenerationError extends Error {
 
 declare global {
   var __flowdockrScenarioRateLimitStore: Map<string, number[]> | undefined;
+  var __flowdockrScenarioQuotaStore: Map<string, number> | undefined;
 }
 
 export async function POST(request: NextRequest) {
@@ -139,9 +142,12 @@ export async function POST(request: NextRequest) {
 
   try {
     enforceRateLimit(request);
-    const freeUsed = getFreeUsage(request);
+    const browserId = getOrCreateBrowserId(request);
+    const freeUsed = getFreeUsage(request, browserId);
     if (freeUsed >= FREE_GENERATION_LIMIT) {
-      throw new FreeQuotaError('Free plan limit reached. Upgrade to Pro ($5 for 20 replies).');
+      throw new FreeQuotaError(
+        'Free quota reached. Buy reply pack: $5 for 20 replies (no subscription).'
+      );
     }
 
     const body = (await request.json()) as Partial<GenerateScenarioInput>;
@@ -176,6 +182,7 @@ export async function POST(request: NextRequest) {
       nextFreeUsed,
       FREE_GENERATION_LIMIT
     );
+    setFreeUsage(request, browserId, nextFreeUsed);
 
     const response = NextResponse.json(output, {
       status: 200,
@@ -187,6 +194,14 @@ export async function POST(request: NextRequest) {
     response.cookies.set({
       name: FREE_COUNT_COOKIE,
       value: String(nextFreeUsed),
+      maxAge: COOKIE_MAX_AGE_SECONDS,
+      path: '/',
+      sameSite: 'lax',
+      httpOnly: false,
+    });
+    response.cookies.set({
+      name: BROWSER_ID_COOKIE,
+      value: browserId,
       maxAge: COOKIE_MAX_AGE_SECONDS,
       path: '/',
       sameSite: 'lax',
@@ -564,15 +579,53 @@ function getRateLimitStore(): Map<string, number[]> {
   return globalThis.__flowdockrScenarioRateLimitStore;
 }
 
-function getFreeUsage(request: NextRequest): number {
+function getFreeUsage(request: NextRequest, browserId: string): number {
+  const store = getQuotaStore();
   const raw = request.cookies.get(FREE_COUNT_COOKIE)?.value || '0';
   const parsed = Number(raw);
+  const browserUsed = store.get(`browser:${browserId}`) || 0;
+  const networkUsed = store.get(`network:${getNetworkFingerprint(request)}`) || 0;
+  const cookieUsed =
+    !Number.isFinite(parsed) || parsed <= 0
+      ? 0
+      : Math.floor(Math.min(parsed, FREE_GENERATION_LIMIT));
 
-  if (!Number.isFinite(parsed) || parsed <= 0) {
-    return 0;
+  return Math.max(cookieUsed, browserUsed, networkUsed);
+}
+
+function setFreeUsage(
+  request: NextRequest,
+  browserId: string,
+  used: number
+): void {
+  const store = getQuotaStore();
+  const normalized = Math.max(0, Math.min(FREE_GENERATION_LIMIT, Math.floor(used)));
+  store.set(`browser:${browserId}`, normalized);
+  store.set(`network:${getNetworkFingerprint(request)}`, normalized);
+}
+
+function getOrCreateBrowserId(request: NextRequest): string {
+  const existing = String(request.cookies.get(BROWSER_ID_COOKIE)?.value || '').trim();
+  if (existing.length >= 12 && existing.length <= 80) {
+    return existing;
   }
 
-  return Math.floor(Math.min(parsed, FREE_GENERATION_LIMIT));
+  return `anon_${getUuid().replace(/-/g, '')}`;
+}
+
+function getNetworkFingerprint(request: NextRequest): string {
+  const ip = getClientKey(request);
+  const userAgent = request.headers.get('user-agent') || '';
+  const acceptLanguage = request.headers.get('accept-language') || '';
+
+  return md5(`${ip}|${userAgent}|${acceptLanguage}`);
+}
+
+function getQuotaStore(): Map<string, number> {
+  if (!globalThis.__flowdockrScenarioQuotaStore) {
+    globalThis.__flowdockrScenarioQuotaStore = new Map<string, number>();
+  }
+  return globalThis.__flowdockrScenarioQuotaStore;
 }
 
 function getErrorStatus(error: unknown): number {
