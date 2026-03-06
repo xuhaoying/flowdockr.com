@@ -1,24 +1,24 @@
 {
   "metadata": {
-    "title": "FlowDockr Pricing",
-    "description": "Simple pricing for freelancers: start free, upgrade when client complexity grows."
+    "title": "FlowDockr 定价",
+    "description": "为自由职业者设计的简单定价：先免费使用，客户复杂度上升时再升级。"
   },
   "page": {
-    "title": "FlowDockr Pricing",
+    "title": "FlowDockr 定价",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Simple pricing for freelancer workflows.",
-        "description": "Start with Scope Guard for free, then upgrade when your client volume and complexity increase.",
+        "title": "面向自由职业流程的简洁定价。",
+        "description": "先免费使用 Scope Guard，当客户数量和复杂度上升时再升级。",
         "buttons": [
           {
-            "title": "Start with Scope",
+            "title": "从 Scope 开始",
             "url": "/scope",
             "icon": "ShieldCheck",
             "variant": "default"
           },
           {
-            "title": "Browse Templates",
+            "title": "查看模板",
             "url": "/templates",
             "icon": "FileText",
             "variant": "outline"
@@ -29,22 +29,22 @@
       },
       "features": {
         "id": "features",
-        "title": "Pricing tiers",
-        "description": "Designed for solo freelancers first.",
+        "title": "套餐层级",
+        "description": "优先为独立自由职业者设计。",
         "items": [
           {
-            "title": "Free",
-            "description": "2 Scope Policy generations. Basic templates and guides.",
+            "title": "免费版",
+            "description": "2 次范围政策生成。基础模板与指南。",
             "icon": "Leaf"
           },
           {
-            "title": "Pro - $9/month",
-            "description": "Unlimited Scope Policy generations.",
+            "title": "Pro - $9/月",
+            "description": "范围政策不限次生成。",
             "icon": "Sparkles"
           },
           {
-            "title": "Lifetime - $19",
-            "description": "One-time payment. Unlimited Scope Policy generations.",
+            "title": "终身版 - $19",
+            "description": "一次性付费。范围政策不限次生成。",
             "icon": "Rocket"
           }
         ],
@@ -53,39 +53,39 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "label": "Upgrade Logic",
-        "title": "When to upgrade",
-        "description": "Upgrade based on workflow volume, not vanity features.",
+        "label": "升级逻辑",
+        "title": "何时升级",
+        "description": "按工作量升级，而不是为花哨功能付费。",
         "items": [
           {
-            "title": "Start free",
-            "description": "Validate output quality in real client scenarios.",
+            "title": "先免费使用",
+            "description": "在真实客户场景中验证输出质量。",
             "icon": "CirclePlay"
           },
           {
-            "title": "Upgrade to Pro",
-            "description": "When monthly generation needs exceed free limits.",
+            "title": "升级到 Pro",
+            "description": "当每月生成需求超过免费额度时。",
             "icon": "ArrowUpCircle"
           },
           {
-            "title": "Choose Lifetime",
-            "description": "If you want one-time payment instead of monthly subscription.",
+            "title": "选择终身版",
+            "description": "如果你更偏好一次性付费而非月订阅。",
             "icon": "Layers"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Start with Scope Guard.",
-        "description": "Validate value first, then expand to more modules.",
+        "title": "从 Scope Guard 开始。",
+        "description": "先验证价值，再扩展到更多模块。",
         "buttons": [
           {
-            "title": "Open Scope Guard",
+            "title": "打开 Scope Guard",
             "url": "/scope",
             "icon": "ShieldCheck"
           },
           {
-            "title": "Read Guides",
+            "title": "阅读指南",
             "url": "/guides",
             "icon": "BookOpen",
             "variant": "outline"

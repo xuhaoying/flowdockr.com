@@ -17,9 +17,7 @@ const DISMISSED_EXPIRY_DAYS = 1; // Expiry in days
 const PREFERRED_LOCALE_KEY = 'locale';
 
 export function LocaleDetector() {
-  if (envConfigs.locale_detect_enabled !== 'true') {
-    return null;
-  }
+  const localeDetectEnabled = envConfigs.locale_detect_enabled === 'true';
 
   const currentLocale = useLocale();
   const router = useRouter();
@@ -69,6 +67,10 @@ export function LocaleDetector() {
   );
 
   useEffect(() => {
+    if (!localeDetectEnabled) {
+      return;
+    }
+
     // Only run initial check once to avoid interference with manual locale switches
     if (hasCheckedRef.current) {
       return;
@@ -107,7 +109,7 @@ export function LocaleDetector() {
     ) {
       setShowBanner(true);
     }
-  }, [currentLocale, switchToLocale]);
+  }, [currentLocale, localeDetectEnabled, switchToLocale]);
 
   // Adjust header and layout spacing when banner visibility changes
   useEffect(() => {
@@ -229,7 +231,7 @@ export function LocaleDetector() {
   const targetLocaleName =
     localeNames[browserLocale as keyof typeof localeNames] || browserLocale;
 
-  if (!showBanner || !browserLocale) {
+  if (!localeDetectEnabled || !showBanner || !browserLocale) {
     return null;
   }
 

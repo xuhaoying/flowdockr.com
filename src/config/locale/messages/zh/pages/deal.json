@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Deal",
+    "description": "用结构化谈判回复和清晰价格边界，应对客户压价。"
+  },
+  "page": {
+    "title": "FlowDockr Deal",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "面对价格异议，也不用降价自损价值。",
+        "description": "FlowDockr Deal 帮助自由职业者在客户要求折扣时，给出有逻辑、有边界、可推进下一步的回复。",
+        "buttons": [
+          {
+            "title": "查看 Scope 模块",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          },
+          {
+            "title": "查看谈判指南",
+            "url": "/guides/client-asking-for-discount",
+            "icon": "BookOpen",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Deal 解决什么",
+        "description": "为真实客户谈判场景设计，重点保护利润与专业定位。",
+        "items": [
+          {
+            "title": "客户说价格太高",
+            "description": "先守住价值，再谈让步条件。",
+            "icon": "MessageSquareWarning"
+          },
+          {
+            "title": "客户说别人更便宜",
+            "description": "把讨论重心拉回结果、风险与交付可靠性。",
+            "icon": "Scale"
+          },
+          {
+            "title": "既要成交也要边界",
+            "description": "用范围或时间换取条件式让步。",
+            "icon": "Shield"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "工作流",
+        "title": "3 步推进谈判",
+        "description": "结构清晰，提升成交掌控感。",
+        "items": [
+          {
+            "title": "记录上下文",
+            "description": "输入你的报价、底价和客户异议。",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "生成回复",
+            "description": "获得可直接发送的多版本谈判回复。",
+            "icon": "Sparkles"
+          },
+          {
+            "title": "锁定下一步",
+            "description": "引导确认动作，推动成交。",
+            "icon": "ArrowRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "谈判压力是常态，临场硬扛不是必选项。",
+        "description": "把 Scope 和 Payment 一起用，兼顾交付边界与回款安全。",
+        "buttons": [
+          {
+            "title": "打开 Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "打开 Payment",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

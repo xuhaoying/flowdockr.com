@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Payment",
+    "description": "发送更有力度的催款提醒，减少应收未收。"
+  },
+  "page": {
+    "title": "FlowDockr Payment",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "不尴尬地把钱收回来。",
+        "description": "FlowDockr Payment 提供结构化催款消息与付款条款话术，帮助你处理逾期发票。",
+        "buttons": [
+          {
+            "title": "使用催款模板",
+            "url": "/templates/payment-reminder",
+            "icon": "FileText",
+            "variant": "default"
+          },
+          {
+            "title": "阅读客户不付款指南",
+            "url": "/guides/client-not-paying",
+            "icon": "BookOpen",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Payment 解决什么",
+        "description": "从项目一开始就标准化跟进节奏与付款条款。",
+        "items": [
+          {
+            "title": "尾款逾期",
+            "description": "基于已约定条款发送坚定且专业的催款提醒。",
+            "icon": "AlarmClock"
+          },
+          {
+            "title": "付款时间不明确",
+            "description": "一条消息明确截止时间与下一步动作。",
+            "icon": "CalendarClock"
+          },
+          {
+            "title": "需要升级催款路径",
+            "description": "从友好提醒到正式跟进，保持一致性。",
+            "icon": "ShieldAlert"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "工作流",
+        "title": "3 步追回款项",
+        "description": "保持专业语气，同时提高回复率和付款率。",
+        "items": [
+          {
+            "title": "整理发票上下文",
+            "description": "金额、到期时间、交付状态。",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "生成催款消息",
+            "description": "快速生成可直接发送的邮件内容，含明确请求与时限。",
+            "icon": "Mail"
+          },
+          {
+            "title": "按层级升级",
+            "description": "若仍未付款，按节奏升级跟进。",
+            "icon": "ArrowUpRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "将 Payment 与 Scope 组合使用，条款更稳。",
+        "description": "范围清晰 + 付款清晰 = 更少争议、更快回款。",
+        "buttons": [
+          {
+            "title": "打开 Scope 模块",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "打开 Deal 模块",
+            "url": "/deal",
+            "icon": "Handshake",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

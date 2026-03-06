@@ -4,7 +4,7 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import moment from 'moment';
 
 import { db } from '@/core/db';
-import { logsSource, pagesSource, postsSource } from '@/core/docs/source';
+import { i18n as docsI18n, logsSource, pagesSource, postsSource } from '@/core/docs/source';
 import { generateTOC } from '@/core/docs/toc';
 import { post } from '@/config/db/schema';
 import { MarkdownContent } from '@/shared/blocks/common/markdown-content';
@@ -30,6 +30,14 @@ export enum PostStatus {
   PENDING = 'pending', // pending review by admin
   DRAFT = 'draft', // draft and not visible to the public
   ARCHIVED = 'archived', // archived means deleted
+}
+
+function resolveContentLocale(locale?: string) {
+  const target = String(locale || '').trim();
+  if (target && docsI18n.languages.includes(target)) {
+    return target;
+  }
+  return docsI18n.defaultLanguage || 'en';
 }
 
 export async function addPost(data: NewPost) {
@@ -206,7 +214,8 @@ export async function getLocalPost({
   locale: string;
   postPrefix?: string;
 }): Promise<BlogPostType | null> {
-  const localPost = await postsSource.getPage([slug], locale);
+  const contentLocale = resolveContentLocale(locale);
+  const localPost = await postsSource.getPage([slug], contentLocale);
   if (!localPost) {
     return null;
   }
@@ -261,7 +270,8 @@ export async function getLocalPage({
     .map((segment) => segment.trim())
     .filter(Boolean);
 
-  const localPage = await pagesSource.getPage(slugSegments, locale);
+  const contentLocale = resolveContentLocale(locale);
+  const localPage = await pagesSource.getPage(slugSegments, contentLocale);
   if (!localPage) {
     return null;
   }
@@ -469,11 +479,12 @@ export async function getLocalPostsAndCategories({
   type?: PostType;
 }) {
   const localPostsList: BlogPostType[] = [];
+  const contentLocale = resolveContentLocale(locale);
 
   // get posts from local files
-  let localPosts = postsSource.getPages(locale);
+  let localPosts = postsSource.getPages(contentLocale);
   if (type === PostType.LOG) {
-    localPosts = logsSource.getPages(locale);
+    localPosts = logsSource.getPages(contentLocale);
   }
 
   // no local posts

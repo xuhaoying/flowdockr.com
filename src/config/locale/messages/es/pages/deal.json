@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Deal",
+    "description": "Gestiona la presión por descuentos con respuestas de negociación estructuradas y límites de precio claros."
+  },
+  "page": {
+    "title": "FlowDockr Deal",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Responde objeciones de precio sin bajar tu valor.",
+        "description": "FlowDockr Deal ayuda a freelancers a responder solicitudes de descuento con claridad, seguridad y un siguiente paso concreto.",
+        "buttons": [
+          {
+            "title": "Ver módulo Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck",
+            "variant": "outline"
+          },
+          {
+            "title": "Ver guía de negociación",
+            "url": "/guides/client-asking-for-discount",
+            "icon": "BookOpen",
+            "variant": "default"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Qué resuelve Deal",
+        "description": "Pensado para conversaciones reales donde margen y posicionamiento están en riesgo.",
+        "items": [
+          {
+            "title": "El cliente dice que es muy caro",
+            "description": "Genera respuestas que defienden valor antes de hablar de concesiones.",
+            "icon": "MessageSquareWarning"
+          },
+          {
+            "title": "La competencia es más barata",
+            "description": "Reencuadra por resultados, reducción de riesgo y fiabilidad de entrega.",
+            "icon": "Scale"
+          },
+          {
+            "title": "Necesitas cerrar con límites",
+            "description": "Usa concesiones condicionadas al alcance o al plazo.",
+            "icon": "Shield"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Flujo",
+        "title": "Resuelve la negociación en 3 pasos",
+        "description": "Estructura simple para cerrar acuerdos más rápido y con más control.",
+        "items": [
+          {
+            "title": "Captura el contexto",
+            "description": "Registra tu precio, tu mínimo y la objeción exacta.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Genera respuesta",
+            "description": "Obtén opciones de respuesta con lógica clara de negociación.",
+            "icon": "Sparkles"
+          },
+          {
+            "title": "Cierra el siguiente paso",
+            "description": "Pide confirmación y avanza el acuerdo.",
+            "icon": "ArrowRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "La presión en negociación es normal. Responder improvisando es opcional.",
+        "description": "Usa juntos los módulos Scope y Payment para proteger entrega e ingresos.",
+        "buttons": [
+          {
+            "title": "Abrir Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Abrir Payment",
+            "url": "/payment",
+            "icon": "CreditCard",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

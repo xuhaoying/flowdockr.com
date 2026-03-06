@@ -19,6 +19,31 @@ type CoachCard = {
 
 type SupportedLocale = 'en' | 'zh' | 'es';
 
+export type DealGenerationMode = 'ai' | 'rules';
+
+export type DealRiskLevel = 'low' | 'medium' | 'high';
+
+export type DealClientAnalysis = {
+  intent: string;
+  client_type: string;
+  leverage: DealRiskLevel;
+};
+
+export type DealStrategyPanel = {
+  type: string;
+  negotiation_principle: string;
+  why_this_works: string;
+  anchor_price: number;
+  negotiable_price: number;
+  floor_price: number;
+};
+
+export type DealRiskAssessment = {
+  deal_risk: DealRiskLevel;
+  ghosting_probability: number;
+  price_collapse_probability: number;
+};
+
 export type CoachStrategyResult = {
   instant_reply: string;
   client_psychology: string;
@@ -37,6 +62,14 @@ export type CoachStrategyResult = {
   next_actions: string[];
   strategy_ids: string[];
   reasoning_summary: string[];
+  client_analysis: DealClientAnalysis;
+  strategy_panel: DealStrategyPanel;
+  risk_assessment: DealRiskAssessment;
+  next_move:
+    | 'send_reply'
+    | 'offer_conditional_concession'
+    | 'ask_clarification'
+    | 'walk_away';
 };
 
 type DealInput = {
@@ -121,6 +154,80 @@ function extractTimeline(clientNeed: string, clientObjection: string): string {
     return 'urgent timeline';
   }
   return 'agreed timeline';
+}
+
+function inferClientType(objection: string): string {
+  if (objection === 'price') return 'price_sensitive';
+  if (objection === 'timing') return 'delay_prone';
+  if (objection === 'trust') return 'risk_averse';
+  if (objection === 'decision_authority') return 'multi_stakeholder';
+  return 'unclear';
+}
+
+function inferLeverage(
+  range: ReturnType<typeof computePriceRange>,
+  yourQuote: number
+): DealRiskLevel {
+  const quote = Math.max(yourQuote, 1);
+  const discountGap = Math.max(0, quote - range.negotiable_price) / quote;
+  if (discountGap < 0.15) return 'low';
+  if (discountGap < 0.35) return 'medium';
+  return 'high';
+}
+
+function inferRiskAssessment(
+  objection: string,
+  leverage: DealRiskLevel
+): DealRiskAssessment {
+  if (objection === 'trust') {
+    return {
+      deal_risk: 'high',
+      ghosting_probability: 0.45,
+      price_collapse_probability: 0.4,
+    };
+  }
+
+  if (objection === 'timing') {
+    return {
+      deal_risk: leverage === 'low' ? 'low' : 'medium',
+      ghosting_probability: leverage === 'low' ? 0.22 : 0.35,
+      price_collapse_probability: leverage === 'high' ? 0.38 : 0.25,
+    };
+  }
+
+  if (objection === 'price') {
+    return {
+      deal_risk: leverage === 'high' ? 'high' : 'medium',
+      ghosting_probability: leverage === 'high' ? 0.4 : 0.28,
+      price_collapse_probability: leverage === 'high' ? 0.6 : 0.42,
+    };
+  }
+
+  return {
+    deal_risk: leverage,
+    ghosting_probability: leverage === 'low' ? 0.18 : leverage === 'medium' ? 0.3 : 0.42,
+    price_collapse_probability:
+      leverage === 'low' ? 0.2 : leverage === 'medium' ? 0.34 : 0.5,
+  };
+}
+
+function inferNextMove(
+  objection: string,
+  risk: DealRiskAssessment
+): CoachStrategyResult['next_move'] {
+  if (risk.deal_risk === 'high' && objection === 'price') {
+    return 'offer_conditional_concession';
+  }
+
+  if (objection === 'decision_authority' || objection === 'implicit') {
+    return 'ask_clarification';
+  }
+
+  if (objection === 'trust') {
+    return 'ask_clarification';
+  }
+
+  return 'send_reply';
 }
 
 function objectionLabel(objection: string, locale: SupportedLocale): string {
@@ -277,6 +384,10 @@ export function generateDealStrategy(input: DealInput): CoachStrategyResult {
   const objection = inferObjection(input.client_objection);
   const cards = pickCards(stage, objection);
   const range = computePriceRange(input.your_quote, input.your_floor_price);
+  const leverage = inferLeverage(range, input.your_quote);
+  const riskAssessment = inferRiskAssessment(objection, leverage);
+  const clientType = inferClientType(objection);
+  const topCard = cards[0];
   const messages = buildMessages(locale, cards, range, {
     needSummary: summarizeNeed(input.client_need),
     timeline: extractTimeline(input.client_need, input.client_objection),
@@ -296,6 +407,23 @@ export function generateDealStrategy(input: DealInput): CoachStrategyResult {
       (card) =>
         `${card.stage}|${card.objection_type}|${card.tactic}|${card.tier_live || card.tier || 'experimental'}`
     ),
+    client_analysis: {
+      intent: objectionLabel(objection, locale),
+      client_type: clientType,
+      leverage,
+    },
+    strategy_panel: {
+      type: topCard?.tactic || 'value_anchoring',
+      negotiation_principle:
+        topCard?.principle_en ||
+        'Anchor value before discussing concessions or timeline changes.',
+      why_this_works: messages.client_psychology,
+      anchor_price: range.ideal_price,
+      negotiable_price: range.negotiable_price,
+      floor_price: range.bottom_price,
+    },
+    risk_assessment: riskAssessment,
+    next_move: inferNextMove(objection, riskAssessment),
   };
 }
 

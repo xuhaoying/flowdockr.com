@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "FlowDockr Payment",
+    "description": "Envía recordatorios de pago más sólidos y reduce facturas pendientes."
+  },
+  "page": {
+    "title": "FlowDockr Payment",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Cobra sin seguimientos incómodos.",
+        "description": "FlowDockr Payment te da mensajes de recordatorio estructurados y lenguaje de términos de pago para facturas vencidas.",
+        "buttons": [
+          {
+            "title": "Usar plantilla de recordatorio de pago",
+            "url": "/templates/payment-reminder",
+            "icon": "FileText",
+            "variant": "default"
+          },
+          {
+            "title": "Leer guía de cliente que no paga",
+            "url": "/guides/client-not-paying",
+            "icon": "BookOpen",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "features": {
+        "id": "features",
+        "title": "Qué resuelve Payment",
+        "description": "Estandariza seguimiento y protege términos de pago desde el día uno.",
+        "items": [
+          {
+            "title": "Pago final atrasado",
+            "description": "Usa recordatorios firmes y profesionales vinculados a los términos acordados.",
+            "icon": "AlarmClock"
+          },
+          {
+            "title": "Fechas de pago poco claras",
+            "description": "Aclara fechas límite y siguientes acciones en un solo mensaje.",
+            "icon": "CalendarClock"
+          },
+          {
+            "title": "Necesitas ruta de escalado",
+            "description": "Pasa de recordatorio amistoso a seguimiento formal con consistencia.",
+            "icon": "ShieldAlert"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "Flujo",
+        "title": "Recupera pagos en 3 pasos",
+        "description": "Mantén tono profesional mientras aumentas la tasa de respuesta.",
+        "items": [
+          {
+            "title": "Captura el contexto de la factura",
+            "description": "Importe, fecha de vencimiento y estado de entrega.",
+            "icon": "ClipboardList"
+          },
+          {
+            "title": "Genera recordatorio",
+            "description": "Crea un seguimiento listo para email con solicitud y fecha límite claras.",
+            "icon": "Mail"
+          },
+          {
+            "title": "Escala con estructura",
+            "description": "Usa seguimientos escalonados si el pago sigue vencido.",
+            "icon": "ArrowUpRight"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Combina Payment con Scope para términos más sólidos.",
+        "description": "Alcance claro + términos de pago claros = menos disputas y cobros más rápidos.",
+        "buttons": [
+          {
+            "title": "Abrir módulo Scope",
+            "url": "/scope",
+            "icon": "ShieldCheck"
+          },
+          {
+            "title": "Abrir módulo Deal",
+            "url": "/deal",
+            "icon": "Handshake",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

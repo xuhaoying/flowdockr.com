@@ -1,24 +1,24 @@
 {
   "metadata": {
-    "title": "FlowDockr Pricing",
-    "description": "Simple pricing for freelancers: start free, upgrade when client complexity grows."
+    "title": "Precios de FlowDockr",
+    "description": "Precios simples para freelancers: empieza gratis y actualiza cuando aumente la complejidad de tus clientes."
   },
   "page": {
-    "title": "FlowDockr Pricing",
+    "title": "Precios de FlowDockr",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Simple pricing for freelancer workflows.",
-        "description": "Start with Scope Guard for free, then upgrade when your client volume and complexity increase.",
+        "title": "Precios simples para workflows freelance.",
+        "description": "Empieza gratis con Scope Guard y mejora cuando aumenten el volumen y la complejidad de tus clientes.",
         "buttons": [
           {
-            "title": "Start with Scope",
+            "title": "Empezar con Scope",
             "url": "/scope",
             "icon": "ShieldCheck",
             "variant": "default"
           },
           {
-            "title": "Browse Templates",
+            "title": "Ver plantillas",
             "url": "/templates",
             "icon": "FileText",
             "variant": "outline"
@@ -29,22 +29,22 @@
       },
       "features": {
         "id": "features",
-        "title": "Pricing tiers",
-        "description": "Designed for solo freelancers first.",
+        "title": "Planes",
+        "description": "Diseñado primero para freelancers independientes.",
         "items": [
           {
-            "title": "Free",
-            "description": "2 Scope Policy generations. Basic templates and guides.",
+            "title": "Gratis",
+            "description": "2 generaciones de política de alcance. Plantillas y guías básicas.",
             "icon": "Leaf"
           },
           {
-            "title": "Pro - $9/month",
-            "description": "Unlimited Scope Policy generations.",
+            "title": "Pro - $9/mes",
+            "description": "Generaciones ilimitadas de política de alcance.",
             "icon": "Sparkles"
           },
           {
             "title": "Lifetime - $19",
-            "description": "One-time payment. Unlimited Scope Policy generations.",
+            "description": "Pago único. Generaciones ilimitadas de política de alcance.",
             "icon": "Rocket"
           }
         ],
@@ -53,39 +53,39 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "label": "Upgrade Logic",
-        "title": "When to upgrade",
-        "description": "Upgrade based on workflow volume, not vanity features.",
+        "label": "Lógica de upgrade",
+        "title": "Cuándo subir de plan",
+        "description": "Sube de plan según volumen de trabajo, no por funciones de vanidad.",
         "items": [
           {
-            "title": "Start free",
-            "description": "Validate output quality in real client scenarios.",
+            "title": "Empieza gratis",
+            "description": "Valida la calidad en escenarios reales con clientes.",
             "icon": "CirclePlay"
           },
           {
-            "title": "Upgrade to Pro",
-            "description": "When monthly generation needs exceed free limits.",
+            "title": "Sube a Pro",
+            "description": "Cuando tus necesidades mensuales superen el límite gratuito.",
             "icon": "ArrowUpCircle"
           },
           {
-            "title": "Choose Lifetime",
-            "description": "If you want one-time payment instead of monthly subscription.",
+            "title": "Elige Lifetime",
+            "description": "Si prefieres pago único en lugar de suscripción mensual.",
             "icon": "Layers"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Start with Scope Guard.",
-        "description": "Validate value first, then expand to more modules.",
+        "title": "Empieza con Scope Guard.",
+        "description": "Primero valida el valor y luego amplía a más módulos.",
         "buttons": [
           {
-            "title": "Open Scope Guard",
+            "title": "Abrir Scope Guard",
             "url": "/scope",
             "icon": "ShieldCheck"
           },
           {
-            "title": "Read Guides",
+            "title": "Leer guías",
             "url": "/guides",
             "icon": "BookOpen",
             "variant": "outline"

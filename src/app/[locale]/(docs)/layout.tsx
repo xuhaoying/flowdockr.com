@@ -33,7 +33,8 @@ export default async function DocsRootLayout({
   params: Promise<{ locale?: string }>;
 }) {
   const { locale } = await params;
-  const lang = locale || 'en';
+  const supportedLocales = new Set(['en', 'zh']);
+  const lang = locale && supportedLocales.has(locale) ? locale : 'en';
 
   return (
     <RootProvider

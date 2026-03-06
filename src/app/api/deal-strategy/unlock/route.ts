@@ -31,6 +31,8 @@ export async function POST(request: Request) {
 
     const taskInfo = task.taskInfo ? JSON.parse(task.taskInfo) : {};
     const taskResult = task.taskResult ? JSON.parse(task.taskResult) : {};
+    const generationMode =
+      taskInfo?.generation_mode === 'ai' ? 'ai' : 'rules';
 
     if (!taskResult?.strategy) {
       throw new Error('strategy content missing');
@@ -41,6 +43,7 @@ export async function POST(request: Request) {
       return respData({
         strategy_id: strategyId,
         unlocked: true,
+        generation_mode: generationMode,
         remaining_credits: remainingCredits,
         strategy: taskResult.strategy,
       });
@@ -72,6 +75,7 @@ export async function POST(request: Request) {
     return respData({
       strategy_id: strategyId,
       unlocked: true,
+      generation_mode: generationMode,
       remaining_credits: remainingCredits,
       strategy: taskResult.strategy,
     });

@@ -4,10 +4,10 @@ import { getUuid } from '@/shared/lib/hash';
 import { createAITask, NewAITask } from '@/shared/models/ai_task';
 import { getUserInfo } from '@/shared/models/user';
 import {
-  generateDealStrategy,
-  makePreview,
-  pickLocale,
-} from '@/shared/services/sales-coach';
+  generateDealStrategyWithMode,
+  makeDealPreview,
+} from '@/shared/services/deal-ai';
+import { pickLocale } from '@/shared/services/sales-coach';
 
 type DealInput = {
   client_need: string;
@@ -42,22 +42,23 @@ export async function POST(request: Request) {
     }
 
     const locale = pickLocale(body.locale);
-    const strategy = generateDealStrategy({
+    const generated = await generateDealStrategyWithMode({
       client_need: clientNeed,
       client_objection: objection,
       your_quote: yourQuote,
       your_floor_price: floorPrice,
       locale,
     });
-    const preview = makePreview(strategy, locale);
+    const strategy = generated.strategy;
+    const preview = makeDealPreview(strategy, locale);
 
     const strategyId = getUuid();
     const newTask: NewAITask = {
       id: strategyId,
       userId: user.id,
       mediaType: 'deal_strategy',
-      provider: 'sales-coach',
-      model: 'kb-rerank-v1',
+      provider: generated.provider,
+      model: generated.model,
       prompt: JSON.stringify({
         client_need: clientNeed,
         client_objection: objection,
@@ -68,10 +69,12 @@ export async function POST(request: Request) {
       status: AITaskStatus.SUCCESS,
       scene: 'deal-strategy-generate',
       taskInfo: JSON.stringify({
+        generation_mode: generated.mode,
         unlocked: false,
         feedbacks: [],
-        selected_strategy_ids: strategy.strategy_ids,
-        reasoning_summary: strategy.reasoning_summary,
+        selected_strategy_ids: generated.selected_strategy_ids,
+        reasoning_summary: generated.reasoning_summary,
+        fallback_reason: generated.fallback_reason,
       }),
       taskResult: JSON.stringify({
         locale,
@@ -91,6 +94,8 @@ export async function POST(request: Request) {
     return respData({
       strategy_id: strategyId,
       locked: true,
+      generation_mode: generated.mode,
+      fallback_reason: generated.fallback_reason,
       locale,
       input: {
         client_need: clientNeed,

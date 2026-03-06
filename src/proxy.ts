@@ -3,6 +3,7 @@ import { getSessionCookie } from 'better-auth/cookies';
 import createIntlMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/core/i18n/config';
+import { shouldBlockSearchIndexingForHost } from '@/shared/lib/search-indexing';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -18,6 +19,9 @@ export async function proxy(request: NextRequest) {
   const pathWithoutLocale = isValidLocale
     ? pathname.slice(locale.length + 1)
     : pathname;
+  const requestHost =
+    request.headers.get('x-forwarded-host') || request.nextUrl.host || '';
+  const blockSearchIndexing = shouldBlockSearchIndexingForHost(requestHost);
 
   // Only check authentication for admin routes
   if (
@@ -45,6 +49,13 @@ export async function proxy(request: NextRequest) {
     // This is a lightweight session check to prevent unauthorized access
     // The detailed permission check (admin.access and specific permissions)
     // will be done in the layout or individual pages using requirePermission()
+  }
+
+  if (blockSearchIndexing) {
+    intlResponse.headers.set(
+      'X-Robots-Tag',
+      'noindex, nofollow, noarchive, nosnippet'
+    );
   }
 
   intlResponse.headers.set('x-pathname', request.nextUrl.pathname);

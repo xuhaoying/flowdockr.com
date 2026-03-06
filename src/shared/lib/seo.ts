@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
 import { defaultLocale } from '@/config/locale';
+import { shouldBlockSearchIndexing } from '@/shared/lib/search-indexing';
 
 // get metadata for page component
 export function getMetadata(
@@ -73,6 +74,8 @@ export function getMetadata(
       appName = envConfigs.app_name || '';
     }
 
+    const noIndex = options.noIndex || shouldBlockSearchIndexing(envConfigs.app_url);
+
     return {
       title:
         passedMetadata.title ||
@@ -109,8 +112,8 @@ export function getMetadata(
       },
 
       robots: {
-        index: options.noIndex ? false : true,
-        follow: options.noIndex ? false : true,
+        index: !noIndex,
+        follow: !noIndex,
       },
     };
   };

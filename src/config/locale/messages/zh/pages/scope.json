@@ -1,18 +1,18 @@
 {
   "metadata": {
     "title": "FlowDockr Scope",
-    "description": "Stop scope creep with clear revision policies and client-ready replies."
+    "description": "通过清晰修订政策与可直接发送的话术，停止范围蔓延。"
   },
   "page": {
     "title": "FlowDockr Scope",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Stop unlimited revisions.",
-        "description": "Create a clear revision policy for your client project.",
+        "title": "停止无限次修改。",
+        "description": "为你的客户项目生成清晰的修订政策。",
         "buttons": [
           {
-            "title": "Generate your revision policy",
+            "title": "生成你的修订政策",
             "url": "/scope#scope-generator",
             "icon": "Zap",
             "variant": "default"
@@ -23,22 +23,22 @@
       },
       "features": {
         "id": "features",
-        "title": "What Scope solves",
-        "description": "Protect deliverables, timeline, and pricing in client communication.",
+        "title": "Scope 解决什么",
+        "description": "在客户沟通中保护交付范围、时间线与报价。",
         "items": [
           {
-            "title": "Unlimited revisions",
-            "description": "Define included rounds and extra-round pricing in plain language.",
+            "title": "无限次修改",
+            "description": "明确包含的修改轮次和超额修改费用。",
             "icon": "RotateCcw"
           },
           {
-            "title": "New requests mid-project",
-            "description": "Separate in-scope and out-of-scope work with explicit approval steps.",
+            "title": "项目中途新增需求",
+            "description": "把范围内与范围外工作拆开，并设置清晰审批步骤。",
             "icon": "ListChecks"
           },
           {
-            "title": "Last-minute scope changes",
-            "description": "Anchor timeline impact and change-fee logic before rework starts.",
+            "title": "临时范围变更",
+            "description": "在返工前明确时间影响与变更费用逻辑。",
             "icon": "Clock3"
           }
         ],
@@ -47,39 +47,39 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "label": "Workflow",
-        "title": "Control scope in 3 steps",
-        "description": "A repeatable system you can apply to every project.",
+        "label": "工作流",
+        "title": "3 步控制范围",
+        "description": "可复制到每个项目的标准流程。",
         "items": [
           {
-            "title": "Define baseline",
-            "description": "List deliverables, included revision rounds, and timeline.",
+            "title": "定义基线",
+            "description": "列出交付项、包含的修改轮次和时间线。",
             "icon": "ClipboardList"
           },
           {
-            "title": "Issue policy",
-            "description": "Generate a client-facing revision policy and reply message.",
+            "title": "生成政策",
+            "description": "生成面向客户的修订政策与回复文案。",
             "icon": "FileCheck2"
           },
           {
-            "title": "Request confirmation",
-            "description": "Get written sign-off before applying any extra work.",
+            "title": "确认生效",
+            "description": "在执行额外工作前获取书面确认。",
             "icon": "MessageSquareReply"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Start with Scope Guard.",
-        "description": "Then connect Payment Protection to reduce late-payment risk.",
+        "title": "先从 Scope Guard 开始。",
+        "description": "再连接 Payment Protection，降低延迟回款风险。",
         "buttons": [
           {
-            "title": "Open Payment Module",
+            "title": "打开 Payment 模块",
             "url": "/payment",
             "icon": "CreditCard"
           },
           {
-            "title": "View Pricing Module",
+            "title": "查看 Pricing 模块",
             "url": "/pricing",
             "icon": "BadgeDollarSign",
             "variant": "outline"
@@ -90,70 +90,70 @@
     }
   },
   "scope_guard": {
-    "title": "Scope Policy Generator",
-    "description": "Describe your project, generate policy, then copy and send it to your client.",
+    "title": "范围政策生成器",
+    "description": "描述你的项目，生成政策后直接复制并发送给客户。",
     "steps": {
-      "describe": "Step 1: Describe your project",
-      "generate": "Step 2: Generate policy",
-      "copy": "Step 3: Copy and send to client"
+      "describe": "第 1 步：描述你的项目",
+      "generate": "第 2 步：生成政策",
+      "copy": "第 3 步：复制并发送给客户"
     },
     "fields": {
-      "project_type": "Project type",
-      "project_type_placeholder": "Select project type",
-      "project_price": "Project price (USD)",
-      "project_price_placeholder": "e.g. 1200",
-      "revision_count": "How many revisions included",
-      "revision_count_placeholder": "Select revisions",
-      "extra_revision_price": "Extra revision price (optional)",
-      "extra_revision_price_placeholder": "e.g. 80",
-      "client_type": "Client type",
-      "client_type_placeholder": "Select client type"
+      "project_type": "项目类型",
+      "project_type_placeholder": "选择项目类型",
+      "project_price": "项目价格（USD）",
+      "project_price_placeholder": "例如 1200",
+      "revision_count": "包含的修改轮次",
+      "revision_count_placeholder": "选择修改轮次",
+      "extra_revision_price": "额外修改价格（可选）",
+      "extra_revision_price_placeholder": "例如 80",
+      "client_type": "客户类型",
+      "client_type_placeholder": "选择客户类型"
     },
     "options": {
       "project_type": {
-        "logo": "Logo design",
-        "website": "Website design",
-        "video": "Video editing",
-        "writing": "Copywriting",
-        "marketing": "Marketing",
-        "other": "Other"
+        "logo": "Logo 设计",
+        "website": "网站设计",
+        "video": "视频剪辑",
+        "writing": "文案写作",
+        "marketing": "营销",
+        "other": "其他"
       },
       "client_type": {
-        "startup": "Startup",
-        "small_business": "Small business",
-        "agency": "Agency",
-        "enterprise": "Enterprise"
+        "startup": "初创公司",
+        "small_business": "中小企业",
+        "agency": "代理机构",
+        "enterprise": "大型企业"
       }
     },
     "actions": {
-      "generate": "Generate your revision policy",
-      "generating": "Generating policy...",
-      "copy": "Copy",
-      "copied": "Copied",
-      "copy_all": "Copy all",
-      "upgrade": "Upgrade to Pro"
+      "generate": "生成你的修订政策",
+      "generating": "正在生成政策...",
+      "copy": "复制",
+      "copied": "已复制",
+      "copy_all": "全部复制",
+      "upgrade": "升级到 Pro"
     },
     "errors": {
-      "invalid_input": "Please complete all required fields with valid values.",
-      "request_failed": "Generation failed. Please try again.",
-      "copy_failed": "Copy failed. Please copy manually."
+      "invalid_input": "请填写所有必填项并确保数值有效。",
+      "request_failed": "生成失败，请重试。",
+      "copy_failed": "复制失败，请手动复制。"
     },
     "messages": {
-      "generated": "Revision policy generated.",
-      "copied": "Copied to clipboard."
+      "generated": "修订政策已生成。",
+      "copied": "已复制到剪贴板。"
     },
     "usage": {
-      "free_left": "Free generations left: {remaining} / {limit}",
-      "paid": "Pro access: unlimited generations",
-      "limit_reached": "Free plan limit reached. Upgrade to continue generating."
+      "free_left": "剩余免费生成次数：{remaining} / {limit}",
+      "paid": "Pro 权限：不限生成次数",
+      "limit_reached": "已达到免费版上限，请升级后继续生成。"
     },
     "result": {
-      "title": "Your revision policy",
-      "subtitle": "Copy each block directly into chat, email, or contract.",
-      "revision_policy": "Revision Policy",
-      "scope_rule": "Scope Rule",
-      "client_message": "Client Explanation Message",
-      "contract_clause": "Contract Clause"
+      "title": "你的修订政策",
+      "subtitle": "可直接复制每个区块到聊天、邮件或合同中。",
+      "revision_policy": "修订政策",
+      "scope_rule": "范围规则",
+      "client_message": "给客户的说明消息",
+      "contract_clause": "合同条款"
     }
   }
 }

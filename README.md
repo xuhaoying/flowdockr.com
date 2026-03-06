@@ -42,3 +42,14 @@ Cloudfare: [https://nanobanana2.16781678.xyz/](https://nanobanana2.16781678.xyz/
 
 - `main`: main branch (for vercel)
 - `cloudfare`: cloudfare branch (for cloudfare)
+
+## 发布与开发流程（最小规范）
+
+- 所有改动从 `feature/*` / `fix/*` / `chore/*` 分支发起，禁止直接 push `main`
+- 通过 Pull Request 合并到 `main`
+- PR 合并前必须通过 CI（`lint` / `type-check` / `build`）并在 Vercel Preview 完成人工验收
+
+参考文档：
+
+- [Development Workflow](docs/development-workflow.md)
+- [Release Checklist](docs/release-checklist.md)

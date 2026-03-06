@@ -1,18 +1,18 @@
 {
   "metadata": {
     "title": "FlowDockr Scope",
-    "description": "Stop scope creep with clear revision policies and client-ready replies."
+    "description": "Detén el scope creep con políticas de revisión claras y respuestas listas para clientes."
   },
   "page": {
     "title": "FlowDockr Scope",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Stop unlimited revisions.",
-        "description": "Create a clear revision policy for your client project.",
+        "title": "Detén las revisiones ilimitadas.",
+        "description": "Crea una política de revisiones clara para tus proyectos con clientes.",
         "buttons": [
           {
-            "title": "Generate your revision policy",
+            "title": "Generar tu política de revisiones",
             "url": "/scope#scope-generator",
             "icon": "Zap",
             "variant": "default"
@@ -23,22 +23,22 @@
       },
       "features": {
         "id": "features",
-        "title": "What Scope solves",
-        "description": "Protect deliverables, timeline, and pricing in client communication.",
+        "title": "Qué resuelve Scope",
+        "description": "Protege entregables, cronograma y precios en la comunicación con clientes.",
         "items": [
           {
-            "title": "Unlimited revisions",
-            "description": "Define included rounds and extra-round pricing in plain language.",
+            "title": "Revisiones ilimitadas",
+            "description": "Define rondas incluidas y precio por rondas extra con lenguaje claro.",
             "icon": "RotateCcw"
           },
           {
-            "title": "New requests mid-project",
-            "description": "Separate in-scope and out-of-scope work with explicit approval steps.",
+            "title": "Nuevas solicitudes durante el proyecto",
+            "description": "Separa trabajo dentro y fuera de alcance con pasos de aprobación explícitos.",
             "icon": "ListChecks"
           },
           {
-            "title": "Last-minute scope changes",
-            "description": "Anchor timeline impact and change-fee logic before rework starts.",
+            "title": "Cambios de alcance de última hora",
+            "description": "Ancla impacto en tiempos y lógica de costo por cambio antes de rehacer.",
             "icon": "Clock3"
           }
         ],
@@ -47,39 +47,39 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "label": "Workflow",
-        "title": "Control scope in 3 steps",
-        "description": "A repeatable system you can apply to every project.",
+        "label": "Flujo",
+        "title": "Controla el alcance en 3 pasos",
+        "description": "Un sistema repetible que puedes aplicar a cada proyecto.",
         "items": [
           {
-            "title": "Define baseline",
-            "description": "List deliverables, included revision rounds, and timeline.",
+            "title": "Define la base",
+            "description": "Lista entregables, rondas de revisión incluidas y cronograma.",
             "icon": "ClipboardList"
           },
           {
-            "title": "Issue policy",
-            "description": "Generate a client-facing revision policy and reply message.",
+            "title": "Emite la política",
+            "description": "Genera una política de revisiones orientada al cliente y un mensaje de respuesta.",
             "icon": "FileCheck2"
           },
           {
-            "title": "Request confirmation",
-            "description": "Get written sign-off before applying any extra work.",
+            "title": "Pide confirmación",
+            "description": "Consigue aprobación por escrito antes de aplicar trabajo extra.",
             "icon": "MessageSquareReply"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Start with Scope Guard.",
-        "description": "Then connect Payment Protection to reduce late-payment risk.",
+        "title": "Empieza con Scope Guard.",
+        "description": "Luego conecta Payment Protection para reducir el riesgo de pagos tardíos.",
         "buttons": [
           {
-            "title": "Open Payment Module",
+            "title": "Abrir módulo de pagos",
             "url": "/payment",
             "icon": "CreditCard"
           },
           {
-            "title": "View Pricing Module",
+            "title": "Ver módulo de precios",
             "url": "/pricing",
             "icon": "BadgeDollarSign",
             "variant": "outline"
@@ -90,70 +90,70 @@
     }
   },
   "scope_guard": {
-    "title": "Scope Policy Generator",
-    "description": "Describe your project, generate policy, then copy and send it to your client.",
+    "title": "Generador de política de alcance",
+    "description": "Describe tu proyecto, genera la política y luego cópiala para enviarla al cliente.",
     "steps": {
-      "describe": "Step 1: Describe your project",
-      "generate": "Step 2: Generate policy",
-      "copy": "Step 3: Copy and send to client"
+      "describe": "Paso 1: Describe tu proyecto",
+      "generate": "Paso 2: Genera la política",
+      "copy": "Paso 3: Copia y envía al cliente"
     },
     "fields": {
-      "project_type": "Project type",
-      "project_type_placeholder": "Select project type",
-      "project_price": "Project price (USD)",
-      "project_price_placeholder": "e.g. 1200",
-      "revision_count": "How many revisions included",
-      "revision_count_placeholder": "Select revisions",
-      "extra_revision_price": "Extra revision price (optional)",
-      "extra_revision_price_placeholder": "e.g. 80",
-      "client_type": "Client type",
-      "client_type_placeholder": "Select client type"
+      "project_type": "Tipo de proyecto",
+      "project_type_placeholder": "Selecciona tipo de proyecto",
+      "project_price": "Precio del proyecto (USD)",
+      "project_price_placeholder": "ej. 1200",
+      "revision_count": "Cuántas revisiones incluidas",
+      "revision_count_placeholder": "Selecciona revisiones",
+      "extra_revision_price": "Precio por revisión extra (opcional)",
+      "extra_revision_price_placeholder": "ej. 80",
+      "client_type": "Tipo de cliente",
+      "client_type_placeholder": "Selecciona tipo de cliente"
     },
     "options": {
       "project_type": {
-        "logo": "Logo design",
-        "website": "Website design",
-        "video": "Video editing",
+        "logo": "Diseño de logo",
+        "website": "Diseño web",
+        "video": "Edición de video",
         "writing": "Copywriting",
         "marketing": "Marketing",
-        "other": "Other"
+        "other": "Otro"
       },
       "client_type": {
         "startup": "Startup",
-        "small_business": "Small business",
-        "agency": "Agency",
-        "enterprise": "Enterprise"
+        "small_business": "PyME",
+        "agency": "Agencia",
+        "enterprise": "Empresa"
       }
     },
     "actions": {
-      "generate": "Generate your revision policy",
-      "generating": "Generating policy...",
-      "copy": "Copy",
-      "copied": "Copied",
-      "copy_all": "Copy all",
-      "upgrade": "Upgrade to Pro"
+      "generate": "Generar tu política de revisiones",
+      "generating": "Generando política...",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "copy_all": "Copiar todo",
+      "upgrade": "Mejorar a Pro"
     },
     "errors": {
-      "invalid_input": "Please complete all required fields with valid values.",
-      "request_failed": "Generation failed. Please try again.",
-      "copy_failed": "Copy failed. Please copy manually."
+      "invalid_input": "Completa todos los campos obligatorios con valores válidos.",
+      "request_failed": "Falló la generación. Inténtalo de nuevo.",
+      "copy_failed": "Falló la copia. Copia manualmente."
     },
     "messages": {
-      "generated": "Revision policy generated.",
-      "copied": "Copied to clipboard."
+      "generated": "Política de revisiones generada.",
+      "copied": "Copiado al portapapeles."
     },
     "usage": {
-      "free_left": "Free generations left: {remaining} / {limit}",
-      "paid": "Pro access: unlimited generations",
-      "limit_reached": "Free plan limit reached. Upgrade to continue generating."
+      "free_left": "Generaciones gratis restantes: {remaining} / {limit}",
+      "paid": "Acceso Pro: generaciones ilimitadas",
+      "limit_reached": "Se alcanzó el límite del plan gratis. Mejora para seguir generando."
     },
     "result": {
-      "title": "Your revision policy",
-      "subtitle": "Copy each block directly into chat, email, or contract.",
-      "revision_policy": "Revision Policy",
-      "scope_rule": "Scope Rule",
-      "client_message": "Client Explanation Message",
-      "contract_clause": "Contract Clause"
+      "title": "Tu política de revisiones",
+      "subtitle": "Copia cada bloque directamente en chat, email o contrato.",
+      "revision_policy": "Política de revisiones",
+      "scope_rule": "Regla de alcance",
+      "client_message": "Mensaje de explicación para cliente",
+      "contract_clause": "Cláusula contractual"
     }
   }
 }
