@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
-  attachBrowserIdCookie,
-  getBrowserIdFromRequest,
-  getPaidRemaining,
+  getScenarioPackById,
   isPackSessionRedeemed,
   markPackSessionRedeemed,
-  SCENARIO_PACK_SIZE,
-  setPaidRemaining,
 } from '@/shared/lib/scenario-quota';
 import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
+import { grantCreditsForUser } from '@/shared/models/credit';
+import { findUserById, getUserInfo } from '@/shared/models/user';
 
 export async function GET(request: NextRequest) {
   const rawReturnTo = request.nextUrl.searchParams.get('return_to') || '';
@@ -23,6 +21,11 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const user = await getUserInfo();
+    if (!user) {
+      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=no_auth');
+    }
+
     const stripe = await getScenarioPackStripeClient();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
@@ -32,34 +35,47 @@ export async function GET(request: NextRequest) {
     if (session.metadata?.flowdockr_pack !== 'scenario_reply') {
       return redirectWithStatus(request, fallbackReturnTo, 'pack_error=invalid_pack');
     }
+    if (String(session.metadata?.user_id || '').trim() !== user.id) {
+      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=account_mismatch');
+    }
 
     const metadataReturnTo = sanitizeReturnPath(
       String(session.metadata?.return_to || ''),
       request
     );
     const returnTo = metadataReturnTo || fallbackReturnTo;
+    const pack = getScenarioPackById(String(session.metadata?.pack_id || '').trim());
+    if (!pack) {
+      return redirectWithStatus(request, returnTo, 'pack_error=invalid_pack');
+    }
 
-    const metadataBrowserId = normalizeBrowserId(session.metadata?.browser_id);
-    const browserId = metadataBrowserId || getBrowserIdFromRequest(request);
-    const response = NextResponse.redirect(
-      new URL(addQuery(returnTo, 'pack_paid=1'), request.nextUrl.origin),
+    const paidRedirect = NextResponse.redirect(
+      new URL(
+        addQuery(returnTo, `pack_paid=1&pack_replies=${encodeURIComponent(String(pack.replies))}`),
+        request.nextUrl.origin
+      ),
       {
         status: 303,
       }
     );
 
-    attachBrowserIdCookie(response, browserId);
-
     if (isPackSessionRedeemed(sessionId)) {
-      return response;
+      return paidRedirect;
     }
 
-    const currentRemaining = getPaidRemaining(request, browserId);
-    const nextRemaining = Math.max(0, currentRemaining) + SCENARIO_PACK_SIZE;
-    setPaidRemaining(response, browserId, nextRemaining);
+    const dbUser = await findUserById(user.id);
+    if (!dbUser) {
+      return redirectWithStatus(request, returnTo, 'pack_error=user_not_found');
+    }
+
+    await grantCreditsForUser({
+      user: dbUser,
+      credits: pack.replies,
+      description: `scenario reply credits pack: ${pack.id}`,
+    });
     markPackSessionRedeemed(sessionId);
 
-    return response;
+    return paidRedirect;
   } catch (error) {
     const code =
       error instanceof Error && error.message
@@ -106,17 +122,4 @@ function addQuery(path: string, query: string): string {
   }
 
   return path.includes('?') ? `${path}&${query}` : `${path}?${query}`;
-}
-
-function normalizeBrowserId(value: unknown): string {
-  if (typeof value !== 'string') {
-    return '';
-  }
-
-  const trimmed = value.trim();
-  if (trimmed.length < 12 || trimmed.length > 80) {
-    return '';
-  }
-
-  return trimmed;
 }

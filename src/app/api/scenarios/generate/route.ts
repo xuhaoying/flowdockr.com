@@ -11,13 +11,11 @@ import {
   getBrowserIdFromRequest,
   getClientIp,
   getFreeUsage,
-  getPaidRemaining,
   SCENARIO_FREE_LIMIT,
-  SCENARIO_PACK_PRICE_CENTS,
-  SCENARIO_PACK_SIZE,
   setFreeUsage,
-  setPaidRemaining,
 } from '@/shared/lib/scenario-quota';
+import { consumeCredits, getRemainingCredits } from '@/shared/models/credit';
+import { getUserInfo } from '@/shared/models/user';
 
 type GenerateScenarioInput = {
   scenario: string;
@@ -30,16 +28,14 @@ type Framework = {
 };
 
 type PlanQuota = {
-  active_plan: 'free' | 'paid_pack';
+  active_plan: 'free' | 'credits';
   free: {
     used: number;
     limit: number;
     remaining: number;
   };
-  paid_pack: {
+  credits: {
     remaining: number;
-    pack_size: number;
-    price_usd: number;
   };
 };
 
@@ -156,11 +152,17 @@ export async function POST(request: NextRequest) {
   try {
     enforceRateLimit(request);
     const browserId = getBrowserIdFromRequest(request);
-    const paidRemaining = getPaidRemaining(request, browserId);
     const freeUsed = getFreeUsage(request, browserId);
-    if (paidRemaining <= 0 && freeUsed >= SCENARIO_FREE_LIMIT) {
+    const user = await getUserInfo();
+    const userCredits = user ? await getRemainingCredits(user.id) : 0;
+    const canUseFree = freeUsed < SCENARIO_FREE_LIMIT;
+    const canUseCredits = !!user && userCredits > 0;
+
+    if (!canUseFree && !canUseCredits) {
       throw new FreeQuotaError(
-        'Free quota reached. Buy reply pack: $5 for 20 replies (no subscription).'
+        user
+          ? 'You have 0 replies left. Buy a credits pack to continue.'
+          : "You've used your 2 free replies. Sign in and choose a credits pack to continue."
       );
     }
 
@@ -188,13 +190,35 @@ export async function POST(request: NextRequest) {
       deadline,
     });
 
-    const usingPaidPack = paidRemaining > 0;
-    const nextPaidRemaining = usingPaidPack
-      ? Math.max(0, paidRemaining - 1)
-      : paidRemaining;
-    const nextFreeUsed = usingPaidPack
-      ? freeUsed
-      : Math.min(SCENARIO_FREE_LIMIT, freeUsed + 1);
+    const usingFree = canUseFree;
+    const usingCredits = !usingFree && !!user;
+    const nextFreeUsed = usingFree
+      ? Math.min(SCENARIO_FREE_LIMIT, freeUsed + 1)
+      : freeUsed;
+    let nextCreditsRemaining = userCredits;
+
+    if (usingCredits && user) {
+      try {
+        await consumeCredits({
+          userId: user.id,
+          credits: 1,
+          scene: 'scenario-reply-generate',
+          description: 'consume 1 credit for scenario negotiation reply',
+          metadata: JSON.stringify({
+            type: 'scenario-reply-generate',
+            scenario: input.scenario,
+          }),
+        });
+        nextCreditsRemaining = Math.max(0, userCredits - 1);
+      } catch (consumeError) {
+        const message =
+          consumeError instanceof Error ? consumeError.message : 'insufficient credits';
+        if (String(message).toLowerCase().includes('insufficient credits')) {
+          throw new FreeQuotaError('You have 0 replies left. Buy a credits pack to continue.');
+        }
+        throw consumeError;
+      }
+    }
 
     const output = finalizeOutput(
       draft,
@@ -202,8 +226,8 @@ export async function POST(request: NextRequest) {
       scenario.h1,
       nextFreeUsed,
       SCENARIO_FREE_LIMIT,
-      nextPaidRemaining,
-      usingPaidPack
+      nextCreditsRemaining,
+      usingCredits
     );
 
     const response = NextResponse.json(output, {
@@ -214,9 +238,7 @@ export async function POST(request: NextRequest) {
     });
 
     attachBrowserIdCookie(response, browserId);
-    if (usingPaidPack) {
-      setPaidRemaining(response, browserId, nextPaidRemaining);
-    } else {
+    if (usingFree) {
       setFreeUsage(request, response, browserId, nextFreeUsed);
     }
 
@@ -450,8 +472,8 @@ function finalizeOutput(
   scenarioTitle: string,
   freeUsed: number,
   freeLimit: number,
-  paidRemaining: number,
-  usingPaidPack: boolean
+  creditsRemaining: number,
+  usingCredits: boolean
 ): GenerateScenarioOutput {
   const framework: Framework = {
     label: clampText(String(draft.framework?.label || FALLBACK_FRAMEWORK.label), 2, 80),
@@ -482,16 +504,14 @@ function finalizeOutput(
       title: scenarioTitle,
     },
     quota: {
-      active_plan: usingPaidPack ? 'paid_pack' : 'free',
+      active_plan: usingCredits ? 'credits' : 'free',
       free: {
         used: freeUsed,
         limit: freeLimit,
         remaining: Math.max(0, freeLimit - freeUsed),
       },
-      paid_pack: {
-        remaining: Math.max(0, paidRemaining),
-        pack_size: SCENARIO_PACK_SIZE,
-        price_usd: SCENARIO_PACK_PRICE_CENTS / 100,
+      credits: {
+        remaining: Math.max(0, creditsRemaining),
       },
     },
   };

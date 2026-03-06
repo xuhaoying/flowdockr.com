@@ -3,15 +3,34 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getUuid, md5 } from '@/shared/lib/hash';
 
 export const SCENARIO_FREE_LIMIT = 2;
-export const SCENARIO_PACK_SIZE = 20;
-export const SCENARIO_PACK_PRICE_CENTS = 500;
 export const SCENARIO_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365 * 10;
 
 export const SCENARIO_BROWSER_ID_COOKIE = 'flowdockr_scenario_browser_id';
 export const SCENARIO_FREE_COUNT_COOKIE = 'flowdockr_scenario_free_count';
-export const SCENARIO_PAID_REMAINING_COOKIE = 'flowdockr_scenario_paid_remaining';
-export const SCENARIO_PAID_SIG_COOKIE = 'flowdockr_scenario_paid_sig';
-export const SCENARIO_PAID_HINT_COOKIE = 'flowdockr_scenario_paid_remaining_hint';
+
+export const SCENARIO_PACKS = [
+  {
+    id: 'flowdockr_10_replies',
+    replies: 10,
+    priceCents: 500,
+    isMostPopular: false,
+  },
+  {
+    id: 'flowdockr_50_replies',
+    replies: 50,
+    priceCents: 1500,
+    isMostPopular: true,
+  },
+  {
+    id: 'flowdockr_200_replies',
+    replies: 200,
+    priceCents: 4000,
+    isMostPopular: false,
+  },
+] as const;
+
+export type ScenarioPack = (typeof SCENARIO_PACKS)[number];
+export type ScenarioPackId = ScenarioPack['id'];
 
 type QuotaStore = Map<string, number>;
 type RedeemedSessionStore = Set<string>;
@@ -43,16 +62,13 @@ function clampInt(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, Math.floor(value)));
 }
 
-function getSignSecret(): string {
-  return (
-    process.env.SCENARIO_QUOTA_SIGNING_KEY ||
-    process.env.AUTH_SECRET ||
-    'flowdockr-scenario-quota-dev-secret'
-  );
-}
+export function getScenarioPackById(packId: string): ScenarioPack | null {
+  const normalized = String(packId || '').trim();
+  if (!normalized) {
+    return null;
+  }
 
-function signPaidRemaining(remaining: number, browserId: string): string {
-  return md5(`${remaining}|${browserId}|${getSignSecret()}`);
+  return SCENARIO_PACKS.find((item) => item.id === normalized) || null;
 }
 
 export function getClientIp(request: NextRequest): string {
@@ -145,86 +161,10 @@ export function setFreeUsage(
   });
 }
 
-export function getPaidRemaining(request: NextRequest, browserId: string): number {
-  const store = getQuotaStore();
-
-  const cookieRemainingRaw = Number(
-    request.cookies.get(SCENARIO_PAID_REMAINING_COOKIE)?.value || '0'
-  );
-  const cookieSig = String(
-    request.cookies.get(SCENARIO_PAID_SIG_COOKIE)?.value || ''
-  ).trim();
-
-  let cookieRemaining = 0;
-  const normalizedCookieRemaining = clampInt(cookieRemainingRaw, 0, 10_000);
-  if (
-    normalizedCookieRemaining > 0 &&
-    cookieSig &&
-    cookieSig === signPaidRemaining(normalizedCookieRemaining, browserId)
-  ) {
-    cookieRemaining = normalizedCookieRemaining;
-  }
-
-  const memoryRemaining = clampInt(
-    Number(store.get(`paid:browser:${browserId}`) || 0),
-    0,
-    10_000
-  );
-
-  return Math.max(cookieRemaining, memoryRemaining);
-}
-
-export function setPaidRemaining(
-  response: NextResponse,
-  browserId: string,
-  remaining: number
-): void {
-  const normalized = clampInt(remaining, 0, 10_000);
-  const store = getQuotaStore();
-
-  store.set(`paid:browser:${browserId}`, normalized);
-
-  response.cookies.set({
-    name: SCENARIO_PAID_REMAINING_COOKIE,
-    value: String(normalized),
-    maxAge: SCENARIO_COOKIE_MAX_AGE_SECONDS,
-    path: '/',
-    sameSite: 'lax',
-    httpOnly: true,
-  });
-  response.cookies.set({
-    name: SCENARIO_PAID_SIG_COOKIE,
-    value: signPaidRemaining(normalized, browserId),
-    maxAge: SCENARIO_COOKIE_MAX_AGE_SECONDS,
-    path: '/',
-    sameSite: 'lax',
-    httpOnly: true,
-  });
-  response.cookies.set({
-    name: SCENARIO_PAID_HINT_COOKIE,
-    value: String(normalized),
-    maxAge: SCENARIO_COOKIE_MAX_AGE_SECONDS,
-    path: '/',
-    sameSite: 'lax',
-    httpOnly: false,
-  });
-}
-
 export function isPackSessionRedeemed(sessionId: string): boolean {
   return getRedeemedSessionStore().has(sessionId);
 }
 
 export function markPackSessionRedeemed(sessionId: string): void {
   getRedeemedSessionStore().add(sessionId);
-}
-
-export function clearPaidHint(response: NextResponse): void {
-  response.cookies.set({
-    name: SCENARIO_PAID_HINT_COOKIE,
-    value: '0',
-    maxAge: SCENARIO_COOKIE_MAX_AGE_SECONDS,
-    path: '/',
-    sameSite: 'lax',
-    httpOnly: false,
-  });
 }
