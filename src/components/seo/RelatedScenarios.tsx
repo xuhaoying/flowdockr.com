@@ -27,10 +27,10 @@ export function RelatedScenarios({
       </h2>
       <ul className="grid gap-3 md:grid-cols-2">
         {relatedScenarios.map((scenario) => (
-          <li key={scenario.slug} className="rounded-md border p-4">
+          <li key={scenario.slug} className="rounded-xl border border-foreground/10 p-4">
             <Link
               href={`/scenarios/${scenario.slug}`}
-              className="font-medium hover:underline"
+              className="font-medium text-foreground hover:text-primary hover:underline"
               onClick={() => onRelatedClick(scenario.slug)}
             >
               {scenario.h1}

@@ -19,11 +19,19 @@ export function ClientMessageInput({
         id="client_message"
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Paste the exact message from your client..."
-        rows={7}
+        placeholder="Paste the exact client message. Include budget/scope details if provided."
+        rows={6}
         maxLength={maxLength}
+        className="resize-y"
       />
-      <p className="text-xs text-muted-foreground">{value.length}/{maxLength}</p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-muted-foreground">
+          Tip: keep your own wording. Flowdockr performs better with real context.
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {value.length}/{maxLength}
+        </p>
+      </div>
     </div>
   );
 }

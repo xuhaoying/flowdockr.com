@@ -10,7 +10,10 @@ export function ScenarioFAQ({ scenario }: ScenarioFAQProps) {
       <h2 className="text-2xl font-semibold tracking-tight">FAQ</h2>
       <div className="space-y-2">
         {scenario.faq.map((item) => (
-          <details key={item.question} className="rounded-md border bg-muted/20 p-4">
+          <details
+            key={item.question}
+            className="rounded-xl border border-foreground/10 bg-background p-4"
+          >
             <summary className="cursor-pointer text-sm font-medium">
               {item.question}
             </summary>
