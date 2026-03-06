@@ -12,30 +12,25 @@
     "nav": {
       "items": [
         {
-          "title": "Scope",
-          "url": "/scope",
-          "icon": "ShieldCheck"
-        },
-        {
           "title": "Escenarios",
           "url": "/scenarios",
           "icon": "Handshake"
         },
         {
-          "title": "Payment",
-          "url": "/payment",
-          "icon": "CreditCard"
-        },
-        {
-          "title": "Pricing",
+          "title": "Precios",
           "url": "/pricing",
           "icon": "BadgeDollarSign"
+        },
+        {
+          "title": "Login",
+          "url": "/login",
+          "icon": "LogIn"
         }
       ]
     },
     "buttons": [
       {
-        "title": "Abrir escenarios",
+        "title": "Abrir herramienta de escenarios",
         "url": "/scenarios",
         "icon": "Zap",
         "variant": "default"
@@ -53,11 +48,11 @@
   },
   "hero": {
     "id": "hero",
-    "title": "Detén el caos con clientes.",
-    "description": "Controla el scope creep en minutos.",
+    "title": "Respuestas de negociación para freelancers, guiadas por escenarios.",
+    "description": "Entra en una situación real de cliente, genera una respuesta estratégica y continúa con créditos.",
     "buttons": [
       {
-        "title": "Probar demo de escenarios",
+        "title": "Empezar con un escenario",
         "icon": "Zap",
         "url": "/scenarios",
         "target": "_self",
@@ -69,26 +64,26 @@
   },
   "features": {
     "id": "features",
-    "title": "Situaciones comunes",
-    "description": "Empieza con Scope Guard según el problema que necesites resolver ahora.",
+    "title": "Escenarios de negociación de alta intención",
+    "description": "Elige el contexto exacto del mensaje del cliente y genera una respuesta que proteja precio y relación.",
     "items": [
       {
-        "title": "El cliente sigue pidiendo revisiones",
-        "description": "Genera un límite de revisiones y evita rondas extra sin pago.",
-        "icon": "RotateCcw",
-        "url": "/scope"
+        "title": "Oferta muy baja del cliente",
+        "description": "Responde con firmeza sin sonar defensivo y vuelve a anclar valor y alcance.",
+        "icon": "Handshake",
+        "url": "/scenarios/how-to-respond-to-a-lowball-offer"
       },
       {
-        "title": "El cliente pide trabajo adicional",
-        "description": "Define reglas fuera de alcance antes de aceptar tareas nuevas.",
-        "icon": "ListPlus",
-        "url": "/scope"
+        "title": "El cliente pide descuento",
+        "description": "Mantén tu posicionamiento ofreciendo alternativas de alcance claras.",
+        "icon": "BadgePercent",
+        "url": "/scenarios/client-asks-for-a-discount"
       },
       {
-        "title": "El cliente cambia el alcance del proyecto",
-        "description": "Protege el brief original y el cronograma.",
-        "icon": "ArrowLeftRight",
-        "url": "/scope"
+        "title": "El cliente pide trabajo de muestra gratis",
+        "description": "Define límites con claridad y conserva la conversación abierta.",
+        "icon": "FileCheck2",
+        "url": "/scenarios/client-asks-for-free-sample-work"
       }
     ],
     "className": "bg-muted/50"
@@ -96,8 +91,8 @@
   "trust": {
     "block": "features",
     "id": "trust",
-    "title": "Diseñado para freelancers en",
-    "description": "diseño, edición de video, copywriting, marketing y consultoría.",
+    "title": "Creado para freelancers con presión real de negociación",
+    "description": "Diseño, desarrollo, copywriting, marketing y consultoría.",
     "items": [
       {
         "title": "Diseño",
@@ -128,12 +123,12 @@
   },
   "cta": {
     "id": "cta",
-    "title": "Genera tu política de revisiones.",
-    "description": "Flujo en 30 segundos: describe el proyecto -> genera -> copia y envía.",
+    "title": "Usa 2 respuestas gratis. Luego desbloquea créditos.",
+    "description": "Sin suscripción. Pagas una vez y los créditos no vencen.",
     "buttons": [
       {
-        "title": "Abrir Scope Guard",
-        "url": "/scope",
+        "title": "Abrir páginas de escenarios",
+        "url": "/scenarios",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -171,7 +166,7 @@
     "id": "footer",
     "brand": {
       "title": "",
-      "description": "Sistema operativo para freelancers, empezando por Scope Guard.",
+      "description": "Copiloto de negociación basado en escenarios para freelancers.",
       "logo": {
         "src": "/flowdockr-logo-primary.svg",
         "alt": "Flowdockr"
@@ -184,8 +179,8 @@
           "title": "Producto",
           "children": [
             {
-              "title": "Alcance",
-              "url": "/scope"
+              "title": "Escenarios",
+              "url": "/scenarios"
             },
             {
               "title": "Precios",
@@ -197,8 +192,8 @@
           "title": "Recursos",
           "children": [
             {
-              "title": "Guías",
-              "url": "/guides"
+              "title": "Oferta muy baja",
+              "url": "/scenarios/how-to-respond-to-a-lowball-offer"
             }
           ]
         },

@@ -12,30 +12,25 @@
     "nav": {
       "items": [
         {
-          "title": "范围管理",
-          "url": "/scope",
-          "icon": "ShieldCheck"
-        },
-        {
           "title": "谈判场景",
           "url": "/scenarios",
           "icon": "Handshake"
         },
         {
-          "title": "回款管理",
-          "url": "/payment",
-          "icon": "CreditCard"
-        },
-        {
           "title": "定价",
           "url": "/pricing",
           "icon": "BadgeDollarSign"
+        },
+        {
+          "title": "登录",
+          "url": "/login",
+          "icon": "LogIn"
         }
       ]
     },
     "buttons": [
       {
-        "title": "打开场景模块",
+        "title": "打开场景工具",
         "url": "/scenarios",
         "icon": "Zap",
         "variant": "default"
@@ -53,11 +48,11 @@
   },
   "hero": {
     "id": "hero",
-    "title": "告别客户协作混乱。",
-    "description": "几分钟内处理范围蔓延（scope creep）。",
+    "title": "以场景为核心的自由职业谈判回复工具",
+    "description": "直接进入具体客户场景，生成策略化回复，再用 credits 持续处理后续沟通。",
     "buttons": [
       {
-        "title": "立即试用场景 Demo",
+        "title": "从场景开始",
         "icon": "Zap",
         "url": "/scenarios",
         "target": "_self",
@@ -69,26 +64,26 @@
   },
   "features": {
     "id": "features",
-    "title": "常见场景",
-    "description": "从 Scope Guard 开始，先解决你当下最紧急的问题。",
+    "title": "高意图谈判场景",
+    "description": "按客户消息场景精准生成回复，既守住价格，也保住关系。",
     "items": [
       {
-        "title": "客户不断要求修改",
-        "description": "生成清晰的修订边界，避免无偿加班返工。",
-        "icon": "RotateCcw",
-        "url": "/scope"
+        "title": "客户明显低价报价",
+        "description": "礼貌但坚定地回锚价值与范围，不做情绪化回复。",
+        "icon": "Handshake",
+        "url": "/scenarios/how-to-respond-to-a-lowball-offer"
       },
       {
-        "title": "客户临时加需求",
-        "description": "在接受新增任务前，先明确超出范围规则。",
-        "icon": "ListPlus",
-        "url": "/scope"
+        "title": "客户要求打折",
+        "description": "不直接降价，优先给出可执行的范围替代方案。",
+        "icon": "BadgePercent",
+        "url": "/scenarios/client-asks-for-a-discount"
       },
       {
-        "title": "客户变更项目范围",
-        "description": "保护原始需求与交付时间线。",
-        "icon": "ArrowLeftRight",
-        "url": "/scope"
+        "title": "客户要求免费试做",
+        "description": "清晰设边界，同时保留合作推进空间。",
+        "icon": "FileCheck2",
+        "url": "/scenarios/client-asks-for-free-sample-work"
       }
     ],
     "className": "bg-muted/50"
@@ -96,8 +91,8 @@
   "trust": {
     "block": "features",
     "id": "trust",
-    "title": "为以下自由职业场景打造",
-    "description": "设计、视频剪辑、文案、营销和咨询。",
+    "title": "为真实谈判压力下的自由职业者打造",
+    "description": "覆盖设计、开发、文案、营销与咨询等项目类型。",
     "items": [
       {
         "title": "设计",
@@ -128,12 +123,12 @@
   },
   "cta": {
     "id": "cta",
-    "title": "立即生成你的修订政策。",
-    "description": "30 秒流程：描述项目 -> 生成内容 -> 复制发送。",
+    "title": "先免费用 2 次，再按次数购买 credits",
+    "description": "无订阅。一次付费，credits 永不过期。",
     "buttons": [
       {
-        "title": "打开 Scope Guard",
-        "url": "/scope",
+        "title": "打开场景页面",
+        "url": "/scenarios",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -171,7 +166,7 @@
     "id": "footer",
     "brand": {
       "title": "",
-      "description": "面向自由职业者的业务系统，从 Scope Guard 开始。",
+      "description": "面向自由职业者的场景化谈判副驾。",
       "logo": {
         "src": "/flowdockr-logo-primary.svg",
         "alt": "Flowdockr"
@@ -184,11 +179,11 @@
           "title": "产品",
           "children": [
             {
-              "title": "范围管理",
-              "url": "/scope"
+              "title": "谈判场景",
+              "url": "/scenarios"
             },
             {
-              "title": "价格",
+              "title": "定价",
               "url": "/pricing"
             }
           ]
@@ -197,8 +192,8 @@
           "title": "资源",
           "children": [
             {
-              "title": "指南",
-              "url": "/guides"
+              "title": "低价报价应对",
+              "url": "/scenarios/how-to-respond-to-a-lowball-offer"
             }
           ]
         },
