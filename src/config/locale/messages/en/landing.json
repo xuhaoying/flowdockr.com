@@ -2,10 +2,10 @@
   "header": {
     "id": "header",
     "brand": {
-      "title": "FlowDockr",
+      "title": "",
       "logo": {
-        "src": "/logo.png",
-        "alt": "FlowDockr"
+        "src": "/flowdockr-logo-primary.svg",
+        "alt": "Flowdockr"
       },
       "url": "/"
     },
@@ -170,11 +170,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "FlowDockr",
+      "title": "",
       "description": "Freelancer Business OS starting with Scope Guard.",
       "logo": {
-        "src": "/logo.png",
-        "alt": "FlowDockr"
+        "src": "/flowdockr-logo-primary.svg",
+        "alt": "Flowdockr"
       },
       "url": "/"
     },

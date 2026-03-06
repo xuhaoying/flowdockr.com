@@ -15,18 +15,15 @@ import {
   buildScenarioFaqSchema,
   getScenarioCanonicalUrl,
 } from '@/lib/seo';
-import { getRelatedScenarios, getScenarioBySlug, scenarios } from '@/lib/scenarios';
+import { getRelatedScenarios, getScenarioBySlug } from '@/lib/scenarios';
 
 type ScenarioPageParams = {
   locale: string;
   slug: string;
 };
 
-export async function generateStaticParams() {
-  return scenarios.map((scenario) => ({
-    slug: scenario.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({
   params,

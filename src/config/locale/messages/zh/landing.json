@@ -2,10 +2,10 @@
   "header": {
     "id": "header",
     "brand": {
-      "title": "FlowDockr",
+      "title": "",
       "logo": {
-        "src": "/logo.png",
-        "alt": "FlowDockr"
+        "src": "/flowdockr-logo-primary.svg",
+        "alt": "Flowdockr"
       },
       "url": "/"
     },
@@ -170,11 +170,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "FlowDockr",
+      "title": "",
       "description": "面向自由职业者的业务系统，从 Scope Guard 开始。",
       "logo": {
-        "src": "/logo.png",
-        "alt": "FlowDockr"
+        "src": "/flowdockr-logo-primary.svg",
+        "alt": "Flowdockr"
       },
       "url": "/"
     },
