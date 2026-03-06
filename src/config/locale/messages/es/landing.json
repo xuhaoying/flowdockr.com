@@ -4,7 +4,7 @@
     "brand": {
       "title": "",
       "logo": {
-        "src": "/flowdockr-logo-primary.svg",
+        "src": "/logo.png",
         "alt": "Flowdockr"
       },
       "url": "/"
@@ -168,7 +168,7 @@
       "title": "",
       "description": "Copiloto de negociación basado en escenarios para freelancers.",
       "logo": {
-        "src": "/flowdockr-logo-primary.svg",
+        "src": "/logo.png",
         "alt": "Flowdockr"
       },
       "url": "/"
