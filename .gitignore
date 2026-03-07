@@ -48,6 +48,10 @@ next-env.d.ts
 data*
 *debug*
 
+# keep scenario seed data committed
+!src/data/
+!src/data/scenarios.ts
+
 *.db
 
 .open-next
