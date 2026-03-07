@@ -1,281 +1,286 @@
-import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
-  createAnonymousSessionId,
-  ensureAnonymousUsageRecord,
-  getAnonymousSessionIdFromRequest,
   hashRequestIp,
   hashRequestUserAgent,
   setAnonymousSessionCookie,
 } from '@/lib/anonymous';
-import { getCurrentUser } from '@/lib/auth';
-import { db, anonymousUsage, creditTransaction, generation, user } from '@/lib/db';
-import { generateReplyWithAI } from '@/lib/generation-ai';
+import {
+  canGenerate,
+  consumeUsage,
+  getGenerationIdentity,
+} from '@/lib/credits';
+import { generateReply } from '@/lib/generation/generateReply';
+import { saveGeneration } from '@/lib/generation/saveGeneration';
 import { getScenarioBySlug } from '@/lib/scenarios';
 import { generateSchema } from '@/lib/validators';
-import { getUuid } from '@/shared/lib/hash';
+import type { GenerateReplyResponse } from '@/types/generation';
 
-const FREE_GENERATION_LIMIT = 2;
 export const runtime = 'nodejs';
 
-type PaywallUsage = {
-  remainingFreeGenerations: number;
-  creditsBalance: number;
-};
+function buildFailureResponse(params: {
+  scenarioSlug: string;
+  error:
+    | 'INVALID_INPUT'
+    | 'SCENARIO_NOT_FOUND'
+    | 'FREE_LIMIT_REACHED'
+    | 'INSUFFICIENT_CREDITS'
+    | 'GENERATION_FAILED'
+    | 'PARSE_FAILED'
+    | 'UNAUTHORIZED'
+    | 'INTERNAL_ERROR';
+  requiresUpgrade?: boolean;
+  creditsRemaining?: number;
+}): GenerateReplyResponse {
+  return {
+    success: false,
+    reply: '',
+    alternativeReply: '',
+    strategy: [],
+    scenarioSlug: params.scenarioSlug,
+    creditsRemaining: params.creditsRemaining,
+    requiresUpgrade: Boolean(params.requiresUpgrade),
+    error: params.error,
+  };
+}
 
-class PaywallRequiredError extends Error {
-  usage: PaywallUsage;
-
-  constructor(message: string, usage: PaywallUsage) {
-    super(message);
-    this.usage = usage;
+function trackGenerationEvent(
+  event:
+    | 'generation_requested'
+    | 'generation_blocked_free_limit'
+    | 'generation_blocked_insufficient_credits'
+    | 'generation_succeeded'
+    | 'generation_failed_model'
+    | 'generation_failed_parse'
+    | 'generation_saved_failed',
+  payload: Record<string, unknown>
+) {
+  try {
+    console.info(
+      '[flowdockr.generate]',
+      JSON.stringify({
+        event,
+        ...payload,
+        ts: new Date().toISOString(),
+      })
+    );
+  } catch {
+    // no-op logging fallback
   }
 }
 
 export async function POST(request: NextRequest) {
+  let scenarioSlug = '';
+
   try {
-    const raw = (await request.json()) as unknown;
-    const parsed = generateSchema.safeParse(raw);
+    const rawBody = (await request.json()) as unknown;
+    const parsed = generateSchema.safeParse(rawBody);
+
     if (!parsed.success) {
       return NextResponse.json(
-        {
-          ok: false,
-          code: 'INVALID_INPUT',
-          message: parsed.error.issues[0]?.message || 'Invalid input.',
-        },
-        { status: 400 }
+        buildFailureResponse({
+          scenarioSlug: '',
+          error: 'INVALID_INPUT',
+        })
       );
     }
 
     const input = parsed.data;
+    scenarioSlug = input.scenarioSlug;
+
     const scenario = getScenarioBySlug(input.scenarioSlug);
     if (!scenario) {
       return NextResponse.json(
-        {
-          ok: false,
-          code: 'INVALID_SCENARIO',
-          message: 'Invalid scenario slug.',
-        },
-        { status: 400 }
+        buildFailureResponse({
+          scenarioSlug: input.scenarioSlug,
+          error: 'SCENARIO_NOT_FOUND',
+        })
       );
     }
 
-    const currentUser = await getCurrentUser();
+    const identity = await getGenerationIdentity(request);
+    const status = await canGenerate(identity);
 
-    if (currentUser) {
-      const [dbUser] = await db()
-        .select({
-          id: user.id,
-          creditsBalance: user.creditsBalance,
-        })
-        .from(user)
-        .where(eq(user.id, currentUser.id))
-        .limit(1);
+    if (!status.canGenerate || status.mode === 'blocked') {
+      const errorCode = status.isLoggedIn
+        ? 'INSUFFICIENT_CREDITS'
+        : 'FREE_LIMIT_REACHED';
 
-      const creditsBalance = dbUser?.creditsBalance || 0;
-      if (!dbUser || creditsBalance <= 0) {
-        throw new PaywallRequiredError('Credits required.', {
-          remainingFreeGenerations: 0,
-          creditsBalance: 0,
-        });
-      }
-
-      const result = await generateReplyWithAI(input, scenario);
-      const ipHash = hashRequestIp(request);
-      const userAgentHash = hashRequestUserAgent(request);
-
-      const nextCreditsBalance = await db().transaction(async (tx: any) => {
-        const [latestUser] = await tx
-          .select({
-            id: user.id,
-            creditsBalance: user.creditsBalance,
-          })
-          .from(user)
-          .where(eq(user.id, currentUser.id))
-          .limit(1);
-
-        if (!latestUser || latestUser.creditsBalance <= 0) {
-          throw new PaywallRequiredError('Credits required.', {
-            remainingFreeGenerations: 0,
-            creditsBalance: 0,
-          });
-        }
-
-        const updatedCredits = latestUser.creditsBalance - 1;
-
-        await tx
-          .update(user)
-          .set({
-            creditsBalance: updatedCredits,
-          })
-          .where(eq(user.id, currentUser.id));
-
-        await tx.insert(creditTransaction).values({
-          id: getUuid(),
-          userId: currentUser.id,
-          type: 'generation_charge',
-          amount: -1,
-          balanceAfter: updatedCredits,
-          reason: 'Negotiation reply generation',
-          metadata: JSON.stringify({
-            scenarioSlug: input.scenarioSlug,
-            source: 'api_generate',
-          }),
-        });
-
-        await tx.insert(generation).values({
-          id: getUuid(),
-          userId: currentUser.id,
+      trackGenerationEvent(
+        status.isLoggedIn
+          ? 'generation_blocked_insufficient_credits'
+          : 'generation_blocked_free_limit',
+        {
           scenarioSlug: input.scenarioSlug,
-          clientMessage: input.clientMessage,
-          serviceType: input.serviceType,
-          tone: input.tone,
-          goal: input.goal,
-          userRateContext: input.userRateContext || null,
-          recommendedReply: result.recommendedReply,
-          alternativeReply: result.alternativeReply,
-          strategyJson: JSON.stringify(result.strategy),
-          confidence: result.confidence,
-          caution: result.caution || null,
-          creditsCharged: 1,
-          isFreeGeneration: false,
-          ipHash,
-          userAgentHash,
-        });
+          sourcePage: input.sourcePage,
+          mode: status.mode,
+          isLoggedIn: status.isLoggedIn,
+        }
+      );
 
-        return updatedCredits;
-      });
-
-      return NextResponse.json({
-        ok: true,
-        data: result,
-        usage: {
-          isFreeGeneration: false,
-          remainingFreeGenerations: 0,
-          creditsBalance: nextCreditsBalance,
-        },
-      });
+      return NextResponse.json(
+        buildFailureResponse({
+          scenarioSlug: input.scenarioSlug,
+          error: errorCode,
+          requiresUpgrade: true,
+          creditsRemaining: status.creditsRemaining,
+        })
+      );
     }
 
-    let anonymousSessionId = getAnonymousSessionIdFromRequest(request);
-    let shouldSetAnonymousCookie = false;
-
-    if (!anonymousSessionId) {
-      anonymousSessionId = createAnonymousSessionId();
-      shouldSetAnonymousCookie = true;
-    }
-
-    const usageRecord = await ensureAnonymousUsageRecord({
-      anonymousSessionId,
-      request,
+    trackGenerationEvent('generation_requested', {
+      scenarioSlug: input.scenarioSlug,
+      sourcePage: input.sourcePage,
+      mode: status.mode,
+      isLoggedIn: status.isLoggedIn,
     });
 
-    if (usageRecord.freeGenerationsUsed >= FREE_GENERATION_LIMIT) {
-      throw new PaywallRequiredError('Free usage limit reached.', {
-        remainingFreeGenerations: 0,
-        creditsBalance: 0,
-      });
-    }
-
-    const result = await generateReplyWithAI(input, scenario);
-    const ipHash = hashRequestIp(request);
-    const userAgentHash = hashRequestUserAgent(request);
-
-    const nextFreeUsed = await db().transaction(async (tx: any) => {
-      const [latestUsage] = await tx
-        .select({
-          id: anonymousUsage.id,
-          freeGenerationsUsed: anonymousUsage.freeGenerationsUsed,
-        })
-        .from(anonymousUsage)
-        .where(eq(anonymousUsage.anonymousSessionId, anonymousSessionId))
-        .limit(1);
-
-      if (!latestUsage) {
-        throw new Error('Anonymous usage not found.');
-      }
-
-      if (latestUsage.freeGenerationsUsed >= FREE_GENERATION_LIMIT) {
-        throw new PaywallRequiredError('Free usage limit reached.', {
-          remainingFreeGenerations: 0,
-          creditsBalance: 0,
-        });
-      }
-
-      const used = latestUsage.freeGenerationsUsed + 1;
-
-      await tx
-        .update(anonymousUsage)
-        .set({
-          freeGenerationsUsed: used,
-          lastScenarioSlug: input.scenarioSlug,
-          ipHash,
-          userAgentHash,
-          updatedAt: new Date(),
-        })
-        .where(eq(anonymousUsage.id, latestUsage.id));
-
-      await tx.insert(generation).values({
-        id: getUuid(),
-        anonymousSessionId,
-        scenarioSlug: input.scenarioSlug,
-        clientMessage: input.clientMessage,
+    let output: Awaited<ReturnType<typeof generateReply>>;
+    try {
+      output = await generateReply({
+        scenario,
+        message: input.message,
+        sourcePage: input.sourcePage,
         serviceType: input.serviceType,
         tone: input.tone,
         goal: input.goal,
-        userRateContext: input.userRateContext || null,
-        recommendedReply: result.recommendedReply,
-        alternativeReply: result.alternativeReply,
-        strategyJson: JSON.stringify(result.strategy),
-        confidence: result.confidence,
-        caution: result.caution || null,
-        creditsCharged: 0,
-        isFreeGeneration: true,
-        ipHash,
-        userAgentHash,
+        userRateContext: input.userRateContext,
       });
-
-      return used;
-    });
-
-    const response = NextResponse.json({
-      ok: true,
-      data: result,
-      usage: {
-        isFreeGeneration: true,
-        remainingFreeGenerations: Math.max(0, FREE_GENERATION_LIMIT - nextFreeUsed),
-        creditsBalance: null,
-      },
-    });
-
-    if (shouldSetAnonymousCookie) {
-      setAnonymousSessionCookie(response, anonymousSessionId);
-    }
-
-    return response;
-  } catch (error) {
-    if (error instanceof PaywallRequiredError) {
-      return NextResponse.json(
+    } catch (error) {
+      const message = error instanceof Error ? error.message : '';
+      const parseFailure = message.includes('FAILED_TO_PARSE_GENERATION');
+      trackGenerationEvent(
+        parseFailure ? 'generation_failed_parse' : 'generation_failed_model',
         {
-          ok: false,
-          code: 'PAYWALL_REQUIRED',
-          message: error.message,
-          usage: error.usage,
-        },
-        { status: 402 }
+          scenarioSlug: input.scenarioSlug,
+          sourcePage: input.sourcePage,
+          mode: status.mode,
+          isLoggedIn: status.isLoggedIn,
+          error: message || 'UNKNOWN',
+        }
+      );
+
+      return NextResponse.json(
+        buildFailureResponse({
+          scenarioSlug: input.scenarioSlug,
+          error: parseFailure ? 'PARSE_FAILED' : 'GENERATION_FAILED',
+        })
       );
     }
 
-    const message =
-      error instanceof Error ? error.message : 'Failed to generate response.';
+    const ipHash = hashRequestIp(request);
+    const userAgentHash = hashRequestUserAgent(request);
 
+    let usageResult: Awaited<ReturnType<typeof consumeUsage>>;
+    try {
+      usageResult = await consumeUsage({
+        status,
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        ipHash,
+        userAgentHash,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'UNKNOWN';
+      if (
+        message === 'FREE_LIMIT_REACHED' ||
+        message === 'NO_CREDITS' ||
+        message === 'USAGE_BLOCKED'
+      ) {
+        const code = status.isLoggedIn
+          ? 'INSUFFICIENT_CREDITS'
+          : 'FREE_LIMIT_REACHED';
+        trackGenerationEvent(
+          status.isLoggedIn
+            ? 'generation_blocked_insufficient_credits'
+            : 'generation_blocked_free_limit',
+          {
+            scenarioSlug: input.scenarioSlug,
+            sourcePage: input.sourcePage,
+            mode: status.mode,
+            isLoggedIn: status.isLoggedIn,
+            error: message,
+          }
+        );
+
+        return NextResponse.json(
+          buildFailureResponse({
+            scenarioSlug: input.scenarioSlug,
+            error: code,
+            requiresUpgrade: true,
+            creditsRemaining: 0,
+          })
+        );
+      }
+
+      return NextResponse.json(
+        buildFailureResponse({
+          scenarioSlug: input.scenarioSlug,
+          error: 'INTERNAL_ERROR',
+        }),
+        { status: 500 }
+      );
+    }
+
+    try {
+      await saveGeneration({
+        userId: status.userId,
+        anonymousId: status.anonymousId,
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        inputText: input.message,
+        replyText: output.reply,
+        altReplyText: output.alternativeReply,
+        strategy: output.strategy,
+        modeUsed: usageResult.modeUsed,
+        serviceType: input.serviceType,
+        tone: input.tone,
+        goal: input.goal,
+        userRateContext: input.userRateContext,
+        confidence: output.confidence,
+        caution: output.caution,
+        ipHash,
+        userAgentHash,
+      });
+    } catch (saveError) {
+      trackGenerationEvent('generation_saved_failed', {
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        mode: usageResult.modeUsed,
+        isLoggedIn: status.isLoggedIn,
+        error: saveError instanceof Error ? saveError.message : 'UNKNOWN',
+      });
+    }
+
+    trackGenerationEvent('generation_succeeded', {
+      scenarioSlug: input.scenarioSlug,
+      sourcePage: input.sourcePage,
+      mode: usageResult.modeUsed,
+      isLoggedIn: status.isLoggedIn,
+    });
+
+    const successPayload: GenerateReplyResponse = {
+      success: true,
+      reply: output.reply,
+      alternativeReply: output.alternativeReply,
+      strategy: output.strategy,
+      scenarioSlug: input.scenarioSlug,
+      creditsRemaining: usageResult.creditsRemaining,
+      requiresUpgrade: false,
+    };
+
+    const response = NextResponse.json(successPayload);
+    if (status.createdAnonymousId && status.anonymousId) {
+      setAnonymousSessionCookie(response, status.anonymousId);
+    }
+
+    return response;
+  } catch {
     return NextResponse.json(
-      {
-        ok: false,
-        code: 'GENERATION_FAILED',
-        message,
-      },
+      buildFailureResponse({
+        scenarioSlug,
+        error: 'INTERNAL_ERROR',
+      }),
       { status: 500 }
     );
   }

@@ -118,7 +118,7 @@ export function SidebarUser({ user }: { user: SidebarUserType }) {
     } else if (!sessionUser && currentUserId) {
       setUser(null);
     }
-  }, [hasMounted, session?.user?.id, authUser?.id, setUser, fetchUserInfo]);
+  }, [hasMounted, session?.user, session?.user?.id, authUser?.id, setUser, fetchUserInfo]);
 
   // If not mounted, render placeholder to avoid hydration mismatch
   if (!hasMounted) {

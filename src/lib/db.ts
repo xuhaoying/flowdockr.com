@@ -6,4 +6,5 @@ export {
   generation,
   purchase,
   user,
+  webhookEvent,
 } from '@/config/db/schema';

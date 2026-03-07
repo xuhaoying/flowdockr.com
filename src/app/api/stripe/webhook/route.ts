@@ -1,245 +1,214 @@
-import { and, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-import { db, anonymousLinkSession, creditTransaction, purchase, user } from '@/lib/db';
-import { getCreditPackageById } from '@/lib/credits';
-import { sendMagicLink } from '@/lib/magic-link';
-import { getStripeClient, getStripeWebhookSecret } from '@/lib/stripe';
-import { getUuid } from '@/shared/lib/hash';
+import { db, purchase } from '@/lib/db';
+import {
+  applySuccessfulPurchase,
+  hasProcessedWebhookEvent,
+  markWebhookEventProcessed,
+} from '@/lib/payments';
+import { verifyWebhookSignature } from '@/lib/stripe';
 
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
-  const body = await request.text();
+  const rawBody = await request.text();
   const signature = request.headers.get('stripe-signature');
 
   if (!signature) {
     return new NextResponse('Missing signature', { status: 400 });
   }
 
+  let event: Stripe.Event;
   try {
-    const stripe = await getStripeClient();
-    const webhookSecret = await getStripeWebhookSecret();
-    const event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    event = await verifyWebhookSignature(rawBody, signature);
+  } catch {
+    return new NextResponse('Invalid signature', { status: 400 });
+  }
 
-    if (event.type === 'checkout.session.completed') {
-      await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
-    } else if (event.type === 'payment_intent.payment_failed') {
-      const paymentIntent = event.data.object as Stripe.PaymentIntent;
-      await db()
-        .update(purchase)
-        .set({ status: 'payment_failed' })
-        .where(eq(purchase.stripePaymentIntentId, paymentIntent.id));
-    } else if (event.type === 'checkout.session.expired') {
-      const session = event.data.object as Stripe.Checkout.Session;
-      await db()
-        .update(purchase)
-        .set({ status: 'expired' })
-        .where(eq(purchase.stripeCheckoutSessionId, session.id));
+  const alreadyProcessed = await hasProcessedWebhookEvent(event.id);
+  if (alreadyProcessed) {
+    return NextResponse.json({ received: true, duplicate: true });
+  }
+
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        if (session.payment_status === 'paid') {
+          await applySuccessfulPurchase({
+            stripeEventId: event.id,
+            stripeEventType: event.type,
+            stripeCheckoutSessionId: session.id,
+            stripePaymentIntentId:
+              typeof session.payment_intent === 'string'
+                ? session.payment_intent
+                : undefined,
+            stripeCustomerId:
+              typeof session.customer === 'string' ? session.customer : undefined,
+            purchaseIdHint: String(
+              session.metadata?.purchaseId || session.client_reference_id || ''
+            ).trim(),
+            customerEmail:
+              session.customer_details?.email || session.customer_email || undefined,
+            metadata: session.metadata || {},
+          });
+        } else {
+          await markCheckoutSessionStatus(session, 'pending');
+        }
+        break;
+      }
+
+      case 'checkout.session.async_payment_succeeded': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        await applySuccessfulPurchase({
+          stripeEventId: event.id,
+          stripeEventType: event.type,
+          stripeCheckoutSessionId: session.id,
+          stripePaymentIntentId:
+            typeof session.payment_intent === 'string'
+              ? session.payment_intent
+              : undefined,
+          stripeCustomerId:
+            typeof session.customer === 'string' ? session.customer : undefined,
+          purchaseIdHint: String(
+            session.metadata?.purchaseId || session.client_reference_id || ''
+          ).trim(),
+          customerEmail:
+            session.customer_details?.email || session.customer_email || undefined,
+          metadata: session.metadata || {},
+        });
+        break;
+      }
+
+      case 'checkout.session.async_payment_failed': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        await markCheckoutSessionStatus(session, 'failed');
+        break;
+      }
+
+      case 'checkout.session.expired': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        await markCheckoutSessionStatus(session, 'canceled');
+        break;
+      }
+
+      case 'payment_intent.payment_failed': {
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        await markPaymentIntentStatus(paymentIntent.id, 'failed');
+        break;
+      }
+
+      default:
+        break;
     }
 
+    await markWebhookEventProcessed(event, rawBody);
     return NextResponse.json({ received: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Webhook handler failed.';
-    return new NextResponse(message, { status: 400 });
+    console.error('[stripe.webhook] processing failed', {
+      eventId: event.id,
+      type: event.type,
+      error: error instanceof Error ? error.message : 'UNKNOWN',
+    });
+    return new NextResponse('Webhook handler failed', { status: 500 });
   }
 }
 
-async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-  const existingPurchase = await findPurchaseBySessionId(session.id);
-  if (existingPurchase) {
-    return;
-  }
-
-  const email = (session.customer_details?.email || session.customer_email || '')
-    .trim()
-    .toLowerCase();
-  if (!email) {
-    throw new Error('Missing customer email in checkout session.');
-  }
-
-  const packageId = String(session.metadata?.packageId || '').trim();
-  const pack = getCreditPackageById(packageId);
-  if (!pack) {
-    throw new Error('Invalid package metadata.');
-  }
-
-  const userIdFromMetadata = String(session.client_reference_id || '').trim();
-  const anonymousSessionId = String(session.metadata?.anonymousSessionId || '').trim();
-  const scenarioSlug = String(session.metadata?.scenarioSlug || '').trim();
-  const returnTo = String(session.metadata?.returnTo || '').trim();
-  const stripeCustomerId =
-    typeof session.customer === 'string' ? session.customer : null;
+async function markCheckoutSessionStatus(
+  session: Stripe.Checkout.Session,
+  nextStatus: 'pending' | 'failed' | 'canceled'
+) {
+  const purchaseIdHint = String(
+    session.metadata?.purchaseId || session.client_reference_id || ''
+  ).trim();
   const stripePaymentIntentId =
     typeof session.payment_intent === 'string' ? session.payment_intent : null;
+  const stripeCustomerId =
+    typeof session.customer === 'string' ? session.customer : null;
 
-  let account: { id: string; email: string } | null = null;
-
-  try {
-    account = await db().transaction(async (tx: any) => {
-      const existing = await tx
-        .select({
-          id: purchase.id,
-        })
-        .from(purchase)
-        .where(eq(purchase.stripeCheckoutSessionId, session.id))
-        .limit(1);
-
-      if (existing.length > 0) {
-        return null;
-      }
-
-      const userById =
-        userIdFromMetadata
-          ? await tx
-              .select()
-              .from(user)
-              .where(eq(user.id, userIdFromMetadata))
-              .limit(1)
-          : [];
-      const userByEmail = await tx
-        .select()
-        .from(user)
-        .where(eq(user.email, email))
-        .limit(1);
-
-      let foundUser = userById[0] || userByEmail[0] || null;
-      if (!foundUser) {
-        const fallbackName = email.split('@')[0] || 'Flowdockr User';
-        await tx
-          .insert(user)
-          .values({
-            id: getUuid(),
-            name: fallbackName.slice(0, 80),
-            email,
-            emailVerified: false,
-            creditsBalance: 0,
-            magicLinkEnabled: true,
+  await db().transaction(async (tx: any) => {
+    const [targetPurchase] = purchaseIdHint
+      ? await tx
+          .select({
+            id: purchase.id,
+            status: purchase.status,
+            creditsGranted: purchase.creditsGranted,
+            stripePaymentIntentId: purchase.stripePaymentIntentId,
+            stripeCustomerId: purchase.stripeCustomerId,
           })
-          .onConflictDoNothing({
-            target: user.email,
-          });
+          .from(purchase)
+          .where(eq(purchase.id, purchaseIdHint))
+          .limit(1)
+          .for('update')
+      : await tx
+          .select({
+            id: purchase.id,
+            status: purchase.status,
+            creditsGranted: purchase.creditsGranted,
+            stripePaymentIntentId: purchase.stripePaymentIntentId,
+            stripeCustomerId: purchase.stripeCustomerId,
+          })
+          .from(purchase)
+          .where(eq(purchase.stripeCheckoutSessionId, session.id))
+          .limit(1)
+          .for('update');
 
-        const [createdOrExisting] = await tx
-          .select()
-          .from(user)
-          .where(eq(user.email, email))
-          .limit(1);
-
-        foundUser = createdOrExisting || null;
-      }
-
-      if (!foundUser) {
-        throw new Error('Failed to resolve user for checkout.');
-      }
-
-      const currentBalance = foundUser.creditsBalance || 0;
-      const newBalance = currentBalance + pack.credits;
-
-      await tx
-        .update(user)
-        .set({
-          creditsBalance: newBalance,
-          stripeCustomerId: foundUser.stripeCustomerId || stripeCustomerId,
-        })
-        .where(eq(user.id, foundUser.id));
-
-      const [createdPurchase] = await tx
-        .insert(purchase)
-        .values({
-          id: getUuid(),
-          userId: foundUser.id,
-          stripeCheckoutSessionId: session.id,
-          stripePaymentIntentId,
-          stripeCustomerId,
-          email,
-          packageId: pack.id,
-          creditsGranted: pack.credits,
-          amountUsdCents: pack.priceUsdCents,
-          currency: 'usd',
-          status: 'paid',
-          metadata: JSON.stringify({
-            packageId: pack.id,
-            scenarioSlug,
-            returnTo,
-            anonymousSessionId,
-            stripeSessionMetadata: session.metadata || {},
-          }),
-        })
-        .returning();
-
-      await tx.insert(creditTransaction).values({
-        id: getUuid(),
-        userId: foundUser.id,
-        type: 'credit_purchase',
-        amount: pack.credits,
-        balanceAfter: newBalance,
-        reason: `Purchased ${pack.name}`,
-        purchaseId: createdPurchase.id,
-        metadata: JSON.stringify({
-          packageId: pack.id,
-          stripeCheckoutSessionId: session.id,
-        }),
-      });
-
-      if (anonymousSessionId) {
-        const [existingLink] = await tx
-          .select({ id: anonymousLinkSession.id })
-          .from(anonymousLinkSession)
-          .where(
-            and(
-              eq(anonymousLinkSession.userId, foundUser.id),
-              eq(anonymousLinkSession.anonymousSessionId, anonymousSessionId)
-            )
-          )
-          .limit(1);
-
-        if (!existingLink) {
-          await tx.insert(anonymousLinkSession).values({
-            id: getUuid(),
-            userId: foundUser.id,
-            anonymousSessionId,
-          });
-        }
-      }
-
-      return {
-        id: foundUser.id,
-        email: foundUser.email,
-      };
-    });
-  } catch (error) {
-    const message = error instanceof Error ? error.message.toLowerCase() : '';
-    if (
-      message.includes('duplicate key') ||
-      message.includes('stripe_checkout_session_id')
-    ) {
+    if (!targetPurchase) {
       return;
     }
 
-    throw error;
-  }
+    if (targetPurchase.status === 'paid' || targetPurchase.creditsGranted > 0) {
+      return;
+    }
 
-  if (!account?.email) {
+    await tx
+      .update(purchase)
+      .set({
+        status: nextStatus,
+        stripeCheckoutSessionId: session.id,
+        stripePaymentIntentId:
+          stripePaymentIntentId || targetPurchase.stripePaymentIntentId,
+        stripeCustomerId: stripeCustomerId || targetPurchase.stripeCustomerId,
+      })
+      .where(eq(purchase.id, targetPurchase.id));
+  });
+}
+
+async function markPaymentIntentStatus(
+  paymentIntentId: string,
+  nextStatus: 'failed' | 'canceled'
+) {
+  if (!paymentIntentId) {
     return;
   }
 
-  try {
-    await sendMagicLink(account.email, returnTo || undefined);
-  } catch (error) {
-    console.error('Failed to send magic link after checkout:', error);
-  }
-}
+  await db().transaction(async (tx: any) => {
+    const [targetPurchase] = await tx
+      .select({
+        id: purchase.id,
+        status: purchase.status,
+        creditsGranted: purchase.creditsGranted,
+      })
+      .from(purchase)
+      .where(eq(purchase.stripePaymentIntentId, paymentIntentId))
+      .limit(1)
+      .for('update');
 
-async function findPurchaseBySessionId(sessionId: string) {
-  const [existingPurchase] = await db()
-    .select({
-      id: purchase.id,
-    })
-    .from(purchase)
-    .where(eq(purchase.stripeCheckoutSessionId, sessionId))
-    .limit(1);
+    if (!targetPurchase) {
+      return;
+    }
 
-  return existingPurchase || null;
+    if (targetPurchase.status === 'paid' || targetPurchase.creditsGranted > 0) {
+      return;
+    }
+
+    await tx
+      .update(purchase)
+      .set({
+        status: nextStatus,
+      })
+      .where(eq(purchase.id, targetPurchase.id));
+  });
 }

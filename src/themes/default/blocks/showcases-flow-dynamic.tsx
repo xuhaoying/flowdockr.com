@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Wand, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -57,13 +57,13 @@ export function ShowcasesFlowDynamic({
   const [error, setError] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  // Track if this is the initial mount to possibly skip fetching
-  const isInitialMount = useState(true);
+  // Track if this is the initial mount to possibly skip fetching.
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
     // If initialItems are provided, skip the first fetch
-    if (initialItems && isInitialMount[0]) {
-      isInitialMount[1](false);
+    if (initialItems && isInitialMount.current) {
+      isInitialMount.current = false;
       return;
     }
     

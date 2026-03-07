@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/core/i18n/navigation';
+import { LazyImage } from '@/shared/blocks/common';
 import { Tabs } from '@/shared/blocks/common/tabs';
 import { cn } from '@/shared/lib/utils';
 import {
@@ -66,9 +67,11 @@ export function Blog({
               >
                 <div className="bg-muted h-full overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-lg">
                   <div className="aspect-video overflow-hidden">
-                    <img
+                    <LazyImage
                       src={item.image || '/imgs/blog/1.jpeg'}
-                      alt={item.title}
+                      alt={item.title ?? 'Blog cover image'}
+                      width={1200}
+                      height={675}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>

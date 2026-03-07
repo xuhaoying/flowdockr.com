@@ -1,5 +1,6 @@
 "use client";
 
+import { LazyImage } from "@/shared/blocks/common";
 import { Button } from "@/shared/components/ui/button";
 import {
   Command,
@@ -292,9 +293,9 @@ export function PromptInputAttachment({
           {...props}
         >
           <div className="relative size-5 shrink-0">
-            <div className="absolute inset-0 flex size-5 items-center justify-center overflow-hidden rounded bg-background transition-opacity group-hover:opacity-0">
+              <div className="absolute inset-0 flex size-5 items-center justify-center overflow-hidden rounded bg-background transition-opacity group-hover:opacity-0">
               {isImage ? (
-                <img
+                <LazyImage
                   alt={filename || "attachment"}
                   className="size-5 object-cover"
                   height={20}
@@ -329,7 +330,7 @@ export function PromptInputAttachment({
         <div className="w-auto space-y-3">
           {isImage && (
             <div className="flex max-h-96 w-96 items-center justify-center overflow-hidden rounded-md border">
-              <img
+              <LazyImage
                 alt={filename || "attachment preview"}
                 className="max-h-full max-w-full object-contain"
                 height={384}
@@ -542,36 +543,64 @@ export const PromptInput = ({
     [matchesAccept, maxFiles, maxFileSize, onError]
   );
 
-  const add = usingProvider
-    ? (files: File[] | FileList) => controller.attachments.add(files)
-    : addLocal;
+  const removeLocal = useCallback((id: string) => {
+    setItems((prev) => {
+      const found = prev.find((file) => file.id === id);
+      if (found?.url) {
+        URL.revokeObjectURL(found.url);
+      }
+      return prev.filter((file) => file.id !== id);
+    });
+  }, []);
 
-  const remove = usingProvider
-    ? (id: string) => controller.attachments.remove(id)
-    : (id: string) =>
-        setItems((prev) => {
-          const found = prev.find((file) => file.id === id);
-          if (found?.url) {
-            URL.revokeObjectURL(found.url);
-          }
-          return prev.filter((file) => file.id !== id);
-        });
+  const clearLocal = useCallback(() => {
+    setItems((prev) => {
+      for (const file of prev) {
+        if (file.url) {
+          URL.revokeObjectURL(file.url);
+        }
+      }
+      return [];
+    });
+  }, []);
 
-  const clear = usingProvider
-    ? () => controller.attachments.clear()
-    : () =>
-        setItems((prev) => {
-          for (const file of prev) {
-            if (file.url) {
-              URL.revokeObjectURL(file.url);
-            }
-          }
-          return [];
-        });
+  const add = useCallback(
+    (fileList: File[] | FileList) => {
+      if (usingProvider) {
+        controller.attachments.add(fileList);
+        return;
+      }
+      addLocal(fileList);
+    },
+    [addLocal, controller, usingProvider]
+  );
 
-  const openFileDialog = usingProvider
-    ? () => controller.attachments.openFileDialog()
-    : openFileDialogLocal;
+  const remove = useCallback(
+    (id: string) => {
+      if (usingProvider) {
+        controller.attachments.remove(id);
+        return;
+      }
+      removeLocal(id);
+    },
+    [controller, removeLocal, usingProvider]
+  );
+
+  const clear = useCallback(() => {
+    if (usingProvider) {
+      controller.attachments.clear();
+      return;
+    }
+    clearLocal();
+  }, [clearLocal, controller, usingProvider]);
+
+  const openFileDialog = useCallback(() => {
+    if (usingProvider) {
+      controller.attachments.openFileDialog();
+      return;
+    }
+    openFileDialogLocal();
+  }, [controller, openFileDialogLocal, usingProvider]);
 
   // Let provider know about our hidden file input so external menus can call openFileDialog()
   useEffect(() => {

@@ -1,4 +1,6 @@
-export type CreditPackageId = 'starter_10' | 'pro_50' | 'studio_200';
+import type { CreditPackCode } from '@/config/creditPacks';
+
+export type CreditPackageId = CreditPackCode;
 
 export type CreditPackage = {
   id: CreditPackageId;
@@ -6,4 +8,7 @@ export type CreditPackage = {
   credits: number;
   priceUsdCents: number;
   stripePriceId: string;
+  active?: boolean;
+  description?: string;
+  currency?: 'usd';
 };

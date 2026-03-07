@@ -68,7 +68,7 @@ export function SignUser({
   // set is check sign
   useEffect(() => {
     setIsCheckSign(isPending);
-  }, [isPending]);
+  }, [isPending, setIsCheckSign]);
 
   // show one tap if not initialized
   useEffect(() => {
@@ -83,7 +83,7 @@ export function SignUser({
       oneTapInitialized.current = true;
       showOneTap(configs);
     }
-  }, [configs, session, isPending]);
+  }, [configs, session, isPending, showOneTap]);
 
   // set user
   useEffect(() => {
@@ -97,7 +97,7 @@ export function SignUser({
     } else if (!sessionUser && currentUserId) {
       setUser(null);
     }
-  }, [session?.user?.id, user?.id]);
+  }, [fetchUserInfo, session?.user, session?.user?.id, setUser, user?.id]);
 
   return (
     <>

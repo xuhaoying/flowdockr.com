@@ -1,5 +1,5 @@
 import { envConfigs } from '@/config';
-import { ScenarioContent } from '@/types/scenario';
+import { Scenario } from '@/lib/scenarios';
 
 const baseUrl = envConfigs.app_url.replace(/\/$/, '');
 
@@ -7,14 +7,14 @@ export function getScenarioCanonicalUrl(slug: string): string {
   return `${baseUrl}/scenarios/${slug}`;
 }
 
-export function buildScenarioArticleSchema(scenario: ScenarioContent) {
+export function buildScenarioArticleSchema(scenario: Scenario) {
   const url = getScenarioCanonicalUrl(scenario.slug);
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: scenario.h1,
-    description: scenario.seoDescription,
+    description: scenario.metaDescription,
     mainEntityOfPage: url,
     url,
     author: {
@@ -28,22 +28,22 @@ export function buildScenarioArticleSchema(scenario: ScenarioContent) {
   };
 }
 
-export function buildScenarioFaqSchema(scenario: ScenarioContent) {
+export function buildScenarioFaqSchema(scenario: Scenario) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: scenario.faq.map((item) => ({
       '@type': 'Question',
-      name: item.question,
+      name: item.q,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.answer,
+        text: item.a,
       },
     })),
   };
 }
 
-export function buildScenarioBreadcrumbSchema(scenario: ScenarioContent) {
+export function buildScenarioBreadcrumbSchema(scenario: Scenario) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
