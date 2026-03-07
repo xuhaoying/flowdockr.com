@@ -50,6 +50,7 @@ data*
 
 # keep scenario seed data committed
 !src/data/
+src/data/*
 !src/data/scenarios.ts
 
 *.db
