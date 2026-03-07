@@ -33,7 +33,7 @@ export function ScenarioHubContent() {
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <Button asChild>
-                <Link href="/scenarios/how-to-respond-to-a-lowball-offer">
+                <Link href="/scenarios/lowball-offer">
                   Start with lowball offer
                   <ArrowRight className="size-4" />
                 </Link>
@@ -96,7 +96,7 @@ export function ScenarioHubContent() {
                 <CardHeader className="space-y-3">
                   <div className="flex items-center justify-between">
                     <Badge variant="outline" className="text-[10px] uppercase tracking-wide">
-                      {scenario.promptContext.riskLevel} risk
+                      {scenario.riskLevel} risk
                     </Badge>
                     <ArrowRight className="size-4 text-muted-foreground transition-colors group-hover:text-primary" />
                   </div>
@@ -104,10 +104,10 @@ export function ScenarioHubContent() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <CardDescription className="line-clamp-3">
-                    {scenario.seoDescription}
+                    {scenario.metaDescription}
                   </CardDescription>
                   <p className="line-clamp-2 text-xs text-muted-foreground">
-                    {scenario.problemSummary}
+                    {scenario.shortDescription}
                   </p>
                 </CardContent>
               </Card>

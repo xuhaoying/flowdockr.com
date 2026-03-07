@@ -1,86 +1,40 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 
-import { getThemePage } from '@/core/theme';
+import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
-import { getPostsAndCategories } from '@/shared/models/post';
-import {
-  Blog as BlogType,
-  Category as CategoryType,
-  Post as PostType,
-} from '@/shared/types/blocks/blog';
-import { DynamicPage } from '@/shared/types/blocks/landing';
 
 export const generateMetadata = getMetadata({
-  metadataKey: 'pages.blog.metadata',
+  title: 'Flowdockr Blog (Coming Soon)',
+  description:
+    'Flowdockr blog is in progress. For now, use scenario pages and the negotiation reply tool.',
   canonicalUrl: '/blog',
 });
 
 export default async function BlogPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: number; pageSize?: number }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // load blog data
-  const t = await getTranslations('pages.blog');
-
-  let posts: PostType[] = [];
-  let categories: CategoryType[] = [];
-
-  // current category data
-  const currentCategory: CategoryType = {
-    id: 'all',
-    slug: 'all',
-    title: t('messages.all'),
-    url: `/blog`,
-  };
-
-  try {
-    const { page: pageNum, pageSize } = await searchParams;
-    const page = pageNum || 1;
-    const limit = pageSize || 30;
-
-    const { posts: allPosts, categories: allCategories } =
-      await getPostsAndCategories({
-        locale,
-        page,
-        limit,
-      });
-
-    posts = allPosts;
-    categories = allCategories;
-
-    categories.unshift(currentCategory);
-  } catch (error) {
-    console.log('getting posts failed:', error);
-  }
-
-  // build blog data
-  const blog: BlogType = {
-    ...t.raw('blog'),
-    categories,
-    currentCategory,
-    posts,
-  };
-
-  // build page sections
-  const page: DynamicPage = {
-    sections: {
-      blog: {
-        block: 'blog',
-        data: {
-          blog,
-        },
-      },
-    },
-  };
-
-  // load page component
-  const Page = await getThemePage('dynamic-page');
-
-  return <Page locale={locale} page={page} />;
+  return (
+    <main className="mx-auto flex w-full max-w-3xl flex-col gap-5 px-4 py-12">
+      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Blog</h1>
+        <p className="mt-2 text-sm text-slate-700">
+          We&apos;re keeping blog minimal for now. The main content engine is scenario
+          pages with embedded tools.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm">
+          <Link href="/scenarios" className="font-semibold text-slate-900 underline">
+            Browse scenarios
+          </Link>
+          <Link href="/tool" className="font-semibold text-slate-900 underline">
+            Open tool
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
 }

@@ -1,5 +1,7 @@
+import { sql } from 'drizzle-orm';
 import {
   boolean,
+  check,
   index,
   integer,
   pgSchema,
@@ -41,6 +43,10 @@ export const user = table(
     locale: text('locale').notNull().default(''),
   },
   (table) => [
+    check(
+      'chk_user_credits_balance_non_negative',
+      sql`${table.creditsBalance} >= 0`
+    ),
     // Search users by name in admin dashboard
     index('idx_user_name').on(table.name),
     // Order users by registration time for latest users list
@@ -380,16 +386,29 @@ export const generation = table(
     caution: text('caution'),
     creditsCharged: integer('credits_charged').notNull().default(0),
     isFreeGeneration: boolean('is_free_generation').notNull().default(false),
+    sourcePage: text('source_page').notNull().default('tool'),
+    modeUsed: text('mode_used').notNull().default('free'),
     ipHash: text('ip_hash'),
     userAgentHash: text('user_agent_hash'),
   },
   (table) => [
+    check(
+      'chk_generation_has_identity',
+      sql`${table.userId} is not null or ${table.anonymousSessionId} is not null`
+    ),
+    check('chk_generation_credits_charged_non_negative', sql`${table.creditsCharged} >= 0`),
+    check(
+      'chk_generation_source_page',
+      sql`${table.sourcePage} in ('home', 'scenario', 'tool')`
+    ),
+    check('chk_generation_mode_used', sql`${table.modeUsed} in ('free', 'paid')`),
     index('idx_generation_user_created').on(table.userId, table.createdAt),
     index('idx_generation_anon_created').on(
       table.anonymousSessionId,
       table.createdAt
     ),
     index('idx_generation_scenario_created').on(table.scenarioSlug, table.createdAt),
+    index('idx_generation_source_page').on(table.sourcePage),
   ]
 );
 
@@ -411,9 +430,33 @@ export const purchase = table(
     metadata: text('metadata'),
   },
   (table) => [
+    check('chk_purchase_credits_granted_non_negative', sql`${table.creditsGranted} >= 0`),
+    check('chk_purchase_amount_positive', sql`${table.amountUsdCents} > 0`),
+    check(
+      'chk_purchase_status_allowed',
+      sql`${table.status} in ('pending', 'paid', 'failed', 'canceled', 'refunded', 'payment_failed', 'expired', 'cancelled')`
+    ),
     index('idx_purchase_user_created').on(table.userId, table.createdAt),
     index('idx_purchase_email_created').on(table.email, table.createdAt),
     index('idx_purchase_status_created').on(table.status, table.createdAt),
+    index('idx_purchase_payment_intent').on(table.stripePaymentIntentId),
+  ]
+);
+
+export const webhookEvent = table(
+  'webhook_event',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    stripeEventId: text('stripe_event_id').notNull().unique(),
+    type: text('type').notNull(),
+    processed: boolean('processed').notNull().default(false),
+    processedAt: timestamp('processed_at'),
+    payload: text('payload'),
+  },
+  (table) => [
+    index('idx_webhook_event_type_created').on(table.type, table.createdAt),
+    index('idx_webhook_event_processed').on(table.processed, table.createdAt),
   ]
 );
 
@@ -454,7 +497,10 @@ export const anonymousUsage = table(
     userAgentHash: text('user_agent_hash'),
     lastScenarioSlug: text('last_scenario_slug'),
   },
-  (table) => [index('idx_anon_usage_updated').on(table.updatedAt)]
+  (table) => [
+    check('chk_anon_usage_non_negative', sql`${table.freeGenerationsUsed} >= 0`),
+    index('idx_anon_usage_updated').on(table.updatedAt),
+  ]
 );
 
 export const anonymousLinkSession = table(

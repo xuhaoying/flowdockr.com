@@ -1,3 +1,4 @@
+import { LazyImage } from "@/shared/blocks/common";
 import {
   Command,
   CommandDialog,
@@ -165,7 +166,7 @@ export const ModelSelectorLogo = ({
   className,
   ...props
 }: ModelSelectorLogoProps) => (
-  <img
+  <LazyImage
     {...props}
     alt={`${provider} logo`}
     className={cn("size-3", className)}

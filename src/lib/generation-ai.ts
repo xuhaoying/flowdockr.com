@@ -1,6 +1,6 @@
-import { buildUserPrompt, FLOWDOCKR_RESPONSE_SCHEMA, SYSTEM_PROMPT } from '@/lib/prompts';
-import { GeneratedReplyResult, GenerateReplyInput } from '@/types/generation';
-import { ScenarioContent } from '@/types/scenario';
+import { buildScenarioPrompt, systemPrompt } from '@/lib/prompts';
+import { Scenario } from '@/lib/scenarios';
+import { GenerateReplyInput } from '@/types/generation';
 
 type OpenAIResponsePayload = {
   output_text?: string;
@@ -25,10 +25,22 @@ type GenerationProvider = 'openai' | 'fal';
 
 export async function generateReplyWithAI(
   input: GenerateReplyInput,
-  scenario: ScenarioContent
-): Promise<GeneratedReplyResult> {
+  scenario: Scenario,
+  options?: {
+    qualityHints?: string[];
+  }
+): Promise<string> {
   const providerConfig = resolveProviderConfig();
   const model = resolveModel(providerConfig.provider);
+
+  const userPrompt = buildScenarioPrompt({
+    scenario,
+    message: input.message,
+    qualityHints: options?.qualityHints,
+    userRateContext: input.userRateContext,
+    serviceType: input.serviceType,
+    userGoal: input.goal,
+  });
 
   const response = await fetch(providerConfig.endpoint, {
     method: 'POST',
@@ -41,21 +53,13 @@ export async function generateReplyWithAI(
       input: [
         {
           role: 'system',
-          content: SYSTEM_PROMPT,
+          content: systemPrompt,
         },
         {
           role: 'user',
-          content: buildUserPrompt(input, scenario),
+          content: userPrompt,
         },
       ],
-      text: {
-        format: {
-          type: 'json_schema',
-          name: 'flowdockr_reply',
-          schema: FLOWDOCKR_RESPONSE_SCHEMA,
-          strict: true,
-        },
-      },
     }),
   });
 
@@ -65,9 +69,7 @@ export async function generateReplyWithAI(
     throw new Error(message);
   }
 
-  const rawText = extractResponseText(payload);
-  const parsed = safeJsonParse(rawText);
-  return normalizeGeneratedReplyResult(parsed);
+  return extractResponseText(payload);
 }
 
 function extractResponseText(payload: OpenAIResponsePayload): string {
@@ -86,62 +88,6 @@ function extractResponseText(payload: OpenAIResponsePayload): string {
   }
 
   return fromContent;
-}
-
-function safeJsonParse(rawText: string): unknown {
-  const cleaned = rawText
-    .trim()
-    .replace(/^```json\s*/i, '')
-    .replace(/^```\s*/i, '')
-    .replace(/\s*```$/i, '');
-
-  return JSON.parse(cleaned);
-}
-
-function normalizeGeneratedReplyResult(raw: unknown): GeneratedReplyResult {
-  const data = raw as Partial<GeneratedReplyResult> | null;
-
-  const recommendedReply =
-    typeof data?.recommendedReply === 'string'
-      ? data.recommendedReply.trim()
-      : '';
-  const alternativeReply =
-    typeof data?.alternativeReply === 'string'
-      ? data.alternativeReply.trim()
-      : '';
-  const confidence =
-    data?.confidence === 'high' ||
-    data?.confidence === 'medium' ||
-    data?.confidence === 'low'
-      ? data.confidence
-      : 'medium';
-  const strategy =
-    Array.isArray(data?.strategy) && data?.strategy.length > 0
-      ? data.strategy
-          .map((item) => (typeof item === 'string' ? item.trim() : ''))
-          .filter(Boolean)
-          .slice(0, 3)
-      : [];
-  const caution =
-    typeof data?.caution === 'string' && data.caution.trim()
-      ? data.caution.trim()
-      : 'Avoid lowering your rate too early before scope/value is clarified.';
-
-  if (!recommendedReply || !alternativeReply || strategy.length === 0) {
-    throw new Error('Model returned invalid reply payload.');
-  }
-
-  while (strategy.length < 3) {
-    strategy.push('Keep the message concise and decision-oriented.');
-  }
-
-  return {
-    recommendedReply,
-    alternativeReply,
-    confidence,
-    strategy,
-    caution,
-  };
 }
 
 function resolveProviderConfig(): {
@@ -181,7 +127,6 @@ function resolveProviderConfig(): {
     };
   }
 
-  // Prefer FAL when configured. FAL acts as a router for multiple model vendors.
   if (falKey) {
     return {
       provider: 'fal',

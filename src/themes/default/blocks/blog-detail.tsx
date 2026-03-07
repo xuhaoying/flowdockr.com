@@ -4,7 +4,7 @@ import { TOCItems, TOCProvider } from 'fumadocs-ui/components/layout/toc';
 import { CalendarIcon, ListIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { MarkdownPreview } from '@/shared/blocks/common';
+import { LazyImage, MarkdownPreview } from '@/shared/blocks/common';
 import { Crumb } from '@/shared/blocks/common/crumb';
 import { type Post as PostType } from '@/shared/types/blocks/blog';
 import { NavItem } from '@/shared/types/blocks/common';
@@ -103,9 +103,11 @@ export function BlogDetail({ post }: { post: PostType }) {
                       <div className="text-center">
                         {post.author_image && (
                           <div className="ring-foreground/10 mx-auto mb-4 aspect-square size-20 overflow-hidden rounded-xl border border-transparent shadow-md ring-1 shadow-black/15">
-                            <img
+                            <LazyImage
                               src={post.author_image}
-                              alt={post.author_name}
+                              alt={post.author_name ?? 'Author avatar'}
+                              width={80}
+                              height={80}
                               className="h-full w-full object-cover"
                             />
                           </div>

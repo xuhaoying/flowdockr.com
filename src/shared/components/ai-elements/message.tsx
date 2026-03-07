@@ -1,5 +1,6 @@
 "use client";
 
+import { LazyImage } from "@/shared/blocks/common";
 import { Button } from "@/shared/components/ui/button";
 import {
   ButtonGroup,
@@ -20,7 +21,14 @@ import {
   XIcon,
 } from "lucide-react";
 import type { ComponentProps, HTMLAttributes, ReactElement } from "react";
-import { createContext, memo, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Streamdown } from "streamdown";
 
 export type MessageProps = HTMLAttributes<HTMLDivElement> & {
@@ -188,7 +196,10 @@ export const MessageBranchContent = ({
   ...props
 }: MessageBranchContentProps) => {
   const { currentBranch, setBranches, branches } = useMessageBranch();
-  const childrenArray = Array.isArray(children) ? children : [children];
+  const childrenArray = useMemo(
+    () => (Array.isArray(children) ? children : [children]),
+    [children]
+  );
 
   // Use useEffect to update branches when they change
   useEffect(() => {
@@ -349,7 +360,7 @@ export function MessageAttachment({
     >
       {isImage ? (
         <>
-          <img
+          <LazyImage
             alt={filename || "attachment"}
             className="size-full object-cover"
             height={100}

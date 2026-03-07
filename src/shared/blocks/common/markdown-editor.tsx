@@ -31,7 +31,7 @@ export function MarkdownEditor({
     editorRef.current = instance;
 
     return () => editorRef.current?.destroy();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- initialize editor only once
 
   useEffect(() => {
     if (editorRef.current && value !== editorRef.current.getValue()) {

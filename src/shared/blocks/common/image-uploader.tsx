@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
+import { LazyImage } from './lazy-image';
 
 export type UploadStatus = 'idle' | 'uploading' | 'uploaded' | 'error';
 
@@ -541,9 +542,11 @@ export function ImageUploader({
             className="group border-border bg-muted/50 hover:border-border hover:bg-muted relative overflow-hidden rounded-xl border p-1 shadow-sm transition"
           >
             <div className="relative overflow-hidden rounded-lg">
-              <img
+              <LazyImage
                 src={item.preview}
                 alt="Reference"
+                width={128}
+                height={128}
                 className="h-32 w-32 rounded-lg object-cover"
               />
               {item.size && (

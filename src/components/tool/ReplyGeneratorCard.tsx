@@ -303,11 +303,6 @@ export function ReplyGeneratorCard({
   };
 
   const handleCheckout = async (packageId: CreditPackageId) => {
-    if (!usage.loggedIn && !checkoutEmail.trim()) {
-      setError('Please enter an email before checkout.');
-      return;
-    }
-
     setCheckoutLoadingPackageId(packageId);
     setError('');
 
@@ -320,14 +315,13 @@ export function ReplyGeneratorCard({
         loggedIn: usage.loggedIn,
       });
 
-      const response = await fetch('/api/checkout', {
+      const response = await fetch('/api/checkout/session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          packageId,
-          email: usage.loggedIn ? undefined : checkoutEmail.trim(),
+          packCode: packageId,
           anonymousSessionId: anonymousSessionId || undefined,
           scenarioSlug,
           returnTo: window.location.pathname + window.location.search,
@@ -338,7 +332,14 @@ export function ReplyGeneratorCard({
         ok: boolean;
         message?: string;
         checkoutUrl?: string;
+        error?: string;
       };
+
+      if (response.status === 401 || payload.error === 'UNAUTHORIZED') {
+        const callbackUrl = `${window.location.pathname}${window.location.search}`;
+        window.location.assign(`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        return;
+      }
 
       if (!response.ok || !payload.ok || !payload.checkoutUrl) {
         throw new Error(payload.message || 'Failed to start checkout.');

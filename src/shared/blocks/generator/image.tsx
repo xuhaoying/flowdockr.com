@@ -276,7 +276,8 @@ export function ImageGenerator({
             // Find first available model for this provider
             const availableModel = MODEL_OPTIONS.find(
               (option) => 
-                option.scenes.includes(activeTab) && 
+                // Use text-to-image as the deterministic initial tab during first mount.
+                option.scenes.includes('text-to-image') && 
                 option.provider === firstProvider
             );
             
@@ -318,7 +319,7 @@ export function ImageGenerator({
         setIsLoadingCredits(false);
       });
     }
-  }, [user?.id, user?.credits, fetchUserCredits]);
+  }, [user, user?.id, user?.credits, fetchUserCredits]);
 
   useEffect(() => {
     if (promptKey) {

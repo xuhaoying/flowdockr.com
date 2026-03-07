@@ -1,4 +1,4 @@
-import { CREDIT_PACKAGE_LIST } from '@/lib/credits';
+import { CREDIT_PACKAGE_LIST } from '@/lib/credits/packages';
 import { CreditPackageId } from '@/types/billing';
 
 import { Button } from '@/shared/components/ui/button';
@@ -62,20 +62,20 @@ export function PaywallModal(props: PaywallModalProps) {
           {CREDIT_PACKAGE_LIST.map((pack) => (
             <div
               key={pack.id}
-              className={`rounded-md border p-4 ${pack.id === 'pro_50' ? 'border-primary' : ''}`}
+              className={`rounded-md border p-4 ${pack.id === 'pro_100' ? 'border-primary' : ''}`}
             >
               <p className="text-sm font-semibold">{pack.name}</p>
               <p className="mt-1 text-2xl font-bold">
                 ${(pack.priceUsdCents / 100).toFixed(0)}
               </p>
               <p className="text-sm text-muted-foreground">{pack.credits} credits</p>
-              {pack.id === 'pro_50' ? (
+              {pack.id === 'pro_100' ? (
                 <p className="mt-2 text-xs text-muted-foreground">Most popular</p>
               ) : null}
               <Button
                 type="button"
                 className="mt-3 w-full"
-                variant={pack.id === 'pro_50' ? 'default' : 'outline'}
+                variant={pack.id === 'pro_100' ? 'default' : 'outline'}
                 onClick={() => onCheckout(pack.id)}
                 disabled={checkoutLoadingPackageId !== null}
               >
