@@ -191,7 +191,7 @@ export function SignInForm({
         <div className="flex w-full justify-center border-t py-4">
           <p className="text-center text-xs text-neutral-500">
             {t('no_account')}
-            <Link href="/sign-up" className="underline">
+            <Link href="/signin" className="underline">
               <span className="cursor-pointer dark:text-white/70">
                 {t('sign_up_title')}
               </span>

@@ -241,7 +241,7 @@ export function SignUp({
           <div className="flex w-full justify-center border-t py-4">
             <p className="text-center text-xs text-neutral-500">
               {t('already_have_account')}
-              <Link href="/sign-in" className="underline">
+              <Link href="/signin" className="underline">
                 <span className="cursor-pointer dark:text-white/70">
                   {t('sign_in_title')}
                 </span>
