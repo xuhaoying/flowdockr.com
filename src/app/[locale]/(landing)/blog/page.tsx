@@ -27,7 +27,7 @@ export default async function BlogPage({
           pages with embedded tools.
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
-          <Link href="/scenarios" className="font-semibold text-slate-900 underline">
+          <Link href="/scenario" className="font-semibold text-slate-900 underline">
             Browse scenarios
           </Link>
           <Link href="/tool" className="font-semibold text-slate-900 underline">

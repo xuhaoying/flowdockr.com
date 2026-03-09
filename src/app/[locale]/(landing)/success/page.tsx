@@ -11,7 +11,7 @@ export const generateMetadata = getMetadata({
 });
 
 function sanitizeReturnPath(value: string | undefined): string {
-  const fallback = '/scenarios';
+  const fallback = '/scenario';
   const raw = String(value || '').trim();
   if (!raw) {
     return fallback;

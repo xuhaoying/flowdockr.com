@@ -161,22 +161,22 @@ export async function createCheckoutSession(
 
 function sanitizeReturnPath(value: string | undefined, request: NextRequest): string {
   if (!value) {
-    return '/scenarios';
+    return '/scenario';
   }
 
   const trimmed = value.trim();
   if (!trimmed) {
-    return '/scenarios';
+    return '/scenario';
   }
 
   try {
     const parsed = new URL(trimmed, request.nextUrl.origin);
     if (parsed.origin !== request.nextUrl.origin) {
-      return '/scenarios';
+      return '/scenario';
     }
 
-    return `${parsed.pathname}${parsed.search}` || '/scenarios';
+    return `${parsed.pathname}${parsed.search}` || '/scenario';
   } catch {
-    return '/scenarios';
+    return '/scenario';
   }
 }
