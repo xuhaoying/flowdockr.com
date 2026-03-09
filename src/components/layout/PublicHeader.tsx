@@ -4,9 +4,10 @@ import { Link, usePathname } from '@/core/i18n/navigation';
 import { cn } from '@/shared/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/scenario', label: 'Scenarios' },
+  { href: '/pricing', label: 'Pricing scenarios' },
+  { href: '/guides', label: 'Guides' },
+  { href: '/tools', label: 'Tools' },
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/pricing', label: 'Pricing' },
 ];
 
 export function PublicHeader() {
@@ -51,10 +52,10 @@ export function PublicHeader() {
             Sign in
           </Link>
           <Link
-            href="/scenario"
+            href="/pricing"
             className="ml-1 inline-flex rounded-md bg-slate-900 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
           >
-            Try a scenario
+            Explore pricing
           </Link>
         </nav>
       </div>

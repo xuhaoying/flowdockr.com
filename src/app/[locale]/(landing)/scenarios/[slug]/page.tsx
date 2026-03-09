@@ -9,6 +9,17 @@ type LegacyScenarioPageParams = {
   slug: string;
 };
 
+const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
+  'lowball-offer': 'price-pushback-after-proposal',
+  'client-asks-discount': 'discount-pressure-before-signing',
+  'cheaper-freelancer': 'cheaper-competitor-comparison',
+  'free-sample-work': 'free-trial-work-request',
+  'more-work-same-budget': 'more-work-same-price',
+  'budget-limited': 'budget-lower-than-expected',
+  'delayed-decision': 'price-pushback-after-proposal',
+  'small-extra-free': 'more-work-same-price',
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -24,8 +35,9 @@ export default async function LegacyScenarioPageRedirect({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const mapped = LEGACY_SCENARIO_REDIRECTS[slug] || 'price-pushback-after-proposal';
 
   redirect(
-    locale === defaultLocale ? `/scenario/${slug}` : `/${locale}/scenario/${slug}`
+    locale === defaultLocale ? `/pricing/${mapped}` : `/${locale}/pricing/${mapped}`
   );
 }

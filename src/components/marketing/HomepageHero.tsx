@@ -12,21 +12,22 @@ export function HomepageHero() {
             Handle difficult client messages without weakening your position.
           </h1>
           <p className="max-w-3xl text-base text-slate-700 md:text-lg">
-            Scenario-based AI negotiation support for pricing pressure, scope creep,
-            lowball offers, delayed decisions, and difficult deal conversations.
+            Flowdockr helps freelancers, consultants, and agencies respond to price
+            pushback, discount pressure, and awkward deal conversations with clearer
+            strategy and stronger wording.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <Link
-              href="/scenario"
+              href="/pricing"
               className="inline-flex rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800"
             >
-              Browse scenarios
+              Explore pricing scenarios
             </Link>
             <Link
-              href="/tool"
+              href="/tools/price-negotiation-email-generator"
               className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-800 transition-colors hover:border-slate-400"
             >
-              Try a real message
+              Try the reply generator
             </Link>
           </div>
         </div>

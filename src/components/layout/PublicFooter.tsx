@@ -1,15 +1,17 @@
 import { Link } from '@/core/i18n/navigation';
 
 const PRIMARY_LINKS = [
-  { href: '/scenario', label: 'Scenarios' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: '/pricing', label: 'Pricing scenarios' },
+  { href: '/guides', label: 'Guides' },
+  { href: '/tools', label: 'Tools' },
+  { href: '/pricing#credits-pricing', label: 'Credits pricing' },
   { href: '/signin', label: 'Sign in' },
 ];
 
 const USE_CASE_LINKS = [
-  { href: '/scenario/client-asks-discount', label: 'Discount pressure' },
-  { href: '/scenario/more-work-same-budget', label: 'Scope creep' },
-  { href: '/scenario/delayed-decision', label: 'Follow-up delays' },
+  { href: '/pricing/price-pushback-after-proposal', label: 'Price pushback' },
+  { href: '/pricing/discount-pressure-before-signing', label: 'Discount pressure' },
+  { href: '/pricing/more-work-same-price', label: 'Scope + price conflict' },
 ];
 
 const LEGAL_LINKS = [

@@ -8,7 +8,7 @@ export const generateMetadata = getMetadata({
   title: 'Scenario-Driven Negotiation Assistant | Flowdockr',
   description:
     'Open a negotiation scenario and generate a professional freelance client reply instantly.',
-  canonicalUrl: '/scenario/lowball-offer',
+  canonicalUrl: '/pricing/price-pushback-after-proposal',
 });
 
 export default async function DealPage({
@@ -21,7 +21,7 @@ export default async function DealPage({
 
   redirect(
     locale === defaultLocale
-      ? '/scenario/lowball-offer'
-      : `/${locale}/scenario/lowball-offer`
+      ? '/pricing/price-pushback-after-proposal'
+      : `/${locale}/pricing/price-pushback-after-proposal`
   );
 }

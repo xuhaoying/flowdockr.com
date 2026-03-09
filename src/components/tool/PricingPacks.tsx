@@ -35,7 +35,7 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
         body: JSON.stringify({
           packCode: packageId,
           scenarioSlug: scenarioSlug || undefined,
-          returnTo: '/scenario',
+          returnTo: '/pricing',
         }),
       });
 

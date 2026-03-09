@@ -30,7 +30,10 @@ export function ExampleConversation() {
           </p>
         </article>
       </div>
-      <Link href="/scenario/lowball-offer" className="inline-flex text-sm font-semibold text-slate-900 underline">
+      <Link
+        href="/pricing/price-pushback-after-proposal"
+        className="inline-flex text-sm font-semibold text-slate-900 underline"
+      >
         See full scenario
       </Link>
     </section>

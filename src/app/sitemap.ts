@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 import { envConfigs } from '@/config';
-import { scenarios } from '@/lib/scenarios';
+import { pricingScenarios } from '@/lib/pricing-cluster';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = envConfigs.app_url.replace(/\/$/, '');
@@ -15,22 +15,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/scenario`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/tool`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.85,
-    },
-    {
       url: `${baseUrl}/pricing`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/tools`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/reply-generator`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/price-negotiation-email-generator`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/guides`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/guides/how-to-negotiate-freelance-pricing`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/guides/when-to-discount-and-when-not-to`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/guides/reduce-scope-instead-of-lowering-rate`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.75,
     },
     {
       url: `${baseUrl}/history`,
@@ -58,8 +88,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const scenarioRoutes: MetadataRoute.Sitemap = scenarios.map((scenario) => ({
-    url: `${baseUrl}/scenario/${scenario.slug}`,
+  const scenarioRoutes: MetadataRoute.Sitemap = pricingScenarios.map((scenario) => ({
+    url: `${baseUrl}/pricing/${scenario.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.85,

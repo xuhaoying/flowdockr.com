@@ -10,16 +10,16 @@ export function FinalCta() {
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
-          href="/scenario"
+          href="/pricing"
           className="inline-flex rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-900"
         >
-          Try a scenario
+          Explore pricing scenarios
         </Link>
         <Link
-          href="/tool"
+          href="/tools/price-negotiation-email-generator"
           className="inline-flex rounded-md border border-slate-400 px-4 py-2 text-sm font-semibold text-white"
         >
-          Try a real message
+          Try the reply generator
         </Link>
       </div>
     </section>

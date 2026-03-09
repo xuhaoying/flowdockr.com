@@ -19,6 +19,22 @@ function sanitizeReturnPath(value: string | undefined): string {
   return raw;
 }
 
+function mapScenarioSlugToPricingPath(slug: string): string {
+  const map: Record<string, string> = {
+    'lowball-offer': 'price-pushback-after-proposal',
+    'client-asks-discount': 'discount-pressure-before-signing',
+    'cheaper-freelancer': 'cheaper-competitor-comparison',
+    'free-sample-work': 'free-trial-work-request',
+    'more-work-same-budget': 'more-work-same-price',
+    'budget-limited': 'budget-lower-than-expected',
+    'small-extra-free': 'more-work-same-price',
+    'delayed-decision': 'price-pushback-after-proposal',
+  };
+
+  const normalized = map[slug] || slug;
+  return `/pricing/${normalized}`;
+}
+
 export default async function CheckoutCanceledPage({
   params,
   searchParams,
@@ -35,7 +51,7 @@ export default async function CheckoutCanceledPage({
   const query = await searchParams;
   const returnTo = sanitizeReturnPath(query.return_to);
   const scenarioSlug = String(query.scenario || '').trim();
-  const backToScenario = scenarioSlug ? `/scenario/${scenarioSlug}` : '/scenario';
+  const backToScenario = scenarioSlug ? mapScenarioSlugToPricingPath(scenarioSlug) : '/pricing';
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
@@ -51,7 +67,7 @@ export default async function CheckoutCanceledPage({
             Return to pricing
           </Link>
           <Link href={backToScenario} className="font-semibold text-slate-700 underline">
-            Continue with scenarios
+            Continue with pricing scenarios
           </Link>
         </div>
       </section>

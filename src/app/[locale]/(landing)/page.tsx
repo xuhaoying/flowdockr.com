@@ -12,12 +12,12 @@ import { PricingCards } from '@/components/pricing/PricingCards';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Flowdockr | Scenario-Based Client Negotiation Support',
+  title: 'Flowdockr | Pricing Negotiation Support for Freelancers',
   description:
-    'Handle difficult client messages with scenario-based negotiation support. Generate send-ready replies and save reusable deal history.',
+    'Handle pricing pushback, discount pressure, and budget mismatch with structured negotiation support for freelancers and agencies.',
   canonicalUrl: '/',
   keywords:
-    'freelance negotiation support, client discount response, lowball offer response, scope creep reply',
+    'freelance pricing negotiation, client discount response, quote too high reply, budget mismatch response',
 });
 
 export default async function LandingPage({
@@ -81,7 +81,7 @@ export default async function LandingPage({
           </summary>
           <p className="mt-2 text-sm text-slate-700">
             You&apos;ll see an upgrade prompt and can continue with credits. Your
-            generated replies can still be saved into deal history.
+            generated replies can still be saved into your negotiation library.
           </p>
         </details>
       </section>
