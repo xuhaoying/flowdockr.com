@@ -35,6 +35,7 @@ export type PricingScenario = {
   heroSubtitle: string;
   shortDescription: string;
   situationSnapshot: string[];
+  whatsReallyHappening?: string[];
   realGoals: string[];
   responsePaths: PricingResponsePath[];
   copyReadyExamples: PricingCopyExample[];
