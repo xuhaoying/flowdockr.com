@@ -3,6 +3,7 @@ import type { Scenario } from '@/types/scenario';
 export const scenarios: Scenario[] = [
   {
     slug: "lowball-offer",
+    category: 'pricing',
     title: "How to Respond to a Lowball Offer from a Client",
     seoTitle: "How to Respond to a Lowball Offer from a Client | Flowdockr",
     metaDescription:
@@ -67,6 +68,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "client-asks-discount",
+    category: 'pricing',
     title: "Client Asks for a Discount: How to Respond",
     seoTitle: "Client Asks for a Discount: How to Respond | Flowdockr",
     metaDescription:
@@ -132,6 +134,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "cheaper-freelancer",
+    category: 'negotiation',
     title: "Client Says Another Freelancer Is Cheaper",
     seoTitle: "Client Says Another Freelancer Is Cheaper | Flowdockr",
     metaDescription:
@@ -197,6 +200,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "free-sample-work",
+    category: 'difficult-clients',
     title: "Client Asks for Free Sample Work",
     seoTitle: "Client Asks for Free Sample Work | Flowdockr",
     metaDescription:
@@ -262,6 +266,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "more-work-same-budget",
+    category: 'negotiation',
     title: "Client Wants More Work for the Same Budget",
     seoTitle: "Client Wants More Work for the Same Budget | Flowdockr",
     metaDescription:
@@ -327,6 +332,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "budget-limited",
+    category: 'pricing',
     title: "Client Says Budget Is Limited",
     seoTitle: "Client Says Budget Is Limited | Flowdockr",
     metaDescription:
@@ -392,6 +398,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "delayed-decision",
+    category: 'difficult-clients',
     title: "Client Delays Decision After Your Quote",
     seoTitle: "Client Delays Decision After Your Quote | Flowdockr",
     metaDescription:
@@ -456,6 +463,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "small-extra-free",
+    category: 'negotiation',
     title: "Client Asks You to Do One Small Thing for Free",
     seoTitle: "Client Asks You to Do One Small Thing for Free | Flowdockr",
     metaDescription:

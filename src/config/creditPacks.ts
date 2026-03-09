@@ -16,7 +16,7 @@ export const creditPacks: CreditPack[] = [
     code: 'starter_20',
     name: 'Starter',
     credits: 20,
-    priceCents: 900,
+    priceCents: 500,
     currency: 'usd',
     stripePriceId:
       process.env.STRIPE_PRICE_STARTER_20 || process.env.STRIPE_PRICE_STARTER_10 || '',
@@ -27,7 +27,7 @@ export const creditPacks: CreditPack[] = [
     code: 'pro_100',
     name: 'Pro',
     credits: 100,
-    priceCents: 2900,
+    priceCents: 1500,
     currency: 'usd',
     stripePriceId:
       process.env.STRIPE_PRICE_PRO_100 || process.env.STRIPE_PRICE_PRO_50 || '',

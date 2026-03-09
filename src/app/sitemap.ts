@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/scenarios`,
+      url: `${baseUrl}/scenario`,
       lastModified: now,
       changeFrequency: 'daily',
       priority: 0.9,
@@ -59,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const scenarioRoutes: MetadataRoute.Sitemap = scenarios.map((scenario) => ({
-    url: `${baseUrl}/scenarios/${scenario.slug}`,
+    url: `${baseUrl}/scenario/${scenario.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.85,

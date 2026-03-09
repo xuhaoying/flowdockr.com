@@ -28,7 +28,7 @@ export function ScenarioLibraryPreview() {
         {featured.map((scenario) => (
           <Link
             key={scenario.slug}
-            href={`/scenarios/${scenario.slug}`}
+            href={`/scenario/${scenario.slug}`}
             className="rounded-lg border border-slate-200 p-4 transition-colors hover:border-slate-400"
           >
             <p className="text-sm font-semibold text-slate-900">{scenario.title}</p>

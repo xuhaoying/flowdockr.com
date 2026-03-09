@@ -6,7 +6,7 @@ import { getStripeClient } from '@/lib/stripe';
 function sanitizeReturnPath(value: string | undefined): string {
   const trimmed = String(value || '').trim();
   if (!trimmed || !trimmed.startsWith('/') || trimmed.startsWith('//')) {
-    return '/scenarios';
+    return '/scenario';
   }
   return trimmed;
 }
@@ -35,7 +35,7 @@ export async function createCheckoutSession(params: {
     purchaseId,
     pack,
     appOrigin = envConfigs.app_url,
-    returnTo = '/scenarios',
+    returnTo = '/scenario',
     scenarioSlug = '',
     anonymousSessionId = '',
   } = params;

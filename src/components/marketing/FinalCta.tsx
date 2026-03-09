@@ -16,7 +16,7 @@ export function FinalCta() {
           Open generator
         </Link>
         <Link
-          href="/scenarios"
+          href="/scenario"
           className="inline-flex rounded-md border border-slate-400 px-4 py-2 text-sm font-semibold text-white"
         >
           Browse scenarios

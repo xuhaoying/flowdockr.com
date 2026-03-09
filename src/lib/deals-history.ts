@@ -27,6 +27,7 @@ function safeParse(raw: string | null): SavedDealRecord[] {
         typeof record.alternativeReply === 'string' &&
         Array.isArray(record.strategy) &&
         typeof record.tone === 'string' &&
+        (typeof record.projectType === 'string' || typeof record.projectType === 'undefined') &&
         typeof record.sourcePage === 'string' &&
         typeof record.status === 'string' &&
         typeof record.createdAt === 'string' &&
@@ -61,6 +62,7 @@ export function saveDealRecord(input: SavedDealInput): SavedDealRecord {
     alternativeReply: input.alternativeReply,
     strategy: input.strategy,
     tone: input.tone,
+    projectType: input.projectType,
     sourcePage: input.sourcePage,
     status: input.status || 'draft',
     createdAt: now,

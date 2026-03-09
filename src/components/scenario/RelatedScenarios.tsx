@@ -23,7 +23,7 @@ export function RelatedScenarios({ slugs }: RelatedScenariosProps) {
         {items.map((item) => (
           <Link
             key={item.slug}
-            href={`/scenarios/${item.slug}`}
+            href={`/scenario/${item.slug}`}
             className="rounded-lg border border-slate-200 p-4 transition-colors hover:border-slate-400"
           >
             <p className="text-sm font-semibold text-slate-900">{item.title}</p>
@@ -32,7 +32,7 @@ export function RelatedScenarios({ slugs }: RelatedScenariosProps) {
         ))}
       </div>
       <div className="flex flex-wrap gap-3 text-sm">
-        <Link href="/scenarios" className="text-slate-700 underline underline-offset-2">
+        <Link href="/scenario" className="text-slate-700 underline underline-offset-2">
           Browse all scenarios
         </Link>
         <Link href="/pricing" className="text-slate-700 underline underline-offset-2">

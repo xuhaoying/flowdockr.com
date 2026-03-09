@@ -25,7 +25,7 @@ export function HomepageHero() {
               Try with a client message
             </Link>
             <Link
-              href="/scenarios"
+              href="/scenario"
               className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-800 transition-colors hover:border-slate-400"
             >
               Browse scenarios

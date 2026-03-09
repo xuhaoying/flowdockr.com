@@ -27,7 +27,7 @@ export function ScenarioCard({ scenario, ctaLabel = 'Open scenario' }: ScenarioC
       </div>
       <p className="text-sm text-slate-700">{scenario.shortDescription}</p>
       <Link
-        href={`/scenarios/${scenario.slug}`}
+        href={`/scenario/${scenario.slug}`}
         className="mt-3 inline-flex text-sm font-medium text-slate-800 underline underline-offset-2"
       >
         {ctaLabel}

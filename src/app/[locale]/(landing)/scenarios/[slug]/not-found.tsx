@@ -7,7 +7,7 @@ export default function ScenarioNotFound() {
       <p className="mt-3 text-muted-foreground">
         This negotiation scenario is unavailable or moved.
       </p>
-      <Link href="/scenarios" className="mt-6 inline-block underline">
+      <Link href="/scenario" className="mt-6 inline-block underline">
         Browse available scenarios
       </Link>
     </main>
