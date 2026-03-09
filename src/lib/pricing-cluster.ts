@@ -8,6 +8,10 @@ import type {
   PricingScenarioWithSchema,
 } from '@/types/pricing-cluster';
 
+function unique(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
 function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSchema {
   const schema = pricingScenarioSchemas[scenario.slug as PricingScenarioSlug];
 
@@ -15,9 +19,18 @@ function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSch
     throw new Error(`Missing pricing taxonomy schema for slug: ${scenario.slug}`);
   }
 
+  const primaryKeywords = unique([scenario.primaryKeyword, ...schema.primaryKeywords]);
+  const supportKeywords = unique([...scenario.keywordVariants, ...schema.supportKeywords]).filter(
+    (keyword) => !primaryKeywords.includes(keyword)
+  );
+
   return {
     ...scenario,
-    schema,
+    schema: {
+      ...schema,
+      primaryKeywords,
+      supportKeywords,
+    },
   };
 }
 

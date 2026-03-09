@@ -194,6 +194,7 @@ pnpm dev
 本地提交前至少跑：
 
 ```bash
+pnpm qa:pricing-taxonomy
 pnpm lint
 pnpm type-check
 pnpm build

@@ -61,7 +61,8 @@
     "seo:factory:links": "node scripts/seo/build-internal-links-graph-v2.mjs",
     "seo:factory:refresh": "node scripts/seo/mark-update-needed-v2.mjs",
     "seo:factory:content": "node scripts/seo/generate-content-prompt-jobs-v2.mjs --source=seo-pages && node scripts/seo/generate-content-drafts-v2.mjs && node scripts/seo/publish-content-drafts-v2.mjs && node scripts/seo/quality-gate-content-v2.mjs --source=prompt-jobs && node scripts/seo/build-internal-links-graph-v2.mjs && node scripts/seo/generate-sitemap-v2.mjs",
-    "qa:deal-quality": "tsx scripts/flowdockr/evaluate-deal-strategy-quality.ts"
+    "qa:deal-quality": "tsx scripts/flowdockr/evaluate-deal-strategy-quality.ts",
+    "qa:pricing-taxonomy": "tsx scripts/flowdockr/validate-pricing-taxonomy.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^2.0.89",
