@@ -1,55 +1,185 @@
-# Shipany Template Nano Banana Pro 基于 Vercel + Supabase + Stripe + Kie.ai + Cloudflare R2 技术栈落地AI生图项目
+# Flowdockr v2
 
-## 预览地址
+Scenario-first SEO negotiation reply tool for freelancers.
 
-> 建议开启魔法梯子后访问
+Flowdockr 不是通用 SaaS 营销页，而是「场景页 + 工具 + credits 付费」产品：
 
-> Vercel全流程闭环，不过在预览时如果要体验生图，得订阅，建议自己下载代码，使用本地走Stripe测试模式体验
+`search/scenario entry -> generate reply -> free limit -> buy credits -> continue`
 
-Vercel: [https://nanobanana.16781678.xyz/](https://nanobanana.16781678.xyz/)
+## Product Scope
 
-> Cloudfare由于google登录等没配置域名，所以只能看个大概（我主要是用来显示部署成功可以访问到）
+- 场景优先公开站点（首页、场景目录、场景详情、通用工具、定价）
+- 三段式输出（Recommended / Alternative / Strategy）
+- 免费 2 次生成 + credits pack 购买
+- Stripe Checkout + Webhook 发放 credits
 
-Cloudfare: [https://nanobanana2.16781678.xyz/](https://nanobanana2.16781678.xyz/)
+## Core Routes
 
-## 快速上手
+本项目使用 `next-intl`，页面实际带 locale 前缀（例如 `/en/scenarios`、`/zh/scenarios`）。
 
-> 不少同学反馈github issues的图在开启魔法后还是展示不出来，现将文档部署到服务器（图片使用R2），阅读体交互验有很大提升（后续就维护这个网站内容了，github issues后续会删除，减少维护成本）
+Public:
+- `/[locale]`
+- `/[locale]/scenarios`
+- `/[locale]/scenarios/[slug]`
+- `/[locale]/tool`
+- `/[locale]/pricing`
+- `/[locale]/checkout/success`
+- `/[locale]/checkout/canceled`
 
-[✨项目快速上手全流程图文手册](https://doc.16781678.xyz/nanobanana)
+Core APIs:
+- `POST /api/generate`
+- `GET /api/credits`
+- `POST /api/checkout/session`
+- `GET /api/checkout/status`
+- `POST /api/stripe/webhook`
 
+## Tech Stack
 
-## 项目概要
+- Next.js 16 (App Router)
+- TypeScript
+- Drizzle ORM
+- Better Auth
+- Stripe
+- next-intl
 
-- 比官网Nano Banana Pro模板更好的地方：展示数据均为数据库数据，非动态JSON配置数据，好处是：更贴近真实项目，方便上线维护，减少写代码（在访问预览网站时会有loading...交互，自己clone的项目在导入预制数据后可见）；
-- 首页Showcases展示的是：用户生图的20条按创建时间倒序数据（自己clone的项目表中无数据，可导入预制数据或者在Admin后台录入Showcases数据）；
-- showcases页面展示的是：Admin后台录入Prompt数据；
-- hairstyles页面展示的是：Admin后台录入Showcases数据（Tags：hairstyles）；
+## Scenario Data System
 
-[✨项目可导入的表预制数据](https://nanobanana2.16781678.xyz/docs/configuration/preset-data)
+场景内容集中在：
+- `src/data/scenarios.ts`
+- `src/lib/scenarios.ts`
 
-[✨项目如何管理首页Showcases块、Showcases页、Hairstyles页数据](https://nanobanana2.16781678.xyz/docs/configuration/showcases-management)
+Seed 场景（8 个）：
+- `lowball-offer`
+- `client-asks-discount`
+- `cheaper-freelancer`
+- `free-sample-work`
+- `more-work-same-budget`
+- `budget-limited`
+- `delayed-decision`
+- `small-extra-free`
 
+## Prompt & Generation Architecture
 
-## 视频教程
+- `src/lib/prompts/systemPrompt.ts`
+- `src/lib/prompts/buildScenarioPrompt.ts`
+- `src/lib/prompts/outputSchema.ts`
+- `src/lib/generation/generateReply.ts`
+- `src/lib/generation/parseResponse.ts`
+- `src/lib/generation/saveGeneration.ts`
 
-[✨ShipanyTwo视频实战课程：AI 壁纸生成器开发视频教学（含Creem支付）（2025-12-03）](https://nanobanana2.16781678.xyz/docs/video-tutorials/ai-wallpaper-tutorial)
+输出契约：
 
-[✨ShipanyTwo实战课程：从零搭建了一个一站式 AI 生成平台(2025-11-26)](https://nanobanana2.16781678.xyz/docs/video-tutorials/ai-platform-tutorial)
+```ts
+type GenerateReplyResponse = {
+  success: boolean;
+  reply: string;
+  alternativeReply: string;
+  strategy: string[];
+  scenarioSlug: string;
+  creditsRemaining?: number;
+  requiresUpgrade?: boolean;
+  error?: string;
+};
+```
 
+## Credits & Payments
 
-## 分支
+Packs:
+- Free: 2 replies
+- Starter: 20 credits
+- Pro: 100 credits
+- 1 generation = 1 credit
 
-- `main`: main branch (for vercel)
-- `cloudfare`: cloudfare branch (for cloudfare)
+配置文件：
+- `src/config/creditPacks.ts`
+- `src/lib/payments/*`
+- `src/app/api/stripe/webhook/route.ts`
 
-## 发布与开发流程（最小规范）
+关键规则：
+- 仅后端判断可生成与扣减
+- 仅 webhook 发放 credits
+- webhook 幂等去重（防重复加币）
 
-- 所有改动从 `feature/*` / `fix/*` / `chore/*` 分支发起，禁止直接 push `main`
-- 通过 Pull Request 合并到 `main`
-- PR 合并前必须通过 CI（`lint` / `type-check` / `build`）并在 Vercel Preview 完成人工验收
+## Database
 
-参考文档：
+业务相关 schema 说明：
+- `docs/08-database-schema.md`
 
-- [Development Workflow](docs/development-workflow.md)
-- [Release Checklist](docs/release-checklist.md)
+核心表：
+- `anonymous_usage`
+- `generation`
+- `purchase`
+- `webhook_event`
+- `credit_transaction`
+- `user.credits_balance`（当前余额）
+
+## Quick Start
+
+### 1) Install
+
+```bash
+pnpm install
+```
+
+### 2) Env
+
+```bash
+cp .env.example .env.local
+```
+
+至少需要配置：
+- `DATABASE_URL`
+- `AUTH_SECRET`
+- `FLOWDOCKR_MODEL`（默认 `gpt-5-mini`）
+- `OPENAI_API_KEY` 或 `FAL_API_KEY`（按你的 provider）
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_PRICE_STARTER_20`
+- `STRIPE_PRICE_PRO_100`
+
+### 3) Database
+
+```bash
+pnpm db:generate
+pnpm db:migrate
+```
+
+### 4) Run
+
+```bash
+pnpm dev
+```
+
+## Quality Gates
+
+本地提交前至少跑：
+
+```bash
+pnpm lint
+pnpm type-check
+pnpm build
+```
+
+CI 工作流同样执行 `lint + type-check + build`（见 `.github/workflows/ci.yml`）。
+
+## Branch & Release Rules
+
+- `main` 为受保护生产分支
+- 禁止直接 push `main`
+- 使用 `feature/*` / `fix/*` / `chore/*` / `codex/*` 分支
+- 通过 PR 合并，并先过 Vercel Preview 验收
+
+参考：
+- `docs/development-workflow.md`
+- `docs/release-checklist.md`
+
+## Troubleshooting
+
+- 报错 `Module not found: Can't resolve '@/data/scenarios'`
+  - 确认 `src/data/scenarios.ts` 已被提交（不要被 ignore 规则误伤）。
+- Stripe 支付后未到账
+  - 先检查 webhook 签名配置与 `checkout.session.completed` 事件投递状态。
+
+## License
+
+See [LICENSE](LICENSE).

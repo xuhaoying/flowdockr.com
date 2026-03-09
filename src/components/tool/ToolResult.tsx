@@ -1,5 +1,6 @@
 'use client';
 
+import { Link } from '@/core/i18n/navigation';
 import { CopyButton } from '@/components/tool/CopyButton';
 import { Button } from '@/shared/components/ui/button';
 
@@ -10,6 +11,10 @@ type ToolResultProps = {
   loading?: boolean;
   onRegenerate?: () => void;
   onCopy?: (target: 'reply' | 'alternative') => void;
+  onSave?: () => void;
+  canSave?: boolean;
+  saveLabel?: string;
+  savedHint?: string;
 };
 
 export function ToolResult({
@@ -19,6 +24,10 @@ export function ToolResult({
   loading = false,
   onRegenerate,
   onCopy,
+  onSave,
+  canSave = false,
+  saveLabel = 'Save to deals',
+  savedHint,
 }: ToolResultProps) {
   const hasResult = Boolean(reply || alternativeReply || strategy.length > 0);
 
@@ -26,11 +35,24 @@ export function ToolResult({
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-lg font-semibold text-slate-900">Generated reply</h3>
-        {onRegenerate ? (
-          <Button type="button" variant="outline" size="sm" onClick={onRegenerate} disabled={loading}>
-            Regenerate
-          </Button>
-        ) : null}
+        <div className="flex items-center gap-2">
+          {onSave ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={onSave}
+              disabled={!canSave || loading}
+            >
+              {saveLabel}
+            </Button>
+          ) : null}
+          {onRegenerate ? (
+            <Button type="button" variant="outline" size="sm" onClick={onRegenerate} disabled={loading}>
+              Regenerate
+            </Button>
+          ) : null}
+        </div>
       </div>
 
       {loading ? (
@@ -45,6 +67,15 @@ export function ToolResult({
         <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-600">
           Your recommended reply and alternative version will appear here after you click
           Generate reply.
+        </div>
+      ) : null}
+
+      {savedHint ? (
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+          {savedHint}{' '}
+          <Link href="/history" className="font-semibold underline underline-offset-2">
+            Open history
+          </Link>
         </div>
       ) : null}
 
