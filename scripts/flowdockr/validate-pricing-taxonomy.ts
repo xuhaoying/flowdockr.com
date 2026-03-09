@@ -240,12 +240,56 @@ function validatePricingTaxonomy(): Issue[] {
     }
 
     for (const link of blueprint.nextDecisionLinks) {
-      if (!link.startsWith('/pricing/')) {
+      if (!link.href.startsWith('/pricing/')) {
         issues.push({
           level: 'warn',
-          message: `${scenario.slug}: next decision link '${link}' does not point to pricing cluster.`,
+          message: `${scenario.slug}: next decision link '${link.href}' does not point to pricing cluster.`,
         });
       }
+
+      if (!link.label.trim()) {
+        issues.push({
+          level: 'warn',
+          message: `${scenario.slug}: next decision link '${link.href}' is missing label.`,
+        });
+      }
+    }
+
+    if (!blueprint.faq.length) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: blueprint.faq is empty.`,
+      });
+    }
+
+    for (const faq of blueprint.faq) {
+      if (!faq.question.trim() || !faq.answer.trim()) {
+        issues.push({
+          level: 'warn',
+          message: `${scenario.slug}: faq entries should include both question and answer.`,
+        });
+      }
+    }
+
+    if (!blueprint.toolCta.title.trim() || !blueprint.toolCta.body.trim()) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: blueprint.toolCta must include title and body.`,
+      });
+    }
+
+    if (!blueprint.toolCta.toolSlug.trim()) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: blueprint.toolCta.toolSlug is empty.`,
+      });
+    }
+
+    if (!blueprint.toolCta.buttonLabel.trim()) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: blueprint.toolCta.buttonLabel is empty.`,
+      });
     }
   }
 

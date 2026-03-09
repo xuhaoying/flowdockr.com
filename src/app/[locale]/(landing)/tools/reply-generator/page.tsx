@@ -4,6 +4,7 @@ import { PricingCards } from '@/components/pricing/PricingCards';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolExample } from '@/components/tool/ToolExample';
 import { Link } from '@/core/i18n/navigation';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import { getScenarioBySlug } from '@/lib/scenarios';
 import { getMetadata } from '@/shared/lib/seo';
 
@@ -24,13 +25,19 @@ const USE_CASES = [
 
 export default async function ReplyGeneratorPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ scenario?: string }>;
 }) {
   const { locale } = await params;
+  const { scenario } = await searchParams;
   setRequestLocale(locale);
 
-  const scenario = getScenarioBySlug('client-asks-discount');
+  const requestedScenario = typeof scenario === 'string' ? scenario.trim() : '';
+  const pricingScenario = requestedScenario ? getPricingScenarioBySlug(requestedScenario) : null;
+  const defaultScenarioSlug = pricingScenario?.generatorScenarioSlug || 'client-asks-discount';
+  const previewScenario = getScenarioBySlug(defaultScenarioSlug);
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -67,9 +74,15 @@ export default async function ReplyGeneratorPage({
         </ul>
       </section>
 
-      <ToolForm sourcePage="tool" showScenarioSelector />
+      {pricingScenario ? (
+        <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+          Context loaded from scenario: <span className="font-semibold text-slate-900">{pricingScenario.title}</span>
+        </section>
+      ) : null}
 
-      {scenario ? <ToolExample scenario={scenario} title="Example output" /> : null}
+      <ToolForm sourcePage="tool" showScenarioSelector defaultScenarioSlug={defaultScenarioSlug} />
+
+      {previewScenario ? <ToolExample scenario={previewScenario} title="Example output" /> : null}
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">Pricing scenarios</h2>

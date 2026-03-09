@@ -1,24 +1,33 @@
 import { ToolForm } from '@/components/tool/ToolForm';
+import { Link } from '@/core/i18n/navigation';
+import type { ScenarioToolCta } from '@/types/content';
 import type { PricingScenario } from '@/types/pricing-cluster';
 
 type AIGeneratorToolProps = {
   scenario: PricingScenario;
+  scenarioSlug: string;
+  cta: ScenarioToolCta;
 };
 
-export function AIGeneratorTool({ scenario }: AIGeneratorToolProps) {
+export function AIGeneratorTool({ scenario, scenarioSlug, cta }: AIGeneratorToolProps) {
+  const toolHref = `/tools/${cta.toolSlug}?scenario=${encodeURIComponent(scenarioSlug)}`;
+
   return (
     <section id="pricing-tool" className="space-y-3">
-      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Generate a tailored reply</h2>
-      <p className="text-sm text-slate-700">
-        {scenario.toolCta ||
-          'Paste the exact client message and project context. Flowdockr will draft a response that protects your rate and fits this negotiation stage.'}
-      </p>
+      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{cta.title}</h2>
+      <p className="text-sm text-slate-700">{cta.body}</p>
       <ToolForm
         sourcePage="scenario"
         defaultScenarioSlug={scenario.generatorScenarioSlug}
         showScenarioSelector={false}
         placeholder="Paste the exact prospect message and budget context..."
       />
+      <Link
+        href={toolHref}
+        className="inline-flex rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-900 hover:border-slate-500"
+      >
+        {cta.buttonLabel}
+      </Link>
     </section>
   );
 }

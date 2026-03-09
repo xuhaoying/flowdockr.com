@@ -1,12 +1,12 @@
 import { Link } from '@/core/i18n/navigation';
-import type { PricingScenario } from '@/types/pricing-cluster';
+import type { ScenarioNextDecisionLink } from '@/types/content';
 
 type NextDecisionPathsProps = {
-  items: PricingScenario[];
+  links: ScenarioNextDecisionLink[];
 };
 
-export function NextDecisionPaths({ items }: NextDecisionPathsProps) {
-  if (!items.length) {
+export function NextDecisionPaths({ links }: NextDecisionPathsProps) {
+  if (!links.length) {
     return null;
   }
 
@@ -18,14 +18,13 @@ export function NextDecisionPaths({ items }: NextDecisionPathsProps) {
       </p>
 
       <div className="grid gap-3 md:grid-cols-3">
-        {items.map((item) => (
+        {links.map((link) => (
           <Link
-            key={item.slug}
-            href={`/pricing/${item.slug}`}
+            key={link.href}
+            href={link.href}
             className="rounded-lg border border-slate-200 p-4 transition-colors hover:border-slate-400"
           >
-            <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-            <p className="mt-1 text-sm text-slate-700">{item.shortDescription}</p>
+            <p className="text-sm font-semibold text-slate-900">{link.label}</p>
           </Link>
         ))}
       </div>

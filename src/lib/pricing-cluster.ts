@@ -132,6 +132,65 @@ const notesBySlug: Partial<Record<PricingScenarioSlug, string>> = {
     'Narrow support page for final-stage micro-discount asks near signature.',
 };
 
+const nextDecisionLabelsBySource: Partial<
+  Record<PricingScenarioSlug, Partial<Record<PricingScenarioSlug, string>>>
+> = {
+  'price-pushback-after-proposal': {
+    'discount-pressure-before-signing': 'If they ask for a direct discount',
+    'budget-lower-than-expected': 'If they say the budget is genuinely lower',
+    'cheaper-competitor-comparison': 'If they compare you with a cheaper option',
+  },
+  'discount-pressure-before-signing': {
+    'small-discount-before-closing': 'If they only ask for a small final reduction',
+    'budget-lower-than-expected': 'If the issue is really overall budget',
+    'cheaper-competitor-comparison': 'If they now reference a cheaper competitor',
+  },
+  'budget-lower-than-expected': {
+    'more-work-same-price': 'If they want more work for the same budget',
+    'discount-pressure-before-signing': 'If they switch to a direct discount ask',
+    'price-pushback-after-proposal': 'If the issue returns to post-proposal price pushback',
+  },
+  'cheaper-competitor-comparison': {
+    'discount-pressure-before-signing': 'If they ask you to lower price to continue',
+    'budget-lower-than-expected': 'If it is really a budget mismatch',
+    'price-pushback-after-proposal': 'If they drop competitor talk and just say it feels expensive',
+  },
+  'more-work-same-price': {
+    'budget-lower-than-expected': 'If they frame it as a budget limit',
+    'can-you-do-it-cheaper': 'If they ask for a cheaper version instead',
+    'discount-pressure-before-signing': 'If they push for direct price cuts before approval',
+  },
+  'free-trial-work-request': {
+    'can-you-do-it-cheaper': 'If they pivot to asking for a cheaper option',
+    'budget-lower-than-expected': 'If they say budget is the main issue',
+    'more-work-same-price': 'If they ask for additional unpaid scope',
+  },
+  'can-you-do-it-cheaper': {
+    'price-pushback-after-proposal': 'If this is post-proposal price pushback',
+    'discount-pressure-before-signing': 'If they want direct discount before moving forward',
+    'budget-lower-than-expected': 'If budget is truly below your quote',
+  },
+  'small-discount-before-closing': {
+    'discount-pressure-before-signing': 'If discount pressure is broader and earlier',
+    'budget-lower-than-expected': 'If they claim total budget is lower',
+    'cheaper-competitor-comparison': 'If they justify the ask with cheaper alternatives',
+  },
+};
+
+function buildNextDecisionLinks(
+  sourceSlug: PricingScenarioSlug,
+  targetSlugs: PricingScenarioSlug[]
+) {
+  const labels = nextDecisionLabelsBySource[sourceSlug] || {};
+  return targetSlugs.map((targetSlug) => {
+    const target = getPricingScenarioBySlug(targetSlug);
+    return {
+      href: `/pricing/${targetSlug}/`,
+      label: labels[targetSlug] || target?.title || targetSlug,
+    };
+  });
+}
+
 export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScenarios.map(
   (scenario) => {
     const concise = getExampleReply(scenario, 'Concise');
@@ -166,11 +225,19 @@ export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScen
         warm,
         firm,
       },
-      faq: scenario.faq.map((item) => item.q),
-      nextDecisionLinks: scenario.nextDecisionSlugs.map((slug) => `/pricing/${slug}/`),
-      toolCta:
-        scenario.toolCta ||
-        'Paste the exact client message and project context. Flowdockr will draft a response that protects your rate and fits this negotiation stage.',
+      faq: scenario.faq.map((item) => ({
+        question: item.q,
+        answer: item.a,
+      })),
+      nextDecisionLinks: buildNextDecisionLinks(scenario.slug, scenario.nextDecisionSlugs),
+      toolCta: {
+        title: 'Generate a tailored reply',
+        body:
+          scenario.toolCta ||
+          'Paste the exact client message and project context. Flowdockr will draft a response that protects your rate and fits this negotiation stage.',
+        buttonLabel: 'Generate my reply',
+        toolSlug: 'price-negotiation-email-generator',
+      },
       hubParent: '/pricing/',
       futureBridgeTo: futureBridgeToBySlug[scenario.slug] || [],
       notes: notesBySlug[scenario.slug] || '',

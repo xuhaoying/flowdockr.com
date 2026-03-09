@@ -1,4 +1,11 @@
 import type { ScenarioSlug } from '@/data/scenarios';
+import type {
+  ExampleReplies,
+  ScenarioFaqItem as StructuredFaqItem,
+  ScenarioNextDecisionLink,
+  ScenarioToolCta,
+  StrategyPath,
+} from '@/types/content';
 
 export type PricingScenarioSlug =
   | 'price-pushback-after-proposal'
@@ -137,10 +144,10 @@ export type PricingScenarioWithSchema = PricingScenario & {
 export type PricingScenarioBlueprintTier = 1 | 2 | 3;
 
 export type PricingScenarioBlueprintPath = {
-  id: string;
-  title: string;
-  whenToUse: string;
-  keyPoints: string[];
+  id: StrategyPath['id'];
+  title: StrategyPath['title'];
+  whenToUse: StrategyPath['whenToUse'];
+  keyPoints: StrategyPath['keyPoints'];
 };
 
 export type PricingScenarioBlueprint = {
@@ -161,14 +168,10 @@ export type PricingScenarioBlueprint = {
   situationSummary: string;
   coreFear: string[];
   strategyPaths: PricingScenarioBlueprintPath[];
-  exampleReplies: {
-    concise: string;
-    warm: string;
-    firm: string;
-  };
-  faq: string[];
-  nextDecisionLinks: string[];
-  toolCta: string;
+  exampleReplies: ExampleReplies;
+  faq: StructuredFaqItem[];
+  nextDecisionLinks: ScenarioNextDecisionLink[];
+  toolCta: ScenarioToolCta;
   hubParent: '/pricing/';
   futureBridgeTo: string[];
   notes: string;

@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { Link } from '@/core/i18n/navigation';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -23,11 +24,18 @@ const USE_CASES = [
 
 export default async function PriceNegotiationEmailGeneratorPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ scenario?: string }>;
 }) {
   const { locale } = await params;
+  const { scenario } = await searchParams;
   setRequestLocale(locale);
+
+  const requestedScenario = typeof scenario === 'string' ? scenario.trim() : '';
+  const pricingScenario = requestedScenario ? getPricingScenarioBySlug(requestedScenario) : null;
+  const defaultScenarioSlug = pricingScenario?.generatorScenarioSlug || 'lowball-offer';
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -53,9 +61,15 @@ export default async function PriceNegotiationEmailGeneratorPage({
         </ul>
       </section>
 
+      {pricingScenario ? (
+        <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+          Context loaded from scenario: <span className="font-semibold text-slate-900">{pricingScenario.title}</span>
+        </section>
+      ) : null}
+
       <ToolForm
         sourcePage="tool"
-        defaultScenarioSlug="lowball-offer"
+        defaultScenarioSlug={defaultScenarioSlug}
         showScenarioSelector
         placeholder="Paste the exact pricing message, including any budget or competitor references..."
       />
