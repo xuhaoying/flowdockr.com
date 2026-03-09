@@ -12,7 +12,7 @@ export type PricingScenarioSlug =
 
 export type PricingScenarioTier = 'tier1' | 'tier2' | 'tier3';
 
-export type PricingPageRole = 'pillar' | 'support' | 'entry';
+export type PricingPageRole = 'pillar' | 'support' | 'entry' | 'bridge';
 
 export type PricingTriggerStage =
   | 'after-proposal'
@@ -53,21 +53,35 @@ export type PricingScenarioFamily =
   | 'more-work-same-price'
   | 'free-work-boundary';
 
+export type PricingIntentType =
+  | 'price_objection'
+  | 'discount_pressure'
+  | 'budget_mismatch'
+  | 'competitor_comparison'
+  | 'scope_for_price'
+  | 'free_work_boundary';
+
 export type PricingScenarioSchema = {
-  cluster: 'pricing';
-  family: PricingScenarioFamily;
-  tier: PricingScenarioTier;
-  pageRole: PricingPageRole;
-  triggerStage: PricingTriggerStage;
-  pressureType: PricingPressureType;
-  primaryIntent: string;
-  primaryKeywords: string[];
-  supportKeywords: string[];
-  bannedPrimaryTopics: string[];
-  doNotCompeteWith: PricingScenarioSlug[];
-  realRisks: PricingRealRisk[];
-  decisionGoals: PricingDecisionGoal[];
-  strategyPathIds: string[];
+  page: {
+    cluster: 'pricing';
+    family: PricingScenarioFamily;
+    tier: PricingScenarioTier;
+    pageRole: PricingPageRole;
+    triggerStage: PricingTriggerStage;
+    pressureType: PricingPressureType;
+    primaryIntent: string;
+    primaryKeywords: string[];
+    supportKeywords: string[];
+    bannedPrimaryTopics: string[];
+    doNotCompeteWith: PricingScenarioSlug[];
+    scopeIn: string[];
+    scopeOut: string[];
+  };
+  content: {
+    realRisks: PricingRealRisk[];
+    decisionGoals: PricingDecisionGoal[];
+    strategyPathIds: string[];
+  };
 };
 
 export type PricingResponsePath = {
@@ -113,10 +127,51 @@ export type PricingScenario = {
   nextDecisionSlugs: PricingScenarioSlug[];
   guideLinks?: PricingGuideLink[];
   generatorScenarioSlug: ScenarioSlug;
+  toolCta?: string;
 };
 
 export type PricingScenarioWithSchema = PricingScenario & {
   schema: PricingScenarioSchema;
+};
+
+export type PricingScenarioBlueprintTier = 1 | 2 | 3;
+
+export type PricingScenarioBlueprintPath = {
+  id: string;
+  title: string;
+  whenToUse: string;
+  keyPoints: string[];
+};
+
+export type PricingScenarioBlueprint = {
+  slug: PricingScenarioSlug;
+  cluster: 'pricing';
+  tier: PricingScenarioBlueprintTier;
+  pageRole: PricingPageRole;
+  intentType: PricingIntentType;
+  primaryIntent: string;
+  primaryKeywords: string[];
+  supportKeywords: string[];
+  doNotCompeteWith: PricingScenarioSlug[];
+  url: string;
+  h1: string;
+  metaTitle: string;
+  metaDescription: string;
+  heroSubheading: string;
+  situationSummary: string;
+  coreFear: string[];
+  strategyPaths: PricingScenarioBlueprintPath[];
+  exampleReplies: {
+    concise: string;
+    warm: string;
+    firm: string;
+  };
+  faq: string[];
+  nextDecisionLinks: string[];
+  toolCta: string;
+  hubParent: '/pricing/';
+  futureBridgeTo: string[];
+  notes: string;
 };
 
 export type PricingScenarioFamilyDefinition = {

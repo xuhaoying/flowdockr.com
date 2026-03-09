@@ -5,88 +5,89 @@ export const pricingScenarios: PricingScenario[] = [
     tier: 'tier1',
     featured: true,
     slug: 'price-pushback-after-proposal',
-    title: 'How to respond to price pushback after sending a proposal',
-    seoTitle: 'How to Respond to Price Pushback After Sending a Proposal | Flowdockr',
+    title: 'How to respond when a prospect says your quote is too high',
+    seoTitle: 'How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr',
     metaDescription:
-      'Handle proposal price pushback without discounting too early. Keep leverage, protect positioning, and move the deal forward.',
+      'Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with Flowdockr.',
     primaryKeyword: 'quote too high',
     keywordVariants: [
       'price too high',
       'rate too high',
       'too expensive proposal',
-      'price objection freelance',
+      'how to respond to a price objection',
+      'proposal too expensive',
     ],
     heroSubtitle:
-      'Keep the deal alive without discounting too early or sounding defensive.',
+      'Handle price pushback after sending a proposal without discounting too early.',
     shortDescription:
-      'Prospect says your quote is too high after reviewing the proposal.',
+      'Prospect reviews your proposal, says it feels expensive, and you need to keep leverage.',
     situationSnapshot: [
-      'This usually happens when the prospect likes the project but tests your flexibility before committing.',
-      'Dropping your rate immediately weakens your anchor for the rest of the deal.',
-      'Pushing too hard can stall momentum, so your reply needs structure and calm tone.',
+      'You already shared a proposal or quote and the prospect says the number feels high.',
+      'This stage is often a negotiation signal, not an immediate rejection.',
+      'If you react too fast, you can lose anchor before real constraints are clear.',
     ],
     whatsReallyHappening: [
-      'The objection may be tactical testing rather than a full rejection of your proposal.',
-      'They may still want your approach but need clearer confidence on value and outcomes.',
-      'You need to protect anchor while offering a structured path to continue the deal.',
+      'The buyer may be testing flexibility rather than rejecting value.',
+      'You are balancing two risks: discounting too early or sounding too rigid.',
+      'Your response needs calm structure, not defensive over-explaining.',
     ],
     realGoals: [
-      'Keep the deal active while protecting your original positioning.',
-      'Test whether budget is the real blocker or a negotiation move.',
-      'Move the conversation to scope, options, and next steps.',
+      'Keep the deal alive without lowering your rate by default.',
+      'Test whether the budget issue is real or tactical.',
+      'Move toward scoped options instead of blind concessions.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Hold value',
-        whenToUse: 'Use when they challenge price but still show clear interest in your approach.',
-        risk: 'If too rigid, it may read like inflexibility instead of confidence.',
+        title: 'Hold value without conceding',
+        whenToUse: 'Use when interest is still strong and price pushback feels exploratory.',
+        risk: 'If phrasing is too hard, the prospect may read it as inflexibility.',
         exampleWording:
-          'I understand the concern. My quote reflects the scope and quality needed for the outcome we discussed. If useful, I can walk through where the value is concentrated so we can decide the best path forward.',
+          'Thanks for sharing that. The quote reflects the scope and outcome we aligned on. If helpful, I can clarify where the core value sits so we can decide the best next step.',
       },
       {
         id: 'B',
-        title: 'Restructure scope',
-        whenToUse: 'Use when budget may be real and you still want to keep the opportunity.',
-        risk: 'If scope cuts are vague, expectations can become messy later.',
+        title: 'Test whether budget is real',
+        whenToUse: 'Use when you are unsure if this is budget reality or negotiation habit.',
+        risk: 'If you ask vaguely, the conversation can stay abstract and circular.',
         exampleWording:
-          'If budget is the main limit, I can offer a reduced-scope option that keeps the highest-impact parts. That gives a lower total without weakening delivery quality.',
+          'Understood. Can you share the working range you need to stay within so I can tell you whether we should adjust scope or keep the current structure?',
       },
       {
         id: 'C',
-        title: 'Walk away politely',
-        whenToUse: 'Use when they only optimize for lowest price and ignore fit or quality.',
-        risk: 'Walking too early can lose deals that were still recoverable.',
+        title: 'Reframe through scope, not rate',
+        whenToUse: 'Use when budget may be constrained but project fit is still good.',
+        risk: 'If scope changes are not explicit, expectations will drift later.',
         exampleWording:
-          'Thanks for the transparency. It sounds like we may be targeting different delivery levels right now, so it may be better to pause here. If priorities shift, happy to reconnect.',
+          'If budget is the main constraint, I can suggest a leaner scope that keeps the critical outcome strong while lowering total project cost.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'Thanks for the pushback. My quote reflects the agreed scope and delivery quality. If budget is the issue, I can suggest a reduced-scope option instead of discounting the same scope.',
+        text: 'Thanks for the honest feedback. If budget is the main issue, we can look at adjusting the scope while keeping the core outcome strong.',
       },
       {
         tone: 'Warm',
-        text: 'I appreciate you sharing that. My pricing is tied to the scope and outcome we discussed. If it helps, I can draft a leaner version that fits a lower range while keeping core quality intact.',
+        text: 'I understand the quote may feel high at first glance. The pricing reflects the scope and level of work involved, but if budget is the main constraint, I’m happy to explore a leaner version that still gets you the key result.',
       },
       {
         tone: 'Firm',
-        text: 'I do not lower pricing on the same scope by default. I can either keep the current scope and price, or propose a smaller scope at a lower total so expectations stay clear.',
+        text: 'The quote is based on the scope and standard required for the project. If needed, we can discuss a reduced scope, but I’d prefer not to compromise the quality by lowering the rate without changing the work involved.',
       },
     ],
     faq: [
       {
-        q: 'Should I discount immediately after price pushback?',
-        a: 'Usually no. First identify whether this is a true budget constraint or a negotiation test.',
+        q: 'Should you lower your rate immediately when a prospect says your quote is too high?',
+        a: 'Usually no. First determine whether the pressure is tactical pushback or a true budget limit.',
       },
       {
-        q: 'How do I avoid sounding defensive?',
-        a: 'Keep tone calm, explain scope-value logic, and offer structured options instead of emotional justification.',
+        q: 'How do you tell whether this is a real budget issue or a negotiation tactic?',
+        a: 'Ask for the working range and decision constraints before discussing concessions.',
       },
       {
-        q: 'Can this still close without discounting?',
-        a: 'Yes. Many deals close when you reframe around scope and outcomes rather than reacting to the number alone.',
+        q: 'Is it better to reduce scope or offer a discount?',
+        a: 'In most cases, reducing scope is safer because it preserves your pricing logic and delivery quality.',
       },
     ],
     nextDecisionSlugs: [
@@ -105,7 +106,10 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'lowball-offer',
+    toolCta:
+      'Paste the prospect’s exact message, your quote, and the tone you want. Flowdockr will draft a reply that protects your rate without sounding defensive.',
   },
+
   {
     tier: 'tier1',
     featured: true,
@@ -113,90 +117,91 @@ export const pricingScenarios: PricingScenario[] = [
     title: 'How to handle discount pressure before signing',
     seoTitle: 'How to Handle Discount Pressure Before Signing | Flowdockr',
     metaDescription:
-      'Prospect asks for a discount right before signing. Learn how to keep leverage and close without weakening your pricing model.',
-    primaryKeyword: 'discount pressure before signing',
+      'Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with Flowdockr.',
+    primaryKeyword: 'ask for discount before signing',
     keywordVariants: [
-      'last minute discount request',
-      'discount before contract signing',
-      'prospect asks for discount before close',
+      'discount before closing',
+      'lower price before moving forward',
+      'can you lower your rate before we start',
+      'final discount request',
     ],
     heroSubtitle:
-      'Negotiate the close without giving away unnecessary margin.',
+      'Keep the deal moving without training the client to expect last-minute concessions.',
     shortDescription:
-      'Near-close discount request right before contract signature.',
+      'Closing-stage conversation where the buyer explicitly asks for a lower number.',
     situationSnapshot: [
-      'This appears late in the process when clients sense urgency on your side.',
-      'A quick yes can damage your anchor and set weak expectations for future work.',
-      'Your response should trade concessions for clear terms, not random flexibility.',
+      'The buyer is close to committing but asks for a discount before signature.',
+      'This stage creates urgency and often triggers avoidable concessions.',
+      'Your pricing anchor is most vulnerable right before close.',
     ],
     whatsReallyHappening: [
-      'They are applying close-stage pressure to extract extra value before commitment.',
-      'Your urgency is being tested more than your delivery quality.',
-      'A structured close option can preserve both momentum and pricing integrity.',
+      'They are testing late-stage leverage, not necessarily rejecting your value.',
+      'A quick concession can weaken both this deal and future negotiations.',
+      'You need a close-oriented reply that preserves structure and tone.',
     ],
     realGoals: [
-      'Protect your base rate during the highest-leverage moment.',
-      'Close with structure instead of emotional urgency.',
-      'Avoid setting a precedent that every close needs a discount.',
+      'Protect margin while keeping the conversation constructive.',
+      'Trade any flexibility for explicit terms instead of giving it away.',
+      'Close with clarity, not pressure-induced compromise.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Hold value and close',
-        whenToUse: 'Use when buying intent is clear and objection is mostly tactical.',
-        risk: 'If tone is too hard, it may create avoidable friction near close.',
+        title: 'Hold the price and reaffirm fit',
+        whenToUse: 'Use when deal quality is strong and scope is already aligned.',
+        risk: 'Too much rigidity can create unnecessary friction near close.',
         exampleWording:
-          'I keep this scope at the quoted rate so quality and delivery stay reliable. If you are ready, we can finalize this version and begin on the agreed timeline.',
+          'I’d prefer to keep the current pricing as quoted since it reflects the agreed scope. If everything else is aligned, I can move straight to final signature details.',
       },
       {
         id: 'B',
-        title: 'Trade concession for terms',
-        whenToUse: 'Use when you are open to flexibility only with a reciprocal commitment.',
-        risk: 'Unclear tradeoffs can become hidden scope or process debt.',
+        title: 'Trade, don’t concede',
+        whenToUse: 'Use when you are open to movement only with reciprocal commitments.',
+        risk: 'If trade terms are vague, the concession becomes a pure margin leak.',
         exampleWording:
-          'If we simplify scope and confirm this week, I can adjust pricing on that revised version. I can send both options so you can choose quickly.',
+          'If we confirm this week and keep payment terms as proposed, I can offer a revised option tied to that commitment.',
       },
       {
         id: 'C',
-        title: 'Pause politely',
-        whenToUse: 'Use when they continue pushing without commitment signals.',
-        risk: 'You may lose a deal that could have closed with tighter framing.',
+        title: 'Offer a smaller version',
+        whenToUse: 'Use when budget is constrained but collaboration still makes sense.',
+        risk: 'Without scope precision, reduced budget can still carry full expectations.',
         exampleWording:
-          'It sounds like we are not aligned on terms yet. I would rather pause than force a structure that is weak for both sides.',
+          'Rather than discounting unchanged scope, I can share a leaner version that fits a lower range while keeping delivery realistic.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'I keep this scope at the quoted rate. If budget is fixed, I can provide a reduced-scope option instead.',
+        text: 'I’d prefer to keep the pricing as quoted, since it reflects the agreed scope. If helpful, we can look at adjusting the scope rather than reducing the rate.',
       },
       {
         tone: 'Warm',
-        text: 'I want this to work and keep quality high. Rather than discounting the same scope, I can suggest a leaner version that fits your target budget.',
+        text: 'I’d love to make this work, and I also want to keep the project set up properly from the start. The quoted rate reflects the current scope, so rather than discounting directly, I’d be happy to discuss a lighter version if that helps.',
       },
       {
         tone: 'Firm',
-        text: 'I do not apply last-minute discounts to unchanged scope. We can either proceed as quoted or revise scope and price together.',
+        text: 'At this stage I’d prefer not to reduce the rate without changing the scope. If budget is the concern, the best next step is to adjust deliverables rather than compress the pricing.',
       },
     ],
     faq: [
       {
-        q: 'Is discount pressure before signing normal?',
-        a: 'Yes. It is a common tactic near close when the buyer tests your flexibility.',
+        q: 'Should you give a discount right before the deal closes?',
+        a: 'Only if it is intentional and tied to explicit terms, not as a reflexive concession.',
       },
       {
-        q: 'What is safer than saying yes to a discount?',
-        a: 'Exchange any concession for scope reduction, faster approval, or clear payment terms.',
+        q: 'What can you offer instead of a discount?',
+        a: 'You can trade for scope adjustments, faster approvals, or stronger payment terms.',
       },
       {
-        q: 'Will holding price always kill the deal?',
-        a: 'No. Clear and calm positioning often increases trust when handled professionally.',
+        q: 'How do you avoid sounding rigid when you hold your price?',
+        a: 'Use calm language, explain structure, and provide a workable alternative path.',
       },
     ],
     nextDecisionSlugs: [
       'small-discount-before-closing',
       'budget-lower-than-expected',
-      'price-pushback-after-proposal',
+      'cheaper-competitor-comparison',
     ],
     guideLinks: [
       {
@@ -209,92 +214,96 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'client-asks-discount',
+    toolCta:
+      'Paste the exact discount request and your current offer. Flowdockr will help you reply without weakening your position right before the deal closes.',
   },
+
   {
     tier: 'tier1',
     featured: true,
     slug: 'budget-lower-than-expected',
-    title: 'How to reply when budget is lower than expected',
-    seoTitle: 'How to Reply When Budget Is Lower Than Expected | Flowdockr',
+    title: 'How to respond when the budget is lower than your quote',
+    seoTitle: 'How to Respond When the Budget Is Lower Than Your Quote | Flowdockr',
     metaDescription:
-      'When a client budget is below your quote, learn how to test constraints and reshape scope without collapsing your pricing logic.',
-    primaryKeyword: 'budget lower than expected',
+      'Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with Flowdockr.',
+    primaryKeyword: 'budget lower than quote',
     keywordVariants: [
-      'client budget too low',
-      'budget mismatch freelance quote',
-      'what to do when budget is lower than quote',
+      'lower budget than expected',
+      'limited budget project',
+      'small budget freelance project',
+      'how to reduce scope instead of price',
     ],
     heroSubtitle:
-      'Treat budget mismatch as a scope design problem, not instant discount pressure.',
+      'Protect your pricing logic by reshaping the project, not shrinking your value.',
     shortDescription:
-      'Prospect says they want to proceed but budget is below your quote.',
+      'Budget and quote do not align, but the project may still be worth pursuing.',
     situationSnapshot: [
-      'Sometimes budget constraints are real and still worth engaging.',
-      'Cutting price on unchanged scope creates margin leakage and delivery risk.',
-      'A better move is to prioritize outcomes and sequence the work.',
+      'The prospect shares a budget that is clearly below your current quote.',
+      'This may be a real constraint, not always a negotiation tactic.',
+      'You need to preserve quality and economics if you continue the conversation.',
     ],
     whatsReallyHappening: [
-      'This is often a scope-shaping problem, not a pure rate-negotiation problem.',
-      'The client may value your approach but cannot fund the full package immediately.',
-      'Phasing or reduced scope can keep quality intact without collapsing your rate logic.',
+      'The deal may still be viable if scope and sequencing are redesigned.',
+      'Lowering rate on unchanged scope creates delivery and margin risk.',
+      'A structured alternative protects your pricing model and client trust.',
     ],
     realGoals: [
-      'Verify whether budget is fixed or flexible.',
-      'Protect quality by reshaping scope, timeline, or phases.',
-      'Keep collaboration viable without underpricing core work.',
+      'Assess whether the budget constraint is fixed or flexible.',
+      'Offer a reduced-scope structure without collapsing your rate logic.',
+      'Keep deal momentum when there is still strategic fit.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Prioritize outcomes',
-        whenToUse: 'Use when they care about impact but cannot fund full scope now.',
-        risk: 'If priorities are unclear, reduced scope can disappoint later.',
+        title: 'Reduce scope, keep quality',
+        whenToUse: 'Use when project fit is strong but full scope is unrealistic at current budget.',
+        risk: 'If scope cuts are vague, expectations become mismatched later.',
         exampleWording:
-          'Given the budget range, the best move is to prioritize the highest-impact deliverables first. I can map a phase one version that fits your current constraints.',
+          'At that budget, the cleanest path is a reduced scope that protects the key outcome rather than lowering rate on the full version.',
       },
       {
         id: 'B',
-        title: 'Phase delivery',
-        whenToUse: 'Use when project value is strong but timing or cash flow is tight.',
-        risk: 'Without clear phase boundaries, phase one can become full scope by stealth.',
+        title: 'Offer tiered options',
+        whenToUse: 'Use when you want to test the buyer’s true decision range.',
+        risk: 'Too many options can confuse decision-making if not clearly prioritized.',
         exampleWording:
-          'We can split this into two phases so phase one fits your current budget, then expand once the first outcomes are validated.',
+          'I can send two scoped options so you can choose between a lean version now and an expanded version when budget allows.',
       },
       {
         id: 'C',
-        title: 'Decline politely',
-        whenToUse: 'Use when budget gap is too large for meaningful delivery.',
-        risk: 'You may lose a relationship if wording sounds dismissive.',
+        title: 'Decline respectfully',
+        whenToUse: 'Use when the budget gap is too large for credible delivery.',
+        risk: 'Direct decline can end relationship if tone sounds dismissive.',
         exampleWording:
-          'Thanks for the transparency. At that range I would not be able to deliver the standard we discussed, so it is better to pause than overpromise.',
+          'Given the current budget range, I would not be able to deliver this scope to the expected standard, so it may be better to pause for now.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'Understood. Rather than discounting full scope, I can design a smaller phase that matches your budget and still delivers useful results.',
+        text: 'Thanks for sharing the budget. At that level, the best option would be to reduce scope rather than lower the rate for the current scope.',
       },
       {
         tone: 'Warm',
-        text: 'Thanks for being clear on budget. I would rather adapt scope and sequence than cut the same work to a level that weakens outcomes.',
+        text: 'Thanks for being transparent about the budget. I don’t think the current scope would be realistic at that level, but I’d be happy to suggest a leaner version that still delivers the core outcome.',
       },
       {
         tone: 'Firm',
-        text: 'I do not reduce full scope to fit that range. I can either propose a reduced scope or we pause until budget aligns with the original plan.',
+        text: 'The current quote reflects the work required for this scope. If the available budget is lower, we’d need to adjust deliverables rather than reduce the rate for the same project.',
       },
     ],
     faq: [
       {
-        q: 'How do I respond to low budget without sounding rigid?',
-        a: 'Acknowledge the constraint and offer a scoped or phased alternative instead of rejecting the client outright.',
+        q: 'Should you accept lower-budget projects?',
+        a: 'Yes, but only when scope and expectations are reset to match the budget.',
       },
       {
-        q: 'Should I always offer a cheaper option?',
-        a: 'Only when it maps to less scope, not less value expectation for the same work.',
+        q: 'How do you reduce scope without looking inflexible?',
+        a: 'Frame it as priority sequencing and outcome protection, not refusal.',
       },
       {
-        q: 'Can low-budget clients still be good clients?',
-        a: 'Yes, if they respect scope boundaries and decision clarity.',
+        q: 'What if the project is a great fit but the budget is too small?',
+        a: 'Offer a phased or reduced version that preserves delivery quality and rate integrity.',
       },
     ],
     nextDecisionSlugs: [
@@ -313,99 +322,102 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'budget-limited',
+    toolCta:
+      'Paste the client’s budget, your original quote, and what parts of the project matter most. Flowdockr will help you draft a reply that restructures the work without underpricing yourself.',
   },
+
   {
     tier: 'tier1',
     featured: true,
     slug: 'cheaper-competitor-comparison',
-    title: 'How to respond when a prospect compares cheaper competitors',
-    seoTitle: 'How to Respond to Cheaper Competitor Comparison | Flowdockr',
+    title: 'How to respond when a prospect says someone else is cheaper',
+    seoTitle: 'How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr',
     metaDescription:
-      'Handle competitor price comparison without entering a race to the bottom. Differentiate on fit, scope, and delivery reliability.',
-    primaryKeyword: 'cheaper competitor comparison',
+      'Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with Flowdockr.',
+    primaryKeyword: 'another freelancer is cheaper',
     keywordVariants: [
-      'another freelancer is cheaper',
-      'client compares my price to cheaper quote',
-      'respond to cheaper competitor pricing',
+      'competitor quoted less',
+      'someone else offered a lower price',
+      'cheaper option comparison',
+      'lower quote from another provider',
     ],
     heroSubtitle:
-      'Stay out of pure price competition and reframe the decision criteria.',
+      'Stay out of commodity pricing and bring the conversation back to fit, quality, and outcomes.',
     shortDescription:
-      'Prospect says another freelancer can do it cheaper.',
+      'Client brings a cheaper quote into the negotiation and pressures you to match.',
     situationSnapshot: [
-      'Comparison pressure often appears when the buyer wants reassurance on value.',
-      'Matching the cheapest option turns your service into a commodity.',
-      'You need to differentiate clearly without attacking competitors.',
+      'You are being compared directly against a lower-priced competitor.',
+      'The buyer may be testing elasticity rather than making a final decision.',
+      'A reactive price match can erase your strategic differentiation.',
     ],
     whatsReallyHappening: [
-      'The buyer is using competitor pricing to test whether your quote is elastic.',
-      'They may not see the process and reliability difference behind pricing gaps.',
-      'Your response must reframe decision criteria beyond a single number.',
+      'The decision frame has shifted to pure price unless you reset criteria quickly.',
+      'Over-explaining can sound defensive and reduce perceived confidence.',
+      'You need to clarify fit and scope differences without attacking competitors.',
     ],
     realGoals: [
-      'Shift decision from price-only to fit and execution quality.',
-      'Keep tone calm and non-defensive.',
-      'Offer a narrowed option only if budget is truly constrained.',
+      'Avoid entering a race-to-the-bottom pricing dynamic.',
+      'Reframe the decision around outcomes and delivery reliability.',
+      'Qualify whether this is a fit client or a commodity buyer.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Differentiate on delivery',
-        whenToUse: 'Use when client still considers your proposal seriously.',
-        risk: 'If too abstract, value claims can sound generic.',
+        title: 'Reframe around outcomes',
+        whenToUse: 'Use when buyer still values quality and delivery confidence.',
+        risk: 'Abstract claims can fail if you do not connect to concrete scope.',
         exampleWording:
-          'Totally fair to compare options. My pricing includes strategy depth, communication cadence, and delivery reliability, not only output volume.',
+          'Totally fair to compare options. The key is whether scope, process, and support levels are truly equivalent to the outcome you want.',
       },
       {
         id: 'B',
-        title: 'Offer a narrower option',
-        whenToUse: 'Use when budget is likely real but they prefer your approach.',
-        risk: 'If not scoped clearly, you may still get full expectations at lower price.',
+        title: 'Clarify differences in scope',
+        whenToUse: 'Use when you suspect the compared quote is not apples-to-apples.',
+        risk: 'Too much detail can overwhelm instead of clarifying.',
         exampleWording:
-          'If cost is the deciding factor, I can draft a narrower version so you can compare options on aligned scope rather than mismatched packages.',
+          'I can map the scope side by side so you can see the practical difference in deliverables, support, and delivery standards.',
       },
       {
         id: 'C',
-        title: 'Disqualify with respect',
-        whenToUse: 'Use when buyer only optimizes for lowest number.',
-        risk: 'Direct tone can feel abrupt if relationship context is early.',
+        title: 'Bless and release',
+        whenToUse: 'Use when buyer clearly optimizes only for the lowest number.',
+        risk: 'You may lose short-term volume while improving client fit quality.',
         exampleWording:
-          'If the main decision criterion is lowest price only, I may not be the right fit for this engagement, and that is completely okay.',
+          'If lowest cost is the primary criterion, I may not be the right fit for this engagement, and that is completely okay.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'Comparison makes sense. My quote reflects scope, process, and reliability. If needed, I can outline a narrower scope for a lower total.',
+        text: 'That makes sense. Pricing can vary a lot depending on scope, process, and level of support, so it may be worth checking whether the deliverables are directly comparable.',
       },
       {
         tone: 'Warm',
-        text: 'I appreciate the transparency. Different quotes often reflect different delivery levels. Happy to map a leaner option if budget is the key constraint.',
+        text: 'I understand, and it’s completely reasonable to compare options. In many cases the difference comes down to scope, level of involvement, and how the work is handled, so I’d be happy to clarify what’s included on my side if that helps you evaluate fairly.',
       },
       {
         tone: 'Firm',
-        text: 'I do not compete on price alone. I can provide a reduced-scope alternative, but I would not match lower pricing on unchanged expectations.',
+        text: 'A lower quote doesn’t always reflect the same scope or standard. If price is the only decision factor, I may not be the right fit, but if you want the outcome this proposal is designed for, I’m happy to walk through the differences clearly.',
       },
     ],
     faq: [
       {
-        q: 'Should I match a cheaper competitor?',
-        a: 'Not by default. Match only if scope and operating model are genuinely equivalent.',
+        q: 'How do you respond when a client says someone else is cheaper?',
+        a: 'Acknowledge comparison, then reframe around scope, fit, and delivery quality.',
       },
       {
-        q: 'How do I avoid sounding insecure?',
-        a: 'Acknowledge comparison calmly and state concrete differences in process and outcomes.',
+        q: 'Should you match a competitor’s lower price?',
+        a: 'Usually no, unless scope and standards are truly equivalent and still economically viable.',
       },
       {
-        q: 'What if they only care about price?',
-        a: 'That is a qualification signal. It can be better to exit than accept weak-fit economics.',
+        q: 'How do you compare proposals without entering a price war?',
+        a: 'Use side-by-side scope clarity and outcomes-based decision criteria.',
       },
     ],
     nextDecisionSlugs: [
-      'price-pushback-after-proposal',
       'discount-pressure-before-signing',
       'budget-lower-than-expected',
-      'can-you-do-it-cheaper',
+      'price-pushback-after-proposal',
     ],
     guideLinks: [
       {
@@ -418,97 +430,101 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'cheaper-freelancer',
+    toolCta:
+      'Paste the competitor comparison message and your offer details. Flowdockr will help you reply without slipping into a defensive price war.',
   },
+
   {
     tier: 'tier2',
     slug: 'more-work-same-price',
-    title: 'How to handle more work requests at the same price',
-    seoTitle: 'How to Handle More Work Requests at the Same Price | Flowdockr',
+    title: 'How to respond when they want more work for the same price',
+    seoTitle: 'How to Respond When They Want More Work for the Same Price | Flowdockr',
     metaDescription:
-      'When clients ask for extra deliverables without extra budget, learn how to re-establish scope and present clear options.',
+      'Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with Flowdockr.',
     primaryKeyword: 'more work same price',
     keywordVariants: [
       'extra deliverables same budget',
-      'scope creep same fee',
-      'client wants more work no budget increase',
+      'more scope without more pay',
+      'expanded scope same fee',
+      'more revisions same price',
     ],
     heroSubtitle:
-      'Protect scope boundaries before hidden expansion erodes margin.',
+      'Protect the project boundary before “just one more thing” becomes a new scope.',
     shortDescription:
-      'Client asks for additional deliverables but wants original budget.',
+      'Client asks for extra tasks, revisions, or deliverables under the original budget.',
     situationSnapshot: [
-      'Scope creep often starts with requests framed as small add-ons.',
-      'Agreeing silently resets expectations for the rest of the project.',
-      'Clear scope framing can protect both relationship and delivery quality.',
+      'The request sounds small but expands effort beyond the original agreement.',
+      'If you accept silently, baseline expectations shift for the rest of the project.',
+      'This is a scope boundary issue that often masquerades as a service attitude issue.',
     ],
     whatsReallyHappening: [
-      'The client may not see the request as expansion unless boundaries are made explicit.',
-      'Without a scope reset, your project economics erode incrementally.',
-      'Clear options reduce friction better than emotional pushback.',
+      'The client may not intentionally exploit scope unless boundaries are explicit.',
+      'One casual yes can normalize unpaid expansion and timeline drift.',
+      'You need process clarity more than emotional resistance.',
     ],
     realGoals: [
-      'Separate original scope from new requests clearly.',
-      'Offer choices rather than emotional pushback.',
-      'Protect project economics and timeline reliability.',
+      'Clarify included scope before discussing added work.',
+      'Protect relationship while keeping economics and timeline sane.',
+      'Route added requests into re-quote or phased alternatives.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Clarify boundary and preserve scope',
-        whenToUse: 'Use when added requests are clearly outside agreed deliverables.',
-        risk: 'If tone is too abrupt, client may read it as resistance.',
+        title: 'Clarify what’s included',
+        whenToUse: 'Use when request may come from unclear scope understanding.',
+        risk: 'If phrasing is vague, the boundary still remains ambiguous.',
         exampleWording:
-          'I can help with those additions. Since they are outside current scope, we can either keep the original plan, or add the new items with an updated estimate.',
+          'Happy to support that direction. This request sits outside the current scope, so we can either keep the existing plan or scope the addition properly.',
       },
       {
         id: 'B',
-        title: 'Trade off within current budget',
-        whenToUse: 'Use when budget cannot move but client is open to substitutions.',
-        risk: 'Trade-offs must be explicit or complexity returns later.',
+        title: 'Re-quote the expanded scope',
+        whenToUse: 'Use when added work materially changes effort or delivery timeline.',
+        risk: 'If you skip explicit pricing update, expansion becomes implicit default.',
         exampleWording:
-          'If budget needs to stay fixed, we can swap lower-priority items for these new requests so total effort remains aligned.',
+          'I can add these deliverables with an updated quote so expectations stay clear on both sides.',
       },
       {
         id: 'C',
-        title: 'One-time courtesy with boundary',
-        whenToUse: 'Use when request is truly minor and relationship value is high.',
-        risk: 'If not framed clearly, courtesy becomes default expectation.',
+        title: 'Offer phased delivery',
+        whenToUse: 'Use when you want to preserve goodwill without absorbing full expansion now.',
+        risk: 'Phasing fails if priorities and boundaries are not documented.',
         exampleWording:
-          'I can include this one item as a one-time courtesy to keep momentum. Any further additions we can treat as a scoped add-on.',
+          'If useful, we can keep current budget for phase one and schedule these additions as phase two.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'Those additions are outside the original scope. I can either keep current deliverables and budget, or send an updated scope and total.',
+        text: 'Happy to help. That request would sit outside the current scope, so I can either quote it separately or suggest a lighter adjustment to fit the existing budget.',
       },
       {
         tone: 'Warm',
-        text: 'Happy to support those additions. Since they extend scope, I can map two options so you can choose between current budget or expanded deliverables.',
+        text: 'I’m glad to support the direction you’re aiming for. Since this would add to the original scope, the cleanest option is either to quote the extra work separately or reshape priorities within the current budget.',
       },
       {
         tone: 'Firm',
-        text: 'I would not include added deliverables under the existing quote by default. We should either swap scope items or revise budget.',
+        text: 'That request goes beyond the scope covered in the current pricing. I’m happy to add it, but it would need either a revised quote or a change in deliverables elsewhere.',
       },
     ],
     faq: [
       {
-        q: 'How do I push back on extra work without conflict?',
-        a: 'Use process language: clarify scope, identify additions, and present options calmly.',
+        q: 'How do you say no to extra work professionally?',
+        a: 'Use neutral scope language and present options instead of emotional pushback.',
       },
       {
-        q: 'Can I include small extras sometimes?',
-        a: 'Yes, but label them as one-time courtesy so baseline expectations stay clear.',
+        q: 'When should you re-quote instead of absorbing the request?',
+        a: 'Re-quote when added work changes effort, risk, or timeline beyond minor courtesy scope.',
       },
       {
-        q: 'What is the biggest risk with scope creep?',
-        a: 'Margin erosion and timeline instability caused by hidden work expansion.',
+        q: 'What if the client says it’s only a small addition?',
+        a: 'Decide intentionally: either one-time courtesy with explicit boundary or scoped add-on.',
       },
     ],
     nextDecisionSlugs: [
       'budget-lower-than-expected',
-      'discount-pressure-before-signing',
-      'free-trial-work-request',
+      'can-you-do-it-cheaper',
+      'price-pushback-after-proposal',
     ],
     guideLinks: [
       {
@@ -517,97 +533,101 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'more-work-same-budget',
+    toolCta:
+      'Paste the extra request and your original scope. Flowdockr will help you respond clearly without sounding defensive or opening the door to unpaid work.',
   },
+
   {
     tier: 'tier2',
     slug: 'free-trial-work-request',
-    title: 'How to respond to free trial work requests',
-    seoTitle: 'How to Respond to Free Trial Work Requests | Flowdockr',
+    title: 'How to respond to a free trial work request',
+    seoTitle: 'How to Respond to a Free Trial Work Request | Flowdockr',
     metaDescription:
-      'Handle unpaid trial requests professionally. Set boundaries while offering safer ways to evaluate fit.',
+      'Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with Flowdockr.',
     primaryKeyword: 'free trial work request',
     keywordVariants: [
-      'unpaid trial work client request',
-      'free sample work freelance',
-      'how to refuse unpaid custom trial',
+      'unpaid sample work',
+      'unpaid test project',
+      'spec work request',
+      'can you do a sample first',
     ],
     heroSubtitle:
-      'Protect boundaries without sounding hostile or defensive.',
+      'Stay professional without normalizing unpaid proof-of-work.',
     shortDescription:
-      'Prospect asks for unpaid custom work before committing.',
+      'Prospect asks for free sample work before commitment.',
     situationSnapshot: [
-      'Free trial asks often shift delivery risk fully to the freelancer.',
-      'Saying yes quickly can set a weak precedent for the engagement.',
-      'You can decline custom unpaid work while still helping them evaluate fit.',
+      'The prospect requests unpaid test work to evaluate fit.',
+      'You want to protect boundaries without sounding hostile.',
+      'This often determines whether the relationship starts with healthy expectations.',
     ],
     whatsReallyHappening: [
-      'The client is trying to reduce decision risk by transferring it to your unpaid labor.',
-      'If unpaid custom work becomes normal, boundary problems usually continue later.',
-      'A paid mini-test or portfolio proof keeps evaluation fair and professional.',
+      'Decision risk is being shifted onto your unpaid labor.',
+      'If you open this boundary early, downstream scope and payment pressure often increase.',
+      'You need an alternative path that keeps trust but protects your process.',
     ],
     realGoals: [
-      'Set a clear professional boundary on unpaid custom work.',
-      'Offer low-risk alternatives like portfolio proof or paid mini-tests.',
-      'Keep conversation constructive if opportunity is still viable.',
+      'Set a clear no-unpaid-custom-work boundary.',
+      'Offer portfolio or paid test alternatives.',
+      'Qualify whether this lead is viable long-term.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Policy-based boundary',
-        whenToUse: 'Use when request is clearly unpaid custom execution.',
-        risk: 'A short rejection without alternatives can feel abrupt.',
+        title: 'Offer portfolio proof instead',
+        whenToUse: 'Use when you have relevant prior work that demonstrates fit quickly.',
+        risk: 'Examples that are too generic may fail to resolve trust concern.',
         exampleWording:
-          'I do not provide unpaid custom sample work, but I can share relevant examples and process notes so you can evaluate fit confidently.',
+          'I don’t provide unpaid custom trial work, but I can share relevant examples and process detail so you can evaluate fit clearly.',
       },
       {
         id: 'B',
-        title: 'Paid trial option',
-        whenToUse: 'Use when buyer wants tailored proof before larger commitment.',
-        risk: 'Trial scope must be strict to avoid open-ended unpaid expansion.',
+        title: 'Offer a paid test',
+        whenToUse: 'Use when buyer needs tailored proof and you want a fair trial structure.',
+        risk: 'Test can sprawl unless scope and timeline are tightly defined.',
         exampleWording:
-          'If you want tailored validation, we can run a small paid test with fixed scope and timeline, then decide next steps from concrete results.',
+          'If you want a tailored validation step, we can run a small paid test with fixed scope and timeline.',
       },
       {
         id: 'C',
-        title: 'Polite decline and exit',
-        whenToUse: 'Use when prospect insists on free custom work as requirement.',
-        risk: 'May close the opportunity, but protects long-term positioning.',
+        title: 'Decline and qualify the lead',
+        whenToUse: 'Use when unpaid work is a hard requirement and fit is low.',
+        risk: 'May end opportunity, but protects future negotiation standards.',
         exampleWording:
-          'Given your current process requires unpaid custom work upfront, this may not be the right fit on my side. Wishing you a smooth search.',
+          'If unpaid trial work is required before engagement, this may not be the right fit on my side.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'I do not provide unpaid custom samples. I can share relevant case work or propose a fixed paid test if that helps your decision.',
+        text: 'I don’t usually provide unpaid trial work, but I’m happy to share relevant examples or discuss a small paid test if that would help.',
       },
       {
         tone: 'Warm',
-        text: 'I understand wanting confidence before commitment. For custom work I keep validation inside a paid trial, and I can share similar portfolio examples now.',
+        text: 'I understand why you’d want to see fit before moving forward. I don’t take on unpaid trial work, but I’d be glad to share similar work or set up a small paid test piece if that helps you decide with confidence.',
       },
       {
         tone: 'Firm',
-        text: 'I do not take unpaid custom trial assignments. I can offer a scoped paid test, otherwise it is better to pause here.',
+        text: 'I don’t provide free trial work as part of my process. If you’d like to assess fit, the best options are reviewing relevant examples or arranging a paid test engagement.',
       },
     ],
     faq: [
       {
-        q: 'How do I say no to free trial work politely?',
-        a: 'Acknowledge their need to evaluate fit, state your policy, and offer alternatives.',
+        q: 'Should freelancers do unpaid trial work?',
+        a: 'Usually no for custom work. It often creates misaligned risk and weak boundaries.',
       },
       {
-        q: 'Is a free sample request always a red flag?',
-        a: 'Not always, but repeated insistence on unpaid custom work is a quality filter signal.',
+        q: 'What can you offer instead of a free sample?',
+        a: 'Offer relevant portfolio proof, a case walkthrough, or a tightly scoped paid test.',
       },
       {
-        q: 'What alternatives should I offer?',
-        a: 'Relevant portfolio pieces, case studies, paid discovery, or a fixed paid test task.',
+        q: 'How do you say no without losing the opportunity?',
+        a: 'Acknowledge evaluation needs, state your policy, and provide practical alternatives.',
       },
     ],
     nextDecisionSlugs: [
-      'more-work-same-price',
       'can-you-do-it-cheaper',
-      'price-pushback-after-proposal',
+      'budget-lower-than-expected',
+      'more-work-same-price',
     ],
     guideLinks: [
       {
@@ -616,97 +636,101 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'free-sample-work',
+    toolCta:
+      'Paste the free-trial request and your preferred boundary. Flowdockr will draft a response that stays professional without giving away unpaid work.',
   },
+
   {
     tier: 'tier3',
     slug: 'can-you-do-it-cheaper',
-    title: 'How to reply when a prospect asks “can you do it cheaper?”',
-    seoTitle: 'How to Reply to “Can You Do It Cheaper?” | Flowdockr',
+    title: 'How to respond when they ask, “Can you do it cheaper?”',
+    seoTitle: 'How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr',
     metaDescription:
-      'Respond to direct price-cut requests with clear structure. Protect positioning while keeping the conversation open.',
+      'Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with Flowdockr.',
     primaryKeyword: 'can you do it cheaper',
     keywordVariants: [
-      'client asks can you lower your price',
-      'how to answer can you do it cheaper',
-      'direct price cut request reply',
+      'can you make it cheaper',
+      'do you offer a lower price',
+      'lower-cost option',
+      'reduce price request',
     ],
     heroSubtitle:
-      'Handle direct price pressure with calm structure, not instant concessions.',
+      'A common question, but not always the same decision problem underneath.',
     shortDescription:
-      'Short, direct request to lower the quoted number.',
+      'High-frequency direct price-cut request that needs fast triage.',
     situationSnapshot: [
-      'This is a high-frequency negotiation line in freelance deals.',
-      'A direct yes usually signals that your first price was negotiable by default.',
-      'You need a short response that protects anchor and offers a controlled alternative.',
+      'This is often the shortest and most common negotiation line you will receive.',
+      'It can map to multiple underlying pressures: pushback, discount, or budget mismatch.',
+      'The goal is to classify pressure quickly before choosing a deeper path.',
     ],
     whatsReallyHappening: [
-      'The request is often habitual haggling rather than evidence your pricing is wrong.',
-      'They are testing response speed and confidence more than detailed economics.',
-      'A concise boundary plus one structured option usually performs best.',
+      'The phrase itself is ambiguous and should trigger diagnosis, not automatic concessions.',
+      'Responding with immediate discount weakens your anchor before facts are clear.',
+      'This page acts as entry routing into the correct pillar decision page.',
     ],
     realGoals: [
-      'Avoid reactive discounting in one message.',
-      'Keep response concise and professional.',
-      'Shift to scope/terms-based options if needed.',
+      'Clarify what the real constraint is.',
+      'Protect pricing while keeping tone calm.',
+      'Route conversation into the right strategic branch.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Hold quote',
-        whenToUse: 'Use when scope fit is strong and price integrity matters most.',
-        risk: 'If too blunt, tone can sound inflexible.',
+        title: 'Clarify the real constraint',
+        whenToUse: 'Use when message is short and intent behind the ask is unclear.',
+        risk: 'If too many questions are asked, momentum can drop.',
         exampleWording:
-          'For this scope I keep the quoted rate. If budget needs adjustment, I can revise scope so price and expectations stay aligned.',
+          'Possibly, depending on scope priorities. Which outcome matters most to you within budget?',
       },
       {
         id: 'B',
-        title: 'Offer structured alternative',
-        whenToUse: 'Use when you want to preserve momentum while controlling concessions.',
-        risk: 'Alternative must be concrete to avoid repeated haggling.',
+        title: 'Offer a smaller version',
+        whenToUse: 'Use when you suspect budget is the real issue.',
+        risk: 'If scope is not narrowed clearly, full-scope expectations remain.',
         exampleWording:
-          'I do not discount the same scope by default, but I can offer a leaner version if you want a lower total.',
+          'Instead of lowering rate on full scope, I can suggest a lighter version that fits a lower range.',
       },
       {
         id: 'C',
-        title: 'Exit quickly',
-        whenToUse: 'Use when conversation repeatedly centers only on lower price.',
-        risk: 'Can reduce deal volume if used too early.',
+        title: 'Hold your position',
+        whenToUse: 'Use when scope fit is strong and price pressure appears tactical.',
+        risk: 'Too blunt delivery can feel inflexible.',
         exampleWording:
-          'If lowest price is the primary criterion, I may not be the right fit for this project, and that is completely fine.',
+          'I wouldn’t reduce the rate for the same scope, but I can help structure a reduced-scope option if needed.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'For this scope I keep the quoted rate. If useful, I can send a reduced-scope option at a lower total.',
+        text: 'Possibly, depending on what part of the scope matters most. If budget is tight, the cleanest option is usually to reduce scope rather than lower the rate for the same work.',
       },
       {
         tone: 'Warm',
-        text: 'I understand the budget ask. Rather than discounting the same scope, I can suggest a leaner version that fits a lower range.',
+        text: 'That may be possible, depending on what outcome matters most to you. Rather than simply lowering the price, I’d usually suggest adjusting scope so the project still works properly.',
       },
       {
         tone: 'Firm',
-        text: 'I do not reduce pricing on unchanged scope. We can either keep the current scope or revise deliverables and price together.',
+        text: 'I wouldn’t reduce the rate for the same scope, but I’d be happy to discuss a lighter version if budget is the main concern.',
       },
     ],
     faq: [
       {
-        q: 'How short should this reply be?',
-        a: 'Short is better. One clear boundary plus one structured option is usually enough.',
+        q: 'What does “can you do it cheaper” usually mean?',
+        a: 'It can mean tactical pushback, direct discount pressure, or real budget mismatch.',
       },
       {
-        q: 'Is this different from full price pushback?',
-        a: 'Yes. It is usually more direct and tactical, so concise boundary language matters more.',
+        q: 'Should you answer with a discount?',
+        a: 'Not by default. Diagnose first, then choose the right response path.',
       },
       {
-        q: 'Should I explain my full pricing model?',
-        a: 'Not initially. Start concise, then expand only if the prospect engages seriously.',
+        q: 'How do you tell if this is a real budget issue?',
+        a: 'Ask for range and priorities, then decide whether scope restructuring is appropriate.',
       },
     ],
     nextDecisionSlugs: [
       'price-pushback-after-proposal',
-      'budget-lower-than-expected',
       'discount-pressure-before-signing',
+      'budget-lower-than-expected',
     ],
     guideLinks: [
       {
@@ -715,97 +739,101 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'client-asks-discount',
+    toolCta:
+      'Paste the exact message and Flowdockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure, then draft the right reply.',
   },
+
   {
     tier: 'tier2',
     slug: 'small-discount-before-closing',
-    title: 'How to handle small discount asks right before closing',
-    seoTitle: 'How to Handle Small Discount Asks Before Closing | Flowdockr',
+    title: 'How to handle a small discount request right before closing',
+    seoTitle: 'How to Handle a Small Discount Request Right Before Closing | Flowdockr',
     metaDescription:
-      'Prospect is ready to sign but asks for a small final discount. Learn how to close while protecting long-term pricing integrity.',
-    primaryKeyword: 'small discount before closing',
+      'Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using Flowdockr.',
+    primaryKeyword: 'small discount before signing',
     keywordVariants: [
-      'final discount before signing',
-      'last minute small discount request',
-      'closing stage discount ask response',
+      'final small discount request',
+      'one last discount before close',
+      'little discount to move forward',
+      'can you do a little better',
     ],
     heroSubtitle:
-      'Close confidently without training clients to expect last-minute discounts.',
+      'The request sounds small, but the pricing signal it sends is not.',
     shortDescription:
-      'Final-stage ask for a “small” reduction before signature.',
+      'Final-stage micro-concession pressure before signature.',
     situationSnapshot: [
-      'Late-stage discount asks are common even when intent to buy is high.',
-      'Small concessions can feel harmless but create precedent risk.',
-      'You need a close-ready reply that preserves positioning and momentum.',
+      'The prospect is close to signing and asks for one last small reduction.',
+      'You want to avoid losing momentum but also avoid softening your anchor.',
+      'The wording must stay warm while preserving pricing discipline.',
     ],
     whatsReallyHappening: [
-      'The buyer may be trying to optimize terms after deciding they want to proceed.',
-      'A final small discount can reset expectations for renewals or follow-on work.',
-      'Conditional concessions or value-add framing can protect your long-term anchor.',
+      'Small final asks often test whether your quote has hidden flexibility.',
+      'A casual concession can reset expectations for future renewals.',
+      'You need close-oriented language with clear boundaries and options.',
     ],
     realGoals: [
-      'Close the deal without weakening baseline pricing norms.',
-      'Use conditional concessions only when terms are explicit.',
-      'Keep tone collaborative at the finish line.',
+      'Close professionally without unnecessary concession.',
+      'If flexibility is offered, tie it to explicit commitments.',
+      'Protect long-term positioning at the final stage.',
     ],
     responsePaths: [
       {
         id: 'A',
-        title: 'Close at quoted terms',
-        whenToUse: 'Use when deal is healthy and concessions are unnecessary.',
-        risk: 'May feel strict if no rationale is provided.',
+        title: 'Hold the line politely',
+        whenToUse: 'Use when deal is healthy and no further concession is needed.',
+        risk: 'If too abrupt, buyer may perceive avoidable friction at close.',
         exampleWording:
-          'I keep this final scope at the quoted rate so delivery quality and process stay intact. If that works for you, I can send final signature details today.',
+          'I’d prefer to keep pricing as quoted so we start on strong footing, and I’m ready to proceed immediately if everything else is aligned.',
       },
       {
         id: 'B',
-        title: 'Conditional close incentive',
-        whenToUse: 'Use when a small concession is acceptable with strong reciprocation.',
-        risk: 'Without conditions it becomes pure margin loss.',
+        title: 'Exchange for a commitment',
+        whenToUse: 'Use when you can offer micro-flexibility only with reciprocal terms.',
+        risk: 'Without clear terms, discount becomes pure margin leakage.',
         exampleWording:
-          'If we finalize by this week and keep payment terms as proposed, I can make a small one-time adjustment to help close cleanly.',
+          'If we finalize this week and keep payment terms as proposed, I can offer a one-time close adjustment.',
       },
       {
         id: 'C',
-        title: 'Alternative value add',
-        whenToUse: 'Use when you prefer not to reduce price but can add bounded value.',
-        risk: 'Value add can become hidden scope if not constrained.',
+        title: 'Repackage, not discount',
+        whenToUse: 'Use when you want to preserve price logic while offering practical movement.',
+        risk: 'Packaging change can become hidden scope unless bounded clearly.',
         exampleWording:
-          'Rather than changing the project price, I can include one small post-delivery review pass so you still get extra support at close.',
+          'Rather than lowering the quoted rate directly, I can adjust packaging or process support so we keep structure intact and still move forward.',
       },
     ],
     copyReadyExamples: [
       {
         tone: 'Concise',
-        text: 'I keep this scope at the quoted rate. If you are ready, I can send final signature details today.',
+        text: 'I’d prefer to keep the pricing as quoted, but I’m happy to move quickly from here if everything else feels aligned.',
       },
       {
         tone: 'Warm',
-        text: 'I appreciate the final ask. To keep scope and quality aligned, I usually keep this rate, but I can suggest a small close option if terms stay fixed.',
+        text: 'I appreciate you asking. I’d prefer to keep the pricing where it is so the project starts on the right footing, but if helpful I can make the process smoother on timing or packaging rather than adjusting the rate directly.',
       },
       {
         tone: 'Firm',
-        text: 'I do not apply final-stage discounts on unchanged scope by default. We can proceed as quoted or adjust scope and price together.',
+        text: 'At this stage I’d prefer not to reduce the quoted price further. If we move ahead on the current scope, I’m ready to proceed as outlined.',
       },
     ],
     faq: [
       {
-        q: 'Should I always give a small closing discount?',
-        a: 'No. It should be a deliberate exception, not default behavior.',
+        q: 'Should you give a small final discount to close a deal?',
+        a: 'Only when intentional and conditional. “Small” concessions still signal pricing flexibility.',
       },
       {
-        q: 'What can I offer instead of reducing price?',
-        a: 'A bounded value add or process convenience can preserve price integrity.',
+        q: 'Is a “small” discount really harmless?',
+        a: 'Not always. It can change future expectations for the same client relationship.',
       },
       {
-        q: 'How do I avoid losing momentum near close?',
-        a: 'Use clear close-oriented language and provide immediate next steps.',
+        q: 'What can you trade instead of lowering the price?',
+        a: 'Trade for faster commitment, cleaner payment terms, or bounded packaging changes.',
       },
     ],
     nextDecisionSlugs: [
       'discount-pressure-before-signing',
-      'price-pushback-after-proposal',
       'budget-lower-than-expected',
+      'cheaper-competitor-comparison',
     ],
     guideLinks: [
       {
@@ -814,6 +842,8 @@ export const pricingScenarios: PricingScenario[] = [
       },
     ],
     generatorScenarioSlug: 'client-asks-discount',
+    toolCta:
+      'Paste the final discount request and your current offer. Flowdockr will help you close professionally without undermining your pricing at the last minute.',
   },
 ];
 

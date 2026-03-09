@@ -1,4 +1,8 @@
-import { pricingFamilies, pricingScenarios } from '../../src/lib/pricing-cluster';
+import {
+  pricingFamilies,
+  pricingScenarioBlueprints,
+  pricingScenarios,
+} from '../../src/lib/pricing-cluster';
 
 type Issue = {
   level: 'error' | 'warn';
@@ -19,85 +23,138 @@ function validatePricingTaxonomy(): Issue[] {
 
   for (const scenario of pricingScenarios) {
     const { schema } = scenario;
+    const page = schema.page;
+    const content = schema.content;
 
-    if (schema.cluster !== 'pricing') {
+    if (page.cluster !== 'pricing') {
       issues.push({
         level: 'error',
-        message: `${scenario.slug}: schema.cluster must be 'pricing'.`,
+        message: `${scenario.slug}: schema.page.cluster must be 'pricing'.`,
       });
     }
 
-    if (scenario.tier !== schema.tier) {
+    if (scenario.tier !== page.tier) {
       issues.push({
         level: 'error',
-        message: `${scenario.slug}: tier mismatch (content=${scenario.tier}, schema=${schema.tier}).`,
+        message: `${scenario.slug}: tier mismatch (content=${scenario.tier}, schema=${page.tier}).`,
       });
     }
 
-    if (!schema.primaryKeywords.length) {
+    if (!page.primaryKeywords.length) {
       issues.push({
         level: 'error',
-        message: `${scenario.slug}: schema.primaryKeywords cannot be empty.`,
+        message: `${scenario.slug}: schema.page.primaryKeywords cannot be empty.`,
       });
     }
 
-    if (!schema.supportKeywords.length) {
+    if (!page.supportKeywords.length) {
       issues.push({
         level: 'warn',
-        message: `${scenario.slug}: schema.supportKeywords is empty.`,
+        message: `${scenario.slug}: schema.page.supportKeywords is empty.`,
       });
     }
 
-    if (!schema.decisionGoals.length) {
+    if (!content.decisionGoals.length) {
       issues.push({
         level: 'error',
-        message: `${scenario.slug}: schema.decisionGoals cannot be empty.`,
+        message: `${scenario.slug}: schema.content.decisionGoals cannot be empty.`,
       });
     }
 
-    if (!schema.realRisks.length) {
+    if (!content.realRisks.length) {
       issues.push({
         level: 'error',
-        message: `${scenario.slug}: schema.realRisks cannot be empty.`,
+        message: `${scenario.slug}: schema.content.realRisks cannot be empty.`,
       });
     }
 
-    if (schema.strategyPathIds.length < 2) {
+    if (scenario.responsePaths.length < 3) {
       issues.push({
         level: 'warn',
-        message: `${scenario.slug}: schema.strategyPathIds should have at least 2 paths.`,
+        message: `${scenario.slug}: responsePaths should have at least 3 strategy options.`,
       });
     }
 
-    if (schema.tier === 'tier1' && schema.pageRole !== 'pillar') {
+    if (scenario.copyReadyExamples.length < 3) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: copyReadyExamples should include concise, warm, and firm variants.`,
+      });
+    }
+
+    if (scenario.nextDecisionSlugs.length < 3) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: nextDecisionSlugs should include at least 3 next-decision links.`,
+      });
+    }
+
+    if (!scenario.toolCta) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: toolCta is empty; scenario-specific CTA is recommended.`,
+      });
+    }
+
+    if (content.strategyPathIds.length < 2) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: schema.content.strategyPathIds should have at least 2 paths.`,
+      });
+    }
+
+    if (!page.scopeIn.length) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: schema.page.scopeIn is empty.`,
+      });
+    }
+
+    if (!page.scopeOut.length) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: schema.page.scopeOut is empty.`,
+      });
+    }
+
+    if (page.tier === 'tier1' && page.pageRole !== 'pillar') {
       issues.push({
         level: 'error',
         message: `${scenario.slug}: tier1 must use pageRole='pillar'.`,
       });
     }
 
-    if (schema.tier === 'tier3' && schema.pageRole !== 'entry') {
+    if (page.tier === 'tier3' && page.pageRole !== 'entry') {
       issues.push({
         level: 'error',
         message: `${scenario.slug}: tier3 must use pageRole='entry'.`,
       });
     }
 
-    if (schema.pageRole === 'entry' && schema.tier !== 'tier3') {
+    if (page.pageRole === 'entry' && page.tier !== 'tier3') {
       issues.push({
         level: 'error',
         message: `${scenario.slug}: pageRole='entry' must be tier3.`,
       });
     }
 
-    if (!schema.primaryKeywords.map(normalize).includes(normalize(scenario.primaryKeyword))) {
+    if (page.pageRole === 'bridge' && page.tier !== 'tier2') {
       issues.push({
-        level: 'warn',
-        message: `${scenario.slug}: scenario.primaryKeyword is not included in schema.primaryKeywords.`,
+        level: 'error',
+        message: `${scenario.slug}: pageRole='bridge' must be tier2.`,
       });
     }
 
-    const schemaKeywords = [...schema.primaryKeywords, ...schema.supportKeywords].map(normalize);
+    if (!page.primaryKeywords.map(normalize).includes(normalize(scenario.primaryKeyword))) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: scenario.primaryKeyword is not included in schema.page.primaryKeywords.`,
+      });
+    }
+
+    const normalizedPrimary = page.primaryKeywords.map(normalize);
+    const normalizedSupport = page.supportKeywords.map(normalize);
+    const schemaKeywords = [...normalizedPrimary, ...normalizedSupport];
     const variantMissing = scenario.keywordVariants.filter(
       (variant) => !schemaKeywords.includes(normalize(variant))
     );
@@ -105,13 +162,11 @@ function validatePricingTaxonomy(): Issue[] {
     if (variantMissing.length > 0) {
       issues.push({
         level: 'warn',
-        message: `${scenario.slug}: ${variantMissing.length} keywordVariants are not mirrored in schema.supportKeywords.`,
+        message: `${scenario.slug}: ${variantMissing.length} keywordVariants are not mirrored in schema.page.supportKeywords.`,
       });
     }
 
-    const overlap = schema.primaryKeywords
-      .map(normalize)
-      .filter((keyword) => schema.supportKeywords.map(normalize).includes(keyword));
+    const overlap = normalizedPrimary.filter((keyword) => normalizedSupport.includes(keyword));
 
     if (overlap.length > 0) {
       issues.push({
@@ -134,7 +189,7 @@ function validatePricingTaxonomy(): Issue[] {
       }
     }
 
-    for (const slug of schema.doNotCompeteWith) {
+    for (const slug of page.doNotCompeteWith) {
       if (slug === scenario.slug) {
         issues.push({
           level: 'error',
@@ -149,10 +204,55 @@ function validatePricingTaxonomy(): Issue[] {
     }
   }
 
+  const blueprintBySlug = new Map(
+    pricingScenarioBlueprints.map((blueprint) => [blueprint.slug, blueprint])
+  );
+
+  if (pricingScenarioBlueprints.length !== pricingScenarios.length) {
+    issues.push({
+      level: 'error',
+      message: `Blueprint count mismatch: ${pricingScenarioBlueprints.length} blueprints for ${pricingScenarios.length} scenarios.`,
+    });
+  }
+
+  for (const scenario of pricingScenarios) {
+    const blueprint = blueprintBySlug.get(scenario.slug);
+    if (!blueprint) {
+      issues.push({
+        level: 'error',
+        message: `${scenario.slug}: missing pricing scenario blueprint.`,
+      });
+      continue;
+    }
+
+    if (blueprint.hubParent !== '/pricing/') {
+      issues.push({
+        level: 'error',
+        message: `${scenario.slug}: blueprint.hubParent must be '/pricing/'.`,
+      });
+    }
+
+    if (!blueprint.nextDecisionLinks.length) {
+      issues.push({
+        level: 'warn',
+        message: `${scenario.slug}: blueprint.nextDecisionLinks is empty.`,
+      });
+    }
+
+    for (const link of blueprint.nextDecisionLinks) {
+      if (!link.startsWith('/pricing/')) {
+        issues.push({
+          level: 'warn',
+          message: `${scenario.slug}: next decision link '${link}' does not point to pricing cluster.`,
+        });
+      }
+    }
+  }
+
   const primaryKeywordOwner = new Map<string, string>();
 
   for (const scenario of pricingScenarios) {
-    for (const keyword of scenario.schema.primaryKeywords.map(normalize)) {
+    for (const keyword of scenario.schema.page.primaryKeywords.map(normalize)) {
       const owner = primaryKeywordOwner.get(keyword);
       if (owner && owner !== scenario.slug) {
         issues.push({
@@ -166,7 +266,7 @@ function validatePricingTaxonomy(): Issue[] {
   }
 
   for (const family of pricingFamilies) {
-    const count = pricingScenarios.filter((scenario) => scenario.schema.family === family.id).length;
+    const count = pricingScenarios.filter((scenario) => scenario.schema.page.family === family.id).length;
     if (count === 0) {
       issues.push({
         level: 'error',
@@ -175,8 +275,8 @@ function validatePricingTaxonomy(): Issue[] {
     }
   }
 
-  const tier1Count = pricingScenarios.filter((scenario) => scenario.schema.tier === 'tier1').length;
-  const tier3Count = pricingScenarios.filter((scenario) => scenario.schema.tier === 'tier3').length;
+  const tier1Count = pricingScenarios.filter((scenario) => scenario.schema.page.tier === 'tier1').length;
+  const tier3Count = pricingScenarios.filter((scenario) => scenario.schema.page.tier === 'tier3').length;
 
   if (tier1Count < 4) {
     issues.push({

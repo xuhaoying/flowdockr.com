@@ -65,7 +65,7 @@ export async function generateMetadata({
     alternates: {
       canonical,
     },
-    keywords: [...scenario.schema.primaryKeywords, ...scenario.schema.supportKeywords],
+    keywords: [...scenario.schema.page.primaryKeywords, ...scenario.schema.page.supportKeywords],
     openGraph: {
       title: scenario.seoTitle,
       description: scenario.metaDescription,

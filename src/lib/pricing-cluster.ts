@@ -1,7 +1,9 @@
 import { pricingScenarios as basePricingScenarios } from '@/data/pricing-cluster';
 import { pricingScenarioFamilies, pricingScenarioSchemas } from '@/data/pricing-taxonomy';
 import type {
+  PricingIntentType,
   PricingScenario,
+  PricingScenarioBlueprint,
   PricingScenarioFamily,
   PricingScenarioFamilyDefinition,
   PricingScenarioSlug,
@@ -19,8 +21,8 @@ function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSch
     throw new Error(`Missing pricing taxonomy schema for slug: ${scenario.slug}`);
   }
 
-  const primaryKeywords = unique([scenario.primaryKeyword, ...schema.primaryKeywords]);
-  const supportKeywords = unique([...scenario.keywordVariants, ...schema.supportKeywords]).filter(
+  const primaryKeywords = unique([scenario.primaryKeyword, ...schema.page.primaryKeywords]);
+  const supportKeywords = unique([...scenario.keywordVariants, ...schema.page.supportKeywords]).filter(
     (keyword) => !primaryKeywords.includes(keyword)
   );
 
@@ -28,8 +30,11 @@ function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSch
     ...scenario,
     schema: {
       ...schema,
-      primaryKeywords,
-      supportKeywords,
+      page: {
+        ...schema.page,
+        primaryKeywords,
+        supportKeywords,
+      },
     },
   };
 }
@@ -38,6 +43,140 @@ export const pricingScenarios: PricingScenarioWithSchema[] =
   basePricingScenarios.map(attachScenarioSchema);
 
 export const pricingFamilies: PricingScenarioFamilyDefinition[] = pricingScenarioFamilies;
+
+function tierToNumber(tier: 'tier1' | 'tier2' | 'tier3'): 1 | 2 | 3 {
+  if (tier === 'tier1') return 1;
+  if (tier === 'tier2') return 2;
+  return 3;
+}
+
+function pressureTypeToIntentType(pressureType: string): PricingIntentType {
+  switch (pressureType) {
+    case 'price-pushback':
+      return 'price_objection';
+    case 'discount-pressure':
+      return 'discount_pressure';
+    case 'budget-mismatch':
+      return 'budget_mismatch';
+    case 'competitor-comparison':
+      return 'competitor_comparison';
+    case 'more-work-same-price':
+      return 'scope_for_price';
+    case 'free-work-boundary':
+      return 'free_work_boundary';
+    default:
+      return 'price_objection';
+  }
+}
+
+function normalizePoint(text: string): string {
+  return text.trim().replace(/\.$/, '');
+}
+
+function humanizeRisk(risk: string): string {
+  switch (risk) {
+    case 'lose-leverage':
+      return 'Discount too early and lose leverage';
+    case 'damage-positioning':
+      return 'Signal weak positioning by treating price as arbitrary';
+    case 'open-scope-creep':
+      return 'Open the door to unpaid scope expansion';
+    case 'low-margin-trap':
+      return 'Get trapped in low-margin work that is hard to sustain';
+    case 'lose-deal':
+      return 'Push too hard and stall or lose the deal';
+    case 'payment-risk':
+      return 'Increase payment risk through weak negotiation structure';
+    default:
+      return normalizePoint(risk);
+  }
+}
+
+function buildPathKeyPoints(path: PricingScenario['responsePaths'][number]): string[] {
+  return [
+    normalizePoint(path.whenToUse),
+    `Watch for: ${normalizePoint(path.risk).replace(/^If\s+/i, '')}`,
+    `Anchor phrase: ${normalizePoint(path.exampleWording)}`,
+  ];
+}
+
+function getExampleReply(
+  scenario: PricingScenario,
+  tone: 'Concise' | 'Warm' | 'Firm'
+): string {
+  return scenario.copyReadyExamples.find((item) => item.tone === tone)?.text || '';
+}
+
+const futureBridgeToBySlug: Partial<Record<PricingScenarioSlug, string[]>> = {
+  'budget-lower-than-expected': ['/scope/'],
+  'more-work-same-price': ['/scope/'],
+  'free-trial-work-request': ['/client-red-flags/'],
+};
+
+const notesBySlug: Partial<Record<PricingScenarioSlug, string>> = {
+  'price-pushback-after-proposal':
+    'Primary pillar. Absorbs quote too high / rate too high / too expensive-after-proposal intent.',
+  'discount-pressure-before-signing':
+    'Closing-stage pillar. Keeps broad pre-sign discount pressure away from smaller final-discount pages.',
+  'budget-lower-than-expected':
+    'Owns true budget mismatch intent and reinforces scope-reduction over blind discounting.',
+  'cheaper-competitor-comparison':
+    'Owns competitor-price comparison intent and prevents commodity price-war framing.',
+  'more-work-same-price':
+    'Bridge page between pricing and scope boundary logic.',
+  'free-trial-work-request':
+    'High-anxiety boundary page. Keeps unpaid trial/spec-work intent isolated from general pricing objections.',
+  'can-you-do-it-cheaper':
+    'Entry page for high-frequency wording; routes users to pillar pages instead of competing with them.',
+  'small-discount-before-closing':
+    'Narrow support page for final-stage micro-discount asks near signature.',
+};
+
+export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScenarios.map(
+  (scenario) => {
+    const concise = getExampleReply(scenario, 'Concise');
+    const warm = getExampleReply(scenario, 'Warm');
+    const firm = getExampleReply(scenario, 'Firm');
+
+    return {
+      slug: scenario.slug,
+      cluster: 'pricing',
+      tier: tierToNumber(scenario.schema.page.tier),
+      pageRole: scenario.schema.page.pageRole,
+      intentType: pressureTypeToIntentType(scenario.schema.page.pressureType),
+      primaryIntent: scenario.schema.page.primaryIntent,
+      primaryKeywords: scenario.schema.page.primaryKeywords,
+      supportKeywords: scenario.schema.page.supportKeywords,
+      doNotCompeteWith: scenario.schema.page.doNotCompeteWith,
+      url: `/pricing/${scenario.slug}/`,
+      h1: scenario.title,
+      metaTitle: scenario.seoTitle,
+      metaDescription: scenario.metaDescription,
+      heroSubheading: scenario.heroSubtitle,
+      situationSummary: scenario.situationSnapshot[0] || '',
+      coreFear: scenario.schema.content.realRisks.map(humanizeRisk),
+      strategyPaths: scenario.responsePaths.map((path) => ({
+        id: path.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+        title: path.title,
+        whenToUse: path.whenToUse,
+        keyPoints: buildPathKeyPoints(path),
+      })),
+      exampleReplies: {
+        concise,
+        warm,
+        firm,
+      },
+      faq: scenario.faq.map((item) => item.q),
+      nextDecisionLinks: scenario.nextDecisionSlugs.map((slug) => `/pricing/${slug}/`),
+      toolCta:
+        scenario.toolCta ||
+        'Paste the exact client message and project context. Flowdockr will draft a response that protects your rate and fits this negotiation stage.',
+      hubParent: '/pricing/',
+      futureBridgeTo: futureBridgeToBySlug[scenario.slug] || [],
+      notes: notesBySlug[scenario.slug] || '',
+    };
+  }
+);
 
 export function getPricingScenarioBySlug(slug: string): PricingScenarioWithSchema | undefined {
   return pricingScenarios.find((scenario) => scenario.slug === slug);
@@ -52,7 +191,7 @@ export function getRelatedPricingScenarios(slugs: string[]): PricingScenarioWith
 export function getPricingScenariosByFamily(
   family: PricingScenarioFamily
 ): PricingScenarioWithSchema[] {
-  return pricingScenarios.filter((scenario) => scenario.schema.family === family);
+  return pricingScenarios.filter((scenario) => scenario.schema.page.family === family);
 }
 
 export function getPricingFamilyById(
@@ -61,7 +200,12 @@ export function getPricingFamilyById(
   return pricingFamilies.find((family) => family.id === id);
 }
 
+export function getPricingBlueprintBySlug(slug: string): PricingScenarioBlueprint | undefined {
+  return pricingScenarioBlueprints.find((scenario) => scenario.slug === slug);
+}
+
 export type {
+  PricingScenarioBlueprint,
   PricingScenarioFamily,
   PricingScenarioFamilyDefinition,
   PricingScenarioWithSchema as PricingScenario,
