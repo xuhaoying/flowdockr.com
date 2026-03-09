@@ -38,6 +38,7 @@ export default async function PricingHubPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const featuredScenarios = pricingScenarios.filter((scenario) => scenario.featured);
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -87,6 +88,19 @@ export default async function PricingHubPage({
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Featured scenarios</h2>
+        <p className="text-sm text-slate-700">
+          Start with the core pricing decision pages that carry the highest intent and
+          strongest conversion potential.
+        </p>
+        <div className="grid gap-3 md:grid-cols-2">
+          {featuredScenarios.map((scenario) => (
+            <PricingScenarioCard key={scenario.slug} scenario={scenario} />
+          ))}
+        </div>
       </section>
 
       <section id="pricing-tool" className="space-y-3">

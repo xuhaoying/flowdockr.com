@@ -15,6 +15,13 @@ export const generateMetadata = getMetadata({
   keywords: 'client reply generator, freelancer negotiation reply, AI pricing response tool',
 });
 
+const USE_CASES = [
+  'Price pushback after proposal review',
+  'Discount pressure before signing',
+  'Competitor comparison and cheaper quote pressure',
+  'More work requests without budget increase',
+];
+
 export default async function ReplyGeneratorPage({
   params,
 }: {
@@ -48,9 +55,45 @@ export default async function ReplyGeneratorPage({
         </div>
       </section>
 
+      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">Best use cases</h2>
+        <ul className="space-y-2 text-sm text-slate-700">
+          {USE_CASES.map((item) => (
+            <li key={item} className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <ToolForm sourcePage="tool" showScenarioSelector />
 
       {scenario ? <ToolExample scenario={scenario} title="Example output" /> : null}
+
+      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">Pricing scenarios</h2>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <Link
+            href="/pricing/price-pushback-after-proposal"
+            className="font-semibold text-slate-900 underline underline-offset-2"
+          >
+            Price pushback after proposal
+          </Link>
+          <Link
+            href="/pricing/discount-pressure-before-signing"
+            className="font-semibold text-slate-900 underline underline-offset-2"
+          >
+            Discount pressure before signing
+          </Link>
+          <Link
+            href="/pricing/budget-lower-than-expected"
+            className="font-semibold text-slate-900 underline underline-offset-2"
+          >
+            Budget lower than expected
+          </Link>
+        </div>
+      </section>
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">Credits and access</h2>

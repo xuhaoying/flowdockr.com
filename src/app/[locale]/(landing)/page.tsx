@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { ExampleConversation } from '@/components/marketing/ExampleConversation';
 import { FinalCta } from '@/components/marketing/FinalCta';
+import { ConversationSurfaces } from '@/components/marketing/ConversationSurfaces';
 import { HowItWorksSection } from '@/components/marketing/HowItWorksSection';
 import { HomepageHero } from '@/components/marketing/HomepageHero';
 import { HomepageScenarioGrid } from '@/components/marketing/HomepageScenarioGrid';
@@ -32,6 +33,7 @@ export default async function LandingPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 md:gap-10 md:py-10">
       <HomepageHero />
       <ProblemStrip />
+      <ConversationSurfaces />
       <ExampleConversation />
       <WhyNotGenericAI />
       <HomepageScenarioGrid />

@@ -52,12 +52,7 @@ export async function generateMetadata({
     alternates: {
       canonical,
     },
-    keywords: [
-      'freelance pricing negotiation',
-      'client price pushback',
-      'discount pressure',
-      'proposal negotiation',
-    ],
+    keywords: [scenario.primaryKeyword, ...scenario.keywordVariants],
     openGraph: {
       title: scenario.seoTitle,
       description: scenario.metaDescription,
@@ -122,6 +117,48 @@ export default async function PricingScenarioPage({
           ))}
         </ul>
       </section>
+
+      {scenario.tier === 'tier1' ? (
+        <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+            Negotiation diagnostics
+          </h2>
+          <ul className="space-y-2 text-sm text-slate-700">
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              Check whether this is tactical pushback or a hard budget ceiling.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              Keep scope and pricing separated before proposing concessions.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              Choose a reply path that preserves both margin and deal momentum.
+            </li>
+          </ul>
+        </section>
+      ) : (
+        <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+            Fast handling checklist
+          </h2>
+          <ul className="space-y-2 text-sm text-slate-700">
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              Name the pressure clearly before writing your reply.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              Avoid instant concessions on unchanged scope.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              End with one structured next step, not vague flexibility.
+            </li>
+          </ul>
+        </section>
+      )}
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Your real goal</h2>
@@ -216,6 +253,25 @@ export default async function PricingScenarioPage({
           </Link>
         </div>
       </section>
+
+      {scenario.guideLinks?.length ? (
+        <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+            Related guides
+          </h2>
+          <div className="flex flex-wrap gap-4 text-sm">
+            {scenario.guideLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="font-semibold text-slate-900 underline underline-offset-2"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">FAQ</h2>

@@ -18,11 +18,20 @@ export type PricingFaqItem = {
   a: string;
 };
 
+export type PricingGuideLink = {
+  href: string;
+  label: string;
+};
+
 export type PricingScenario = {
+  tier: 'tier1' | 'tier2';
+  featured?: boolean;
   slug: string;
   title: string;
   seoTitle: string;
   metaDescription: string;
+  primaryKeyword: string;
+  keywordVariants: string[];
   heroSubtitle: string;
   shortDescription: string;
   situationSnapshot: string[];
@@ -31,5 +40,6 @@ export type PricingScenario = {
   copyReadyExamples: PricingCopyExample[];
   faq: PricingFaqItem[];
   nextDecisionSlugs: string[];
+  guideLinks?: PricingGuideLink[];
   generatorScenarioSlug: ScenarioSlug;
 };
