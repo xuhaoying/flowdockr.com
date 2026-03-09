@@ -3,7 +3,6 @@ import { setRequestLocale } from 'next-intl/server';
 import { ScenarioCard } from '@/components/scenario/ScenarioCard';
 import { Link } from '@/core/i18n/navigation';
 import { scenarios } from '@/lib/scenarios';
-import { ScenarioCategory } from '@/types/scenario';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -15,28 +14,68 @@ export const generateMetadata = getMetadata({
     'freelance negotiation scenarios, client discount response, scope creep reply, lowball offer response',
 });
 
-const HUB_SECTIONS: Array<{
-  key: ScenarioCategory;
+const PRESSURE_GROUPS: Array<{
+  key: string;
   title: string;
   description: string;
+  slugs: string[];
 }> = [
   {
-    key: 'negotiation',
-    title: 'Negotiation',
+    key: 'pricing-pressure',
+    title: 'Pricing pressure',
     description:
-      'Scenarios where you need to defend boundaries and keep leverage without damaging trust.',
+      'Discount asks, lowball offers, and price comparisons where you need to hold your position.',
+    slugs: ['client-asks-discount', 'lowball-offer', 'cheaper-freelancer', 'budget-limited'],
   },
   {
-    key: 'pricing',
-    title: 'Pricing',
+    key: 'scope-pressure',
+    title: 'Scope pressure',
     description:
-      'Scenarios focused on discount pressure, lowball offers, and budget mismatch conversations.',
+      'Extra requests and boundary tests that quietly erode margin if not handled clearly.',
+    slugs: ['more-work-same-budget', 'small-extra-free', 'free-sample-work'],
   },
   {
-    key: 'difficult-clients',
-    title: 'Difficult clients',
+    key: 'delay-pressure',
+    title: 'Delay and follow-up pressure',
     description:
-      'Scenarios for delayed decisions, boundary tests, and higher-friction client behavior.',
+      'Conversations where momentum stalls and you need a clear, low-pressure next step.',
+    slugs: ['delayed-decision'],
+  },
+];
+
+const DEAL_STAGE_GROUPS = [
+  {
+    key: 'before-quote',
+    title: 'Before quote',
+    slugs: ['free-sample-work', 'budget-limited'],
+  },
+  {
+    key: 'after-quote',
+    title: 'After quote',
+    slugs: ['client-asks-discount', 'lowball-offer', 'cheaper-freelancer'],
+  },
+  {
+    key: 'stalled-deal',
+    title: 'Stalled deal',
+    slugs: ['delayed-decision', 'more-work-same-budget', 'small-extra-free'],
+  },
+];
+
+const GOAL_GROUPS = [
+  {
+    key: 'protect-price',
+    title: 'Protect price',
+    slugs: ['lowball-offer', 'client-asks-discount', 'cheaper-freelancer'],
+  },
+  {
+    key: 'set-boundaries',
+    title: 'Set boundaries',
+    slugs: ['free-sample-work', 'more-work-same-budget', 'small-extra-free'],
+  },
+  {
+    key: 'keep-momentum',
+    title: 'Keep momentum',
+    slugs: ['delayed-decision', 'budget-limited'],
   },
 ];
 
@@ -61,31 +100,36 @@ export default async function ScenariosPage({
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Scenario hub</h2>
-        <div className="space-y-6">
-          {HUB_SECTIONS.map((section) => {
-            const sectionScenarios = scenarios.filter(
-              (scenario) => scenario.category === section.key
-            );
+        <h2 className="text-xl font-semibold text-slate-900">By pressure type</h2>
+        <p className="text-sm text-slate-700">
+          Start from the negotiation pressure you are facing right now.
+        </p>
+        {PRESSURE_GROUPS.map((group) => (
+          <ScenarioGroup key={group.key} title={group.title} description={group.description} slugs={group.slugs} />
+        ))}
+      </section>
 
-            if (sectionScenarios.length === 0) {
-              return null;
-            }
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">By deal stage</h2>
+        <p className="text-sm text-slate-700">
+          Navigate based on where the conversation sits in your deal lifecycle.
+        </p>
+        <div className="space-y-4">
+          {DEAL_STAGE_GROUPS.map((group) => (
+            <ScenarioMiniGroup key={group.key} title={group.title} slugs={group.slugs} />
+          ))}
+        </div>
+      </section>
 
-            return (
-              <article key={section.key} className="space-y-3">
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">{section.title}</h3>
-                  <p className="mt-1 text-sm text-slate-700">{section.description}</p>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {sectionScenarios.map((scenario) => (
-                    <ScenarioCard key={scenario.slug} scenario={scenario} />
-                  ))}
-                </div>
-              </article>
-            );
-          })}
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">By goal</h2>
+        <p className="text-sm text-slate-700">
+          Choose the outcome you want to optimize in this specific message.
+        </p>
+        <div className="space-y-4">
+          {GOAL_GROUPS.map((group) => (
+            <ScenarioMiniGroup key={group.key} title={group.title} slugs={group.slugs} />
+          ))}
         </div>
       </section>
 
@@ -96,37 +140,72 @@ export default async function ScenariosPage({
             <ScenarioCard key={scenario.slug} scenario={scenario} />
           ))}
         </div>
-      </section>
-
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">FAQ</h2>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Are these scenario pages only for SEO?
-          </summary>
-          <p className="mt-2 text-sm text-slate-700">
-            No. Each page is a direct-use tool page with practical examples and immediate
-            generation.
-          </p>
-        </details>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Can I start from a generic tool instead?
-          </summary>
-          <p className="mt-2 text-sm text-slate-700">
-            Yes. Use the generic tool page if you don&apos;t need scenario-specific framing.
-          </p>
-        </details>
-      </section>
-
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <p className="text-sm text-slate-700">
-          Want direct access without browsing scenarios?
+          Need direct access without browsing? Use the generic tool.
         </p>
-        <Link href="/tool" className="mt-2 inline-flex text-sm font-semibold text-slate-900 underline">
+        <Link href="/tool" className="inline-flex text-sm font-semibold text-slate-900 underline">
           Open client negotiation reply generator
         </Link>
       </section>
     </main>
+  );
+}
+
+function ScenarioGroup({
+  title,
+  description,
+  slugs,
+}: {
+  title: string;
+  description: string;
+  slugs: string[];
+}) {
+  const items = slugs
+    .map((slug) => scenarios.find((scenario) => scenario.slug === slug))
+    .filter((scenario): scenario is (typeof scenarios)[number] => Boolean(scenario));
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <article className="space-y-3">
+      <div>
+        <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+        <p className="mt-1 text-sm text-slate-700">{description}</p>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {items.map((scenario) => (
+          <ScenarioCard key={scenario.slug} scenario={scenario} />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function ScenarioMiniGroup({
+  title,
+  slugs,
+}: {
+  title: string;
+  slugs: string[];
+}) {
+  const items = slugs
+    .map((slug) => scenarios.find((scenario) => scenario.slug === slug))
+    .filter((scenario): scenario is (typeof scenarios)[number] => Boolean(scenario));
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <article className="space-y-2">
+      <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {items.map((scenario) => (
+          <ScenarioCard key={scenario.slug} scenario={scenario} />
+        ))}
+      </div>
+    </article>
   );
 }

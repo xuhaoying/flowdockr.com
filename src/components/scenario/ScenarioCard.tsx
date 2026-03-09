@@ -12,6 +12,12 @@ const RISK_STYLES: Record<Scenario['riskLevel'], string> = {
   high: 'bg-rose-50 text-rose-700 border-rose-200',
 };
 
+const CATEGORY_LABEL: Record<Scenario['category'], string> = {
+  negotiation: 'Negotiation',
+  pricing: 'Pricing',
+  'difficult-clients': 'Difficult clients',
+};
+
 export function ScenarioCard({ scenario, ctaLabel = 'Open scenario' }: ScenarioCardProps) {
   return (
     <article className="rounded-lg border border-slate-200 p-4">
@@ -23,6 +29,14 @@ export function ScenarioCard({ scenario, ctaLabel = 'Open scenario' }: ScenarioC
           }`}
         >
           {scenario.riskLevel}
+        </span>
+      </div>
+      <div className="mb-2 flex flex-wrap gap-2">
+        <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+          {CATEGORY_LABEL[scenario.category]}
+        </span>
+        <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+          {scenario.toneProfile}
         </span>
       </div>
       <p className="text-sm text-slate-700">{scenario.shortDescription}</p>

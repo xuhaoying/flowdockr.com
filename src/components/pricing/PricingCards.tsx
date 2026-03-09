@@ -65,7 +65,7 @@ export function PricingCards({
 
       if (response.status === 401 || payload.error === 'UNAUTHORIZED') {
         const callbackUrl = `${window.location.pathname}${window.location.search}`;
-        window.location.assign(`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        window.location.assign(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
         return;
       }
 
@@ -92,7 +92,7 @@ export function PricingCards({
           <p className="text-sm font-semibold text-slate-900">Free</p>
           <p className="mt-2 text-3xl font-bold text-slate-900">$0</p>
           <p className="mt-1 text-sm text-slate-600">2 replies</p>
-          <p className="mt-3 text-xs text-slate-600">No subscription required.</p>
+          <p className="mt-3 text-xs text-slate-600">Try before account creation.</p>
         </article>
 
         {CREDIT_PACKAGE_LIST.map((pack) => (
@@ -112,7 +112,10 @@ export function PricingCards({
               {pack.credits} replies
             </p>
             <p className={`mt-3 text-xs ${pack.id === 'pro_100' ? 'text-slate-200' : 'text-slate-600'}`}>
-              1 generation = 1 credit.
+              {pack.description}
+            </p>
+            <p className={`mt-1 text-xs ${pack.id === 'pro_100' ? 'text-slate-300' : 'text-slate-500'}`}>
+              One-time purchase · 1 generation = 1 credit
             </p>
 
             <Button
@@ -122,7 +125,7 @@ export function PricingCards({
               onClick={() => startCheckout(pack.id)}
               disabled={loadingId !== null}
             >
-              {loadingId === pack.id ? 'Redirecting...' : 'Buy credits'}
+              {loadingId === pack.id ? 'Redirecting...' : `Buy ${pack.credits} credits`}
             </Button>
           </article>
         ))}

@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolExample } from '@/components/tool/ToolExample';
+import { Link } from '@/core/i18n/navigation';
 import { getScenarioBySlug } from '@/lib/scenarios';
 import { getMetadata } from '@/shared/lib/seo';
 
@@ -28,11 +29,15 @@ export default async function ToolPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <section className="space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-          Client negotiation reply generator
+          Generic client negotiation generator
         </h1>
         <p className="max-w-3xl text-base text-slate-700">
-          Pick a scenario, paste the client message, and generate a reply you can send.
+          Prefer scenario pages for higher-quality context. Use this page when you need a
+          quick reply without browsing the scenario hub.
         </p>
+        <Link href="/scenario" className="inline-flex text-sm font-semibold text-slate-900 underline">
+          Browse scenario-first pages
+        </Link>
       </section>
 
       <ToolForm sourcePage="tool" showScenarioSelector />

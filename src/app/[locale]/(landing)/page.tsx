@@ -5,18 +5,19 @@ import { FinalCta } from '@/components/marketing/FinalCta';
 import { HowItWorksSection } from '@/components/marketing/HowItWorksSection';
 import { HomepageHero } from '@/components/marketing/HomepageHero';
 import { HomepageScenarioGrid } from '@/components/marketing/HomepageScenarioGrid';
+import { ProblemStrip } from '@/components/marketing/ProblemStrip';
 import { SavedDealsPreview } from '@/components/marketing/SavedDealsPreview';
-import { ScenarioLibraryPreview } from '@/components/marketing/ScenarioLibraryPreview';
+import { WhyNotGenericAI } from '@/components/marketing/WhyNotGenericAI';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Flowdockr | Client Negotiation Reply Tool for Freelancers',
+  title: 'Flowdockr | Scenario-Based Client Negotiation Support',
   description:
-    'Paste the client message and get a reply you can send today. Handle lowball offers, discount requests, and scope pressure with confidence.',
+    'Handle difficult client messages with scenario-based negotiation support. Generate send-ready replies and save reusable deal history.',
   canonicalUrl: '/',
   keywords:
-    'freelance negotiation reply, client discount response, lowball offer response, scope creep response',
+    'freelance negotiation support, client discount response, lowball offer response, scope creep reply',
 });
 
 export default async function LandingPage({
@@ -30,16 +31,17 @@ export default async function LandingPage({
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 md:gap-10 md:py-10">
       <HomepageHero />
-      <HomepageScenarioGrid />
+      <ProblemStrip />
       <ExampleConversation />
-      <ScenarioLibraryPreview />
+      <WhyNotGenericAI />
+      <HomepageScenarioGrid />
       <HowItWorksSection />
       <SavedDealsPreview />
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Simple pricing</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Pricing preview</h2>
         <p className="text-sm text-slate-700">
-          Credits-first pricing for occasional and ongoing deal support.
+          Credits-first pricing for occasional and ongoing client conversations.
         </p>
         <PricingCards sourcePage="home" />
       </section>
@@ -48,29 +50,29 @@ export default async function LandingPage({
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">FAQ</h2>
         <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            How are replies generated?
+            Why not just use ChatGPT?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            Flowdockr uses scenario-specific prompt context plus your exact client
-            message to generate a concise reply and an alternative version.
+            Flowdockr is structured around real negotiation scenarios with strategy
+            constraints and reusable history, not just generic text generation.
           </p>
         </details>
         <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Can I edit the generated reply?
+            Will replies sound robotic?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            Yes. Every output is editable. Use it as a starting draft and adjust to
-            your voice.
+            No. Outputs are concise, editable drafts designed for normal client
+            communication, not canned scripts.
           </p>
         </details>
         <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Do I need to log in for free replies?
+            Do I need an account before trying?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. You can use 2 free replies first. You only need email during checkout
-            when you buy credits.
+            No. You can start with 2 free replies first, then sign in when you want to
+            save history or buy credits.
           </p>
         </details>
         <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">

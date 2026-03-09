@@ -29,7 +29,7 @@ export default async function DashboardPage({
         <p className="mt-3 text-muted-foreground">
           Please log in to view your credits and generation history.
         </p>
-        <Link href="/login?callbackUrl=/dashboard" className="mt-6 inline-block underline">
+        <Link href="/signin?callbackUrl=/dashboard" className="mt-6 inline-block underline">
           Send me a magic link
         </Link>
       </main>

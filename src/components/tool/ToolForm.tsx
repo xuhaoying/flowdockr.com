@@ -334,7 +334,7 @@ export function ToolForm({
 
       if (checkoutResponse.status === 401 || payload.error === 'UNAUTHORIZED') {
         const callbackUrl = `${window.location.pathname}${window.location.search}`;
-        window.location.assign(`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        window.location.assign(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
         return;
       }
 

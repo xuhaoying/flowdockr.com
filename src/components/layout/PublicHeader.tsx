@@ -5,8 +5,7 @@ import { cn } from '@/shared/lib/utils';
 
 const NAV_ITEMS = [
   { href: '/scenario', label: 'Scenarios' },
-  { href: '/tool', label: 'Tool' },
-  { href: '/history', label: 'History' },
+  { href: '/#how-it-works', label: 'How it works' },
   { href: '/pricing', label: 'Pricing' },
 ];
 
@@ -23,11 +22,11 @@ export function PublicHeader() {
           Flowdockr
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-1.5">
           {NAV_ITEMS.map((item) => {
-            const active =
-              pathname === item.href ||
-              (item.href !== '/' && pathname.startsWith(`${item.href}/`));
+            const active = item.href.startsWith('/#')
+              ? pathname === '/'
+              : pathname === item.href || (item.href !== '/' && pathname.startsWith(`${item.href}/`));
 
             return (
               <Link
@@ -46,10 +45,16 @@ export function PublicHeader() {
           })}
 
           <Link
-            href="/login"
+            href="/signin"
             className="ml-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
           >
             Sign in
+          </Link>
+          <Link
+            href="/scenario"
+            className="ml-1 inline-flex rounded-md bg-slate-900 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+          >
+            Try a scenario
           </Link>
         </nav>
       </div>

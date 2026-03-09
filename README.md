@@ -1,28 +1,31 @@
 # Flowdockr v2
 
-Scenario-first SEO negotiation reply tool for freelancers.
+Scenario-based client negotiation system for freelancers and small agencies.
 
-Flowdockr 不是通用 SaaS 营销页，而是「场景页 + 工具 + credits 付费」产品：
+Flowdockr 不是通用 AI demo，而是「Scenario SEO 入口 + 生成工具 + 历史留存 + Credits 付费」产品：
 
-`search/scenario entry -> generate reply -> free limit -> buy credits -> continue`
+`search intent -> scenario page -> generate reply -> save history -> free limit -> buy credits -> continue`
 
 ## Product Scope
 
-- 场景优先公开站点（首页、场景目录、场景详情、通用工具、定价）
+- 场景优先公开站点（首页、Scenario Hub、Scenario Detail、Tool、History、Pricing）
 - 三段式输出（Recommended / Alternative / Strategy）
 - 免费 2 次生成 + credits pack 购买
 - Stripe Checkout + Webhook 发放 credits
+- Save-to-history 最小留存路径（先本地存储，后续可接账户侧）
 
 ## Core Routes
 
-本项目使用 `next-intl`，页面实际带 locale 前缀（例如 `/en/scenarios`、`/zh/scenarios`）。
+本项目使用 `next-intl`，页面实际带 locale 前缀（例如 `/en/scenario`、`/zh/scenario`）。
 
 Public:
 - `/[locale]`
-- `/[locale]/scenarios`
-- `/[locale]/scenarios/[slug]`
+- `/[locale]/scenario`
+- `/[locale]/scenario/[slug]`
 - `/[locale]/tool`
+- `/[locale]/history`
 - `/[locale]/pricing`
+- `/[locale]/signin`
 - `/[locale]/checkout/success`
 - `/[locale]/checkout/canceled`
 
@@ -99,19 +102,29 @@ Packs:
 - 仅后端判断可生成与扣减
 - 仅 webhook 发放 credits
 - webhook 幂等去重（防重复加币）
+- 前端只传 `packCode`，价格与 credits 数量由服务端决定
+
+## Auth & Access
+
+- Landing 登录入口：`/[locale]/signin`（`/[locale]/login` 兼容别名）
+- 登录方式：Google OAuth + Email Magic Link
+- 典型触发点：
+  - free usage 用尽
+  - 点击 Save to history
+  - 开始 Checkout
 
 ## Database
 
-业务相关 schema 说明：
-- `docs/08-database-schema.md`
+数据库定义见：
+- `src/config/db/schema.postgres.ts`
+- `src/config/db/schema.sqlite.ts`
+- `src/config/db/schema.mysql.ts`
 
-核心表：
-- `anonymous_usage`
-- `generation`
-- `purchase`
-- `webhook_event`
-- `credit_transaction`
-- `user.credits_balance`（当前余额）
+核心实体（命名会随 provider 适配）：
+- 匿名免费次数追踪
+- generation 记录
+- purchase + webhook 幂等
+- credit transaction / balance
 
 ## Quick Start
 
@@ -179,6 +192,8 @@ CI 工作流同样执行 `lint + type-check + build`（见 `.github/workflows/ci
   - 确认 `src/data/scenarios.ts` 已被提交（不要被 ignore 规则误伤）。
 - Stripe 支付后未到账
   - 先检查 webhook 签名配置与 `checkout.session.completed` 事件投递状态。
+- 页面入口混用 `/scenarios` 与 `/scenario`
+  - 对外 canonical 以 `/scenario` 为主；旧路径保留兼容。
 
 ## License
 

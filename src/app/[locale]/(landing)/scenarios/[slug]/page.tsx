@@ -2,12 +2,14 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-import { ScenarioExampleMessage } from '@/components/scenario/ScenarioExampleMessage';
 import { ScenarioFaq } from '@/components/scenario/ScenarioFaq';
 import { ScenarioHero } from '@/components/scenario/ScenarioHero';
-import { ScenarioOutputPreview } from '@/components/scenario/ScenarioOutputPreview';
+import { ScenarioExampleComparison } from '@/components/scenario/ScenarioExampleComparison';
 import { ScenarioProblem } from '@/components/scenario/ScenarioProblem';
+import { ScenarioQuickStrategy } from '@/components/scenario/ScenarioQuickStrategy';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
+import { ScenarioStrategicPrinciples } from '@/components/scenario/ScenarioStrategicPrinciples';
+import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { ScenarioStrategy } from '@/components/scenario/ScenarioStrategy';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { locales } from '@/config/locale';
@@ -86,7 +88,7 @@ export default async function ScenarioPage({
   const breadcrumbSchema = buildScenarioBreadcrumbSchema(scenario);
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
+    <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 pb-24 md:py-10 md:pb-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -112,29 +114,24 @@ export default async function ScenarioPage({
         }
       />
 
+      <ScenarioQuickStrategy scenario={scenario} />
       <ScenarioProblem paragraphs={scenario.problemText} />
-      <ScenarioExampleMessage message={scenario.exampleClientMessage} />
-      <ScenarioOutputPreview
-        exampleReply={scenario.exampleReply}
-        exampleAltReply={scenario.exampleAltReply}
-      />
-
+      <ScenarioExampleComparison scenario={scenario} />
       <ScenarioStrategy scenario={scenario} />
+      <ScenarioStrategicPrinciples scenario={scenario} />
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Save this deal context
-        </h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Save and reuse</h2>
         <p className="text-sm text-slate-700">
-          After generating a reply, save this interaction to your deal history so you
-          can revisit what worked and reuse patterns in future negotiations.
+          Turn useful replies into reusable deal assets. Save context and outcomes so
+          future negotiation replies are faster and more consistent.
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
-          <Link href="/history" className="font-semibold text-slate-900 underline">
-            Open saved deals history
+          <Link href="/history" className="font-semibold text-slate-900 underline underline-offset-2">
+            Save this reply in history
           </Link>
-          <Link href="/tool" className="font-semibold text-slate-900 underline">
-            Generate another reply
+          <Link href="/history" className="font-semibold text-slate-900 underline underline-offset-2">
+            View deal history
           </Link>
         </div>
       </section>
@@ -159,6 +156,8 @@ export default async function ScenarioPage({
           </Link>
         </div>
       </section>
+
+      <ScenarioStickyBottomCta />
     </main>
   );
 }

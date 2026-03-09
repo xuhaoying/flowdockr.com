@@ -10,25 +10,24 @@ export function HomepageHero() {
             Built for freelancers and agencies
           </p>
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-            Handle difficult client messages without losing the deal.
+            Handle difficult client messages without weakening your position.
           </h1>
           <p className="max-w-3xl text-base text-slate-700 md:text-lg">
-            AI-assisted negotiation replies for freelancers and agencies. Use real
-            scenarios, generate smarter responses, and keep track of your deal
-            conversations.
+            Scenario-based AI negotiation support for pricing pressure, scope creep,
+            lowball offers, delayed decisions, and difficult deal conversations.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <Link
-              href="/tool"
+              href="/scenario"
               className="inline-flex rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800"
             >
-              Try with a client message
+              Browse scenarios
             </Link>
             <Link
-              href="/scenario"
+              href="/tool"
               className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-800 transition-colors hover:border-slate-400"
             >
-              Browse scenarios
+              Try a real message
             </Link>
           </div>
         </div>
@@ -57,7 +56,7 @@ export function HomepageHero() {
       </div>
 
       <p className="text-sm text-slate-600">2 free replies. No subscription required.</p>
-      <ToolForm sourcePage="home" showScenarioSelector defaultScenarioSlug="lowball-offer" />
+      <ToolForm sourcePage="home" showScenarioSelector defaultScenarioSlug="client-asks-discount" />
     </section>
   );
 }
