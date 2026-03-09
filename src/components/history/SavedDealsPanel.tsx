@@ -60,7 +60,7 @@ export function SavedDealsPanel() {
           <Link href="/tool" className="font-semibold text-slate-900 underline">
             Open generator
           </Link>
-          <Link href="/scenarios" className="font-semibold text-slate-900 underline">
+          <Link href="/scenario" className="font-semibold text-slate-900 underline">
             Browse scenarios
           </Link>
         </div>
@@ -87,6 +87,7 @@ export function SavedDealsPanel() {
                   <p className="text-sm font-semibold text-slate-900">{record.scenarioTitle}</p>
                   <p className="text-xs text-slate-600">
                     {formatDate(record.createdAt)} · tone: {record.tone}
+                    {record.projectType ? ` · project: ${formatProjectType(record.projectType)}` : ''}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -161,4 +162,8 @@ function formatDate(value: string) {
     hour: '2-digit',
     minute: '2-digit',
   });
+}
+
+function formatProjectType(value: string) {
+  return value.replace(/_/g, ' ');
 }

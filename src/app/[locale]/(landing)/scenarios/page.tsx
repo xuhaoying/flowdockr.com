@@ -3,16 +3,42 @@ import { setRequestLocale } from 'next-intl/server';
 import { ScenarioCard } from '@/components/scenario/ScenarioCard';
 import { Link } from '@/core/i18n/navigation';
 import { scenarios } from '@/lib/scenarios';
+import { ScenarioCategory } from '@/types/scenario';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Client Negotiation Scenarios for Freelancers | Flowdockr',
   description:
     'Browse client negotiation scenarios, then generate a professional reply tailored to that exact message.',
-  canonicalUrl: '/scenarios',
+  canonicalUrl: '/scenario',
   keywords:
     'freelance negotiation scenarios, client discount response, scope creep reply, lowball offer response',
 });
+
+const HUB_SECTIONS: Array<{
+  key: ScenarioCategory;
+  title: string;
+  description: string;
+}> = [
+  {
+    key: 'negotiation',
+    title: 'Negotiation',
+    description:
+      'Scenarios where you need to defend boundaries and keep leverage without damaging trust.',
+  },
+  {
+    key: 'pricing',
+    title: 'Pricing',
+    description:
+      'Scenarios focused on discount pressure, lowball offers, and budget mismatch conversations.',
+  },
+  {
+    key: 'difficult-clients',
+    title: 'Difficult clients',
+    description:
+      'Scenarios for delayed decisions, boundary tests, and higher-friction client behavior.',
+  },
+];
 
 export default async function ScenariosPage({
   params,
@@ -35,33 +61,40 @@ export default async function ScenariosPage({
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">Scenario hub</h2>
+        <div className="space-y-6">
+          {HUB_SECTIONS.map((section) => {
+            const sectionScenarios = scenarios.filter(
+              (scenario) => scenario.category === section.key
+            );
+
+            if (sectionScenarios.length === 0) {
+              return null;
+            }
+
+            return (
+              <article key={section.key} className="space-y-3">
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900">{section.title}</h3>
+                  <p className="mt-1 text-sm text-slate-700">{section.description}</p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {sectionScenarios.map((scenario) => (
+                    <ScenarioCard key={scenario.slug} scenario={scenario} />
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">All scenarios</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {scenarios.map((scenario) => (
             <ScenarioCard key={scenario.slug} scenario={scenario} />
           ))}
-        </div>
-      </section>
-
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Scenario buckets</h2>
-        <div className="grid gap-3 md:grid-cols-2">
-          <article className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-slate-900">Pricing pressure</p>
-            <p className="mt-1">Lowball offers, discount requests, cheaper freelancer comparisons.</p>
-          </article>
-          <article className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-slate-900">Scope pressure</p>
-            <p className="mt-1">More work same budget, small free extras, free sample requests.</p>
-          </article>
-          <article className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-slate-900">Trust and proof pressure</p>
-            <p className="mt-1">When clients question value and compare alternatives.</p>
-          </article>
-          <article className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-slate-900">Timing and follow-up pressure</p>
-            <p className="mt-1">Delayed decision after quote and stalled decision loops.</p>
-          </article>
         </div>
       </section>
 

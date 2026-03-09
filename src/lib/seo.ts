@@ -4,7 +4,7 @@ import { Scenario } from '@/lib/scenarios';
 const baseUrl = envConfigs.app_url.replace(/\/$/, '');
 
 export function getScenarioCanonicalUrl(slug: string): string {
-  return `${baseUrl}/scenarios/${slug}`;
+  return `${baseUrl}/scenario/${slug}`;
 }
 
 export function buildScenarioArticleSchema(scenario: Scenario) {
@@ -58,7 +58,7 @@ export function buildScenarioBreadcrumbSchema(scenario: Scenario) {
         '@type': 'ListItem',
         position: 2,
         name: 'Scenarios',
-        item: `${baseUrl}/scenarios`,
+        item: `${baseUrl}/scenario`,
       },
       {
         '@type': 'ListItem',

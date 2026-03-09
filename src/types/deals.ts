@@ -1,6 +1,14 @@
 export type DealStatus = 'draft' | 'sent' | 'won' | 'ongoing' | 'lost';
 
 export type DealTone = 'professional' | 'friendly' | 'firm';
+export type DealProjectType =
+  | 'designer'
+  | 'developer'
+  | 'copywriter'
+  | 'marketer'
+  | 'video_editor'
+  | 'consultant'
+  | 'other';
 
 export type SavedDealRecord = {
   id: string;
@@ -11,6 +19,7 @@ export type SavedDealRecord = {
   alternativeReply: string;
   strategy: string[];
   tone: DealTone;
+  projectType?: DealProjectType;
   sourcePage: 'home' | 'scenario' | 'tool';
   status: DealStatus;
   createdAt: string;
@@ -25,6 +34,7 @@ export type SavedDealInput = {
   alternativeReply: string;
   strategy: string[];
   tone: DealTone;
+  projectType?: DealProjectType;
   sourcePage: 'home' | 'scenario' | 'tool';
   status?: DealStatus;
 };

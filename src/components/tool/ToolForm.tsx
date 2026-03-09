@@ -7,7 +7,7 @@ import { trackEvent } from '@/lib/analytics-client';
 import { saveDealRecord } from '@/lib/deals-history';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
 import { CreditPackageId } from '@/types/billing';
-import { DealTone } from '@/types/deals';
+import { DealProjectType, DealTone } from '@/types/deals';
 import { GenerateReplyRequest } from '@/types/generation';
 
 import { Button } from '@/shared/components/ui/button';
@@ -42,6 +42,16 @@ const TONE_OPTIONS: Array<{ value: DealTone; label: string }> = [
   { value: 'firm', label: 'Firm' },
 ];
 
+const PROJECT_TYPE_OPTIONS: Array<{ value: DealProjectType; label: string }> = [
+  { value: 'designer', label: 'Design' },
+  { value: 'developer', label: 'Development' },
+  { value: 'copywriter', label: 'Copywriting' },
+  { value: 'marketer', label: 'Marketing' },
+  { value: 'video_editor', label: 'Video editing' },
+  { value: 'consultant', label: 'Consulting' },
+  { value: 'other', label: 'Other services' },
+];
+
 export function ToolForm({
   defaultScenarioSlug,
   showScenarioSelector = true,
@@ -56,6 +66,7 @@ export function ToolForm({
   const [upgradeVisible, setUpgradeVisible] = useState(false);
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [checkoutLoading, setCheckoutLoading] = useState<CreditPackageId | null>(null);
+  const [projectType, setProjectType] = useState<DealProjectType>('other');
   const [tone, setTone] = useState<DealTone>('professional');
   const [savedHint, setSavedHint] = useState('');
 
@@ -71,8 +82,8 @@ export function ToolForm({
   const usageText = usage.loggedIn
     ? usage.creditsBalance > 0
       ? `${Math.max(0, usage.creditsBalance)} credits left`
-      : `${Math.max(0, usage.remainingFreeGenerations)} free replies left`
-    : `${Math.max(0, usage.remainingFreeGenerations)} free replies left`;
+      : `${formatFreeReplies(Math.max(0, usage.remainingFreeGenerations))} left`
+    : `${formatFreeReplies(Math.max(0, usage.remainingFreeGenerations))} left`;
 
   const isExhausted = usage.loggedIn
     ? usage.creditsBalance <= 0 && usage.remainingFreeGenerations <= 0
@@ -182,6 +193,7 @@ export function ToolForm({
       scenarioSlug,
       message: trimmedMessage,
       sourcePage,
+      serviceType: projectType,
       tone: mapToneToApiTone(tone),
     });
 
@@ -272,6 +284,7 @@ export function ToolForm({
       alternativeReply: result.alternativeReply,
       strategy: result.strategy,
       tone,
+      projectType,
       sourcePage,
       status: 'draft',
     });
@@ -367,6 +380,21 @@ export function ToolForm({
             label="Scenario"
           />
         ) : null}
+
+        <label className="block space-y-2">
+          <span className="text-sm font-medium text-slate-800">Project type</span>
+          <select
+            value={projectType}
+            onChange={(event) => setProjectType(event.target.value as DealProjectType)}
+            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 outline-none transition focus:border-slate-500"
+          >
+            {PROJECT_TYPE_OPTIONS.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <label className="block space-y-2">
           <span className="text-sm font-medium text-slate-800">Tone</span>
@@ -480,4 +508,8 @@ function toUserErrorMessage(errorCode: string) {
     default:
       return 'Failed to generate a reply. Please try again.';
   }
+}
+
+function formatFreeReplies(value: number) {
+  return `${value} free ${value === 1 ? 'reply' : 'replies'}`;
 }

@@ -35,7 +35,7 @@ export default async function CheckoutCanceledPage({
   const query = await searchParams;
   const returnTo = sanitizeReturnPath(query.return_to);
   const scenarioSlug = String(query.scenario || '').trim();
-  const backToScenario = scenarioSlug ? `/scenarios/${scenarioSlug}` : '/scenarios';
+  const backToScenario = scenarioSlug ? `/scenario/${scenarioSlug}` : '/scenario';
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">

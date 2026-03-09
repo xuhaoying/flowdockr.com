@@ -11,7 +11,7 @@ export const generateMetadata = getMetadata({
 });
 
 function sanitizeReturnPath(value: string | undefined): string {
-  const fallback = '/scenarios';
+  const fallback = '/scenario';
   const raw = String(value || '').trim();
   if (!raw || !raw.startsWith('/') || raw.startsWith('//')) {
     return fallback;
@@ -42,7 +42,7 @@ export default async function CheckoutSuccessPage({
   const scenarioSlug = String(query.scenario || '').trim();
 
   const continuePath =
-    returnTo || (scenarioSlug ? `/scenarios/${scenarioSlug}` : '/scenarios');
+    returnTo || (scenarioSlug ? `/scenario/${scenarioSlug}` : '/scenario');
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">

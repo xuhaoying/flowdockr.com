@@ -1,6 +1,7 @@
 export type ScenarioRiskLevel = 'low' | 'medium' | 'high';
 export type ScenarioToneProfile = 'firm' | 'calm' | 'warm-firm' | 'decision-oriented';
 export type ToneProfile = ScenarioToneProfile;
+export type ScenarioCategory = 'negotiation' | 'pricing' | 'difficult-clients';
 
 export type ScenarioFaqItem = {
   q: string;
@@ -9,6 +10,7 @@ export type ScenarioFaqItem = {
 
 export type Scenario = {
   slug: string;
+  category: ScenarioCategory;
   title: string;
   seoTitle: string;
   metaDescription: string;

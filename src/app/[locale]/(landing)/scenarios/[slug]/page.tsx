@@ -148,7 +148,7 @@ export default async function ScenarioPage({
           Try more scenarios or buy credits when you need more than 2 free replies.
         </p>
         <div className="mt-3 flex flex-wrap gap-4 text-sm">
-          <Link href="/scenarios" className="font-semibold text-slate-900 underline">
+          <Link href="/scenario" className="font-semibold text-slate-900 underline">
             Browse all scenarios
           </Link>
           <Link href="/pricing" className="font-semibold text-slate-900 underline">
