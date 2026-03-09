@@ -1,11 +1,8 @@
-import { ReactNode } from 'react';
-
 import { Link } from '@/core/i18n/navigation';
 import { Scenario } from '@/lib/scenarios';
 
 type ScenarioHeroProps = {
   scenario: Scenario;
-  tool: ReactNode;
 };
 
 const CATEGORY_LABEL: Record<Scenario['category'], string> = {
@@ -20,7 +17,7 @@ const RISK_LABEL: Record<Scenario['riskLevel'], string> = {
   high: 'High pressure',
 };
 
-export function ScenarioHero({ scenario, tool }: ScenarioHeroProps) {
+export function ScenarioHero({ scenario }: ScenarioHeroProps) {
   return (
     <section className="space-y-4">
       <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
@@ -39,24 +36,22 @@ export function ScenarioHero({ scenario, tool }: ScenarioHeroProps) {
         </ol>
       </nav>
 
-      <div className="grid gap-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1.05fr_0.95fr] lg:p-6">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex items-center rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-              {CATEGORY_LABEL[scenario.category]}
-            </p>
-            <p className="inline-flex items-center rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-700">
-              {RISK_LABEL[scenario.riskLevel]}
-            </p>
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-            {scenario.h1}
-          </h1>
-          <p className="max-w-2xl text-base text-slate-700">{scenario.heroIntro}</p>
-          <p className="text-sm font-medium text-slate-800">Paste your client message to get a structured reply.</p>
+      <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:p-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="inline-flex items-center rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+            {CATEGORY_LABEL[scenario.category]}
+          </p>
+          <p className="inline-flex items-center rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-700">
+            {RISK_LABEL[scenario.riskLevel]}
+          </p>
         </div>
-
-        <div id="scenario-tool">{tool}</div>
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+          {scenario.h1}
+        </h1>
+        <p className="max-w-3xl text-base text-slate-700">{scenario.heroIntro}</p>
+        <a href="#scenario-tool" className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
+          Paste your client message
+        </a>
       </div>
     </section>
   );

@@ -102,19 +102,24 @@ export default async function ScenarioPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <ScenarioHero
-        scenario={scenario}
-        tool={
-          <ToolForm
-            sourcePage="scenario"
-            defaultScenarioSlug={scenario.slug}
-            showScenarioSelector={false}
-            placeholder={scenario.placeholder}
-          />
-        }
-      />
+      <ScenarioHero scenario={scenario} />
 
       <ScenarioQuickStrategy scenario={scenario} />
+
+      <section id="scenario-tool" className="space-y-3">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Try your message</h2>
+        <p className="text-sm text-slate-700">
+          Paste the exact client wording and generate a structured reply you can send.
+          2 free replies. No subscription required.
+        </p>
+        <ToolForm
+          sourcePage="scenario"
+          defaultScenarioSlug={scenario.slug}
+          showScenarioSelector={false}
+          placeholder={scenario.placeholder}
+        />
+      </section>
+
       <ScenarioProblem paragraphs={scenario.problemText} />
       <ScenarioExampleComparison scenario={scenario} />
       <ScenarioStrategy scenario={scenario} />
@@ -127,13 +132,16 @@ export default async function ScenarioPage({
           future negotiation replies are faster and more consistent.
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
-          <Link href="/history" className="font-semibold text-slate-900 underline underline-offset-2">
-            Save this reply in history
-          </Link>
+          <a href="#scenario-tool" className="font-semibold text-slate-900 underline underline-offset-2">
+            Save this reply
+          </a>
           <Link href="/history" className="font-semibold text-slate-900 underline underline-offset-2">
             View deal history
           </Link>
         </div>
+        <p className="text-xs text-slate-600">
+          After generation, use <strong>Save to deals</strong> in the output panel.
+        </p>
       </section>
 
       <RelatedScenarios slugs={scenario.relatedSlugs} />

@@ -40,10 +40,9 @@ export function SignUp({
   const [loading, setLoading] = useState(false);
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
-  const isGithubAuthEnabled = configs.github_auth_enabled === 'true';
   const isEmailAuthEnabled =
     configs.email_auth_enabled !== 'false' ||
-    (!isGoogleAuthEnabled && !isGithubAuthEnabled); // no social providers enabled, auto enable email auth
+    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
   const emailVerificationEnabled = configs.email_verification_enabled === 'true';
 
   if (callbackUrl) {

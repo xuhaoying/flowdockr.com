@@ -8,12 +8,12 @@ import { getScenarioBySlug } from '@/lib/scenarios';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Client Negotiation Reply Generator | Flowdockr',
+  title: 'Client Conversation Support Workspace | Flowdockr',
   description:
-    'Generate client negotiation replies for freelancers. Paste a client message and get a send-ready response.',
+    'Scenario-informed client conversation support for freelancers. Generate structured replies and keep your negotiation flow moving.',
   canonicalUrl: '/tool',
   keywords:
-    'client negotiation reply generator, freelance reply generator, discount request response',
+    'client conversation support, negotiation support tool, freelancer pricing response',
 });
 
 export default async function ToolPage({
@@ -29,11 +29,11 @@ export default async function ToolPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <section className="space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-          Generic client negotiation generator
+          Generic conversation workspace
         </h1>
         <p className="max-w-3xl text-base text-slate-700">
-          Prefer scenario pages for higher-quality context. Use this page when you need a
-          quick reply without browsing the scenario hub.
+          Scenario pages are the primary path for context-rich replies. Use this
+          workspace when you need direct access without browsing.
         </p>
         <Link href="/scenario" className="inline-flex text-sm font-semibold text-slate-900 underline">
           Browse scenario-first pages
