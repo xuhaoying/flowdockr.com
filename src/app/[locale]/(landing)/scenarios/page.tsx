@@ -144,7 +144,7 @@ export default async function ScenariosPage({
           Need direct access without browsing? Use the generic tool.
         </p>
         <Link href="/tool" className="inline-flex text-sm font-semibold text-slate-900 underline">
-          Open client negotiation reply generator
+          Open client conversation workspace
         </Link>
       </section>
     </main>

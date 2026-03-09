@@ -132,7 +132,7 @@ export default async function ScenarioPage({
           future negotiation replies are faster and more consistent.
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
-          <a href="#scenario-tool" className="font-semibold text-slate-900 underline underline-offset-2">
+          <a href="#tool-result-panel" className="font-semibold text-slate-900 underline underline-offset-2">
             Save this reply
           </a>
           <Link href="/history" className="font-semibold text-slate-900 underline underline-offset-2">

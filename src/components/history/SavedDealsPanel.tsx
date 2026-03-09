@@ -51,14 +51,14 @@ export function SavedDealsPanel() {
   if (records.length === 0) {
     return (
       <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Saved deals</h2>
+        <h2 className="text-xl font-semibold text-slate-900">Negotiation library</h2>
         <p className="mt-2 text-sm text-slate-700">
           No saved records yet. Generate a reply and click <strong>Save to deals</strong> to
           build your negotiation history.
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <Link href="/tool" className="font-semibold text-slate-900 underline">
-            Open generator
+            Open conversation workspace
           </Link>
           <Link href="/scenario" className="font-semibold text-slate-900 underline">
             Browse scenarios
@@ -78,7 +78,7 @@ export function SavedDealsPanel() {
       </section>
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Saved Deals</h2>
+        <h2 className="text-xl font-semibold text-slate-900">Saved conversations</h2>
         <div className="space-y-3">
           {records.map((record) => (
             <article key={record.id} className="rounded-xl border border-slate-200 p-4">

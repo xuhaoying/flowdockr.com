@@ -1,9 +1,8 @@
 import { Link } from '@/core/i18n/navigation';
-import { ToolForm } from '@/components/tool/ToolForm';
 
 export function HomepageHero() {
   return (
-    <section className="space-y-5">
+    <section className="space-y-2">
       <div className="grid gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1.08fr_0.92fr] lg:p-6">
         <div className="space-y-4">
           <p className="inline-flex rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
@@ -56,7 +55,6 @@ export function HomepageHero() {
       </div>
 
       <p className="text-sm text-slate-600">2 free replies. No subscription required.</p>
-      <ToolForm sourcePage="home" showScenarioSelector defaultScenarioSlug="client-asks-discount" />
     </section>
   );
 }

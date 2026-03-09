@@ -91,7 +91,7 @@ export function VerifyEmailPage({
     const query = new URLSearchParams();
     if (prefillEmail) query.set('email', prefillEmail);
     query.set('callbackUrl', nextUrl || '/');
-    window.location.assign(`${base}/sign-in?${query.toString()}`);
+    window.location.assign(`${base}/signin?${query.toString()}`);
   };
 
   // Initialize & tick cooldown

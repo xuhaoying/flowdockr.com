@@ -32,9 +32,9 @@ export function ToolResult({
   const hasResult = Boolean(reply || alternativeReply || strategy.length > 0);
 
   return (
-    <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section id="tool-result-panel" className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="text-lg font-semibold text-slate-900">Generated reply</h3>
+        <h3 className="text-lg font-semibold text-slate-900">Decision output</h3>
         <div className="flex items-center gap-2">
           {onSave ? (
             <Button
