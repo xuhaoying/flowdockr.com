@@ -9,4 +9,5 @@ export { ScenarioHero } from './ScenarioHero';
 export { ScenarioStickyCta } from './ScenarioStickyCta';
 export { SituationSnapshot } from './SituationSnapshot';
 export { StrategyPaths } from './StrategyPaths';
+export { TaxonomySnapshot } from './TaxonomySnapshot';
 export { WhatsReallyHappening } from './WhatsReallyHappening';

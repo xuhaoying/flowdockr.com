@@ -52,6 +52,8 @@ data*
 !src/data/
 src/data/*
 !src/data/scenarios.ts
+!src/data/pricing-cluster.ts
+!src/data/pricing-taxonomy.ts
 
 *.db
 

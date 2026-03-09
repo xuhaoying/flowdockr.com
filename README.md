@@ -62,7 +62,20 @@ Core APIs:
 
 首发 SEO 集群（pricing cluster）内容集中在：
 - `src/data/pricing-cluster.ts`
+- `src/data/pricing-taxonomy.ts`
 - `src/lib/pricing-cluster.ts`
+
+Pricing taxonomy 采用「四元组」约束：
+- trigger stage
+- pressure type
+- real risks
+- decision goals
+
+并且每个 scenario 带有 page-level SEO 控制字段：
+- `pageRole` (`pillar` / `support` / `entry`)
+- `primaryKeywords` / `supportKeywords`
+- `bannedPrimaryTopics`
+- `doNotCompeteWith`
 
 Seed negotiation 场景（8 个）：
 - `lowball-offer`

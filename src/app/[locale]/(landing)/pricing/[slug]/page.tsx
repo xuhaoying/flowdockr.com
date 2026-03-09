@@ -16,6 +16,7 @@ import {
   ScenarioStickyCta,
   SituationSnapshot,
   StrategyPaths,
+  TaxonomySnapshot,
   WhatsReallyHappening,
 } from '@/components/pricing-scenario';
 import {
@@ -64,7 +65,7 @@ export async function generateMetadata({
     alternates: {
       canonical,
     },
-    keywords: [scenario.primaryKeyword, ...scenario.keywordVariants],
+    keywords: [...scenario.schema.primaryKeywords, ...scenario.schema.supportKeywords],
     openGraph: {
       title: scenario.seoTitle,
       description: scenario.metaDescription,
@@ -93,6 +94,7 @@ export default async function PricingScenarioPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 pb-24 md:py-10 md:pb-10">
       <HowToSchema scenario={scenario} />
       <ScenarioHero scenario={scenario} />
+      <TaxonomySnapshot scenario={scenario} />
       <SituationSnapshot scenario={scenario} />
       <WhatsReallyHappening scenario={scenario} />
       <PossibleGoals scenario={scenario} />

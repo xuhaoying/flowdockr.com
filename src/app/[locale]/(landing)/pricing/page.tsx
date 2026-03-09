@@ -5,7 +5,7 @@ import { CreditExplainer } from '@/components/pricing/CreditExplainer';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { Link } from '@/core/i18n/navigation';
-import { pricingScenarios } from '@/lib/pricing-cluster';
+import { getPricingScenariosByFamily, pricingFamilies, pricingScenarios } from '@/lib/pricing-cluster';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -71,10 +71,25 @@ export default async function PricingHubPage({
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Choose your situation</h2>
-        <div className="grid gap-3 md:grid-cols-2">
-          {pricingScenarios.map((scenario) => (
-            <PricingScenarioCard key={scenario.slug} scenario={scenario} />
-          ))}
+        <div className="space-y-5">
+          {pricingFamilies.map((family) => {
+            const items = getPricingScenariosByFamily(family.id);
+            if (!items.length) {
+              return null;
+            }
+
+            return (
+              <article key={family.id} className="space-y-3">
+                <h3 className="text-lg font-semibold text-slate-900">{family.title}</h3>
+                <p className="text-sm text-slate-700">{family.description}</p>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {items.map((scenario) => (
+                    <PricingScenarioCard key={scenario.slug} scenario={scenario} />
+                  ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 

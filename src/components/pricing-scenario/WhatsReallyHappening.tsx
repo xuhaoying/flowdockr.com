@@ -15,6 +15,11 @@ const DEFAULT_HAPPENING_BY_TIER: Record<PricingScenario['tier'], string[]> = {
     'If you respond without structure, scope and pricing boundaries blur quickly.',
     'A short, calm, options-based reply keeps momentum without weak concessions.',
   ],
+  tier3: [
+    'This is usually a short-form entry pressure, not the final decision point.',
+    'The right move is to classify the pressure quickly and route to the correct strategy page.',
+    'Concise boundary language works best before deeper negotiation detail.',
+  ],
 };
 
 export function WhatsReallyHappening({ scenario }: WhatsReallyHappeningProps) {
