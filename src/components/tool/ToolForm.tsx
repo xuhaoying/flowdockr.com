@@ -404,7 +404,7 @@ export function ToolForm({
             {isLoading ? 'Generating...' : 'Generate reply'}
           </Button>
           {isExhausted ? (
-            <Button type="button" variant="outline" onClick={() => setUpgradeVisible(true)}>
+            <Button type="button" variant="outline" onClick={() => window.location.assign('/pricing')}>
               View pricing
             </Button>
           ) : null}
