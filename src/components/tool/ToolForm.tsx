@@ -4,8 +4,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useToolGeneration } from '@/hooks/useToolGeneration';
 import { trackEvent } from '@/lib/analytics-client';
+import { saveDealRecord } from '@/lib/deals-history';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
 import { CreditPackageId } from '@/types/billing';
+import { DealTone } from '@/types/deals';
+import { GenerateReplyRequest } from '@/types/generation';
 
 import { Button } from '@/shared/components/ui/button';
 import { Textarea } from '@/shared/components/ui/textarea';
@@ -33,6 +36,12 @@ const INITIAL_USAGE: UsageState = {
   creditsBalance: 0,
 };
 
+const TONE_OPTIONS: Array<{ value: DealTone; label: string }> = [
+  { value: 'professional', label: 'Professional' },
+  { value: 'friendly', label: 'Friendly' },
+  { value: 'firm', label: 'Firm' },
+];
+
 export function ToolForm({
   defaultScenarioSlug,
   showScenarioSelector = true,
@@ -47,6 +56,8 @@ export function ToolForm({
   const [upgradeVisible, setUpgradeVisible] = useState(false);
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [checkoutLoading, setCheckoutLoading] = useState<CreditPackageId | null>(null);
+  const [tone, setTone] = useState<DealTone>('professional');
+  const [savedHint, setSavedHint] = useState('');
 
   const resultRef = useRef<HTMLDivElement>(null);
 
@@ -86,6 +97,7 @@ export function ToolForm({
   }, [trimmedMessage]);
 
   const canSubmit = !validationError && !isLoading;
+  const canSaveResult = Boolean(result?.success && result.reply);
 
   useEffect(() => {
     let active = true;
@@ -133,6 +145,15 @@ export function ToolForm({
     };
   }, []);
 
+  useEffect(() => {
+    if (!savedHint) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setSavedHint(''), 3000);
+    return () => window.clearTimeout(timeout);
+  }, [savedHint]);
+
   const onGenerate = async () => {
     if (!canSubmit) {
       trackEvent('tool_submit_failed', {
@@ -161,6 +182,7 @@ export function ToolForm({
       scenarioSlug,
       message: trimmedMessage,
       sourcePage,
+      tone: mapToneToApiTone(tone),
     });
 
     if (!response) {
@@ -190,6 +212,7 @@ export function ToolForm({
     }
 
     setUpgradeVisible(false);
+    setSavedHint('');
 
     setUsage((prev) => {
       if (prev.loggedIn) {
@@ -233,6 +256,32 @@ export function ToolForm({
       if (rect.top > window.innerHeight * 0.88) {
         node.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    });
+  };
+
+  const onSaveDeal = () => {
+    if (!result?.success || !result.reply) {
+      return;
+    }
+
+    const saved = saveDealRecord({
+      scenarioSlug,
+      scenarioTitle: scenario?.title || scenarioSlug,
+      clientMessage: trimmedMessage,
+      generatedReply: result.reply,
+      alternativeReply: result.alternativeReply,
+      strategy: result.strategy,
+      tone,
+      sourcePage,
+      status: 'draft',
+    });
+
+    setSavedHint('Saved to deal history.');
+    trackEvent('deal_saved', {
+      dealId: saved.id,
+      scenarioSlug,
+      sourcePage,
+      tone,
     });
   };
 
@@ -313,10 +362,26 @@ export function ToolForm({
             onChange={(slug) => {
               setScenarioSlug(slug);
               setResult(null);
+              setSavedHint('');
             }}
             label="Scenario"
           />
         ) : null}
+
+        <label className="block space-y-2">
+          <span className="text-sm font-medium text-slate-800">Tone</span>
+          <select
+            value={tone}
+            onChange={(event) => setTone(event.target.value as DealTone)}
+            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 outline-none transition focus:border-slate-500"
+          >
+            {TONE_OPTIONS.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <label className="block space-y-2">
           <span className="text-sm font-medium text-slate-800">Client message</span>
@@ -376,10 +441,26 @@ export function ToolForm({
           loading={isLoading}
           onRegenerate={onGenerate}
           onCopy={onCopy}
+          onSave={onSaveDeal}
+          canSave={canSaveResult}
+          saveLabel="Save to deals"
+          savedHint={savedHint}
         />
       </div>
     </div>
   );
+}
+
+function mapToneToApiTone(tone: DealTone): NonNullable<GenerateReplyRequest['tone']> {
+  switch (tone) {
+    case 'friendly':
+      return 'warm_confident';
+    case 'firm':
+      return 'direct';
+    case 'professional':
+    default:
+      return 'professional_firm';
+  }
 }
 
 function toUserErrorMessage(errorCode: string) {

@@ -2,6 +2,21 @@ export type GenerateReplyRequest = {
   scenarioSlug: string;
   message: string;
   sourcePage?: 'home' | 'scenario' | 'tool';
+  serviceType?:
+    | 'designer'
+    | 'developer'
+    | 'copywriter'
+    | 'marketer'
+    | 'video_editor'
+    | 'consultant'
+    | 'other';
+  tone?: 'professional_firm' | 'warm_confident' | 'direct' | 'diplomatic';
+  goal?:
+    | 'protect_price'
+    | 'keep_relationship'
+    | 'close_faster'
+    | 'offer_scope_reduction';
+  userRateContext?: string;
 };
 
 export type GenerateReplyResult = {
@@ -23,21 +38,7 @@ export type GenerateReplyResponse = {
 
 // Internal generation input extends public request with optional context knobs.
 export type GenerateReplyInput = GenerateReplyRequest & {
-  serviceType?:
-    | 'designer'
-    | 'developer'
-    | 'copywriter'
-    | 'marketer'
-    | 'video_editor'
-    | 'consultant'
-    | 'other';
-  tone?: 'professional_firm' | 'warm_confident' | 'direct' | 'diplomatic';
-  goal?:
-    | 'protect_price'
-    | 'keep_relationship'
-    | 'close_faster'
-    | 'offer_scope_reduction';
-  userRateContext?: string;
+  // kept for backward compatibility
 };
 
 export type GeneratedReplyResult = {

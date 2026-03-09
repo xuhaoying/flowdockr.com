@@ -120,6 +120,25 @@ export default async function ScenarioPage({
       />
 
       <ScenarioStrategy scenario={scenario} />
+
+      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          Save this deal context
+        </h2>
+        <p className="text-sm text-slate-700">
+          After generating a reply, save this interaction to your deal history so you
+          can revisit what worked and reuse patterns in future negotiations.
+        </p>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <Link href="/history" className="font-semibold text-slate-900 underline">
+            Open saved deals history
+          </Link>
+          <Link href="/tool" className="font-semibold text-slate-900 underline">
+            Generate another reply
+          </Link>
+        </div>
+      </section>
+
       <RelatedScenarios slugs={scenario.relatedSlugs} />
       <ScenarioFaq scenario={scenario} />
 

@@ -3,6 +3,7 @@ import { Link } from '@/core/i18n/navigation';
 const PRIMARY_LINKS = [
   { href: '/scenarios', label: 'Scenarios' },
   { href: '/tool', label: 'Tool' },
+  { href: '/history', label: 'History' },
   { href: '/pricing', label: 'Pricing' },
 ];
 

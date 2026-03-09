@@ -1,12 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
 
+import { ExampleConversation } from '@/components/marketing/ExampleConversation';
+import { FinalCta } from '@/components/marketing/FinalCta';
+import { HowItWorksSection } from '@/components/marketing/HowItWorksSection';
 import { HomepageHero } from '@/components/marketing/HomepageHero';
 import { HomepageScenarioGrid } from '@/components/marketing/HomepageScenarioGrid';
-import { TrustNote } from '@/components/marketing/TrustNote';
-import { WhyItWorks } from '@/components/marketing/WhyItWorks';
-import { ToolExample } from '@/components/tool/ToolExample';
-import { Link } from '@/core/i18n/navigation';
-import { getScenarioBySlug } from '@/lib/scenarios';
+import { SavedDealsPreview } from '@/components/marketing/SavedDealsPreview';
+import { ScenarioLibraryPreview } from '@/components/marketing/ScenarioLibraryPreview';
+import { PricingCards } from '@/components/pricing/PricingCards';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -25,39 +26,22 @@ export default async function LandingPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const lowballScenario = getScenarioBySlug('lowball-offer');
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 md:gap-10 md:py-10">
       <HomepageHero />
-
-      {lowballScenario ? <ToolExample scenario={lowballScenario} /> : null}
       <HomepageScenarioGrid />
-      <WhyItWorks />
-      <TrustNote />
+      <ExampleConversation />
+      <ScenarioLibraryPreview />
+      <HowItWorksSection />
+      <SavedDealsPreview />
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Simple pricing</h2>
         <p className="text-sm text-slate-700">
-          Free for your first 2 replies. Buy credits only when needed.
+          Credits-first pricing for occasional and ongoing deal support.
         </p>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Free</p>
-            <p className="mt-1 text-sm text-slate-700">2 replies</p>
-          </article>
-          <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Starter</p>
-            <p className="mt-1 text-sm text-slate-700">20 replies</p>
-          </article>
-          <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">Pro</p>
-            <p className="mt-1 text-sm text-slate-700">100 replies</p>
-          </article>
-        </div>
-        <Link href="/pricing" className="inline-flex text-sm font-medium text-slate-800 underline">
-          View full pricing and checkout
-        </Link>
+        <PricingCards sourcePage="home" />
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -94,11 +78,13 @@ export default async function LandingPage({
             What happens after free replies are used?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            You&apos;ll see a simple upgrade block and can buy credits to continue.
-            No subscription required.
+            You&apos;ll see an upgrade prompt and can continue with credits. Your
+            generated replies can still be saved into deal history.
           </p>
         </details>
       </section>
+
+      <FinalCta />
     </main>
   );
 }
