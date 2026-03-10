@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 
-import type { PricingScenarioBlueprint } from '@/types/pricing-cluster';
+import type { ScenarioPageData } from '@/types/content';
 
-export function buildPricingScenarioMetadata(params: {
-  scenario: PricingScenarioBlueprint;
+type ScenarioMetadataInput = Pick<
+  ScenarioPageData,
+  'metaTitle' | 'metaDescription' | 'primaryKeywords' | 'supportKeywords'
+>;
+
+export function buildScenarioMetadata(params: {
+  scenario: ScenarioMetadataInput;
   canonical: string;
 }): Metadata {
   const { scenario, canonical } = params;

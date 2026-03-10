@@ -1,9 +1,9 @@
 import type { ScenarioSlug } from '@/data/scenarios';
 import type {
   ExampleReplies,
-  ScenarioFaqItem as StructuredFaqItem,
-  ScenarioNextDecisionLink,
-  ScenarioToolCta,
+  FAQItem,
+  NextDecisionLink,
+  ToolCTA,
   StrategyPath,
 } from '@/types/content';
 
@@ -169,9 +169,9 @@ export type PricingScenarioBlueprint = {
   coreFear: string[];
   strategyPaths: PricingScenarioBlueprintPath[];
   exampleReplies: ExampleReplies;
-  faq: StructuredFaqItem[];
-  nextDecisionLinks: ScenarioNextDecisionLink[];
-  toolCta: ScenarioToolCta;
+  faq: FAQItem[];
+  nextDecisionLinks: NextDecisionLink[];
+  toolCta: ToolCTA;
   hubParent: '/pricing/';
   futureBridgeTo: string[];
   notes: string;

@@ -1,8 +1,8 @@
 import { Link } from '@/core/i18n/navigation';
-import type { ScenarioNextDecisionLink } from '@/types/content';
+import type { NextDecisionLink } from '@/types/content';
 
 type NextDecisionPathsProps = {
-  links: ScenarioNextDecisionLink[];
+  links: NextDecisionLink[];
 };
 
 export function NextDecisionPaths({ links }: NextDecisionPathsProps) {

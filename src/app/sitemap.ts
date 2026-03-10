@@ -1,7 +1,9 @@
 import { MetadataRoute } from 'next';
 
 import { envConfigs } from '@/config';
-import { pricingScenarios } from '@/lib/pricing-cluster';
+import { getAllGuides } from '@/lib/content/getGuideBySlug';
+import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
+import { getAllTools } from '@/lib/content/getToolBySlug';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = envConfigs.app_url.replace(/\/$/, '');
@@ -27,37 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/tools/reply-generator`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tools/price-negotiation-email-generator`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.85,
-    },
-    {
       url: `${baseUrl}/guides`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/guides/how-to-negotiate-freelance-pricing`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/guides/when-to-discount-and-when-not-to`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/guides/reduce-scope-instead-of-lowering-rate`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.75,
@@ -88,12 +60,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const scenarioRoutes: MetadataRoute.Sitemap = pricingScenarios.map((scenario) => ({
-    url: `${baseUrl}/pricing/${scenario.slug}`,
+  const scenarioRoutes: MetadataRoute.Sitemap = getAllScenarios().map((scenario) => ({
+    url: `${baseUrl}${normalizeRoutePath(scenario.url)}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...scenarioRoutes];
+  const guideRoutes: MetadataRoute.Sitemap = getAllGuides().map((guide) => ({
+    url: `${baseUrl}${normalizeRoutePath(guide.url)}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.75,
+  }));
+
+  const toolRoutes: MetadataRoute.Sitemap = getAllTools().map((tool) => ({
+    url: `${baseUrl}${normalizeRoutePath(tool.url)}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...scenarioRoutes, ...guideRoutes, ...toolRoutes];
+}
+
+function normalizeRoutePath(path: string): string {
+  if (!path.startsWith('/')) {
+    return `/${path}`;
+  }
+
+  if (path.length > 1 && path.endsWith('/')) {
+    return path.slice(0, -1);
+  }
+
+  return path;
 }

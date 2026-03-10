@@ -1,12 +1,12 @@
 import { ToolForm } from '@/components/tool/ToolForm';
 import { Link } from '@/core/i18n/navigation';
-import type { ScenarioToolCta } from '@/types/content';
+import type { ToolCTA } from '@/types/content';
 import type { PricingScenario } from '@/types/pricing-cluster';
 
 type AIGeneratorToolProps = {
   scenario: PricingScenario;
   scenarioSlug: string;
-  cta: ScenarioToolCta;
+  cta: ToolCTA;
 };
 
 export function AIGeneratorTool({ scenario, scenarioSlug, cta }: AIGeneratorToolProps) {

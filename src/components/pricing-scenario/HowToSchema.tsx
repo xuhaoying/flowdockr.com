@@ -1,12 +1,12 @@
-import { buildPricingScenarioHowToSchema } from '@/lib/seo/buildSchema';
-import type { PricingScenarioBlueprint } from '@/types/pricing-cluster';
+import { buildScenarioHowToSchema } from '@/lib/seo/buildScenarioSchema';
+import type { ScenarioPageData } from '@/types/content';
 
 type HowToSchemaProps = {
-  scenario: PricingScenarioBlueprint;
+  scenario: ScenarioPageData;
 };
 
 export function HowToSchema({ scenario }: HowToSchemaProps) {
-  const schema = buildPricingScenarioHowToSchema(scenario);
+  const schema = buildScenarioHowToSchema(scenario);
 
   return (
     <script

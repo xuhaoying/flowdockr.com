@@ -1,5 +1,5 @@
-import { pricingScenarioBlueprints } from '@/lib/pricing-cluster';
+import { pricingScenarioPages } from '@/lib/content/pricingScenarios';
 
 export function getAllScenarioSlugs(): string[] {
-  return pricingScenarioBlueprints.map((item) => item.slug);
+  return pricingScenarioPages.map((item) => item.slug);
 }

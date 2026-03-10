@@ -1,0 +1,317 @@
+[
+  {
+    "slug": "how-to-negotiate-freelance-pricing",
+    "pageType": "guide",
+    "cluster": "pricing",
+    "tier": 1,
+    "url": "/guides/how-to-negotiate-freelance-pricing/",
+    "h1": "How to negotiate freelance pricing without undercutting yourself",
+    "metaTitle": "How to Negotiate Freelance Pricing Without Undercutting Yourself | Flowdockr",
+    "metaDescription": "Learn how to negotiate freelance pricing with clearer boundaries, stronger positioning, and smarter scope decisions. Use Flowdockr to handle pricing conversations more strategically.",
+    "heroSubheading": "A practical framework for handling pricing conversations without defaulting to discounts.",
+    "primaryIntent": "Teach freelancers how to structure pricing negotiations so they can protect positioning while still moving deals forward.",
+    "primaryKeywords": [
+      "how to negotiate freelance pricing",
+      "freelance pricing negotiation",
+      "how to negotiate freelance rates"
+    ],
+    "supportKeywords": [
+      "freelancer price negotiation",
+      "how to handle pricing conversations",
+      "how to respond to pricing objections"
+    ],
+    "doNotCompeteWith": [
+      "price-pushback-after-proposal",
+      "discount-pressure-before-signing"
+    ],
+    "intro": "Most freelancers do not lose pricing conversations because they lack confidence. They lose them because they collapse different negotiation situations into one move: explain more, apologize more, or discount faster. Good pricing negotiation is not one script. It is a set of decisions.",
+    "coreTakeaways": [
+      "Not every price objection is the same problem.",
+      "Discounting is only one move, and often the weakest one.",
+      "Scope is one of the most powerful negotiation levers.",
+      "The quality of your framing matters as much as the words you use."
+    ],
+    "sections": [
+      {
+        "id": "separate-the-problems",
+        "title": "Separate price discomfort from real budget constraints",
+        "summary": "A prospect saying something feels expensive does not automatically mean the budget is impossible.",
+        "points": [
+          "Price pushback and low budget are not the same scenario.",
+          "A vague objection often signals negotiation pressure, not a dead deal.",
+          "The first job is diagnosis, not concession."
+        ]
+      },
+      {
+        "id": "protect-anchor",
+        "title": "Protect your price anchor before you try to save the deal",
+        "summary": "The moment you lower your number too early, you train the other side how to negotiate with you.",
+        "points": [
+          "Early concessions weaken later leverage.",
+          "Calm confidence outperforms defensive explanations.",
+          "A structured response protects credibility."
+        ]
+      },
+      {
+        "id": "use-scope-as-lever",
+        "title": "Use scope as a negotiation lever",
+        "summary": "If the budget is real, the cleanest move is often changing the shape of the work, not the value of your time.",
+        "points": [
+          "Reduce deliverables, not standards.",
+          "Offer smaller versions instead of cheaper versions.",
+          "Scope reduction preserves pricing logic."
+        ]
+      },
+      {
+        "id": "know-when-to-exit",
+        "title": "Know when to stop negotiating",
+        "summary": "Some buyers are not negotiating toward fit. They are negotiating toward maximum extraction.",
+        "points": [
+          "Not every deal should be saved.",
+          "Low-quality deals often reveal themselves through pattern, not just price.",
+          "Professional exits are part of strong positioning."
+        ]
+      }
+    ],
+    "recommendedScenarios": [
+      {
+        "href": "/pricing/price-pushback-after-proposal/",
+        "label": "If the quote feels too high after proposal"
+      },
+      {
+        "href": "/pricing/discount-pressure-before-signing/",
+        "label": "If they ask for a direct discount"
+      },
+      {
+        "href": "/pricing/budget-lower-than-expected/",
+        "label": "If the budget is genuinely lower"
+      },
+      {
+        "href": "/pricing/cheaper-competitor-comparison/",
+        "label": "If they compare you to a cheaper option"
+      }
+    ],
+    "toolCta": {
+      "title": "Apply this framework to a real message",
+      "body": "Paste the exact pricing message you received. Flowdockr will help you identify the real negotiation type and draft the right response.",
+      "buttonLabel": "Analyze this pricing message",
+      "toolSlug": "reply-generator"
+    },
+    "faq": [
+      {
+        "question": "What is the biggest mistake freelancers make in price negotiation?",
+        "answer": "Treating every objection as a reason to discount. Most pricing mistakes come from misdiagnosing the situation."
+      },
+      {
+        "question": "Should you always defend your price with more explanation?",
+        "answer": "No. More explanation often sounds defensive unless the real issue is lack of clarity. In many cases, clear structure works better than more words."
+      },
+      {
+        "question": "When is it okay to lower your price?",
+        "answer": "Usually when the scope, terms, or commitment also change. Lowering the price for the same work is the move that causes most long-term problems."
+      }
+    ],
+    "notes": "This is the main educational guide for the pricing cluster. It should feed traffic and authority into the pricing pillar pages."
+  },
+  {
+    "slug": "when-to-discount-and-when-not-to",
+    "pageType": "guide",
+    "cluster": "pricing",
+    "tier": 1,
+    "url": "/guides/when-to-discount-and-when-not-to/",
+    "h1": "When to discount and when not to",
+    "metaTitle": "When to Discount and When Not to as a Freelancer | Flowdockr",
+    "metaDescription": "Learn when a discount makes strategic sense and when it weakens your positioning. Use Flowdockr to handle discount requests with clearer judgment.",
+    "heroSubheading": "Discounting is not always wrong. But default discounting usually is.",
+    "primaryIntent": "Help freelancers distinguish strategic discounts from weak concessions so they can make smarter pricing decisions.",
+    "primaryKeywords": [
+      "when to discount",
+      "should freelancers offer discounts",
+      "when not to discount"
+    ],
+    "supportKeywords": [
+      "discount strategy freelance",
+      "should i lower my rate",
+      "how to handle discount requests"
+    ],
+    "doNotCompeteWith": [
+      "discount-pressure-before-signing",
+      "small-discount-before-closing"
+    ],
+    "intro": "The real question is not whether discounts are good or bad. The real question is whether a discount changes the structure of the deal in your favor, or simply teaches the buyer to push harder.",
+    "coreTakeaways": [
+      "A discount without a trade-off is usually a concession, not a strategy.",
+      "Discounting the same scope is riskier than people think.",
+      "Sometimes packaging, timing, or terms matter more than the headline number.",
+      "A small late-stage discount can carry a bigger signal than its dollar amount."
+    ],
+    "sections": [
+      {
+        "id": "bad-discounts",
+        "title": "Discounts that weaken your position",
+        "summary": "Some discounts solve immediate discomfort but create long-term commercial damage.",
+        "points": [
+          "Discounting before understanding the objection",
+          "Discounting the same scope with no trade-off",
+          "Discounting because the buyer simply expects it"
+        ]
+      },
+      {
+        "id": "good-discounts",
+        "title": "Discounts that can be strategically valid",
+        "summary": "A discount can make sense when the structure of the deal improves with it.",
+        "points": [
+          "Higher certainty or faster commitment",
+          "Reduced scope or cleaner terms",
+          "Packaging that lowers delivery burden"
+        ]
+      },
+      {
+        "id": "what-to-do-instead",
+        "title": "What to do instead of discounting",
+        "summary": "Most pricing conversations have better alternatives than a raw rate cut.",
+        "points": [
+          "Reduce scope",
+          "Offer phased work",
+          "Clarify value and outcomes",
+          "Change terms rather than price"
+        ]
+      }
+    ],
+    "recommendedScenarios": [
+      {
+        "href": "/pricing/discount-pressure-before-signing/",
+        "label": "If they ask for a discount before signing"
+      },
+      {
+        "href": "/pricing/small-discount-before-closing/",
+        "label": "If they ask for one last small discount"
+      },
+      {
+        "href": "/pricing/price-pushback-after-proposal/",
+        "label": "If the quote just feels high"
+      }
+    ],
+    "toolCta": {
+      "title": "Test whether this discount is strategic",
+      "body": "Paste the discount request and your current deal structure. Flowdockr will help you decide whether to hold, trade, or reshape the offer.",
+      "buttonLabel": "Evaluate this discount request",
+      "toolSlug": "price-negotiation-email-generator"
+    },
+    "faq": [
+      {
+        "question": "Is offering a discount always bad?",
+        "answer": "No. A discount can be fine when it is tied to a better structure, such as reduced scope, better terms, or faster commitment."
+      },
+      {
+        "question": "What is the biggest risk of discounting too easily?",
+        "answer": "You weaken your price anchor and teach the buyer that pressure works. That can shape the whole relationship, not just this deal."
+      },
+      {
+        "question": "What should you do before offering any discount?",
+        "answer": "Understand the real objection first. If you do not know whether the issue is budget, value, timing, or negotiation pressure, you are moving too early."
+      }
+    ],
+    "notes": "Judgment guide, not a scenario page. Should support discount-related pillars without competing for narrow transactional intent."
+  },
+  {
+    "slug": "reduce-scope-instead-of-lowering-rate",
+    "pageType": "guide",
+    "cluster": "pricing",
+    "tier": 1,
+    "url": "/guides/reduce-scope-instead-of-lowering-rate/",
+    "h1": "Reduce scope instead of lowering your rate",
+    "metaTitle": "Reduce Scope Instead of Lowering Your Rate | Flowdockr",
+    "metaDescription": "Learn how to protect your pricing by adjusting scope rather than lowering your rate for the same work. Use Flowdockr to structure smarter pricing replies.",
+    "heroSubheading": "One of the cleanest negotiation moves is not charging less. It is redefining the work honestly.",
+    "primaryIntent": "Teach freelancers how to use scope reduction as a negotiation lever instead of lowering their rate for unchanged work.",
+    "primaryKeywords": [
+      "reduce scope instead of lowering rate",
+      "reduce scope freelance project",
+      "adjust scope to fit budget"
+    ],
+    "supportKeywords": [
+      "scope reduction pricing",
+      "smaller project version",
+      "how to fit a project into budget"
+    ],
+    "doNotCompeteWith": [
+      "budget-lower-than-expected",
+      "more-work-same-price"
+    ],
+    "intro": "Many freelancers think the only way to save a constrained deal is to lower the price. In reality, changing the shape of the work is often cleaner, more honest, and more sustainable.",
+    "coreTakeaways": [
+      "A lower budget does not automatically require a lower rate.",
+      "Scope is the most flexible part of many projects.",
+      "A smaller version of the work can still deliver value.",
+      "Clear scope changes protect both profitability and trust."
+    ],
+    "sections": [
+      {
+        "id": "why-rate-cuts-backfire",
+        "title": "Why lowering your rate for the same scope backfires",
+        "summary": "The same work at a lower price usually creates hidden resentment, weaker delivery economics, or later scope fights.",
+        "points": [
+          "You work under pressure from day one",
+          "The client learns that your number was elastic",
+          "Future scope control becomes harder"
+        ]
+      },
+      {
+        "id": "how-to-reduce-scope",
+        "title": "How to reduce scope cleanly",
+        "summary": "Good scope reduction keeps the core outcome while removing lower-priority work.",
+        "points": [
+          "Identify the highest-value deliverables",
+          "Remove complexity before removing quality",
+          "Be explicit about what changes"
+        ]
+      },
+      {
+        "id": "how-to-present-options",
+        "title": "How to present options without confusion",
+        "summary": "The goal is not to overwhelm the client, but to create a clear path forward.",
+        "points": [
+          "Use two or three structured options",
+          "Explain trade-offs simply",
+          "Keep the pricing logic visible"
+        ]
+      }
+    ],
+    "recommendedScenarios": [
+      {
+        "href": "/pricing/budget-lower-than-expected/",
+        "label": "If the client budget is lower than your quote"
+      },
+      {
+        "href": "/pricing/more-work-same-price/",
+        "label": "If they want more work for the same budget"
+      },
+      {
+        "href": "/pricing/can-you-do-it-cheaper/",
+        "label": "If they broadly ask for a cheaper version"
+      }
+    ],
+    "toolCta": {
+      "title": "Turn a low-budget deal into a cleaner offer",
+      "body": "Paste the current budget, original scope, and your must-keep deliverables. Flowdockr will help you reframe the offer around scope instead of rate cuts.",
+      "buttonLabel": "Restructure this offer",
+      "toolSlug": "price-negotiation-email-generator"
+    },
+    "faq": [
+      {
+        "question": "Is reducing scope better than discounting?",
+        "answer": "In many cases, yes. It preserves the logic of your pricing and prevents you from doing the same work for less money."
+      },
+      {
+        "question": "How do you reduce scope without sounding like you are taking value away?",
+        "answer": "Frame it around protecting the core outcome and keeping the project realistic. Scope reduction should sound intentional, not like arbitrary removal."
+      },
+      {
+        "question": "How many options should you present?",
+        "answer": "Usually two or three. Too many options create confusion, while too few make the conversation feel rigid."
+      }
+    ],
+    "notes": "Methodology guide and one of the most strategically important pages in the pricing cluster."
+  }
+]

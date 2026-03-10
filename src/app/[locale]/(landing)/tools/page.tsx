@@ -1,13 +1,14 @@
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
+import { getAllTools } from '@/lib/content/getToolBySlug';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Negotiation Tools | Flowdockr',
   description:
     'Use pricing-focused negotiation tools to draft client replies and move deal conversations forward.',
-  canonicalUrl: '/tools',
+  canonicalUrl: '/tools/',
 });
 
 export default async function ToolsPage({
@@ -17,6 +18,7 @@ export default async function ToolsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const tools = getAllTools();
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -31,31 +33,18 @@ export default async function ToolsPage({
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-900">Reply generator</h2>
-          <p className="mt-2 text-sm text-slate-700">
-            Generate clear, professional responses for difficult client messages.
-          </p>
-          <Link
-            href="/tools/reply-generator"
-            className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
-          >
-            Open reply generator
-          </Link>
-        </article>
-
-        <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-900">Price negotiation email generator</h2>
-          <p className="mt-2 text-sm text-slate-700">
-            Draft pricing-specific replies that protect your rate and keep the deal active.
-          </p>
-          <Link
-            href="/tools/price-negotiation-email-generator"
-            className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
-          >
-            Open pricing email generator
-          </Link>
-        </article>
+        {tools.map((tool) => (
+          <article key={tool.slug} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-xl font-semibold text-slate-900">{tool.h1}</h2>
+            <p className="mt-2 text-sm text-slate-700">{tool.heroSubheading}</p>
+            <Link
+              href={tool.url}
+              className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+            >
+              Open tool
+            </Link>
+          </article>
+        ))}
       </section>
     </main>
   );

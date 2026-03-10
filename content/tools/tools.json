@@ -1,0 +1,181 @@
+[
+  {
+    "slug": "reply-generator",
+    "pageType": "tool",
+    "cluster": "pricing",
+    "url": "/tools/reply-generator/",
+    "h1": "AI reply generator for difficult client conversations",
+    "metaTitle": "AI Reply Generator for Difficult Client Conversations | Flowdockr",
+    "metaDescription": "Generate clearer replies for pricing objections, scope pressure, payment delays, and awkward client conversations. Flowdockr helps you respond with more strategy and less guesswork.",
+    "heroSubheading": "Draft professional replies for difficult client conversations without starting from scratch.",
+    "primaryIntent": "Provide a broad reply-generation tool that can handle multiple client communication situations, especially pricing-related ones.",
+    "primaryKeywords": [
+      "AI reply generator",
+      "client reply generator",
+      "professional response generator"
+    ],
+    "supportKeywords": [
+      "email reply generator",
+      "AI response tool",
+      "difficult client response generator"
+    ],
+    "intro": "Flowdockr helps you turn messy client messages into clearer next-step replies. Instead of guessing what to say, you can work from the actual context, your goal, and the tone you want to keep.",
+    "bestFor": [
+      "Pricing objections",
+      "Discount requests",
+      "Low-budget conversations",
+      "Scope pressure",
+      "Awkward follow-ups"
+    ],
+    "inputs": [
+      {
+        "name": "scenario",
+        "label": "Situation type",
+        "placeholder": "Select or auto-detect the scenario",
+        "required": false
+      },
+      {
+        "name": "clientMessage",
+        "label": "Client message",
+        "placeholder": "Paste the exact client message here",
+        "required": true
+      },
+      {
+        "name": "projectContext",
+        "label": "Project context",
+        "placeholder": "Add quote, scope, timeline, or budget context",
+        "required": false
+      },
+      {
+        "name": "goal",
+        "label": "Your goal",
+        "placeholder": "Protect price, clarify scope, keep deal alive, etc.",
+        "required": false
+      },
+      {
+        "name": "tone",
+        "label": "Preferred tone",
+        "placeholder": "Warm, concise, firm, calm, direct",
+        "required": false
+      }
+    ],
+    "exampleUseCases": [
+      "The prospect says your quote feels too high",
+      "They ask if you can do it cheaper",
+      "They want more work without more budget",
+      "You need a polite but firm boundary"
+    ],
+    "relatedScenarios": [
+      {
+        "href": "/pricing/price-pushback-after-proposal/",
+        "label": "For quote-too-high objections"
+      },
+      {
+        "href": "/pricing/can-you-do-it-cheaper/",
+        "label": "For broad cheaper-version requests"
+      },
+      {
+        "href": "/pricing/free-trial-work-request/",
+        "label": "For unpaid trial or sample work requests"
+      }
+    ],
+    "notes": "General-purpose tool page. Must feel like a real software tool page, not a thin CTA wrapper."
+  },
+  {
+    "slug": "price-negotiation-email-generator",
+    "pageType": "tool",
+    "cluster": "pricing",
+    "url": "/tools/price-negotiation-email-generator/",
+    "h1": "Price negotiation email generator",
+    "metaTitle": "Price Negotiation Email Generator | Flowdockr",
+    "metaDescription": "Generate better price negotiation emails for quote pushback, discount requests, low-budget clients, and competitor comparisons. Flowdockr helps you protect your rate with clearer positioning.",
+    "heroSubheading": "Write pricing replies that protect your rate, clarify trade-offs, and move the deal forward.",
+    "primaryIntent": "Provide a pricing-specific tool page for drafting negotiation emails and replies tied to price objections, discounts, and budget pressure.",
+    "primaryKeywords": [
+      "price negotiation email generator",
+      "pricing reply generator",
+      "discount request email response"
+    ],
+    "supportKeywords": [
+      "price objection email",
+      "negotiation reply generator",
+      "how to reply to discount request"
+    ],
+    "intro": "This tool is built for pricing conversations specifically. Whether the quote feels high, the client wants a discount, the budget is lower than expected, or a cheaper option is being used as leverage, Flowdockr helps you write a response that protects your position.",
+    "bestFor": [
+      "Price pushback after proposal",
+      "Direct discount requests",
+      "Low-budget but still viable projects",
+      "Competitor price pressure",
+      "Final discount asks before closing"
+    ],
+    "inputs": [
+      {
+        "name": "scenario",
+        "label": "Pricing scenario",
+        "placeholder": "Quote too high, direct discount, low budget, competitor comparison, etc.",
+        "required": false
+      },
+      {
+        "name": "clientMessage",
+        "label": "Client pricing message",
+        "placeholder": "Paste the exact pricing objection or request",
+        "required": true
+      },
+      {
+        "name": "quoteAmount",
+        "label": "Current quote or rate",
+        "placeholder": "Add your current quote, package, or pricing context",
+        "required": false
+      },
+      {
+        "name": "projectScope",
+        "label": "Current scope",
+        "placeholder": "Summarize deliverables, timeline, and boundaries",
+        "required": false
+      },
+      {
+        "name": "goal",
+        "label": "Your goal",
+        "placeholder": "Hold price, test budget, reduce scope, close the deal, etc.",
+        "required": false
+      },
+      {
+        "name": "tone",
+        "label": "Preferred tone",
+        "placeholder": "Warm, concise, firm, high-trust, non-defensive",
+        "required": false
+      }
+    ],
+    "exampleUseCases": [
+      "Reply to 'your quote is too high'",
+      "Respond to 'can you lower the price?'",
+      "Restructure the offer around budget",
+      "Reply when someone says another freelancer is cheaper",
+      "Handle a small final discount ask before signing"
+    ],
+    "relatedScenarios": [
+      {
+        "href": "/pricing/price-pushback-after-proposal/",
+        "label": "For proposal price pushback"
+      },
+      {
+        "href": "/pricing/discount-pressure-before-signing/",
+        "label": "For direct discount pressure"
+      },
+      {
+        "href": "/pricing/budget-lower-than-expected/",
+        "label": "For budget mismatch"
+      },
+      {
+        "href": "/pricing/cheaper-competitor-comparison/",
+        "label": "For cheaper competitor comparison"
+      },
+      {
+        "href": "/pricing/small-discount-before-closing/",
+        "label": "For final small discount pressure"
+      }
+    ],
+    "notes": "Pricing-specific tool page and the main conversion destination for pricing scenario pages."
+  }
+]

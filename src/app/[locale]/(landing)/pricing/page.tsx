@@ -1,35 +1,33 @@
 import { setRequestLocale } from 'next-intl/server';
 
-import { PricingScenarioCard } from '@/components/pricing/PricingScenarioCard';
 import { CreditExplainer } from '@/components/pricing/CreditExplainer';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { Link } from '@/core/i18n/navigation';
-import { getPricingScenariosByFamily, pricingFamilies, pricingScenarios } from '@/lib/pricing-cluster';
+import { getGuideBySlug } from '@/lib/content/getGuideBySlug';
+import { getPricingHub } from '@/lib/content/getPricingHub';
+import {
+  getAllScenarios,
+  getDefaultGeneratorScenarioSlug,
+  getScenarioBySlug,
+} from '@/lib/content/getScenarioBySlug';
+import { getToolBySlug } from '@/lib/content/getToolBySlug';
 import { getMetadata } from '@/shared/lib/seo';
 
+const pricingHubPage = getPricingHub();
+
+function getSlugFromUrl(url: string): string | null {
+  const segments = url.split('/').filter(Boolean);
+  return segments.at(-1) ?? null;
+}
+
 export const generateMetadata = getMetadata({
-  title: 'Freelance Pricing Negotiation Scenarios | Flowdockr',
-  description:
-    'Navigate pricing pushback, discount pressure, and budget mismatch with scenario-based negotiation guidance and reply generation.',
-  canonicalUrl: '/pricing',
+  title: pricingHubPage.metaTitle,
+  description: pricingHubPage.metaDescription,
+  canonicalUrl: pricingHubPage.url,
   keywords:
-    'freelance pricing negotiation, client discount response, proposal price pushback, budget mismatch reply',
+    'freelance pricing negotiation scenarios, quote pushback, discount requests, budget mismatch, scope pressure',
 });
-
-const PRICING_FAILURES = [
-  'Discounting too early before understanding the real objection.',
-  'Mixing a scope problem with a pricing problem.',
-  'Failing to test whether budget pressure is real or tactical.',
-  'Saving one deal while damaging long-term margin positioning.',
-];
-
-const PRICING_PRINCIPLES = [
-  'Do not discount before you diagnose the objection.',
-  'Separate deliverables from price in every negotiation step.',
-  'Offer options with tradeoffs, not instant concessions.',
-  'Protect long-term positioning, not just this single project.',
-];
 
 export default async function PricingHubPage({
   params,
@@ -38,65 +36,71 @@ export default async function PricingHubPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const featuredScenarios = pricingScenarios.filter((scenario) => scenario.featured);
+
+  const allScenarios = getAllScenarios();
+  const featuredScenarios = pricingHubPage.featuredScenarios
+    .map((url) => {
+      const slug = getSlugFromUrl(url);
+      return slug ? getScenarioBySlug(slug) : null;
+    })
+    .filter((scenario) => scenario !== null);
+
+  const relatedGuides = pricingHubPage.relatedGuides
+    .map((url) => {
+      const slug = getSlugFromUrl(url);
+      return slug ? getGuideBySlug(slug) : null;
+    })
+    .filter((guide) => guide !== null);
+
+  const relatedTools = pricingHubPage.relatedTools
+    .map((url) => {
+      const slug = getSlugFromUrl(url);
+      return slug ? getToolBySlug(slug) : null;
+    })
+    .filter((tool) => tool !== null);
+
+  const defaultScenarioSlug = featuredScenarios[0]
+    ? getDefaultGeneratorScenarioSlug(featuredScenarios[0].slug)
+    : 'lowball-offer';
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:p-6">
         <p className="inline-flex w-fit rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-          Pricing cluster
+          Pricing cluster hub
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-          Freelance pricing negotiation scenarios
+          {pricingHubPage.h1}
         </h1>
-        <p className="max-w-3xl text-base text-slate-700">
-          Find the right response when a prospect pushes back on price, asks for a
-          discount, or wants more work for the same budget.
-        </p>
-      </section>
-
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Why pricing conversations go wrong
-        </h2>
-        <ul className="space-y-2 text-sm text-slate-700">
-          {PRICING_FAILURES.map((item) => (
-            <li key={item} className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="max-w-4xl text-base text-slate-700">{pricingHubPage.heroSubheading}</p>
+        <p className="max-w-4xl text-sm leading-relaxed text-slate-700">{pricingHubPage.intro}</p>
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Choose your situation</h2>
-        <div className="space-y-5">
-          {pricingFamilies.map((family) => {
-            const items = getPricingScenariosByFamily(family.id);
-            if (!items.length) {
-              return null;
-            }
-
-            return (
-              <article key={family.id} className="space-y-3">
-                <h3 className="text-lg font-semibold text-slate-900">{family.title}</h3>
-                <p className="text-sm text-slate-700">{family.description}</p>
-                <div className="grid gap-3 md:grid-cols-2">
-                  {items.map((scenario) => (
-                    <PricingScenarioCard key={scenario.slug} scenario={scenario} />
-                  ))}
-                </div>
-              </article>
-            );
-          })}
+        <div className="grid gap-3 md:grid-cols-2">
+          {pricingHubPage.decisionBuckets.map((bucket) => (
+            <article
+              key={bucket.href}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <h3 className="text-base font-semibold text-slate-900">{bucket.title}</h3>
+              <p className="mt-1 text-sm text-slate-700">{bucket.description}</p>
+              <Link
+                href={bucket.href}
+                className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+              >
+                Open decision path
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Pricing principles</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Key principles</h2>
         <ul className="space-y-2 text-sm text-slate-700">
-          {PRICING_PRINCIPLES.map((item) => (
+          {pricingHubPage.keyPrinciples.map((item) => (
             <li key={item} className="flex items-start gap-2">
               <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
               <span>{item}</span>
@@ -106,14 +110,88 @@ export default async function PricingHubPage({
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Featured scenarios</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">All pricing scenarios</h2>
         <p className="text-sm text-slate-700">
-          Start with the core pricing decision pages that carry the highest intent and
-          strongest conversion potential.
+          Navigate all pricing decision pages in one place, then open the matching tool with
+          scenario context.
         </p>
         <div className="grid gap-3 md:grid-cols-2">
+          {allScenarios.map((scenario) => (
+            <article
+              key={scenario.slug}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <div className="mb-2 flex flex-wrap gap-2">
+                <span className="inline-flex rounded-full border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-700">
+                  {scenario.pageRole}
+                </span>
+                <span className="inline-flex rounded-full border border-slate-300 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-700">
+                  Tier {scenario.tier}
+                </span>
+              </div>
+              <h3 className="text-base font-semibold text-slate-900">{scenario.h1}</h3>
+              <p className="mt-1 text-sm text-slate-700">{scenario.heroSubheading}</p>
+              <Link
+                href={scenario.url}
+                className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+              >
+                Open scenario
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Featured scenarios</h2>
+        <div className="grid gap-3 md:grid-cols-2">
           {featuredScenarios.map((scenario) => (
-            <PricingScenarioCard key={scenario.slug} scenario={scenario} />
+            <article
+              key={scenario.slug}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <h3 className="text-base font-semibold text-slate-900">{scenario.h1}</h3>
+              <p className="mt-1 text-sm text-slate-700">{scenario.metaDescription}</p>
+              <Link
+                href={scenario.url}
+                className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+              >
+                Open featured scenario
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Related guides</h2>
+        <div className="grid gap-3 md:grid-cols-3">
+          {relatedGuides.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={guide.url}
+              className="rounded-lg border border-slate-200 p-4 text-sm text-slate-800 transition-colors hover:border-slate-400"
+            >
+              {guide.h1}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Related tools</h2>
+        <div className="grid gap-3 md:grid-cols-2">
+          {relatedTools.map((tool) => (
+            <article key={tool.slug} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-base font-semibold text-slate-900">{tool.h1}</h3>
+              <p className="mt-1 text-sm text-slate-700">{tool.heroSubheading}</p>
+              <Link
+                href={tool.url}
+                className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+              >
+                Open tool
+              </Link>
+            </article>
           ))}
         </div>
       </section>
@@ -126,37 +204,16 @@ export default async function PricingHubPage({
         </p>
         <ToolForm
           sourcePage="tool"
-          defaultScenarioSlug="lowball-offer"
+          defaultScenarioSlug={defaultScenarioSlug}
           showScenarioSelector={true}
           placeholder="Paste the exact message where they pushed back on pricing..."
         />
       </section>
 
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Related guides</h2>
-        <div className="grid gap-3 md:grid-cols-3">
-          <Link
-            href="/guides/how-to-negotiate-freelance-pricing"
-            className="rounded-lg border border-slate-200 p-4 text-sm text-slate-800 transition-colors hover:border-slate-400"
-          >
-            How to negotiate freelance pricing
-          </Link>
-          <Link
-            href="/guides/when-to-discount-and-when-not-to"
-            className="rounded-lg border border-slate-200 p-4 text-sm text-slate-800 transition-colors hover:border-slate-400"
-          >
-            When to discount and when not to
-          </Link>
-          <Link
-            href="/guides/reduce-scope-instead-of-lowering-rate"
-            className="rounded-lg border border-slate-200 p-4 text-sm text-slate-800 transition-colors hover:border-slate-400"
-          >
-            Reduce scope instead of lowering your rate
-          </Link>
-        </div>
-      </section>
-
-      <section id="credits-pricing" className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section
+        id="credits-pricing"
+        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+      >
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">Credits pricing</h2>
         <p className="text-sm text-slate-700">
           Start with 2 free replies, then buy credits when you need deeper support.

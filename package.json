@@ -62,7 +62,10 @@
     "seo:factory:refresh": "node scripts/seo/mark-update-needed-v2.mjs",
     "seo:factory:content": "node scripts/seo/generate-content-prompt-jobs-v2.mjs --source=seo-pages && node scripts/seo/generate-content-drafts-v2.mjs && node scripts/seo/publish-content-drafts-v2.mjs && node scripts/seo/quality-gate-content-v2.mjs --source=prompt-jobs && node scripts/seo/build-internal-links-graph-v2.mjs && node scripts/seo/generate-sitemap-v2.mjs",
     "qa:deal-quality": "tsx scripts/flowdockr/evaluate-deal-strategy-quality.ts",
-    "qa:pricing-taxonomy": "tsx scripts/flowdockr/validate-pricing-taxonomy.ts"
+    "qa:pricing-content": "tsx scripts/flowdockr/validate-pricing-content.ts",
+    "qa:pricing-taxonomy": "tsx scripts/flowdockr/validate-pricing-taxonomy.ts",
+    "qa:pricing-runtime-smoke": "tsx scripts/flowdockr/smoke-pricing-runtime.ts",
+    "start:standalone": "node .next/standalone/server.js"
   },
   "dependencies": {
     "@ai-sdk/react": "^2.0.89",
@@ -178,6 +181,7 @@
     "@types/react-lazy-load-image-component": "^1.6.4",
     "autoprefixer": "^10.4.21",
     "babel-plugin-react-compiler": "^1.0.0",
+    "baseline-browser-mapping": "^2.10.0",
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.37.0",

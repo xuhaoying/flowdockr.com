@@ -34,5 +34,14 @@ jobs:
       - name: Type check
         run: pnpm type-check
 
+      - name: Validate pricing content
+        run: pnpm qa:pricing-content
+
+      - name: Validate pricing taxonomy
+        run: pnpm qa:pricing-taxonomy
+
       - name: Build
         run: pnpm build
+
+      - name: Runtime smoke (pricing cluster)
+        run: pnpm qa:pricing-runtime-smoke
