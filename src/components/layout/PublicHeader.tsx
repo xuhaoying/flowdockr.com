@@ -4,10 +4,9 @@ import { Link, usePathname } from '@/core/i18n/navigation';
 import { cn } from '@/shared/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/scenario', label: 'Scenarios' },
-  { href: '/tool', label: 'Tool' },
-  { href: '/history', label: 'History' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: '/pricing', label: 'Scenarios' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/pricing#credits-pricing', label: 'Pricing' },
 ];
 
 export function PublicHeader() {
@@ -23,11 +22,12 @@ export function PublicHeader() {
           Flowdockr
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-1.5">
           {NAV_ITEMS.map((item) => {
-            const active =
-              pathname === item.href ||
-              (item.href !== '/' && pathname.startsWith(`${item.href}/`));
+            const hrefPath = item.href.split('#')[0] || '/';
+            const active = item.href.startsWith('/#')
+              ? pathname === '/'
+              : pathname === hrefPath || (hrefPath !== '/' && pathname.startsWith(`${hrefPath}/`));
 
             return (
               <Link
@@ -46,10 +46,16 @@ export function PublicHeader() {
           })}
 
           <Link
-            href="/login"
+            href="/signin"
             className="ml-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
           >
             Sign in
+          </Link>
+          <Link
+            href="/pricing"
+            className="ml-1 inline-flex rounded-md bg-slate-900 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+          >
+            Try a scenario
           </Link>
         </nav>
       </div>

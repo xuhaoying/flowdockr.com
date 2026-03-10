@@ -1,12 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
 
 import { SocialLoginButtons } from '@/components/auth/SocialLoginButtons';
+import { MagicLinkLoginForm } from '@/components/tool';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Log in | Flowdockr',
-  description: 'Continue with Google or GitHub to access your credits and saved deal history.',
-  canonicalUrl: '/login',
+  description: 'Continue with Google or email magic link to access your credits and saved deal history.',
+  canonicalUrl: '/signin',
   noIndex: true,
 });
 
@@ -41,10 +42,14 @@ export default async function LoginPage({
       <section className="mb-6 space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Log in</h1>
         <p className="text-muted-foreground">
-          Continue with your preferred provider to access credits and saved deals.
+          Continue with Google or use a magic link to access credits and saved deals.
         </p>
       </section>
-      <SocialLoginButtons callbackUrl={callbackUrl} />
+      <div className="space-y-4">
+        <SocialLoginButtons callbackUrl={callbackUrl} />
+        <div className="text-center text-xs uppercase tracking-wide text-slate-500">or</div>
+        <MagicLinkLoginForm callbackUrl={callbackUrl} />
+      </div>
     </main>
   );
 }

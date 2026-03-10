@@ -40,10 +40,9 @@ export function SignIn({
   const [rememberMe, setRememberMe] = useState(false);
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
-  const isGithubAuthEnabled = configs.github_auth_enabled === 'true';
   const isEmailAuthEnabled =
     configs.email_auth_enabled !== 'false' ||
-    (!isGoogleAuthEnabled && !isGithubAuthEnabled); // no social providers enabled, auto enable email auth
+    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
 
   if (callbackUrl) {
     if (
@@ -217,7 +216,7 @@ export function SignIn({
           <div className="flex w-full justify-center border-t py-4">
             <p className="text-center text-xs text-neutral-500">
               {t('no_account')}
-              <Link href="/sign-up" className="underline">
+              <Link href="/signin" className="underline">
                 <span className="cursor-pointer dark:text-white/70">
                   {t('sign_up_title')}
                 </span>

@@ -14,16 +14,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -34,5 +36,14 @@ jobs:
       - name: Type check
         run: pnpm type-check
 
+      - name: Validate pricing content
+        run: pnpm qa:pricing-content
+
+      - name: Validate pricing taxonomy
+        run: pnpm qa:pricing-taxonomy
+
       - name: Build
         run: pnpm build
+
+      - name: Runtime smoke (pricing cluster)
+        run: pnpm qa:pricing-runtime-smoke

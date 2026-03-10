@@ -7,7 +7,7 @@ import { getMetadata } from '@/shared/lib/seo';
 export const generateMetadata = getMetadata({
   title: 'Freelance Negotiation Scenarios | Flowdockr',
   description: 'Open scenario-first negotiation flows and generate client replies instantly.',
-  canonicalUrl: '/scenarios',
+  canonicalUrl: '/pricing',
 });
 
 export default async function CreatePage({
@@ -18,5 +18,5 @@ export default async function CreatePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  redirect(locale === defaultLocale ? '/scenarios' : `/${locale}/scenarios`);
+  redirect(locale === defaultLocale ? '/pricing' : `/${locale}/pricing`);
 }

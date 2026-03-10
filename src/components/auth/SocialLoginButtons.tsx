@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { RiGithubFill, RiGoogleFill } from 'react-icons/ri';
+import { RiGoogleFill } from 'react-icons/ri';
 
 import { signIn } from '@/core/auth/client';
 import { trackEvent } from '@/lib/analytics-client';
@@ -11,7 +11,7 @@ type SocialLoginButtonsProps = {
   callbackUrl?: string;
 };
 
-type Provider = 'google' | 'github';
+type Provider = 'google';
 
 const PROVIDERS: Array<{
   id: Provider;
@@ -22,11 +22,6 @@ const PROVIDERS: Array<{
     id: 'google',
     label: 'Continue with Google',
     icon: <RiGoogleFill className="h-4 w-4" />,
-  },
-  {
-    id: 'github',
-    label: 'Continue with GitHub',
-    icon: <RiGithubFill className="h-4 w-4" />,
   },
 ];
 

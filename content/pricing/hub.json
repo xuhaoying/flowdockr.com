@@ -1,0 +1,66 @@
+{
+  "slug": "pricing",
+  "pageType": "hub",
+  "cluster": "pricing",
+  "url": "/pricing/",
+  "h1": "Freelance pricing negotiation scenarios",
+  "metaTitle": "Freelance Pricing Negotiation Scenarios | Flowdockr",
+  "metaDescription": "Explore freelance pricing negotiation scenarios for quote pushback, discount requests, low-budget projects, competitor comparisons, and scope pressure. Find the right next move with Flowdockr.",
+  "heroSubheading": "Find the right response when a prospect pushes back on price, asks for a discount, or wants more work for the same budget.",
+  "intro": "Pricing conversations rarely fail because of one sentence alone. They fail because different kinds of pressure get treated as if they were all the same problem. This hub helps you identify the real negotiation situation and choose the right response path.",
+  "decisionBuckets": [
+    {
+      "title": "The quote feels too high",
+      "description": "Use this when the prospect reacts to your proposal as expensive, but has not yet asked directly for a discount.",
+      "href": "/pricing/price-pushback-after-proposal/"
+    },
+    {
+      "title": "They want a direct discount",
+      "description": "Use this when the prospect asks you to lower your rate before moving forward.",
+      "href": "/pricing/discount-pressure-before-signing/"
+    },
+    {
+      "title": "The budget is genuinely lower",
+      "description": "Use this when the numbers do not support the current scope and the real question is how to reshape the work.",
+      "href": "/pricing/budget-lower-than-expected/"
+    },
+    {
+      "title": "They compare you with a cheaper option",
+      "description": "Use this when the conversation shifts from price discomfort to direct competitor comparison.",
+      "href": "/pricing/cheaper-competitor-comparison/"
+    },
+    {
+      "title": "They want more for the same price",
+      "description": "Use this when pricing pressure turns into scope pressure and extra work starts creeping in.",
+      "href": "/pricing/more-work-same-price/"
+    },
+    {
+      "title": "They ask for unpaid trial work",
+      "description": "Use this when the prospect wants proof-of-work before committing, but the request crosses into free labor.",
+      "href": "/pricing/free-trial-work-request/"
+    }
+  ],
+  "keyPrinciples": [
+    "Do not discount before you understand the real objection.",
+    "Separate scope problems from price problems.",
+    "Protect long-term positioning, not just this one deal.",
+    "Offer structured options instead of reflexive concessions.",
+    "A calm boundary usually works better than a defensive explanation."
+  ],
+  "featuredScenarios": [
+    "/pricing/price-pushback-after-proposal/",
+    "/pricing/discount-pressure-before-signing/",
+    "/pricing/budget-lower-than-expected/",
+    "/pricing/cheaper-competitor-comparison/"
+  ],
+  "relatedGuides": [
+    "/guides/how-to-negotiate-freelance-pricing/",
+    "/guides/when-to-discount-and-when-not-to/",
+    "/guides/reduce-scope-instead-of-lowering-rate/"
+  ],
+  "relatedTools": [
+    "/tools/reply-generator/",
+    "/tools/price-negotiation-email-generator/"
+  ],
+  "notes": "Primary pricing cluster hub. Must feel like a decision console, not a blog archive."
+}

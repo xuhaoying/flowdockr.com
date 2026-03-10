@@ -22,7 +22,7 @@ export function SavedDealsPreview() {
           Saved deals and reusable history
         </h2>
         <p className="text-sm text-slate-700">
-          Flowdockr is more than a one-off generator. Save difficult conversations,
+          Flowdockr is more than a one-off tool. Save difficult conversations,
           revisit your best responses, and build your own negotiation history.
         </p>
       </div>

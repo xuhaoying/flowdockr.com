@@ -1,7 +1,7 @@
-import { Scenario } from '@/lib/scenarios';
+import type { ScenarioPageData } from '@/types/content';
 
 type ScenarioFaqProps = {
-  scenario: Scenario;
+  scenario: ScenarioPageData;
 };
 
 export function ScenarioFaq({ scenario }: ScenarioFaqProps) {
@@ -10,11 +10,14 @@ export function ScenarioFaq({ scenario }: ScenarioFaqProps) {
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">FAQ</h2>
       <div className="space-y-2">
         {scenario.faq.map((item) => (
-          <details key={item.q} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <details
+            key={item.question}
+            className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+          >
             <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-              {item.q}
+              {item.question}
             </summary>
-            <p className="mt-2 text-sm leading-relaxed text-slate-700">{item.a}</p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">{item.answer}</p>
           </details>
         ))}
       </div>

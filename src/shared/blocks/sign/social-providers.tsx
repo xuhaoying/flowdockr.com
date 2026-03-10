@@ -1,11 +1,10 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { RiGithubFill, RiGoogleFill } from 'react-icons/ri';
+import { RiGoogleFill } from 'react-icons/ri';
 import { toast } from 'sonner';
 
 import { signIn } from '@/core/auth/client';
-import { useRouter } from '@/core/i18n/navigation';
 import { defaultLocale } from '@/config/locale';
 import { Button } from '@/shared/components/ui/button';
 import { useAppContext } from '@/shared/contexts/app';
@@ -25,7 +24,6 @@ export function SocialProviders({
 }) {
   const t = useTranslations('common.sign');
   const locale = useLocale();
-  const router = useRouter();
 
   const { setIsShowSignModal } = useAppContext();
 
@@ -72,15 +70,6 @@ export function SocialProviders({
       title: t('google_sign_in_title'),
       icon: <RiGoogleFill />,
       onClick: () => handleSignIn({ provider: 'google' }),
-    });
-  }
-
-  if (configs.github_auth_enabled === 'true') {
-    providers.push({
-      name: 'github',
-      title: t('github_sign_in_title'),
-      icon: <RiGithubFill />,
-      onClick: () => handleSignIn({ provider: 'github' }),
     });
   }
 

@@ -32,13 +32,13 @@ export function RelatedScenarios({ slugs }: RelatedScenariosProps) {
         ))}
       </div>
       <div className="flex flex-wrap gap-3 text-sm">
-        <Link href="/scenario" className="text-slate-700 underline underline-offset-2">
-          Browse all scenarios
+        <Link href="/pricing" className="text-slate-700 underline underline-offset-2">
+          Browse pricing scenarios
         </Link>
         <Link href="/pricing" className="text-slate-700 underline underline-offset-2">
           View pricing
         </Link>
-        <Link href="/tool" className="text-slate-700 underline underline-offset-2">
+        <Link href="/tools/reply-generator" className="text-slate-700 underline underline-offset-2">
           Open generic tool
         </Link>
       </div>

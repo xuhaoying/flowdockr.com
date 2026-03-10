@@ -1,28 +1,23 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-import { ScenarioExampleMessage } from '@/components/scenario/ScenarioExampleMessage';
-import { ScenarioFaq } from '@/components/scenario/ScenarioFaq';
-import { ScenarioHero } from '@/components/scenario/ScenarioHero';
-import { ScenarioOutputPreview } from '@/components/scenario/ScenarioOutputPreview';
-import { ScenarioProblem } from '@/components/scenario/ScenarioProblem';
-import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
-import { ScenarioStrategy } from '@/components/scenario/ScenarioStrategy';
-import { ToolForm } from '@/components/tool/ToolForm';
-import { locales } from '@/config/locale';
-import { Link } from '@/core/i18n/navigation';
-import {
-  buildScenarioArticleSchema,
-  buildScenarioBreadcrumbSchema,
-  buildScenarioFaqSchema,
-  getScenarioCanonicalUrl,
-} from '@/lib/seo';
-import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
+import { defaultLocale, locales } from '@/config/locale';
+import { scenarios } from '@/lib/scenarios';
 
-type ScenarioPageParams = {
+type LegacyScenarioPageParams = {
   locale: string;
   slug: string;
+};
+
+const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
+  'lowball-offer': 'price-pushback-after-proposal',
+  'client-asks-discount': 'discount-pressure-before-signing',
+  'cheaper-freelancer': 'cheaper-competitor-comparison',
+  'free-sample-work': 'free-trial-work-request',
+  'more-work-same-budget': 'more-work-same-price',
+  'budget-limited': 'budget-lower-than-expected',
+  'delayed-decision': 'price-pushback-after-proposal',
+  'small-extra-free': 'more-work-same-price',
 };
 
 export const dynamicParams = false;
@@ -33,132 +28,16 @@ export function generateStaticParams() {
   );
 }
 
-export async function generateMetadata({
+export default async function LegacyScenarioPageRedirect({
   params,
 }: {
-  params: Promise<ScenarioPageParams>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const scenario = getScenarioBySlug(slug);
-
-  if (!scenario) {
-    return {
-      title: 'Scenario not found | Flowdockr',
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
-  }
-
-  const canonicalUrl = getScenarioCanonicalUrl(scenario.slug);
-
-  return {
-    title: scenario.seoTitle,
-    description: scenario.metaDescription,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: scenario.seoTitle,
-      description: scenario.metaDescription,
-      url: canonicalUrl,
-      type: 'article',
-    },
-  };
-}
-
-export default async function ScenarioPage({
-  params,
-}: {
-  params: Promise<ScenarioPageParams>;
+  params: Promise<LegacyScenarioPageParams>;
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const mapped = LEGACY_SCENARIO_REDIRECTS[slug] || 'price-pushback-after-proposal';
 
-  const scenario = getScenarioBySlug(slug);
-  if (!scenario) {
-    notFound();
-  }
-
-  const faqSchema = buildScenarioFaqSchema(scenario);
-  const articleSchema = buildScenarioArticleSchema(scenario);
-  const breadcrumbSchema = buildScenarioBreadcrumbSchema(scenario);
-
-  return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-
-      <ScenarioHero
-        scenario={scenario}
-        tool={
-          <ToolForm
-            sourcePage="scenario"
-            defaultScenarioSlug={scenario.slug}
-            showScenarioSelector={false}
-            placeholder={scenario.placeholder}
-          />
-        }
-      />
-
-      <ScenarioProblem paragraphs={scenario.problemText} />
-      <ScenarioExampleMessage message={scenario.exampleClientMessage} />
-      <ScenarioOutputPreview
-        exampleReply={scenario.exampleReply}
-        exampleAltReply={scenario.exampleAltReply}
-      />
-
-      <ScenarioStrategy scenario={scenario} />
-
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Save this deal context
-        </h2>
-        <p className="text-sm text-slate-700">
-          After generating a reply, save this interaction to your deal history so you
-          can revisit what worked and reuse patterns in future negotiations.
-        </p>
-        <div className="flex flex-wrap gap-4 text-sm">
-          <Link href="/history" className="font-semibold text-slate-900 underline">
-            Open saved deals history
-          </Link>
-          <Link href="/tool" className="font-semibold text-slate-900 underline">
-            Generate another reply
-          </Link>
-        </div>
-      </section>
-
-      <RelatedScenarios slugs={scenario.relatedSlugs} />
-      <ScenarioFaq scenario={scenario} />
-
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Continue generating replies</h2>
-        <p className="mt-1 text-sm text-slate-700">
-          Try more scenarios or buy credits when you need more than 2 free replies.
-        </p>
-        <div className="mt-3 flex flex-wrap gap-4 text-sm">
-          <Link href="/scenario" className="font-semibold text-slate-900 underline">
-            Browse all scenarios
-          </Link>
-          <Link href="/pricing" className="font-semibold text-slate-900 underline">
-            View credits pricing
-          </Link>
-          <Link href="/tool" className="font-semibold text-slate-900 underline">
-            Open generic tool
-          </Link>
-        </div>
-      </section>
-    </main>
+  redirect(
+    locale === defaultLocale ? `/pricing/${mapped}` : `/${locale}/pricing/${mapped}`
   );
 }

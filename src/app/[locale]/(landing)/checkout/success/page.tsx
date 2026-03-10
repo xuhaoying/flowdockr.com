@@ -11,13 +11,29 @@ export const generateMetadata = getMetadata({
 });
 
 function sanitizeReturnPath(value: string | undefined): string {
-  const fallback = '/scenario';
+  const fallback = '/pricing';
   const raw = String(value || '').trim();
   if (!raw || !raw.startsWith('/') || raw.startsWith('//')) {
     return fallback;
   }
 
   return raw;
+}
+
+function mapScenarioSlugToPricingPath(slug: string): string {
+  const map: Record<string, string> = {
+    'lowball-offer': 'price-pushback-after-proposal',
+    'client-asks-discount': 'discount-pressure-before-signing',
+    'cheaper-freelancer': 'cheaper-competitor-comparison',
+    'free-sample-work': 'free-trial-work-request',
+    'more-work-same-budget': 'more-work-same-price',
+    'budget-limited': 'budget-lower-than-expected',
+    'small-extra-free': 'more-work-same-price',
+    'delayed-decision': 'price-pushback-after-proposal',
+  };
+
+  const normalized = map[slug] || slug;
+  return `/pricing/${normalized}`;
 }
 
 export default async function CheckoutSuccessPage({
@@ -42,7 +58,7 @@ export default async function CheckoutSuccessPage({
   const scenarioSlug = String(query.scenario || '').trim();
 
   const continuePath =
-    returnTo || (scenarioSlug ? `/scenario/${scenarioSlug}` : '/scenario');
+    returnTo || (scenarioSlug ? mapScenarioSlugToPricingPath(scenarioSlug) : '/pricing');
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">

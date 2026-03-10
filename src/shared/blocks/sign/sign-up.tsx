@@ -40,10 +40,9 @@ export function SignUp({
   const [loading, setLoading] = useState(false);
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
-  const isGithubAuthEnabled = configs.github_auth_enabled === 'true';
   const isEmailAuthEnabled =
     configs.email_auth_enabled !== 'false' ||
-    (!isGoogleAuthEnabled && !isGithubAuthEnabled); // no social providers enabled, auto enable email auth
+    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
   const emailVerificationEnabled = configs.email_verification_enabled === 'true';
 
   if (callbackUrl) {
@@ -242,7 +241,7 @@ export function SignUp({
           <div className="flex w-full justify-center border-t py-4">
             <p className="text-center text-xs text-neutral-500">
               {t('already_have_account')}
-              <Link href="/sign-in" className="underline">
+              <Link href="/signin" className="underline">
                 <span className="cursor-pointer dark:text-white/70">
                   {t('sign_in_title')}
                 </span>

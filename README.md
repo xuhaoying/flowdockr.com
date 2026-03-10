@@ -1,30 +1,42 @@
 # Flowdockr v2
 
-Scenario-first SEO negotiation reply tool for freelancers.
+Scenario-based client negotiation system for freelancers and small agencies.
 
-Flowdockr 不是通用 SaaS 营销页，而是「场景页 + 工具 + credits 付费」产品：
+Flowdockr 不是通用 AI demo，而是「Scenario SEO 入口 + 决策页面 + 生成工具 + 历史留存 + Credits 付费」产品：
 
-`search/scenario entry -> generate reply -> free limit -> buy credits -> continue`
+`search intent -> scenario page -> generate reply -> save history -> free limit -> buy credits -> continue`
 
 ## Product Scope
 
-- 场景优先公开站点（首页、场景目录、场景详情、通用工具、定价）
+- 场景优先公开站点（首页、Pricing Hub、Pricing Scenarios、Guides、Tools、History、Pricing）
 - 三段式输出（Recommended / Alternative / Strategy）
 - 免费 2 次生成 + credits pack 购买
 - Stripe Checkout + Webhook 发放 credits
+- Save-to-history 最小留存路径（先本地存储，后续可接账户侧）
 
 ## Core Routes
 
-本项目使用 `next-intl`，页面实际带 locale 前缀（例如 `/en/scenarios`、`/zh/scenarios`）。
+本项目使用 `next-intl`，页面实际带 locale 前缀（例如 `/en/scenario`、`/zh/scenario`）。
 
-Public:
+Public (v2 pricing cluster):
 - `/[locale]`
-- `/[locale]/scenarios`
-- `/[locale]/scenarios/[slug]`
-- `/[locale]/tool`
 - `/[locale]/pricing`
+- `/[locale]/pricing/[slug]`
+- `/[locale]/guides`
+- `/[locale]/guides/[slug]`
+- `/[locale]/tools`
+- `/[locale]/tools/reply-generator`
+- `/[locale]/tools/price-negotiation-email-generator`
+- `/[locale]/history`
+- `/[locale]/signin`
 - `/[locale]/checkout/success`
 - `/[locale]/checkout/canceled`
+
+Legacy redirects kept for compatibility:
+- `/[locale]/scenario` -> `/[locale]/pricing`
+- `/[locale]/scenario/[slug]` -> mapped `/[locale]/pricing/[slug]`
+- `/[locale]/scenarios` -> `/[locale]/pricing`
+- `/[locale]/tool` -> `/[locale]/tools/reply-generator`
 
 Core APIs:
 - `POST /api/generate`
@@ -44,11 +56,28 @@ Core APIs:
 
 ## Scenario Data System
 
-场景内容集中在：
+通用谈判场景内容集中在：
 - `src/data/scenarios.ts`
 - `src/lib/scenarios.ts`
 
-Seed 场景（8 个）：
+首发 SEO 集群（pricing cluster）内容集中在：
+- `src/data/pricing-cluster.ts`
+- `src/data/pricing-taxonomy.ts`
+- `src/lib/pricing-cluster.ts`
+
+Pricing taxonomy 采用「四元组」约束：
+- trigger stage
+- pressure type
+- real risks
+- decision goals
+
+并且每个 scenario 带有 page-level SEO 控制字段：
+- `pageRole` (`pillar` / `support` / `entry`)
+- `primaryKeywords` / `supportKeywords`
+- `bannedPrimaryTopics`
+- `doNotCompeteWith`
+
+Seed negotiation 场景（8 个）：
 - `lowball-offer`
 - `client-asks-discount`
 - `cheaper-freelancer`
@@ -99,19 +128,29 @@ Packs:
 - 仅后端判断可生成与扣减
 - 仅 webhook 发放 credits
 - webhook 幂等去重（防重复加币）
+- 前端只传 `packCode`，价格与 credits 数量由服务端决定
+
+## Auth & Access
+
+- Landing 登录入口：`/[locale]/signin`（`/[locale]/login` 兼容别名）
+- 登录方式：Google OAuth + Email Magic Link
+- 典型触发点：
+  - free usage 用尽
+  - 点击 Save to history
+  - 开始 Checkout
 
 ## Database
 
-业务相关 schema 说明：
-- `docs/08-database-schema.md`
+数据库定义见：
+- `src/config/db/schema.postgres.ts`
+- `src/config/db/schema.sqlite.ts`
+- `src/config/db/schema.mysql.ts`
 
-核心表：
-- `anonymous_usage`
-- `generation`
-- `purchase`
-- `webhook_event`
-- `credit_transaction`
-- `user.credits_balance`（当前余额）
+核心实体（命名会随 provider 适配）：
+- 匿名免费次数追踪
+- generation 记录
+- purchase + webhook 幂等
+- credit transaction / balance
 
 ## Quick Start
 
@@ -155,6 +194,7 @@ pnpm dev
 本地提交前至少跑：
 
 ```bash
+pnpm qa:pricing-taxonomy
 pnpm lint
 pnpm type-check
 pnpm build
@@ -179,6 +219,8 @@ CI 工作流同样执行 `lint + type-check + build`（见 `.github/workflows/ci
   - 确认 `src/data/scenarios.ts` 已被提交（不要被 ignore 规则误伤）。
 - Stripe 支付后未到账
   - 先检查 webhook 签名配置与 `checkout.session.completed` 事件投递状态。
+- 页面入口混用 `/scenario` 与 `/pricing`
+  - 对外 canonical 以 `/pricing` 为主；旧路径仅保留兼容跳转。
 
 ## License
 

@@ -1,34 +1,33 @@
 import { Link } from '@/core/i18n/navigation';
-import { ToolForm } from '@/components/tool/ToolForm';
 
 export function HomepageHero() {
   return (
-    <section className="space-y-5">
+    <section className="space-y-2">
       <div className="grid gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1.08fr_0.92fr] lg:p-6">
         <div className="space-y-4">
           <p className="inline-flex rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
             Built for freelancers and agencies
           </p>
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-            Handle difficult client messages without losing the deal.
+            Handle difficult client messages without weakening your position.
           </h1>
           <p className="max-w-3xl text-base text-slate-700 md:text-lg">
-            AI-assisted negotiation replies for freelancers and agencies. Use real
-            scenarios, generate smarter responses, and keep track of your deal
-            conversations.
+            Flowdockr helps freelancers, consultants, and agencies respond to price
+            pushback, discount pressure, and awkward deal conversations with clearer
+            strategy and stronger wording.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <Link
-              href="/tool"
+              href="/pricing"
               className="inline-flex rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800"
             >
-              Try with a client message
+              Explore pricing scenarios
             </Link>
             <Link
-              href="/scenario"
+              href="/tools/price-negotiation-email-generator"
               className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-800 transition-colors hover:border-slate-400"
             >
-              Browse scenarios
+              Try the reply generator
             </Link>
           </div>
         </div>
@@ -57,7 +56,6 @@ export function HomepageHero() {
       </div>
 
       <p className="text-sm text-slate-600">2 free replies. No subscription required.</p>
-      <ToolForm sourcePage="home" showScenarioSelector defaultScenarioSlug="lowball-offer" />
     </section>
   );
 }
