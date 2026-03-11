@@ -13,13 +13,7 @@ export function PricingScenarioCard({
           {scenario.schema.page.family.replace(/-/g, ' ')}
         </span>
         <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
-          {scenario.schema.page.pageRole === 'pillar'
-            ? 'Core decision'
-            : scenario.schema.page.pageRole === 'entry'
-              ? 'Entry scenario'
-              : scenario.schema.page.pageRole === 'bridge'
-                ? 'Bridge scenario'
-              : 'Support scenario'}
+          Pricing decision
         </span>
       </div>
       <h3 className="mt-3 text-base font-semibold text-slate-900">{scenario.title}</h3>

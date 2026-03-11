@@ -6,9 +6,11 @@ Client message:
 "Your quote is higher than expected. Another freelancer said they can do it for $300."
 
 Good style:
-Recommended reply should re-anchor on value, avoid racing to the bottom, and offer reduced scope as a structured alternative.
-Alternative reply should keep the same strategy but use a different framing.
-Strategy bullets should explain value anchoring, boundary protection, and structured next step.
+The professional reply should re-anchor on value, avoid racing to the bottom, and offer reduced scope as a structured alternative.
+The firm reply should keep boundaries clearer without sounding hostile.
+The softer reply should remain calm and workable without giving away pricing too early.
+The strategy block should explain value anchoring, boundary protection, and structured next step.
+Risk insight should warn against fast discounting or over-explaining.
 
 Bad style to avoid:
 - over-apologetic tone
@@ -23,9 +25,11 @@ Client message:
 "Thanks, we'll review internally and get back to you soon."
 
 Good style:
-Recommended reply should reopen momentum with low pressure, offer clarification help, and make it easy to respond.
-Alternative reply should remain respectful and concise with a decision-oriented next step.
-Strategy bullets should mention momentum, response ease, and low-pressure tone.
+The professional reply should reopen momentum with low pressure, offer clarification help, and make it easy to respond.
+The firm reply should keep the ask clearer and more decision-oriented.
+The softer reply should remain respectful and concise.
+The strategy block should mention momentum, response ease, and low-pressure tone.
+Risk insight should warn against sounding needy or chasing too hard.
 
 Bad style to avoid:
 - pushy urgency

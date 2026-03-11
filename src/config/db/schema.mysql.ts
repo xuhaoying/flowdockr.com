@@ -23,6 +23,9 @@ export const user = table(
     email: varchar191('email').notNull().unique(),
     emailVerified: boolean('email_verified').default(false).notNull(),
     image: text('image'),
+    creditsBalance: int('credits_balance').default(0).notNull(),
+    stripeCustomerId: varchar191('stripe_customer_id').unique(),
+    magicLinkEnabled: boolean('magic_link_enabled').default(true).notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
     // Track first-touch acquisition channel (e.g. google, twitter, newsletter)
@@ -35,7 +38,47 @@ export const user = table(
     index('idx_user_name').on(table.name),
     // Order users by registration time for latest users list
     index('idx_user_created_at').on(table.createdAt),
+    index('idx_user_credits_balance').on(table.creditsBalance),
   ]
+);
+
+export const userBillingState = table(
+  'user_billing_state',
+  {
+    userId: varchar191('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    creditsRemaining: int('credits_remaining').default(0).notNull(),
+    creditsTotal: int('credits_total').default(0).notNull(),
+    supportLevel: varchar('support_level', { length: 50 }).default('free').notNull(),
+    purchasedPlan: varchar191('purchased_plan').default('free_trial').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [
+    index('idx_user_billing_state_support_level').on(table.supportLevel),
+    index('idx_user_billing_state_updated_at').on(table.updatedAt),
+  ]
+);
+
+export const featureEntitlement = table(
+  'feature_entitlement',
+  {
+    userId: varchar191('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    multiVersionEnabled: boolean('multi_version_enabled').default(false).notNull(),
+    strategyExplanationEnabled: boolean('strategy_explanation_enabled')
+      .default(false)
+      .notNull(),
+    riskAlertEnabled: boolean('risk_alert_enabled').default(false).notNull(),
+    historyEnabled: boolean('history_enabled').default(false).notNull(),
+    followUpEnabled: boolean('follow_up_enabled').default(false).notNull(),
+    advancedModesEnabled: boolean('advanced_modes_enabled').default(false).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [index('idx_feature_entitlement_history').on(table.historyEnabled)]
 );
 
 export const session = table(

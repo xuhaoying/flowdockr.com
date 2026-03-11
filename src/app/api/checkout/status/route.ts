@@ -20,6 +20,8 @@ export async function GET(request: NextRequest) {
     creditsGranted: Boolean(status.creditsGranted),
     creditsAdded: Math.max(0, status.creditsAdded || 0),
     creditsRemaining: status.creditsRemaining,
+    supportLevel: status.supportLevel,
+    purchasedPlan: status.purchasedPlan,
     error: status.error,
   });
 }

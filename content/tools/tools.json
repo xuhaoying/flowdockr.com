@@ -60,23 +60,23 @@
       }
     ],
     "exampleUseCases": [
-      "The prospect says your quote feels too high",
-      "They ask if you can do it cheaper",
-      "They want more work without more budget",
-      "You need a polite but firm boundary"
+      "Price pushback after proposal",
+      "Can you do it cheaper?",
+      "More work for the same price",
+      "Free trial work request"
     ],
     "relatedScenarios": [
       {
         "href": "/pricing/price-pushback-after-proposal/",
-        "label": "For quote-too-high objections"
+        "label": "Price pushback after proposal"
       },
       {
         "href": "/pricing/can-you-do-it-cheaper/",
-        "label": "For broad cheaper-version requests"
+        "label": "Can you do it cheaper?"
       },
       {
         "href": "/pricing/free-trial-work-request/",
-        "label": "For unpaid trial or sample work requests"
+        "label": "Free trial work request"
       }
     ],
     "notes": "General-purpose tool page. Must feel like a real software tool page, not a thin CTA wrapper."
@@ -104,10 +104,10 @@
     "intro": "This tool is built for pricing conversations specifically. Whether the quote feels high, the client wants a discount, the budget is lower than expected, or a cheaper option is being used as leverage, Flowdockr helps you write a response that protects your position.",
     "bestFor": [
       "Price pushback after proposal",
-      "Direct discount requests",
-      "Low-budget but still viable projects",
-      "Competitor price pressure",
-      "Final discount asks before closing"
+      "Discount pressure before signing",
+      "Budget lower than expected",
+      "Cheaper competitor comparison",
+      "Small discount before closing"
     ],
     "inputs": [
       {
@@ -148,32 +148,32 @@
       }
     ],
     "exampleUseCases": [
-      "Reply to 'your quote is too high'",
-      "Respond to 'can you lower the price?'",
-      "Restructure the offer around budget",
-      "Reply when someone says another freelancer is cheaper",
-      "Handle a small final discount ask before signing"
+      "Price pushback after proposal",
+      "Discount pressure before signing",
+      "Budget lower than expected",
+      "Cheaper competitor comparison",
+      "Small discount before closing"
     ],
     "relatedScenarios": [
       {
         "href": "/pricing/price-pushback-after-proposal/",
-        "label": "For proposal price pushback"
+        "label": "Price pushback after proposal"
       },
       {
         "href": "/pricing/discount-pressure-before-signing/",
-        "label": "For direct discount pressure"
+        "label": "Discount pressure before signing"
       },
       {
         "href": "/pricing/budget-lower-than-expected/",
-        "label": "For budget mismatch"
+        "label": "Budget lower than expected"
       },
       {
         "href": "/pricing/cheaper-competitor-comparison/",
-        "label": "For cheaper competitor comparison"
+        "label": "Cheaper competitor comparison"
       },
       {
         "href": "/pricing/small-discount-before-closing/",
-        "label": "For final small discount pressure"
+        "label": "Small discount before closing"
       }
     ],
     "notes": "Pricing-specific tool page and the main conversion destination for pricing scenario pages."

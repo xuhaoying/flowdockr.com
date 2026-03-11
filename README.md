@@ -173,8 +173,9 @@ cp .env.example .env.local
 - `OPENAI_API_KEY` 或 `FAL_API_KEY`（按你的 provider）
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
-- `STRIPE_PRICE_STARTER_20`
-- `STRIPE_PRICE_PRO_100`
+- `STRIPE_PRICE_7`
+- `STRIPE_PRICE_19`
+- `STRIPE_PRICE_39`
 
 ### 3) Database
 

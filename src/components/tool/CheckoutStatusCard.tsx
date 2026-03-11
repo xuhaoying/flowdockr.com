@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Link } from '@/core/i18n/navigation';
+import { BillingSupportLevel } from '@/types/billing';
 import { Button } from '@/shared/components/ui/button';
 
 type CheckoutStatusResponse = {
@@ -11,6 +12,8 @@ type CheckoutStatusResponse = {
   creditsGranted: boolean;
   creditsAdded: number;
   creditsRemaining?: number;
+  supportLevel?: BillingSupportLevel;
+  purchasedPlan?: string;
   error?: string;
 };
 
@@ -140,14 +143,15 @@ export function CheckoutStatusCard({
 
       {!isFinalized && !isFinalFailure && hasCheckoutReference ? (
         <p className="text-muted-foreground">
-          Payment completed. We are confirming your credits. This usually takes a few
-          seconds.
+          Payment completed. We are confirming your negotiation credits and support
+          level. This usually takes a few seconds.
         </p>
       ) : null}
 
       {isFinalized ? (
         <p className="text-muted-foreground">
-          Your credits are now available. You can continue generating replies.
+          Your negotiation credits are now available. You can continue with deeper
+          client support right away.
         </p>
       ) : null}
 
@@ -175,11 +179,16 @@ export function CheckoutStatusCard({
             {Math.max(0, status.creditsRemaining)}
           </p>
         ) : null}
+        {status.supportLevel ? (
+          <p>
+            <span className="font-semibold">Support level:</span> {formatSupportLevel(status.supportLevel)}
+          </p>
+        ) : null}
       </div>
 
       <div className="flex flex-wrap gap-3">
         <Button asChild>
-          <Link href={continuePath}>Continue generating replies</Link>
+          <Link href={continuePath}>Continue negotiating</Link>
         </Button>
         {isFinalFailure ? (
           <Button asChild variant="outline">
@@ -189,4 +198,18 @@ export function CheckoutStatusCard({
       </div>
     </section>
   );
+}
+
+function formatSupportLevel(value: BillingSupportLevel) {
+  switch (value) {
+    case 'quick_help':
+      return 'Quick Help';
+    case 'pro':
+      return 'Pro';
+    case 'studio':
+      return 'Studio';
+    case 'free':
+    default:
+      return 'Free Trial';
+  }
 }

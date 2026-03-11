@@ -12,12 +12,11 @@ export function HubBackLink({ scenario }: HubBackLinkProps) {
         href={scenario.hubParent}
         className="text-sm font-semibold text-slate-900 underline underline-offset-2"
       >
-        Back to pricing hub
+        Back to pricing console
       </Link>
       <p className="text-sm text-slate-600">
-        Continue from hub to choose another pricing decision scenario.
+        Choose another pricing situation from the decision console.
       </p>
     </section>
   );
 }
-

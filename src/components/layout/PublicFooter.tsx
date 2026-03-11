@@ -4,14 +4,14 @@ const PRIMARY_LINKS = [
   { href: '/pricing', label: 'Pricing scenarios' },
   { href: '/guides', label: 'Guides' },
   { href: '/tools', label: 'Tools' },
-  { href: '/pricing#credits-pricing', label: 'Credits pricing' },
+  { href: '/pricing#pricing-cards', label: 'Pricing' },
   { href: '/signin', label: 'Sign in' },
 ];
 
 const USE_CASE_LINKS = [
-  { href: '/pricing/price-pushback-after-proposal', label: 'Price pushback' },
-  { href: '/pricing/discount-pressure-before-signing', label: 'Discount pressure' },
-  { href: '/pricing/more-work-same-price', label: 'Scope + price conflict' },
+  { href: '/pricing/price-pushback-after-proposal', label: 'Price pushback after proposal' },
+  { href: '/pricing/discount-pressure-before-signing', label: 'Discount pressure before signing' },
+  { href: '/pricing/more-work-same-price', label: 'More work for the same price' },
 ];
 
 const LEGAL_LINKS = [
@@ -26,7 +26,7 @@ export function PublicFooter() {
         <div>
           <p className="text-sm font-semibold text-slate-900">Flowdockr</p>
           <p className="text-sm text-slate-600">
-            Scenario-based negotiation support for freelancers and agencies.
+            Scenario-based negotiation system for freelancers and agencies.
           </p>
         </div>
 

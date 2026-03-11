@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1772802435791,
+      "tag": "0000_famous_colossus",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1772871000000,
+      "tag": "0001_flowdockr_business_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1772892000000,
+      "tag": "0002_flowdockr_billing_entitlements",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1772895600000,
+      "tag": "0003_flowdockr_generation_support_level",
+      "breakpoints": true
+    }
+  ]
+}

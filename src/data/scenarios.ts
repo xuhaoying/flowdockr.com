@@ -4,11 +4,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "lowball-offer",
     category: 'pricing',
-    title: "How to Respond to a Lowball Offer from a Client",
-    seoTitle: "How to Respond to a Lowball Offer from a Client | Flowdockr",
+    title: "Price pushback after proposal",
+    seoTitle: "Price pushback after proposal | Flowdockr",
     metaDescription:
       "Generate a professional reply when a client offers too little for your freelance work. Protect your rate, re-anchor value, and keep the deal alive.",
-    h1: "How to Respond to a Lowball Offer from a Client",
+    h1: "Price pushback after proposal",
     heroIntro:
       "Lowball offers pressure freelancers into fast concessions. A stronger reply does not argue emotionally or race to the bottom. It re-anchors value, clarifies what the quote includes, and offers a practical next step if budget is the real constraint.",
     shortDescription:
@@ -69,11 +69,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "client-asks-discount",
     category: 'pricing',
-    title: "Client Asks for a Discount: How to Respond",
-    seoTitle: "Client Asks for a Discount: How to Respond | Flowdockr",
+    title: "Discount pressure before signing",
+    seoTitle: "Discount pressure before signing | Flowdockr",
     metaDescription:
       "Generate a confident response when a client asks for a discount. Protect your rate and offer smart alternatives instead of weakening your pricing.",
-    h1: "Client Asks for a Discount: How to Respond",
+    h1: "Discount pressure before signing",
     heroIntro:
       "Discount requests are common, but immediate discounts weaken pricing power. A stronger reply protects the core price and trades any concession against reduced scope, faster decisions, or clearer terms.",
     shortDescription:
@@ -135,11 +135,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "cheaper-freelancer",
     category: 'negotiation',
-    title: "Client Says Another Freelancer Is Cheaper",
-    seoTitle: "Client Says Another Freelancer Is Cheaper | Flowdockr",
+    title: "Cheaper competitor comparison",
+    seoTitle: "Cheaper competitor comparison | Flowdockr",
     metaDescription:
       "Generate a strong reply when a client compares your price with a cheaper freelancer. Re-anchor on value, execution quality, and fit.",
-    h1: "Client Says Another Freelancer Is Cheaper",
+    h1: "Cheaper competitor comparison",
     heroIntro:
       "When a client compares you to a cheaper freelancer, the trap is obvious: get pulled into a price race. A better response differentiates on value, process, reliability, and fit rather than trying to win by being cheaper.",
     shortDescription:
@@ -201,11 +201,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "free-sample-work",
     category: 'difficult-clients',
-    title: "Client Asks for Free Sample Work",
-    seoTitle: "Client Asks for Free Sample Work | Flowdockr",
+    title: "Free trial work request",
+    seoTitle: "Free trial work request | Flowdockr",
     metaDescription:
       "Create a polite but firm reply when a client asks for unpaid sample work. Protect your boundaries and propose safer alternatives.",
-    h1: "Client Asks for Free Sample Work",
+    h1: "Free trial work request",
     heroIntro:
       "Free sample requests often shift risk from the client to the freelancer. A strong reply keeps the tone professional, protects your boundaries, and offers alternatives like portfolio proof, paid discovery, or a small paid test instead.",
     shortDescription:
@@ -267,11 +267,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "more-work-same-budget",
     category: 'negotiation',
-    title: "Client Wants More Work for the Same Budget",
-    seoTitle: "Client Wants More Work for the Same Budget | Flowdockr",
+    title: "More work for the same price",
+    seoTitle: "More work for the same price | Flowdockr",
     metaDescription:
       "Generate a response when a client asks for extra work without increasing budget. Keep scope control and preserve the relationship.",
-    h1: "Client Wants More Work for the Same Budget",
+    h1: "More work for the same price",
     heroIntro:
       "Extra work without extra budget is how margin quietly disappears. A stronger reply separates what is already included from what is additional, then gives the client clear options instead of absorbing hidden scope creep.",
     shortDescription:
@@ -333,11 +333,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "budget-limited",
     category: 'pricing',
-    title: "Client Says Budget Is Limited",
-    seoTitle: "Client Says Budget Is Limited | Flowdockr",
+    title: "Budget lower than expected",
+    seoTitle: "Budget lower than expected | Flowdockr",
     metaDescription:
       "Generate a strategic reply when a client says budget is limited. Keep the deal alive without underpricing your work.",
-    h1: "Client Says Budget Is Limited",
+    h1: "Budget lower than expected",
     heroIntro:
       "A limited budget does not automatically mean you need to lower your rate. A stronger response acknowledges the constraint, then reshapes the engagement around scope, priorities, or phased delivery.",
     shortDescription:
@@ -399,11 +399,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "delayed-decision",
     category: 'difficult-clients',
-    title: "Client Delays Decision After Your Quote",
-    seoTitle: "Client Delays Decision After Your Quote | Flowdockr",
+    title: "Decision delay after proposal",
+    seoTitle: "Decision delay after proposal | Flowdockr",
     metaDescription:
       "Generate a professional follow-up when a client delays after receiving your quote. Re-open momentum without sounding pushy.",
-    h1: "Client Delays Decision After Your Quote",
+    h1: "Decision delay after proposal",
     heroIntro:
       "Silence after a quote is common, but passivity kills momentum. A good follow-up is short, respectful, and decision-oriented. It reopens the conversation without sounding needy or over-eager.",
     shortDescription:
@@ -464,11 +464,11 @@ export const scenarios: Scenario[] = [
   {
     slug: "small-extra-free",
     category: 'negotiation',
-    title: "Client Asks You to Do One Small Thing for Free",
-    seoTitle: "Client Asks You to Do One Small Thing for Free | Flowdockr",
+    title: "Small extra request for free",
+    seoTitle: "Small extra request for free | Flowdockr",
     metaDescription:
       "Write a professional reply when a client asks for a small extra task for free. Keep boundaries while preserving the relationship.",
-    h1: "Client Asks You to Do One Small Thing for Free",
+    h1: "Small extra request for free",
     heroIntro:
       "Small free requests feel harmless, but repeated unpriced extras quietly reset expectations. A strong reply decides clearly: either it is a one-time goodwill gesture, or it is scope expansion that should be named and priced.",
     shortDescription:
@@ -527,12 +527,78 @@ export const scenarios: Scenario[] = [
     placeholder:
       "Paste the message where the client asks for a small extra for free...",
   },
+  {
+    slug: "client-delays-payment",
+    category: 'difficult-clients',
+    title: "Delayed payment follow-up",
+    seoTitle: "Delayed payment follow-up | Flowdockr",
+    metaDescription:
+      "Generate a clear, professional follow-up when a client delays payment. Protect cash flow without turning the message hostile.",
+    h1: "Delayed payment follow-up",
+    heroIntro:
+      "Late payment follow-ups are delicate because the issue is both financial and relational. A stronger message stays calm, names the due status clearly, and points the client toward the next step without sounding passive.",
+    shortDescription:
+      "Generate a professional message when a client is late paying an invoice.",
+    problemText: [
+      "When a payment is late, many freelancers either send reminders that are too vague or messages that sound more frustrated than strategic. Neither works well. Vague reminders invite more delay. Overheated reminders create unnecessary friction.",
+      "A better reply stays factual. It references the invoice or due date, confirms the status you need, and makes the next step obvious.",
+      "The goal is not to vent. It is to move the payment conversation forward while keeping your tone professional and controlled.",
+    ],
+    exampleClientMessage:
+      "Sorry for the delay. We're still sorting a few internal approvals and should have an update soon.",
+    exampleReply:
+      "Thanks for the update. Just to keep this moving, invoice #104 was due on March 5. Can you confirm the expected payment date from your side so I know how to plan next steps here?",
+    exampleAltReply:
+      "Understood. For clarity, the invoice is now past due, so I wanted to confirm timing on payment. If helpful, feel free to share the expected payment date or who I should coordinate with directly.",
+    strategyBullets: [
+      "Keeps the tone professional without sounding overly soft.",
+      "Names the due status clearly instead of hinting at it.",
+      "Asks for a concrete next step rather than waiting on vague reassurance.",
+    ],
+    faq: [
+      {
+        q: "How do I follow up when a client pays late?",
+        a: "A strong follow-up is clear, factual, and specific. Reference the invoice or due date, ask for the expected payment timing, and keep the tone controlled rather than emotional.",
+      },
+      {
+        q: "Should I mention that the invoice is overdue?",
+        a: "Yes, usually. Avoid sounding accusatory, but do make the status explicit so the conversation stays grounded in facts.",
+      },
+      {
+        q: "What if I want to stay polite without sounding passive?",
+        a: "Focus on clarity instead of apology. You can stay respectful while still asking for a concrete payment date or next step.",
+      },
+      {
+        q: "When should I escalate a late payment follow-up?",
+        a: "Escalation depends on your agreement and the delay length, but the first step is usually a clear reminder that asks for specific timing instead of another open-ended promise.",
+      },
+    ],
+    relatedSlugs: ["delayed-decision", "client-asks-discount", "small-extra-free"],
+    promptContext:
+      "The client has delayed payment or is late on an invoice. The response should stay calm, reference the due status clearly, ask for a concrete payment update, and avoid emotional escalation.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Move the payment conversation forward with a clear, professional follow-up.",
+    avoid: [
+      "Sending a vague reminder with no clear ask",
+      "Sounding apologetic about asking for payment",
+      "Letting frustration control the tone",
+    ],
+    preferredMoves: [
+      "Reference the invoice or due date clearly",
+      "Ask for a concrete payment update",
+      "Keep the tone calm and controlled",
+    ],
+    toneProfile: "decision-oriented",
+    placeholder:
+      "Paste the delayed payment message or overdue invoice follow-up context...",
+  },
 ];
 
 export const scenarioOptions = scenarios.map((scenario) => ({
   value: scenario.slug,
   label: scenario.title,
-}));
+})) as ReadonlyArray<{ value: string; label: string }>;
 
 export type ScenarioSlug = (typeof scenarios)[number]["slug"];
 

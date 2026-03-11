@@ -8,9 +8,16 @@ import { Button } from '@/shared/components/ui/button';
 type CopyButtonProps = {
   value: string;
   onCopied?: () => void;
+  idleLabel?: string;
+  copiedLabel?: string;
 };
 
-export function CopyButton({ value, onCopied }: CopyButtonProps) {
+export function CopyButton({
+  value,
+  onCopied,
+  idleLabel = 'Copy',
+  copiedLabel = 'Copied',
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -31,7 +38,7 @@ export function CopyButton({ value, onCopied }: CopyButtonProps) {
   return (
     <Button type="button" variant="ghost" size="sm" className="h-7 px-2" onClick={handleCopy}>
       {copied ? <Check className="mr-1.5 size-3.5" /> : <Copy className="mr-1.5 size-3.5" />}
-      {copied ? 'Copied' : 'Copy'}
+      {copied ? copiedLabel : idleLabel}
     </Button>
   );
 }

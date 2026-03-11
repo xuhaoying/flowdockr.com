@@ -1,5 +1,6 @@
 import { eq } from 'drizzle-orm';
 
+import { getUserBillingProfile } from '@/lib/billing';
 import { db, purchase, user } from '@/lib/db';
 import type { CheckoutStatusResponse, PurchaseStatus } from '@/types/payments';
 
@@ -69,6 +70,8 @@ export async function getCheckoutStatus(params: {
   const creditsAdded = Math.max(0, record.creditsGranted || 0);
 
   let creditsRemaining: number | undefined;
+  let supportLevel: CheckoutStatusResponse['supportLevel'];
+  let purchasedPlan: string | undefined;
   if (record.userId) {
     const [balance] = await db()
       .select({
@@ -79,6 +82,10 @@ export async function getCheckoutStatus(params: {
       .limit(1);
 
     creditsRemaining = Math.max(0, balance?.creditsBalance || 0);
+
+    const billingProfile = await getUserBillingProfile(record.userId);
+    supportLevel = billingProfile.supportLevel;
+    purchasedPlan = billingProfile.purchasedPlan;
   }
 
   return {
@@ -87,5 +94,7 @@ export async function getCheckoutStatus(params: {
     creditsGranted,
     creditsAdded,
     creditsRemaining,
+    supportLevel,
+    purchasedPlan,
   };
 }

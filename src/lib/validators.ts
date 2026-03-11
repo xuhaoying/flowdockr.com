@@ -51,8 +51,8 @@ export const generateSchema = z
 
 export const checkoutSchema = z
   .object({
-    packageId: z.enum(['starter_20', 'pro_100']).optional(),
-    packCode: z.enum(['starter_20', 'pro_100']).optional(),
+    packageId: z.enum(['quick_help', 'pro', 'studio']).optional(),
+    packCode: z.enum(['quick_help', 'pro', 'studio']).optional(),
     email: z.string().email().optional(),
     anonymousSessionId: z.string().min(10).max(120).optional(),
     scenarioSlug: z.string().min(1).max(120).optional(),

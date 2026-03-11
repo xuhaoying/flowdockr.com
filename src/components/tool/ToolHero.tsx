@@ -10,6 +10,14 @@ export function ToolHero({ tool }: ToolHeroProps) {
       <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">{tool.h1}</h1>
       <p className="max-w-4xl text-base text-slate-700">{tool.heroSubheading}</p>
       <p className="max-w-4xl text-sm leading-relaxed text-slate-700">{tool.intro}</p>
+      <div className="flex flex-wrap gap-2 text-xs">
+        <span className="rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+          Paste exact client wording
+        </span>
+        <span className="rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+          Get negotiation-aware draft
+        </span>
+      </div>
     </section>
   );
 }
