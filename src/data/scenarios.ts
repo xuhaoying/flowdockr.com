@@ -527,16 +527,78 @@ export const scenarios: Scenario[] = [
     placeholder:
       "Paste the message where the client asks for a small extra for free...",
   },
+  {
+    slug: "client-delays-payment",
+    category: 'difficult-clients',
+    title: "Delayed payment follow-up",
+    seoTitle: "Delayed payment follow-up | Flowdockr",
+    metaDescription:
+      "Generate a clear, professional follow-up when a client delays payment. Protect cash flow without turning the message hostile.",
+    h1: "Delayed payment follow-up",
+    heroIntro:
+      "Late payment follow-ups are delicate because the issue is both financial and relational. A stronger message stays calm, names the due status clearly, and points the client toward the next step without sounding passive.",
+    shortDescription:
+      "Generate a professional message when a client is late paying an invoice.",
+    problemText: [
+      "When a payment is late, many freelancers either send reminders that are too vague or messages that sound more frustrated than strategic. Neither works well. Vague reminders invite more delay. Overheated reminders create unnecessary friction.",
+      "A better reply stays factual. It references the invoice or due date, confirms the status you need, and makes the next step obvious.",
+      "The goal is not to vent. It is to move the payment conversation forward while keeping your tone professional and controlled.",
+    ],
+    exampleClientMessage:
+      "Sorry for the delay. We're still sorting a few internal approvals and should have an update soon.",
+    exampleReply:
+      "Thanks for the update. Just to keep this moving, invoice #104 was due on March 5. Can you confirm the expected payment date from your side so I know how to plan next steps here?",
+    exampleAltReply:
+      "Understood. For clarity, the invoice is now past due, so I wanted to confirm timing on payment. If helpful, feel free to share the expected payment date or who I should coordinate with directly.",
+    strategyBullets: [
+      "Keeps the tone professional without sounding overly soft.",
+      "Names the due status clearly instead of hinting at it.",
+      "Asks for a concrete next step rather than waiting on vague reassurance.",
+    ],
+    faq: [
+      {
+        q: "How do I follow up when a client pays late?",
+        a: "A strong follow-up is clear, factual, and specific. Reference the invoice or due date, ask for the expected payment timing, and keep the tone controlled rather than emotional.",
+      },
+      {
+        q: "Should I mention that the invoice is overdue?",
+        a: "Yes, usually. Avoid sounding accusatory, but do make the status explicit so the conversation stays grounded in facts.",
+      },
+      {
+        q: "What if I want to stay polite without sounding passive?",
+        a: "Focus on clarity instead of apology. You can stay respectful while still asking for a concrete payment date or next step.",
+      },
+      {
+        q: "When should I escalate a late payment follow-up?",
+        a: "Escalation depends on your agreement and the delay length, but the first step is usually a clear reminder that asks for specific timing instead of another open-ended promise.",
+      },
+    ],
+    relatedSlugs: ["delayed-decision", "client-asks-discount", "small-extra-free"],
+    promptContext:
+      "The client has delayed payment or is late on an invoice. The response should stay calm, reference the due status clearly, ask for a concrete payment update, and avoid emotional escalation.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Move the payment conversation forward with a clear, professional follow-up.",
+    avoid: [
+      "Sending a vague reminder with no clear ask",
+      "Sounding apologetic about asking for payment",
+      "Letting frustration control the tone",
+    ],
+    preferredMoves: [
+      "Reference the invoice or due date clearly",
+      "Ask for a concrete payment update",
+      "Keep the tone calm and controlled",
+    ],
+    toneProfile: "decision-oriented",
+    placeholder:
+      "Paste the delayed payment message or overdue invoice follow-up context...",
+  },
 ];
 
-export const scenarioOptions = [
-  { value: 'lowball-offer', label: 'Price pushback after proposal' },
-  { value: 'client-asks-discount', label: 'Discount pressure before signing' },
-  { value: 'budget-limited', label: 'Budget lower than expected' },
-  { value: 'cheaper-freelancer', label: 'Cheaper competitor comparison' },
-  { value: 'more-work-same-budget', label: 'More work for the same price' },
-  { value: 'free-sample-work', label: 'Free trial work request' },
-] as const;
+export const scenarioOptions = scenarios.map((scenario) => ({
+  value: scenario.slug,
+  label: scenario.title,
+})) as ReadonlyArray<{ value: string; label: string }>;
 
 export type ScenarioSlug = (typeof scenarios)[number]["slug"];
 

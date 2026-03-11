@@ -24,6 +24,9 @@ type ToolFormProps = {
   showScenarioSelector?: boolean;
   placeholder?: string;
   sourcePage: 'home' | 'scenario' | 'tool';
+  workspaceTitle?: string;
+  workspaceDescription?: string;
+  submitLabel?: string;
 };
 
 type UsageState = {
@@ -72,6 +75,9 @@ export function ToolForm({
   showScenarioSelector = true,
   placeholder,
   sourcePage,
+  workspaceTitle = 'Paste the exact pricing message',
+  workspaceDescription = '2 free negotiation credits. No subscription required.',
+  submitLabel = 'Draft negotiation reply',
 }: ToolFormProps) {
   const fallbackSlug = scenarios[0]?.slug || 'lowball-offer';
 
@@ -398,10 +404,10 @@ export function ToolForm({
       >
         <div className="space-y-1">
           <p className="text-sm font-medium text-slate-700">
-            Paste the exact pricing message
+            {workspaceTitle}
           </p>
           <p className="text-xs text-slate-600">
-            2 free negotiation credits. No subscription required.
+            {workspaceDescription}
           </p>
         </div>
 
@@ -471,7 +477,7 @@ export function ToolForm({
 
         <div className="flex flex-wrap items-center gap-3">
           <Button type="button" onClick={onGenerate} disabled={!canSubmit}>
-            {isLoading ? 'Drafting...' : 'Draft negotiation reply'}
+            {isLoading ? 'Preparing guidance...' : submitLabel}
           </Button>
           {isExhausted ? (
             <Button

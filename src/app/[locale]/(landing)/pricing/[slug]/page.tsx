@@ -9,7 +9,7 @@ import { ExampleReplies } from '@/components/scenario/ExampleReplies';
 import { HubBackLink } from '@/components/scenario/HubBackLink';
 import { NextDecisionLinks } from '@/components/scenario/NextDecisionLinks';
 import { ScenarioFaq } from '@/components/scenario/ScenarioFaq';
-import { ScenarioHero } from '@/components/scenario/ScenarioHero';
+import { PricingScenarioHero } from '@/components/scenario/PricingScenarioHero';
 import { SituationSummary } from '@/components/scenario/SituationSummary';
 import { StrategyPaths } from '@/components/scenario/StrategyPaths';
 import { ToolCtaBlock } from '@/components/scenario/ToolCtaBlock';
@@ -87,7 +87,7 @@ export default async function PricingScenarioPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <ScenarioHero scenario={scenario} />
+      <PricingScenarioHero scenario={scenario} />
       <SituationSummary scenario={scenario} />
       <CoreFearBlock scenario={scenario} />
       <StrategyPaths scenario={scenario} />

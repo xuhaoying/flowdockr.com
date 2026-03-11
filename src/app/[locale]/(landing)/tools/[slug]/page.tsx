@@ -92,10 +92,15 @@ export default async function ToolPage({
 
   const requestedScenario = typeof scenario === 'string' ? scenario.trim() : '';
   const pricingScenario = requestedScenario ? getPricingScenarioBySlug(requestedScenario) : null;
+  const generatorScenario = requestedScenario
+    ? getGeneratorScenarioBySlug(requestedScenario)
+    : null;
 
   const defaultScenarioSlug = pricingScenario
     ? getDefaultGeneratorScenarioSlug(pricingScenario.slug)
-    : defaultGeneratorScenarioByToolSlug[tool.slug] || 'lowball-offer';
+    : generatorScenario?.slug ||
+      defaultGeneratorScenarioByToolSlug[tool.slug] ||
+      'lowball-offer';
 
   const previewScenario = getGeneratorScenarioBySlug(defaultScenarioSlug);
   const clientMessageInput = tool.inputs.find((input) => input.name === 'clientMessage');
