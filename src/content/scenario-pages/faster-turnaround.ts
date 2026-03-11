@@ -37,7 +37,7 @@ export const fasterTurnaroundScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These responses hide the real cost of speed instead of making the tradeoff visible.',
   toolPreset: {
-    scenarioSlug: 'more-work-same-budget',
+    scenarioSlug: 'timeline-pressure',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,

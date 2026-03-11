@@ -593,6 +593,468 @@ export const scenarios: Scenario[] = [
     placeholder:
       "Paste the delayed payment message or overdue invoice follow-up context...",
   },
+  {
+    slug: "invoice-follow-up",
+    category: 'difficult-clients',
+    title: "Overdue invoice follow-up",
+    seoTitle: "Overdue invoice follow-up | Flowdockr",
+    metaDescription:
+      "Generate a professional overdue invoice reminder that is clear, specific, and harder for the client to ignore.",
+    h1: "Overdue invoice follow-up",
+    heroIntro:
+      "Invoice follow-ups work best when they are specific, factual, and easy to act on. A stronger message references the invoice clearly, names the overdue status, and asks for a concrete payment timeline instead of sending another vague nudge.",
+    shortDescription:
+      "Generate a professional follow-up when a freelance invoice is overdue.",
+    problemText: [
+      "Once an invoice is overdue, many freelancers try to stay polite by sending messages that are too soft to move anything forward. The result is often more delay, not less tension.",
+      "The goal of an overdue invoice follow-up is not to sound aggressive. It is to make the status explicit, remove ambiguity, and give the client a clear next step.",
+      "A stronger reply cites the invoice, references the payment timing clearly, and asks for a specific update rather than accepting another vague promise.",
+    ],
+    exampleClientMessage:
+      "Sorry, we've been a bit behind internally. We'll try to get this sorted soon.",
+    exampleReply:
+      "Thanks for the update. Invoice #1042 is now overdue, so I wanted to check the exact payment timeline from your side. Can you confirm the expected payment date so I can plan next steps here?",
+    exampleAltReply:
+      "Understood. Since the invoice is now past due, could you confirm when payment is scheduled? A specific date would be helpful so I can keep the project admin aligned on my side.",
+    strategyBullets: [
+      "Names the overdue status clearly instead of hinting at it.",
+      "Asks for a concrete payment date rather than another open-ended reassurance.",
+      "Keeps the tone factual and controlled without sounding passive.",
+    ],
+    faq: [
+      {
+        q: "How do I follow up on an overdue invoice without sounding rude?",
+        a: "Use factual language, reference the invoice clearly, and ask for a specific payment date. Clarity is more useful than extra apology.",
+      },
+      {
+        q: "Should I mention that the invoice is overdue?",
+        a: "Yes. Avoid accusations, but make the payment status explicit so the conversation stays grounded in facts.",
+      },
+      {
+        q: "What should I ask for in an invoice follow-up?",
+        a: "Ask for a concrete payment date or a clear next step. That is usually more effective than asking whether they saw the invoice.",
+      },
+      {
+        q: "What if the client keeps saying payment is in progress?",
+        a: "Keep asking for a specific date or owner on their side. The main goal is to move the conversation from vague reassurance to actionable timing.",
+      },
+    ],
+    relatedSlugs: ["client-delays-payment", "delayed-decision", "budget-limited"],
+    promptContext:
+      "The invoice is overdue and the freelancer needs a clear payment update. The response should reference the invoice status directly, ask for a specific payment date or next step, and stay calm and professional without sounding passive.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Get a clear payment timeline without making the follow-up emotional or vague.",
+    avoid: [
+      "Sending another vague reminder",
+      "Sounding apologetic about asking for payment",
+      "Letting the client stay in abstract reassurance mode",
+    ],
+    preferredMoves: [
+      "Reference the invoice and overdue status clearly",
+      "Ask for a concrete payment date",
+      "Keep the tone factual and professional",
+    ],
+    toneProfile: "decision-oriented",
+    placeholder:
+      "Paste the overdue invoice follow-up message or payment delay context...",
+  },
+  {
+    slug: "price-objection",
+    category: 'pricing',
+    title: "Price objection without discount framing",
+    seoTitle: "Price objection without discount framing | Flowdockr",
+    metaDescription:
+      "Generate a calm, value-protecting reply when a client says your price feels too expensive.",
+    h1: "Price objection without discount framing",
+    heroIntro:
+      "When a client says the price feels expensive, the pressure is often about perceived value, not just budget. A stronger response acknowledges the concern, avoids immediate concessions, and reframes the discussion around fit, scope, and tradeoffs.",
+    shortDescription:
+      "Generate a confident reply when a client says your price feels too expensive.",
+    problemText: [
+      "A pure price objection can trigger an unhelpful instinct: defend yourself or cut the number quickly. Both responses weaken your positioning.",
+      "Often the client has not yet connected the quote to the scope, process, or outcome they are actually buying. That makes the objection feel broader and more emotional than a direct discount ask.",
+      "A stronger reply acknowledges the concern without treating it as a verdict. It keeps the focus on value, clarifies tradeoffs, and offers a structured lower-cost path only if the scope changes.",
+    ],
+    exampleClientMessage:
+      "This seems a bit too expensive for where we are right now.",
+    exampleReply:
+      "I understand the concern. The quote reflects the scope and the level of thinking needed for the outcome you're aiming for. If the current number feels heavy, I can suggest a narrower first phase or a reduced-scope version so we keep the work aligned with the budget more realistically.",
+    exampleAltReply:
+      "Totally fair to raise. I wouldn't recommend lowering the same scope just to make the number feel easier, but I can outline a leaner option or phased approach if that would help us find a better fit.",
+    strategyBullets: [
+      "Acknowledges the objection without sounding defensive.",
+      "Re-centers the discussion on scope, value, and tradeoffs instead of price alone.",
+      "Offers a structured alternative only if the engagement changes.",
+    ],
+    faq: [
+      {
+        q: "How do I respond when a client says my price is too expensive?",
+        a: "A strong reply acknowledges the concern, protects the pricing logic, and shifts the conversation toward value, scope, or phased work instead of immediate concessions.",
+      },
+      {
+        q: "Is this the same as a discount request?",
+        a: "Not exactly. A price objection is broader. The client is pushing back on perceived value or fit, not always asking for a specific discount.",
+      },
+      {
+        q: "What should I offer instead of lowering the same scope?",
+        a: "Reduced scope, a phased approach, or a leaner first version are usually stronger than simply cutting the price on unchanged work.",
+      },
+      {
+        q: "What tone works best for price objections?",
+        a: "Calm and confident. You want to show clarity, not defensiveness or over-justification.",
+      },
+    ],
+    relatedSlugs: ["lowball-offer", "client-asks-discount", "budget-limited"],
+    promptContext:
+      "The client says the freelancer's price feels too expensive, but has not necessarily asked for a direct discount yet. The response should acknowledge the concern, reinforce value framing, avoid immediate price concessions, and suggest scope or phased alternatives only if appropriate.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Protect value framing and keep the conversation moving toward fit or tradeoffs instead of immediate concessions.",
+    avoid: [
+      "Apologizing for the quote",
+      "Dropping the same scope to a lower price immediately",
+      "Over-explaining every line item in the estimate",
+    ],
+    preferredMoves: [
+      "Acknowledge the objection calmly",
+      "Reconnect the quote to scope and outcomes",
+      "Offer a leaner or phased option if budget fit is the real issue",
+    ],
+    toneProfile: "calm",
+    placeholder:
+      "Paste the message where the client says your price feels too expensive...",
+  },
+  {
+    slug: "extra-revisions",
+    category: 'negotiation',
+    title: "Extra revisions beyond agreed rounds",
+    seoTitle: "Extra revisions beyond agreed rounds | Flowdockr",
+    metaDescription:
+      "Generate a clear reply when a client asks for more revision rounds than the project originally included.",
+    h1: "Extra revisions beyond agreed rounds",
+    heroIntro:
+      "Extra revisions often sound harmless, but they quickly reset expectations if you keep absorbing them. A stronger reply references the agreed revision scope, keeps the relationship warm, and gives the client a structured next step.",
+    shortDescription:
+      "Generate a professional response when a client asks for more revisions than agreed.",
+    problemText: [
+      "Revision pressure is tricky because it often comes wrapped in collaborative language. The client is not always asking for a major change, but repeated extra rounds still expand the work.",
+      "If you keep saying yes casually, the revision limit stops meaning anything. That makes later boundaries much harder to defend.",
+      "A stronger reply references the original revision scope, clarifies what would count as additional rounds, and offers a simple path forward instead of letting the process drift.",
+    ],
+    exampleClientMessage:
+      "Could we do a couple more revision rounds before we lock this in?",
+    exampleReply:
+      "Happy to keep refining it. We have already moved through the revision rounds included in the original scope, so any additional rounds would be treated as an extension rather than part of the base project. If helpful, I can outline the next revision step and what it would add.",
+    exampleAltReply:
+      "I can absolutely help with further changes. Since they go beyond the revision rounds we originally planned for, I'd frame them as extra rounds so we keep the scope and timeline clear on both sides.",
+    strategyBullets: [
+      "References the agreed revision scope instead of arguing about effort.",
+      "Keeps the tone supportive while still naming the boundary.",
+      "Turns extra revisions into a clear next-step decision rather than an assumption.",
+    ],
+    faq: [
+      {
+        q: "How do I push back on extra revisions without sounding difficult?",
+        a: "Use process language. Refer to the agreed revision scope, explain that further rounds are additional, and offer a clear next step.",
+      },
+      {
+        q: "Should I ever allow extra revisions for free?",
+        a: "Sometimes, but only intentionally. The key is not letting extra rounds quietly replace the original agreement.",
+      },
+      {
+        q: "What makes revision requests hard to handle?",
+        a: "They often sound collaborative and minor, which makes it easy to keep saying yes without noticing the scope change.",
+      },
+      {
+        q: "How do I keep the client relationship positive?",
+        a: "Stay warm, refer to process, and focus on what happens next instead of making it personal.",
+      },
+    ],
+    relatedSlugs: ["small-extra-free", "more-work-same-budget", "additional-features"],
+    promptContext:
+      "The client is asking for additional revision rounds beyond what was originally agreed. The response should stay cooperative, reference the agreed revision scope clearly, and frame further rounds as an extension or add-on rather than an assumed free continuation.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Protect the revision boundary while keeping the collaboration constructive.",
+    avoid: [
+      "Treating unlimited revisions as the default",
+      "Sounding irritated about client feedback",
+      "Talking only about effort instead of agreed scope",
+    ],
+    preferredMoves: [
+      "Reference the original revision scope",
+      "Clarify that extra rounds are an extension",
+      "Offer a clear next step for additional changes",
+    ],
+    toneProfile: "warm-firm",
+    placeholder:
+      "Paste the message where the client asks for more revision rounds...",
+  },
+  {
+    slug: "scope-creep",
+    category: 'negotiation',
+    title: "Scope creep during delivery",
+    seoTitle: "Scope creep during delivery | Flowdockr",
+    metaDescription:
+      "Generate a structured response when a client expands the project scope mid-stream.",
+    h1: "Scope creep during delivery",
+    heroIntro:
+      "Scope creep gets expensive when it stays unnamed. A stronger response identifies what changed, reconnects the conversation to the original agreement, and gives the client a structured choice instead of silently absorbing the expansion.",
+    shortDescription:
+      "Generate a structured reply when a client expands project scope mid-project.",
+    problemText: [
+      "Scope creep rarely arrives as a dramatic reset. More often it appears in small additions that make the original agreement harder to recognize.",
+      "The trap is waiting too long because each individual request feels manageable. By the time you react, the client may already assume the new work is included.",
+      "A stronger response names the scope change clearly, explains that the request affects timeline or price, and offers a decision path instead of frustration.",
+    ],
+    exampleClientMessage:
+      "Can we also add these extra pages and adjust the flow while we're already in here?",
+    exampleReply:
+      "Those additions make sense, and they do expand the original scope from what we agreed at the start. The cleanest way to handle it is to treat them as a scope change, so I can outline what stays inside the current plan and what would sit in an updated version with revised timing or budget.",
+    exampleAltReply:
+      "Happy to help with those additions. Since they go beyond the original scope, I'd suggest we reset the plan before moving ahead so the deliverables, timeline, and pricing stay clear on both sides.",
+    strategyBullets: [
+      "Names the scope change clearly instead of letting it stay implicit.",
+      "Frames the response around agreement clarity rather than frustration.",
+      "Turns expansion into a structured decision about scope, timing, or budget.",
+    ],
+    faq: [
+      {
+        q: "What is the best way to respond to scope creep?",
+        a: "Identify the change clearly, connect it to the original scope, and offer structured options for handling the added work.",
+      },
+      {
+        q: "Why is scope creep hard to address early?",
+        a: "Because each request often feels small on its own. The challenge is naming the pattern before it becomes the assumed baseline.",
+      },
+      {
+        q: "Should I talk about budget immediately?",
+        a: "If the added work materially changes the project, yes. Budget or timeline implications should be part of the reset conversation.",
+      },
+      {
+        q: "How do I avoid sounding defensive?",
+        a: "Use calm, process-based language and keep the focus on agreement clarity rather than blame.",
+      },
+    ],
+    relatedSlugs: ["more-work-same-budget", "additional-features", "extra-revisions"],
+    promptContext:
+      "The client is expanding project scope after work is already underway. The response should name the scope change clearly, reconnect the conversation to the original agreement, and present structured options around timing, scope, or budget rather than silently absorbing the change.",
+    riskLevel: "high",
+    primaryGoal:
+      "Reset the agreement clearly before the expanded scope becomes the default expectation.",
+    avoid: [
+      "Silently absorbing the scope change",
+      "Waiting so long that the new scope feels assumed",
+      "Making the response sound emotional or resentful",
+    ],
+    preferredMoves: [
+      "Identify what changed from the original scope",
+      "Frame the issue around agreement clarity",
+      "Offer structured options for scope, timing, or budget",
+    ],
+    toneProfile: "firm",
+    placeholder:
+      "Paste the message where the client expands the project scope...",
+  },
+  {
+    slug: "additional-features",
+    category: 'negotiation',
+    title: "Additional feature request after agreement",
+    seoTitle: "Additional feature request after agreement | Flowdockr",
+    metaDescription:
+      "Generate a positive but boundary-aware reply when a client asks to add new features after the project is already agreed.",
+    h1: "Additional feature request after agreement",
+    heroIntro:
+      "New feature requests sound exciting, but they still change the original agreement. A stronger response stays positive, makes the impact visible, and turns the request into a scoped decision rather than a casual yes.",
+    shortDescription:
+      "Generate a boundary-aware response when a client asks for new features after agreement.",
+    problemText: [
+      "Feature requests often arrive when the client is excited and already imagining more possibilities. That makes them feel collaborative, not negotiable.",
+      "The danger is saying yes before assessing implementation impact. Once you do that, the new feature starts to feel included by default.",
+      "A stronger reply welcomes the idea, explains that it changes the scope, and proposes a clear way to evaluate or add it properly.",
+    ],
+    exampleClientMessage:
+      "We were thinking it would be great to add one more feature before launch. Could you include that too?",
+    exampleReply:
+      "That could absolutely be valuable. Since it adds new functionality beyond the original agreement, I'd treat it as a feature addition rather than include it by default. If you want, I can outline the impact on scope and timing so you can decide whether to add it now or keep it for a later phase.",
+    exampleAltReply:
+      "I like the direction. Because it changes what we originally scoped, the cleanest approach is to price and plan it as an add-on so we stay clear on delivery expectations.",
+    strategyBullets: [
+      "Keeps the tone positive instead of making the request feel unreasonable.",
+      "Makes the scope impact visible before work is accepted.",
+      "Creates a clear decision point around whether to add the feature now or later.",
+    ],
+    faq: [
+      {
+        q: "How do I respond when a client asks for another feature after agreement?",
+        a: "Acknowledge the idea positively, explain that it changes the scope, and suggest a structured way to evaluate or add it.",
+      },
+      {
+        q: "Why are feature requests tricky?",
+        a: "Because they often sound like natural extensions, even when they add real implementation time, testing, and delivery risk.",
+      },
+      {
+        q: "Should I push the feature to a later phase?",
+        a: "Sometimes that is the strongest option. It keeps the current work stable while giving the client a path to add more later.",
+      },
+      {
+        q: "How do I avoid sounding negative?",
+        a: "Stay collaborative, but be explicit that the request changes the agreed scope and needs its own decision.",
+      },
+    ],
+    relatedSlugs: ["scope-creep", "more-work-same-budget", "rush-delivery"],
+    promptContext:
+      "The client is asking to add new functionality after the project is already agreed. The response should stay positive, explain that the feature changes scope or delivery, and propose a structured way to add it now or phase it later.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Keep the relationship positive while preventing new features from sliding into scope by default.",
+    avoid: [
+      "Saying yes before evaluating impact",
+      "Treating the feature as already included",
+      "Making the client feel scolded for asking",
+    ],
+    preferredMoves: [
+      "Acknowledge the idea positively",
+      "Explain that it changes scope or delivery",
+      "Offer a clear add-now or phase-later decision path",
+    ],
+    toneProfile: "warm-firm",
+    placeholder:
+      "Paste the message where the client asks to add a new feature...",
+  },
+  {
+    slug: "rush-delivery",
+    category: 'negotiation',
+    title: "Rush delivery request",
+    seoTitle: "Rush delivery request | Flowdockr",
+    metaDescription:
+      "Generate a professional reply when a client asks for delivery much sooner than originally agreed.",
+    h1: "Rush delivery request",
+    heroIntro:
+      "Rush delivery requests create pressure fast because the client wants speed without always seeing the tradeoffs. A stronger response acknowledges urgency, names feasibility and pricing implications, and offers a workable rush path only if it is real.",
+    shortDescription:
+      "Generate a clear response when a client asks for significantly faster delivery.",
+    problemText: [
+      "Urgent delivery requests often compress decision-making. The temptation is to say yes first and figure out the consequences later.",
+      "That usually creates hidden costs: schedule disruption, quality risk, or resentment about unpriced urgency.",
+      "A stronger reply acknowledges the urgency, explains that faster delivery changes the working conditions, and offers concrete options around rush handling, scope reduction, or timing.",
+    ],
+    exampleClientMessage:
+      "Can you deliver this by Friday instead of next week?",
+    exampleReply:
+      "I understand the urgency. Delivering by Friday would require a rush adjustment because it changes the timeline we originally planned around. If that deadline is fixed, I can look at what is realistically possible and either price it as a rush delivery or reduce scope so the compressed timeline still works.",
+    exampleAltReply:
+      "That may be possible, but it would change the delivery conditions from what we agreed. The cleanest next step is for me to confirm what can move into a rush timeline and what tradeoffs or rush terms would come with it.",
+    strategyBullets: [
+      "Acknowledges urgency instead of dismissing it.",
+      "Makes timeline compression sound negotiated rather than free.",
+      "Introduces rush terms, scope reduction, or scheduling alternatives.",
+    ],
+    faq: [
+      {
+        q: "How do I respond to a rush delivery request?",
+        a: "Acknowledge the urgency, then explain that the faster delivery changes feasibility, pricing, or scope. Offer concrete options instead of a vague yes.",
+      },
+      {
+        q: "Should rush work cost more?",
+        a: "Often yes. If the faster timeline affects your schedule, response windows, or other commitments, it should usually come with adjusted terms.",
+      },
+      {
+        q: "What if I cannot meet the rush deadline?",
+        a: "Say that clearly and offer the closest realistic alternative. It is better than agreeing to something you cannot actually deliver.",
+      },
+      {
+        q: "How do I stay helpful without giving urgency away for free?",
+        a: "Recognize the deadline, then frame the response around what is feasible and what tradeoffs would be required.",
+      },
+    ],
+    relatedSlugs: ["timeline-pressure", "more-work-same-budget", "client-asks-discount"],
+    promptContext:
+      "The client wants delivery faster than originally agreed. The response should acknowledge urgency, explain feasibility or scheduling tradeoffs, introduce rush terms if appropriate, and offer scope or timing alternatives rather than treating the speed change as free.",
+    riskLevel: "high",
+    primaryGoal:
+      "Protect schedule and pricing logic while still giving the client a realistic path forward.",
+    avoid: [
+      "Agreeing before checking feasibility",
+      "Treating the rush timeline as automatically included",
+      "Giving a vague maybe with no tradeoffs",
+    ],
+    preferredMoves: [
+      "Acknowledge the urgency clearly",
+      "Explain the scheduling or rush tradeoff",
+      "Offer rush terms, reduced scope, or a realistic alternative timeline",
+    ],
+    toneProfile: "firm",
+    placeholder:
+      "Paste the message where the client asks for rush delivery...",
+  },
+  {
+    slug: "timeline-pressure",
+    category: 'negotiation',
+    title: "Timeline pressure without explicit rush terms",
+    seoTitle: "Timeline pressure without explicit rush terms | Flowdockr",
+    metaDescription:
+      "Generate a professional response when a client asks to speed up the project timeline.",
+    h1: "Timeline pressure without explicit rush terms",
+    heroIntro:
+      "Timeline pressure often sounds softer than a rush request, but it still changes scheduling and tradeoffs. A stronger response clarifies what the faster turnaround would affect and guides the client toward a realistic adjustment.",
+    shortDescription:
+      "Generate a response when a client asks whether the project can move faster.",
+    problemText: [
+      "Clients often ask to speed things up without naming the consequences. That makes the request sound lighter than it really is.",
+      "If you answer too quickly, you can accidentally agree to a compressed schedule without clarifying reprioritization, scope trimming, or availability.",
+      "A stronger reply acknowledges the request, frames it around scheduling constraints, and offers options that make the tradeoff visible.",
+    ],
+    exampleClientMessage:
+      "Is there any way to speed this up?",
+    exampleReply:
+      "Possibly, but it would depend on what needs to move in the schedule and whether we keep the current scope unchanged. If the timeline needs to shorten, I can suggest the cleanest options around reprioritizing deliverables, tightening the schedule, or adjusting the plan so the faster turnaround is still realistic.",
+    exampleAltReply:
+      "I can look at ways to accelerate it, but I would want to frame that around scheduling and scope tradeoffs rather than promise a faster turnaround without checking what shifts on the backend.",
+    strategyBullets: [
+      "Acknowledges the request without committing too early.",
+      "Frames the conversation around scheduling constraints and tradeoffs.",
+      "Suggests practical ways to shorten the timeline without hiding the cost.",
+    ],
+    faq: [
+      {
+        q: "How do I respond when a client asks to speed up the timeline?",
+        a: "Acknowledge the request, then explain that faster delivery depends on scheduling, scope, and feasibility. Offer concrete options rather than a vague yes.",
+      },
+      {
+        q: "Is timeline pressure the same as rush delivery?",
+        a: "Not always. It is often a softer request, but it still creates real tradeoffs that need to be named.",
+      },
+      {
+        q: "What should I offer when the client wants it faster?",
+        a: "Useful options include reprioritizing scope, adjusting the schedule, or defining a tighter version of the deliverable.",
+      },
+      {
+        q: "How do I avoid underpricing speed?",
+        a: "Make the scheduling impact visible before you commit. If speed creates real cost or disruption, treat it as a negotiated change.",
+      },
+    ],
+    relatedSlugs: ["rush-delivery", "more-work-same-budget", "budget-limited"],
+    promptContext:
+      "The client wants the work to move faster, but the request is framed more as timeline pressure than a formal rush ask. The response should acknowledge the request, reframe the conversation around scheduling constraints, and suggest realistic timeline or scope adjustments instead of committing too quickly.",
+    riskLevel: "medium",
+    primaryGoal:
+      "Make the timeline tradeoff visible before the faster turnaround becomes an assumption.",
+    avoid: [
+      "Committing to a faster schedule too quickly",
+      "Ignoring the scheduling impact",
+      "Treating acceleration as a free add-on",
+    ],
+    preferredMoves: [
+      "Acknowledge the timeline request",
+      "Reframe around scheduling constraints",
+      "Offer scope or schedule adjustments that make the tradeoff explicit",
+    ],
+    toneProfile: "calm",
+    placeholder:
+      "Paste the message where the client asks if the timeline can move faster...",
+  },
 ];
 
 export const scenarioOptions = scenarios.map((scenario) => ({

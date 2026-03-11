@@ -22,6 +22,8 @@ const SCENARIO_ALIAS_REDIRECTS: Record<string, string> = {
   'client-asks-for-extra-revisions': 'extra-revisions',
   'client-expands-project-scope': 'scope-creep',
   'client-delays-payment': 'late-payment',
+  'price-objection': 'price-too-expensive',
+  'timeline-pressure': 'faster-turnaround',
 };
 
 const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
@@ -70,7 +72,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  if (SCENARIO_ALIAS_REDIRECTS[slug] || LEGACY_SCENARIO_REDIRECTS[slug]) {
+  if (SCENARIO_ALIAS_REDIRECTS[slug]) {
     return {
       title: 'Negotiation scenario | Flowdockr',
       robots: {
@@ -81,9 +83,19 @@ export async function generateMetadata({
   }
 
   const page = getScenarioPageBySlug(slug);
-  if (!page) {
+  if (page) {
+    const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+    const canonical = `${envConfigs.app_url}${localePrefix}${normalizePath(page.canonicalPath)}`;
+
+    return buildScenarioPageMetadata({
+      page,
+      canonical,
+    });
+  }
+
+  if (LEGACY_SCENARIO_REDIRECTS[slug]) {
     return {
-      title: 'Scenario not found | Flowdockr',
+      title: 'Negotiation scenario | Flowdockr',
       robots: {
         index: false,
         follow: false,
@@ -91,13 +103,13 @@ export async function generateMetadata({
     };
   }
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.app_url}${localePrefix}${normalizePath(page.canonicalPath)}`;
-
-  return buildScenarioPageMetadata({
-    page,
-    canonical,
-  });
+  return {
+    title: 'Scenario not found | Flowdockr',
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
 }
 
 export default async function ScenarioPage({
@@ -114,33 +126,33 @@ export default async function ScenarioPage({
     redirect(`${localePrefix}/scenario/${scenarioAliasSlug}`);
   }
 
+  const page = getScenarioPageBySlug(slug);
+  if (page) {
+    return (
+      <PageContainer className="max-w-5xl gap-8 py-8 md:py-10">
+        <ScenarioViewTracker scenarioSlug={page.slug} />
+        <ScenarioHero scenario={page} />
+        <ScenarioOverview overview={page.overview} />
+        <ScenarioDifficulty points={page.difficultyPoints} />
+        <ScenarioMistakes
+          mistakes={page.commonMistakes}
+          closingLine={page.mistakesClosingLine}
+        />
+        <ScenarioInlineTool
+          analyticsScenarioSlug={page.slug}
+          toolPreset={page.toolPreset}
+        />
+        <RelatedScenarios items={page.relatedScenarios} />
+        <ScenarioCTA cta={page.cta} />
+      </PageContainer>
+    );
+  }
+
   const legacyPricingSlug = LEGACY_SCENARIO_REDIRECTS[slug];
   if (legacyPricingSlug) {
     const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
     redirect(`${localePrefix}/pricing/${legacyPricingSlug}`);
   }
 
-  const page = getScenarioPageBySlug(slug);
-  if (!page) {
-    notFound();
-  }
-
-  return (
-    <PageContainer className="max-w-5xl gap-8 py-8 md:py-10">
-      <ScenarioViewTracker scenarioSlug={page.slug} />
-      <ScenarioHero scenario={page} />
-      <ScenarioOverview overview={page.overview} />
-      <ScenarioDifficulty points={page.difficultyPoints} />
-      <ScenarioMistakes
-        mistakes={page.commonMistakes}
-        closingLine={page.mistakesClosingLine}
-      />
-      <ScenarioInlineTool
-        analyticsScenarioSlug={page.slug}
-        toolPreset={page.toolPreset}
-      />
-      <RelatedScenarios items={page.relatedScenarios} />
-      <ScenarioCTA cta={page.cta} />
-    </PageContainer>
-  );
+  notFound();
 }

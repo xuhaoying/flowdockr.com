@@ -63,6 +63,14 @@ const PRESSURE_KEYWORDS_BY_SLUG: Record<string, string[]> = {
   'budget-limited': ['budget', 'limited', 'tight'],
   'delayed-decision': ['follow up', 'review', 'decision', 'timing'],
   'small-extra-free': ['small', 'extra', 'free', 'outside scope'],
+  'client-delays-payment': ['invoice', 'payment', 'overdue', 'due'],
+  'invoice-follow-up': ['invoice', 'overdue', 'payment', 'date'],
+  'price-objection': ['expensive', 'price', 'budget', 'cost'],
+  'extra-revisions': ['revision', 'round', 'changes', 'feedback'],
+  'scope-creep': ['scope', 'add', 'expand', 'additional'],
+  'additional-features': ['feature', 'functionality', 'include', 'launch'],
+  'rush-delivery': ['rush', 'deliver', 'urgent', 'friday'],
+  'timeline-pressure': ['faster', 'speed', 'timeline', 'accelerate'],
 };
 
 const GENERIC_FILLER_PATTERNS = [

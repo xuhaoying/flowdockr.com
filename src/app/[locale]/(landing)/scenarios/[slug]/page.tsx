@@ -10,14 +10,22 @@ type LegacyScenarioPageParams = {
 };
 
 const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
-  'lowball-offer': 'price-pushback-after-proposal',
-  'client-asks-discount': 'discount-pressure-before-signing',
-  'cheaper-freelancer': 'cheaper-competitor-comparison',
-  'free-sample-work': 'free-trial-work-request',
-  'more-work-same-budget': 'more-work-same-price',
-  'budget-limited': 'budget-lower-than-expected',
-  'delayed-decision': 'price-pushback-after-proposal',
-  'small-extra-free': 'more-work-same-price',
+  'lowball-offer': '/pricing/price-pushback-after-proposal',
+  'client-asks-discount': '/pricing/discount-pressure-before-signing',
+  'cheaper-freelancer': '/scenario/cheaper-freelancer',
+  'free-sample-work': '/pricing/free-trial-work-request',
+  'more-work-same-budget': '/scenario/more-work',
+  'budget-limited': '/pricing/budget-lower-than-expected',
+  'delayed-decision': '/pricing/price-pushback-after-proposal',
+  'small-extra-free': '/pricing/more-work-same-price',
+  'client-delays-payment': '/scenario/late-payment',
+  'invoice-follow-up': '/scenario/invoice-follow-up',
+  'price-objection': '/scenario/price-too-expensive',
+  'extra-revisions': '/scenario/extra-revisions',
+  'scope-creep': '/scenario/scope-creep',
+  'additional-features': '/scenario/additional-features',
+  'rush-delivery': '/scenario/rush-delivery',
+  'timeline-pressure': '/scenario/faster-turnaround',
 };
 
 export const dynamicParams = false;
@@ -35,9 +43,7 @@ export default async function LegacyScenarioPageRedirect({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const mapped = LEGACY_SCENARIO_REDIRECTS[slug] || 'price-pushback-after-proposal';
+  const mapped = LEGACY_SCENARIO_REDIRECTS[slug] || '/pricing/price-pushback-after-proposal';
 
-  redirect(
-    locale === defaultLocale ? `/pricing/${mapped}` : `/${locale}/pricing/${mapped}`
-  );
+  redirect(locale === defaultLocale ? mapped : `/${locale}${mapped}`);
 }

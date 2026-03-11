@@ -37,7 +37,7 @@ export const scopeCreepScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These patterns turn scope drift into the new default instead of resetting the agreement.',
   toolPreset: {
-    scenarioSlug: 'more-work-same-budget',
+    scenarioSlug: 'scope-creep',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,
