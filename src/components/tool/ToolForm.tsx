@@ -397,7 +397,7 @@ export function ToolForm({
   };
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr]">
       <section
         id="tool-workspace"
         className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
