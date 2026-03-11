@@ -1,17 +1,31 @@
 import type { ScenarioPageData } from '@/types/scenario-page';
 
-import { clientAsksForDiscountScenarioPage } from './client-asks-for-discount';
-import { clientAsksForExtraRevisionsScenarioPage } from './client-asks-for-extra-revisions';
-import { clientDelaysPaymentScenarioPage } from './client-delays-payment';
-import { clientExpandsProjectScopeScenarioPage } from './client-expands-project-scope';
-import { clientSaysRateTooHighScenarioPage } from './client-says-rate-too-high';
+import { additionalFeaturesScenarioPage } from './additional-features';
+import { cheaperFreelancerScenarioPage } from './cheaper-freelancer';
+import { discountRequestScenarioPage } from './discount-request';
+import { extraRevisionsScenarioPage } from './extra-revisions';
+import { fasterTurnaroundScenarioPage } from './faster-turnaround';
+import { invoiceFollowUpScenarioPage } from './invoice-follow-up';
+import { latePaymentScenarioPage } from './late-payment';
+import { moreWorkScenarioPage } from './more-work';
+import { priceTooExpensiveScenarioPage } from './price-too-expensive';
+import { rateTooHighScenarioPage } from './rate-too-high';
+import { rushDeliveryScenarioPage } from './rush-delivery';
+import { scopeCreepScenarioPage } from './scope-creep';
 
 export const scenarioPages: ScenarioPageData[] = [
-  clientSaysRateTooHighScenarioPage,
-  clientAsksForDiscountScenarioPage,
-  clientAsksForExtraRevisionsScenarioPage,
-  clientExpandsProjectScopeScenarioPage,
-  clientDelaysPaymentScenarioPage,
+  rateTooHighScenarioPage,
+  discountRequestScenarioPage,
+  priceTooExpensiveScenarioPage,
+  cheaperFreelancerScenarioPage,
+  extraRevisionsScenarioPage,
+  scopeCreepScenarioPage,
+  additionalFeaturesScenarioPage,
+  moreWorkScenarioPage,
+  latePaymentScenarioPage,
+  invoiceFollowUpScenarioPage,
+  rushDeliveryScenarioPage,
+  fasterTurnaroundScenarioPage,
 ];
 
 const scenarioPageMap = new Map<string, ScenarioPageData>(

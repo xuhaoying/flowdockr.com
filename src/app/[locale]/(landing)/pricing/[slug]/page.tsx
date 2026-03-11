@@ -4,6 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
 import { defaultLocale, locales } from '@/config/locale';
+import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker';
 import { CoreFearBlock } from '@/components/scenario/CoreFearBlock';
 import { ExampleReplies } from '@/components/scenario/ExampleReplies';
 import { HubBackLink } from '@/components/scenario/HubBackLink';
@@ -83,6 +84,7 @@ export default async function PricingScenarioPage({
 
   return (
     <PageContainer>
+      <ScenarioViewTracker scenarioSlug={scenario.slug} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

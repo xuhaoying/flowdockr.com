@@ -3,6 +3,7 @@ import '@/config/style/global.css';
 import { getLocale, setRequestLocale } from 'next-intl/server';
 import NextTopLoader from 'nextjs-toploader';
 
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
@@ -22,6 +23,8 @@ export default async function RootLayout({
 
   const isProduction = process.env.NODE_ENV === 'production';
   const isDebug = process.env.NEXT_PUBLIC_DEBUG === 'true';
+  const googleSearchConsoleVerification =
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || '';
 
   // app url
   const appUrl = envConfigs.app_url || '';
@@ -89,6 +92,13 @@ export default async function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#ffffff" />
+        {/* Optional: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to enable Search Console verification */}
+        {googleSearchConsoleVerification ? (
+          <meta
+            name="google-site-verification"
+            content={googleSearchConsoleVerification}
+          />
+        ) : null}
 
         {/* inject locales */}
         {locales ? (
@@ -138,6 +148,7 @@ export default async function RootLayout({
 
         {children}
         <UtmCapture />
+        <GoogleAnalytics />
 
         {/* inject ads body scripts */}
         {adsBodyScripts}

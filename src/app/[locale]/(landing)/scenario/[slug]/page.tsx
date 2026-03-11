@@ -4,6 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
 import { defaultLocale, locales } from '@/config/locale';
+import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioCTA } from '@/components/scenario/ScenarioCTA';
@@ -14,6 +15,14 @@ import { ScenarioMistakes } from '@/components/scenario/ScenarioMistakes';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
 import { getAllScenarioPageSlugs, getScenarioPageBySlug } from '@/lib/content/scenarioPages';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
+
+const SCENARIO_ALIAS_REDIRECTS: Record<string, string> = {
+  'client-says-rate-too-high': 'rate-too-high',
+  'client-asks-for-discount': 'discount-request',
+  'client-asks-for-extra-revisions': 'extra-revisions',
+  'client-expands-project-scope': 'scope-creep',
+  'client-delays-payment': 'late-payment',
+};
 
 const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
   'lowball-offer': 'price-pushback-after-proposal',
@@ -43,10 +52,14 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const landingSlugs = getAllScenarioPageSlugs();
+  const aliasSlugs = Object.keys(SCENARIO_ALIAS_REDIRECTS);
   const legacySlugs = Object.keys(LEGACY_SCENARIO_REDIRECTS);
 
   return locales.flatMap((locale) =>
-    [...landingSlugs, ...legacySlugs].map((slug) => ({ locale, slug }))
+    [...landingSlugs, ...aliasSlugs, ...legacySlugs].map((slug) => ({
+      locale,
+      slug,
+    }))
   );
 }
 
@@ -57,7 +70,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  if (LEGACY_SCENARIO_REDIRECTS[slug]) {
+  if (SCENARIO_ALIAS_REDIRECTS[slug] || LEGACY_SCENARIO_REDIRECTS[slug]) {
     return {
       title: 'Negotiation scenario | Flowdockr',
       robots: {
@@ -95,6 +108,12 @@ export default async function ScenarioPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
+  const scenarioAliasSlug = SCENARIO_ALIAS_REDIRECTS[slug];
+  if (scenarioAliasSlug) {
+    const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+    redirect(`${localePrefix}/scenario/${scenarioAliasSlug}`);
+  }
+
   const legacyPricingSlug = LEGACY_SCENARIO_REDIRECTS[slug];
   if (legacyPricingSlug) {
     const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
@@ -108,6 +127,7 @@ export default async function ScenarioPage({
 
   return (
     <PageContainer className="max-w-5xl gap-8 py-8 md:py-10">
+      <ScenarioViewTracker scenarioSlug={page.slug} />
       <ScenarioHero scenario={page} />
       <ScenarioOverview overview={page.overview} />
       <ScenarioDifficulty points={page.difficultyPoints} />
@@ -115,7 +135,10 @@ export default async function ScenarioPage({
         mistakes={page.commonMistakes}
         closingLine={page.mistakesClosingLine}
       />
-      <ScenarioInlineTool toolPreset={page.toolPreset} />
+      <ScenarioInlineTool
+        analyticsScenarioSlug={page.slug}
+        toolPreset={page.toolPreset}
+      />
       <RelatedScenarios items={page.relatedScenarios} />
       <ScenarioCTA cta={page.cta} />
     </PageContainer>

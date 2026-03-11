@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useToolGeneration } from '@/hooks/useToolGeneration';
-import { trackEvent } from '@/lib/analytics-client';
+import { useLocale } from 'next-intl';
+
+import { useToolGeneration, type ToolGenerationState } from '@/hooks/useToolGeneration';
+import { trackEvent } from '@/lib/analytics';
+import { getCreditPackageById } from '@/lib/credits/packages';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
 import {
   BillingSupportLevel,
@@ -20,6 +23,7 @@ import { ToolPaywall } from './ToolPaywall';
 import { ToolResult } from './ToolResult';
 
 type ToolFormProps = {
+  analyticsScenarioSlug?: string;
   defaultScenarioSlug?: string;
   showScenarioSelector?: boolean;
   placeholder?: string;
@@ -71,6 +75,7 @@ const PROJECT_TYPE_OPTIONS: Array<{ value: DealProjectType; label: string }> = [
 ];
 
 export function ToolForm({
+  analyticsScenarioSlug: initialAnalyticsScenarioSlug,
   defaultScenarioSlug,
   showScenarioSelector = true,
   placeholder,
@@ -80,9 +85,13 @@ export function ToolForm({
   submitLabel = 'Draft negotiation reply',
 }: ToolFormProps) {
   const fallbackSlug = scenarios[0]?.slug || 'lowball-offer';
+  const locale = useLocale();
 
   const [scenarioSlug, setScenarioSlug] = useState(
     defaultScenarioSlug || fallbackSlug
+  );
+  const [analyticsScenarioSlug, setAnalyticsScenarioSlug] = useState(
+    initialAnalyticsScenarioSlug || defaultScenarioSlug || fallbackSlug
   );
   const [message, setMessage] = useState('');
   const [usage, setUsage] = useState<UsageState>(INITIAL_USAGE);
@@ -95,6 +104,14 @@ export function ToolForm({
   const [savedHint, setSavedHint] = useState('');
 
   const resultRef = useRef<HTMLDivElement>(null);
+  const toolOpenTrackedRef = useRef(false);
+  const paywallWasVisibleRef = useRef(false);
+  const paywallTriggerTypeRef = useRef('usage_state');
+  const generationSuccessPendingRef = useRef(false);
+  const pendingGenerationScenarioSlugRef = useRef('');
+  const generateInFlightRef = useRef(false);
+  const lastGenerateAttemptAtRef = useRef(0);
+  const checkoutInFlightRef = useRef(false);
 
   const { isLoading, error, result, submit, setResult } = useToolGeneration();
 
@@ -137,6 +154,20 @@ export function ToolForm({
   }, [trimmedMessage]);
 
   const canSubmit = !validationError && !isLoading;
+  const trackedScenarioSlug = analyticsScenarioSlug || scenarioSlug;
+  const paywallVisible = upgradeVisible || isExhausted;
+
+  const trackToolOpen = (scenarioSlugOverride?: string) => {
+    if (toolOpenTrackedRef.current) {
+      return;
+    }
+
+    toolOpenTrackedRef.current = true;
+    trackEvent('tool_open', {
+      scenario_slug: scenarioSlugOverride || trackedScenarioSlug,
+      locale,
+    });
+  };
 
   useEffect(() => {
     let active = true;
@@ -205,7 +236,50 @@ export function ToolForm({
     };
   }, []);
 
+  useEffect(() => {
+    if (!paywallVisible) {
+      paywallWasVisibleRef.current = false;
+      paywallTriggerTypeRef.current = 'usage_state';
+      return;
+    }
+
+    if (paywallWasVisibleRef.current) {
+      return;
+    }
+
+    paywallWasVisibleRef.current = true;
+    const paywallScenarioSlug =
+      paywallTriggerTypeRef.current === 'usage_state'
+        ? trackedScenarioSlug
+        : pendingGenerationScenarioSlugRef.current || trackedScenarioSlug;
+
+    trackEvent('paywall_trigger', {
+      scenario_slug: paywallScenarioSlug,
+      locale,
+      trigger_type: paywallTriggerTypeRef.current || 'usage_state',
+    });
+  }, [locale, paywallVisible, trackedScenarioSlug]);
+
+  useEffect(() => {
+    if (
+      !generationSuccessPendingRef.current ||
+      !hasRenderableGenerationResult(result)
+    ) {
+      return;
+    }
+
+    generationSuccessPendingRef.current = false;
+    trackEvent('generation_success', {
+      scenario_slug:
+        pendingGenerationScenarioSlugRef.current || trackedScenarioSlug,
+      locale,
+    });
+  }, [locale, result, trackedScenarioSlug]);
+
   const onGenerate = async () => {
+    generationSuccessPendingRef.current = false;
+    pendingGenerationScenarioSlugRef.current = trackedScenarioSlug;
+
     if (!canSubmit) {
       trackEvent('tool_submit_failed', {
         scenarioSlug,
@@ -215,75 +289,109 @@ export function ToolForm({
       return;
     }
 
-    if (isExhausted) {
-      setUpgradeVisible(true);
-      trackEvent('free_limit_reached', {
-        scenarioSlug,
-        sourcePage,
-      });
+    const now = Date.now();
+    if (
+      generateInFlightRef.current ||
+      isLoading ||
+      now - lastGenerateAttemptAtRef.current < 500
+    ) {
       return;
     }
 
-    trackEvent('tool_submit_started', {
-      scenarioSlug,
-      sourcePage,
-    });
+    lastGenerateAttemptAtRef.current = now;
+    generateInFlightRef.current = true;
 
-    const response = await submit({
-      scenarioSlug,
-      message: trimmedMessage,
-      sourcePage,
-      serviceType: projectType,
-      tone: mapToneToApiTone(tone),
-    });
-
-    if (!response) {
-      trackEvent('tool_submit_failed', {
-        scenarioSlug,
-        sourcePage,
-        reason: 'NETWORK_ERROR',
+    try {
+      trackToolOpen();
+      trackEvent('generate_click', {
+        scenario_slug: trackedScenarioSlug,
+        locale,
       });
-      return;
-    }
 
-    if (!response.success) {
-      if (response.requiresUpgrade) {
+      if (isExhausted) {
+        paywallTriggerTypeRef.current = 'free_limit_precheck';
         setUpgradeVisible(true);
         trackEvent('free_limit_reached', {
           scenarioSlug,
           sourcePage,
         });
+        return;
       }
 
-      trackEvent('tool_submit_failed', {
+      trackEvent('tool_submit_started', {
         scenarioSlug,
         sourcePage,
-        reason: response.error || 'GENERATION_FAILED',
       });
-      return;
-    }
 
-    setUpgradeVisible(false);
-    setSavedHint(
-      response.entitlements?.historyEnabled
-        ? 'Saved to negotiation history.'
-        : ''
-    );
+      const response = await submit({
+        scenarioSlug,
+        message: trimmedMessage,
+        sourcePage,
+        serviceType: projectType,
+        tone: mapToneToApiTone(tone),
+      });
 
-    setUsage((prev) => {
-      const nextSupportLevel = response.supportLevel || prev.supportLevel;
-      const nextEntitlements = response.entitlements || prev.entitlements;
+      if (!response) {
+        trackEvent('tool_submit_failed', {
+          scenarioSlug,
+          sourcePage,
+          reason: 'NETWORK_ERROR',
+        });
+        return;
+      }
 
-      if (prev.loggedIn) {
-        const nextCredits =
-          typeof response.creditsRemaining === 'number'
-            ? Math.max(0, response.creditsRemaining || 0)
-            : prev.creditsBalance;
+      if (!response.success) {
+        if (response.requiresUpgrade) {
+          paywallTriggerTypeRef.current = 'free_limit_response';
+          setUpgradeVisible(true);
+          trackEvent('free_limit_reached', {
+            scenarioSlug,
+            sourcePage,
+          });
+        }
 
-        if (prev.creditsBalance > 0) {
+        trackEvent('tool_submit_failed', {
+          scenarioSlug,
+          sourcePage,
+          reason: response.error || 'GENERATION_FAILED',
+        });
+        return;
+      }
+
+      generationSuccessPendingRef.current = hasRenderableGenerationResult(response);
+      setUpgradeVisible(false);
+      setSavedHint(
+        response.entitlements?.historyEnabled
+          ? 'Saved to negotiation history.'
+          : ''
+      );
+
+      setUsage((prev) => {
+        const nextSupportLevel = response.supportLevel || prev.supportLevel;
+        const nextEntitlements = response.entitlements || prev.entitlements;
+
+        if (prev.loggedIn) {
+          const nextCredits =
+            typeof response.creditsRemaining === 'number'
+              ? Math.max(0, response.creditsRemaining || 0)
+              : prev.creditsBalance;
+
+          if (prev.creditsBalance > 0) {
+            return {
+              ...prev,
+              creditsBalance: nextCredits,
+              supportLevel: nextSupportLevel,
+              entitlements: nextEntitlements,
+            };
+          }
+
           return {
             ...prev,
             creditsBalance: nextCredits,
+            remainingFreeGenerations: Math.max(
+              0,
+              prev.remainingFreeGenerations - 1
+            ),
             supportLevel: nextSupportLevel,
             entitlements: nextEntitlements,
           };
@@ -291,7 +399,6 @@ export function ToolForm({
 
         return {
           ...prev,
-          creditsBalance: nextCredits,
           remainingFreeGenerations: Math.max(
             0,
             prev.remainingFreeGenerations - 1
@@ -299,41 +406,46 @@ export function ToolForm({
           supportLevel: nextSupportLevel,
           entitlements: nextEntitlements,
         };
-      }
+      });
 
-      return {
-        ...prev,
-        remainingFreeGenerations: Math.max(
-          0,
-          prev.remainingFreeGenerations - 1
-        ),
-        supportLevel: nextSupportLevel,
-        entitlements: nextEntitlements,
-      };
-    });
+      trackEvent('tool_submit_success', {
+        scenarioSlug,
+        sourcePage,
+      });
 
-    trackEvent('tool_submit_success', {
-      scenarioSlug,
-      sourcePage,
-    });
+      window.requestAnimationFrame(() => {
+        const node = resultRef.current;
+        if (!node) {
+          return;
+        }
 
-    window.requestAnimationFrame(() => {
-      const node = resultRef.current;
-      if (!node) {
-        return;
-      }
-
-      const rect = node.getBoundingClientRect();
-      if (rect.top > window.innerHeight * 0.88) {
-        node.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+        const rect = node.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 0.88) {
+          node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    } finally {
+      generateInFlightRef.current = false;
+    }
   };
 
   const onCheckout = async (packageId: CreditPackageId) => {
+    if (checkoutInFlightRef.current || checkoutLoading) {
+      return;
+    }
+
+    checkoutInFlightRef.current = true;
     setCheckoutLoading(packageId);
 
     try {
+      const pack = getCreditPackageById(packageId);
+
+      trackEvent('checkout_click', {
+        scenario_slug: trackedScenarioSlug,
+        locale,
+        plan_id: pack?.id || packageId,
+        price_id: pack?.stripePriceId || undefined,
+      });
       trackEvent('pricing_card_clicked', {
         packageId,
         scenarioSlug,
@@ -384,6 +496,7 @@ export function ToolForm({
         reason: 'CHECKOUT_FAILED',
       });
     } finally {
+      checkoutInFlightRef.current = false;
       setCheckoutLoading(null);
     }
   };
@@ -416,6 +529,8 @@ export function ToolForm({
             value={scenarioSlug}
             onChange={(slug) => {
               setScenarioSlug(slug);
+              setAnalyticsScenarioSlug(slug);
+              trackToolOpen(slug);
               setResult(null);
               setSavedHint('');
             }}
@@ -429,9 +544,10 @@ export function ToolForm({
           </span>
           <select
             value={projectType}
-            onChange={(event) =>
-              setProjectType(event.target.value as DealProjectType)
-            }
+            onChange={(event) => {
+              trackToolOpen();
+              setProjectType(event.target.value as DealProjectType);
+            }}
             className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
           >
             {PROJECT_TYPE_OPTIONS.map((item) => (
@@ -446,7 +562,10 @@ export function ToolForm({
           <span className="text-sm font-medium text-slate-800">Tone</span>
           <select
             value={tone}
-            onChange={(event) => setTone(event.target.value as DealTone)}
+            onChange={(event) => {
+              trackToolOpen();
+              setTone(event.target.value as DealTone);
+            }}
             className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
           >
             {TONE_OPTIONS.map((item) => (
@@ -463,7 +582,10 @@ export function ToolForm({
           </span>
           <Textarea
             value={message}
-            onChange={(event) => setMessage(event.target.value)}
+            onChange={(event) => {
+              trackToolOpen();
+              setMessage(event.target.value);
+            }}
             rows={9}
             maxLength={4000}
             placeholder={textareaPlaceholder}
@@ -502,7 +624,7 @@ export function ToolForm({
           </div>
         ) : null}
 
-        {(upgradeVisible || isExhausted) && (
+        {paywallVisible && (
           <ToolPaywall
             loggedIn={usage.loggedIn}
             email={checkoutEmail}
@@ -570,4 +692,23 @@ function toUserErrorMessage(errorCode: string) {
 
 function formatFreeReplies(value: number) {
   return `${value} free ${value === 1 ? 'credit' : 'credits'}`;
+}
+
+function hasRenderableGenerationResult(
+  result: Pick<
+    NonNullable<ToolGenerationState['result']>,
+    'reply' | 'replyVersions' | 'strategyBlock' | 'riskInsights' | 'followUpSuggestion'
+  > | null
+) {
+  if (!result) {
+    return false;
+  }
+
+  return Boolean(
+    result.reply.trim() ||
+      result.replyVersions?.some((version) => version.text.trim()) ||
+      result.strategyBlock?.sections?.length ||
+      result.riskInsights?.length ||
+      result.followUpSuggestion?.reply?.trim()
+  );
 }

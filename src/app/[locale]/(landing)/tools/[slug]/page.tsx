@@ -112,7 +112,7 @@ export default async function ToolPage({
 
       {pricingScenario ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          Loaded situation:{' '}
+          Context loaded from scenario:{' '}
           <span className="font-semibold text-slate-900">{pricingScenario.h1}</span>
         </section>
       ) : null}
@@ -126,6 +126,7 @@ export default async function ToolPage({
       </section>
 
       <ToolForm
+        analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
         showScenarioSelector={true}

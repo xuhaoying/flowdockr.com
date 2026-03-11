@@ -15,7 +15,7 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
           </li>
           <li>/</li>
           <li>
-            <Link href="/pricing">Negotiation situations</Link>
+            <Link href="/scenario">Negotiation situations</Link>
           </li>
           <li>/</li>
           <li className="text-slate-900">{scenario.h1}</li>

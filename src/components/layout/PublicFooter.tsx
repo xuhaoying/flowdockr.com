@@ -1,7 +1,7 @@
 import { Link } from '@/core/i18n/navigation';
 
 const PRIMARY_LINKS = [
-  { href: '/pricing', label: 'Pricing scenarios' },
+  { href: '/scenario', label: 'Scenario hub' },
   { href: '/guides', label: 'Guides' },
   { href: '/tools', label: 'Tools' },
   { href: '/pricing#pricing-cards', label: 'Pricing' },
