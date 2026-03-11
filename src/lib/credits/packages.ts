@@ -8,12 +8,20 @@ export const CREDIT_PACKAGES: Record<CreditPackageId, CreditPackage> = creditPac
       acc[pack.code] = {
         id: pack.code,
         name: pack.name,
+        supportLevel: pack.supportLevel,
         credits: pack.credits,
-        priceUsdCents: pack.priceCents,
+        priceUsdCents: pack.priceUsdCents,
         stripePriceId: pack.stripePriceId || '',
         active: pack.active,
         description: pack.description,
+        tagline: pack.tagline,
+        popular: pack.popular,
+        badge: pack.badge,
         currency: pack.currency,
+        ctaLabel: pack.ctaLabel,
+        featureSummary: pack.featureSummary,
+        advancedModeLabels: pack.advancedModeLabels,
+        entitlements: pack.entitlements,
       };
       return acc;
     },

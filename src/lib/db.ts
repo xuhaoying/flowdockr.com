@@ -3,8 +3,10 @@ export {
   anonymousLinkSession,
   anonymousUsage,
   creditTransaction,
+  featureEntitlement,
   generation,
   purchase,
   user,
+  userBillingState,
   webhookEvent,
 } from '@/config/db/schema';

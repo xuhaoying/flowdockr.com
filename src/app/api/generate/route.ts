@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   hashRequestIp,
   hashRequestUserAgent,
   setAnonymousSessionCookie,
 } from '@/lib/anonymous';
+import { getDefaultBillingProfile, getUserBillingProfile } from '@/lib/billing';
 import {
   canGenerate,
   consumeUsage,
   getGenerationIdentity,
 } from '@/lib/credits';
+import { filterOutputByEntitlements } from '@/lib/generation/filterOutputByEntitlements';
 import { generateReply } from '@/lib/generation/generateReply';
 import { saveGeneration } from '@/lib/generation/saveGeneration';
 import { getScenarioBySlug } from '@/lib/scenarios';
@@ -135,6 +136,11 @@ export async function POST(request: NextRequest) {
       isLoggedIn: status.isLoggedIn,
     });
 
+    const billingProfile =
+      status.isLoggedIn && status.userId
+        ? await getUserBillingProfile(status.userId)
+        : getDefaultBillingProfile();
+
     let output: Awaited<ReturnType<typeof generateReply>>;
     try {
       output = await generateReply({
@@ -222,6 +228,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const filteredOutput = filterOutputByEntitlements(output, {
+      supportLevel: billingProfile.supportLevel,
+      entitlements: billingProfile.entitlements,
+    });
+
     try {
       await saveGeneration({
         userId: status.userId,
@@ -229,10 +240,15 @@ export async function POST(request: NextRequest) {
         scenarioSlug: input.scenarioSlug,
         sourcePage: input.sourcePage,
         inputText: input.message,
-        replyText: output.reply,
-        altReplyText: output.alternativeReply,
-        strategy: output.strategy,
+        replyText: filteredOutput.reply,
+        altReplyText: filteredOutput.alternativeReply,
+        strategy: filteredOutput.strategy,
+        strategyBlock: filteredOutput.strategyBlock,
+        replyVersions: filteredOutput.replyVersions,
+        riskInsights: filteredOutput.riskInsights,
+        followUpSuggestion: filteredOutput.followUpSuggestion,
         modeUsed: usageResult.modeUsed,
+        supportLevel: billingProfile.supportLevel,
         serviceType: input.serviceType,
         tone: input.tone,
         goal: input.goal,
@@ -261,12 +277,21 @@ export async function POST(request: NextRequest) {
 
     const successPayload: GenerateReplyResponse = {
       success: true,
-      reply: output.reply,
-      alternativeReply: output.alternativeReply,
-      strategy: output.strategy,
+      reply: filteredOutput.reply,
+      alternativeReply: filteredOutput.alternativeReply,
+      strategy: filteredOutput.strategy,
+      strategyBlock: filteredOutput.strategyBlock,
+      replyVersions: filteredOutput.replyVersions,
+      riskInsights: filteredOutput.riskInsights,
+      followUpSuggestion: filteredOutput.followUpSuggestion,
+      explanation: filteredOutput.explanation,
+      riskAlert: filteredOutput.riskAlert,
+      confidence: filteredOutput.confidence,
       scenarioSlug: input.scenarioSlug,
       creditsRemaining: usageResult.creditsRemaining,
       requiresUpgrade: false,
+      supportLevel: billingProfile.supportLevel,
+      entitlements: billingProfile.entitlements,
     };
 
     const response = NextResponse.json(successPayload);

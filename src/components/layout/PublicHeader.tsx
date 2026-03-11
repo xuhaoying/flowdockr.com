@@ -55,7 +55,7 @@ export function PublicHeader() {
             href="/pricing"
             className="ml-1 inline-flex rounded-md bg-slate-900 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
           >
-            Try a scenario
+            Solve a pricing message
           </Link>
         </nav>
       </div>

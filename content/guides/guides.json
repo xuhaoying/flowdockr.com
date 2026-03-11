@@ -76,19 +76,19 @@
     "recommendedScenarios": [
       {
         "href": "/pricing/price-pushback-after-proposal/",
-        "label": "If the quote feels too high after proposal"
+        "label": "Price pushback after proposal"
       },
       {
         "href": "/pricing/discount-pressure-before-signing/",
-        "label": "If they ask for a direct discount"
+        "label": "Discount pressure before signing"
       },
       {
         "href": "/pricing/budget-lower-than-expected/",
-        "label": "If the budget is genuinely lower"
+        "label": "Budget lower than expected"
       },
       {
         "href": "/pricing/cheaper-competitor-comparison/",
-        "label": "If they compare you to a cheaper option"
+        "label": "Cheaper competitor comparison"
       }
     ],
     "toolCta": {
@@ -181,15 +181,15 @@
     "recommendedScenarios": [
       {
         "href": "/pricing/discount-pressure-before-signing/",
-        "label": "If they ask for a discount before signing"
+        "label": "Discount pressure before signing"
       },
       {
         "href": "/pricing/small-discount-before-closing/",
-        "label": "If they ask for one last small discount"
+        "label": "Small discount before closing"
       },
       {
         "href": "/pricing/price-pushback-after-proposal/",
-        "label": "If the quote just feels high"
+        "label": "Price pushback after proposal"
       }
     ],
     "toolCta": {
@@ -281,15 +281,15 @@
     "recommendedScenarios": [
       {
         "href": "/pricing/budget-lower-than-expected/",
-        "label": "If the client budget is lower than your quote"
+        "label": "Budget lower than expected"
       },
       {
         "href": "/pricing/more-work-same-price/",
-        "label": "If they want more work for the same budget"
+        "label": "More work for the same price"
       },
       {
         "href": "/pricing/can-you-do-it-cheaper/",
-        "label": "If they broadly ask for a cheaper version"
+        "label": "Can you do it cheaper?"
       }
     ],
     "toolCta": {

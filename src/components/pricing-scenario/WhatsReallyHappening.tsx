@@ -16,7 +16,7 @@ const DEFAULT_HAPPENING_BY_TIER: Record<PricingScenario['tier'], string[]> = {
     'A short, calm, options-based reply keeps momentum without weak concessions.',
   ],
   tier3: [
-    'This is usually a short-form entry pressure, not the final decision point.',
+    'This is usually an early pricing signal, not the final decision point.',
     'The right move is to classify the pressure quickly and route to the correct strategy page.',
     'Concise boundary language works best before deeper negotiation detail.',
   ],

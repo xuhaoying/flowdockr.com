@@ -18,19 +18,16 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
             <Link href={scenario.hubParent}>Pricing scenarios</Link>
           </li>
           <li>/</li>
-          <li className="text-slate-900">{scenario.slug}</li>
+          <li className="text-slate-900">{scenario.h1}</li>
         </ol>
       </nav>
 
       <div className="flex flex-wrap gap-2">
         <p className="inline-flex items-center rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-          Pricing scenario
+          Pricing decision
         </p>
         <p className="inline-flex items-center rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-700">
-          {scenario.pageRole}
-        </p>
-        <p className="inline-flex items-center rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-700">
-          Tier {scenario.tier}
+          Use before replying
         </p>
       </div>
 
@@ -42,11 +39,8 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
         href="#scenario-tool-cta"
         className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
       >
-        Open tool with this scenario
+        Draft a reply for this situation
       </a>
-      <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-        Primary intent: <span className="font-medium text-slate-900">{scenario.primaryIntent}</span>
-      </div>
     </section>
   );
 }

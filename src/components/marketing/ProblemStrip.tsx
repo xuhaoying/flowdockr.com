@@ -4,9 +4,11 @@ const PRESSURE_ITEMS = [
   { label: 'Price pushback after proposal', slug: 'price-pushback-after-proposal' },
   { label: 'Discount pressure before signing', slug: 'discount-pressure-before-signing' },
   { label: 'Budget lower than expected', slug: 'budget-lower-than-expected' },
-  { label: 'Another freelancer is cheaper', slug: 'cheaper-competitor-comparison' },
-  { label: 'More work for same price', slug: 'more-work-same-price' },
+  { label: 'Cheaper competitor comparison', slug: 'cheaper-competitor-comparison' },
+  { label: 'More work for the same price', slug: 'more-work-same-price' },
+  { label: 'Free trial work request', slug: 'free-trial-work-request' },
   { label: 'Can you do it cheaper?', slug: 'can-you-do-it-cheaper' },
+  { label: 'Small discount before closing', slug: 'small-discount-before-closing' },
 ];
 
 export function ProblemStrip() {

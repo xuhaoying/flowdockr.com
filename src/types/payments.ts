@@ -1,4 +1,4 @@
-import type { CreditPackCode } from '@/config/creditPacks';
+import type { BillingSupportLevel, CreditPackCode } from '@/types/billing';
 
 export type PurchaseStatus =
   | 'pending'
@@ -24,6 +24,8 @@ export type CheckoutStatusResponse = {
   creditsGranted?: boolean;
   creditsAdded?: number;
   creditsRemaining?: number;
+  supportLevel?: BillingSupportLevel;
+  purchasedPlan?: string;
   error?: string;
 };
 

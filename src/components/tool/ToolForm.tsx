@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-
 import { useToolGeneration } from '@/hooks/useToolGeneration';
 import { trackEvent } from '@/lib/analytics-client';
-import { saveDealRecord } from '@/lib/deals-history';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
-import { CreditPackageId } from '@/types/billing';
+import {
+  BillingSupportLevel,
+  CreditPackageId,
+  FeatureEntitlements,
+} from '@/types/billing';
 import { DealProjectType, DealTone } from '@/types/deals';
 import { GenerateReplyRequest } from '@/types/generation';
 
@@ -28,12 +30,25 @@ type UsageState = {
   loggedIn: boolean;
   remainingFreeGenerations: number;
   creditsBalance: number;
+  supportLevel: BillingSupportLevel;
+  entitlements: FeatureEntitlements;
+};
+
+const FREE_ENTITLEMENTS: FeatureEntitlements = {
+  multiVersionEnabled: false,
+  strategyExplanationEnabled: false,
+  riskAlertEnabled: false,
+  historyEnabled: false,
+  followUpEnabled: false,
+  advancedModesEnabled: false,
 };
 
 const INITIAL_USAGE: UsageState = {
   loggedIn: false,
   remainingFreeGenerations: 2,
   creditsBalance: 0,
+  supportLevel: 'free',
+  entitlements: FREE_ENTITLEMENTS,
 };
 
 const TONE_OPTIONS: Array<{ value: DealTone; label: string }> = [
@@ -60,12 +75,15 @@ export function ToolForm({
 }: ToolFormProps) {
   const fallbackSlug = scenarios[0]?.slug || 'lowball-offer';
 
-  const [scenarioSlug, setScenarioSlug] = useState(defaultScenarioSlug || fallbackSlug);
+  const [scenarioSlug, setScenarioSlug] = useState(
+    defaultScenarioSlug || fallbackSlug
+  );
   const [message, setMessage] = useState('');
   const [usage, setUsage] = useState<UsageState>(INITIAL_USAGE);
   const [upgradeVisible, setUpgradeVisible] = useState(false);
   const [checkoutEmail, setCheckoutEmail] = useState('');
-  const [checkoutLoading, setCheckoutLoading] = useState<CreditPackageId | null>(null);
+  const [checkoutLoading, setCheckoutLoading] =
+    useState<CreditPackageId | null>(null);
   const [projectType, setProjectType] = useState<DealProjectType>('other');
   const [tone, setTone] = useState<DealTone>('professional');
   const [savedHint, setSavedHint] = useState('');
@@ -74,10 +92,15 @@ export function ToolForm({
 
   const { isLoading, error, result, submit, setResult } = useToolGeneration();
 
-  const scenario = useMemo(() => getScenarioBySlug(scenarioSlug), [scenarioSlug]);
+  const scenario = useMemo(
+    () => getScenarioBySlug(scenarioSlug),
+    [scenarioSlug]
+  );
 
   const textareaPlaceholder =
-    placeholder || scenario?.placeholder || 'Paste the exact message the client sent...';
+    placeholder ||
+    scenario?.placeholder ||
+    'Paste the exact message the client sent...';
 
   const usageText = usage.loggedIn
     ? usage.creditsBalance > 0
@@ -108,7 +131,6 @@ export function ToolForm({
   }, [trimmedMessage]);
 
   const canSubmit = !validationError && !isLoading;
-  const canSaveResult = Boolean(result?.success && result.reply);
 
   useEffect(() => {
     let active = true;
@@ -123,8 +145,19 @@ export function ToolForm({
       try {
         const response = await fetch('/api/credits');
         const payload = (await response.json()) as
-          | { loggedIn: true; creditsBalance: number; freeRepliesRemaining?: number }
-          | { loggedIn: false; remainingFreeGenerations: number };
+          | {
+              loggedIn: true;
+              creditsBalance: number;
+              freeRepliesRemaining?: number;
+              supportLevel?: BillingSupportLevel;
+              entitlements?: FeatureEntitlements;
+            }
+          | {
+              loggedIn: false;
+              remainingFreeGenerations: number;
+              supportLevel?: BillingSupportLevel;
+              entitlements?: FeatureEntitlements;
+            };
 
         if (!active) {
           return;
@@ -134,7 +167,12 @@ export function ToolForm({
           setUsage({
             loggedIn: true,
             creditsBalance: Math.max(0, payload.creditsBalance || 0),
-            remainingFreeGenerations: Math.max(0, payload.freeRepliesRemaining || 0),
+            remainingFreeGenerations: Math.max(
+              0,
+              payload.freeRepliesRemaining || 0
+            ),
+            supportLevel: payload.supportLevel || 'free',
+            entitlements: payload.entitlements || FREE_ENTITLEMENTS,
           });
           return;
         }
@@ -142,7 +180,12 @@ export function ToolForm({
         setUsage({
           loggedIn: false,
           creditsBalance: 0,
-          remainingFreeGenerations: Math.max(0, payload.remainingFreeGenerations || 0),
+          remainingFreeGenerations: Math.max(
+            0,
+            payload.remainingFreeGenerations || 0
+          ),
+          supportLevel: payload.supportLevel || 'free',
+          entitlements: payload.entitlements || FREE_ENTITLEMENTS,
         });
       } catch {
         // no-op
@@ -155,15 +198,6 @@ export function ToolForm({
       active = false;
     };
   }, []);
-
-  useEffect(() => {
-    if (!savedHint) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => setSavedHint(''), 3000);
-    return () => window.clearTimeout(timeout);
-  }, [savedHint]);
 
   const onGenerate = async () => {
     if (!canSubmit) {
@@ -224,9 +258,16 @@ export function ToolForm({
     }
 
     setUpgradeVisible(false);
-    setSavedHint('');
+    setSavedHint(
+      response.entitlements?.historyEnabled
+        ? 'Saved to negotiation history.'
+        : ''
+    );
 
     setUsage((prev) => {
+      const nextSupportLevel = response.supportLevel || prev.supportLevel;
+      const nextEntitlements = response.entitlements || prev.entitlements;
+
       if (prev.loggedIn) {
         const nextCredits =
           typeof response.creditsRemaining === 'number'
@@ -237,19 +278,31 @@ export function ToolForm({
           return {
             ...prev,
             creditsBalance: nextCredits,
+            supportLevel: nextSupportLevel,
+            entitlements: nextEntitlements,
           };
         }
 
         return {
           ...prev,
           creditsBalance: nextCredits,
-          remainingFreeGenerations: Math.max(0, prev.remainingFreeGenerations - 1),
+          remainingFreeGenerations: Math.max(
+            0,
+            prev.remainingFreeGenerations - 1
+          ),
+          supportLevel: nextSupportLevel,
+          entitlements: nextEntitlements,
         };
       }
 
       return {
         ...prev,
-        remainingFreeGenerations: Math.max(0, prev.remainingFreeGenerations - 1),
+        remainingFreeGenerations: Math.max(
+          0,
+          prev.remainingFreeGenerations - 1
+        ),
+        supportLevel: nextSupportLevel,
+        entitlements: nextEntitlements,
       };
     });
 
@@ -268,33 +321,6 @@ export function ToolForm({
       if (rect.top > window.innerHeight * 0.88) {
         node.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    });
-  };
-
-  const onSaveDeal = () => {
-    if (!result?.success || !result.reply) {
-      return;
-    }
-
-    const saved = saveDealRecord({
-      scenarioSlug,
-      scenarioTitle: scenario?.title || scenarioSlug,
-      clientMessage: trimmedMessage,
-      generatedReply: result.reply,
-      alternativeReply: result.alternativeReply,
-      strategy: result.strategy,
-      tone,
-      projectType,
-      sourcePage,
-      status: 'draft',
-    });
-
-    setSavedHint('Saved to deal history.');
-    trackEvent('deal_saved', {
-      dealId: saved.id,
-      scenarioSlug,
-      sourcePage,
-      tone,
     });
   };
 
@@ -334,7 +360,9 @@ export function ToolForm({
 
       if (checkoutResponse.status === 401 || payload.error === 'UNAUTHORIZED') {
         const callbackUrl = `${window.location.pathname}${window.location.search}`;
-        window.location.assign(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        window.location.assign(
+          `/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
+        );
         return;
       }
 
@@ -354,8 +382,9 @@ export function ToolForm({
     }
   };
 
-  const onCopy = (target: 'reply' | 'alternative') => {
-    trackEvent(target === 'reply' ? 'copy_reply_clicked' : 'copy_alt_reply_clicked', {
+  const onCopy = (target: string) => {
+    trackEvent('copy_reply_clicked', {
+      target,
       scenarioSlug,
       sourcePage,
     });
@@ -363,10 +392,17 @@ export function ToolForm({
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section
+        id="tool-workspace"
+        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+      >
         <div className="space-y-1">
-          <p className="text-sm font-medium text-slate-700">Paste the client message</p>
-          <p className="text-xs text-slate-600">2 free replies. No subscription required.</p>
+          <p className="text-sm font-medium text-slate-700">
+            Paste the exact pricing message
+          </p>
+          <p className="text-xs text-slate-600">
+            2 free negotiation credits. No subscription required.
+          </p>
         </div>
 
         {showScenarioSelector ? (
@@ -377,16 +413,20 @@ export function ToolForm({
               setResult(null);
               setSavedHint('');
             }}
-            label="Scenario"
+            label="Pricing situation"
           />
         ) : null}
 
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">Project type</span>
+          <span className="text-sm font-medium text-slate-800">
+            Project type
+          </span>
           <select
             value={projectType}
-            onChange={(event) => setProjectType(event.target.value as DealProjectType)}
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 outline-none transition focus:border-slate-500"
+            onChange={(event) =>
+              setProjectType(event.target.value as DealProjectType)
+            }
+            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
           >
             {PROJECT_TYPE_OPTIONS.map((item) => (
               <option key={item.value} value={item.value}>
@@ -401,7 +441,7 @@ export function ToolForm({
           <select
             value={tone}
             onChange={(event) => setTone(event.target.value as DealTone)}
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 outline-none transition focus:border-slate-500"
+            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
           >
             {TONE_OPTIONS.map((item) => (
               <option key={item.value} value={item.value}>
@@ -412,7 +452,9 @@ export function ToolForm({
         </label>
 
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">Client message</span>
+          <span className="text-sm font-medium text-slate-800">
+            Client message
+          </span>
           <Textarea
             value={message}
             onChange={(event) => setMessage(event.target.value)}
@@ -429,10 +471,14 @@ export function ToolForm({
 
         <div className="flex flex-wrap items-center gap-3">
           <Button type="button" onClick={onGenerate} disabled={!canSubmit}>
-            {isLoading ? 'Generating...' : 'Generate reply'}
+            {isLoading ? 'Drafting...' : 'Draft negotiation reply'}
           </Button>
           {isExhausted ? (
-            <Button type="button" variant="outline" onClick={() => window.location.assign('/pricing')}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => window.location.assign('/pricing')}
+            >
               View pricing
             </Button>
           ) : null}
@@ -464,14 +510,18 @@ export function ToolForm({
       <div ref={resultRef}>
         <ToolResult
           reply={result?.reply || ''}
-          alternativeReply={result?.alternativeReply || ''}
-          strategy={result?.strategy || []}
+          strategyBlock={result?.strategyBlock}
+          replyVersions={result?.replyVersions}
+          riskInsights={result?.riskInsights}
+          followUpSuggestion={result?.followUpSuggestion}
+          historyEnabled={
+            result?.entitlements?.historyEnabled ??
+            usage.entitlements.historyEnabled
+          }
+          supportLevel={result?.supportLevel || usage.supportLevel}
           loading={isLoading}
           onRegenerate={onGenerate}
           onCopy={onCopy}
-          onSave={onSaveDeal}
-          canSave={canSaveResult}
-          saveLabel="Save to deals"
           savedHint={savedHint}
         />
       </div>
@@ -479,7 +529,9 @@ export function ToolForm({
   );
 }
 
-function mapToneToApiTone(tone: DealTone): NonNullable<GenerateReplyRequest['tone']> {
+function mapToneToApiTone(
+  tone: DealTone
+): NonNullable<GenerateReplyRequest['tone']> {
   switch (tone) {
     case 'friendly':
       return 'warm_confident';
@@ -498,9 +550,9 @@ function toUserErrorMessage(errorCode: string) {
     case 'SCENARIO_NOT_FOUND':
       return 'Scenario not found. Please select another scenario.';
     case 'FREE_LIMIT_REACHED':
-      return "You've used your 2 free replies. Buy credits to keep generating.";
+      return "You've used your 2 free negotiation credits. Buy more credits to keep generating.";
     case 'INSUFFICIENT_CREDITS':
-      return 'No credits available. Buy credits to continue generating.';
+      return 'No credits available. Buy more negotiation credits to continue generating.';
     case 'PARSE_FAILED':
       return 'Generation format was invalid. Please try again.';
     case 'INTERNAL_ERROR':
@@ -511,5 +563,5 @@ function toUserErrorMessage(errorCode: string) {
 }
 
 function formatFreeReplies(value: number) {
-  return `${value} free ${value === 1 ? 'reply' : 'replies'}`;
+  return `${value} free ${value === 1 ? 'credit' : 'credits'}`;
 }

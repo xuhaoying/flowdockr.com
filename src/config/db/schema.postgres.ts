@@ -56,6 +56,67 @@ export const user = table(
   ]
 );
 
+export const userBillingState = table(
+  'user_billing_state',
+  {
+    userId: text('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    creditsRemaining: integer('credits_remaining').default(0).notNull(),
+    creditsTotal: integer('credits_total').default(0).notNull(),
+    supportLevel: text('support_level').default('free').notNull(),
+    purchasedPlan: text('purchased_plan').default('free_trial').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    check(
+      'chk_user_billing_state_credits_remaining_non_negative',
+      sql`${table.creditsRemaining} >= 0`
+    ),
+    check(
+      'chk_user_billing_state_credits_total_non_negative',
+      sql`${table.creditsTotal} >= 0`
+    ),
+    check(
+      'chk_user_billing_state_support_level',
+      sql`${table.supportLevel} in ('free', 'quick_help', 'pro', 'studio')`
+    ),
+    index('idx_user_billing_state_support_level').on(table.supportLevel),
+    index('idx_user_billing_state_updated_at').on(table.updatedAt),
+  ]
+);
+
+export const featureEntitlement = table(
+  'feature_entitlement',
+  {
+    userId: text('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    multiVersionEnabled: boolean('multi_version_enabled')
+      .default(false)
+      .notNull(),
+    strategyExplanationEnabled: boolean('strategy_explanation_enabled')
+      .default(false)
+      .notNull(),
+    riskAlertEnabled: boolean('risk_alert_enabled').default(false).notNull(),
+    historyEnabled: boolean('history_enabled').default(false).notNull(),
+    followUpEnabled: boolean('follow_up_enabled').default(false).notNull(),
+    advancedModesEnabled: boolean('advanced_modes_enabled')
+      .default(false)
+      .notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [index('idx_feature_entitlement_history').on(table.historyEnabled)]
+);
+
 export const session = table(
   'session',
   {
@@ -388,6 +449,7 @@ export const generation = table(
     isFreeGeneration: boolean('is_free_generation').notNull().default(false),
     sourcePage: text('source_page').notNull().default('tool'),
     modeUsed: text('mode_used').notNull().default('free'),
+    supportLevel: text('support_level').notNull().default('free'),
     ipHash: text('ip_hash'),
     userAgentHash: text('user_agent_hash'),
   },
@@ -396,19 +458,36 @@ export const generation = table(
       'chk_generation_has_identity',
       sql`${table.userId} is not null or ${table.anonymousSessionId} is not null`
     ),
-    check('chk_generation_credits_charged_non_negative', sql`${table.creditsCharged} >= 0`),
+    check(
+      'chk_generation_credits_charged_non_negative',
+      sql`${table.creditsCharged} >= 0`
+    ),
     check(
       'chk_generation_source_page',
       sql`${table.sourcePage} in ('home', 'scenario', 'tool')`
     ),
-    check('chk_generation_mode_used', sql`${table.modeUsed} in ('free', 'paid')`),
+    check(
+      'chk_generation_mode_used',
+      sql`${table.modeUsed} in ('free', 'paid')`
+    ),
+    check(
+      'chk_generation_support_level',
+      sql`${table.supportLevel} in ('free', 'quick_help', 'pro', 'studio')`
+    ),
     index('idx_generation_user_created').on(table.userId, table.createdAt),
     index('idx_generation_anon_created').on(
       table.anonymousSessionId,
       table.createdAt
     ),
-    index('idx_generation_scenario_created').on(table.scenarioSlug, table.createdAt),
+    index('idx_generation_scenario_created').on(
+      table.scenarioSlug,
+      table.createdAt
+    ),
     index('idx_generation_source_page').on(table.sourcePage),
+    index('idx_generation_support_level_created').on(
+      table.supportLevel,
+      table.createdAt
+    ),
   ]
 );
 
@@ -418,7 +497,9 @@ export const purchase = table(
     id: text('id').primaryKey(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     userId: text('user_id').references(() => user.id, { onDelete: 'set null' }),
-    stripeCheckoutSessionId: text('stripe_checkout_session_id').notNull().unique(),
+    stripeCheckoutSessionId: text('stripe_checkout_session_id')
+      .notNull()
+      .unique(),
     stripePaymentIntentId: text('stripe_payment_intent_id'),
     stripeCustomerId: text('stripe_customer_id'),
     email: text('email').notNull(),
@@ -430,7 +511,10 @@ export const purchase = table(
     metadata: text('metadata'),
   },
   (table) => [
-    check('chk_purchase_credits_granted_non_negative', sql`${table.creditsGranted} >= 0`),
+    check(
+      'chk_purchase_credits_granted_non_negative',
+      sql`${table.creditsGranted} >= 0`
+    ),
     check('chk_purchase_amount_positive', sql`${table.amountUsdCents} > 0`),
     check(
       'chk_purchase_status_allowed',
@@ -498,7 +582,10 @@ export const anonymousUsage = table(
     lastScenarioSlug: text('last_scenario_slug'),
   },
   (table) => [
-    check('chk_anon_usage_non_negative', sql`${table.freeGenerationsUsed} >= 0`),
+    check(
+      'chk_anon_usage_non_negative',
+      sql`${table.freeGenerationsUsed} >= 0`
+    ),
     index('idx_anon_usage_updated').on(table.updatedAt),
   ]
 );

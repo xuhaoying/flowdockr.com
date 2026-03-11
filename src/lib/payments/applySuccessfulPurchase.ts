@@ -1,6 +1,7 @@
 import { and, eq } from 'drizzle-orm';
 
 import { creditPacks } from '@/config/creditPacks';
+import { applyPackPurchaseToBillingTx } from '@/lib/billing';
 import {
   anonymousLinkSession,
   creditTransaction,
@@ -133,7 +134,20 @@ export async function applySuccessfulPurchase(
         stripePaymentIntentId: stripePaymentIntentId || '',
         packCode: pack.code,
         credits: pack.credits,
+        supportLevel: pack.supportLevel,
+        support_level: pack.supportLevel,
+        planName: pack.name,
+        plan_name: pack.name,
+        credits_amount: pack.credits,
       }),
+    });
+
+    const billingProfile = await applyPackPurchaseToBillingTx(tx, {
+      userId: lockedUser.id,
+      purchasedPlan: pack.code,
+      supportLevel: pack.supportLevel,
+      creditsAdded: pack.credits,
+      creditsRemaining: nextBalance,
     });
 
     const mergedMetadata = parseRecord(targetPurchase.metadata);
@@ -163,6 +177,11 @@ export async function applySuccessfulPurchase(
           anonymousSessionId,
           packCode: pack.code,
           credits: pack.credits,
+          planName: pack.name,
+          plan_name: pack.name,
+          supportLevel: billingProfile.supportLevel,
+          support_level: billingProfile.supportLevel,
+          credits_amount: pack.credits,
         }),
       })
       .where(eq(purchase.id, targetPurchase.id));

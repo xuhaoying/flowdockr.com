@@ -15,7 +15,7 @@ export function ScenarioStickyBottomCta() {
             href="/pricing"
             className="inline-flex items-center justify-center rounded-md border border-slate-300 px-3 py-2 text-xs font-medium text-slate-700"
           >
-            2 free replies
+            2 free credits
           </Link>
         </div>
         <p className="text-center text-[11px] text-slate-600">No subscription required.</p>

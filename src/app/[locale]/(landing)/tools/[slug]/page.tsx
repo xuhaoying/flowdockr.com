@@ -107,10 +107,18 @@ export default async function ToolPage({
 
       {pricingScenario ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          Context loaded from scenario:{' '}
+          Loaded situation:{' '}
           <span className="font-semibold text-slate-900">{pricingScenario.h1}</span>
         </section>
       ) : null}
+
+      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900">Paste the message now</h2>
+        <p className="text-sm text-slate-700">
+          Add the exact pricing pushback, choose the situation, and generate a draft
+          built for negotiation outcomes, not generic AI tone.
+        </p>
+      </section>
 
       <ToolForm
         sourcePage="tool"
@@ -126,7 +134,9 @@ export default async function ToolPage({
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">Credits and access</h2>
-        <p className="text-sm text-slate-700">2 free replies, then buy credits when needed.</p>
+        <p className="text-sm text-slate-700">
+          Start with 2 free drafts, then use credits when you need more active deal output.
+        </p>
         <PricingCards sourcePage="tool" />
       </section>
 

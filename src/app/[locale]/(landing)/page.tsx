@@ -15,7 +15,7 @@ import { getMetadata } from '@/shared/lib/seo';
 export const generateMetadata = getMetadata({
   title: 'Flowdockr | Pricing Negotiation Support for Freelancers',
   description:
-    'Handle pricing pushback, discount pressure, and budget mismatch with structured negotiation support for freelancers and agencies.',
+    'Respond to pricing pushback before a deal slips. Choose the right negotiation path and draft a send-ready reply from the exact client message.',
   canonicalUrl: '/',
   keywords:
     'freelance pricing negotiation, client discount response, quote too high reply, budget mismatch response',
@@ -73,17 +73,17 @@ export default async function LandingPage({
             Do I need an account before trying?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. You can start with 2 free replies first, then sign in when you want to
-            save history or buy credits.
+            No. You can start with 2 free negotiation credits first, then sign in when
+            you want to save history or buy more support.
           </p>
         </details>
         <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            What happens after free replies are used?
+            What happens after free credits are used?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            You&apos;ll see an upgrade prompt and can continue with credits. Your
-            generated replies can still be saved into your negotiation library.
+            You&apos;ll see a pack comparison and can continue with Quick Help, Pro, or
+            Studio. Saved negotiation history is included from Pro upward.
           </p>
         </details>
       </section>

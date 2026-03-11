@@ -1,27 +1,50 @@
 export const outputFormatInstructions = `
-Return your answer in the following exact structure:
+Return valid JSON only with this exact shape:
 
-Recommended reply:
-<directly sendable reply>
-
-Alternative reply:
-<second directly sendable reply>
-
-Strategy:
-- <bullet 1>
-- <bullet 2>
-- <bullet 3>
+{
+  "strategy": {
+    "objective": "string",
+    "why_it_works": ["string", "string"],
+    "what_to_avoid": ["string", "string"],
+    "negotiation_framing": "string"
+  },
+  "replies": {
+    "professional": "string",
+    "firm": "string",
+    "softer": "string"
+  },
+  "risk_insights": ["string", "string"],
+  "follow_up": {
+    "reply": "string",
+    "direction": "string"
+  }
+}
 
 Rules:
-- The two replies must not be identical.
-- The alternative reply should offer a slightly different phrasing angle, not just a trivial paraphrase.
-- Strategy bullets must explain negotiation logic.
-- Keep each strategy bullet short and concrete.
-- Do not add any extra sections.
+- Return JSON only. No markdown fences.
+- All reply fields must be directly sendable client-facing text.
+- "firm" should be stronger than "professional" without becoming hostile.
+- "softer" should preserve boundaries while sounding more accommodating.
+- Keep strategy fields short and concrete.
+- Include at least 1 meaningful risk insight. If the risk is low, write a neutral caution.
+- Include a practical follow-up reply for the case where the client pushes again.
 `.trim();
 
 export type RawModelSections = {
-  recommendedReply: string;
-  alternativeReply: string;
-  strategy: string[];
+  strategy: {
+    objective: string;
+    why_it_works: string[];
+    what_to_avoid: string[];
+    negotiation_framing: string;
+  };
+  replies: {
+    professional: string;
+    firm: string;
+    softer: string;
+  };
+  risk_insights: string[];
+  follow_up: {
+    reply: string;
+    direction: string;
+  };
 };

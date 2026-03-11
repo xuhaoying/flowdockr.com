@@ -5,7 +5,7 @@ export const pricingScenarios: PricingScenario[] = [
     tier: 'tier1',
     featured: true,
     slug: 'price-pushback-after-proposal',
-    title: 'How to respond when a prospect says your quote is too high',
+    title: 'Price pushback after proposal',
     seoTitle: 'How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr',
     metaDescription:
       'Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with Flowdockr.',
@@ -114,7 +114,7 @@ export const pricingScenarios: PricingScenario[] = [
     tier: 'tier1',
     featured: true,
     slug: 'discount-pressure-before-signing',
-    title: 'How to handle discount pressure before signing',
+    title: 'Discount pressure before signing',
     seoTitle: 'How to Handle Discount Pressure Before Signing | Flowdockr',
     metaDescription:
       'Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with Flowdockr.',
@@ -222,7 +222,7 @@ export const pricingScenarios: PricingScenario[] = [
     tier: 'tier1',
     featured: true,
     slug: 'budget-lower-than-expected',
-    title: 'How to respond when the budget is lower than your quote',
+    title: 'Budget lower than expected',
     seoTitle: 'How to Respond When the Budget Is Lower Than Your Quote | Flowdockr',
     metaDescription:
       'Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with Flowdockr.',
@@ -330,7 +330,7 @@ export const pricingScenarios: PricingScenario[] = [
     tier: 'tier1',
     featured: true,
     slug: 'cheaper-competitor-comparison',
-    title: 'How to respond when a prospect says someone else is cheaper',
+    title: 'Cheaper competitor comparison',
     seoTitle: 'How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr',
     metaDescription:
       'Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with Flowdockr.',
@@ -437,7 +437,7 @@ export const pricingScenarios: PricingScenario[] = [
   {
     tier: 'tier2',
     slug: 'more-work-same-price',
-    title: 'How to respond when they want more work for the same price',
+    title: 'More work for the same price',
     seoTitle: 'How to Respond When They Want More Work for the Same Price | Flowdockr',
     metaDescription:
       'Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with Flowdockr.',
@@ -540,7 +540,7 @@ export const pricingScenarios: PricingScenario[] = [
   {
     tier: 'tier2',
     slug: 'free-trial-work-request',
-    title: 'How to respond to a free trial work request',
+    title: 'Free trial work request',
     seoTitle: 'How to Respond to a Free Trial Work Request | Flowdockr',
     metaDescription:
       'Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with Flowdockr.',
@@ -643,7 +643,7 @@ export const pricingScenarios: PricingScenario[] = [
   {
     tier: 'tier3',
     slug: 'can-you-do-it-cheaper',
-    title: 'How to respond when they ask, “Can you do it cheaper?”',
+    title: 'Can you do it cheaper?',
     seoTitle: 'How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr',
     metaDescription:
       'Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with Flowdockr.',
@@ -746,7 +746,7 @@ export const pricingScenarios: PricingScenario[] = [
   {
     tier: 'tier2',
     slug: 'small-discount-before-closing',
-    title: 'How to handle a small discount request right before closing',
+    title: 'Small discount before closing',
     seoTitle: 'How to Handle a Small Discount Request Right Before Closing | Flowdockr',
     metaDescription:
       'Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using Flowdockr.',

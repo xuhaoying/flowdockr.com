@@ -5,6 +5,8 @@ export async function createPendingPurchase(params: {
   userId: string;
   email: string;
   packCode: string;
+  planName: string;
+  supportLevel: string;
   credits: number;
   amountCents: number;
   currency: string;
@@ -16,6 +18,8 @@ export async function createPendingPurchase(params: {
     userId,
     email,
     packCode,
+    planName,
+    supportLevel,
     credits,
     amountCents,
     currency,
@@ -42,7 +46,12 @@ export async function createPendingPurchase(params: {
     metadata: JSON.stringify({
       purchaseId,
       packageId: packCode,
+      planName,
+      plan_name: planName,
+      supportLevel,
+      support_level: supportLevel,
       credits,
+      credits_amount: credits,
       scenarioSlug,
       returnTo,
       anonymousSessionId,

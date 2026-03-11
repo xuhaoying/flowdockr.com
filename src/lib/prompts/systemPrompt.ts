@@ -42,13 +42,10 @@ Negotiation rules:
 - prefer clarity over cleverness
 
 Output rules:
-You must return exactly 3 sections:
-1. Recommended reply
-2. Alternative reply
-3. Strategy bullets
-
-The strategy bullets must explain negotiation logic, not writing style.
-They should describe why the response works strategically.
+You must return JSON only using the required schema.
+The strategy fields must explain negotiation logic, not writing style.
+The reply variants must stay aligned on strategy while offering different delivery styles.
+The risk insights must identify what could weaken the user's position.
 
 Keep the output practical, calm, and credible.
 `.trim();

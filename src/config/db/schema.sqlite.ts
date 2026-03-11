@@ -17,6 +17,11 @@ export const user = table(
       .default(false)
       .notNull(),
     image: text('image'),
+    creditsBalance: integer('credits_balance').default(0).notNull(),
+    stripeCustomerId: text('stripe_customer_id').unique(),
+    magicLinkEnabled: integer('magic_link_enabled', { mode: 'boolean' })
+      .default(true)
+      .notNull(),
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
       .default(sqliteNowMs)
       .notNull(),
@@ -34,7 +39,69 @@ export const user = table(
     index('idx_user_name').on(table.name),
     // Order users by registration time for latest users list
     index('idx_user_created_at').on(table.createdAt),
+    index('idx_user_credits_balance').on(table.creditsBalance),
   ]
+);
+
+export const userBillingState = table(
+  'user_billing_state',
+  {
+    userId: text('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    creditsRemaining: integer('credits_remaining').default(0).notNull(),
+    creditsTotal: integer('credits_total').default(0).notNull(),
+    supportLevel: text('support_level').default('free').notNull(),
+    purchasedPlan: text('purchased_plan').default('free_trial').notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    index('idx_user_billing_state_support_level').on(table.supportLevel),
+    index('idx_user_billing_state_updated_at').on(table.updatedAt),
+  ]
+);
+
+export const featureEntitlement = table(
+  'feature_entitlement',
+  {
+    userId: text('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    multiVersionEnabled: integer('multi_version_enabled', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    strategyExplanationEnabled: integer('strategy_explanation_enabled', {
+      mode: 'boolean',
+    })
+      .default(false)
+      .notNull(),
+    riskAlertEnabled: integer('risk_alert_enabled', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    historyEnabled: integer('history_enabled', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    followUpEnabled: integer('follow_up_enabled', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    advancedModesEnabled: integer('advanced_modes_enabled', { mode: 'boolean' })
+      .default(false)
+      .notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [index('idx_feature_entitlement_history').on(table.historyEnabled)]
 );
 
 export const session = table(

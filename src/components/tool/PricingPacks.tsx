@@ -74,30 +74,50 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
         {CREDIT_PACKAGE_LIST.map((pack) => (
           <article
             key={pack.id}
-            className={`rounded-lg border p-5 ${pack.id === 'pro_100' ? 'border-primary' : ''}`}
+            className={`rounded-lg border p-5 ${pack.popular ? 'border-primary bg-primary/5' : ''}`}
           >
             <h3 className="text-lg font-semibold">{pack.name}</h3>
+            {pack.badge ? (
+              <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                {pack.badge}
+              </p>
+            ) : null}
             <p className="mt-2 text-3xl font-bold">
               ${(pack.priceUsdCents / 100).toFixed(0)}
             </p>
-            <p className="mt-1 text-sm text-muted-foreground">{pack.credits} credits</p>
-            {pack.id === 'pro_100' ? (
-              <p className="mt-2 text-xs text-muted-foreground">Most popular</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {pack.credits} negotiation credits
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">{pack.description}</p>
+            {pack.featureSummary?.length ? (
+              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                {pack.featureSummary.slice(0, 3).map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             ) : null}
 
             <Button
               className="mt-4 w-full"
-              variant={pack.id === 'pro_100' ? 'default' : 'outline'}
+              variant={pack.popular ? 'default' : 'outline'}
               onClick={() => startCheckout(pack.id)}
               disabled={loadingPackageId !== null}
             >
-              {loadingPackageId === pack.id ? 'Redirecting...' : 'Buy credits'}
+              {loadingPackageId === pack.id
+                ? 'Redirecting...'
+                : pack.ctaLabel || 'Buy credits'}
             </Button>
           </article>
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">Pay once. Credits never expire.</p>
+      <p className="text-sm text-muted-foreground">
+        Pay once. Credits never expire. Pro unlocks the most complete negotiation
+        support layer.
+      </p>
 
       {error ? (
         <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">

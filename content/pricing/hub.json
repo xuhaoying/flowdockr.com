@@ -3,39 +3,39 @@
   "pageType": "hub",
   "cluster": "pricing",
   "url": "/pricing/",
-  "h1": "Freelance pricing negotiation scenarios",
-  "metaTitle": "Freelance Pricing Negotiation Scenarios | Flowdockr",
-  "metaDescription": "Explore freelance pricing negotiation scenarios for quote pushback, discount requests, low-budget projects, competitor comparisons, and scope pressure. Find the right next move with Flowdockr.",
-  "heroSubheading": "Find the right response when a prospect pushes back on price, asks for a discount, or wants more work for the same budget.",
-  "intro": "Pricing conversations rarely fail because of one sentence alone. They fail because different kinds of pressure get treated as if they were all the same problem. This hub helps you identify the real negotiation situation and choose the right response path.",
+  "h1": "Pricing for real client negotiations",
+  "metaTitle": "Pricing for Real Client Negotiations | Flowdockr",
+  "metaDescription": "Choose the right level of negotiation support for pricing pressure, discount requests, scope creep, and awkward client conversations.",
+  "heroSubheading": "Choose the level of support you need, from quick help to deeper negotiation guidance.",
+  "intro": "Flowdockr is built for difficult client conversations, not generic AI writing. Use this console to route the exact pressure you are dealing with, respond without panic discounting, and buy negotiation support only when you need it.",
   "decisionBuckets": [
     {
-      "title": "The quote feels too high",
+      "title": "Price pushback after proposal",
       "description": "Use this when the prospect reacts to your proposal as expensive, but has not yet asked directly for a discount.",
       "href": "/pricing/price-pushback-after-proposal/"
     },
     {
-      "title": "They want a direct discount",
+      "title": "Discount pressure before signing",
       "description": "Use this when the prospect asks you to lower your rate before moving forward.",
       "href": "/pricing/discount-pressure-before-signing/"
     },
     {
-      "title": "The budget is genuinely lower",
+      "title": "Budget lower than expected",
       "description": "Use this when the numbers do not support the current scope and the real question is how to reshape the work.",
       "href": "/pricing/budget-lower-than-expected/"
     },
     {
-      "title": "They compare you with a cheaper option",
+      "title": "Cheaper competitor comparison",
       "description": "Use this when the conversation shifts from price discomfort to direct competitor comparison.",
       "href": "/pricing/cheaper-competitor-comparison/"
     },
     {
-      "title": "They want more for the same price",
+      "title": "More work for the same price",
       "description": "Use this when pricing pressure turns into scope pressure and extra work starts creeping in.",
       "href": "/pricing/more-work-same-price/"
     },
     {
-      "title": "They ask for unpaid trial work",
+      "title": "Free trial work request",
       "description": "Use this when the prospect wants proof-of-work before committing, but the request crosses into free labor.",
       "href": "/pricing/free-trial-work-request/"
     }

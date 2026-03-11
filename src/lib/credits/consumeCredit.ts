@@ -1,5 +1,6 @@
 import { eq } from 'drizzle-orm';
 
+import { syncBillingStateCreditsTx } from '@/lib/billing';
 import { db, creditTransaction, user } from '@/lib/db';
 import { getUuid } from '@/shared/lib/hash';
 
@@ -51,6 +52,8 @@ export async function consumeCredit(params: {
         source: sourcePage,
       }),
     });
+
+    await syncBillingStateCreditsTx(tx, userId, nextCredits);
 
     return nextCredits;
   });

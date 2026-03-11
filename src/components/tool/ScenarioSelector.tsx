@@ -9,7 +9,7 @@ type ScenarioSelectorProps = {
 export function ScenarioSelector({
   value,
   onChange,
-  label = 'Scenario',
+  label = 'Pricing situation',
 }: ScenarioSelectorProps) {
   return (
     <label className="block space-y-2">

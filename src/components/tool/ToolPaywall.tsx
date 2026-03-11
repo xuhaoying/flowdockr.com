@@ -21,9 +21,12 @@ export function ToolPaywall({
 }: ToolPaywallProps) {
   return (
     <div className="space-y-3 rounded-xl border border-slate-300 bg-slate-50 p-4">
-      <p className="text-sm font-semibold text-slate-900">You&apos;ve used your 2 free replies</p>
+      <p className="text-sm font-semibold text-slate-900">
+        You&apos;ve used your 2 free negotiation credits
+      </p>
       <p className="text-sm text-slate-700">
-        Buy credits to keep generating strategic client replies. No subscription required.
+        Buy a one-time pack to keep responding with negotiation-aware support. No
+        subscription required.
       </p>
 
       {!loggedIn ? (
@@ -39,23 +42,36 @@ export function ToolPaywall({
         </label>
       ) : null}
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-3">
         {CREDIT_PACKAGE_LIST.map((pack) => (
-          <div key={pack.id} className="rounded-lg border border-slate-300 bg-white p-3">
+          <div
+            key={pack.id}
+            className={`rounded-lg border bg-white p-3 ${
+              pack.popular ? 'border-slate-900' : 'border-slate-300'
+            }`}
+          >
             <p className="text-sm font-semibold text-slate-900">{pack.name}</p>
+            {pack.badge ? (
+              <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-slate-500">
+                {pack.badge}
+              </p>
+            ) : null}
             <p className="mt-1 text-2xl font-bold text-slate-900">
               ${(pack.priceUsdCents / 100).toFixed(0)}
             </p>
-            <p className="text-xs text-slate-600">{pack.credits} replies</p>
+            <p className="text-xs text-slate-600">{pack.credits} negotiation credits</p>
+            <p className="mt-2 text-xs text-slate-600">{pack.description}</p>
             <Button
               type="button"
               size="sm"
               className="mt-3 w-full"
-              variant={pack.id === 'pro_100' ? 'default' : 'outline'}
+              variant={pack.popular ? 'default' : 'outline'}
               onClick={() => onCheckout(pack.id)}
               disabled={loadingPackageId !== null}
             >
-              {loadingPackageId === pack.id ? 'Redirecting...' : 'Buy credits'}
+              {loadingPackageId === pack.id
+                ? 'Redirecting...'
+                : pack.ctaLabel || 'Buy credits'}
             </Button>
           </div>
         ))}
