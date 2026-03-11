@@ -11,5 +11,5 @@ export default async function LegacyScenariosPageRedirect({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  redirect(locale === defaultLocale ? '/pricing' : `/${locale}/pricing`);
+  redirect(locale === defaultLocale ? '/scenario' : `/${locale}/scenario`);
 }

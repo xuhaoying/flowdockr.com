@@ -4,7 +4,7 @@ import { Link, usePathname } from '@/core/i18n/navigation';
 import { cn } from '@/shared/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/pricing', label: 'Scenarios' },
+  { href: '/scenario', label: 'Scenarios' },
   { href: '/#how-it-works', label: 'How it works' },
   { href: '/pricing#pricing-cards', label: 'Pricing' },
 ];
