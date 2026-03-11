@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/utils';
 const NAV_ITEMS = [
   { href: '/pricing', label: 'Scenarios' },
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/pricing#credits-pricing', label: 'Pricing' },
+  { href: '/pricing#pricing-cards', label: 'Pricing' },
 ];
 
 export function PublicHeader() {
