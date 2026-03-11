@@ -126,6 +126,7 @@ export default async function ToolPage({
       </section>
 
       <ToolForm
+        analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
         showScenarioSelector={true}
