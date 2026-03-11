@@ -37,7 +37,7 @@ export const additionalFeaturesScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These replies encourage expansion before the work has been properly re-scoped.',
   toolPreset: {
-    scenarioSlug: 'more-work-same-budget',
+    scenarioSlug: 'additional-features',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,

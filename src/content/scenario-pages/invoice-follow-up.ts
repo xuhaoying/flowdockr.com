@@ -37,7 +37,7 @@ export const invoiceFollowUpScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These reminders reduce clarity right when the next step should be explicit.',
   toolPreset: {
-    scenarioSlug: 'client-delays-payment',
+    scenarioSlug: 'invoice-follow-up',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,

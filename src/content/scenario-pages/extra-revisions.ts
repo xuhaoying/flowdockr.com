@@ -37,7 +37,7 @@ export const extraRevisionsScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These replies blur what was included and make later boundaries harder to defend.',
   toolPreset: {
-    scenarioSlug: 'small-extra-free',
+    scenarioSlug: 'extra-revisions',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,

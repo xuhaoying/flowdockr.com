@@ -36,7 +36,7 @@ export const priceTooExpensiveScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These responses pull the conversation toward price defense instead of clearer positioning.',
   toolPreset: {
-    scenarioSlug: 'budget-limited',
+    scenarioSlug: 'price-objection',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,

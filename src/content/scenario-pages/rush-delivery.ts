@@ -37,7 +37,7 @@ export const rushDeliveryScenarioPage: ScenarioPageData = {
   mistakesClosingLine:
     'These replies make the faster timeline sound free instead of negotiated.',
   toolPreset: {
-    scenarioSlug: 'more-work-same-budget',
+    scenarioSlug: 'rush-delivery',
     title: DEFAULT_TOOL_TITLE,
     description: DEFAULT_TOOL_DESCRIPTION,
     ctaLabel: DEFAULT_TOOL_CTA,
