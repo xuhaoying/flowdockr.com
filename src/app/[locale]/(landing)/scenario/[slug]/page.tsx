@@ -15,6 +15,14 @@ import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
 import { getAllScenarioPageSlugs, getScenarioPageBySlug } from '@/lib/content/scenarioPages';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 
+const SCENARIO_ALIAS_REDIRECTS: Record<string, string> = {
+  'client-says-rate-too-high': 'rate-too-high',
+  'client-asks-for-discount': 'discount-request',
+  'client-asks-for-extra-revisions': 'extra-revisions',
+  'client-expands-project-scope': 'scope-creep',
+  'client-delays-payment': 'late-payment',
+};
+
 const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
   'lowball-offer': 'price-pushback-after-proposal',
   'client-asks-discount': 'discount-pressure-before-signing',
@@ -43,10 +51,14 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const landingSlugs = getAllScenarioPageSlugs();
+  const aliasSlugs = Object.keys(SCENARIO_ALIAS_REDIRECTS);
   const legacySlugs = Object.keys(LEGACY_SCENARIO_REDIRECTS);
 
   return locales.flatMap((locale) =>
-    [...landingSlugs, ...legacySlugs].map((slug) => ({ locale, slug }))
+    [...landingSlugs, ...aliasSlugs, ...legacySlugs].map((slug) => ({
+      locale,
+      slug,
+    }))
   );
 }
 
@@ -57,7 +69,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  if (LEGACY_SCENARIO_REDIRECTS[slug]) {
+  if (SCENARIO_ALIAS_REDIRECTS[slug] || LEGACY_SCENARIO_REDIRECTS[slug]) {
     return {
       title: 'Negotiation scenario | Flowdockr',
       robots: {
@@ -94,6 +106,12 @@ export default async function ScenarioPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+
+  const scenarioAliasSlug = SCENARIO_ALIAS_REDIRECTS[slug];
+  if (scenarioAliasSlug) {
+    const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+    redirect(`${localePrefix}/scenario/${scenarioAliasSlug}`);
+  }
 
   const legacyPricingSlug = LEGACY_SCENARIO_REDIRECTS[slug];
   if (legacyPricingSlug) {

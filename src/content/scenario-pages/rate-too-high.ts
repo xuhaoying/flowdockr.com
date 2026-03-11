@@ -1,11 +1,19 @@
 import type { ScenarioPageData } from '@/types/scenario-page';
 
-export const clientSaysRateTooHighScenarioPage: ScenarioPageData = {
-  slug: 'client-says-rate-too-high',
+import {
+  DEFAULT_SCENARIO_CTA,
+  DEFAULT_TOOL_CTA,
+  DEFAULT_TOOL_DESCRIPTION,
+  DEFAULT_TOOL_TITLE,
+  related,
+} from './shared';
+
+export const rateTooHighScenarioPage: ScenarioPageData = {
+  slug: 'rate-too-high',
   seoTitle: 'How to Respond When a Client Says Your Rate Is Too High | Flowdockr',
   metaDescription:
     "Learn how to respond when a client says your freelance rate is too high and try Flowdockr's negotiation guidance for this situation.",
-  canonicalPath: '/scenario/client-says-rate-too-high',
+  canonicalPath: '/scenario/rate-too-high',
   h1: 'How to respond when a client says your rate is too high',
   subtitle:
     'A common freelance negotiation moment where your response can affect both price and trust.',
@@ -17,7 +25,7 @@ export const clientSaysRateTooHighScenarioPage: ScenarioPageData = {
   difficultyPoints: [
     'Price pressure often appears late in the conversation.',
     'Your response can change how the client perceives your value.',
-    'A rushed reply can make the negotiation harder instead of easier.',
+    'A rushed reply can make the negotiation harder.',
   ],
   commonMistakes: [
     'Lowering the price immediately',
@@ -26,38 +34,26 @@ export const clientSaysRateTooHighScenarioPage: ScenarioPageData = {
     "Ignoring the client's concern",
   ],
   mistakesClosingLine:
-    'These responses often make the conversation harder instead of easier.',
+    'These responses often make the negotiation harder instead of clarifying the next step.',
   toolPreset: {
     scenarioSlug: 'lowball-offer',
-    title: 'Try this scenario',
-    description:
-      'Paste the message your client sent and see how Flowdockr suggests responding.',
-    ctaLabel: 'Generate negotiation guidance',
+    title: DEFAULT_TOOL_TITLE,
+    description: DEFAULT_TOOL_DESCRIPTION,
+    ctaLabel: DEFAULT_TOOL_CTA,
     inputPlaceholder:
       'Thanks for the quote. We like the direction, but $1,200 is above budget. Can you do it for $800?',
   },
   relatedScenarios: [
-    {
-      slug: 'client-asks-for-discount',
-      title: 'How to respond when a client asks for a discount',
-    },
-    {
-      slug: 'client-asks-for-extra-revisions',
-      title: 'How to respond when a client asks for extra revisions',
-    },
-    {
-      slug: 'client-expands-project-scope',
-      title: 'How to respond when a client expands the project scope',
-    },
-    {
-      slug: 'client-delays-payment',
-      title: 'How to respond when a client delays payment',
-    },
+    related('discount-request', 'What to say when a client asks for a discount'),
+    related(
+      'price-too-expensive',
+      'Client says your price is too expensive: how to respond'
+    ),
+    related(
+      'extra-revisions',
+      'How to respond when a client asks for extra revisions'
+    ),
+    related('late-payment', 'How to respond when a client delays payment'),
   ],
-  cta: {
-    title: 'Try your own client message',
-    description:
-      'See how Flowdockr suggests responding to a real negotiation situation.',
-    buttonLabel: 'Start with this scenario',
-  },
+  cta: DEFAULT_SCENARIO_CTA,
 };
