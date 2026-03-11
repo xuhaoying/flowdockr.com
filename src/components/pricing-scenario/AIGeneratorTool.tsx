@@ -17,6 +17,7 @@ export function AIGeneratorTool({ scenario, scenarioSlug, cta }: AIGeneratorTool
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{cta.title}</h2>
       <p className="text-sm text-slate-700">{cta.body}</p>
       <ToolForm
+        analyticsScenarioSlug={scenarioSlug}
         sourcePage="scenario"
         defaultScenarioSlug={scenario.generatorScenarioSlug}
         showScenarioSelector={false}

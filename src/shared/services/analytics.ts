@@ -1,7 +1,6 @@
 import {
   AnalyticsManager,
   ClarityAnalyticsProvider,
-  GoogleAnalyticsProvider,
   OpenPanelAnalyticsProvider,
   PlausibleAnalyticsProvider,
   VercelAnalyticsProvider,
@@ -13,13 +12,6 @@ import { Configs, getAllConfigs } from '@/shared/models/config';
  */
 export function getAnalyticsManagerWithConfigs(configs: Configs) {
   const analytics = new AnalyticsManager();
-
-  // google analytics
-  if (configs.google_analytics_id) {
-    analytics.addProvider(
-      new GoogleAnalyticsProvider({ gaId: configs.google_analytics_id })
-    );
-  }
 
   // clarity
   if (configs.clarity_id) {

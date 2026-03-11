@@ -2,10 +2,14 @@ import { ToolForm } from '@/components/tool/ToolForm';
 import type { ScenarioToolPreset } from '@/types/scenario-page';
 
 type ScenarioInlineToolProps = {
+  analyticsScenarioSlug: string;
   toolPreset: ScenarioToolPreset;
 };
 
-export function ScenarioInlineTool({ toolPreset }: ScenarioInlineToolProps) {
+export function ScenarioInlineTool({
+  analyticsScenarioSlug,
+  toolPreset,
+}: ScenarioInlineToolProps) {
   return (
     <section
       id="scenario-inline-tool"
@@ -22,6 +26,7 @@ export function ScenarioInlineTool({ toolPreset }: ScenarioInlineToolProps) {
 
       <div className="mt-5">
         <ToolForm
+          analyticsScenarioSlug={analyticsScenarioSlug}
           sourcePage="scenario"
           defaultScenarioSlug={toolPreset.scenarioSlug}
           showScenarioSelector={false}

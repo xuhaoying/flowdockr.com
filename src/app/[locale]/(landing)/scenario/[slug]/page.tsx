@@ -4,6 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
 import { defaultLocale, locales } from '@/config/locale';
+import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioCTA } from '@/components/scenario/ScenarioCTA';
@@ -126,6 +127,7 @@ export default async function ScenarioPage({
 
   return (
     <PageContainer className="max-w-5xl gap-8 py-8 md:py-10">
+      <ScenarioViewTracker scenarioSlug={page.slug} />
       <ScenarioHero scenario={page} />
       <ScenarioOverview overview={page.overview} />
       <ScenarioDifficulty points={page.difficultyPoints} />
@@ -133,7 +135,10 @@ export default async function ScenarioPage({
         mistakes={page.commonMistakes}
         closingLine={page.mistakesClosingLine}
       />
-      <ScenarioInlineTool toolPreset={page.toolPreset} />
+      <ScenarioInlineTool
+        analyticsScenarioSlug={page.slug}
+        toolPreset={page.toolPreset}
+      />
       <RelatedScenarios items={page.relatedScenarios} />
       <ScenarioCTA cta={page.cta} />
     </PageContainer>
