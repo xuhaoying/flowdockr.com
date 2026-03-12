@@ -1,7 +1,9 @@
 'use client';
 
 import { CopyButton } from '@/components/tool/CopyButton';
+import { ResultCard } from '@/components/tool/ResultCard';
 import { BillingSupportLevel } from '@/types/billing';
+import { DealTone } from '@/types/deals';
 import type {
   FollowUpSuggestion,
   PresentableStrategyBlock,
@@ -9,7 +11,6 @@ import type {
 } from '@/types/generation';
 
 import { Link } from '@/core/i18n/navigation';
-import { Button } from '@/shared/components/ui/button';
 
 type ToolResultProps = {
   reply: string;
@@ -19,6 +20,7 @@ type ToolResultProps = {
   followUpSuggestion?: FollowUpSuggestion;
   historyEnabled?: boolean;
   supportLevel?: BillingSupportLevel;
+  selectedTone?: DealTone;
   loading?: boolean;
   onRegenerate?: () => void;
   onCopy?: (target: string) => void;
@@ -33,13 +35,16 @@ export function ToolResult({
   followUpSuggestion,
   historyEnabled = true,
   supportLevel = 'free',
+  selectedTone = 'professional',
   loading = false,
   onRegenerate,
   onCopy,
   savedHint,
 }: ToolResultProps) {
   const versions = normalizeReplyVersions(reply, replyVersions);
-  const primaryResponse = versions[0]?.text || reply;
+  const primaryVersion = versions[0];
+  const primaryResponse = primaryVersion?.text || reply;
+  const alternateVersions = versions.slice(1);
   const hasResult = Boolean(
     versions.length > 0 ||
       strategyBlock?.sections.length ||
@@ -84,6 +89,22 @@ export function ToolResult({
 
       {hasResult ? (
         <>
+          {primaryResponse ? (
+            <ResultCard
+              reply={primaryResponse}
+              whyThisWorks={buildWhyThisWorks({
+                strategyBlock,
+                selectedTone,
+                primaryVersionKey: primaryVersion?.key,
+              })}
+              toneLabel={getToneLabel(selectedTone, primaryVersion?.key)}
+              suggestedNextStep={buildSuggestedNextStep(followUpSuggestion)}
+              onCopy={() => onCopy?.('primary_response')}
+              onRegenerate={onRegenerate}
+              loading={loading}
+            />
+          ) : null}
+
           {strategyBlock ? (
             <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               <h4 className="text-sm font-semibold text-slate-900">
@@ -115,20 +136,19 @@ export function ToolResult({
             </section>
           ) : null}
 
-          {versions.length > 0 ? (
+          {alternateVersions.length > 0 ? (
             <section className="space-y-3">
               <div>
                 <h4 className="text-sm font-semibold text-slate-900">
-                  Possible responses
+                  Alternate versions
                 </h4>
                 <p className="text-sm text-slate-600">
-                  Choose the tone that best fits your relationship with the
-                  client.
+                  Compare additional tones before you send the reply.
                 </p>
               </div>
 
               <div className="space-y-3">
-                {versions.map((version) => (
+                {alternateVersions.map((version) => (
                   <div
                     key={version.key}
                     className="rounded-lg border border-slate-200 p-4"
@@ -144,6 +164,8 @@ export function ToolResult({
                       </div>
                       <CopyButton
                         value={version.text}
+                        idleLabel="Copy Reply"
+                        copiedLabel="Reply copied"
                         onCopied={() => onCopy?.(version.key)}
                       />
                     </div>
@@ -212,27 +234,10 @@ export function ToolResult({
             </section>
           ) : null}
 
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <h4 className="text-sm font-semibold text-slate-900">Actions</h4>
-            <div className="mt-3 flex flex-wrap items-center gap-3">
-              <CopyButton
-                value={primaryResponse}
-                idleLabel="Copy response"
-                copiedLabel="Response copied"
-                onCopied={() => onCopy?.('primary_response')}
-              />
-              {onRegenerate ? (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={onRegenerate}
-                  disabled={loading}
-                >
-                  Generate another version
-                </Button>
-              ) : null}
-              {historyEnabled ? (
+          {historyEnabled ? (
+            <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <h4 className="text-sm font-semibold text-slate-900">Actions</h4>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
                 <Link
                   href="/history"
                   className="inline-flex h-9 items-center rounded-md border border-slate-300 px-3 text-sm font-medium text-slate-900 transition-colors hover:border-slate-400"
@@ -241,9 +246,9 @@ export function ToolResult({
                     ? 'Saved to negotiation history'
                     : 'Save to negotiation history'}
                 </Link>
-              ) : null}
-            </div>
-          </section>
+              </div>
+            </section>
+          ) : null}
 
           {showUpgradeNudge ? (
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
@@ -301,4 +306,77 @@ function getResponseUsageHint(key: ReplyVersion['key']) {
     default:
       return 'Recommended when you want a clear and balanced response.';
   }
+}
+
+function buildWhyThisWorks(params: {
+  strategyBlock?: PresentableStrategyBlock;
+  selectedTone: DealTone;
+  primaryVersionKey?: ReplyVersion['key'];
+}) {
+  const whySection = params.strategyBlock?.sections.find((section) =>
+    /why/i.test(section.title)
+  );
+  if (whySection?.bullets.length) {
+    return joinBullets(whySection.bullets);
+  }
+
+  const objectiveSection = params.strategyBlock?.sections.find((section) =>
+    /objective|goal|approach/i.test(section.title)
+  );
+  if (objectiveSection?.bullets.length) {
+    return joinBullets(objectiveSection.bullets);
+  }
+
+  if (params.primaryVersionKey === 'firm' || params.selectedTone === 'firm') {
+    return 'This reply protects your pricing boundary, acknowledges the objection without sounding defensive, and avoids rewarding pushback with an immediate discount.';
+  }
+
+  if (
+    params.primaryVersionKey === 'softer' ||
+    params.selectedTone === 'friendly'
+  ) {
+    return 'This reply keeps the relationship warm, shows the client you heard the concern, and creates room to clarify priorities before changing the deal terms.';
+  }
+
+  return 'This reply acknowledges the concern, keeps the tone calm, and moves the conversation toward scope or budget clarity before you make concessions.';
+}
+
+function buildSuggestedNextStep(followUpSuggestion?: FollowUpSuggestion) {
+  if (followUpSuggestion?.direction?.trim()) {
+    return followUpSuggestion.direction.trim();
+  }
+
+  if (followUpSuggestion?.reply?.trim()) {
+    return 'Use the follow-up reply below if the client pushes again and you need to keep the negotiation moving.';
+  }
+
+  return '';
+}
+
+function getToneLabel(
+  selectedTone: DealTone,
+  primaryVersionKey?: ReplyVersion['key']
+) {
+  if (primaryVersionKey === 'firm' || selectedTone === 'firm') {
+    return 'Confident';
+  }
+
+  if (primaryVersionKey === 'softer' || selectedTone === 'friendly') {
+    return 'Soft';
+  }
+
+  return 'Neutral';
+}
+
+function joinBullets(bullets: string[]) {
+  const parts = bullets
+    .slice(0, 2)
+    .map((bullet) => bullet.trim().replace(/[.;:,\s]+$/, ''))
+    .filter(Boolean);
+
+  if (parts.length === 0) {
+    return '';
+  }
+
+  return `${parts.join('. ')}.`;
 }

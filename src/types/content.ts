@@ -70,9 +70,11 @@ export type ScenarioPageData = {
   metaDescription: string;
   heroSubheading: string;
   situationSummary: string;
+  commonClientMessages: string[];
   coreFear: string[];
   strategyPaths: StrategyPath[];
   exampleReplies: ExampleReplies;
+  commonMistakes: string[];
   faq: FAQItem[];
   nextDecisionLinks: NextDecisionLink[];
   toolCta: ToolCTA;
@@ -208,9 +210,11 @@ export const scenarioPageDataSchema = z.object({
   metaDescription: z.string().min(1),
   heroSubheading: z.string().min(1),
   situationSummary: z.string().min(1),
+  commonClientMessages: z.array(z.string().min(1)).default([]),
   coreFear: z.array(z.string().min(1)).min(1),
   strategyPaths: z.array(strategyPathSchema).length(3),
   exampleReplies: exampleRepliesSchema,
+  commonMistakes: z.array(z.string().min(1)).default([]),
   faq: z.array(faqItemSchema).min(1),
   nextDecisionLinks: z.array(nextDecisionLinkSchema).min(3),
   toolCta: toolCtaSchema,
@@ -219,7 +223,9 @@ export const scenarioPageDataSchema = z.object({
   notes: z.string(),
 });
 
-export const scenarioPageDataListSchema = z.array(scenarioPageDataSchema).min(1);
+export const scenarioPageDataListSchema = z
+  .array(scenarioPageDataSchema)
+  .min(1);
 
 export const decisionBucketSchema = z.object({
   title: z.string().min(1),

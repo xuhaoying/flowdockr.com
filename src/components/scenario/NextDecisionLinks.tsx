@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { ScenarioPageData } from '@/types/content';
+
+import { Link } from '@/core/i18n/navigation';
 
 type NextDecisionLinksProps = {
   scenario: ScenarioPageData;
@@ -13,10 +14,11 @@ export function NextDecisionLinks({ scenario }: NextDecisionLinksProps) {
   return (
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-        Next decision links
+        Next decision links and related scenarios
       </h2>
       <p className="text-sm text-slate-700">
-        Route to the next pricing decision state instead of generic related posts.
+        Move to the next decision state instead of dropping into generic related
+        posts.
       </p>
       <div className="grid gap-3 md:grid-cols-3">
         {scenario.nextDecisionLinks.map((link) => (
@@ -32,4 +34,3 @@ export function NextDecisionLinks({ scenario }: NextDecisionLinksProps) {
     </section>
   );
 }
-
