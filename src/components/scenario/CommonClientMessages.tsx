@@ -30,7 +30,7 @@ export function CommonClientMessages({ scenario }: CommonClientMessagesProps) {
               Example {index + 1}
             </p>
             <blockquote className="mt-3 text-sm leading-relaxed text-slate-700">
-              "{message}"
+              &ldquo;{message}&rdquo;
             </blockquote>
           </article>
         ))}
