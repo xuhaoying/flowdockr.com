@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocale } from 'next-intl';
-
-import { useToolGeneration, type ToolGenerationState } from '@/hooks/useToolGeneration';
+import {
+  useToolGeneration,
+  type ToolGenerationState,
+} from '@/hooks/useToolGeneration';
 import { trackEvent } from '@/lib/analytics';
 import { getCreditPackageById } from '@/lib/credits/packages';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
@@ -14,6 +15,7 @@ import {
 } from '@/types/billing';
 import { DealProjectType, DealTone } from '@/types/deals';
 import { GenerateReplyRequest } from '@/types/generation';
+import { useLocale } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/button';
 import { Textarea } from '@/shared/components/ui/textarea';
@@ -27,6 +29,8 @@ type ToolFormProps = {
   defaultScenarioSlug?: string;
   showScenarioSelector?: boolean;
   placeholder?: string;
+  rateContextLabel?: string;
+  rateContextPlaceholder?: string;
   sourcePage: 'home' | 'scenario' | 'tool';
   workspaceTitle?: string;
   workspaceDescription?: string;
@@ -79,6 +83,8 @@ export function ToolForm({
   defaultScenarioSlug,
   showScenarioSelector = true,
   placeholder,
+  rateContextLabel = 'Quote / scope / pricing context (optional)',
+  rateContextPlaceholder = 'Example: Quote was $2,400 for strategy, copy, and 2 revision rounds over 10 days.',
   sourcePage,
   workspaceTitle = 'Paste the exact pricing message',
   workspaceDescription = '2 free negotiation credits. No subscription required.',
@@ -101,6 +107,7 @@ export function ToolForm({
     useState<CreditPackageId | null>(null);
   const [projectType, setProjectType] = useState<DealProjectType>('other');
   const [tone, setTone] = useState<DealTone>('professional');
+  const [userRateContext, setUserRateContext] = useState('');
   const [savedHint, setSavedHint] = useState('');
 
   const resultRef = useRef<HTMLDivElement>(null);
@@ -371,6 +378,7 @@ export function ToolForm({
         sourcePage,
         serviceType: projectType,
         tone: mapToneToApiTone(tone),
+        userRateContext: userRateContext.trim() || undefined,
       });
 
       if (!response) {
@@ -404,7 +412,8 @@ export function ToolForm({
         return;
       }
 
-      generationSuccessPendingRef.current = hasRenderableGenerationResult(response);
+      generationSuccessPendingRef.current =
+        hasRenderableGenerationResult(response);
       pendingGenerationSupportLevelRef.current =
         response.supportLevel || usage.supportLevel;
       pendingGenerationRemainingCreditsRef.current = Math.max(
@@ -568,12 +577,8 @@ export function ToolForm({
         className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
       >
         <div className="space-y-1">
-          <p className="text-sm font-medium text-slate-700">
-            {workspaceTitle}
-          </p>
-          <p className="text-xs text-slate-600">
-            {workspaceDescription}
-          </p>
+          <p className="text-sm font-medium text-slate-700">{workspaceTitle}</p>
+          <p className="text-xs text-slate-600">{workspaceDescription}</p>
         </div>
 
         {showScenarioSelector ? (
@@ -589,44 +594,6 @@ export function ToolForm({
             label="Pricing situation"
           />
         ) : null}
-
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">
-            Project type
-          </span>
-          <select
-            value={projectType}
-            onChange={(event) => {
-              trackToolOpen();
-              setProjectType(event.target.value as DealProjectType);
-            }}
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
-          >
-            {PROJECT_TYPE_OPTIONS.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">Tone</span>
-          <select
-            value={tone}
-            onChange={(event) => {
-              trackToolOpen();
-              setTone(event.target.value as DealTone);
-            }}
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
-          >
-            {TONE_OPTIONS.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </label>
 
         <label className="block space-y-2">
           <span className="text-sm font-medium text-slate-800">
@@ -648,6 +615,67 @@ export function ToolForm({
             <span>{trimmedMessage.length}/4000</span>
           </div>
         </label>
+
+        <label className="block space-y-2">
+          <span className="text-sm font-medium text-slate-800">
+            {rateContextLabel}
+          </span>
+          <Textarea
+            value={userRateContext}
+            onChange={(event) => {
+              trackToolOpen();
+              setUserRateContext(event.target.value);
+            }}
+            rows={4}
+            maxLength={500}
+            placeholder={rateContextPlaceholder}
+            className="resize-y border-slate-300"
+          />
+          <p className="text-xs text-slate-600">
+            Add your current quote, scope, timing, or constraints so the draft
+            can protect the right boundary.
+          </p>
+        </label>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <label className="block space-y-2">
+            <span className="text-sm font-medium text-slate-800">Tone</span>
+            <select
+              value={tone}
+              onChange={(event) => {
+                trackToolOpen();
+                setTone(event.target.value as DealTone);
+              }}
+              className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
+            >
+              {TONE_OPTIONS.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block space-y-2">
+            <span className="text-sm font-medium text-slate-800">
+              Project type
+            </span>
+            <select
+              value={projectType}
+              onChange={(event) => {
+                trackToolOpen();
+                setProjectType(event.target.value as DealProjectType);
+              }}
+              className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
+            >
+              {PROJECT_TYPE_OPTIONS.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <Button
@@ -705,6 +733,7 @@ export function ToolForm({
             usage.entitlements.historyEnabled
           }
           supportLevel={result?.supportLevel || usage.supportLevel}
+          selectedTone={tone}
           loading={isLoading}
           onRegenerate={() => {
             void onGenerate('regenerate');
@@ -764,7 +793,11 @@ function getRemainingCredits(usage: UsageState) {
 function hasRenderableGenerationResult(
   result: Pick<
     NonNullable<ToolGenerationState['result']>,
-    'reply' | 'replyVersions' | 'strategyBlock' | 'riskInsights' | 'followUpSuggestion'
+    | 'reply'
+    | 'replyVersions'
+    | 'strategyBlock'
+    | 'riskInsights'
+    | 'followUpSuggestion'
   > | null
 ) {
   if (!result) {
