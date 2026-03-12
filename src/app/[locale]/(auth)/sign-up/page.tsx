@@ -1,3 +1,5 @@
+import { envConfigs } from '@/config';
+import { defaultLocale } from '@/config/locale';
 import { redirect } from 'next/navigation';
 
 export async function generateMetadata({
@@ -6,10 +8,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
+
   return {
     title: 'Sign up | Flowdockr',
     alternates: {
-      canonical: `/${locale}/signin`,
+      canonical: `${envConfigs.site_url}${localePrefix}/signin`,
     },
     robots: {
       index: false,

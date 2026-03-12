@@ -85,7 +85,7 @@ export async function generateMetadata({
   const page = getScenarioPageBySlug(slug);
   if (page) {
     const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-    const canonical = `${envConfigs.app_url}${localePrefix}${normalizePath(page.canonicalPath)}`;
+    const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(page.canonicalPath)}`;
 
     return buildScenarioPageMetadata({
       page,

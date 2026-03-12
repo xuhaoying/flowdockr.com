@@ -16,8 +16,8 @@ export async function generateMetadata({
 
   const canonicalUrl =
     locale !== envConfigs.locale
-      ? `${envConfigs.app_url}/${locale}/blog/${slug}`
-      : `${envConfigs.app_url}/blog/${slug}`;
+      ? `${envConfigs.site_url}/${locale}/blog/${slug}`
+      : `${envConfigs.site_url}/blog/${slug}`;
 
   const post = await getPost({ slug, locale });
   if (!post) {

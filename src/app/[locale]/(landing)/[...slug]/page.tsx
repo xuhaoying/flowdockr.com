@@ -28,8 +28,8 @@ export async function generateMetadata({
   // build canonical url
   canonicalUrl =
     locale !== envConfigs.locale
-      ? `${envConfigs.app_url}/${locale}/${staticPageSlug}`
-      : `${envConfigs.app_url}/${staticPageSlug}`;
+      ? `${envConfigs.site_url}/${locale}/${staticPageSlug}`
+      : `${envConfigs.site_url}/${staticPageSlug}`;
 
   // get static page content
   const staticPage = await getLocalPage({ slug: staticPageSlug, locale });

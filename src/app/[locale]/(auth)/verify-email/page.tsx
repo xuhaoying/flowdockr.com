@@ -18,8 +18,8 @@ export async function generateMetadata({
     alternates: {
       canonical:
         locale !== defaultLocale
-          ? `${envConfigs.app_url}/${locale}/verify-email`
-          : `${envConfigs.app_url}/verify-email`,
+          ? `${envConfigs.site_url}/${locale}/verify-email`
+          : `${envConfigs.site_url}/verify-email`,
     },
   };
 }

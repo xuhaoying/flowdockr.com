@@ -19,8 +19,45 @@ if (
 
 export type ConfigMap = Record<string, string>;
 
+const FLOWDOCKR_PRODUCTION_SITE_URL = 'https://www.flowdockr.com';
+const LOCAL_APP_URL = 'http://localhost:3000';
+
+function normalizeUrl(url: string) {
+  const trimmed = url.trim();
+  if (!trimmed) {
+    return trimmed;
+  }
+
+  try {
+    return new URL(trimmed).origin;
+  } catch {
+    return trimmed.replace(/\/+$/, '');
+  }
+}
+
+function getAppUrl() {
+  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  if (configuredUrl) {
+    return normalizeUrl(configuredUrl);
+  }
+
+  return process.env.NODE_ENV === 'production'
+    ? FLOWDOCKR_PRODUCTION_SITE_URL
+    : LOCAL_APP_URL;
+}
+
+function getSiteUrl(appUrl: string) {
+  return process.env.NODE_ENV === 'production'
+    ? FLOWDOCKR_PRODUCTION_SITE_URL
+    : appUrl;
+}
+
+const appUrl = getAppUrl();
+const siteUrl = getSiteUrl(appUrl);
+
 export const envConfigs: ConfigMap = {
-  app_url: process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+  app_url: appUrl,
+  site_url: siteUrl,
   app_name: process.env.NEXT_PUBLIC_APP_NAME ?? 'FlowDockr',
   app_description:
     process.env.NEXT_PUBLIC_APP_DESCRIPTION ??

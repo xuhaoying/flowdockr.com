@@ -6,7 +6,7 @@ import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
 import { getAllTools } from '@/lib/content/getToolBySlug';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = envConfigs.app_url.replace(/\/$/, '');
+  const baseUrl = envConfigs.site_url.replace(/\/$/, '');
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [

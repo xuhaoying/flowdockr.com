@@ -59,7 +59,7 @@ export async function generateMetadata({
   }
 
   const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.app_url}${localePrefix}${normalizePath(guide.url)}`;
+  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(guide.url)}`;
 
   return buildGuideMetadata({
     guide,

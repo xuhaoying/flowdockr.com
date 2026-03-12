@@ -65,7 +65,7 @@ export function getMetadata(
     if (imageUrl.startsWith('http')) {
       imageUrl = imageUrl;
     } else {
-      imageUrl = `${envConfigs.app_url}${imageUrl}`;
+      imageUrl = `${envConfigs.site_url}${imageUrl}`;
     }
 
     // app name
@@ -74,7 +74,8 @@ export function getMetadata(
       appName = envConfigs.app_name || '';
     }
 
-    const noIndex = options.noIndex || shouldBlockSearchIndexing(envConfigs.app_url);
+    const noIndex =
+      options.noIndex || shouldBlockSearchIndexing(envConfigs.site_url);
 
     return {
       title:
@@ -108,7 +109,7 @@ export function getMetadata(
         title,
         description,
         images: [imageUrl.toString()],
-        site: envConfigs.app_url,
+        site: envConfigs.site_url,
       },
 
       robots: {
@@ -146,7 +147,7 @@ async function getCanonicalUrl(canonicalUrl: string, locale: string) {
       canonicalUrl = `/${canonicalUrl}`;
     }
 
-    canonicalUrl = `${envConfigs.app_url}${
+    canonicalUrl = `${envConfigs.site_url}${
       !locale || locale === defaultLocale ? '' : `/${locale}`
     }${canonicalUrl}`;
 
