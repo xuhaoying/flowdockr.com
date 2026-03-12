@@ -109,9 +109,12 @@ export function ToolForm({
   const paywallTriggerTypeRef = useRef('usage_state');
   const generationSuccessPendingRef = useRef(false);
   const pendingGenerationScenarioSlugRef = useRef('');
+  const pendingGenerationSupportLevelRef = useRef<BillingSupportLevel>('free');
+  const pendingGenerationRemainingCreditsRef = useRef(0);
   const generateInFlightRef = useRef(false);
   const lastGenerateAttemptAtRef = useRef(0);
   const checkoutInFlightRef = useRef(false);
+  const paywallRemainingCreditsRef = useRef(0);
 
   const { isLoading, error, result, submit, setResult } = useToolGeneration();
 
@@ -156,6 +159,7 @@ export function ToolForm({
   const canSubmit = !validationError && !isLoading;
   const trackedScenarioSlug = analyticsScenarioSlug || scenarioSlug;
   const paywallVisible = upgradeVisible || isExhausted;
+  const currentRemainingCredits = getRemainingCredits(usage);
 
   const trackToolOpen = (scenarioSlugOverride?: string) => {
     if (toolOpenTrackedRef.current) {
@@ -252,13 +256,33 @@ export function ToolForm({
       paywallTriggerTypeRef.current === 'usage_state'
         ? trackedScenarioSlug
         : pendingGenerationScenarioSlugRef.current || trackedScenarioSlug;
+    const paywallRemainingCredits =
+      paywallTriggerTypeRef.current === 'usage_state'
+        ? currentRemainingCredits
+        : paywallRemainingCreditsRef.current;
 
     trackEvent('paywall_trigger', {
       scenario_slug: paywallScenarioSlug,
       locale,
       trigger_type: paywallTriggerTypeRef.current || 'usage_state',
     });
-  }, [locale, paywallVisible, trackedScenarioSlug]);
+
+    if (sourcePage === 'scenario') {
+      trackEvent('fd_paywall_shown', {
+        scenario_slug: paywallScenarioSlug,
+        support_level: usage.supportLevel,
+        remaining_credits: paywallRemainingCredits,
+        page_type: 'scenario',
+      });
+    }
+  }, [
+    currentRemainingCredits,
+    locale,
+    paywallVisible,
+    sourcePage,
+    trackedScenarioSlug,
+    usage.supportLevel,
+  ]);
 
   useEffect(() => {
     if (
@@ -269,14 +293,22 @@ export function ToolForm({
     }
 
     generationSuccessPendingRef.current = false;
-    trackEvent('generation_success', {
+    if (sourcePage !== 'scenario') {
+      return;
+    }
+
+    trackEvent('fd_generation_success', {
       scenario_slug:
         pendingGenerationScenarioSlugRef.current || trackedScenarioSlug,
-      locale,
+      support_level: pendingGenerationSupportLevelRef.current,
+      remaining_credits: pendingGenerationRemainingCreditsRef.current,
+      page_type: 'scenario',
     });
-  }, [locale, result, trackedScenarioSlug]);
+  }, [result, sourcePage, trackedScenarioSlug]);
 
-  const onGenerate = async () => {
+  const onGenerate = async (
+    trigger: 'main_button' | 'regenerate' = 'main_button'
+  ) => {
     generationSuccessPendingRef.current = false;
     pendingGenerationScenarioSlugRef.current = trackedScenarioSlug;
 
@@ -300,6 +332,7 @@ export function ToolForm({
 
     lastGenerateAttemptAtRef.current = now;
     generateInFlightRef.current = true;
+    paywallRemainingCreditsRef.current = currentRemainingCredits;
 
     try {
       trackToolOpen();
@@ -307,9 +340,18 @@ export function ToolForm({
         scenario_slug: trackedScenarioSlug,
         locale,
       });
+      if (sourcePage === 'scenario' && trigger === 'main_button') {
+        trackEvent('fd_tool_start', {
+          scenario_slug: trackedScenarioSlug,
+          project_type: projectType,
+          tone,
+          page_type: 'scenario',
+        });
+      }
 
       if (isExhausted) {
         paywallTriggerTypeRef.current = 'free_limit_precheck';
+        paywallRemainingCreditsRef.current = currentRemainingCredits;
         setUpgradeVisible(true);
         trackEvent('free_limit_reached', {
           scenarioSlug,
@@ -343,6 +385,10 @@ export function ToolForm({
       if (!response.success) {
         if (response.requiresUpgrade) {
           paywallTriggerTypeRef.current = 'free_limit_response';
+          paywallRemainingCreditsRef.current = Math.max(
+            0,
+            response.creditsRemaining || 0
+          );
           setUpgradeVisible(true);
           trackEvent('free_limit_reached', {
             scenarioSlug,
@@ -359,6 +405,12 @@ export function ToolForm({
       }
 
       generationSuccessPendingRef.current = hasRenderableGenerationResult(response);
+      pendingGenerationSupportLevelRef.current =
+        response.supportLevel || usage.supportLevel;
+      pendingGenerationRemainingCreditsRef.current = Math.max(
+        0,
+        response.creditsRemaining || 0
+      );
       setUpgradeVisible(false);
       setSavedHint(
         response.entitlements?.historyEnabled
@@ -598,7 +650,13 @@ export function ToolForm({
         </label>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button type="button" onClick={onGenerate} disabled={!canSubmit}>
+          <Button
+            type="button"
+            onClick={() => {
+              void onGenerate('main_button');
+            }}
+            disabled={!canSubmit}
+          >
             {isLoading ? 'Preparing guidance...' : submitLabel}
           </Button>
           {isExhausted ? (
@@ -648,7 +706,9 @@ export function ToolForm({
           }
           supportLevel={result?.supportLevel || usage.supportLevel}
           loading={isLoading}
-          onRegenerate={onGenerate}
+          onRegenerate={() => {
+            void onGenerate('regenerate');
+          }}
           onCopy={onCopy}
           savedHint={savedHint}
         />
@@ -692,6 +752,13 @@ function toUserErrorMessage(errorCode: string) {
 
 function formatFreeReplies(value: number) {
   return `${value} free ${value === 1 ? 'credit' : 'credits'}`;
+}
+
+function getRemainingCredits(usage: UsageState) {
+  return Math.max(
+    0,
+    usage.loggedIn ? usage.creditsBalance : usage.remainingFreeGenerations
+  );
 }
 
 function hasRenderableGenerationResult(
