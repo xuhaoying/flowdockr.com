@@ -28,6 +28,11 @@
     "metaDescription": "Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with Flowdockr.",
     "heroSubheading": "Handle price pushback after sending a proposal without discounting too early.",
     "situationSummary": "This usually happens after a prospect reviews your proposal and says the price feels high. In many cases, this is a negotiation signal rather than a true rejection.",
+    "commonClientMessages": [
+      "Thanks for the proposal. The price is higher than we expected for this scope.",
+      "We like the direction, but the quote feels expensive compared with what we had in mind.",
+      "This is more than our budget right now. Is there any flexibility on price?"
+    ],
     "coreFear": [
       "Discount too early and lose leverage",
       "Sound too rigid and stall the deal",
@@ -70,6 +75,11 @@
       "warm": "I understand the quote may feel high at first glance. The pricing reflects the scope and level of work involved, but if budget is the main constraint, I'd be happy to explore a leaner version that still gets you the key result.",
       "firm": "The quote is based on the scope and standard required for the project. If needed, we can discuss a reduced scope, but I'd prefer not to compromise the quality by lowering the rate without changing the work involved."
     },
+    "commonMistakes": [
+      "Trying to justify every line item before you understand whether the objection is real budget pressure or just negotiation.",
+      "Offering a discount before you have tested whether scope, timing, or payment terms are the actual blocker.",
+      "Replying defensively and turning the conversation into a debate about whether your work is worth the rate."
+    ],
     "faq": [
       {
         "question": "Should you lower your rate immediately when a prospect says your quote is too high?",
@@ -319,9 +329,7 @@
       "toolSlug": "price-negotiation-email-generator"
     },
     "hubParent": "/pricing/",
-    "futureBridgeTo": [
-      "/scope/"
-    ],
+    "futureBridgeTo": ["/scope/"],
     "notes": "Budget mismatch pillar and core entry point into scope-reduction logic."
   },
   {
@@ -448,9 +456,7 @@
       "more revisions same price",
       "added work original quote"
     ],
-    "doNotCompeteWith": [
-      "budget-lower-than-expected"
-    ],
+    "doNotCompeteWith": ["budget-lower-than-expected"],
     "url": "/pricing/more-work-same-price/",
     "h1": "More work for the same price",
     "metaTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
@@ -534,9 +540,7 @@
       "toolSlug": "reply-generator"
     },
     "hubParent": "/pricing/",
-    "futureBridgeTo": [
-      "/scope/"
-    ],
+    "futureBridgeTo": ["/scope/"],
     "notes": "Bridge page from pricing cluster into future scope cluster."
   },
   {
@@ -643,9 +647,7 @@
       "toolSlug": "reply-generator"
     },
     "hubParent": "/pricing/",
-    "futureBridgeTo": [
-      "/client-red-flags/"
-    ],
+    "futureBridgeTo": ["/client-red-flags/"],
     "notes": "High-anxiety page with strong practical conversion potential."
   },
   {

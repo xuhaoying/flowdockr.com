@@ -1,13 +1,12 @@
-import { Link } from '@/core/i18n/navigation';
 import type { ScenarioPageData } from '@/types/content';
+
+import { Link } from '@/core/i18n/navigation';
 
 type PricingScenarioHeroProps = {
   scenario: ScenarioPageData;
 };
 
-export function PricingScenarioHero({
-  scenario,
-}: PricingScenarioHeroProps) {
+export function PricingScenarioHero({ scenario }: PricingScenarioHeroProps) {
   return (
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:p-6">
       <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
@@ -36,9 +35,11 @@ export function PricingScenarioHero({
       <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
         {scenario.h1}
       </h1>
-      <p className="max-w-3xl text-base text-slate-700">{scenario.heroSubheading}</p>
+      <p className="max-w-3xl text-base text-slate-700">
+        {scenario.heroSubheading}
+      </p>
       <a
-        href="#scenario-tool-cta"
+        href="#scenario-inline-tool"
         className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
       >
         Draft a reply for this situation
