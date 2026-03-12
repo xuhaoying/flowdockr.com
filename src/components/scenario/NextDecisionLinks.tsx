@@ -14,7 +14,7 @@ export function NextDecisionLinks({ scenario }: NextDecisionLinksProps) {
   return (
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-        Related scenarios and next decisions
+        Next decision links and related scenarios
       </h2>
       <p className="text-sm text-slate-700">
         Move to the next decision state instead of dropping into generic related
