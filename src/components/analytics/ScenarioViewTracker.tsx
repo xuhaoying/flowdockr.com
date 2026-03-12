@@ -34,11 +34,21 @@ export function ScenarioViewTracker({
     lastScenarioViewKey = key;
     lastScenarioViewAt = now;
 
-    trackEvent('scenario_view', {
+    trackEvent('fd_scenario_view', {
       scenario_slug: scenarioSlug,
-      locale,
+      page_type: 'scenario',
+      referrer: document.referrer || 'direct',
+      device_type: getDeviceType(),
     });
   }, [locale, pathname, scenarioSlug]);
 
   return null;
+}
+
+function getDeviceType() {
+  if (typeof window === 'undefined') {
+    return 'desktop';
+  }
+
+  return window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop';
 }
