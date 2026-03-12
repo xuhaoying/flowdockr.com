@@ -160,7 +160,7 @@ export function ReplyGeneratorCard({
       return;
     }
 
-    trackEvent('paywall_shown', {
+    trackEvent('fd_paywall_shown', {
       scenarioSlug,
       serviceType,
       tone,
@@ -284,7 +284,7 @@ export function ReplyGeneratorCard({
             : prev.creditsBalance,
       }));
 
-      trackEvent('generation_success', {
+      trackEvent('fd_generation_success', {
         scenarioSlug,
         serviceType,
         tone,
