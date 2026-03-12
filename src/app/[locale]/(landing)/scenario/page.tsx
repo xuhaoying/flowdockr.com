@@ -28,7 +28,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.app_url}${localePrefix}${normalizePath(
+  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(
     scenarioHubData.canonicalPath
   )}`;
 

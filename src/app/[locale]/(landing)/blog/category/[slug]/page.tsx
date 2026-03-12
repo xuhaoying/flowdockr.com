@@ -36,8 +36,8 @@ export async function generateMetadata({
     alternates: {
       canonical:
         locale !== envConfigs.locale
-          ? `${envConfigs.app_url}/${locale}/blog/category/${slug}`
-          : `${envConfigs.app_url}/blog/category/${slug}`,
+          ? `${envConfigs.site_url}/${locale}/blog/category/${slug}`
+          : `${envConfigs.site_url}/blog/category/${slug}`,
     },
   };
 }

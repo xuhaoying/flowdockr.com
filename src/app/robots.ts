@@ -1,11 +1,17 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
 
 import { envConfigs } from '@/config';
-import { shouldBlockSearchIndexing } from '@/shared/lib/search-indexing';
+import { shouldBlockSearchIndexingForHost } from '@/shared/lib/search-indexing';
 
-export default function robots(): MetadataRoute.Robots {
-  const appUrl = envConfigs.app_url;
-  const blockSearchIndexing = shouldBlockSearchIndexing(appUrl);
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const appUrl = envConfigs.site_url;
+  const headersList = await headers();
+  const requestHost =
+    headersList.get('x-forwarded-host') ||
+    headersList.get('host') ||
+    new URL(appUrl).host;
+  const blockSearchIndexing = shouldBlockSearchIndexingForHost(requestHost);
 
   if (blockSearchIndexing) {
     return {

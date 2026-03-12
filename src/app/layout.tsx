@@ -27,7 +27,7 @@ export default async function RootLayout({
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || '';
 
   // app url
-  const appUrl = envConfigs.app_url || '';
+  const appUrl = envConfigs.site_url || '';
 
   // ads components
   let adsMetaTags = null;
