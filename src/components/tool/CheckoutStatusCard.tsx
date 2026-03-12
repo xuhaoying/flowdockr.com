@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Link } from '@/core/i18n/navigation';
+import { trackEvent } from '@/lib/analytics';
 import { BillingSupportLevel } from '@/types/billing';
 import { Button } from '@/shared/components/ui/button';
 
@@ -123,6 +124,27 @@ export function CheckoutStatusCard({
     status.status === 'failed' ||
     status.status === 'canceled' ||
     status.status === 'refunded';
+  const purchaseTrackedRef = useRef(false);
+
+  useEffect(() => {
+    if (!isFinalized || purchaseTrackedRef.current) {
+      return;
+    }
+
+    purchaseTrackedRef.current = true;
+    trackEvent('fd_purchase_success', {
+      purchased_plan: status.purchasedPlan || 'unknown',
+      credits_added: Math.max(0, status.creditsAdded || 0),
+      return_to: continuePath,
+      page_type: 'checkout',
+    });
+  }, [
+    continuePath,
+    isFinalized,
+    status.creditsAdded,
+    status.creditsGranted,
+    status.purchasedPlan,
+  ]);
 
   return (
     <section className="space-y-4 rounded-lg border p-6">
