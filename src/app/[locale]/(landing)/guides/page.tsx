@@ -10,7 +10,7 @@ export const generateMetadata = getMetadata({
   title: 'Pricing Negotiation Guides | Flowdockr',
   description:
     'Practical guides for freelance pricing negotiation, discount decisions, and scope-based deal structuring.',
-  canonicalUrl: '/guides/',
+  canonicalUrl: '/guides',
 });
 
 const RECOMMENDED_GUIDE_ORDER = [

@@ -10,6 +10,7 @@ export const generateMetadata = getMetadata({
   canonicalUrl: '/history',
   keywords:
     'negotiation library, freelancer deal history, saved client replies',
+  noIndex: true,
 });
 
 export default async function HistoryPage({

@@ -5,7 +5,6 @@ import NextTopLoader from 'nextjs-toploader';
 
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { envConfigs } from '@/config';
-import { locales } from '@/config/locale';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
 import { getAllConfigs } from '@/shared/models/config';
 import { getAdsService } from '@/shared/services/ads';
@@ -98,20 +97,6 @@ export default async function RootLayout({
             name="google-site-verification"
             content={googleSearchConsoleVerification}
           />
-        ) : null}
-
-        {/* inject locales */}
-        {locales ? (
-          <>
-            {locales.map((loc) => (
-              <link
-                key={loc}
-                rel="alternate"
-                hrefLang={loc}
-                href={`${appUrl}${loc === 'en' ? '' : `/${loc}`}`}
-              />
-            ))}
-          </>
         ) : null}
 
         {/* inject ads meta tags */}

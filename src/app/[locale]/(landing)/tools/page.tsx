@@ -10,7 +10,7 @@ export const generateMetadata = getMetadata({
   title: 'Negotiation Tools | Flowdockr',
   description:
     'Use pricing-focused negotiation tools to draft client replies and move deal conversations forward.',
-  canonicalUrl: '/tools/',
+  canonicalUrl: '/tools',
 });
 
 const STARTING_SCENARIO_SLUGS = [

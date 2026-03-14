@@ -16,7 +16,7 @@ const pricingHubPage = getPricingHub();
 export const generateMetadata = getMetadata({
   title: pricingHubPage.metaTitle,
   description: pricingHubPage.metaDescription,
-  canonicalUrl: pricingHubPage.url,
+  canonicalUrl: '/pricing',
   keywords:
     'freelance pricing negotiation scenarios, quote pushback, discount requests, budget mismatch, scope pressure',
 });
