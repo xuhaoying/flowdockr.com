@@ -53,7 +53,7 @@ export default async function PromptEditPage({
         name: 'image',
         type: 'upload_image',
         title: 'Image',
-        tip: 'Upload showcase image',
+        tip: 'Upload prompt thumbnail',
       },
       {
         name: 'promptTitle',

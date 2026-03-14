@@ -2,7 +2,7 @@
 
 ## Principles
 - Keep logic feature-scoped and testable.
-- Use existing ShipAny infra for user, credits, subscription, and billing.
+- Use existing Flowdockr platform infra for user, credits, subscription, and billing.
 - Do not alter framework internals.
 
 ## Core Modules

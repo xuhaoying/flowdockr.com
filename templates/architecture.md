@@ -3,7 +3,7 @@
 ## Principles
 - Keep core business logic under `/src/core`.
 - Keep route handlers under `/src/app/api`.
-- Do not modify ShipAny auth, billing, or admin framework internals.
+- Do not modify shared auth, billing, or admin framework internals unless the task explicitly requires it.
 
 ## Core Modules
 1. **Module A**

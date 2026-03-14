@@ -6,7 +6,7 @@ You are implementing and refining FlowDockr Scope Guard in the existing codebase
 1. Follow `prd.md`, `architecture.md`, and `filetree.md` in this folder.
 2. Keep MVP narrow: Scope Guard only.
 3. Do not introduce new frameworks.
-4. Do not modify ShipAny auth/billing/admin internals.
+4. Do not modify shared auth, billing, or admin internals unless the task explicitly requires it.
 5. Keep business logic under `/src/core/flowdockr/scope/`.
 
 ## Tasks (in order)
