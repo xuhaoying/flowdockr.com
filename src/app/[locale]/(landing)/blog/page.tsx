@@ -8,6 +8,7 @@ export const generateMetadata = getMetadata({
   description:
     'Flowdockr blog is in progress. For now, use scenario pages and the negotiation reply tool.',
   canonicalUrl: '/blog',
+  noIndex: true,
 });
 
 export default async function BlogPage({
