@@ -1,21 +1,21 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
 ## Project Overview
 
-ShipAny Template Two is a modern full-stack SaaS application for AI-powered content generation with integrated payment processing. It supports multiple deployment targets (Vercel, Cloudflare, Docker) and payment providers (Stripe, PayPal, Creem).
+Flowdockr is an AI negotiation assistant for pricing conversations. The product centers on scenario-driven reply generation, negotiation support, credits-based usage, and reusable deal history. The codebase supports Vercel, Cloudflare, and Docker deployments, with billing integrations such as Stripe, PayPal, and Creem.
 
 ## Essential Commands
 
-**Development:**
+**Development**
 ```bash
 pnpm dev              # Start development server with Turbopack
 pnpm build            # Production build
 pnpm start            # Start production server
 ```
 
-**Database Operations:**
+**Database Operations**
 ```bash
 pnpm db:generate      # Generate Drizzle migrations
 pnpm db:migrate       # Run database migrations
@@ -23,14 +23,14 @@ pnpm db:push          # Push schema changes
 pnpm db:studio        # Open Drizzle Studio
 ```
 
-**Code Quality:**
+**Code Quality**
 ```bash
 pnpm lint             # Run ESLint
 pnpm format           # Format with Prettier
 pnpm format:check     # Check formatting
 ```
 
-**Cloudflare Deployment:**
+**Cloudflare Deployment**
 ```bash
 pnpm cf:preview       # Preview on Cloudflare
 pnpm cf:deploy        # Deploy to Cloudflare
@@ -39,44 +39,37 @@ pnpm cf:typegen       # Generate Cloudflare types
 
 ## Architecture Overview
 
-**App Router Structure:**
-```
+**App Router Structure**
+```text
 src/app/[locale]/
-├── (landing)/          # Public pages (home, pricing, etc.)
+├── (landing)/          # Public landing, pricing, guides, scenario, and tool pages
 ├── (admin)/            # Admin dashboard and settings
-├── (app)/              # Main application UI
+├── (app)/              # Signed-in product experience
 └── api/                # API routes
 ```
 
-**Core Systems:**
-- **Authentication**: `src/core/auth/` - Better-auth integration with dynamic configuration
-- **Database**: `src/core/db/` - Drizzle ORM with PostgreSQL/SQLite support
-- **RBAC**: `src/core/rbac/` - Role-based access control
-- **Internationalization**: `src/core/i18n/` - next-intl with Chinese/English support
+**Core Systems**
+- **Authentication**: `src/core/auth/` with better-auth
+- **Database**: `src/core/db/` with Drizzle ORM and multiple database targets
+- **RBAC**: `src/core/rbac/` for admin and internal permissions
+- **Internationalization**: `src/core/i18n/` with next-intl locale handling
 
-**Key Patterns:**
+**Key Patterns**
+1. OAuth, billing, email, analytics, and storage settings are managed through `/admin/settings` and stored in the database.
+2. Public marketing pages and signed-in product flows share the same auth and billing primitives.
+3. Payment integrations flow through `src/shared/services/payment.ts`.
+4. Shared marketing and dashboard blocks live under `src/shared/blocks/`.
 
-1. **Configuration Management**: OAuth, payment, and storage settings are managed via Admin UI (`/admin/settings`) in the database, not environment variables.
-
-2. **Database Connection**: Supports both singleton and serverless patterns via `DB_SINGLETON_ENABLED` env var. Automatically detects Cloudflare Workers environment.
-
-3. **Payment Integration**: Multi-provider support through `src/shared/services/payment.ts` with provider-specific implementations.
-
-4. **Theme System**: Dynamic theming via `src/core/theme/` with CSS variables and Tailwind integration.
-
-**Environment Requirements:**
+**Environment Requirements**
 - `DATABASE_URL`: PostgreSQL connection string
-- `AUTH_SECRET`: 32-character secret for better-auth (generate with `openssl rand -base64 32`)
-- `NEXT_PUBLIC_APP_URL`: Application URL
+- `AUTH_SECRET`: better-auth secret
+- `NEXT_PUBLIC_APP_URL`: application URL
 
-**TypeScript Path Mapping:**
+**TypeScript Path Mapping**
 - `@/*` maps to `./src/*`
 
-**AI Content Generation Features:**
-- Image generation
-- Audio generation  
-- Music generation
-- Video generation
-- Chatbot interface
-
-**Database Schema:** Located in `src/core/db/schema/` with Drizzle ORM definitions for users, subscriptions, credits, and AI generation records.
+**Primary Product Surfaces**
+- Pricing and scenario landing pages
+- Negotiation reply generation tools
+- Credits and payment flows
+- Saved history and dashboard views

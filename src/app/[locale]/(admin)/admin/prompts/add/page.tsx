@@ -48,7 +48,7 @@ export default async function PromptAddPage({
         name: 'image',
         type: 'upload_image',
         title: 'Image',
-        tip: 'Upload showcase image',
+        tip: 'Upload prompt thumbnail',
       },
       {
         name: 'promptTitle',

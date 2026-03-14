@@ -1,12 +1,12 @@
 # Codex Agent Prompt Template
 
-You are implementing `<PRODUCT_NAME>` on top of the existing ShipAny codebase.
+You are implementing `<PRODUCT_NAME>` inside the existing Flowdockr codebase.
 
 ## Hard Constraints
 1. Follow `prd.md`, `architecture.md`, and `filetree.md` exactly.
 2. Implement only MVP scope.
 3. Do not introduce new frameworks or major dependencies.
-4. Do not modify ShipAny authentication, billing core, or admin framework internals.
+4. Do not rewrite shared authentication, billing core, or admin framework internals unless the task explicitly requires it.
 5. Keep business logic in `/src/core`; keep route handlers in `/src/app/api`.
 
 ## Implementation Order

@@ -2,10 +2,10 @@
   "sidebar": {
     "header": {
       "brand": {
-        "title": "Nano Banana Pro Chat",
+        "title": "Flowdockr Assistant",
         "logo": {
           "src": "/logo.png",
-          "alt": "Nano Banana Pro Chat"
+          "alt": "Flowdockr Assistant"
         },
         "url": "/chat"
       },
@@ -51,38 +51,7 @@
     },
     "footer": {
       "nav": {
-        "items": [
-          {
-            "title": "首页",
-            "url": "/",
-            "icon": "Home",
-            "target": "_blank"
-          },
-          {
-            "title": "GitHub",
-            "url": "https://github.com/your-app-name",
-            "icon": "Github",
-            "target": "_blank"
-          },
-          {
-            "title": "推特",
-            "url": "https://twitter.com/your-app-name",
-            "icon": "RiTwitterXFill",
-            "target": "_blank"
-          },
-          {
-            "title": "Discord",
-            "url": "https://discord.gg/your-app-name",
-            "icon": "RiDiscordFill",
-            "target": "_blank"
-          },
-          {
-            "title": "邮箱",
-            "url": "mailto:support@your-domain.com",
-            "icon": "Mail",
-            "target": "_blank"
-          }
-        ]
+      "items": []
       },
       "show_theme": true,
       "show_locale": false
@@ -101,16 +70,16 @@
     }
   },
   "generator": {
-    "title": "今天有什么可以帮到你？",
-    "input_placeholder": "你可以问我任何问题"
+    "title": "你要处理哪条定价谈判消息？",
+    "input_placeholder": "粘贴客户原话或当前谈判压力"
   },
   "history": {
-    "title": "历史对话",
-    "description": "查看你之前的对话。",
+    "title": "对话历史",
+    "description": "查看已保存的谈判对话，并重新打开之前的交流。",
     "empty": "暂无对话记录。",
     "error": "加载对话列表失败。",
     "retry": "重试",
-    "signin": "登录后可查看历史对话。",
+    "signin": "登录后可查看你的 Flowdockr 对话历史。",
     "summary": "正在显示第 {from}-{to} 条，共 {total} 条",
     "perPage": "每页",
     "prev": "上一页",

@@ -1,21 +1,20 @@
 {
-  "name": "shipany-template-nano-banana",
+  "name": "flowdockr",
   "version": "1.8.2",
   "private": true,
-  "author": "ShipAny.ai",
-  "homepage": "https://shipany.ai",
+  "author": "Flowdockr",
+  "homepage": "https://www.flowdockr.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shipanyai/shipany-template-two"
+    "url": "https://github.com/xuhaoying/flowdockr.com"
   },
   "keywords": [
-    "shipany",
-    "shipany-two",
-    "shipany-template-two",
-    "ai-saas-boilerplate",
-    "ai-saas-template",
-    "ai-saas-framework",
-    "ai-saas-development"
+    "flowdockr",
+    "negotiation-assistant",
+    "pricing-negotiation",
+    "freelancer-tools",
+    "reply-generator",
+    "deal-history"
   ],
   "scripts": {
     "dev": "next dev --turbopack",

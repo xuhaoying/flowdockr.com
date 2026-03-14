@@ -559,7 +559,7 @@ export const chatMessage = table(
   ]
 );
 
-// Business tables for nano-banana (hairstyle generation)
+// Business tables for Flowdockr prompt management
 export const prompt = table(
   'prompt',
   {
@@ -580,26 +580,5 @@ export const prompt = table(
   (table) => [
     index('idx_prompt_status').on(table.status),
     index('idx_prompt_created_at').on(table.createdAt),
-  ]
-);
-
-export const showcase = table(
-  'showcase',
-  {
-    id: varchar191('id').primaryKey(),
-    userId: varchar191('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    title: varchar('title', { length: 255 }).notNull(),
-    prompt: text('prompt'),
-    image: text('image').notNull(),
-    tags: text('tags'),
-    description: text('description'),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-  },
-  (table) => [
-    index('idx_showcase_created_at').on(table.createdAt),
-    index('idx_showcase_user_id').on(table.userId),
-    index('idx_showcase_tags').on(table.tags),
   ]
 );
