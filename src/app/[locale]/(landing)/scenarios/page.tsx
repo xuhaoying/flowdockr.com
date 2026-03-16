@@ -2,6 +2,7 @@ import { permanentRedirect } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
 import { defaultLocale } from '@/config/locale';
+import { getLegacyScenariosHubRedirectPath } from '@/lib/routing/legacyScenarioRedirects';
 
 export default async function LegacyScenariosPageRedirect({
   params,
@@ -12,6 +13,8 @@ export default async function LegacyScenariosPageRedirect({
   setRequestLocale(locale);
 
   permanentRedirect(
-    locale === defaultLocale ? '/scenario' : `/${locale}/scenario`
+    locale === defaultLocale
+      ? getLegacyScenariosHubRedirectPath()
+      : `/${locale}${getLegacyScenariosHubRedirectPath()}`
   );
 }

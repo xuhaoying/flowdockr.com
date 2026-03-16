@@ -3,25 +3,58 @@ import { getSessionCookie } from 'better-auth/cookies';
 import createIntlMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/core/i18n/config';
+import { defaultLocale } from '@/config/locale';
+import {
+  getLegacyScenarioRedirectPath,
+  getLegacyScenariosHubRedirectPath,
+} from '@/lib/routing/legacyScenarioRedirects';
 import { shouldBlockSearchIndexingForHost } from '@/shared/lib/search-indexing';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+function normalizePath(path: string) {
+  if (path.length > 1 && path.endsWith('/')) {
+    return path.slice(0, -1);
+  }
+
+  return path;
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // Handle internationalization first
-  const intlResponse = intlMiddleware(request);
 
   // Extract locale from pathname
   const locale = pathname.split('/')[1];
   const isValidLocale = routing.locales.includes(locale as any);
-  const pathWithoutLocale = isValidLocale
-    ? pathname.slice(locale.length + 1)
-    : pathname;
+  const pathWithoutLocale = normalizePath(
+    isValidLocale ? pathname.slice(locale.length + 1) || '/' : pathname
+  );
   const requestHost =
     request.headers.get('x-forwarded-host') || request.nextUrl.host || '';
   const blockSearchIndexing = shouldBlockSearchIndexingForHost(requestHost);
+
+  if (pathWithoutLocale === '/scenarios') {
+    return redirectLegacyScenarioPath(
+      request,
+      isValidLocale ? locale : null,
+      getLegacyScenariosHubRedirectPath()
+    );
+  }
+
+  if (pathWithoutLocale.startsWith('/scenarios/')) {
+    const slug = pathWithoutLocale.slice('/scenarios/'.length);
+    if (slug) {
+      return redirectLegacyScenarioPath(
+        request,
+        isValidLocale ? locale : null,
+        getLegacyScenarioRedirectPath(slug)
+      );
+    }
+  }
+
+  // Handle internationalization after redirect checks so legacy URLs emit a true
+  // HTTP redirect instead of a rendered App Router redirect payload.
+  const intlResponse = intlMiddleware(request);
 
   // Only check authentication for admin routes
   if (
@@ -82,6 +115,21 @@ export async function proxy(request: NextRequest) {
 
   // For all other routes (including /, /sign-in, /sign-up, /sign-out), just return the intl response
   return intlResponse;
+}
+
+function redirectLegacyScenarioPath(
+  request: NextRequest,
+  locale: string | null,
+  targetPath: string
+) {
+  const redirectUrl = request.nextUrl.clone();
+  const localizedTarget =
+    locale && locale !== defaultLocale ? `/${locale}${targetPath}` : targetPath;
+
+  redirectUrl.pathname = localizedTarget;
+  redirectUrl.search = '';
+
+  return NextResponse.redirect(redirectUrl, 308);
 }
 
 // Export proxy as middleware for Next.js
