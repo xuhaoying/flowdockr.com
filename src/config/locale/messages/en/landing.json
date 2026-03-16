@@ -13,7 +13,7 @@
       "items": [
         {
           "title": "Scenarios",
-          "url": "/scenarios",
+          "url": "/scenario",
           "icon": "Handshake"
         },
         {
@@ -31,7 +31,7 @@
     "buttons": [
       {
         "title": "Open Scenario Tool",
-        "url": "/scenarios",
+        "url": "/scenario",
         "icon": "Zap",
         "variant": "default"
       }
@@ -54,7 +54,7 @@
       {
         "title": "Start With a Scenario",
         "icon": "Zap",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "variant": "default"
       }
@@ -71,19 +71,19 @@
         "title": "Lowball offer from client",
         "description": "Reply firmly without sounding defensive, and re-anchor around scope and value.",
         "icon": "Handshake",
-        "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+        "url": "/scenario/quote-too-high"
       },
       {
         "title": "Client asks for a discount",
         "description": "Hold your positioning while offering practical scope alternatives.",
         "icon": "BadgePercent",
-        "url": "/scenarios/client-asks-for-a-discount"
+        "url": "/scenario/discount-request"
       },
       {
         "title": "Client asks for free sample work",
         "description": "Set boundaries clearly while keeping the conversation open.",
         "icon": "FileCheck2",
-        "url": "/scenarios/client-asks-for-free-sample-work"
+        "url": "/pricing/free-trial-work-request"
       }
     ],
     "className": "bg-muted/50"
@@ -128,7 +128,7 @@
     "buttons": [
       {
         "title": "Open Scenario Pages",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -177,7 +177,7 @@
           "children": [
             {
               "title": "Scenarios",
-              "url": "/scenarios"
+              "url": "/scenario"
             },
             {
               "title": "Pricing",
@@ -190,7 +190,7 @@
           "children": [
             {
               "title": "Lowball Offer",
-              "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+              "url": "/scenario/quote-too-high"
             }
           ]
         },

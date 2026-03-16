@@ -6,6 +6,7 @@ import {
   type ToolGenerationState,
 } from '@/hooks/useToolGeneration';
 import { trackEvent } from '@/lib/analytics';
+import { hasCanonicalScenarioFunnel } from '@/lib/analytics/scenarioFunnel';
 import { getCreditPackageById } from '@/lib/credits/packages';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
 import {
@@ -26,6 +27,7 @@ import { ToolResult } from './ToolResult';
 
 type ToolFormProps = {
   analyticsScenarioSlug?: string;
+  funnelScenarioSlug?: string;
   defaultScenarioSlug?: string;
   showScenarioSelector?: boolean;
   placeholder?: string;
@@ -80,17 +82,18 @@ const PROJECT_TYPE_OPTIONS: Array<{ value: DealProjectType; label: string }> = [
 
 export function ToolForm({
   analyticsScenarioSlug: initialAnalyticsScenarioSlug,
+  funnelScenarioSlug = '',
   defaultScenarioSlug,
   showScenarioSelector = true,
   placeholder,
-  rateContextLabel = 'Quote / scope / pricing context (optional)',
+  rateContextLabel = 'Quote / scope / deal context (optional)',
   rateContextPlaceholder = 'Example: Quote was $2,400 for strategy, copy, and 2 revision rounds over 10 days.',
   sourcePage,
-  workspaceTitle = 'Paste the exact pricing message',
+  workspaceTitle = 'Paste the exact client message',
   workspaceDescription = '2 free negotiation credits. No subscription required.',
   submitLabel = 'Draft negotiation reply',
 }: ToolFormProps) {
-  const fallbackSlug = scenarios[0]?.slug || 'lowball-offer';
+  const fallbackSlug = scenarios[0]?.slug || 'quote-too-high';
   const locale = useLocale();
 
   const [scenarioSlug, setScenarioSlug] = useState(
@@ -165,6 +168,11 @@ export function ToolForm({
 
   const canSubmit = !validationError && !isLoading;
   const trackedScenarioSlug = analyticsScenarioSlug || scenarioSlug;
+  const canonicalFunnelScenarioSlug = funnelScenarioSlug.trim();
+  const isCanonicalScenarioFunnel = hasCanonicalScenarioFunnel({
+    sourcePage,
+    funnelScenarioSlug: canonicalFunnelScenarioSlug,
+  });
   const paywallVisible = upgradeVisible || isExhausted;
   const currentRemainingCredits = getRemainingCredits(usage);
 
@@ -274,9 +282,9 @@ export function ToolForm({
       trigger_type: paywallTriggerTypeRef.current || 'usage_state',
     });
 
-    if (sourcePage === 'scenario') {
+    if (isCanonicalScenarioFunnel) {
       trackEvent('fd_paywall_shown', {
-        scenario_slug: paywallScenarioSlug,
+        scenario_slug: canonicalFunnelScenarioSlug,
         support_level: usage.supportLevel,
         remaining_credits: paywallRemainingCredits,
         page_type: 'scenario',
@@ -286,7 +294,8 @@ export function ToolForm({
     currentRemainingCredits,
     locale,
     paywallVisible,
-    sourcePage,
+    canonicalFunnelScenarioSlug,
+    isCanonicalScenarioFunnel,
     trackedScenarioSlug,
     usage.supportLevel,
   ]);
@@ -300,18 +309,22 @@ export function ToolForm({
     }
 
     generationSuccessPendingRef.current = false;
-    if (sourcePage !== 'scenario') {
+    if (!isCanonicalScenarioFunnel) {
       return;
     }
 
     trackEvent('fd_generation_success', {
-      scenario_slug:
-        pendingGenerationScenarioSlugRef.current || trackedScenarioSlug,
+      scenario_slug: canonicalFunnelScenarioSlug,
       support_level: pendingGenerationSupportLevelRef.current,
       remaining_credits: pendingGenerationRemainingCreditsRef.current,
       page_type: 'scenario',
     });
-  }, [result, sourcePage, trackedScenarioSlug]);
+  }, [
+    result,
+    canonicalFunnelScenarioSlug,
+    isCanonicalScenarioFunnel,
+    trackedScenarioSlug,
+  ]);
 
   const onGenerate = async (
     trigger: 'main_button' | 'regenerate' = 'main_button'
@@ -347,9 +360,9 @@ export function ToolForm({
         scenario_slug: trackedScenarioSlug,
         locale,
       });
-      if (sourcePage === 'scenario' && trigger === 'main_button') {
+      if (isCanonicalScenarioFunnel && trigger === 'main_button') {
         trackEvent('fd_tool_start', {
-          scenario_slug: trackedScenarioSlug,
+          scenario_slug: canonicalFunnelScenarioSlug,
           project_type: projectType,
           tone,
           page_type: 'scenario',

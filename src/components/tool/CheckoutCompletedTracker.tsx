@@ -13,7 +13,7 @@ export function CheckoutCompletedTracker({
 }: CheckoutCompletedTrackerProps) {
   useEffect(() => {
     trackEvent('checkout_completed', {
-      scenarioSlug,
+      ...(scenarioSlug ? { scenario_slug: scenarioSlug } : {}),
     });
   }, [scenarioSlug]);
 

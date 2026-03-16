@@ -13,7 +13,7 @@
       "items": [
         {
           "title": "Escenarios",
-          "url": "/scenarios",
+          "url": "/scenario",
           "icon": "Handshake"
         },
         {
@@ -31,7 +31,7 @@
     "buttons": [
       {
         "title": "Abrir herramienta de escenarios",
-        "url": "/scenarios",
+        "url": "/scenario",
         "icon": "Zap",
         "variant": "default"
       }
@@ -54,7 +54,7 @@
       {
         "title": "Empezar con un escenario",
         "icon": "Zap",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "variant": "default"
       }
@@ -71,19 +71,19 @@
         "title": "Oferta muy baja del cliente",
         "description": "Responde con firmeza sin sonar defensivo y vuelve a anclar valor y alcance.",
         "icon": "Handshake",
-        "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+        "url": "/scenario/quote-too-high"
       },
       {
         "title": "El cliente pide descuento",
         "description": "Mantén tu posicionamiento ofreciendo alternativas de alcance claras.",
         "icon": "BadgePercent",
-        "url": "/scenarios/client-asks-for-a-discount"
+        "url": "/scenario/discount-request"
       },
       {
         "title": "El cliente pide trabajo de muestra gratis",
         "description": "Define límites con claridad y conserva la conversación abierta.",
         "icon": "FileCheck2",
-        "url": "/scenarios/client-asks-for-free-sample-work"
+        "url": "/pricing/free-trial-work-request"
       }
     ],
     "className": "bg-muted/50"
@@ -128,7 +128,7 @@
     "buttons": [
       {
         "title": "Abrir páginas de escenarios",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -177,7 +177,7 @@
           "children": [
             {
               "title": "Escenarios",
-              "url": "/scenarios"
+              "url": "/scenario"
             },
             {
               "title": "Precios",
@@ -190,7 +190,7 @@
           "children": [
             {
               "title": "Oferta muy baja",
-              "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+              "url": "/scenario/quote-too-high"
             }
           ]
         },

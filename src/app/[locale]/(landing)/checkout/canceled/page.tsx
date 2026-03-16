@@ -21,25 +21,41 @@ function sanitizeReturnPath(value: string | undefined): string {
 
 function mapScenarioSlugToPricingPath(slug: string): string {
   const map: Record<string, string> = {
-    'lowball-offer': '/pricing/price-pushback-after-proposal',
-    'client-asks-discount': '/pricing/discount-pressure-before-signing',
+    'quote-too-high': '/scenario/quote-too-high',
+    'higher-than-expected': '/scenario/higher-than-expected',
+    'justify-your-price': '/scenario/justify-your-price',
+    'budget-limited': '/scenario/budget-limited',
+    'do-it-for-less': '/scenario/do-it-for-less',
+    'discount-request': '/scenario/discount-request',
     'cheaper-freelancer': '/scenario/cheaper-freelancer',
-    'free-sample-work': '/pricing/free-trial-work-request',
-    'more-work-same-budget': '/scenario/more-work',
-    'budget-limited': '/pricing/budget-lower-than-expected',
-    'small-extra-free': '/pricing/more-work-same-price',
-    'delayed-decision': '/pricing/price-pushback-after-proposal',
-    'client-delays-payment': '/scenario/late-payment',
-    'invoice-follow-up': '/scenario/invoice-follow-up',
-    'price-objection': '/scenario/price-too-expensive',
-    'extra-revisions': '/scenario/extra-revisions',
-    'scope-creep': '/scenario/scope-creep',
-    'additional-features': '/scenario/additional-features',
-    'rush-delivery': '/scenario/rush-delivery',
-    'timeline-pressure': '/scenario/faster-turnaround',
+    'match-lower-rate': '/scenario/match-lower-rate',
+    'laughs-at-rate': '/scenario/laughs-at-rate',
+    'rate-before-project-details': '/scenario/rate-before-project-details',
+    'hourly-rate-request': '/scenario/hourly-rate-request',
+    'day-rate-request': '/scenario/day-rate-request',
+    'price-range-request': '/scenario/price-range-request',
+    'immediate-quote-request': '/scenario/immediate-quote-request',
+    'rates-negotiable': '/scenario/rates-negotiable',
+    'reduce-scope-to-lower-cost': '/scenario/reduce-scope-to-lower-cost',
+    'extra-work-outside-scope': '/scenario/extra-work-outside-scope',
+    'unlimited-revisions': '/scenario/unlimited-revisions',
+    'project-should-be-easy': '/scenario/project-should-be-easy',
+    'start-before-payment': '/scenario/start-before-payment',
+    'start-immediately': '/scenario/start-immediately',
+    'exclusive-low-rate': '/scenario/exclusive-low-rate',
+    'ghosted-after-rate': '/scenario/ghosted-after-rate',
+    'guarantee-results': '/scenario/guarantee-results',
+    'lowball-offer': '/scenario/quote-too-high',
+    'client-asks-discount': '/scenario/discount-request',
+    'more-work-same-budget': '/scenario/extra-work-outside-scope',
+    'small-extra-free': '/scenario/extra-work-outside-scope',
+    'delayed-decision': '/scenario/ghosted-after-rate',
+    'price-objection': '/scenario/higher-than-expected',
+    'extra-revisions': '/scenario/unlimited-revisions',
+    'scope-creep': '/scenario/extra-work-outside-scope',
   };
 
-  return map[slug] || '/pricing';
+  return map[slug] || '/scenario';
 }
 
 export default async function CheckoutCanceledPage({
@@ -58,7 +74,9 @@ export default async function CheckoutCanceledPage({
   const query = await searchParams;
   const returnTo = sanitizeReturnPath(query.return_to);
   const scenarioSlug = String(query.scenario || '').trim();
-  const backToScenario = scenarioSlug ? mapScenarioSlugToPricingPath(scenarioSlug) : '/pricing';
+  const backToScenario = scenarioSlug
+    ? mapScenarioSlugToPricingPath(scenarioSlug)
+    : '/scenario';
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
@@ -70,10 +88,16 @@ export default async function CheckoutCanceledPage({
           No charge was completed. You can restart checkout anytime.
         </p>
         <div className="mt-5 flex flex-wrap gap-4 text-sm">
-          <Link href={returnTo} className="font-semibold text-slate-900 underline">
+          <Link
+            href={returnTo}
+            className="font-semibold text-slate-900 underline"
+          >
             Return to pricing
           </Link>
-          <Link href={backToScenario} className="font-semibold text-slate-700 underline">
+          <Link
+            href={backToScenario}
+            className="font-semibold text-slate-700 underline"
+          >
             Continue with pricing scenarios
           </Link>
         </div>

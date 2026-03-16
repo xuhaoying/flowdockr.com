@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
 
 import { envConfigs } from '@/config';
+import { getAllScenarioPages } from '@/lib/content/scenarioPages';
 import { getAllGuides } from '@/lib/content/getGuideBySlug';
 import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
-import { getAllTools } from '@/lib/content/getToolBySlug';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = envConfigs.site_url.replace(/\/$/, '');
@@ -23,10 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/tools`,
+      url: `${baseUrl}/scenario`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/guides`,
@@ -35,6 +35,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
   ];
+
+  const canonicalScenarioRoutes: MetadataRoute.Sitemap = getAllScenarioPages().map(
+    (scenario) => ({
+      url: `${baseUrl}/scenario/${scenario.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    })
+  );
 
   const scenarioRoutes: MetadataRoute.Sitemap = getAllScenarios().map((scenario) => ({
     url: `${baseUrl}${normalizeRoutePath(scenario.url)}`,
@@ -50,14 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const toolRoutes: MetadataRoute.Sitemap = getAllTools().map((tool) => ({
-    url: `${baseUrl}${normalizeRoutePath(tool.url)}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  }));
-
-  return [...staticRoutes, ...scenarioRoutes, ...guideRoutes, ...toolRoutes];
+  return [...staticRoutes, ...canonicalScenarioRoutes, ...scenarioRoutes, ...guideRoutes];
 }
 
 function normalizeRoutePath(path: string): string {
