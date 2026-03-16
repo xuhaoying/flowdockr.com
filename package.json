@@ -23,6 +23,7 @@
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
+    "test:scenario-funnel": "vitest run src/lib/analytics/scenarioFunnel.test.ts src/components/tool/ToolForm.analytics.test.tsx",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "db:generate": "tsx scripts/with-env.ts npx drizzle-kit generate --config=src/core/db/config.ts",
@@ -171,6 +172,8 @@
     "@eslint/eslintrc": "^3.3.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^20",
     "@types/pg": "^8.15.5",
@@ -185,6 +188,7 @@
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.37.0",
     "eslint-config-next": "16.0.7",
+    "jsdom": "^29.0.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
@@ -192,6 +196,7 @@
     "tsx": "^4.20.3",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5",
+    "vitest": "^4.1.0",
     "wrangler": "^4.34.0"
   },
   "pnpm": {

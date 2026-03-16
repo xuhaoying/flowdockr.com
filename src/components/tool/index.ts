@@ -7,7 +7,6 @@ export { MagicLinkLoginForm } from './MagicLinkLoginForm';
 export { OutputPanel } from './OutputPanel';
 export { PaywallModal } from './PaywallModal';
 export { PricingPacks } from './PricingPacks';
-export { ReplyGeneratorCard } from './ReplyGeneratorCard';
 export { ScenarioSelector } from './ScenarioSelector';
 export { ServiceTypeSelect } from './ServiceTypeSelect';
 export { StrategyPanel } from './StrategyPanel';

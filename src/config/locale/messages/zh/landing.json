@@ -13,7 +13,7 @@
       "items": [
         {
           "title": "谈判场景",
-          "url": "/scenarios",
+          "url": "/scenario",
           "icon": "Handshake"
         },
         {
@@ -31,7 +31,7 @@
     "buttons": [
       {
         "title": "打开场景工具",
-        "url": "/scenarios",
+        "url": "/scenario",
         "icon": "Zap",
         "variant": "default"
       }
@@ -54,7 +54,7 @@
       {
         "title": "从场景开始",
         "icon": "Zap",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "variant": "default"
       }
@@ -71,19 +71,19 @@
         "title": "客户明显低价报价",
         "description": "礼貌但坚定地回锚价值与范围，不做情绪化回复。",
         "icon": "Handshake",
-        "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+        "url": "/scenario/quote-too-high"
       },
       {
         "title": "客户要求打折",
         "description": "不直接降价，优先给出可执行的范围替代方案。",
         "icon": "BadgePercent",
-        "url": "/scenarios/client-asks-for-a-discount"
+        "url": "/scenario/discount-request"
       },
       {
         "title": "客户要求免费试做",
         "description": "清晰设边界，同时保留合作推进空间。",
         "icon": "FileCheck2",
-        "url": "/scenarios/client-asks-for-free-sample-work"
+        "url": "/pricing/free-trial-work-request"
       }
     ],
     "className": "bg-muted/50"
@@ -128,7 +128,7 @@
     "buttons": [
       {
         "title": "打开场景页面",
-        "url": "/scenarios",
+        "url": "/scenario",
         "target": "_self",
         "icon": "ArrowRight"
       }
@@ -177,7 +177,7 @@
           "children": [
             {
               "title": "谈判场景",
-              "url": "/scenarios"
+              "url": "/scenario"
             },
             {
               "title": "定价",
@@ -190,7 +190,7 @@
           "children": [
             {
               "title": "低价报价应对",
-              "url": "/scenarios/how-to-respond-to-a-lowball-offer"
+              "url": "/scenario/quote-too-high"
             }
           ]
         },

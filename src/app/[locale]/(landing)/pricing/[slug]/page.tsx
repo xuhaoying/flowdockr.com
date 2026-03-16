@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker';
 import { CommonClientMessages } from '@/components/scenario/CommonClientMessages';
 import { CommonMistakes } from '@/components/scenario/CommonMistakes';
 import { CoreFearBlock } from '@/components/scenario/CoreFearBlock';
@@ -87,7 +86,6 @@ export default async function PricingScenarioPage({
 
   return (
     <PageContainer>
-      <ScenarioViewTracker scenarioSlug={scenario.slug} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

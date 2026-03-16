@@ -55,12 +55,34 @@ export type ReplyQualityReport = {
 };
 
 const PRESSURE_KEYWORDS_BY_SLUG: Record<string, string[]> = {
+  'quote-too-high': ['quote', 'high', 'rate', 'price'],
+  'higher-than-expected': ['higher', 'expected', 'quote', 'price'],
+  'justify-your-price': ['cost', 'price', 'why', 'justify'],
+  'budget-limited': ['budget', 'limited', 'tight'],
+  'do-it-for-less': ['less', 'lower', 'price', 'rate'],
+  'discount-request': ['discount', 'lower', 'rate'],
+  'cheaper-freelancer': ['cheaper', 'compare', 'quote'],
+  'match-lower-rate': ['match', 'rate', 'price'],
+  'laughs-at-rate': ['ridiculous', 'rate', 'hour'],
+  'rate-before-project-details': ['rate', 'scope', 'project'],
+  'hourly-rate-request': ['hourly', 'rate'],
+  'day-rate-request': ['day', 'rate'],
+  'price-range-request': ['range', 'price'],
+  'immediate-quote-request': ['price', 'quote', 'right now'],
+  'rates-negotiable': ['negotiable', 'rates'],
+  'reduce-scope-to-lower-cost': ['scope', 'reduce', 'cost'],
+  'extra-work-outside-scope': ['extra', 'scope', 'add'],
+  'unlimited-revisions': ['unlimited', 'revisions', 'changes'],
+  'project-should-be-easy': ['easy', 'hours', 'simple'],
+  'start-before-payment': ['start', 'payment', 'later'],
+  'start-immediately': ['start', 'today', 'immediately'],
+  'exclusive-low-rate': ['exclusive', 'rate'],
+  'ghosted-after-rate': ['follow up', 'rate', 'review', 'back to you'],
+  'guarantee-results': ['guarantee', 'results', 'outcome'],
   'lowball-offer': ['low', 'offer', 'quote', 'price'],
   'client-asks-discount': ['discount', 'lower', 'rate'],
-  'cheaper-freelancer': ['cheaper', 'compare', 'quote'],
   'free-sample-work': ['sample', 'free', 'unpaid'],
   'more-work-same-budget': ['more work', 'same budget', 'extra', 'scope'],
-  'budget-limited': ['budget', 'limited', 'tight'],
   'delayed-decision': ['follow up', 'review', 'decision', 'timing'],
   'small-extra-free': ['small', 'extra', 'free', 'outside scope'],
   'client-delays-payment': ['invoice', 'payment', 'overdue', 'due'],
@@ -123,9 +145,11 @@ export function evaluateReplyQuality(params: {
   const alternativeReply = params.alternativeReply.trim();
   const strategy = params.strategy.map((item) => item.trim()).filter(Boolean);
 
-  const combined = `${reply}\n${alternativeReply}\n${strategy.join('\n')}`.toLowerCase();
+  const combined =
+    `${reply}\n${alternativeReply}\n${strategy.join('\n')}`.toLowerCase();
 
-  const pressureKeywords = PRESSURE_KEYWORDS_BY_SLUG[params.scenario.slug] || [];
+  const pressureKeywords =
+    PRESSURE_KEYWORDS_BY_SLUG[params.scenario.slug] || [];
   const pressureFromSlug = pressureKeywords.some((keyword) =>
     combined.includes(keyword.toLowerCase())
   );
@@ -135,10 +159,13 @@ export function evaluateReplyQuality(params: {
   const pressureRecognition = pressureFromSlug || pressureFromMoves;
 
   const positionSignal = STRATEGIC_SIGNAL_PATTERN.test(combined);
-  const riskyConcession = HARD_DISCOUNT_PATTERN.test(combined) && !TRADEOFF_PATTERN.test(combined);
+  const riskyConcession =
+    HARD_DISCOUNT_PATTERN.test(combined) && !TRADEOFF_PATTERN.test(combined);
   const positionProtection = positionSignal && !riskyConcession;
 
-  const relationshipQuality = !HOSTILE_PATTERNS.some((pattern) => pattern.test(combined));
+  const relationshipQuality = !HOSTILE_PATTERNS.some((pattern) =>
+    pattern.test(combined)
+  );
 
   const replyWords = wordCount(reply);
   const altWords = wordCount(alternativeReply);
@@ -155,7 +182,9 @@ export function evaluateReplyQuality(params: {
     distinctReplies &&
     strategyWordBudgetOk;
 
-  const nonGenericness = !GENERIC_FILLER_PATTERNS.some((pattern) => pattern.test(combined));
+  const nonGenericness = !GENERIC_FILLER_PATTERNS.some((pattern) =>
+    pattern.test(combined)
+  );
 
   const strategicMovement =
     NEXT_STEP_PATTERN.test(combined) &&
@@ -170,7 +199,9 @@ export function evaluateReplyQuality(params: {
     strategic_movement: strategicMovement,
   };
 
-  const failedCriteria = (Object.entries(criteria) as Array<[RubricCriterion, boolean]>)
+  const failedCriteria = (
+    Object.entries(criteria) as Array<[RubricCriterion, boolean]>
+  )
     .filter(([, passed]) => !passed)
     .map(([criterion]) => criterion);
 
@@ -186,10 +217,7 @@ export function evaluateReplyQuality(params: {
 }
 
 function wordCount(text: string): number {
-  return text
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean).length;
+  return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
 function extractKeywords(text: string): string[] {

@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
 import { defaultLocale } from '@/config/locale';
@@ -11,5 +11,7 @@ export default async function LegacyScenariosPageRedirect({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  redirect(locale === defaultLocale ? '/scenario' : `/${locale}/scenario`);
+  permanentRedirect(
+    locale === defaultLocale ? '/scenario' : `/${locale}/scenario`
+  );
 }

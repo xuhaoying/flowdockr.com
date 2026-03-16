@@ -1,14 +1,19 @@
 import { ToolForm } from '@/components/tool/ToolForm';
-import type { ScenarioToolPreset } from '@/types/scenario-page';
 
 type ScenarioInlineToolProps = {
   analyticsScenarioSlug: string;
-  toolPreset: ScenarioToolPreset;
+  defaultScenarioSlug: string;
+  title: string;
+  description: string;
+  primaryClientMessage: string;
 };
 
 export function ScenarioInlineTool({
   analyticsScenarioSlug,
-  toolPreset,
+  defaultScenarioSlug,
+  title,
+  description,
+  primaryClientMessage,
 }: ScenarioInlineToolProps) {
   return (
     <section
@@ -17,21 +22,20 @@ export function ScenarioInlineTool({
     >
       <div className="max-w-3xl space-y-2">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          {toolPreset.title}
+          {title}
         </h2>
-        <p className="text-sm leading-6 text-slate-700">
-          {toolPreset.description}
-        </p>
+        <p className="text-sm leading-6 text-slate-700">{description}</p>
       </div>
 
       <div className="mt-5">
         <ToolForm
           analyticsScenarioSlug={analyticsScenarioSlug}
+          funnelScenarioSlug={analyticsScenarioSlug}
           sourcePage="scenario"
-          defaultScenarioSlug={toolPreset.scenarioSlug}
+          defaultScenarioSlug={defaultScenarioSlug}
           showScenarioSelector={false}
-          placeholder={toolPreset.inputPlaceholder}
-          submitLabel={toolPreset.ctaLabel}
+          placeholder={`Paste the exact version of "${primaryClientMessage}" or the closest message from the thread...`}
+          submitLabel="Draft reply"
           workspaceTitle="Client message"
           workspaceDescription="Paste the exact wording from the conversation and review the suggested approach before you reply."
         />

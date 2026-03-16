@@ -1,5 +1,6 @@
+import type { ScenarioRelatedLink } from '@/types/scenario-catalog';
+
 import { Link } from '@/core/i18n/navigation';
-import type { ScenarioRelatedLink } from '@/types/scenario-page';
 
 type RelatedScenariosProps = {
   items: ScenarioRelatedLink[];
@@ -30,6 +31,9 @@ export function RelatedScenarios({ items }: RelatedScenariosProps) {
             className="rounded-lg border border-slate-200 p-4 transition-colors hover:border-slate-400"
           >
             <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              {item.description}
+            </p>
           </Link>
         ))}
       </div>

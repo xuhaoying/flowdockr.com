@@ -1,20 +1,14 @@
-import type { ScenarioPageData } from '@/types/scenario-page';
-
 type ScenarioOverviewProps = {
-  overview: ScenarioPageData['overview'];
+  userSituation: string;
 };
 
-export function ScenarioOverview({ overview }: ScenarioOverviewProps) {
+export function ScenarioOverview({ userSituation }: ScenarioOverviewProps) {
   return (
     <section className="max-w-3xl space-y-4">
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-        Situation overview
+        Situation snapshot
       </h2>
-      <div className="space-y-4 text-base leading-7 text-slate-700">
-        {overview.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
+      <p className="text-base leading-7 text-slate-700">{userSituation}</p>
     </section>
   );
 }

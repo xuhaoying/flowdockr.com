@@ -9,7 +9,7 @@ type ScenarioSelectorProps = {
 export function ScenarioSelector({
   value,
   onChange,
-  label = 'Pricing situation',
+  label = 'Scenario',
 }: ScenarioSelectorProps) {
   return (
     <label className="block space-y-2">
@@ -17,7 +17,7 @@ export function ScenarioSelector({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition-colors focus:border-slate-500"
+        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors outline-none focus:border-slate-500"
       >
         {scenarioOptions.map((scenario) => (
           <option key={scenario.value} value={scenario.value}>

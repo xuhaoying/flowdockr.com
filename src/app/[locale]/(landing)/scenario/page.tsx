@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { setRequestLocale } from 'next-intl/server';
-
-import { envConfigs } from '@/config';
-import { defaultLocale } from '@/config/locale';
+import { PopularScenarios } from '@/components/scenario-hub/PopularScenarios';
 import { ScenarioClusterSection } from '@/components/scenario-hub/ScenarioClusterSection';
 import { ScenarioHubCTA } from '@/components/scenario-hub/ScenarioHubCTA';
 import { ScenarioHubHero } from '@/components/scenario-hub/ScenarioHubHero';
 import { ScenarioHubIntro } from '@/components/scenario-hub/ScenarioHubIntro';
 import { ScenarioHubWhy } from '@/components/scenario-hub/ScenarioHubWhy';
-import { PopularScenarios } from '@/components/scenario-hub/PopularScenarios';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { scenarioHubData } from '@/content/scenario-hub';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
+import { setRequestLocale } from 'next-intl/server';
+
+import { envConfigs } from '@/config';
+import { defaultLocale } from '@/config/locale';
 
 function normalizePath(path: string): string {
   if (path.length > 1 && path.endsWith('/')) {
@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   return buildScenarioPageMetadata({
     page: {
-      seoTitle: scenarioHubData.seoTitle,
+      title: scenarioHubData.hero.title,
       metaDescription: scenarioHubData.metaDescription,
     },
     canonical,

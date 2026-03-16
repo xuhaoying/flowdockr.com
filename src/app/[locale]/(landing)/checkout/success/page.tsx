@@ -1,11 +1,16 @@
+import {
+  CheckoutCompletedTracker,
+  CheckoutStatusCard,
+} from '@/components/tool';
+import { getCanonicalScenarioSlugForCheckoutSuccess } from '@/lib/analytics/scenarioFunnel';
 import { setRequestLocale } from 'next-intl/server';
 
-import { CheckoutCompletedTracker, CheckoutStatusCard } from '@/components/tool';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Payment successful | Flowdockr',
-  description: 'Your Flowdockr negotiation credits and support level are being confirmed.',
+  description:
+    'Your Flowdockr negotiation credits and support level are being confirmed.',
   canonicalUrl: '/checkout/success',
   noIndex: true,
 });
@@ -22,25 +27,41 @@ function sanitizeReturnPath(value: string | undefined): string {
 
 function mapScenarioSlugToPricingPath(slug: string): string {
   const map: Record<string, string> = {
-    'lowball-offer': '/pricing/price-pushback-after-proposal',
-    'client-asks-discount': '/pricing/discount-pressure-before-signing',
+    'quote-too-high': '/scenario/quote-too-high',
+    'higher-than-expected': '/scenario/higher-than-expected',
+    'justify-your-price': '/scenario/justify-your-price',
+    'budget-limited': '/scenario/budget-limited',
+    'do-it-for-less': '/scenario/do-it-for-less',
+    'discount-request': '/scenario/discount-request',
     'cheaper-freelancer': '/scenario/cheaper-freelancer',
-    'free-sample-work': '/pricing/free-trial-work-request',
-    'more-work-same-budget': '/scenario/more-work',
-    'budget-limited': '/pricing/budget-lower-than-expected',
-    'small-extra-free': '/pricing/more-work-same-price',
-    'delayed-decision': '/pricing/price-pushback-after-proposal',
-    'client-delays-payment': '/scenario/late-payment',
-    'invoice-follow-up': '/scenario/invoice-follow-up',
-    'price-objection': '/scenario/price-too-expensive',
-    'extra-revisions': '/scenario/extra-revisions',
-    'scope-creep': '/scenario/scope-creep',
-    'additional-features': '/scenario/additional-features',
-    'rush-delivery': '/scenario/rush-delivery',
-    'timeline-pressure': '/scenario/faster-turnaround',
+    'match-lower-rate': '/scenario/match-lower-rate',
+    'laughs-at-rate': '/scenario/laughs-at-rate',
+    'rate-before-project-details': '/scenario/rate-before-project-details',
+    'hourly-rate-request': '/scenario/hourly-rate-request',
+    'day-rate-request': '/scenario/day-rate-request',
+    'price-range-request': '/scenario/price-range-request',
+    'immediate-quote-request': '/scenario/immediate-quote-request',
+    'rates-negotiable': '/scenario/rates-negotiable',
+    'reduce-scope-to-lower-cost': '/scenario/reduce-scope-to-lower-cost',
+    'extra-work-outside-scope': '/scenario/extra-work-outside-scope',
+    'unlimited-revisions': '/scenario/unlimited-revisions',
+    'project-should-be-easy': '/scenario/project-should-be-easy',
+    'start-before-payment': '/scenario/start-before-payment',
+    'start-immediately': '/scenario/start-immediately',
+    'exclusive-low-rate': '/scenario/exclusive-low-rate',
+    'ghosted-after-rate': '/scenario/ghosted-after-rate',
+    'guarantee-results': '/scenario/guarantee-results',
+    'lowball-offer': '/scenario/quote-too-high',
+    'client-asks-discount': '/scenario/discount-request',
+    'more-work-same-budget': '/scenario/extra-work-outside-scope',
+    'small-extra-free': '/scenario/extra-work-outside-scope',
+    'delayed-decision': '/scenario/ghosted-after-rate',
+    'price-objection': '/scenario/higher-than-expected',
+    'extra-revisions': '/scenario/unlimited-revisions',
+    'scope-creep': '/scenario/extra-work-outside-scope',
   };
 
-  return map[slug] || '/pricing';
+  return map[slug] || '/scenario';
 }
 
 export default async function CheckoutSuccessPage({
@@ -63,17 +84,23 @@ export default async function CheckoutSuccessPage({
   const purchaseId = String(query.purchase_id || '').trim();
   const returnTo = sanitizeReturnPath(query.return_to);
   const scenarioSlug = String(query.scenario || '').trim();
+  const canonicalFunnelScenarioSlug = getCanonicalScenarioSlugForCheckoutSuccess({
+    returnTo,
+    scenarioSlug,
+  });
 
   const continuePath =
-    returnTo || (scenarioSlug ? mapScenarioSlugToPricingPath(scenarioSlug) : '/pricing');
+    returnTo ||
+    (scenarioSlug ? mapScenarioSlugToPricingPath(scenarioSlug) : '/scenario');
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
-      <CheckoutCompletedTracker scenarioSlug={scenarioSlug} />
+      <CheckoutCompletedTracker scenarioSlug={canonicalFunnelScenarioSlug} />
       <CheckoutStatusCard
         sessionId={sessionId}
         purchaseId={purchaseId}
         continuePath={continuePath}
+        scenarioSlug={canonicalFunnelScenarioSlug}
       />
     </main>
   );
