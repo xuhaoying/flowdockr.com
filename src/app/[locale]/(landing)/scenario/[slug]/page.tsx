@@ -8,6 +8,7 @@ import { ScenarioDifficulty } from '@/components/scenario/ScenarioDifficulty';
 import { ScenarioHero } from '@/components/scenario/ScenarioHero';
 import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
+import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { PageContainer } from '@/components/shared/PageContainer';
 import {
   getAllScenarioPageSlugs,
@@ -144,32 +145,35 @@ export default async function ScenarioPage({
     }
 
     return (
-      <PageContainer className="max-w-5xl gap-8 py-8 md:py-10">
-        <ScenarioViewTracker scenarioSlug={page.slug} />
-        <ScenarioHero
-          title={page.title}
-          archetypeLabel={getScenarioArchetypeLabel(page.archetype)}
-          negotiationStageLabel={getNegotiationStageLabel(
-            page.negotiationStage
-          )}
-          primaryClientMessage={page.primaryClientMessage}
-        />
-        <ScenarioOverview userSituation={page.userSituation} />
-        <ScenarioClientMessages
-          primaryClientMessage={page.primaryClientMessage}
-          clientMessageVariants={page.clientMessageVariants}
-        />
-        <ScenarioDifficulty points={strategyPoints} />
-        <ScenarioInlineTool
-          analyticsScenarioSlug={page.slug}
-          defaultScenarioSlug={page.slug}
-          title="Draft a reply for this situation"
-          description={page.toolPromptIntent}
-          primaryClientMessage={page.primaryClientMessage}
-        />
-        <RelatedScenarios items={getRelatedScenarioLinks(page.slug)} />
-        <ScenarioCTA title={page.title} />
-      </PageContainer>
+      <>
+        <PageContainer className="max-w-6xl gap-6 py-8 md:gap-8 md:py-12">
+          <ScenarioViewTracker scenarioSlug={page.slug} />
+          <ScenarioHero
+            title={page.title}
+            archetypeLabel={getScenarioArchetypeLabel(page.archetype)}
+            negotiationStageLabel={getNegotiationStageLabel(
+              page.negotiationStage
+            )}
+            primaryClientMessage={page.primaryClientMessage}
+          />
+          <ScenarioOverview userSituation={page.userSituation} />
+          <ScenarioClientMessages
+            primaryClientMessage={page.primaryClientMessage}
+            clientMessageVariants={page.clientMessageVariants}
+          />
+          <ScenarioDifficulty points={strategyPoints} />
+          <ScenarioInlineTool
+            analyticsScenarioSlug={page.slug}
+            defaultScenarioSlug={page.slug}
+            title="Draft a reply for this situation"
+            description={page.toolPromptIntent}
+            primaryClientMessage={page.primaryClientMessage}
+          />
+          <RelatedScenarios items={getRelatedScenarioLinks(page.slug)} />
+          <ScenarioCTA title={page.title} />
+        </PageContainer>
+        <ScenarioStickyBottomCta />
+      </>
     );
   }
 

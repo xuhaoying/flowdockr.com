@@ -1,5 +1,7 @@
 import { ToolForm } from '@/components/tool/ToolForm';
 
+import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
+
 type ScenarioInlineToolProps = {
   analyticsScenarioSlug: string;
   defaultScenarioSlug: string;
@@ -16,18 +18,21 @@ export function ScenarioInlineTool({
   primaryClientMessage,
 }: ScenarioInlineToolProps) {
   return (
-    <section
+    <Card
       id="scenario-inline-tool"
-      className="scroll-mt-24 rounded-[28px] border border-slate-300 bg-slate-50 p-5 shadow-sm lg:p-6"
+      className="border-border/80 scroll-mt-24 overflow-hidden rounded-[24px] bg-white py-0 shadow-sm"
     >
-      <div className="max-w-3xl space-y-2">
+      <CardHeader className="border-border/70 gap-2 border-b bg-gradient-to-br from-white via-white to-slate-50/80 px-5 py-5 lg:px-6 lg:py-6">
+        <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+          Reply generator
+        </p>
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
           {title}
         </h2>
         <p className="text-sm leading-6 text-slate-700">{description}</p>
-      </div>
+      </CardHeader>
 
-      <div className="mt-5">
+      <CardContent className="px-5 py-5 lg:px-6 lg:py-6">
         <ToolForm
           analyticsScenarioSlug={analyticsScenarioSlug}
           funnelScenarioSlug={analyticsScenarioSlug}
@@ -39,7 +44,7 @@ export function ScenarioInlineTool({
           workspaceTitle="Client message"
           workspaceDescription="Paste the exact wording from the conversation and review the suggested approach before you reply."
         />
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

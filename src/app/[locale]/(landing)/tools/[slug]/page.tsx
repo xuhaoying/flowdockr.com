@@ -123,8 +123,8 @@ export default async function ToolPage({
         </section>
       ) : null}
 
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">
+      <section className="space-y-2 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 shadow-sm">
+        <h2 className="text-base font-semibold text-slate-900">
           Paste the message now
         </h2>
         <p className="text-sm text-slate-700">

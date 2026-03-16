@@ -6,13 +6,15 @@ type ToolBestForProps = {
 
 export function ToolBestFor({ items }: ToolBestForProps) {
   return (
-    <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="text-xl font-semibold text-slate-900">Best for</h2>
-      <ul className="space-y-2 text-sm text-slate-700">
+    <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
+      <h2 className="text-lg font-semibold text-slate-900">Best for</h2>
+      <ul className="grid gap-2 text-sm text-slate-700 md:grid-cols-2">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2">
-            <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
-            <span>{item}</span>
+          <li
+            key={item}
+            className="rounded-xl border border-slate-200 bg-slate-50/70 px-3 py-2.5"
+          >
+            {item}
           </li>
         ))}
       </ul>

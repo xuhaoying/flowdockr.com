@@ -18,7 +18,15 @@ import { DealProjectType, DealTone } from '@/types/deals';
 import { GenerateReplyRequest } from '@/types/generation';
 import { useLocale } from 'next-intl';
 
+import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card';
 import { Textarea } from '@/shared/components/ui/textarea';
 
 import { ScenarioSelector } from './ScenarioSelector';
@@ -584,163 +592,199 @@ export function ToolForm({
   };
 
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-      <section
+    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
+      <Card
         id="tool-workspace"
-        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+        className="border-border/80 overflow-hidden bg-white py-0"
       >
-        <div className="space-y-1">
-          <p className="text-sm font-medium text-slate-700">{workspaceTitle}</p>
-          <p className="text-xs text-slate-600">{workspaceDescription}</p>
-        </div>
-
-        {showScenarioSelector ? (
-          <ScenarioSelector
-            value={scenarioSlug}
-            onChange={(slug) => {
-              setScenarioSlug(slug);
-              setAnalyticsScenarioSlug(slug);
-              trackToolOpen(slug);
-              setResult(null);
-              setSavedHint('');
-            }}
-            label="Pricing situation"
-          />
-        ) : null}
-
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">
-            Client message
-          </span>
-          <Textarea
-            value={message}
-            onChange={(event) => {
-              trackToolOpen();
-              setMessage(event.target.value);
-            }}
-            rows={9}
-            maxLength={4000}
-            placeholder={textareaPlaceholder}
-            className="resize-y border-slate-300"
-          />
-          <div className="flex items-center justify-between text-xs text-slate-600">
-            <span>{usageText}</span>
-            <span>{trimmedMessage.length}/4000</span>
+        <CardHeader className="border-border/70 gap-3 border-b bg-gradient-to-br from-white via-white to-slate-50/80 px-5 py-5 lg:px-6 lg:py-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="space-y-1">
+              <CardTitle className="text-xl tracking-tight text-slate-900">
+                {workspaceTitle}
+              </CardTitle>
+              <CardDescription className="max-w-2xl text-sm leading-6 text-slate-600">
+                {workspaceDescription}
+              </CardDescription>
+            </div>
+            <Badge
+              variant="outline"
+              className="rounded-full border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+            >
+              {usageText}
+            </Badge>
           </div>
-        </label>
+        </CardHeader>
 
-        <label className="block space-y-2">
-          <span className="text-sm font-medium text-slate-800">
-            {rateContextLabel}
-          </span>
-          <Textarea
-            value={userRateContext}
-            onChange={(event) => {
-              trackToolOpen();
-              setUserRateContext(event.target.value);
-            }}
-            rows={4}
-            maxLength={500}
-            placeholder={rateContextPlaceholder}
-            className="resize-y border-slate-300"
-          />
-          <p className="text-xs text-slate-600">
-            Add your current quote, scope, timing, or constraints so the draft
-            can protect the right boundary.
-          </p>
-        </label>
+        <CardContent className="space-y-5 px-5 py-5 lg:px-6 lg:py-6">
+          {showScenarioSelector ? (
+            <ScenarioSelector
+              value={scenarioSlug}
+              onChange={(slug) => {
+                setScenarioSlug(slug);
+                setAnalyticsScenarioSlug(slug);
+                trackToolOpen(slug);
+                setResult(null);
+                setSavedHint('');
+              }}
+              label="Pricing situation"
+            />
+          ) : null}
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-800">Tone</span>
-            <select
-              value={tone}
+          <label className="block space-y-2.5">
+            <div className="space-y-1">
+              <span className="text-sm font-medium text-slate-800">
+                Client message
+              </span>
+              <p className="text-xs text-slate-600">
+                Paste the exact wording so the reply matches the pressure and
+                tone.
+              </p>
+            </div>
+            <Textarea
+              value={message}
               onChange={(event) => {
                 trackToolOpen();
-                setTone(event.target.value as DealTone);
+                setMessage(event.target.value);
               }}
-              className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
-            >
-              {TONE_OPTIONS.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
+              rows={10}
+              maxLength={4000}
+              placeholder={textareaPlaceholder}
+              className="min-h-[220px] resize-y rounded-xl border-slate-300 px-4 py-3 shadow-xs"
+            />
+            <div className="flex items-center justify-end text-xs text-slate-500">
+              <span>{trimmedMessage.length}/4000</span>
+            </div>
           </label>
 
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-800">
-              Project type
-            </span>
-            <select
-              value={projectType}
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-slate-800">Tone</span>
+              <select
+                value={tone}
+                onChange={(event) => {
+                  trackToolOpen();
+                  setTone(event.target.value as DealTone);
+                }}
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-800 shadow-xs transition outline-none focus:border-slate-500"
+              >
+                {TONE_OPTIONS.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-slate-800">
+                Project type
+              </span>
+              <select
+                value={projectType}
+                onChange={(event) => {
+                  trackToolOpen();
+                  setProjectType(event.target.value as DealProjectType);
+                }}
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-800 shadow-xs transition outline-none focus:border-slate-500"
+              >
+                {PROJECT_TYPE_OPTIONS.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <label className="block space-y-2.5">
+            <div className="space-y-1">
+              <span className="text-sm font-medium text-slate-800">
+                {rateContextLabel}
+              </span>
+              <p className="text-xs text-slate-600">
+                Add your quote, scope, timing, or constraints so the draft
+                protects the right boundary.
+              </p>
+            </div>
+            <Textarea
+              value={userRateContext}
               onChange={(event) => {
                 trackToolOpen();
-                setProjectType(event.target.value as DealProjectType);
+                setUserRateContext(event.target.value);
               }}
-              className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-800 transition outline-none focus:border-slate-500"
-            >
-              {PROJECT_TYPE_OPTIONS.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
+              rows={4}
+              maxLength={500}
+              placeholder={rateContextPlaceholder}
+              className="resize-y rounded-xl border-slate-300 px-4 py-3 shadow-xs"
+            />
           </label>
-        </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <Button
-            type="button"
-            onClick={() => {
-              void onGenerate('main_button');
-            }}
-            disabled={!canSubmit}
-          >
-            {isLoading ? 'Preparing guidance...' : submitLabel}
-          </Button>
-          {isExhausted ? (
+          <div className="border-border/70 flex flex-col gap-3 border-t pt-5 sm:flex-row sm:flex-wrap sm:items-center">
             <Button
               type="button"
-              variant="outline"
-              onClick={() => window.location.assign('/pricing')}
+              size="lg"
+              className="w-full sm:w-auto"
+              onClick={() => {
+                void onGenerate('main_button');
+              }}
+              disabled={!canSubmit}
             >
-              View pricing
+              {isLoading ? 'Preparing guidance...' : submitLabel}
             </Button>
+            {isExhausted ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto"
+                onClick={() => window.location.assign('/pricing')}
+              >
+                View pricing
+              </Button>
+            ) : null}
+          </div>
+
+          {validationError && trimmedMessage ? (
+            <div className="rounded-[18px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              {validationError}
+            </div>
           ) : null}
-        </div>
 
-        {validationError && trimmedMessage ? (
-          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-            {validationError}
-          </div>
-        ) : null}
+          {error ? (
+            <div className="rounded-[18px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              {toUserErrorMessage(error)}
+            </div>
+          ) : null}
 
-        {error ? (
-          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-            {toUserErrorMessage(error)}
-          </div>
-        ) : null}
+          {paywallVisible && (
+            <ToolPaywall
+              loggedIn={usage.loggedIn}
+              email={checkoutEmail}
+              onEmailChange={setCheckoutEmail}
+              loadingPackageId={checkoutLoading}
+              onCheckout={onCheckout}
+            />
+          )}
+        </CardContent>
+      </Card>
 
-        {paywallVisible && (
-          <ToolPaywall
-            loggedIn={usage.loggedIn}
-            email={checkoutEmail}
-            onEmailChange={setCheckoutEmail}
-            loadingPackageId={checkoutLoading}
-            onCheckout={onCheckout}
-          />
-        )}
-      </section>
-
-      <div ref={resultRef}>
+      <div ref={resultRef} className="min-w-0">
         <ToolResult
           reply={result?.reply || ''}
           strategyBlock={result?.strategyBlock}
           replyVersions={result?.replyVersions}
           riskInsights={result?.riskInsights}
           followUpSuggestion={result?.followUpSuggestion}
+          scenarioContext={
+            scenario
+              ? {
+                  title: scenario.title,
+                  clientMessage: scenario.exampleClientMessage,
+                  primaryGoal: scenario.primaryGoal,
+                }
+              : undefined
+          }
           historyEnabled={
             result?.entitlements?.historyEnabled ??
             usage.entitlements.historyEnabled

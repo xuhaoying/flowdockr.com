@@ -17,7 +17,7 @@ export function ScenarioSelector({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition-colors outline-none focus:border-slate-500"
+        className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition-colors outline-none focus:border-slate-500"
       >
         {scenarioOptions.map((scenario) => (
           <option key={scenario.value} value={scenario.value}>
