@@ -1,3 +1,7 @@
+import { CheckCircle2 } from 'lucide-react';
+
+import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
+
 type ScenarioDifficultyProps = {
   title?: string;
   points: string[];
@@ -8,20 +12,28 @@ export function ScenarioDifficulty({
   points,
 }: ScenarioDifficultyProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
-      <div className="max-w-3xl space-y-4">
+    <Card className="border-border/80 bg-white">
+      <CardHeader className="gap-2">
+        <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+          Recommended approach
+        </p>
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
           {title}
         </h2>
-        <ul className="space-y-3 text-sm text-slate-700">
+      </CardHeader>
+      <CardContent>
+        <ul className="grid gap-3 md:grid-cols-2">
           {points.map((point) => (
-            <li key={point} className="flex items-start gap-3">
-              <span className="mt-1.5 inline-block h-2 w-2 rounded-full bg-slate-500" />
+            <li
+              key={point}
+              className="border-border/80 flex items-start gap-3 rounded-[18px] border bg-slate-50/70 p-4 text-sm leading-6 text-slate-700"
+            >
+              <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-slate-900" />
               <span>{point}</span>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }
