@@ -11,6 +11,7 @@ import type {
 } from '@/types/generation';
 
 import { Link } from '@/core/i18n/navigation';
+import { Button } from '@/shared/components/ui/button';
 
 type ToolResultProps = {
   reply: string;
@@ -18,6 +19,11 @@ type ToolResultProps = {
   replyVersions?: ReplyVersion[];
   riskInsights?: string[];
   followUpSuggestion?: FollowUpSuggestion;
+  scenarioContext?: {
+    title?: string;
+    clientMessage?: string;
+    primaryGoal?: string;
+  };
   historyEnabled?: boolean;
   supportLevel?: BillingSupportLevel;
   selectedTone?: DealTone;
@@ -33,6 +39,7 @@ export function ToolResult({
   replyVersions,
   riskInsights,
   followUpSuggestion,
+  scenarioContext,
   historyEnabled = true,
   supportLevel = 'free',
   selectedTone = 'professional',
@@ -56,6 +63,9 @@ export function ToolResult({
     (supportLevel === 'free' ||
       supportLevel === 'quick_help' ||
       supportLevel === 'pro');
+  const softerVersion = alternateVersions.find((version) => version.key === 'softer');
+  const firmerVersion = alternateVersions.find((version) => version.key === 'firm');
+  const followUpAvailable = Boolean(followUpSuggestion?.reply);
 
   return (
     <section
@@ -92,49 +102,82 @@ export function ToolResult({
           {primaryResponse ? (
             <ResultCard
               reply={primaryResponse}
+              situationTitle={scenarioContext?.title}
+              situationClientMessage={scenarioContext?.clientMessage}
+              strategyInsight={buildStrategyInsight({
+                strategyBlock,
+                selectedTone,
+                primaryVersionKey: primaryVersion?.key,
+                scenarioGoal: scenarioContext?.primaryGoal,
+              })}
               whyThisWorks={buildWhyThisWorks({
                 strategyBlock,
                 selectedTone,
                 primaryVersionKey: primaryVersion?.key,
               })}
+              negotiationTip={buildNegotiationTip({
+                followUpSuggestion,
+                scenarioGoal: scenarioContext?.primaryGoal,
+              })}
               toneLabel={getToneLabel(selectedTone, primaryVersion?.key)}
-              suggestedNextStep={buildSuggestedNextStep(followUpSuggestion)}
               onCopy={() => onCopy?.('primary_response')}
-              onRegenerate={onRegenerate}
-              loading={loading}
             />
           ) : null}
 
-          {strategyBlock ? (
-            <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <section className="space-y-3">
+            <div>
               <h4 className="text-sm font-semibold text-slate-900">
-                Suggested approach
+                More reply options
               </h4>
-              <p className="mt-1 text-sm text-slate-600">
-                What this response is trying to achieve in the negotiation.
+              <p className="text-sm text-slate-600">
+                Generate or review additional versions before you send.
               </p>
-              <div className="mt-3 space-y-3">
-                {strategyBlock.sections.map((section) => (
-                  <div key={section.title} className="space-y-2">
-                    <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-                      {section.title}
-                    </p>
-                    <ul className="space-y-2 text-sm text-slate-700">
-                      {section.bullets.map((bullet) => (
-                        <li
-                          key={`${section.title}-${bullet}`}
-                          className="flex items-start gap-2"
-                        >
-                          <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-lg border-slate-300 bg-white text-sm font-medium text-slate-900"
+                onClick={() =>
+                  handleReplyAction({
+                    targetId: softerVersion ? `reply-version-${softerVersion.key}` : null,
+                    onFallback: onRegenerate,
+                  })
+                }
+                disabled={!softerVersion && !onRegenerate}
+              >
+                Generate softer version
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-lg border-slate-300 bg-white text-sm font-medium text-slate-900"
+                onClick={() =>
+                  handleReplyAction({
+                    targetId: firmerVersion ? `reply-version-${firmerVersion.key}` : null,
+                    onFallback: onRegenerate,
+                  })
+                }
+                disabled={!firmerVersion && !onRegenerate}
+              >
+                Generate firmer version
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-lg border-slate-300 bg-white text-sm font-medium text-slate-900"
+                onClick={() =>
+                  handleReplyAction({
+                    targetId: followUpAvailable ? 'tool-follow-up-reply' : null,
+                    onFallback: onRegenerate,
+                  })
+                }
+                disabled={!followUpAvailable && !onRegenerate}
+              >
+                Generate follow-up reply
+              </Button>
+            </div>
+          </section>
 
           {alternateVersions.length > 0 ? (
             <section className="space-y-3">
@@ -143,17 +186,18 @@ export function ToolResult({
                   Alternate versions
                 </h4>
                 <p className="text-sm text-slate-600">
-                  Compare additional tones before you send the reply.
+                  Compare tone-adjusted options without losing the negotiation logic.
                 </p>
               </div>
 
               <div className="space-y-3">
                 {alternateVersions.map((version) => (
                   <div
+                    id={`reply-version-${version.key}`}
                     key={version.key}
-                    className="rounded-lg border border-slate-200 p-4"
+                    className="rounded-xl border border-slate-200 bg-white p-4"
                   >
-                    <div className="mb-2 flex items-center justify-between gap-2">
+                    <div className="mb-3 flex items-center justify-between gap-3">
                       <div>
                         <h5 className="text-sm font-semibold text-slate-900">
                           {version.label}
@@ -164,14 +208,16 @@ export function ToolResult({
                       </div>
                       <CopyButton
                         value={version.text}
-                        idleLabel="Copy Reply"
-                        copiedLabel="Reply copied"
+                        idleLabel="Copy reply"
+                        copiedLabel="Copied ✓"
                         onCopied={() => onCopy?.(version.key)}
                       />
                     </div>
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap text-slate-700">
-                      {version.text}
-                    </p>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                      <p className="text-[15px] leading-[1.6] whitespace-pre-wrap text-slate-800">
+                        {version.text}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -198,7 +244,10 @@ export function ToolResult({
           ) : null}
 
           {followUpSuggestion ? (
-            <section className="rounded-lg border border-sky-200 bg-sky-50 p-4">
+            <section
+              id="tool-follow-up-reply"
+              className="rounded-lg border border-sky-200 bg-sky-50 p-4"
+            >
               <h4 className="text-sm font-semibold text-sky-950">
                 If the client pushes again
               </h4>
@@ -317,40 +366,71 @@ function buildWhyThisWorks(params: {
     /why/i.test(section.title)
   );
   if (whySection?.bullets.length) {
-    return joinBullets(whySection.bullets);
+    return whySection.bullets.slice(0, 3);
   }
 
   const objectiveSection = params.strategyBlock?.sections.find((section) =>
     /objective|goal|approach/i.test(section.title)
   );
   if (objectiveSection?.bullets.length) {
-    return joinBullets(objectiveSection.bullets);
+    return objectiveSection.bullets.slice(0, 3);
   }
 
   if (params.primaryVersionKey === 'firm' || params.selectedTone === 'firm') {
-    return 'This reply protects your pricing boundary, acknowledges the objection without sounding defensive, and avoids rewarding pushback with an immediate discount.';
+    return [
+      "Acknowledges the client's pushback without sounding defensive.",
+      'Protects your pricing boundary instead of rewarding the objection instantly.',
+      'Keeps the discussion focused on scope, value, and next steps.',
+    ];
   }
 
   if (
     params.primaryVersionKey === 'softer' ||
     params.selectedTone === 'friendly'
   ) {
-    return 'This reply keeps the relationship warm, shows the client you heard the concern, and creates room to clarify priorities before changing the deal terms.';
+    return [
+      "Shows the client you heard the concern without agreeing to cut price immediately.",
+      'Keeps the relationship collaborative and low-friction.',
+      'Creates room to clarify priorities before changing the deal terms.',
+    ];
   }
 
-  return 'This reply acknowledges the concern, keeps the tone calm, and moves the conversation toward scope or budget clarity before you make concessions.';
+  return [
+    "Acknowledges the client's concern in a calm way.",
+    'Reframes the conversation around scope, budget, and value.',
+    'Keeps the negotiation collaborative before you make concessions.',
+  ];
 }
 
-function buildSuggestedNextStep(followUpSuggestion?: FollowUpSuggestion) {
-  if (followUpSuggestion?.direction?.trim()) {
-    return followUpSuggestion.direction.trim();
+function buildStrategyInsight(params: {
+  strategyBlock?: PresentableStrategyBlock;
+  selectedTone: DealTone;
+  primaryVersionKey?: ReplyVersion['key'];
+  scenarioGoal?: string;
+}) {
+  const objectiveSection = params.strategyBlock?.sections.find((section) =>
+    /objective|goal|approach/i.test(section.title)
+  );
+  if (objectiveSection?.bullets[0]) {
+    return objectiveSection.bullets[0];
   }
 
-  if (followUpSuggestion?.reply?.trim()) {
-    return 'Use the follow-up reply below if the client pushes again and you need to keep the negotiation moving.';
+  if (params.scenarioGoal) {
+    return params.scenarioGoal;
   }
 
-  return '';
+  if (params.primaryVersionKey === 'firm' || params.selectedTone === 'firm') {
+    return 'The goal here is to defend your price while keeping control of the negotiation.';
+  }
+
+  if (
+    params.primaryVersionKey === 'softer' ||
+    params.selectedTone === 'friendly'
+  ) {
+    return 'The goal here is to keep the conversation warm while guiding the client back to value and priorities.';
+  }
+
+  return 'The goal here is to acknowledge the concern, defend your value, and keep the conversation collaborative.';
 }
 
 function getToneLabel(
@@ -368,15 +448,35 @@ function getToneLabel(
   return 'Neutral';
 }
 
-function joinBullets(bullets: string[]) {
-  const parts = bullets
-    .slice(0, 2)
-    .map((bullet) => bullet.trim().replace(/[.;:,\s]+$/, ''))
-    .filter(Boolean);
-
-  if (parts.length === 0) {
-    return '';
+function buildNegotiationTip(params: {
+  followUpSuggestion?: FollowUpSuggestion;
+  scenarioGoal?: string;
+}) {
+  if (params.followUpSuggestion?.direction?.trim()) {
+    return params.followUpSuggestion.direction.trim();
   }
 
-  return `${parts.join('. ')}.`;
+  if (
+    params.scenarioGoal &&
+    /scope|phase|smaller/i.test(params.scenarioGoal)
+  ) {
+    return params.scenarioGoal;
+  }
+
+  return 'If the client pushes again, offer a smaller scope or phased starting point instead of lowering the same price.';
+}
+
+function handleReplyAction(params: {
+  targetId: string | null;
+  onFallback?: () => void;
+}) {
+  if (params.targetId) {
+    document.getElementById(params.targetId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    return;
+  }
+
+  params.onFallback?.();
 }

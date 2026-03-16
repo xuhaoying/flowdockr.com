@@ -1,95 +1,165 @@
 'use client';
 
-import { CopyButton } from '@/components/tool/CopyButton';
+import { Mail } from 'lucide-react';
+import { useState } from 'react';
 
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 
 type ResultCardProps = {
   reply: string;
-  whyThisWorks: string;
+  situationTitle?: string;
+  situationClientMessage?: string;
+  strategyInsight: string;
+  whyThisWorks: string[];
+  negotiationTip: string;
   toneLabel: string;
-  suggestedNextStep?: string;
   onCopy?: () => void;
-  onRegenerate?: () => void;
-  loading?: boolean;
 };
 
 export function ResultCard({
   reply,
+  situationTitle,
+  situationClientMessage,
+  strategyInsight,
   whyThisWorks,
+  negotiationTip,
   toneLabel,
-  suggestedNextStep,
   onCopy,
-  onRegenerate,
-  loading = false,
 }: ResultCardProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    if (!reply) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(reply);
+      setCopied(true);
+      onCopy?.();
+      window.setTimeout(() => setCopied(false), 1200);
+    } catch {
+      // no-op
+    }
+  };
+
   return (
-    <section className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="space-y-1">
-          <h4 className="text-base font-semibold text-slate-900">
-            AI Suggested Reply
-          </h4>
-          <p className="text-sm text-slate-600">
-            A send-ready reply built for this negotiation moment.
+    <section className="space-y-4">
+      {situationTitle || situationClientMessage ? (
+        <section className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4">
+          <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+            Situation
           </p>
+          {situationTitle ? (
+            <p className="mt-2 text-sm font-semibold text-slate-900">
+              {situationTitle}
+            </p>
+          ) : null}
+          {situationClientMessage ? (
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              {situationClientMessage}
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
+      <section className="rounded-xl bg-[#EEF2FF] p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="space-y-1">
+            <p className="text-xs font-semibold tracking-[0.16em] text-indigo-700 uppercase">
+              Strategy insight
+            </p>
+            <p className="text-sm leading-6 text-slate-800">{strategyInsight}</p>
+          </div>
+          <Badge
+            variant="outline"
+            className="rounded-full border-indigo-200 bg-white/70 px-2.5 py-1 text-slate-700"
+          >
+            Tone: {toneLabel}
+          </Badge>
         </div>
+      </section>
 
-        <Badge
-          variant="outline"
-          className="rounded-full border-slate-300 bg-white px-2.5 py-1 text-slate-700"
-        >
-          Tone: {toneLabel}
-        </Badge>
-      </div>
+      <section className="rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-slate-900">
+              <Mail className="size-4 text-indigo-600" />
+              <h4 className="text-base font-semibold">
+                Suggested reply you can send
+              </h4>
+            </div>
+            <p className="text-sm text-slate-600">
+              Clear enough to use now, with room to adjust the tone before you
+              send it.
+            </p>
+          </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm leading-relaxed whitespace-pre-wrap text-slate-800">
-          {reply}
-        </p>
-      </div>
-
-      <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-            Why this works
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-slate-700">
-            {whyThisWorks}
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-            Suggested next step
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-slate-700">
-            {suggestedNextStep ||
-              'If the client pushes again, ask one clarifying question before making concessions or reshaping the scope.'}
-          </p>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-3">
-        <CopyButton
-          value={reply}
-          idleLabel="Copy Reply"
-          copiedLabel="Reply copied"
-          onCopied={onCopy}
-        />
-        {onRegenerate ? (
           <Button
             type="button"
-            variant="outline"
-            size="sm"
-            onClick={onRegenerate}
-            disabled={loading}
+            onClick={handleCopy}
+            className="h-10 rounded-lg bg-[#4F46E5] px-4 text-sm font-medium text-white hover:bg-[#4338CA]"
           >
-            Try Another Version
+            {copied ? 'Copied ✓' : 'Copy reply'}
           </Button>
-        ) : null}
-      </div>
+        </div>
+
+        <div className="mt-5 space-y-4 rounded-xl border border-[#E2E8F0] bg-white p-5">
+          {renderReplyParagraphs(reply)}
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] p-4">
+        <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+          Why this works
+        </p>
+        <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+          {whyThisWorks.map((reason) => (
+            <li key={reason} className="flex items-start gap-2">
+              <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              <span>{reason}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="rounded-xl bg-[#FFF7ED] p-4">
+        <p className="text-xs font-semibold tracking-[0.16em] text-amber-800 uppercase">
+          Negotiation tip
+        </p>
+        <p className="mt-2 text-sm leading-6 text-slate-800">
+          {negotiationTip}
+        </p>
+      </section>
     </section>
+  );
+}
+
+function renderReplyParagraphs(reply: string) {
+  const paragraphs = reply
+    .split(/\n\s*\n/g)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
+  if (paragraphs.length === 0) {
+    return (
+      <p className="text-[15px] leading-[1.6] text-slate-800 whitespace-pre-wrap">
+        {reply}
+      </p>
+    );
+  }
+
+  return (
+    <>
+      {paragraphs.map((paragraph, index) => (
+        <p
+          key={`${paragraph}-${index}`}
+          className="text-[15px] leading-[1.6] text-slate-800 whitespace-pre-line"
+        >
+          {paragraph}
+        </p>
+      ))}
+    </>
   );
 }

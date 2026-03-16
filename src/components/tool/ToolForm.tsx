@@ -741,6 +741,15 @@ export function ToolForm({
           replyVersions={result?.replyVersions}
           riskInsights={result?.riskInsights}
           followUpSuggestion={result?.followUpSuggestion}
+          scenarioContext={
+            scenario
+              ? {
+                  title: scenario.title,
+                  clientMessage: scenario.exampleClientMessage,
+                  primaryGoal: scenario.primaryGoal,
+                }
+              : undefined
+          }
           historyEnabled={
             result?.entitlements?.historyEnabled ??
             usage.entitlements.historyEnabled
