@@ -199,11 +199,11 @@
           "children": [
             {
               "title": "服务条款",
-              "url": "/terms-of-service"
+              "url": "/terms"
             },
             {
               "title": "隐私政策",
-              "url": "/privacy-policy"
+              "url": "/privacy"
             }
           ]
         }
@@ -213,11 +213,11 @@
       "items": [
         {
           "title": "服务条款",
-          "url": "/terms-of-service"
+          "url": "/terms"
         },
         {
           "title": "隐私政策",
-          "url": "/privacy-policy"
+          "url": "/privacy"
         }
       ]
     },

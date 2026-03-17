@@ -7,6 +7,10 @@ import { getCookie, setCookie } from '@/shared/lib/cookie';
 const COOKIE_NAME = 'utm_source';
 const COOKIE_DAYS = 30;
 
+type UtmCaptureProps = {
+  consentGranted?: boolean;
+};
+
 function sanitizeUtmSource(value: string) {
   const decoded = (() => {
     try {
@@ -26,8 +30,11 @@ function sanitizeUtmSource(value: string) {
  * Capture utm_source from landing URL and persist in cookie.
  * This enables server-side signup to save it into the user table.
  */
-export function UtmCapture() {
+export function UtmCapture({ consentGranted = false }: UtmCaptureProps) {
   useEffect(() => {
+    if (!consentGranted) {
+      return;
+    }
     // Don’t overwrite if already captured.
     if (getCookie(COOKIE_NAME)) return;
 
@@ -40,7 +47,7 @@ export function UtmCapture() {
 
     // Store encoded to keep cookie safe.
     setCookie(COOKIE_NAME, encodeURIComponent(sanitized), COOKIE_DAYS);
-  }, []);
+  }, [consentGranted]);
 
   return null;
 }

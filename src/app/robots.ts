@@ -28,8 +28,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       allow: '/',
       disallow: [
         '/*?*q=',
-        '/privacy-policy',
-        '/terms-of-service',
         '/settings/*',
         '/activity/*',
         '/admin/*',

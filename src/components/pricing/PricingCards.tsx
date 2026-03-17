@@ -299,6 +299,30 @@ export function PricingCards({
                 >
                   One-time purchase. Credits do not expire.
                 </p>
+                <div
+                  className={`flex flex-wrap gap-3 text-xs ${
+                    isPopular ? 'text-slate-300' : 'text-slate-500'
+                  }`}
+                >
+                  <Link
+                    href="/terms"
+                    className="underline underline-offset-2 hover:text-slate-900"
+                  >
+                    Terms
+                  </Link>
+                  <Link
+                    href="/privacy"
+                    className="underline underline-offset-2 hover:text-slate-900"
+                  >
+                    Privacy
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="underline underline-offset-2 hover:text-slate-900"
+                  >
+                    Contact
+                  </Link>
+                </div>
               </div>
             </article>
           );
