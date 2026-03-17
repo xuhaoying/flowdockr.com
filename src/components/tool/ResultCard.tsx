@@ -131,6 +131,13 @@ export function ResultCard({
                 {renderReplyParagraphs(reply)}
               </div>
             </div>
+            <div className="mt-3 space-y-1 text-xs leading-5 text-slate-500">
+              <p>AI-generated draft. Please review and adapt before sending.</p>
+              <p>
+                Flowdockr provides communication suggestions, not legal or
+                financial advice.
+              </p>
+            </div>
           </CardContent>
         </Card>
 

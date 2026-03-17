@@ -319,10 +319,10 @@ export function FlowDockrLandingContent() {
       </section>
 
       <footer className="flex flex-wrap items-center gap-4 border-t pt-5 text-sm text-muted-foreground">
-        <Link href="/privacy-policy" className="hover:text-foreground">
+        <Link href="/privacy" className="hover:text-foreground">
           Privacy
         </Link>
-        <Link href="/terms-of-service" className="hover:text-foreground">
+        <Link href="/terms" className="hover:text-foreground">
           Terms
         </Link>
         <Link href="/blog" className="hover:text-foreground">

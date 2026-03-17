@@ -1,10 +1,18 @@
 import '@/config/style/global.css';
 
+import { cookies } from 'next/headers';
 import { getLocale, setRequestLocale } from 'next-intl/server';
 import NextTopLoader from 'nextjs-toploader';
 
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { CookieConsentBanner } from '@/components/layout/CookieConsentBanner';
 import { envConfigs } from '@/config';
+import {
+  TRACKING_CONSENT_COOKIE,
+  getLocalizedPublicPath,
+  hasOptionalTrackingConfigured,
+  parseTrackingConsent,
+} from '@/lib/trust';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
 import { getAllConfigs } from '@/shared/models/config';
 import { getAdsService } from '@/shared/services/ads';
@@ -24,6 +32,14 @@ export default async function RootLayout({
   const isDebug = process.env.NEXT_PUBLIC_DEBUG === 'true';
   const googleSearchConsoleVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || '';
+  const googleAnalyticsMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
+  const cookieStore = await cookies();
+  const trackingConsent = parseTrackingConsent(
+    cookieStore.get(TRACKING_CONSENT_COOKIE)?.value
+  );
+  const allowOptionalTracking = trackingConsent === 'accepted';
+  const privacyHref = getLocalizedPublicPath('/privacy', locale);
 
   // app url
   const appUrl = envConfigs.site_url || '';
@@ -47,37 +63,47 @@ export default async function RootLayout({
   let customerServiceMetaTags = null;
   let customerServiceHeadScripts = null;
   let customerServiceBodyScripts = null;
+  let showCookieConsentBanner = false;
 
   if (isProduction || isDebug) {
     const configs = await getAllConfigs();
+    const hasOptionalTracking = hasOptionalTrackingConfigured(configs, {
+      gaMeasurementId: googleAnalyticsMeasurementId,
+      isDebug,
+      isProduction,
+    });
+    showCookieConsentBanner =
+      hasOptionalTracking && trackingConsent === null;
 
-    const [adsService, analyticsService, affiliateService, customerService] =
-      await Promise.all([
-        getAdsService(configs),
-        getAnalyticsService(configs),
-        getAffiliateService(configs),
-        getCustomerService(configs),
-      ]);
+    if (allowOptionalTracking) {
+      const [adsService, analyticsService, affiliateService, customerService] =
+        await Promise.all([
+          getAdsService(configs),
+          getAnalyticsService(configs),
+          getAffiliateService(configs),
+          getCustomerService(configs),
+        ]);
 
-    // get ads components
-    adsMetaTags = adsService.getMetaTags();
-    adsHeadScripts = adsService.getHeadScripts();
-    adsBodyScripts = adsService.getBodyScripts();
+      // get ads components
+      adsMetaTags = adsService.getMetaTags();
+      adsHeadScripts = adsService.getHeadScripts();
+      adsBodyScripts = adsService.getBodyScripts();
 
-    // get analytics components
-    analyticsMetaTags = analyticsService.getMetaTags();
-    analyticsHeadScripts = analyticsService.getHeadScripts();
-    analyticsBodyScripts = analyticsService.getBodyScripts();
+      // get analytics components
+      analyticsMetaTags = analyticsService.getMetaTags();
+      analyticsHeadScripts = analyticsService.getHeadScripts();
+      analyticsBodyScripts = analyticsService.getBodyScripts();
 
-    // get affiliate components
-    affiliateMetaTags = affiliateService.getMetaTags();
-    affiliateHeadScripts = affiliateService.getHeadScripts();
-    affiliateBodyScripts = affiliateService.getBodyScripts();
+      // get affiliate components
+      affiliateMetaTags = affiliateService.getMetaTags();
+      affiliateHeadScripts = affiliateService.getHeadScripts();
+      affiliateBodyScripts = affiliateService.getBodyScripts();
 
-    // get customer service components
-    customerServiceMetaTags = customerService.getMetaTags();
-    customerServiceHeadScripts = customerService.getHeadScripts();
-    customerServiceBodyScripts = customerService.getBodyScripts();
+      // get customer service components
+      customerServiceMetaTags = customerService.getMetaTags();
+      customerServiceHeadScripts = customerService.getHeadScripts();
+      customerServiceBodyScripts = customerService.getBodyScripts();
+    }
   }
 
   return (
@@ -132,8 +158,8 @@ export default async function RootLayout({
         />
 
         {children}
-        <UtmCapture />
-        <GoogleAnalytics />
+        <UtmCapture consentGranted={allowOptionalTracking} />
+        <GoogleAnalytics consentGranted={allowOptionalTracking} />
 
         {/* inject ads body scripts */}
         {adsBodyScripts}
@@ -146,6 +172,10 @@ export default async function RootLayout({
 
         {/* inject customer service body scripts */}
         {customerServiceBodyScripts}
+
+        {showCookieConsentBanner ? (
+          <CookieConsentBanner privacyHref={privacyHref} />
+        ) : null}
       </body>
     </html>
   );

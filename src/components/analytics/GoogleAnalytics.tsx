@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import Script from 'next/script';
 import { usePathname } from 'next/navigation';
+import Script from 'next/script';
 
 import {
   ANALYTICS_ENABLED,
@@ -10,18 +10,24 @@ import {
   pageview,
 } from '@/lib/analytics';
 
-export function GoogleAnalytics() {
+type GoogleAnalyticsProps = {
+  consentGranted?: boolean;
+};
+
+export function GoogleAnalytics({
+  consentGranted = false,
+}: GoogleAnalyticsProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!ANALYTICS_ENABLED || !pathname) {
+    if (!consentGranted || !ANALYTICS_ENABLED || !pathname) {
       return;
     }
 
     pageview(pathname);
-  }, [pathname]);
+  }, [consentGranted, pathname]);
 
-  if (!ANALYTICS_ENABLED || !GA_MEASUREMENT_ID) {
+  if (!consentGranted || !ANALYTICS_ENABLED || !GA_MEASUREMENT_ID) {
     return null;
   }
 

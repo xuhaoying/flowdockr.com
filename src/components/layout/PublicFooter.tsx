@@ -15,8 +15,9 @@ const USE_CASE_LINKS = [
 ];
 
 const LEGAL_LINKS = [
-  { href: '/terms', label: 'Terms' },
-  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms of Service' },
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function PublicFooter() {
@@ -27,6 +28,9 @@ export function PublicFooter() {
           <p className="text-sm font-semibold text-slate-900">Flowdockr</p>
           <p className="text-sm text-slate-600">
             Scenario-based negotiation system for freelancers and agencies.
+          </p>
+          <p className="mt-3 text-sm text-slate-600">
+            Flowdockr is a product of Auralis Labs LLC.
           </p>
         </div>
 
@@ -55,6 +59,12 @@ export function PublicFooter() {
               {link.label}
             </Link>
           ))}
+        </div>
+      </div>
+      <div className="border-t border-slate-200">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-4 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
+          <p>© 2026 Flowdockr. All rights reserved.</p>
+          <p>Flowdockr is a product of Auralis Labs LLC.</p>
         </div>
       </div>
     </footer>

@@ -1,3 +1,4 @@
+import { BillingPolicy } from '@/components/pricing/BillingPolicy';
 import { CreditExplanation } from '@/components/pricing/CreditExplanation';
 import { FeatureComparison } from '@/components/pricing/FeatureComparison';
 import { HowItWorks } from '@/components/pricing/HowItWorks';
@@ -39,6 +40,7 @@ export default async function PricingHubPage({
         showSectionHeader={true}
         sectionId="pricing-cards"
       />
+      <BillingPolicy />
       <CreditExplanation />
       <FeatureComparison />
       <PricingFAQ />
