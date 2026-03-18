@@ -20,7 +20,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "build:fast": "NODE_OPTIONS='--max-old-space-size=4096' next build",
-    "start": "next start",
+    "start": "pnpm start:standalone",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test:scenario-funnel": "vitest run src/lib/analytics/scenarioFunnel.test.ts src/components/tool/ToolForm.analytics.test.tsx",
@@ -65,7 +65,7 @@
     "qa:pricing-content": "tsx scripts/flowdockr/validate-pricing-content.ts",
     "qa:pricing-taxonomy": "tsx scripts/flowdockr/validate-pricing-taxonomy.ts",
     "qa:pricing-runtime-smoke": "tsx scripts/flowdockr/smoke-pricing-runtime.ts",
-    "start:standalone": "node .next/standalone/server.js"
+    "start:standalone": "mkdir -p .next/standalone/.next && cp -R .next/static .next/standalone/.next/static && cp -R public .next/standalone/public && node .next/standalone/server.js"
   },
   "dependencies": {
     "@ai-sdk/react": "^2.0.89",
