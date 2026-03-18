@@ -23,22 +23,22 @@ export function PricingScenarioInlineTool({
   return (
     <section
       id="scenario-inline-tool"
-      className="scroll-mt-24 space-y-4 rounded-2xl border border-slate-900 bg-slate-900 p-5 text-white shadow-sm lg:p-6"
+      className="scroll-mt-24 space-y-4 rounded-2xl border border-slate-200 bg-white p-5 text-slate-900 shadow-sm lg:p-6"
     >
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
-          <p className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-medium text-slate-100">
+          <p className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700">
             Start here on this page
           </p>
-          <p className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-100">
+          <p className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700">
             2 free drafts
           </p>
         </div>
         <div className="max-w-3xl space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             {scenario.toolCta.title}
           </h2>
-          <p className="text-sm leading-relaxed text-slate-200">
+          <p className="text-sm leading-relaxed text-slate-700">
             {scenario.toolCta.body} Start with the exact message, add your quote
             or scope context, choose the tone, and generate without leaving this
             scenario page.
@@ -60,11 +60,11 @@ export function PricingScenarioInlineTool({
         submitLabel={scenario.toolCta.buttonLabel}
       />
 
-      <div className="flex flex-wrap items-center gap-3 text-sm text-slate-200">
+      <div className="flex flex-wrap items-center gap-3 text-sm text-slate-700">
         <span>Need the dedicated tool page instead?</span>
         <Link
           href={fullWorkspaceHref}
-          className="font-semibold text-white underline underline-offset-2"
+          className="font-semibold text-slate-900 underline underline-offset-2"
         >
           Open full workspace
         </Link>
