@@ -88,6 +88,12 @@ const PROJECT_TYPE_OPTIONS: Array<{ value: DealProjectType; label: string }> = [
   { value: 'other', label: 'Other services' },
 ];
 
+const LIGHT_FIELD_STYLE = {
+  backgroundColor: '#ffffff',
+  color: '#0f172a',
+  colorScheme: 'light' as const,
+};
+
 export function ToolForm({
   analyticsScenarioSlug: initialAnalyticsScenarioSlug,
   funnelScenarioSlug = '',
@@ -650,7 +656,8 @@ export function ToolForm({
               rows={10}
               maxLength={4000}
               placeholder={textareaPlaceholder}
-              className="min-h-[220px] resize-y rounded-xl border-slate-300 px-4 py-3 shadow-xs"
+              className="min-h-[220px] resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-xs dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+              style={LIGHT_FIELD_STYLE}
             />
             <div className="flex items-center justify-end text-xs text-slate-500">
               <span>{trimmedMessage.length}/4000</span>
@@ -666,7 +673,8 @@ export function ToolForm({
                   trackToolOpen();
                   setTone(event.target.value as DealTone);
                 }}
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-800 shadow-xs transition outline-none focus:border-slate-500"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                style={LIGHT_FIELD_STYLE}
               >
                 {TONE_OPTIONS.map((item) => (
                   <option key={item.value} value={item.value}>
@@ -686,7 +694,8 @@ export function ToolForm({
                   trackToolOpen();
                   setProjectType(event.target.value as DealProjectType);
                 }}
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-800 shadow-xs transition outline-none focus:border-slate-500"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                style={LIGHT_FIELD_STYLE}
               >
                 {PROJECT_TYPE_OPTIONS.map((item) => (
                   <option key={item.value} value={item.value}>
@@ -716,7 +725,8 @@ export function ToolForm({
               rows={4}
               maxLength={500}
               placeholder={rateContextPlaceholder}
-              className="resize-y rounded-xl border-slate-300 px-4 py-3 shadow-xs"
+              className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-xs dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+              style={LIGHT_FIELD_STYLE}
             />
           </label>
 
