@@ -89,9 +89,9 @@ export function ToolResult({
     <Card
       id="tool-result-panel"
       data-result-ready={hasResult ? 'true' : 'false'}
-      className="border-border/80 overflow-hidden bg-white py-0"
+      className="overflow-hidden border-slate-200 bg-white py-0 shadow-sm"
     >
-      <CardHeader className="border-border/70 gap-3 border-b bg-gradient-to-br from-white via-white to-slate-50/70 px-5 py-5 lg:px-6">
+      <CardHeader className="gap-3 border-b border-slate-200 bg-slate-50 px-5 py-5 lg:px-6">
         <div className="flex flex-wrap items-center gap-2">
           <Badge
             variant="outline"
@@ -111,7 +111,7 @@ export function ToolResult({
 
       <CardContent className="space-y-6 px-5 py-5 lg:px-6 lg:py-6">
         {loading ? (
-          <div className="border-border/80 space-y-3 rounded-[18px] border bg-slate-50/80 p-5">
+          <div className="space-y-3 rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs">
             <div className="h-3 w-full animate-pulse rounded bg-slate-200" />
             <div className="h-3 w-11/12 animate-pulse rounded bg-slate-200" />
             <div className="h-3 w-9/12 animate-pulse rounded bg-slate-200" />
@@ -119,7 +119,7 @@ export function ToolResult({
         ) : null}
 
         {!hasResult && !loading ? (
-          <div className="rounded-[18px] border border-dashed border-slate-300 bg-slate-50/80 p-5 text-sm text-slate-600">
+          <div className="rounded-[18px] border border-dashed border-slate-300 bg-white p-5 text-sm text-slate-700 shadow-xs">
             <div className="flex items-center gap-2 text-slate-900">
               <Sparkles className="size-4" />
               <p className="font-semibold">
@@ -244,9 +244,9 @@ export function ToolResult({
                     <Card
                       id={`reply-version-${version.key}`}
                       key={version.key}
-                      className="border-border/80 overflow-hidden bg-white py-0"
+                      className="overflow-hidden border-slate-200 bg-white py-0 shadow-xs"
                     >
-                      <CardHeader className="border-border/70 gap-2 border-b bg-white px-5 py-4">
+                      <CardHeader className="gap-2 border-b border-slate-200 bg-slate-50 px-5 py-4">
                         <div className="flex items-center justify-between gap-3">
                           <div>
                             <h5 className="text-sm font-semibold text-slate-900">
@@ -265,8 +265,8 @@ export function ToolResult({
                         </div>
                       </CardHeader>
                       <CardContent className="px-5 py-5">
-                        <div className="border-border/80 rounded-[18px] border bg-slate-50/70 p-4">
-                          <p className="text-[15px] leading-[1.75] whitespace-pre-wrap text-slate-800">
+                        <div className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs sm:p-6">
+                          <p className="text-[15px] leading-7 whitespace-pre-wrap text-slate-900 sm:text-base">
                             {version.text}
                           </p>
                         </div>
@@ -302,7 +302,7 @@ export function ToolResult({
             {followUpSuggestion ? (
               <section
                 id="tool-follow-up-reply"
-                className="rounded-[18px] border border-sky-200 bg-sky-50/80 p-5"
+                className="rounded-[18px] border border-sky-200 bg-sky-50 p-5"
               >
                 <div className="flex items-center gap-2 text-sky-950">
                   <CornerDownRight className="size-4" />
@@ -329,7 +329,7 @@ export function ToolResult({
                     </p>
                   </div>
                   {followUpSuggestion.direction ? (
-                    <div className="rounded-[18px] border border-sky-200/70 bg-white/70 p-4">
+                    <div className="rounded-[18px] border border-sky-200 bg-white p-4 shadow-xs">
                       <p className="text-xs font-semibold tracking-wide text-sky-700 uppercase">
                         Negotiation direction
                       </p>
@@ -343,7 +343,7 @@ export function ToolResult({
             ) : null}
 
             {historyEnabled ? (
-              <section className="border-border/80 rounded-[18px] border bg-slate-50/80 p-5">
+              <section className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs">
                 <div className="flex items-center gap-2 text-slate-900">
                   <History className="size-4" />
                   <h4 className="text-sm font-semibold">Actions</h4>
@@ -361,7 +361,7 @@ export function ToolResult({
             ) : null}
 
             {showUpgradeNudge ? (
-              <div className="border-border/80 rounded-[18px] border bg-slate-50/80 p-5 text-sm text-slate-700">
+              <div className="rounded-[18px] border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-xs">
                 <p className="font-semibold text-slate-900">
                   {supportLevel === 'quick_help'
                     ? 'Upgrade to Pro for deeper negotiation support.'
