@@ -6,6 +6,7 @@ export {
   featureEntitlement,
   generation,
   purchase,
+  scenarioAnalyticsEvent,
   user,
   userBillingState,
   webhookEvent,

@@ -111,8 +111,7 @@ export const scenarioHubData: ScenarioHubData = {
   canonicalPath: '/scenario',
   hero: {
     title: 'Freelance client negotiation scenarios',
-    subtitle:
-      'Browse 24 canonical client situations built from raw freelancer negotiation patterns, not generic template categories.',
+    subtitle: `Browse ${scenarioPages.length} canonical client situations built from raw freelancer negotiation patterns, not generic template categories.`,
     supportingText:
       'Use the situation title, typical client wording, and embedded reply tool to move from recognition to action fast.',
     primaryCtaLabel: 'Browse scenarios',

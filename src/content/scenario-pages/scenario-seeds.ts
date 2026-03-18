@@ -1,3 +1,5 @@
+import { canonicalScenarioBatchOne } from '@/content/scenario-pages/scenario-batch-1';
+import { canonicalScenarioBatchTwo } from '@/content/scenario-pages/scenario-batch-2';
 import type { CanonicalScenario } from '@/types/scenario-catalog';
 
 export const canonicalScenarioSeeds: CanonicalScenario[] = [
@@ -631,4 +633,6 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     priority: 'p1',
     isSeed: true,
   },
+  ...canonicalScenarioBatchOne,
+  ...canonicalScenarioBatchTwo,
 ];

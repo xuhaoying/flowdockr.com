@@ -491,6 +491,37 @@ export const generation = table(
   ]
 );
 
+export const scenarioAnalyticsEvent = table(
+  'scenario_analytics_event',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    eventName: text('event_name').notNull(),
+    scenarioSlug: text('scenario_slug').notNull(),
+    pageType: text('page_type').notNull().default('scenario'),
+    pathname: text('pathname'),
+  },
+  (table) => [
+    check(
+      'chk_scenario_analytics_event_name',
+      sql`${table.eventName} in ('fd_scenario_view', 'fd_tool_start', 'fd_generation_success')`
+    ),
+    index('idx_scenario_analytics_event_slug_created').on(
+      table.scenarioSlug,
+      table.createdAt
+    ),
+    index('idx_scenario_analytics_event_name_created').on(
+      table.eventName,
+      table.createdAt
+    ),
+    index('idx_scenario_analytics_event_slug_name_created').on(
+      table.scenarioSlug,
+      table.eventName,
+      table.createdAt
+    ),
+  ]
+);
+
 export const purchase = table(
   'purchase',
   {

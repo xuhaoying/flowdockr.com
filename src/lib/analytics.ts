@@ -29,6 +29,12 @@ export const ANALYTICS_ENABLED =
   Boolean(GA_MEASUREMENT_ID) &&
   (process.env.NODE_ENV === 'production' || ANALYTICS_DEBUG_ENABLED);
 
+const MIRRORED_SCENARIO_EVENTS = new Set([
+  'fd_scenario_view',
+  'fd_tool_start',
+  'fd_generation_success',
+]);
+
 function isBrowser() {
   return typeof window !== 'undefined';
 }
@@ -47,6 +53,42 @@ function normalizeParams(params: AnalyticsParams = {}) {
   }
 
   return normalized;
+}
+
+function mirrorCanonicalScenarioEvent(
+  eventName: string,
+  params: Record<string, AnalyticsPrimitive>
+) {
+  if (!isBrowser() || !MIRRORED_SCENARIO_EVENTS.has(eventName)) {
+    return;
+  }
+
+  const scenarioSlug =
+    typeof params.scenario_slug === 'string' ? params.scenario_slug.trim() : '';
+  const pageType =
+    typeof params.page_type === 'string' ? params.page_type.trim() : '';
+
+  if (!scenarioSlug || pageType !== 'scenario') {
+    return;
+  }
+
+  try {
+    void fetch('/api/analytics/scenario-events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        eventName,
+        scenarioSlug,
+        pageType,
+        pathname: window.location.pathname,
+      }),
+      keepalive: true,
+    });
+  } catch {
+    // no-op
+  }
 }
 
 function ensureGtag() {
@@ -84,15 +126,17 @@ export function pageview(path?: string) {
   });
 }
 
-export function trackEvent(
-  eventName: string,
-  params: AnalyticsParams = {}
-) {
-  if (!isBrowser() || !ANALYTICS_ENABLED) {
+export function trackEvent(eventName: string, params: AnalyticsParams = {}) {
+  if (!isBrowser()) {
     return;
   }
 
   const normalized = normalizeParams(params);
+  mirrorCanonicalScenarioEvent(eventName, normalized);
+
+  if (!ANALYTICS_ENABLED) {
+    return;
+  }
 
   try {
     window.plausible?.(eventName, { props: normalized });
