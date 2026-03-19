@@ -53,6 +53,9 @@ function trackGenerationEvent(
     | 'generation_succeeded'
     | 'generation_failed_model'
     | 'generation_failed_parse'
+    | 'generation_schema_retry'
+    | 'generation_rubric_retry'
+    | 'generation_fallback_used'
     | 'generation_saved_failed',
   payload: Record<string, unknown>
 ) {
@@ -70,8 +73,45 @@ function trackGenerationEvent(
   }
 }
 
+function buildGenerationObservabilityPayload(params: {
+  serviceType?: string;
+  generationLog: {
+    model: string;
+    provider: string;
+    entitlementTier?: string;
+    schemaValid: boolean;
+    fallbackUsed: boolean;
+    fallbackReason?: string;
+    rubricPassed: boolean;
+    rubricFailReasons: string[];
+    rubricWarningReasons: string[];
+    schemaRetryCount: number;
+    rubricRetryCount: number;
+  };
+}) {
+  const { generationLog, serviceType } = params;
+
+  return {
+    service_type: serviceType,
+    model: generationLog.model,
+    provider: generationLog.provider,
+    entitlement_tier: generationLog.entitlementTier,
+    schema_status: generationLog.schemaValid ? 'valid' : 'invalid',
+    fallback_status: generationLog.fallbackUsed ? 'used' : 'not_used',
+    fallback_reason: generationLog.fallbackReason || null,
+    rubric_status: generationLog.rubricPassed ? 'passed' : 'failed',
+    rubric_failure_reasons: generationLog.rubricFailReasons,
+    rubric_warning_reasons: generationLog.rubricWarningReasons,
+    schema_retry_count: generationLog.schemaRetryCount,
+    rubric_retry_count: generationLog.rubricRetryCount,
+  };
+}
+
 export async function POST(request: NextRequest) {
   let scenarioSlug = '';
+  const configuredModel = String(
+    process.env.FLOWDOCKR_MODEL || 'gpt-5-mini'
+  ).trim();
 
   try {
     const rawBody = (await request.json()) as unknown;
@@ -141,9 +181,9 @@ export async function POST(request: NextRequest) {
         ? await getUserBillingProfile(status.userId)
         : getDefaultBillingProfile();
 
-    let output: Awaited<ReturnType<typeof generateReply>>;
+    let pipeline: Awaited<ReturnType<typeof generateReply>>;
     try {
-      output = await generateReply({
+      pipeline = await generateReply({
         scenario,
         message: input.message,
         sourcePage: input.sourcePage,
@@ -162,6 +202,8 @@ export async function POST(request: NextRequest) {
           sourcePage: input.sourcePage,
           mode: status.mode,
           isLoggedIn: status.isLoggedIn,
+          model: configuredModel,
+          service_type: input.serviceType,
           error: message || 'UNKNOWN',
         }
       );
@@ -228,13 +270,54 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const filteredOutput = filterOutputByEntitlements(output, {
+    const generationLog = {
+      ...pipeline.generationLog,
+      entitlementTier: billingProfile.supportLevel,
+    };
+
+    if (generationLog.schemaRetryCount > 0) {
+      trackGenerationEvent('generation_schema_retry', {
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        retry_kind: 'schema',
+        ...buildGenerationObservabilityPayload({
+          serviceType: input.serviceType,
+          generationLog,
+        }),
+      });
+    }
+
+    if (generationLog.rubricRetryCount > 0) {
+      trackGenerationEvent('generation_rubric_retry', {
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        retry_kind: 'rubric',
+        ...buildGenerationObservabilityPayload({
+          serviceType: input.serviceType,
+          generationLog,
+        }),
+      });
+    }
+
+    if (generationLog.fallbackUsed) {
+      trackGenerationEvent('generation_fallback_used', {
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        ...buildGenerationObservabilityPayload({
+          serviceType: input.serviceType,
+          generationLog,
+        }),
+      });
+    }
+
+    const filteredOutput = filterOutputByEntitlements(pipeline.output, {
       supportLevel: billingProfile.supportLevel,
       entitlements: billingProfile.entitlements,
     });
 
+    let generationId: string | undefined;
     try {
-      await saveGeneration({
+      generationId = await saveGeneration({
         userId: status.userId,
         anonymousId: status.anonymousId,
         scenarioSlug: input.scenarioSlug,
@@ -253,8 +336,9 @@ export async function POST(request: NextRequest) {
         tone: input.tone,
         goal: input.goal,
         userRateContext: input.userRateContext,
-        confidence: output.confidence,
-        caution: output.caution,
+        confidence: pipeline.output.confidence,
+        caution: pipeline.output.caution,
+        generationLog,
         ipHash,
         userAgentHash,
       });
@@ -264,6 +348,8 @@ export async function POST(request: NextRequest) {
         sourcePage: input.sourcePage,
         mode: usageResult.modeUsed,
         isLoggedIn: status.isLoggedIn,
+        model: generationLog.model,
+        service_type: input.serviceType,
         error: saveError instanceof Error ? saveError.message : 'UNKNOWN',
       });
     }
@@ -273,6 +359,10 @@ export async function POST(request: NextRequest) {
       sourcePage: input.sourcePage,
       mode: usageResult.modeUsed,
       isLoggedIn: status.isLoggedIn,
+      ...buildGenerationObservabilityPayload({
+        serviceType: input.serviceType,
+        generationLog,
+      }),
     });
 
     const successPayload: GenerateReplyResponse = {
@@ -290,6 +380,7 @@ export async function POST(request: NextRequest) {
       scenarioSlug: input.scenarioSlug,
       creditsRemaining: usageResult.creditsRemaining,
       requiresUpgrade: false,
+      generationId,
       supportLevel: billingProfile.supportLevel,
       entitlements: billingProfile.entitlements,
     };

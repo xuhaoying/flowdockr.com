@@ -23,53 +23,156 @@ const FAL_OPENROUTER_RESPONSES_ENDPOINT =
 
 type GenerationProvider = 'openai' | 'fal';
 
+type ProviderRequestPayload = {
+  model: string;
+  input: Array<{
+    role: 'system' | 'user';
+    content: string;
+  }>;
+};
+
+export type ProviderRequestDebugShape = {
+  provider: GenerationProvider;
+  endpoint: string;
+  model: string;
+  bodyLength: number;
+  inputCount: number;
+  inputRoles: string[];
+  inputContentLengths: number[];
+  hasMessages: boolean;
+  hasInput: boolean;
+  hasResponseFormat: boolean;
+  hasTextFormat: boolean;
+  hasTools: boolean;
+  hasMetadata: boolean;
+  hasTemperature: boolean;
+  hasMaxOutputTokens: boolean;
+  repairNotesCount: number;
+  serviceType: string | null;
+  goal: string | null;
+  sourcePage: string | null;
+};
+
+export type AIReplyResult = {
+  text: string;
+  model: string;
+  provider: GenerationProvider;
+  promptMeta: {
+    strategyCardSource: 'top10' | 'compat';
+    calibrationExampleCount: number;
+    usedServiceAdjustment: boolean;
+  };
+};
+
 export async function generateReplyWithAI(
   input: GenerateReplyInput,
   scenario: Scenario,
   options?: {
-    qualityHints?: string[];
+    repairNotes?: string[];
   }
-): Promise<string> {
+): Promise<AIReplyResult> {
+  const outbound = prepareProviderRequest(input, scenario, options);
+  logOutboundDebugShape('provider_request_preflight', outbound.debugShape);
+
+  const response = await fetch(outbound.providerConfig.endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: outbound.providerConfig.authorizationHeader,
+    },
+    body: outbound.body,
+  });
+
+  const payload = (await response.json()) as OpenAIResponsePayload;
+  if (!response.ok) {
+    logOutboundDebugShape('provider_request_failed', {
+      ...outbound.debugShape,
+      responseStatus: response.status,
+      providerErrorMessage: payload?.error?.message || null,
+    });
+    const message =
+      payload?.error?.message || 'OpenAI generation request failed.';
+    throw new Error(message);
+  }
+
+  return {
+    text: extractResponseText(payload),
+    model: outbound.model,
+    provider: outbound.providerConfig.provider,
+    promptMeta: outbound.promptMeta,
+  };
+}
+
+export function prepareProviderRequest(
+  input: GenerateReplyInput,
+  scenario: Scenario,
+  options?: {
+    repairNotes?: string[];
+  }
+): {
+  providerConfig: ReturnType<typeof resolveProviderConfig>;
+  model: string;
+  payload: ProviderRequestPayload;
+  body: string;
+  promptMeta: AIReplyResult['promptMeta'];
+  debugShape: ProviderRequestDebugShape;
+} {
   const providerConfig = resolveProviderConfig();
   const model = resolveModel(providerConfig.provider);
 
-  const userPrompt = buildScenarioPrompt({
+  const builtPrompt = buildScenarioPrompt({
     scenario,
     message: input.message,
-    qualityHints: options?.qualityHints,
+    repairNotes: options?.repairNotes,
     userRateContext: input.userRateContext,
     serviceType: input.serviceType,
     userGoal: input.goal,
   });
 
-  const response = await fetch(providerConfig.endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: providerConfig.authorizationHeader,
-    },
-    body: JSON.stringify({
+  const payload: ProviderRequestPayload = {
+    model,
+    input: [
+      {
+        role: 'system',
+        content: systemPrompt,
+      },
+      {
+        role: 'user',
+        content: builtPrompt.prompt,
+      },
+    ],
+  };
+
+  const body = JSON.stringify(payload);
+
+  return {
+    providerConfig,
+    model,
+    payload,
+    body,
+    promptMeta: builtPrompt.meta,
+    debugShape: {
+      provider: providerConfig.provider,
+      endpoint: providerConfig.endpoint,
       model,
-      input: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: userPrompt,
-        },
-      ],
-    }),
-  });
-
-  const payload = (await response.json()) as OpenAIResponsePayload;
-  if (!response.ok) {
-    const message = payload?.error?.message || 'OpenAI generation request failed.';
-    throw new Error(message);
-  }
-
-  return extractResponseText(payload);
+      bodyLength: body.length,
+      inputCount: payload.input.length,
+      inputRoles: payload.input.map((item) => item.role),
+      inputContentLengths: payload.input.map((item) => item.content.length),
+      hasMessages: false,
+      hasInput: true,
+      hasResponseFormat: false,
+      hasTextFormat: false,
+      hasTools: false,
+      hasMetadata: false,
+      hasTemperature: false,
+      hasMaxOutputTokens: false,
+      repairNotesCount: options?.repairNotes?.length || 0,
+      serviceType: input.serviceType || null,
+      goal: input.goal || null,
+      sourcePage: input.sourcePage || null,
+    },
+  };
 }
 
 function extractResponseText(payload: OpenAIResponsePayload): string {
@@ -103,7 +206,9 @@ function resolveProviderConfig(): {
 
   if (forcedProvider === 'fal') {
     if (!falKey) {
-      throw new Error('FLOWDOCKR_AI_PROVIDER=fal but FAL_API_KEY is not configured.');
+      throw new Error(
+        'FLOWDOCKR_AI_PROVIDER=fal but FAL_API_KEY is not configured.'
+      );
     }
 
     return {
@@ -143,7 +248,36 @@ function resolveProviderConfig(): {
     };
   }
 
-  throw new Error('No AI provider configured. Set FAL_API_KEY or OPENAI_API_KEY.');
+  throw new Error(
+    'No AI provider configured. Set FAL_API_KEY or OPENAI_API_KEY.'
+  );
+}
+
+function logOutboundDebugShape(
+  event: 'provider_request_preflight' | 'provider_request_failed',
+  payload: Record<string, unknown>
+) {
+  // This switch is only for short-lived route/provider debugging. It logs a
+  // redacted request shape, never prompt text, request bodies, or credentials.
+  if (!isOutboundDebugEnabled()) {
+    return;
+  }
+
+  try {
+    console.info(
+      '[flowdockr.provider]',
+      JSON.stringify({
+        event,
+        ...payload,
+      })
+    );
+  } catch {
+    // no-op logging fallback
+  }
+}
+
+function isOutboundDebugEnabled() {
+  return process.env.FLOWDOCKR_DEBUG_OUTBOUND === 'true';
 }
 
 function resolveModel(provider: GenerationProvider): string {

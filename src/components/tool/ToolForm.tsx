@@ -15,7 +15,11 @@ import {
   FeatureEntitlements,
 } from '@/types/billing';
 import { DealProjectType, DealTone } from '@/types/deals';
-import { GenerateReplyRequest } from '@/types/generation';
+import {
+  GenerateReplyRequest,
+  type GenerationFeedbackReason,
+  type GenerationFeedbackType,
+} from '@/types/generation';
 import { useLocale } from 'next-intl';
 
 import { Badge } from '@/shared/components/ui/badge';
@@ -597,6 +601,39 @@ export function ToolForm({
     });
   };
 
+  const onFeedback = async (params: {
+    type: GenerationFeedbackType;
+    reason?: GenerationFeedbackReason;
+  }) => {
+    if (!result?.generationId) {
+      return;
+    }
+
+    try {
+      await fetch('/api/generate/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          generationId: result.generationId,
+          type: params.type,
+          reason: params.reason,
+        }),
+      });
+    } catch {
+      // no-op
+    }
+
+    trackEvent('generation_feedback_submitted', {
+      generation_id: result.generationId,
+      scenario_slug: scenarioSlug,
+      source_page: sourcePage,
+      feedback_type: params.type,
+      feedback_reason: params.reason,
+    });
+  };
+
   return (
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
       <Card
@@ -656,7 +693,7 @@ export function ToolForm({
               rows={10}
               maxLength={4000}
               placeholder={textareaPlaceholder}
-              className="min-h-[220px] resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-xs dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+              className="min-h-[220px] resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
               style={LIGHT_FIELD_STYLE}
             />
             <div className="flex items-center justify-end text-xs text-slate-500">
@@ -725,7 +762,7 @@ export function ToolForm({
               rows={4}
               maxLength={500}
               placeholder={rateContextPlaceholder}
-              className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-xs dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+              className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
               style={LIGHT_FIELD_STYLE}
             />
           </label>
@@ -786,6 +823,7 @@ export function ToolForm({
           replyVersions={result?.replyVersions}
           riskInsights={result?.riskInsights}
           followUpSuggestion={result?.followUpSuggestion}
+          generationId={result?.generationId}
           scenarioContext={
             scenario
               ? {
@@ -806,6 +844,7 @@ export function ToolForm({
             void onGenerate('regenerate');
           }}
           onCopy={onCopy}
+          onFeedback={onFeedback}
           savedHint={savedHint}
         />
       </div>

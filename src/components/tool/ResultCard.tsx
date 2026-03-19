@@ -1,6 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type {
+  GenerationFeedbackReason,
+  GenerationFeedbackType,
+} from '@/types/generation';
 import { Lightbulb, Mail, ShieldCheck } from 'lucide-react';
 
 import { Badge } from '@/shared/components/ui/badge';
@@ -21,6 +25,12 @@ type ResultCardProps = {
   negotiationTip: string;
   toneLabel: string;
   onCopy?: () => void;
+  feedbackKey?: string;
+  onFeedback?: (params: {
+    type: GenerationFeedbackType;
+    reason?: GenerationFeedbackReason;
+  }) => Promise<void> | void;
+  onRegenerate?: () => void;
 };
 
 export function ResultCard({
@@ -32,8 +42,21 @@ export function ResultCard({
   negotiationTip,
   toneLabel,
   onCopy,
+  feedbackKey,
+  onFeedback,
+  onRegenerate,
 }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
+  const [selectedFeedback, setSelectedFeedback] =
+    useState<GenerationFeedbackType | null>(null);
+  const [showReasonPicker, setShowReasonPicker] = useState(false);
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
+
+  useEffect(() => {
+    setSelectedFeedback(null);
+    setShowReasonPicker(false);
+    setSubmittingFeedback(false);
+  }, [feedbackKey]);
 
   const handleCopy = async () => {
     if (!reply) {
@@ -47,6 +70,37 @@ export function ResultCard({
       window.setTimeout(() => setCopied(false), 1200);
     } catch {
       // no-op
+    }
+  };
+
+  const handleFeedback = async (
+    type: GenerationFeedbackType,
+    reason?: GenerationFeedbackReason
+  ) => {
+    if (!onFeedback) {
+      if (type === 'regenerated') {
+        onRegenerate?.();
+      }
+      return;
+    }
+
+    if (type === 'not_useful' && !reason) {
+      setSelectedFeedback(type);
+      setShowReasonPicker(true);
+      return;
+    }
+
+    setSubmittingFeedback(true);
+    try {
+      await onFeedback({ type, reason });
+      setSelectedFeedback(type);
+      setShowReasonPicker(false);
+
+      if (type === 'regenerated') {
+        onRegenerate?.();
+      }
+    } finally {
+      setSubmittingFeedback(false);
     }
   };
 
@@ -138,6 +192,49 @@ export function ResultCard({
                 financial advice.
               </p>
             </div>
+            {onFeedback ? (
+              <div className="mt-4 rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-4">
+                <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+                  Quick feedback
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {FEEDBACK_BUTTONS.map((item) => (
+                    <Button
+                      key={item.type}
+                      type="button"
+                      variant={
+                        selectedFeedback === item.type ? 'default' : 'outline'
+                      }
+                      size="sm"
+                      className="rounded-full"
+                      disabled={submittingFeedback}
+                      onClick={() => void handleFeedback(item.type)}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                </div>
+                {showReasonPicker ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {NOT_USEFUL_REASONS.map((item) => (
+                      <Button
+                        key={item.reason}
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full"
+                        disabled={submittingFeedback}
+                        onClick={() =>
+                          void handleFeedback('not_useful', item.reason)
+                        }
+                      >
+                        {item.label}
+                      </Button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </CardContent>
         </Card>
 
@@ -190,6 +287,54 @@ export function ResultCard({
     </section>
   );
 }
+
+const FEEDBACK_BUTTONS: Array<{
+  type: GenerationFeedbackType;
+  label: string;
+}> = [
+  {
+    type: 'sent_as_is',
+    label: 'Sent as-is',
+  },
+  {
+    type: 'edited_before_send',
+    label: 'Edited before send',
+  },
+  {
+    type: 'not_useful',
+    label: 'Not useful',
+  },
+  {
+    type: 'regenerated',
+    label: 'Regenerated',
+  },
+];
+
+const NOT_USEFUL_REASONS: Array<{
+  reason: GenerationFeedbackReason;
+  label: string;
+}> = [
+  {
+    reason: 'too_generic',
+    label: 'Too generic',
+  },
+  {
+    reason: 'too_soft',
+    label: 'Too soft',
+  },
+  {
+    reason: 'too_aggressive',
+    label: 'Too aggressive',
+  },
+  {
+    reason: 'missed_context',
+    label: 'Missed context',
+  },
+  {
+    reason: 'not_my_style',
+    label: 'Not my style',
+  },
+];
 
 function renderReplyParagraphs(reply: string) {
   const paragraphs = reply

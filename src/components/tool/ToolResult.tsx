@@ -6,6 +6,8 @@ import { BillingSupportLevel } from '@/types/billing';
 import { DealTone } from '@/types/deals';
 import type {
   FollowUpSuggestion,
+  GenerationFeedbackReason,
+  GenerationFeedbackType,
   PresentableStrategyBlock,
   ReplyVersion,
 } from '@/types/generation';
@@ -39,11 +41,16 @@ type ToolResultProps = {
     primaryGoal?: string;
   };
   historyEnabled?: boolean;
+  generationId?: string;
   supportLevel?: BillingSupportLevel;
   selectedTone?: DealTone;
   loading?: boolean;
   onRegenerate?: () => void;
   onCopy?: (target: string) => void;
+  onFeedback?: (params: {
+    type: GenerationFeedbackType;
+    reason?: GenerationFeedbackReason;
+  }) => Promise<void> | void;
   savedHint?: string;
 };
 
@@ -55,11 +62,13 @@ export function ToolResult({
   followUpSuggestion,
   scenarioContext,
   historyEnabled = true,
+  generationId,
   supportLevel = 'free',
   selectedTone = 'professional',
   loading = false,
   onRegenerate,
   onCopy,
+  onFeedback,
   savedHint,
 }: ToolResultProps) {
   const versions = normalizeReplyVersions(reply, replyVersions);
@@ -157,6 +166,9 @@ export function ToolResult({
                 })}
                 toneLabel={getToneLabel(selectedTone, primaryVersion?.key)}
                 onCopy={() => onCopy?.('primary_response')}
+                feedbackKey={generationId || primaryResponse}
+                onFeedback={onFeedback}
+                onRegenerate={onRegenerate}
               />
             ) : null}
 
