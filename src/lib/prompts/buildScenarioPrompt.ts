@@ -1,67 +1,100 @@
+import { getStrategyCard } from '@/lib/generation/strategyCards';
 import type { Scenario } from '@/types/scenario';
 
-import { getCalibrationExample } from './calibrationExamples';
+import { formatCalibrationExamples } from './calibrationExamples';
 import { outputFormatInstructions } from './outputSchema';
+
+export type BuiltScenarioPrompt = {
+  prompt: string;
+  meta: {
+    strategyCardSource: 'top10' | 'compat';
+    calibrationExampleCount: number;
+    usedServiceAdjustment: boolean;
+  };
+};
 
 export function buildScenarioPrompt(params: {
   scenario: Scenario;
   message: string;
-  qualityHints?: string[];
+  repairNotes?: string[];
   userRateContext?: string;
   serviceType?: string;
   userGoal?: string;
-}) {
+}): BuiltScenarioPrompt {
   const {
     scenario,
     message,
-    qualityHints = [],
+    repairNotes = [],
     userRateContext,
     serviceType,
     userGoal,
   } = params;
-  const calibrationExample = getCalibrationExample(scenario.slug);
+  const { card, source } = getStrategyCard(scenario);
+  const calibrationExamples = formatCalibrationExamples(scenario.slug);
+  const serviceAdjustment =
+    serviceType && card.serviceAdjustments
+      ? card.serviceAdjustments[
+          serviceType as keyof typeof card.serviceAdjustments
+        ]
+      : undefined;
+  const sections = [
+    `Scenario title:\n${scenario.title}`,
+    `Scenario context:\n${scenario.promptContext}`,
+    `Strategy card:\n- Primary goal: ${card.primaryGoal}\n- Pressure type: ${card.pressureType}\n- User positioning: ${card.userPositioning}\n- Counterpart mindset: ${card.counterpartMindset}\n- Required reframe: ${card.requiredReframe}\n- Allowed concessions: ${card.allowedConcessions.join('; ')}\n- Forbidden concessions: ${card.forbiddenConcessions.join('; ')}\n- Red flags: ${card.redFlags.join('; ')}\n- Preferred moves: ${card.preferredMoves.join('; ')}\n- Avoid moves: ${card.avoidMoves.join('; ')}\n- Tone profile: ${card.toneProfile}\n- Next-step templates: ${card.nextStepTemplates.join(' | ')}`,
+  ];
 
-  return `
-Scenario title:
-${scenario.title}
+  if (serviceType) {
+    sections.push(`Service type:\n${serviceType}`);
+  }
 
-Scenario context:
-${scenario.promptContext}
+  if (serviceAdjustment) {
+    sections.push(
+      `Service adjustment:\n- Scope lever: ${serviceAdjustment.scopeLever}\n- Caution: ${serviceAdjustment.caution}`
+    );
+  }
 
-Primary goal:
-${scenario.primaryGoal}
+  if (userGoal) {
+    sections.push(`User goal:\n${userGoal}`);
+  }
 
-Avoid these mistakes:
-${scenario.avoid.map((item) => `- ${item}`).join('\n')}
+  if (userRateContext) {
+    sections.push(`Rate context:\n${userRateContext}`);
+  }
 
-Preferred strategic moves:
-${scenario.preferredMoves.map((item) => `- ${item}`).join('\n')}
+  sections.push(`User's client message:\n"""\n${message}\n"""`);
+  sections.push(
+    [
+      'Task:',
+      'Write three sendable reply variants plus the strategy block.',
+      '',
+      'Important requirements:',
+      '- Match the exact pressure in the client message.',
+      '- Protect value, scope, payment, or boundaries where appropriate.',
+      '- Keep the relationship constructive without sounding weak.',
+      '- Keep the replies concise, natural, and directly sendable.',
+      '- Do not invent project facts or offer unstructured concessions.',
+      '- Prefer a concrete next step over vague politeness.',
+    ].join('\n')
+  );
 
-Tone profile:
-${scenario.toneProfile}
+  if (repairNotes.length > 0) {
+    sections.push(
+      `Repair requirements:\n${repairNotes.map((item) => `- ${item}`).join('\n')}`
+    );
+  }
 
-${serviceType ? `Service type:\n${serviceType}\n` : ''}${userGoal ? `User goal:\n${userGoal}\n` : ''}${
-    userRateContext ? `Rate context:\n${userRateContext}\n` : ''
-  }User's client message:
-"""
-${message}
-"""
+  if (calibrationExamples.text) {
+    sections.push(calibrationExamples.text);
+  }
 
-Task:
-Write a response the user could realistically send to this client.
+  sections.push(outputFormatInstructions);
 
-Important requirements:
-- Match the actual pressure in the message
-- Protect value, scope, or boundaries where appropriate
-- Keep the relationship constructive where possible
-- Keep the reply concise and natural
-- Do not over-explain
-- Do not produce generic AI-business filler
-- Prefer a strategic next step over vague politeness
-- Do not invent project details not present in the message
-
-${qualityHints.length > 0 ? `Revision requirements:\n${qualityHints.map((item) => `- ${item}`).join('\n')}\n` : ''}${
-    calibrationExample ? `${calibrationExample}\n\n` : ''
-  }${outputFormatInstructions}
-`.trim();
+  return {
+    prompt: sections.join('\n\n').trim(),
+    meta: {
+      strategyCardSource: source,
+      calibrationExampleCount: calibrationExamples.count,
+      usedServiceAdjustment: Boolean(serviceAdjustment),
+    },
+  };
 }

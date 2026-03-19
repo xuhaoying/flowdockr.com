@@ -1,4 +1,3 @@
-export { AIGeneratorTool } from './AIGeneratorTool';
 export { CopyReadyReplies } from './CopyReadyReplies';
 export { FAQBlock } from './FAQBlock';
 export { HowToSchema } from './HowToSchema';

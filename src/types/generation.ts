@@ -51,6 +51,59 @@ export type FollowUpSuggestion = {
   direction: string;
 };
 
+export type GenerationFeedbackType =
+  | 'sent_as_is'
+  | 'edited_before_send'
+  | 'not_useful'
+  | 'regenerated';
+
+export type GenerationFeedbackReason =
+  | 'too_generic'
+  | 'too_soft'
+  | 'too_aggressive'
+  | 'missed_context'
+  | 'not_my_style';
+
+export type GenerationFeedbackEvent = {
+  type: GenerationFeedbackType;
+  reason?: GenerationFeedbackReason;
+  createdAt: string;
+  source: 'result_card';
+};
+
+export type GenerationCaseMemoryRecord = {
+  scenarioSlug: string;
+  serviceType: string;
+  clientMessage: string;
+  generatedReply: string;
+  feedbackScore?: number | null;
+  feedbackType?: GenerationFeedbackType | null;
+  outcomeLabel?: string | null;
+  tags: string[];
+  createdAt: string;
+};
+
+export type GenerationLogRecord = {
+  pipelineVersion: 'reply-v2';
+  provider: string;
+  model: string;
+  schemaValid: boolean;
+  fallbackUsed: boolean;
+  fallbackReason?: string;
+  rubricPassed: boolean;
+  rubricFailReasons: string[];
+  rubricWarningReasons: string[];
+  schemaRetryCount: number;
+  rubricRetryCount: number;
+  scenarioSlug: string;
+  serviceType: string;
+  sourcePage: 'home' | 'scenario' | 'tool';
+  entitlementTier?: BillingSupportLevel;
+  strategyCardSource: 'top10' | 'compat';
+  calibrationExampleCount: number;
+  usedServiceAdjustment: boolean;
+};
+
 export type GenerateReplyResult = {
   reply: string;
   alternativeReply: string;
@@ -76,6 +129,7 @@ export type GenerateReplyResponse = {
   scenarioSlug: string;
   creditsRemaining?: number;
   requiresUpgrade?: boolean;
+  generationId?: string;
   supportLevel?: BillingSupportLevel;
   entitlements?: FeatureEntitlements;
   error?: string;

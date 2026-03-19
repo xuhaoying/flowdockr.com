@@ -50,7 +50,12 @@ export type ReplyQualityReport = {
   passed: boolean;
   score: number;
   failedCriteria: RubricCriterion[];
-  hints: string[];
+  failures: Array<{
+    criterion: RubricCriterion;
+    reason: string;
+    repairHint: string;
+  }>;
+  repairHints: string[];
   criteria: CriteriaResult;
 };
 
@@ -135,6 +140,21 @@ const HINTS_BY_CRITERION: Record<RubricCriterion, string> = {
     'Add a clearer next step or structured option so the conversation can move forward.',
 };
 
+const FAILURE_REASONS_BY_CRITERION: Record<RubricCriterion, string> = {
+  pressure_recognition:
+    'The reply does not clearly name or engage the actual pressure in the client message.',
+  position_protection:
+    'The reply weakens pricing, scope, or payment boundaries instead of protecting them.',
+  relationship_quality:
+    'The tone risks sounding reactive, hostile, or commercially awkward.',
+  sendability:
+    'The output is not concise and send-ready enough in its current form.',
+  non_genericness:
+    'The wording sounds generic, filler-heavy, or AI-written rather than situation-specific.',
+  strategic_movement:
+    'The reply does not create a clear next step, option, or decision path.',
+};
+
 export function evaluateReplyQuality(params: {
   scenario: Scenario;
   reply: string;
@@ -207,11 +227,18 @@ export function evaluateReplyQuality(params: {
 
   const score = 6 - failedCriteria.length;
 
+  const failures = failedCriteria.map((criterion) => ({
+    criterion,
+    reason: FAILURE_REASONS_BY_CRITERION[criterion],
+    repairHint: HINTS_BY_CRITERION[criterion],
+  }));
+
   return {
-    passed: failedCriteria.length === 0,
+    passed: failedCriteria.length <= 1,
     score,
     failedCriteria,
-    hints: failedCriteria.map((criterion) => HINTS_BY_CRITERION[criterion]),
+    failures,
+    repairHints: failures.map((failure) => failure.repairHint),
     criteria,
   };
 }

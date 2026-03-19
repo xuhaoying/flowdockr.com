@@ -1,7 +1,14 @@
 import { db, generation } from '@/lib/db';
+import {
+  buildCaseMemoryCandidate,
+  buildStoredGenerationPayload,
+} from '@/lib/generation/storedGeneration';
 import type { BillingSupportLevel } from '@/types/billing';
 import type {
   FollowUpSuggestion,
+  GenerationCaseMemoryRecord,
+  GenerationFeedbackEvent,
+  GenerationLogRecord,
   PresentableStrategyBlock,
   ReplyVersion,
 } from '@/types/generation';
@@ -27,24 +34,17 @@ type SaveBase = {
   followUpSuggestion?: FollowUpSuggestion;
   confidence: 'high' | 'medium' | 'low';
   caution?: string;
+  generationLog?: GenerationLogRecord;
+  feedbackEvents?: GenerationFeedbackEvent[];
+  caseMemoryCandidate?: GenerationCaseMemoryRecord;
   ipHash?: string;
   userAgentHash?: string;
 };
 
-function buildStoredOutput(input: SaveBase) {
-  return JSON.stringify({
-    strategy: input.strategy,
-    strategyBlock: input.strategyBlock || null,
-    replyVersions: input.replyVersions || [],
-    riskInsights: input.riskInsights || [],
-    followUpSuggestion: input.followUpSuggestion || null,
-    supportLevel: input.supportLevel,
-  });
-}
-
 export async function saveUserGeneration(
   userId: string,
   input: SaveBase & {
+    id: string;
     creditsCharged: number;
     isFreeGeneration?: boolean;
   }
@@ -52,7 +52,7 @@ export async function saveUserGeneration(
   await db()
     .insert(generation)
     .values({
-      id: getUuid(),
+      id: input.id,
       userId,
       scenarioSlug: input.scenarioSlug,
       clientMessage: input.message,
@@ -62,7 +62,27 @@ export async function saveUserGeneration(
       userRateContext: input.userRateContext || null,
       recommendedReply: input.reply,
       alternativeReply: input.alternativeReply,
-      strategyJson: buildStoredOutput(input),
+      strategyJson: buildStoredGenerationPayload({
+        strategy: input.strategy,
+        strategyBlock: input.strategyBlock || null,
+        replyVersions: input.replyVersions || [],
+        riskInsights: input.riskInsights || [],
+        followUpSuggestion: input.followUpSuggestion || null,
+        supportLevel: input.supportLevel,
+        generationLog: input.generationLog || null,
+        feedbackEvents: input.feedbackEvents || [],
+        caseMemoryCandidate:
+          input.caseMemoryCandidate ||
+          buildCaseMemoryCandidate({
+            scenarioSlug: input.scenarioSlug,
+            serviceType: input.serviceType,
+            clientMessage: input.message,
+            generatedReply: input.reply,
+            tone: input.tone,
+            goal: input.goal,
+            sourcePage: input.sourcePage,
+          }),
+      }),
       confidence: input.confidence,
       caution: input.caution || null,
       creditsCharged: input.creditsCharged,
@@ -77,12 +97,14 @@ export async function saveUserGeneration(
 
 export async function saveAnonymousGeneration(
   anonymousSessionId: string,
-  input: SaveBase
+  input: SaveBase & {
+    id: string;
+  }
 ) {
   await db()
     .insert(generation)
     .values({
-      id: getUuid(),
+      id: input.id,
       anonymousSessionId,
       scenarioSlug: input.scenarioSlug,
       clientMessage: input.message,
@@ -92,7 +114,27 @@ export async function saveAnonymousGeneration(
       userRateContext: input.userRateContext || null,
       recommendedReply: input.reply,
       alternativeReply: input.alternativeReply,
-      strategyJson: buildStoredOutput(input),
+      strategyJson: buildStoredGenerationPayload({
+        strategy: input.strategy,
+        strategyBlock: input.strategyBlock || null,
+        replyVersions: input.replyVersions || [],
+        riskInsights: input.riskInsights || [],
+        followUpSuggestion: input.followUpSuggestion || null,
+        supportLevel: input.supportLevel,
+        generationLog: input.generationLog || null,
+        feedbackEvents: input.feedbackEvents || [],
+        caseMemoryCandidate:
+          input.caseMemoryCandidate ||
+          buildCaseMemoryCandidate({
+            scenarioSlug: input.scenarioSlug,
+            serviceType: input.serviceType,
+            clientMessage: input.message,
+            generatedReply: input.reply,
+            tone: input.tone,
+            goal: input.goal,
+            sourcePage: input.sourcePage,
+          }),
+      }),
       confidence: input.confidence,
       caution: input.caution || null,
       creditsCharged: 0,
@@ -126,9 +168,13 @@ export async function saveGeneration(params: {
   userRateContext?: string;
   confidence?: 'high' | 'medium' | 'low';
   caution?: string;
+  generationLog?: GenerationLogRecord;
+  feedbackEvents?: GenerationFeedbackEvent[];
+  caseMemoryCandidate?: GenerationCaseMemoryRecord;
   ipHash?: string;
   userAgentHash?: string;
-}): Promise<void> {
+}): Promise<string> {
+  const generationId = getUuid();
   const base: SaveBase = {
     scenarioSlug: params.scenarioSlug,
     message: params.inputText,
@@ -150,22 +196,30 @@ export async function saveGeneration(params: {
     caution:
       params.caution ||
       `Generated from ${params.sourcePage} page with ${params.modeUsed} usage mode.`,
+    generationLog: params.generationLog,
+    feedbackEvents: params.feedbackEvents,
+    caseMemoryCandidate: params.caseMemoryCandidate,
     ipHash: params.ipHash,
     userAgentHash: params.userAgentHash,
   };
 
   if (params.userId) {
     await saveUserGeneration(params.userId, {
+      id: generationId,
       ...base,
       creditsCharged: params.modeUsed === 'paid' ? 1 : 0,
       isFreeGeneration: params.modeUsed === 'free',
     });
-    return;
+    return generationId;
   }
 
   if (!params.anonymousId) {
     throw new Error('IDENTITY_MISSING');
   }
 
-  await saveAnonymousGeneration(params.anonymousId, base);
+  await saveAnonymousGeneration(params.anonymousId, {
+    id: generationId,
+    ...base,
+  });
+  return generationId;
 }
