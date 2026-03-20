@@ -15,11 +15,33 @@ vi.mock('@/lib/analytics', () => ({
 }));
 
 vi.mock('./ToolPaywall', () => ({
-  ToolPaywall: () => <div data-testid="tool-paywall" />,
+  ToolPaywall: ({ onCheckout }: { onCheckout: (packageId: 'quick_help') => void }) => (
+    <div data-testid="tool-paywall">
+      <button type="button" onClick={() => onCheckout('quick_help')}>
+        Mock checkout
+      </button>
+    </div>
+  ),
 }));
 
 vi.mock('./ToolResult', () => ({
-  ToolResult: () => <div data-testid="tool-result" />,
+  ToolResult: ({
+    onFeedback,
+  }: {
+    onFeedback: (params: {
+      type: 'sent_as_is' | 'edited_before_send' | 'not_useful' | 'regenerated';
+      reason?: 'too_generic' | 'too_soft' | 'too_aggressive' | 'missed_context' | 'not_my_style';
+    }) => void;
+  }) => (
+    <div data-testid="tool-result">
+      <button
+        type="button"
+        onClick={() => onFeedback({ type: 'not_useful', reason: 'too_generic' })}
+      >
+        Mock feedback
+      </button>
+    </div>
+  ),
 }));
 
 import { ToolForm } from './ToolForm';
@@ -32,6 +54,7 @@ function buildSuccessResponse(): GenerateReplyResponse {
       'Happy to explore a leaner version if that would help keep the project moving.',
     strategy: ['Hold value', 'Offer scope options', 'Keep next step clear'],
     scenarioSlug: 'quote-too-high',
+    generationId: 'gen_test_123',
     strategyBlock: {
       title: 'Suggested approach',
       sections: [
@@ -74,6 +97,17 @@ function installFetchMock(params?: {
       return buildJsonResponse(generateResponse);
     }
 
+    if (url === '/api/generate/feedback') {
+      return buildJsonResponse({ ok: true });
+    }
+
+    if (url === '/api/checkout/session') {
+      return buildJsonResponse({
+        ok: true,
+        checkoutUrl: 'https://checkout.stripe.com/mock-session',
+      });
+    }
+
     throw new Error(`Unexpected fetch url: ${url}`);
   });
 
@@ -114,6 +148,7 @@ function getClientMessageInput() {
 async function renderToolForm(params?: {
   funnelScenarioSlug?: string;
   remainingFreeGenerations?: number;
+  sourcePage?: 'home' | 'scenario' | 'tool';
 }) {
   installFetchMock({
     remainingFreeGenerations: params?.remainingFreeGenerations,
@@ -123,7 +158,7 @@ async function renderToolForm(params?: {
     <ToolForm
       analyticsScenarioSlug="quote-too-high"
       funnelScenarioSlug={params?.funnelScenarioSlug}
-      sourcePage="scenario"
+      sourcePage={params?.sourcePage || 'scenario'}
       defaultScenarioSlug="quote-too-high"
       showScenarioSelector={false}
     />
@@ -137,6 +172,11 @@ async function renderToolForm(params?: {
 describe('ToolForm analytics funnel guard', () => {
   beforeEach(() => {
     trackEvent.mockReset();
+    vi.unstubAllGlobals();
+    vi.stubGlobal('fetch', vi.fn());
+    vi.stubGlobal('location', {
+      assign: vi.fn(),
+    } as unknown as Location);
   });
 
   it('emits canonical tool_start and generation_success when funnelScenarioSlug is present', async () => {
@@ -212,5 +252,83 @@ describe('ToolForm analytics funnel guard', () => {
     });
 
     expect(getEventPayloads('fd_paywall_shown')).toHaveLength(0);
+  });
+
+  it('does not leak scenario_slug on generic tool events outside canonical scenario routes', async () => {
+    await renderToolForm({
+      remainingFreeGenerations: 2,
+      sourcePage: 'tool',
+    });
+
+    fireEvent.change(getClientMessageInput(), {
+      target: { value: 'Your quote is too high for us.' },
+    });
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Draft negotiation reply' })
+    );
+
+    await waitFor(() => {
+      expect(getEventPayloads('tool_submit_success')).toHaveLength(1);
+    });
+
+    expect(getEventPayloads('tool_open')[0]).not.toHaveProperty(
+      'scenario_slug'
+    );
+    expect(getEventPayloads('generate_click')[0]).not.toHaveProperty(
+      'scenario_slug'
+    );
+  });
+
+  it('does not leak scenario_slug on non-canonical paywall and checkout events', async () => {
+    await renderToolForm({
+      remainingFreeGenerations: 0,
+      sourcePage: 'tool',
+    });
+
+    await waitFor(() => {
+      expect(getEventPayloads('paywall_trigger')).toHaveLength(1);
+    });
+
+    expect(getEventPayloads('paywall_trigger')[0]).not.toHaveProperty(
+      'scenario_slug'
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Mock checkout' }));
+
+    await waitFor(() => {
+      expect(getEventPayloads('checkout_click')).toHaveLength(1);
+    });
+
+    expect(getEventPayloads('checkout_click')[0]).not.toHaveProperty(
+      'scenario_slug'
+    );
+  });
+
+  it('does not leak scenario_slug on non-canonical feedback events', async () => {
+    await renderToolForm({
+      remainingFreeGenerations: 2,
+      sourcePage: 'tool',
+    });
+
+    fireEvent.change(getClientMessageInput(), {
+      target: { value: 'Your quote is too high for us.' },
+    });
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Draft negotiation reply' })
+    );
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Mock feedback' })).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Mock feedback' }));
+
+    await waitFor(() => {
+      expect(getEventPayloads('generation_feedback_submitted')).toHaveLength(1);
+    });
+
+    expect(
+      getEventPayloads('generation_feedback_submitted')[0]
+    ).not.toHaveProperty('scenario_slug');
   });
 });

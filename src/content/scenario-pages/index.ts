@@ -1,11 +1,15 @@
 import { canonicalScenarioSeeds } from '@/content/scenario-pages/scenario-seeds';
+import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
 import type {
   CanonicalScenario,
   ScenarioArchetype,
   ScenarioRelatedLink,
 } from '@/types/scenario-catalog';
 
-export const scenarioPages: CanonicalScenario[] = canonicalScenarioSeeds;
+export const scenarioPages: CanonicalScenario[] = mergeScenarioPages(
+  scenarioDatasetV1,
+  canonicalScenarioSeeds
+);
 
 type ScenarioLinkCluster =
   | 'pricing'
@@ -81,9 +85,13 @@ export function getNegotiationStageLabel(
 export function getScenarioMetaDescription(
   scenario: Pick<
     CanonicalScenario,
-    'title' | 'userSituation' | 'primaryClientMessage'
+    'title' | 'userSituation' | 'primaryClientMessage' | 'metaDescription'
   >
 ): string {
+  if (scenario.metaDescription?.trim()) {
+    return scenario.metaDescription.trim();
+  }
+
   const description = `${scenario.title}. ${scenario.userSituation} Typical client message: ${scenario.primaryClientMessage}`;
 
   if (description.length <= 155) {
@@ -103,6 +111,13 @@ export function getRelatedScenarioLinks(
   }
 
   const maxLinks = Math.max(3, Math.min(5, limit));
+  const explicitLinks = getExplicitRelatedScenarioLinks(scenario, maxLinks);
+  const explicitLinkSlugs = new Set(explicitLinks.map((item) => item.slug));
+
+  if (explicitLinks.length >= maxLinks) {
+    return explicitLinks;
+  }
+
   const sourceCluster = getScenarioLinkCluster(scenario);
   const sameCluster: RelatedScenarioCandidate[] = [];
   const adjacentByCluster = new Map<
@@ -113,6 +128,10 @@ export function getRelatedScenarioLinks(
 
   for (const candidate of scenarioPages) {
     if (candidate.slug === slug) {
+      continue;
+    }
+
+    if (explicitLinkSlugs.has(candidate.slug)) {
       continue;
     }
 
@@ -157,7 +176,7 @@ export function getRelatedScenarioLinks(
   }
 
   const selected: RelatedScenarioCandidate[] = [];
-  const selectedSlugs = new Set<string>();
+  const selectedSlugs = new Set<string>(explicitLinkSlugs);
 
   const pushCandidates = (candidates: RelatedScenarioCandidate[]) => {
     for (const candidate of candidates) {
@@ -187,11 +206,13 @@ export function getRelatedScenarioLinks(
 
   pushCandidates(fallback);
 
-  return selected.slice(0, maxLinks).map(({ candidate }) => ({
+  const heuristicLinks = selected.slice(0, maxLinks).map(({ candidate }) => ({
     slug: candidate.slug,
     title: candidate.title,
     description: candidate.userSituation,
   }));
+
+  return [...explicitLinks, ...heuristicLinks].slice(0, maxLinks);
 }
 
 function getRelatedScore(
@@ -260,4 +281,33 @@ function getScenarioLinkCluster(
   }
 
   return 'client_management';
+}
+
+function getExplicitRelatedScenarioLinks(
+  scenario: Pick<CanonicalScenario, 'slug' | 'relatedScenarioSlugs'>,
+  limit: number
+): ScenarioRelatedLink[] {
+  if (!scenario.relatedScenarioSlugs?.length) {
+    return [];
+  }
+
+  return scenario.relatedScenarioSlugs
+    .filter((relatedSlug) => relatedSlug !== scenario.slug)
+    .map((relatedSlug) => scenarioPageMap.get(relatedSlug))
+    .filter((item): item is CanonicalScenario => Boolean(item))
+    .slice(0, limit)
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      description: item.userSituation,
+    }));
+}
+
+function mergeScenarioPages(
+  preferred: CanonicalScenario[],
+  existing: CanonicalScenario[]
+): CanonicalScenario[] {
+  const preferredSlugs = new Set(preferred.map((item) => item.slug));
+
+  return [...preferred, ...existing.filter((item) => !preferredSlugs.has(item.slug))];
 }

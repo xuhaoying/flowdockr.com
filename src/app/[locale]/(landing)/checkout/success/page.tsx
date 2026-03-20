@@ -2,7 +2,6 @@ import {
   CheckoutCompletedTracker,
   CheckoutStatusCard,
 } from '@/components/tool';
-import { getCanonicalScenarioSlugForCheckoutSuccess } from '@/lib/analytics/scenarioFunnel';
 import { setRequestLocale } from 'next-intl/server';
 
 import { getMetadata } from '@/shared/lib/seo';
@@ -84,10 +83,6 @@ export default async function CheckoutSuccessPage({
   const purchaseId = String(query.purchase_id || '').trim();
   const returnTo = sanitizeReturnPath(query.return_to);
   const scenarioSlug = String(query.scenario || '').trim();
-  const canonicalFunnelScenarioSlug = getCanonicalScenarioSlugForCheckoutSuccess({
-    returnTo,
-    scenarioSlug,
-  });
 
   const continuePath =
     returnTo ||
@@ -95,12 +90,11 @@ export default async function CheckoutSuccessPage({
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
-      <CheckoutCompletedTracker scenarioSlug={canonicalFunnelScenarioSlug} />
+      <CheckoutCompletedTracker />
       <CheckoutStatusCard
         sessionId={sessionId}
         purchaseId={purchaseId}
         continuePath={continuePath}
-        scenarioSlug={canonicalFunnelScenarioSlug}
       />
     </main>
   );

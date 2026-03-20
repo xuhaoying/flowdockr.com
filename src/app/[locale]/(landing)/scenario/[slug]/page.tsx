@@ -30,6 +30,14 @@ const SCENARIO_ALIAS_REDIRECTS: Record<string, string> = {
   'client-asks-for-extra-revisions': 'unlimited-revisions',
   'client-expands-project-scope': 'extra-work-outside-scope',
   'price-objection': 'higher-than-expected',
+  'price-too-high-response': 'quote-too-high',
+  'out-of-budget-still-interested': 'out-of-budget-but-interested',
+  'same-scope-lower-budget': 'same-scope-lower-price',
+  'no-response-after-proposal-email': 'no-response-after-proposal',
+  'stopped-replying-after-quote': 'no-response-after-proposal',
+  'no-response-after-contract-sent': 'contract-sent-no-response',
+  'rate-before-project-details': 'price-before-scope',
+  'final-price-before-signing': 'best-price-before-signing',
 };
 
 const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
@@ -117,6 +125,7 @@ export async function generateMetadata({
   return buildScenarioPageMetadata({
     page: {
       title: page.title,
+      metaTitle: page.metaTitle,
       metaDescription: getScenarioMetaDescription(page),
     },
     canonical,
@@ -149,7 +158,7 @@ export default async function ScenarioPage({
         <PageContainer className="max-w-6xl gap-6 py-8 md:gap-8 md:py-12">
           <ScenarioViewTracker scenarioSlug={page.slug} />
           <ScenarioHero
-            title={page.title}
+            title={page.h1 || page.title}
             archetypeLabel={getScenarioArchetypeLabel(page.archetype)}
             negotiationStageLabel={getNegotiationStageLabel(
               page.negotiationStage
@@ -166,11 +175,11 @@ export default async function ScenarioPage({
             analyticsScenarioSlug={page.slug}
             defaultScenarioSlug={page.slug}
             title="Draft a reply for this situation"
-            description={page.toolPromptIntent}
+            description={page.userGoal || page.toolPromptIntent}
             primaryClientMessage={page.primaryClientMessage}
           />
           <RelatedScenarios items={getRelatedScenarioLinks(page.slug)} />
-          <ScenarioCTA title={page.title} />
+          <ScenarioCTA title={page.h1 || page.title} />
         </PageContainer>
         <ScenarioStickyBottomCta />
       </>

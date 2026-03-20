@@ -15,6 +15,14 @@ export const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
   'additional-features': '/scenario/extra-work-outside-scope',
   'rush-delivery': '/scenario',
   'timeline-pressure': '/scenario',
+  'price-too-high-response': '/scenario/quote-too-high',
+  'out-of-budget-still-interested': '/scenario/out-of-budget-but-interested',
+  'same-scope-lower-budget': '/scenario/same-scope-lower-price',
+  'no-response-after-proposal-email': '/scenario/no-response-after-proposal',
+  'stopped-replying-after-quote': '/scenario/no-response-after-proposal',
+  'no-response-after-contract-sent': '/scenario/contract-sent-no-response',
+  'rate-before-project-details': '/scenario/price-before-scope',
+  'final-price-before-signing': '/scenario/best-price-before-signing',
 };
 
 export function getLegacyScenariosHubRedirectPath(): string {
