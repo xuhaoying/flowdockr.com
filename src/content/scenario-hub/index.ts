@@ -1,8 +1,8 @@
 import {
-  getPopularScenarioPages,
   getScenarioPageBySlug,
   scenarioPages,
 } from '@/content/scenario-pages';
+import { scenarioDatasetV1Top20 } from '@/content/scenario-pages/scenario-dataset-v1';
 import type {
   ScenarioHubCluster,
   ScenarioHubData,
@@ -144,11 +144,9 @@ export const scenarioHubData: ScenarioHubData = {
     },
   ],
   clusters,
-  popularScenarios: getPopularScenarioPages(4).map((page) => ({
-    slug: page.slug,
-    title: page.title,
-    description: summarize(page.userSituation),
-  })),
+  popularScenarios: scenarioDatasetV1Top20
+    .slice(0, 8)
+    .map((page) => scenario(page.slug, summarize(page.userSituation))),
   why: {
     title: 'Why scenario-based guidance works',
     paragraphs: [

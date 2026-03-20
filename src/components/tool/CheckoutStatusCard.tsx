@@ -22,14 +22,12 @@ type CheckoutStatusCardProps = {
   sessionId?: string;
   purchaseId?: string;
   continuePath: string;
-  scenarioSlug?: string;
 };
 
 export function CheckoutStatusCard({
   sessionId = '',
   purchaseId = '',
   continuePath,
-  scenarioSlug = '',
 }: CheckoutStatusCardProps) {
   const [status, setStatus] = useState<CheckoutStatusResponse>({
     success: true,
@@ -135,7 +133,6 @@ export function CheckoutStatusCard({
 
     purchaseTrackedRef.current = true;
     trackEvent('fd_purchase_success', {
-      ...(scenarioSlug ? { scenario_slug: scenarioSlug } : {}),
       purchased_plan: status.purchasedPlan || 'unknown',
       credits_added: Math.max(0, status.creditsAdded || 0),
       return_to: continuePath,
@@ -144,7 +141,6 @@ export function CheckoutStatusCard({
   }, [
     continuePath,
     isFinalized,
-    scenarioSlug,
     status.creditsAdded,
     status.creditsGranted,
     status.purchasedPlan,

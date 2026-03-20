@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import type { CanonicalScenario } from '@/types/scenario-catalog';
 
-type ScenarioPageMetadataInput = Pick<CanonicalScenario, 'title'> & {
+type ScenarioPageMetadataInput = Pick<
+  CanonicalScenario,
+  'title' | 'metaTitle'
+> & {
   metaDescription: string;
 };
 
@@ -10,7 +13,7 @@ export function buildScenarioPageMetadata(params: {
   canonical: string;
 }): Metadata {
   const { page, canonical } = params;
-  const seoTitle = `${page.title} | Flowdockr`;
+  const seoTitle = page.metaTitle || `${page.title} | Flowdockr`;
 
   return {
     title: seoTitle,

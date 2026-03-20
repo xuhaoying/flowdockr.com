@@ -8,11 +8,10 @@ The canonical scenario funnel is limited to these events:
 - `fd_tool_start`
 - `fd_generation_success`
 - `fd_paywall_shown`
-- `fd_purchase_success`
 
 ## `scenario_slug` meaning
 
-`scenario_slug` always means the canonical Scenario Dataset v1 slug from `src/content/scenario-pages/scenario-seeds.ts`.
+`scenario_slug` always means a canonical scenario slug from the merged scenario page catalog in `src/content/scenario-pages/index.ts`.
 
 It must never carry:
 
@@ -31,7 +30,6 @@ Allowed today:
 - `/scenario/[slug]` inline tool start
 - `/scenario/[slug]` generation success
 - `/scenario/[slug]` paywall shown
-- checkout success only when the purchase originated from a canonical `/scenario/[slug]` flow
 
 ## Pages forbidden from sending `scenario_slug`
 
@@ -45,12 +43,10 @@ These surfaces must not attach `scenario_slug` to canonical funnel events unless
 
 ## Checkout attribution rule
 
-`fd_purchase_success` may include `scenario_slug` only when both conditions are true:
+Checkout success events must not attach `scenario_slug`.
 
-1. `return_to` resolves to a canonical `/scenario/[slug]` path, with or without locale prefix.
-2. The checkout `scenario` query param exactly matches that canonical slug.
-
-If either condition fails, `fd_purchase_success` must still fire without `scenario_slug`.
+Checkout still keeps `return_to` and checkout-specific fields for attribution, but
+canonical scenario funnel reporting is limited to `/scenario/[slug]` page events.
 
 ## Guardrail
 

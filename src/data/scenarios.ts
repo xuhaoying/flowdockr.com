@@ -1,8 +1,8 @@
 import {
   getRelatedScenarioLinks,
   getScenarioMetaDescription,
+  scenarioPages,
 } from '@/content/scenario-pages';
-import { canonicalScenarioSeeds } from '@/content/scenario-pages/scenario-seeds';
 import type {
   Scenario,
   ScenarioCategory,
@@ -53,7 +53,7 @@ const toneByArchetype: Record<
   contract_terms: 'firm',
 };
 
-export const scenarios: Scenario[] = canonicalScenarioSeeds.map((page) =>
+export const scenarios: Scenario[] = scenarioPages.map((page) =>
   buildGeneratorScenario(page)
 );
 
@@ -88,6 +88,7 @@ export function getRelatedScenarios(slug: string): Scenario[] {
 }
 
 function buildGeneratorScenario(page: CanonicalScenario): Scenario {
+  const pageHeading = page.h1 || page.title;
   const preferredMoves = [page.strategyPrimary];
   if (page.strategySecondary) {
     preferredMoves.push(page.strategySecondary);
@@ -95,22 +96,24 @@ function buildGeneratorScenario(page: CanonicalScenario): Scenario {
   preferredMoves.push(getFallbackMove(page));
 
   const avoid = getAvoidList(page);
-  const relatedSlugs = getRelatedScenarioLinks(page.slug).map(
-    (item) => item.slug
-  );
+  const relatedSlugs =
+    page.relatedScenarioSlugs?.length
+      ? page.relatedScenarioSlugs
+      : getRelatedScenarioLinks(page.slug).map((item) => item.slug);
 
   return {
     slug: page.slug,
     category: categoryByArchetype[page.archetype],
-    title: page.title,
-    seoTitle: `${page.title} | Flowdockr`,
+    title: pageHeading,
+    seoTitle: page.metaTitle || `${page.title} | Flowdockr`,
     metaDescription: getScenarioMetaDescription(page),
-    h1: page.title,
-    heroIntro: `${page.userSituation} ${page.strategyPrimary}`,
+    h1: pageHeading,
+    heroIntro: `${page.userSituation} ${page.userGoal || page.strategyPrimary}`,
     shortDescription: page.userSituation,
     problemText: [
       page.userSituation,
       `Typical client wording includes: ${page.clientMessageVariants.join(' / ')}`,
+      page.userGoal || page.strategyPrimary,
       page.strategySecondary || page.strategyPrimary,
     ],
     exampleClientMessage: page.primaryClientMessage,
@@ -121,18 +124,19 @@ function buildGeneratorScenario(page: CanonicalScenario): Scenario {
     relatedSlugs,
     promptContext: buildPromptContext(page),
     riskLevel: riskByArchetype[page.archetype],
-    primaryGoal: page.strategyPrimary,
+    primaryGoal: page.userGoal || page.strategyPrimary,
     avoid,
     preferredMoves,
     toneProfile: toneByArchetype[page.archetype],
-    placeholder: `Paste the exact client message for "${page.title}"...`,
+    placeholder: `Paste the exact client message for "${pageHeading}"...`,
   };
 }
 
 function buildPromptContext(page: CanonicalScenario): string {
   const parts = [
-    `Scenario: ${page.title}.`,
+    `Scenario: ${page.h1 || page.title}.`,
     page.userSituation,
+    page.userGoal ? `User goal: ${page.userGoal}.` : null,
     `Primary client message: "${page.primaryClientMessage}".`,
     `Primary strategy: ${page.strategyPrimary}.`,
   ];
@@ -143,7 +147,7 @@ function buildPromptContext(page: CanonicalScenario): string {
 
   parts.push(`Prompt intent: ${page.toolPromptIntent}`);
 
-  return parts.join(' ');
+  return parts.filter(Boolean).join(' ');
 }
 
 function buildExampleReply(page: CanonicalScenario): string {

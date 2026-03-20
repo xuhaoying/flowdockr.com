@@ -191,17 +191,20 @@ export function ToolForm({
     sourcePage,
     funnelScenarioSlug: canonicalFunnelScenarioSlug,
   });
+  const canonicalScenarioSlugParams = isCanonicalScenarioFunnel
+    ? { scenario_slug: canonicalFunnelScenarioSlug }
+    : {};
   const paywallVisible = upgradeVisible || isExhausted;
   const currentRemainingCredits = getRemainingCredits(usage);
 
-  const trackToolOpen = (scenarioSlugOverride?: string) => {
+  const trackToolOpen = () => {
     if (toolOpenTrackedRef.current) {
       return;
     }
 
     toolOpenTrackedRef.current = true;
     trackEvent('tool_open', {
-      scenario_slug: scenarioSlugOverride || trackedScenarioSlug,
+      ...canonicalScenarioSlugParams,
       locale,
     });
   };
@@ -285,17 +288,13 @@ export function ToolForm({
     }
 
     paywallWasVisibleRef.current = true;
-    const paywallScenarioSlug =
-      paywallTriggerTypeRef.current === 'usage_state'
-        ? trackedScenarioSlug
-        : pendingGenerationScenarioSlugRef.current || trackedScenarioSlug;
     const paywallRemainingCredits =
       paywallTriggerTypeRef.current === 'usage_state'
         ? currentRemainingCredits
         : paywallRemainingCreditsRef.current;
 
     trackEvent('paywall_trigger', {
-      scenario_slug: paywallScenarioSlug,
+      ...canonicalScenarioSlugParams,
       locale,
       trigger_type: paywallTriggerTypeRef.current || 'usage_state',
     });
@@ -375,7 +374,7 @@ export function ToolForm({
     try {
       trackToolOpen();
       trackEvent('generate_click', {
-        scenario_slug: trackedScenarioSlug,
+        ...canonicalScenarioSlugParams,
         locale,
       });
       if (isCanonicalScenarioFunnel && trigger === 'main_button') {
@@ -533,7 +532,7 @@ export function ToolForm({
       const pack = getCreditPackageById(packageId);
 
       trackEvent('checkout_click', {
-        scenario_slug: trackedScenarioSlug,
+        ...canonicalScenarioSlugParams,
         locale,
         plan_id: pack?.id || packageId,
         price_id: pack?.stripePriceId || undefined,
@@ -627,7 +626,7 @@ export function ToolForm({
 
     trackEvent('generation_feedback_submitted', {
       generation_id: result.generationId,
-      scenario_slug: scenarioSlug,
+      ...canonicalScenarioSlugParams,
       source_page: sourcePage,
       feedback_type: params.type,
       feedback_reason: params.reason,
@@ -666,7 +665,7 @@ export function ToolForm({
               onChange={(slug) => {
                 setScenarioSlug(slug);
                 setAnalyticsScenarioSlug(slug);
-                trackToolOpen(slug);
+                trackToolOpen();
                 setResult(null);
                 setSavedHint('');
               }}
