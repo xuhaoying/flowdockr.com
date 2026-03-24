@@ -43,6 +43,7 @@ export type CanonicalScenario = {
   h1?: string;
   metaTitle?: string;
   metaDescription?: string;
+  previewReply?: string;
   archetype: ScenarioArchetype;
   negotiationStage: NegotiationStage;
   primaryClientMessage: string;

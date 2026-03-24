@@ -6,7 +6,6 @@ import { ToolBestFor } from '@/components/tool/ToolBestFor';
 import { ToolExample } from '@/components/tool/ToolExample';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolHero } from '@/components/tool/ToolHero';
-import { ToolInputPreview } from '@/components/tool/ToolInputPreview';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
 import {
@@ -112,7 +111,6 @@ export default async function ToolPage({
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <ToolHero tool={tool} />
-      <ToolBestFor items={tool.bestFor} />
 
       {pricingScenario ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
@@ -128,8 +126,8 @@ export default async function ToolPage({
           Paste the message now
         </h2>
         <p className="text-sm text-slate-700">
-          Add the exact client message, choose the situation, and generate a
-          draft built for negotiation outcomes instead of generic AI tone.
+          Paste the exact client message and generate a draft built for the
+          pressure in the conversation.
         </p>
       </section>
 
@@ -137,14 +135,14 @@ export default async function ToolPage({
         analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
-        showScenarioSelector={true}
+        showScenarioSelector={false}
         placeholder={clientMessageInput?.placeholder}
       />
 
       {previewScenario ? (
         <ToolExample scenario={previewScenario} title="Example output" />
       ) : null}
-      <ToolInputPreview inputs={tool.inputs} />
+      <ToolBestFor items={tool.bestFor} />
       <ToolUseCases useCases={tool.exampleUseCases} />
       <RelatedScenarios links={tool.relatedScenarios} />
 

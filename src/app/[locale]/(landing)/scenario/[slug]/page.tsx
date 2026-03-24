@@ -4,10 +4,10 @@ import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker'
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioClientMessages } from '@/components/scenario/ScenarioClientMessages';
 import { ScenarioCTA } from '@/components/scenario/ScenarioCTA';
-import { ScenarioDifficulty } from '@/components/scenario/ScenarioDifficulty';
 import { ScenarioHero } from '@/components/scenario/ScenarioHero';
 import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
+import { ScenarioReplyPreview } from '@/components/scenario/ScenarioReplyPreview';
 import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { PageContainer } from '@/components/shared/PageContainer';
 import {
@@ -18,6 +18,7 @@ import {
   getScenarioMetaDescription,
   getScenarioPageBySlug,
 } from '@/lib/content/scenarioPages';
+import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 import { setRequestLocale } from 'next-intl/server';
 
@@ -148,10 +149,8 @@ export default async function ScenarioPage({
 
   const page = getScenarioPageBySlug(slug);
   if (page) {
-    const strategyPoints = [page.strategyPrimary];
-    if (page.strategySecondary) {
-      strategyPoints.push(page.strategySecondary);
-    }
+    const generatorScenario = getGeneratorScenarioBySlug(page.slug);
+    const previewReply = page.previewReply || generatorScenario?.exampleReply;
 
     return (
       <>
@@ -170,7 +169,10 @@ export default async function ScenarioPage({
             primaryClientMessage={page.primaryClientMessage}
             clientMessageVariants={page.clientMessageVariants}
           />
-          <ScenarioDifficulty points={strategyPoints} />
+          <ScenarioReplyPreview
+            reply={previewReply}
+            ctaLabel="Generate a better reply"
+          />
           <ScenarioInlineTool
             analyticsScenarioSlug={page.slug}
             defaultScenarioSlug={page.slug}

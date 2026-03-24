@@ -1,6 +1,8 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { GenerateReplyResponse } from '@/types/generation';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { ToolForm } from './ToolForm';
 
 const { trackEvent } = vi.hoisted(() => ({
   trackEvent: vi.fn(),
@@ -15,7 +17,11 @@ vi.mock('@/lib/analytics', () => ({
 }));
 
 vi.mock('./ToolPaywall', () => ({
-  ToolPaywall: ({ onCheckout }: { onCheckout: (packageId: 'quick_help') => void }) => (
+  ToolPaywall: ({
+    onCheckout,
+  }: {
+    onCheckout: (packageId: 'quick_help') => void;
+  }) => (
     <div data-testid="tool-paywall">
       <button type="button" onClick={() => onCheckout('quick_help')}>
         Mock checkout
@@ -30,13 +36,20 @@ vi.mock('./ToolResult', () => ({
   }: {
     onFeedback: (params: {
       type: 'sent_as_is' | 'edited_before_send' | 'not_useful' | 'regenerated';
-      reason?: 'too_generic' | 'too_soft' | 'too_aggressive' | 'missed_context' | 'not_my_style';
+      reason?:
+        | 'too_generic'
+        | 'too_soft'
+        | 'too_aggressive'
+        | 'missed_context'
+        | 'not_my_style';
     }) => void;
   }) => (
     <div data-testid="tool-result">
       <button
         type="button"
-        onClick={() => onFeedback({ type: 'not_useful', reason: 'too_generic' })}
+        onClick={() =>
+          onFeedback({ type: 'not_useful', reason: 'too_generic' })
+        }
       >
         Mock feedback
       </button>
@@ -44,12 +57,11 @@ vi.mock('./ToolResult', () => ({
   ),
 }));
 
-import { ToolForm } from './ToolForm';
-
 function buildSuccessResponse(): GenerateReplyResponse {
   return {
     success: true,
-    reply: 'Thanks for sharing that. I can adjust scope if budget is the issue.',
+    reply:
+      'Thanks for sharing that. I can adjust scope if budget is the issue.',
     alternativeReply:
       'Happy to explore a leaner version if that would help keep the project moving.',
     strategy: ['Hold value', 'Offer scope options', 'Keep next step clear'],
@@ -177,6 +189,24 @@ describe('ToolForm analytics funnel guard', () => {
     vi.stubGlobal('location', {
       assign: vi.fn(),
     } as unknown as Location);
+  });
+
+  it('keeps the default first-touch form limited to message and generate', async () => {
+    await renderToolForm({
+      remainingFreeGenerations: 2,
+    });
+
+    expect(
+      screen.queryByRole('combobox', { name: 'Pricing situation' })
+    ).toBeNull();
+    expect(screen.queryByRole('combobox', { name: 'Tone' })).toBeNull();
+    expect(screen.queryByRole('combobox', { name: 'Project type' })).toBeNull();
+    expect(
+      screen.queryByText('Quote / scope / deal context (optional)')
+    ).toBeNull();
+    expect(
+      screen.getByRole('button', { name: 'Draft negotiation reply' })
+    ).toBeTruthy();
   });
 
   it('emits canonical tool_start and generation_success when funnelScenarioSlug is present', async () => {
@@ -318,7 +348,9 @@ describe('ToolForm analytics funnel guard', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Mock feedback' })).toBeTruthy();
+      expect(
+        screen.getByRole('button', { name: 'Mock feedback' })
+      ).toBeTruthy();
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Mock feedback' }));

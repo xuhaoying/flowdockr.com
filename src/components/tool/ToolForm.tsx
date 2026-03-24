@@ -42,6 +42,7 @@ type ToolFormProps = {
   funnelScenarioSlug?: string;
   defaultScenarioSlug?: string;
   showScenarioSelector?: boolean;
+  showAdvancedFields?: boolean;
   placeholder?: string;
   rateContextLabel?: string;
   rateContextPlaceholder?: string;
@@ -102,7 +103,8 @@ export function ToolForm({
   analyticsScenarioSlug: initialAnalyticsScenarioSlug,
   funnelScenarioSlug = '',
   defaultScenarioSlug,
-  showScenarioSelector = true,
+  showScenarioSelector = false,
+  showAdvancedFields = false,
   placeholder,
   rateContextLabel = 'Quote / scope / deal context (optional)',
   rateContextPlaceholder = 'Example: Quote was $2,400 for strategy, copy, and 2 revision rounds over 10 days.',
@@ -191,9 +193,13 @@ export function ToolForm({
     sourcePage,
     funnelScenarioSlug: canonicalFunnelScenarioSlug,
   });
-  const canonicalScenarioSlugParams = isCanonicalScenarioFunnel
-    ? { scenario_slug: canonicalFunnelScenarioSlug }
-    : {};
+  const canonicalScenarioSlugParams = useMemo(
+    () =>
+      isCanonicalScenarioFunnel
+        ? { scenario_slug: canonicalFunnelScenarioSlug }
+        : {},
+    [canonicalFunnelScenarioSlug, isCanonicalScenarioFunnel]
+  );
   const paywallVisible = upgradeVisible || isExhausted;
   const currentRemainingCredits = getRemainingCredits(usage);
 
@@ -311,9 +317,9 @@ export function ToolForm({
     currentRemainingCredits,
     locale,
     paywallVisible,
+    canonicalScenarioSlugParams,
     canonicalFunnelScenarioSlug,
     isCanonicalScenarioFunnel,
-    trackedScenarioSlug,
     usage.supportLevel,
   ]);
 
@@ -679,8 +685,8 @@ export function ToolForm({
                 Client message
               </span>
               <p className="text-xs text-slate-600">
-                Paste the exact wording so the reply matches the pressure and
-                tone.
+                Paste the exact wording so the reply matches the pressure in the
+                conversation.
               </p>
             </div>
             <Textarea
@@ -700,71 +706,77 @@ export function ToolForm({
             </div>
           </label>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-800">Tone</span>
-              <select
-                value={tone}
-                onChange={(event) => {
-                  trackToolOpen();
-                  setTone(event.target.value as DealTone);
-                }}
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
-                style={LIGHT_FIELD_STYLE}
-              >
-                {TONE_OPTIONS.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+          {showAdvancedFields ? (
+            <>
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="block space-y-2">
+                  <span className="text-sm font-medium text-slate-800">
+                    Tone
+                  </span>
+                  <select
+                    value={tone}
+                    onChange={(event) => {
+                      trackToolOpen();
+                      setTone(event.target.value as DealTone);
+                    }}
+                    className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                    style={LIGHT_FIELD_STYLE}
+                  >
+                    {TONE_OPTIONS.map((item) => (
+                      <option key={item.value} value={item.value}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-            <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-800">
-                Project type
-              </span>
-              <select
-                value={projectType}
-                onChange={(event) => {
-                  trackToolOpen();
-                  setProjectType(event.target.value as DealProjectType);
-                }}
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
-                style={LIGHT_FIELD_STYLE}
-              >
-                {PROJECT_TYPE_OPTIONS.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
+                <label className="block space-y-2">
+                  <span className="text-sm font-medium text-slate-800">
+                    Project type
+                  </span>
+                  <select
+                    value={projectType}
+                    onChange={(event) => {
+                      trackToolOpen();
+                      setProjectType(event.target.value as DealProjectType);
+                    }}
+                    className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                    style={LIGHT_FIELD_STYLE}
+                  >
+                    {PROJECT_TYPE_OPTIONS.map((item) => (
+                      <option key={item.value} value={item.value}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
 
-          <label className="block space-y-2.5">
-            <div className="space-y-1">
-              <span className="text-sm font-medium text-slate-800">
-                {rateContextLabel}
-              </span>
-              <p className="text-xs text-slate-600">
-                Add your quote, scope, timing, or constraints so the draft
-                protects the right boundary.
-              </p>
-            </div>
-            <Textarea
-              value={userRateContext}
-              onChange={(event) => {
-                trackToolOpen();
-                setUserRateContext(event.target.value);
-              }}
-              rows={4}
-              maxLength={500}
-              placeholder={rateContextPlaceholder}
-              className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
-              style={LIGHT_FIELD_STYLE}
-            />
-          </label>
+              <label className="block space-y-2.5">
+                <div className="space-y-1">
+                  <span className="text-sm font-medium text-slate-800">
+                    {rateContextLabel}
+                  </span>
+                  <p className="text-xs text-slate-600">
+                    Add your quote, scope, timing, or constraints so the draft
+                    protects the right boundary.
+                  </p>
+                </div>
+                <Textarea
+                  value={userRateContext}
+                  onChange={(event) => {
+                    trackToolOpen();
+                    setUserRateContext(event.target.value);
+                  }}
+                  rows={4}
+                  maxLength={500}
+                  placeholder={rateContextPlaceholder}
+                  className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+                  style={LIGHT_FIELD_STYLE}
+                />
+              </label>
+            </>
+          ) : null}
 
           <div className="border-border/70 flex flex-col gap-3 border-t pt-5 sm:flex-row sm:flex-wrap sm:items-center">
             <Button

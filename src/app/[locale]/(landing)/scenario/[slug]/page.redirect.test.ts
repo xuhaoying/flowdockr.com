@@ -4,6 +4,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { defaultLocale, locales } from '@/config/locale';
 
+import ScenarioPage from './page';
+
 const mocks = vi.hoisted(() => ({
   redirect: vi.fn((path: string) => {
     const error = new Error('NEXT_REDIRECT');
@@ -58,6 +60,10 @@ vi.mock('@/components/scenario/ScenarioOverview', () => ({
   ScenarioOverview: () => null,
 }));
 
+vi.mock('@/components/scenario/ScenarioReplyPreview', () => ({
+  ScenarioReplyPreview: () => null,
+}));
+
 vi.mock('@/components/scenario/ScenarioStickyBottomCta', () => ({
   ScenarioStickyBottomCta: () => null,
 }));
@@ -65,8 +71,6 @@ vi.mock('@/components/scenario/ScenarioStickyBottomCta', () => ({
 vi.mock('@/components/shared/PageContainer', () => ({
   PageContainer: ({ children }: { children?: unknown }) => children,
 }));
-
-import ScenarioPage from './page';
 
 const DIRECT_REDIRECT_CASES = [
   ['price-too-high-response', 'quote-too-high'],
