@@ -115,16 +115,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client says they found someone cheaper',
     slug: 'found-someone-cheaper',
     metaTitle:
-      'Client Found Someone Cheaper? What to Say Next | Flowdockr',
+      'Client Found Someone Cheaper? Reply Without Starting a Price War | Flowdockr',
     metaDescription:
-      'Use this scenario when a client says they found someone cheaper. Defend your value, avoid a price war, and keep the reply professional.',
+      'Use this scenario when a client says they found someone cheaper. Compare offers without sounding threatened, and protect your positioning instead of racing down on price.',
     previewReply:
-      'I understand. If the decision comes down to price alone, the cheaper option may be the better fit, but if you want, I can also clarify what is different in my scope, process, or level of support so you can compare it properly.',
+      'I understand. If price is the only decision factor, the cheaper option may be the better fit, but if it helps, I can also show what is different in scope, process, or support so you can compare the offers on more than just the number.',
     heroDescription:
-      'Use this scenario when a client says they found someone cheaper and you need to protect your positioning without sounding threatened. Get a reply you can adapt and send.',
+      'Use this scenario when a client brings up a cheaper competitor and you need to protect your positioning without sounding threatened or defensive. Get a reply you can adapt and send.',
     pagePromise:
-      'Generate a price-comparison reply that protects value and avoids a race to the bottom.',
+      'Generate a competitor-comparison reply that defends value without starting a price war.',
     cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'price_comparison',
     negotiationStage: 'quote_pushback',
     primaryClientMessage: 'We found someone cheaper.',
@@ -142,9 +145,18 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'Reframe around scope, reliability, and fit, or offer a smaller package if the budget truly differs.',
     relatedScenarioSlugs: [
       'quote-too-high',
+      'same-scope-lower-price',
       'meet-their-budget',
       'lower-rate-after-proposal',
+      'discount-request',
+    ],
+    similarScenarioSlugs: [
+      'quote-too-high',
       'same-scope-lower-price',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'lower-rate-after-proposal',
       'discount-request',
     ],
     toolPromptIntent:
@@ -295,16 +307,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client asks for a lower rate after your proposal',
     slug: 'lower-rate-after-proposal',
     metaTitle:
-      'Client Asks for a Lower Rate After Your Proposal | Flowdockr',
+      'Client Wants a Lower Rate After the Proposal? What to Say | Flowdockr',
     metaDescription:
-      'Use this scenario when a client asks for a lower rate after you already sent the proposal. Protect the original quote and offer structured alternatives only if needed.',
+      'Use this scenario when a client comes back after the proposal and asks for a lower rate. Protect the integrity of the quoted plan and redirect the conversation toward real tradeoffs.',
     previewReply:
-      'The proposal price reflects the scope we outlined, so I would not usually revise the number downward without changing something behind it. If the budget needs to change, I can suggest a smaller version or adjusted phase plan rather than weakening the same proposal.',
+      'The proposal price reflects the scope we aligned on, so I would not usually revise the number downward without changing something behind it. If the budget needs to move, I can outline a smaller version or phased option instead of weakening the same proposal.',
     heroDescription:
-      'Use this scenario when a client comes back after the proposal and asks for a lower rate. Get a reply that protects the original quote without stalling the deal.',
+      'Use this scenario when the proposal is already on the table and the client comes back asking for a lower rate. Get a reply that protects the proposal without stalling the deal.',
     pagePromise:
-      'Generate a post-proposal pricing reply that keeps the scope-price link intact.',
+      'Generate a post-proposal pricing reply that keeps the original plan intact unless the scope changes.',
     cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'pricing_objection',
     negotiationStage: 'post_quote',
     primaryClientMessage: 'Can you lower the rate from the proposal?',
@@ -323,9 +338,18 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'quote-too-high',
       'same-scope-lower-price',
+      'discount-request',
+      'meet-their-budget',
+      'best-price-before-signing',
+    ],
+    similarScenarioSlugs: [
+      'quote-too-high',
+      'same-scope-lower-price',
+    ],
+    nextStepScenarioSlugs: [
       'meet-their-budget',
       'discount-request',
-      'found-someone-cheaper',
+      'best-price-before-signing',
     ],
     toolPromptIntent:
       'Write a professional reply when a client asks for a lower rate after you sent a proposal. Keep the tone steady and protect the integrity of the original quote.',
@@ -360,16 +384,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to reply after a client ghosts you',
     slug: 'after-client-ghosted',
     metaTitle:
-      'Client Ghosted You? How to Follow Up Professionally | Flowdockr',
+      'Client Ghosted After Showing Interest? What to Say | Flowdockr',
     metaDescription:
-      'Use this scenario when a client ghosts you after showing interest. Send a follow-up that is direct, low-pressure, and easy to answer.',
+      'Use this scenario when a client showed interest and then disappeared. Send a low-pressure follow-up that reopens the thread without sounding resentful or needy.',
     previewReply:
-      'Hi [Name] — just checking back in on this. If timing or priorities changed on your side, no problem, but if you are still considering it, I am happy to answer anything that would help you decide on next steps.',
+      'Hi [Name] — just checking back in on this. Since we had already discussed moving forward, I wanted to see whether timing changed on your side or whether there is anything you need from me to help you decide next steps.',
     heroDescription:
-      'Use this scenario when a client showed interest and then disappeared. Get a follow-up you can send that feels professional, not resentful or needy.',
+      'Use this scenario when a client seemed interested, then disappeared without a clear reason. Get a follow-up that acknowledges the silence without sounding emotional.',
     pagePromise:
-      'Generate a ghosting follow-up that reopens the thread without adding pressure.',
+      'Generate a ghosting follow-up that gently reopens the thread after interest has already been shown.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage: "Thanks, I'll get back to you.",
@@ -388,6 +415,15 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'client-no-response-follow-up',
       'no-response-after-rate',
+      'silent-after-discovery-call',
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
+    ],
+    similarScenarioSlugs: [
+      'client-no-response-follow-up',
+      'no-response-after-rate',
+    ],
+    nextStepScenarioSlugs: [
       'no-response-after-proposal',
       'reviewing-internally-no-response',
       'silent-after-discovery-call',
@@ -424,16 +460,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to follow up with a client who did not respond',
     slug: 'client-no-response-follow-up',
     metaTitle:
-      'How to Follow Up With a Client Who Did Not Respond | Flowdockr',
+      'How to Follow Up When a Client Did Not Respond to Your Last Message | Flowdockr',
     metaDescription:
-      'Use this scenario when a client did not respond and you need a short follow-up that nudges the conversation forward without sounding pushy.',
+      'Use this scenario when a client did not respond to your last message and you need a short, general follow-up. Prompt a yes, no, or timing update without sounding pushy.',
     previewReply:
-      'Hi [Name] — wanted to follow up on my last note in case it got buried. If it helps, I can clarify anything or adjust timing on my side, but even a quick yes, no, or later update would be helpful.',
+      'Hi [Name] — following up on my last note in case it got buried. If timing changed or you need anything from me, just let me know, but even a quick update would help me know where this stands.',
     heroDescription:
-      'Use this scenario when a client did not respond and you need a polite nudge that makes replying feel simple. Get a follow-up you can copy, adjust, and send.',
+      'Use this scenario when a client simply did not respond and there is no special context like a proposal or contract. Get a general follow-up you can adapt quickly.',
     pagePromise:
-      'Generate a low-friction client follow-up that invites a clear response.',
+      'Generate a short, general client follow-up that makes replying easy.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage: 'Sounds good, let me think about it.',
@@ -451,8 +490,17 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'Invite a decision, timing update, or graceful close instead of just asking if they saw your message.',
     relatedScenarioSlugs: [
       'after-client-ghosted',
-      'no-response-after-proposal',
       'no-response-after-rate',
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
+      'contract-sent-no-response',
+    ],
+    similarScenarioSlugs: [
+      'after-client-ghosted',
+      'no-response-after-rate',
+    ],
+    nextStepScenarioSlugs: [
+      'no-response-after-proposal',
       'reviewing-internally-no-response',
       'contract-sent-no-response',
     ],
@@ -603,16 +651,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client keeps changing requirements',
     slug: 'changing-requirements-response',
     metaTitle:
-      'Client Keeps Changing Requirements? What to Say | Flowdockr',
+      'Client Keeps Changing Requirements Mid-Project | Flowdockr',
     metaDescription:
-      'Use this scenario when a client keeps changing requirements mid-project. Slow the drift down and redirect the conversation toward a clear scope change process.',
+      'Use this scenario when a client keeps changing requirements mid-project. Reset the scope conversation before the work turns into a moving target.',
     previewReply:
-      'I can work through those changes, but since they move beyond the requirements we originally aligned on, the cleanest next step is to update the scope before I keep building against a moving target.',
+      'I can work through changes, but since the requirements are moving beyond what we aligned on, I need to pause and update scope before I keep building against a shifting target.',
     heroDescription:
-      'Use this scenario when a client keeps changing requirements and the project is starting to drift. Get a structured reply that protects scope without sounding inflexible.',
+      'Use this scenario when the brief keeps shifting mid-project and you need to slow the drift down without sounding inflexible. Get a structured reply that restores clarity.',
     pagePromise:
-      'Generate a scope-change reply that restores clarity around requirements, timing, and budget.',
+      'Generate a scope-reset reply that turns changing requirements into a clear revision process.',
     cluster: 'scope',
+    intentTier: 'core',
+    valueIntent: 'boundary',
+    commercialPriority: 'high',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage: 'We need to change a few things again.',
@@ -631,9 +682,18 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'scope-creep-polite-response',
       'adding-small-requests',
+      'extra-work-outside-scope',
+      'out-of-scope-professionally',
+      'unlimited-revisions',
+    ],
+    similarScenarioSlugs: [
+      'scope-creep-polite-response',
+      'adding-small-requests',
+    ],
+    nextStepScenarioSlugs: [
       'out-of-scope-professionally',
       'extra-work-outside-scope',
-      'extra-page-request',
+      'unlimited-revisions',
     ],
     toolPromptIntent:
       'Draft a professional reply when a client keeps changing requirements. Keep the tone calm, restate the current scope, and propose a structured way to handle changes.',
@@ -644,16 +704,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to handle scope creep politely',
     slug: 'scope-creep-polite-response',
     metaTitle:
-      'How to Handle Scope Creep Politely | Flowdockr',
+      'Scope Creep Starting? What to Say Early | Flowdockr',
     metaDescription:
-      'Use this scenario when small client requests keep stretching the project. Protect the boundary politely and offer a practical next step.',
+      'Use this scenario when small extra asks are starting to stretch the project. Set the boundary early and keep the tone cooperative before the pattern gets expensive.',
     previewReply:
-      'Happy to look at that. Since it sits outside the scope we are currently working from, the cleanest option is to either treat it as an add-on, trade it against something already included, or move it into a later phase.',
+      'Happy to look at that. Since requests like this are starting to expand the original scope, the cleanest move is to separate them from the current plan and decide which extras you actually want to prioritize.',
     heroDescription:
-      'Use this scenario when the extra asks seem small one by one, but together they are turning into scope creep. Get a polite boundary-setting reply you can send.',
+      'Use this scenario when small extra asks are beginning to pile up and you need to address scope creep early without making the client feel scolded. Get a polite boundary-setting reply you can send.',
     pagePromise:
-      'Generate a scope-creep reply that stays collaborative while making the boundary explicit.',
+      'Generate an early scope-creep reply that keeps the relationship cooperative while making the boundary visible.',
     cluster: 'scope',
+    intentTier: 'core',
+    valueIntent: 'boundary',
+    commercialPriority: 'high',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can you also add this while you are in there?',
@@ -670,10 +733,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     strategySecondary:
       'Offer a paid add-on, tradeoff, or later phase so the boundary stays practical and collaborative.',
     relatedScenarioSlugs: [
-      'changing-requirements-response',
-      'extra-work-outside-scope',
-      'extra-work-for-free',
       'adding-small-requests',
+      'extra-work-outside-scope',
+      'changing-requirements-response',
+      'extra-work-for-free',
+      'out-of-scope-professionally',
+    ],
+    similarScenarioSlugs: [
+      'adding-small-requests',
+      'extra-work-outside-scope',
+    ],
+    nextStepScenarioSlugs: [
+      'changing-requirements-response',
+      'extra-work-for-free',
       'out-of-scope-professionally',
     ],
     toolPromptIntent:
@@ -685,16 +757,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client asks for extra work for free',
     slug: 'extra-work-for-free',
     metaTitle:
-      'Client Wants Extra Work for Free? What to Say | Flowdockr',
+      'Client Wants Free Additional Work? What to Say | Flowdockr',
     metaDescription:
-      'Use this scenario when a client asks for extra work for free. Hold the scope boundary clearly and offer structured options instead of absorbing the request.',
+      'Use this scenario when a client explicitly asks for extra work at no additional cost. Hold the commercial boundary clearly and offer structured options instead of absorbing the request.',
     previewReply:
-      'I can help with that, but it would sit outside the scope we agreed. The cleanest option is to add it as an extra item, swap it with something currently included, or save it for a later phase so the project stays clear on both sides.',
+      'I can help with that, but I would treat it as additional work rather than fold it into the existing fee. The cleanest options are to add it as a separate item, swap it against something already included, or save it for a later phase.',
     heroDescription:
-      'Use this scenario when a client wants extra work for free and you need to protect the project economics without sounding hostile. Get a reply that keeps the boundary professional.',
+      'Use this scenario when a client asks for extra work for free and you need to protect the project economics without sounding hostile or petty. Get a reply that keeps the boundary professional.',
     pagePromise:
-      'Generate a free-extra-work reply that protects scope and keeps the relationship intact.',
+      'Generate a free-extra-work reply that protects margin and keeps the relationship workable.',
     cluster: 'scope',
+    intentTier: 'core',
+    valueIntent: 'boundary',
+    commercialPriority: 'high',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage:
@@ -714,9 +789,18 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'extra-work-outside-scope',
       'out-of-scope-professionally',
-      'extra-page-request',
+      'adding-small-requests',
       'scope-creep-polite-response',
-      'unlimited-revisions',
+      'changing-requirements-response',
+    ],
+    similarScenarioSlugs: [
+      'extra-work-outside-scope',
+      'out-of-scope-professionally',
+    ],
+    nextStepScenarioSlugs: [
+      'adding-small-requests',
+      'scope-creep-polite-response',
+      'changing-requirements-response',
     ],
     toolPromptIntent:
       'Draft a firm but professional reply when a client asks for extra work for free. Keep the boundary clear and offer structured options.',
@@ -727,16 +811,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to say that is out of scope professionally',
     slug: 'out-of-scope-professionally',
     metaTitle:
-      'How to Say That Is Out of Scope Professionally | Flowdockr',
+      'How to Say “That’s Out of Scope” Without Sounding Abrupt | Flowdockr',
     metaDescription:
-      'Use this scenario when you need to tell a client a request is out of scope. Keep the tone respectful, practical, and solution-oriented.',
+      'Use this scenario when you need to tell a client a request is out of scope. Get wording that stays respectful, practical, and easy for the client to respond to.',
     previewReply:
-      'That request sits outside the scope we originally agreed, so I would treat it as a separate add-on rather than fold it into the current plan. If you want, I can map out the cleanest way to include it from here.',
+      'That request sits outside the scope we originally agreed, so I would treat it as an add-on rather than fold it into the current plan. If you want to include it, I can map out the cleanest way to do that.',
     heroDescription:
-      'Use this scenario when you need to tell a client a request is out of scope without making the message feel blunt. Get wording that is clear, respectful, and useful.',
+      'Use this scenario when the wording itself is the problem: you need to tell a client something is out of scope without sounding blunt. Get wording that is clear, respectful, and useful.',
     pagePromise:
-      'Generate an out-of-scope reply that sets the boundary and gives the client a practical next step.',
+      'Generate an out-of-scope reply that sounds clear and professional instead of abrupt.',
     cluster: 'scope',
+    intentTier: 'core',
+    valueIntent: 'boundary',
+    commercialPriority: 'high',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can you add this to the original scope?',
@@ -755,8 +842,17 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'extra-work-outside-scope',
       'extra-work-for-free',
-      'scope-creep-polite-response',
-      'extra-page-request',
+      'adding-small-requests',
+      'changing-requirements-response',
+      'unlimited-revisions',
+    ],
+    similarScenarioSlugs: [
+      'extra-work-outside-scope',
+      'extra-work-for-free',
+    ],
+    nextStepScenarioSlugs: [
+      'adding-small-requests',
+      'changing-requirements-response',
       'unlimited-revisions',
     ],
     toolPromptIntent:
@@ -815,16 +911,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client keeps adding small requests',
     slug: 'adding-small-requests',
     metaTitle:
-      'Client Keeps Adding Small Requests? What to Say | Flowdockr',
+      'Client Keeps Adding Small Requests? Stop Scope Drift Early | Flowdockr',
     metaDescription:
-      'Use this scenario when a client keeps adding small requests and the extras are starting to add up. Flag the scope impact early and redirect the conversation professionally.',
+      'Use this scenario when a client keeps adding “small” requests and the extras are starting to add up. Name the pattern early before it turns into silent scope creep.',
     previewReply:
-      'I can see those requests are each small on their own, but together they are pushing beyond the scope we are working from. Rather than keep folding them in one by one, the cleaner move is to group the extras and decide how you want to handle them.',
+      'I’m happy to look at those, but the small additions are starting to move beyond the scope we’re working from. Rather than keep folding them in one by one, let’s group the extras and decide the best way to handle them.',
     heroDescription:
-      'Use this scenario when a client keeps adding small requests and the project is drifting by inches. Get a reply that names the pattern early without sounding dramatic.',
+      'Use this scenario when the issue is accumulation: each request seems minor, but together they are changing the project. Get a reply that flags the pattern early without sounding dramatic.',
     pagePromise:
-      'Generate a reply that handles small extra requests before they turn into silent scope creep.',
+      'Generate a reply that stops small extras from quietly turning into a larger scope change.',
     cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can you add these two small tweaks as well?',
@@ -841,11 +940,20 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     strategySecondary:
       'Group the extras into a scoped add-on or later phase instead of reacting one request at a time.',
     relatedScenarioSlugs: [
-      'extra-work-outside-scope',
       'scope-creep-polite-response',
       'extra-page-request',
-      'extra-work-for-free',
       'changing-requirements-response',
+      'extra-work-for-free',
+      'out-of-scope-professionally',
+    ],
+    similarScenarioSlugs: [
+      'scope-creep-polite-response',
+      'extra-page-request',
+    ],
+    nextStepScenarioSlugs: [
+      'changing-requirements-response',
+      'extra-work-for-free',
+      'out-of-scope-professionally',
     ],
     toolPromptIntent:
       'Draft a reply when a client keeps adding small requests. Keep the tone calm, flag the scope impact, and offer a structured way to handle the extras.',

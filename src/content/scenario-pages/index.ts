@@ -4,6 +4,7 @@ import type {
   CanonicalScenario,
   ScenarioArchetype,
   ScenarioLinkCluster,
+  ScenarioRelatedGroup,
   ScenarioRelatedLink,
 } from '@/types/scenario-catalog';
 
@@ -296,6 +297,59 @@ export function getRelatedScenarioLinks(
   return [...explicitLinks, ...heuristicLinks].slice(0, maxLinks);
 }
 
+export function getRelatedScenarioGroups(
+  slug: string
+): ScenarioRelatedGroup[] {
+  const scenario = getScenarioPageBySlug(slug);
+  if (!scenario) {
+    return [];
+  }
+
+  const similarItems = getScenarioLinksBySlugs(scenario.similarScenarioSlugs, 3);
+  const nextStepItems = getScenarioLinksBySlugs(scenario.nextStepScenarioSlugs, 3);
+
+  const groups: ScenarioRelatedGroup[] = [];
+
+  if (similarItems.length > 0) {
+    groups.push({
+      id: 'similar',
+      title: 'Similar scenarios',
+      description:
+        'Close variants of this client conversation that need a similar kind of reply.',
+      items: similarItems,
+    });
+  }
+
+  if (nextStepItems.length > 0) {
+    groups.push({
+      id: 'next_step',
+      title: 'Next-step scenarios',
+      description: getNextStepScenarioDescription(scenario),
+      items: nextStepItems,
+    });
+  }
+
+  if (groups.length > 0) {
+    return groups;
+  }
+
+  const fallbackItems = getRelatedScenarioLinks(slug);
+  if (fallbackItems.length === 0) {
+    return [];
+  }
+
+  const relatedSection = getRelatedScenarioSectionCopy(scenario);
+
+  return [
+    {
+      id: 'related',
+      title: relatedSection.title,
+      description: relatedSection.description,
+      items: fallbackItems,
+    },
+  ];
+}
+
 function getRelatedScore(
   source: CanonicalScenario,
   candidate: CanonicalScenario
@@ -368,16 +422,15 @@ function getScenarioLinkCluster(
   return 'client_management';
 }
 
-function getExplicitRelatedScenarioLinks(
-  scenario: Pick<CanonicalScenario, 'slug' | 'relatedScenarioSlugs'>,
+function getScenarioLinksBySlugs(
+  slugs: string[] | undefined,
   limit: number
 ): ScenarioRelatedLink[] {
-  if (!scenario.relatedScenarioSlugs?.length) {
+  if (!slugs?.length) {
     return [];
   }
 
-  return scenario.relatedScenarioSlugs
-    .filter((relatedSlug) => relatedSlug !== scenario.slug)
+  return slugs
     .map((relatedSlug) => scenarioPageMap.get(relatedSlug))
     .filter((item): item is CanonicalScenario => Boolean(item))
     .slice(0, limit)
@@ -386,6 +439,35 @@ function getExplicitRelatedScenarioLinks(
       title: item.title,
       description: item.userSituation,
     }));
+}
+
+function getExplicitRelatedScenarioLinks(
+  scenario: Pick<CanonicalScenario, 'slug' | 'relatedScenarioSlugs'>,
+  limit: number
+): ScenarioRelatedLink[] {
+  return getScenarioLinksBySlugs(
+    scenario.relatedScenarioSlugs?.filter(
+      (relatedSlug) => relatedSlug !== scenario.slug
+    ),
+    limit
+  );
+}
+
+function getNextStepScenarioDescription(
+  scenario: Pick<CanonicalScenario, 'cluster' | 'archetype'>
+): string {
+  switch (getScenarioLinkCluster(scenario)) {
+    case 'payment':
+      return 'If the payment issue keeps dragging, these are the next money conversations you are likely to hit.';
+    case 'pricing':
+      return 'If the client keeps pushing on price, these are the next pricing conversations likely to follow.';
+    case 'scope':
+      return 'If the boundary keeps getting tested, these are the next scope conversations likely to show up.';
+    case 'ghosting':
+      return 'If the silence continues or shifts stages, these are the next follow-up conversations likely to matter.';
+    case 'client_management':
+      return 'If the conversation gets more complicated, these are the next client situations likely to matter.';
+  }
 }
 
 function mergeScenarioPages(

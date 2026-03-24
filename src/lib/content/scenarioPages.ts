@@ -3,6 +3,7 @@ export {
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
   getPopularScenarioPages,
+  getRelatedScenarioGroups,
   getRelatedScenarioLinks,
   getRelatedScenarioSectionCopy,
   getScenarioArchetypeLabel,

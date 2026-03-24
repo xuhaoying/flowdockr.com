@@ -13,6 +13,7 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import {
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
+  getRelatedScenarioGroups,
   getRelatedScenarioLinks,
   getRelatedScenarioSectionCopy,
   getScenarioArchetypeLabel,
@@ -193,6 +194,7 @@ export default async function ScenarioPage({
           />
           <RelatedScenarios
             items={getRelatedScenarioLinks(page.slug)}
+            groups={getRelatedScenarioGroups(page.slug)}
             title={relatedSection.title}
             description={relatedSection.description}
           />

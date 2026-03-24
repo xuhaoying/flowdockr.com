@@ -52,16 +52,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks if you can meet their budget',
     slug: 'meet-their-budget',
     metaTitle:
-      'Client Asks if You Can Meet Their Budget | Flowdockr',
+      'Can You Meet Their Budget Without Undercutting the Scope? | Flowdockr',
     metaDescription:
-      'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Protect the original scope logic and offer a cleaner alternative if needed.',
+      'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Draft a reply that protects your pricing logic and offers a scoped alternative instead of squeezing the same work into a smaller fee.',
     previewReply:
-      'Thanks for sharing the number. If that budget is the real constraint, the cleanest way to make it work is to adjust scope, timing, or phasing rather than squeeze the same deliverables into a smaller fee.',
+      'Thanks for sharing the budget. If that number is fixed, the cleanest way to make it work would be to adjust scope, timing, or phasing rather than squeeze the same deliverables into a smaller fee. If helpful, I can outline the version I would recommend at that level.',
     heroDescription:
-      'Use this scenario when a client gives you a real budget cap that sits below your quote. Get a reply that stays constructive without compressing the same work into a lower price.',
+      'Use this scenario when a client gives you a real budget cap that sits below your quote and wants to know whether you can make it work. Get a constructive reply that protects the logic of the original proposal.',
     pagePromise:
-      'Generate a budget-cap reply that protects your pricing logic and offers a credible path forward.',
+      'Generate a budget-cap reply that offers a workable scope path without turning the same project into a cheaper one.',
     cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage: 'Our budget is $2,000. Can you make it work?',
@@ -77,12 +80,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Treat the budget as a planning constraint, not an automatic reason to cut the same scope.',
     strategySecondary:
       'Offer a leaner version, phased rollout, or smaller first step if there is still a workable deal.',
+    similarScenarioSlugs: [
+      'out-of-budget-but-interested',
+      'quote-too-high',
+    ],
+    nextStepScenarioSlugs: [
+      'same-scope-lower-price',
+      'lower-rate-after-proposal',
+      'discount-request',
+    ],
     relatedScenarioSlugs: [
       'out-of-budget-but-interested',
       'quote-too-high',
       'same-scope-lower-price',
-      'discount-request',
       'lower-rate-after-proposal',
+      'discount-request',
     ],
     toolPromptIntent:
       'Write a professional reply when a client asks if you can meet their budget. Keep the tone constructive and protect your pricing logic.',
@@ -221,6 +233,9 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     pagePromise:
       'Generate a discovery-call follow-up that restarts the conversation without sounding needy.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'early_inquiry',
     primaryClientMessage:
@@ -237,6 +252,15 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Reference the call briefly and give the client a simple next step instead of a vague check-in.',
     strategySecondary:
       'Keep the tone light so the message feels like a helpful nudge, not pressure.',
+    similarScenarioSlugs: [
+      'no-response-after-rate',
+      'after-client-ghosted',
+    ],
+    nextStepScenarioSlugs: [
+      'client-no-response-follow-up',
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
+    ],
     relatedScenarioSlugs: [
       'no-response-after-rate',
       'after-client-ghosted',
@@ -395,16 +419,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'How to follow up on an unpaid invoice',
     slug: 'unpaid-invoice-follow-up',
     metaTitle:
-      'How to Follow Up on an Unpaid Invoice Professionally | Flowdockr',
+      'How to Follow Up on an Unpaid Invoice Before Escalating | Flowdockr',
     metaDescription:
-      'Use this scenario when an invoice is still unpaid and you need a professional follow-up. Ask for a concrete payment date without sounding apologetic or vague.',
+      'Use this scenario when an invoice is unpaid and you want a professional follow-up before the reminders turn more forceful. Ask for a concrete payment date without sounding apologetic or vague.',
     previewReply:
-      'Hi [Name] — following up on invoice [number]. It is still outstanding on my side, so could you let me know the payment date or if there is anything blocking processing there?',
+      'Hi [Name] — following up on invoice [number], which is still open on my side. Could you let me know the payment date, or whether there is anything blocking processing there that I should account for?',
     heroDescription:
-      'Use this scenario when an invoice is still unpaid and you need a clear follow-up that does not sound awkward, soft, or apologetic. Get wording you can adapt and send.',
+      'Use this scenario when an invoice is still unpaid and you want an early, professional follow-up before the tone needs to get firmer. Get wording you can adapt and send without sounding awkward or overly soft.',
     pagePromise:
-      'Generate an unpaid-invoice follow-up that asks for a date and keeps the tone professional.',
+      'Generate an early unpaid-invoice follow-up that asks for a date and keeps the tone steady.',
     cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: "We haven't processed the invoice yet.",
@@ -420,12 +447,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Keep the message focused on the invoice status, due date, and requested payment timing.',
     strategySecondary:
       'Ask for a concrete date so the follow-up creates accountability instead of another soft promise.',
+    similarScenarioSlugs: [
+      'ask-for-payment-politely',
+      'payment-overdue-reminder',
+    ],
+    nextStepScenarioSlugs: [
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'overdue-invoice-no-response',
+    ],
     relatedScenarioSlugs: [
       'ask-for-payment-politely',
-      'overdue-invoice-no-response',
       'payment-overdue-reminder',
       'second-payment-reminder',
       'final-payment-reminder',
+      'overdue-invoice-no-response',
     ],
     toolPromptIntent:
       'Draft a professional unpaid-invoice follow-up. Keep the tone direct, polite, and clear about the payment step needed.',
@@ -436,16 +472,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client payment is overdue',
     slug: 'payment-overdue-reminder',
     metaTitle:
-      'Overdue Payment Reminder to a Client | Flowdockr',
+      'First Overdue Payment Reminder After the Due Date | Flowdockr',
     metaDescription:
-      'Use this scenario when a client payment is overdue and you need a firmer reminder than a casual check-in. Ask for a specific payment date clearly.',
+      'Use this scenario when the due date has passed and you need your first firmer overdue-payment reminder. Ask for a specific payment date clearly, without jumping straight to a final notice.',
     previewReply:
-      'Hi [Name] — invoice [number] is now overdue, so I wanted to follow up directly on the payment date. Please let me know when I should expect it, or if there is a blocker I need to account for on my side.',
+      'Hi [Name] — invoice [number] is now past due, so I wanted to follow up directly on the payment date. Please let me know when I should expect it, or whether there is a blocker I should account for on my side.',
     heroDescription:
-      'Use this scenario when the due date has passed and you need a reminder that is firmer than a casual nudge, but still professional. Get an overdue payment message you can send right away.',
+      'Use this scenario when the due date has passed and you need the first overdue reminder to sound firmer than a casual nudge, but not yet like a final warning. Get a message you can send right away.',
     pagePromise:
-      'Generate an overdue payment reminder that asks for a date and keeps the boundary clear.',
+      'Generate a first overdue-payment reminder that raises urgency without over-escalating.',
     cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Sorry, payment has slipped on our side.',
@@ -461,12 +500,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'State the overdue status plainly and ask for a specific payment date rather than another generic update.',
     strategySecondary:
       'If needed, connect continued work or delivery to the payment timeline so the boundary is clear.',
-    relatedScenarioSlugs: [
-      'overdue-invoice-no-response',
-      'second-payment-reminder',
-      'final-payment-reminder',
+    similarScenarioSlugs: [
       'ask-for-payment-politely',
       'unpaid-invoice-follow-up',
+    ],
+    nextStepScenarioSlugs: [
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'payment-extension-request',
+    ],
+    relatedScenarioSlugs: [
+      'ask-for-payment-politely',
+      'unpaid-invoice-follow-up',
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'payment-extension-request',
     ],
     toolPromptIntent:
       'Write a professional overdue-payment reminder to a client. Keep the tone firm, polite, and focused on securing a clear payment date.',
@@ -477,16 +525,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Second payment reminder to a client',
     slug: 'second-payment-reminder',
     metaTitle:
-      'Second Payment Reminder for a Client | Flowdockr',
+      'Second Payment Reminder Before a Final Notice | Flowdockr',
     metaDescription:
-      'Use this scenario when you already sent one payment reminder and still have not been paid. Write a firmer second reminder that stays professional.',
+      'Use this scenario when you already sent one overdue reminder and still have not been paid. Draft a firmer second reminder that stays professional and sets up the next step clearly.',
     previewReply:
-      'Hi [Name] — following up again on invoice [number], which is still outstanding. Please confirm the payment date today so I know how to plan next steps on my side.',
+      'Hi [Name] — following up again on invoice [number], which is still outstanding after my previous reminder. Please confirm the payment date today so I can plan next steps clearly on my side.',
     heroDescription:
-      'Use this scenario when the first payment reminder did not work and you need a stronger second follow-up without sounding emotional. Get a firm reminder you can adapt and send.',
+      'Use this scenario when the first overdue reminder did not work and you need a stronger second follow-up before moving to a final notice. Get a firm reminder you can adapt and send.',
     pagePromise:
-      'Generate a second payment reminder that increases clarity and urgency without escalating the tone too far.',
+      'Generate a second payment reminder that clearly raises urgency before the conversation turns into a final notice.',
     cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: "I know we're overdue on this invoice.",
@@ -502,12 +553,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Be more direct than the first reminder and restate the invoice, due date, and payment action required.',
     strategySecondary:
       'Ask for a firm date or immediate confirmation so the second reminder moves the situation forward.',
-    relatedScenarioSlugs: [
-      'final-payment-reminder',
+    similarScenarioSlugs: [
       'payment-overdue-reminder',
-      'overdue-invoice-no-response',
-      'ask-for-payment-politely',
       'unpaid-invoice-follow-up',
+    ],
+    nextStepScenarioSlugs: [
+      'final-payment-reminder',
+      'pay-later-request',
+      'payment-extension-request',
+    ],
+    relatedScenarioSlugs: [
+      'payment-overdue-reminder',
+      'unpaid-invoice-follow-up',
+      'final-payment-reminder',
+      'pay-later-request',
+      'payment-extension-request',
     ],
     toolPromptIntent:
       'Draft a second payment reminder to a client. Keep the tone professional, firmer than the first follow-up, and clear about the next action needed.',
@@ -543,16 +603,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks to pay later',
     slug: 'pay-later-request',
     metaTitle:
-      'Client Wants to Pay Later? What to Say | Flowdockr',
+      'Client Wants to Pay Later? How to Reply Without Leaving It Open-Ended | Flowdockr',
     metaDescription:
-      'Use this scenario when a client asks to pay later than agreed. Protect the payment boundary and make any revised terms explicit.',
+      'Use this scenario when a client asks to pay later than agreed, but has not proposed clear revised terms yet. Protect the payment boundary and avoid leaving the delay open-ended.',
     previewReply:
-      'I understand the request. If we move the payment date, I would want to confirm the exact revised date in writing so the timeline stays clear on both sides.',
+      'I understand the request. If we move the payment date, I would want to confirm the exact revised date in writing now so the timeline stays clear on both sides.',
     heroDescription:
-      'Use this scenario when a client asks to pay later and you need to protect cash flow without making the relationship tense. Get a reply that keeps the payment boundary clear.',
+      'Use this scenario when a client asks to pay later in a general way and you need to protect cash flow without leaving the revised timeline vague. Get a reply that keeps the payment boundary clear.',
     pagePromise:
-      'Generate a pay-later reply that documents the next payment step clearly.',
+      'Generate a pay-later reply that turns a vague delay request into a clear next payment step.',
     cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can we pay this next month instead?',
@@ -568,12 +631,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Respond to the request directly and decide whether you are offering an exception, a condition, or a firm no.',
     strategySecondary:
       'If you allow extra time, document the new date clearly so the delay does not become open-ended.',
+    similarScenarioSlugs: [
+      'payment-extension-request',
+      'deposit-not-paid-yet',
+    ],
+    nextStepScenarioSlugs: [
+      'ask-for-payment-politely',
+      'payment-overdue-reminder',
+      'second-payment-reminder',
+    ],
     relatedScenarioSlugs: [
       'payment-extension-request',
-      'start-before-payment',
-      'ask-for-payment-politely',
       'deposit-not-paid-yet',
+      'ask-for-payment-politely',
       'payment-overdue-reminder',
+      'second-payment-reminder',
     ],
     toolPromptIntent:
       'Draft a professional reply when a client asks to pay later. Keep the tone calm and protect the payment boundary.',
@@ -584,16 +656,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks for more time to pay',
     slug: 'payment-extension-request',
     metaTitle:
-      'Client Asks for More Time to Pay | Flowdockr',
+      'Client Asks for More Time to Pay? How to Set Clear Extension Terms | Flowdockr',
     metaDescription:
-      'Use this scenario when a client asks for a payment extension. Make the revised terms explicit and avoid leaving the new payment window vague.',
+      'Use this scenario when a client asks for a payment extension on a specific invoice. Draft a reply that sets a revised date clearly and avoids leaving the new payment window vague.',
     previewReply:
-      'If we extend the payment date, I would want to confirm the exact revised date now so the terms stay clear. Let me know the date you can commit to and I can confirm from there.',
+      'If we extend the payment date, I would want to confirm the exact revised date now so the terms stay clear. Let me know the date you can commit to and I can confirm the extension from there.',
     heroDescription:
-      'Use this scenario when a client asks for more time to pay and you need a clear answer, not vague flexibility. Get a payment-extension reply that protects the commercial boundary.',
+      'Use this scenario when a client asks for more time to pay on a specific invoice and you need a clear answer, not vague flexibility. Get a payment-extension reply that protects the commercial boundary.',
     pagePromise:
-      'Generate a payment-extension reply that makes the revised terms explicit.',
+      'Generate a payment-extension reply that confirms the revised date and keeps the new terms explicit.',
     cluster: 'payment',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can we get another week to pay the invoice?',
@@ -609,12 +684,21 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Decide quickly whether to allow the extension and spell out the revised date and any conditions in clear language.',
     strategySecondary:
       'Avoid soft wording that leaves the payment window open-ended or unclear.',
+    similarScenarioSlugs: [
+      'pay-later-request',
+      'deposit-not-paid-yet',
+    ],
+    nextStepScenarioSlugs: [
+      'payment-overdue-reminder',
+      'second-payment-reminder',
+      'final-payment-reminder',
+    ],
     relatedScenarioSlugs: [
       'pay-later-request',
-      'ask-for-payment-politely',
-      'second-payment-reminder',
-      'start-before-payment',
       'deposit-not-paid-yet',
+      'payment-overdue-reminder',
+      'second-payment-reminder',
+      'final-payment-reminder',
     ],
     toolPromptIntent:
       'Write a professional reply when a client asks for more time to pay. Keep the tone clear and make any new payment terms explicit.',
@@ -625,16 +709,19 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client has not paid the deposit yet',
     slug: 'deposit-not-paid-yet',
     metaTitle:
-      'Client Has Not Paid the Deposit Yet? What to Say | Flowdockr',
+      'Deposit Still Not Paid? What to Say Before Kickoff | Flowdockr',
     metaDescription:
-      'Use this scenario when kickoff is blocked because the client still has not paid the deposit. Follow up clearly and keep the start-after-payment boundary intact.',
+      'Use this scenario when the kickoff deposit was promised but still has not arrived. Follow up clearly and keep the start-after-payment boundary intact without sounding awkward.',
     previewReply:
       'Hi [Name] — just checking in on the deposit for this project. Once that is in place, I can lock the kickoff and move forward right away, so let me know if anything is blocking it on your side.',
     heroDescription:
-      'Use this scenario when kickoff is blocked because the client still has not paid the deposit. Get a clear follow-up that keeps the start-after-payment rule intact.',
+      'Use this scenario when kickoff is blocked because the client promised the deposit but it still has not arrived. Get a clear follow-up that keeps the start-after-payment rule intact.',
     pagePromise:
-      'Generate a deposit follow-up that keeps kickoff tied to payment completion.',
+      'Generate a deposit follow-up that keeps kickoff tied to the deposit arriving, not just a verbal promise.',
     cluster: 'payment',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'payment_protection',
     negotiationStage: 'pre_kickoff',
     primaryClientMessage: "We'll send the deposit soon.",
@@ -650,6 +737,15 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Restate the deposit step clearly and tie kickoff to payment completion, not good intentions.',
     strategySecondary:
       'Keep the tone professional and give the client the fastest path to start once the deposit is paid.',
+    similarScenarioSlugs: [
+      'start-before-payment',
+      'pay-later-request',
+    ],
+    nextStepScenarioSlugs: [
+      'payment-extension-request',
+      'ask-for-payment-politely',
+      'overdue-invoice-no-response',
+    ],
     relatedScenarioSlugs: [
       'start-before-payment',
       'pay-later-request',

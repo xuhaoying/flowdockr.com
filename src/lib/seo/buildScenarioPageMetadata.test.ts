@@ -46,9 +46,10 @@ describe('buildScenarioPageMetadata', () => {
     );
   });
 
-  it('builds metadata from the strengthened cluster pages without changing canonical routing', () => {
-    const paymentPage = getScenarioPageBySlug('second-payment-reminder');
+  it('builds metadata from the strengthened high-value pages without changing canonical routing', () => {
+    const paymentPage = getScenarioPageBySlug('final-payment-reminder');
     const pricingPage = getScenarioPageBySlug('meet-their-budget');
+    const depositPage = getScenarioPageBySlug('deposit-not-paid-yet');
 
     const paymentMetadata = buildScenarioPageMetadata({
       page: {
@@ -56,7 +57,7 @@ describe('buildScenarioPageMetadata', () => {
         metaTitle: paymentPage!.metaTitle,
         metaDescription: paymentPage!.metaDescription!,
       },
-      canonical: 'https://www.flowdockr.com/scenario/second-payment-reminder',
+      canonical: 'https://www.flowdockr.com/scenario/final-payment-reminder',
     });
     const pricingMetadata = buildScenarioPageMetadata({
       page: {
@@ -66,25 +67,43 @@ describe('buildScenarioPageMetadata', () => {
       },
       canonical: 'https://www.flowdockr.com/scenario/meet-their-budget',
     });
+    const depositMetadata = buildScenarioPageMetadata({
+      page: {
+        title: depositPage!.title,
+        metaTitle: depositPage!.metaTitle,
+        metaDescription: depositPage!.metaDescription!,
+      },
+      canonical: 'https://www.flowdockr.com/scenario/deposit-not-paid-yet',
+    });
 
     expect(paymentMetadata.title).toBe(
-      'Second Payment Reminder for a Client | Flowdockr'
+      'Final Payment Reminder Before You Escalate | Flowdockr'
     );
     expect(paymentMetadata.description).toBe(
-      'Use this scenario when you already sent one payment reminder and still have not been paid. Write a firmer second reminder that stays professional.'
+      'Use this scenario when earlier reminders failed and you need a final payment message that sets a deadline, asks for a concrete answer, and still sounds professional.'
     );
     expect(paymentMetadata.alternates?.canonical).toBe(
-      'https://www.flowdockr.com/scenario/second-payment-reminder'
+      'https://www.flowdockr.com/scenario/final-payment-reminder'
     );
 
     expect(pricingMetadata.title).toBe(
-      'Client Asks if You Can Meet Their Budget | Flowdockr'
+      'Can You Meet Their Budget Without Undercutting the Scope? | Flowdockr'
     );
     expect(pricingMetadata.description).toBe(
-      'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Protect the original scope logic and offer a cleaner alternative if needed.'
+      'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Draft a reply that protects your pricing logic and offers a scoped alternative instead of squeezing the same work into a smaller fee.'
     );
     expect(pricingMetadata.alternates?.canonical).toBe(
       'https://www.flowdockr.com/scenario/meet-their-budget'
+    );
+
+    expect(depositMetadata.title).toBe(
+      'Deposit Still Not Paid? What to Say Before Kickoff | Flowdockr'
+    );
+    expect(depositMetadata.description).toBe(
+      'Use this scenario when the kickoff deposit was promised but still has not arrived. Follow up clearly and keep the start-after-payment boundary intact without sounding awkward.'
+    );
+    expect(depositMetadata.alternates?.canonical).toBe(
+      'https://www.flowdockr.com/scenario/deposit-not-paid-yet'
     );
   });
 });

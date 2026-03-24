@@ -1,9 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
+import {
+  scenarioCommercialPriorityValues,
+  scenarioIntentTierValues,
+  scenarioValueIntentValues,
+} from '@/types/scenario-catalog';
 
 import { scenarioDatasetV1 } from './scenario-dataset-v1';
 import {
   getAllScenarioPages,
+  getRelatedScenarioGroups,
   getRelatedScenarioSectionCopy,
   getScenarioHeroDescription,
   getRelatedScenarioLinks,
@@ -57,6 +63,24 @@ const EXPANDED_CLUSTER_SLUGS = {
   ],
 } as const;
 
+const HIGH_VALUE_SCENARIO_SLUGS = [
+  'ask-for-payment-politely',
+  'final-payment-reminder',
+  'deposit-not-paid-yet',
+  'start-before-payment',
+  'payment-extension-request',
+  'quote-too-high',
+  'discount-request',
+  'found-someone-cheaper',
+  'lower-rate-after-proposal',
+  'meet-their-budget',
+  'extra-work-for-free',
+  'unlimited-revisions',
+  'scope-creep-polite-response',
+  'out-of-scope-professionally',
+  'changing-requirements-response',
+] as const;
+
 describe('scenario dataset v1 integration', () => {
   it('wires all 50 dataset scenarios into the page catalog and generator catalog', () => {
     expect(scenarioDatasetV1).toHaveLength(50);
@@ -103,11 +127,11 @@ describe('scenario dataset v1 integration', () => {
     }
 
     expect(getScenarioPageBySlug('overdue-invoice-no-response')?.relatedScenarioSlugs).toEqual([
-      'ask-for-payment-politely',
       'unpaid-invoice-follow-up',
       'payment-overdue-reminder',
       'second-payment-reminder',
       'final-payment-reminder',
+      'ask-for-payment-politely',
     ]);
   });
 
@@ -136,8 +160,6 @@ describe('scenario dataset v1 integration', () => {
 
   it('keeps the first-batch cluster expansion pages wired into the canonical catalog and generator catalog', () => {
     for (const [cluster, slugs] of Object.entries(EXPANDED_CLUSTER_SLUGS)) {
-      const clusterSet = new Set<string>(slugs);
-
       for (const slug of slugs) {
         const page = getScenarioPageBySlug(slug);
         const generatorScenario = getGeneratorScenarioBySlug(slug);
@@ -153,8 +175,10 @@ describe('scenario dataset v1 integration', () => {
         expect(page?.relatedScenarioSlugs?.length).toBeGreaterThanOrEqual(5);
 
         for (const relatedSlug of page?.relatedScenarioSlugs || []) {
-          expect(getScenarioPageBySlug(relatedSlug)?.slug).toBe(relatedSlug);
-          expect(clusterSet.has(relatedSlug)).toBe(true);
+          const relatedPage = getScenarioPageBySlug(relatedSlug);
+
+          expect(relatedPage?.slug).toBe(relatedSlug);
+          expect(relatedPage?.cluster).toBe(cluster);
         }
       }
     }
@@ -168,15 +192,82 @@ describe('scenario dataset v1 integration', () => {
     }
   });
 
-  it('returns the explicit payment cluster links first for the strengthened payment pages', () => {
-    expect(
-      getRelatedScenarioLinks('ask-for-payment-politely').map((item) => item.slug)
-    ).toEqual([
-      'overdue-invoice-no-response',
-      'final-payment-reminder',
-      'second-payment-reminder',
-      'unpaid-invoice-follow-up',
-      'payment-overdue-reminder',
+  it('keeps grouped related slugs pointing at existing canonical pages and preserves a fallback path', () => {
+    for (const page of getAllScenarioPages()) {
+      for (const relatedSlug of page.similarScenarioSlugs || []) {
+        expect(getScenarioPageBySlug(relatedSlug)?.slug).toBe(relatedSlug);
+      }
+
+      for (const relatedSlug of page.nextStepScenarioSlugs || []) {
+        expect(getScenarioPageBySlug(relatedSlug)?.slug).toBe(relatedSlug);
+      }
+    }
+
+    expect(getRelatedScenarioGroups('best-price-request').map((group) => group.id)).toEqual([
+      'related',
+    ]);
+  });
+
+  it('marks high-value pages with valid intent and commercial labels', () => {
+    for (const slug of HIGH_VALUE_SCENARIO_SLUGS) {
+      const page = getScenarioPageBySlug(slug);
+
+      expect(page).toBeTruthy();
+      expect(scenarioIntentTierValues).toContain(page?.intentTier);
+      expect(scenarioValueIntentValues).toContain(page?.valueIntent);
+      expect(scenarioCommercialPriorityValues).toContain(
+        page?.commercialPriority
+      );
+    }
+  });
+
+  it('builds grouped related paths for the strengthened payment and pricing pages', () => {
+    expect(getRelatedScenarioGroups('ask-for-payment-politely')).toEqual([
+      {
+        id: 'similar',
+        title: 'Similar scenarios',
+        description:
+          'Close variants of this client conversation that need a similar kind of reply.',
+        items: [
+          expect.objectContaining({ slug: 'unpaid-invoice-follow-up' }),
+          expect.objectContaining({ slug: 'payment-overdue-reminder' }),
+        ],
+      },
+      {
+        id: 'next_step',
+        title: 'Next-step scenarios',
+        description:
+          'If the payment issue keeps dragging, these are the next money conversations you are likely to hit.',
+        items: [
+          expect.objectContaining({ slug: 'second-payment-reminder' }),
+          expect.objectContaining({ slug: 'final-payment-reminder' }),
+          expect.objectContaining({ slug: 'payment-extension-request' }),
+        ],
+      },
+    ]);
+
+    expect(getRelatedScenarioGroups('discount-request')).toEqual([
+      {
+        id: 'similar',
+        title: 'Similar scenarios',
+        description:
+          'Close variants of this client conversation that need a similar kind of reply.',
+        items: [
+          expect.objectContaining({ slug: 'same-scope-lower-price' }),
+          expect.objectContaining({ slug: 'lower-rate-after-proposal' }),
+        ],
+      },
+      {
+        id: 'next_step',
+        title: 'Next-step scenarios',
+        description:
+          'If the client keeps pushing on price, these are the next pricing conversations likely to follow.',
+        items: [
+          expect.objectContaining({ slug: 'meet-their-budget' }),
+          expect.objectContaining({ slug: 'out-of-budget-but-interested' }),
+          expect.objectContaining({ slug: 'best-price-before-signing' }),
+        ],
+      },
     ]);
   });
 });

@@ -32,16 +32,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client says your quote is too high',
     h1: 'Client says your quote is too high',
     metaTitle:
-      'Client Says Your Quote Is Too High? What to Say Next | Flowdockr',
+      'Client Says Your Quote Is Too High? Reply Without Discounting Too Fast | Flowdockr',
     metaDescription:
-      'Use this scenario to draft a calm reply when a client says your quote is too high. Protect value, explain the scope, and keep the deal moving without discounting too fast.',
+      'Use this scenario when a client says your quote is too high but has not given you a real budget yet. Get a reply that defends value, explains scope, and avoids a premature discount.',
     previewReply:
-      'Thanks for flagging that. The quote reflects the scope, timeline, and level of work needed to get the result we discussed. If budget is the constraint, I can outline a leaner version so we adjust scope rather than cut the same work blindly.',
+      'Thanks for flagging that. The quote reflects the scope, timeline, and level of work needed to get the result we discussed, so I would want to clarify the constraint before I start moving the number. If budget is the issue, I can outline a leaner version instead of weakening the original scope.',
     heroDescription:
-      'Use this scenario when a client says your quote is too high and you need to protect value without sounding defensive. Get a stronger pricing reply you can adapt and send.',
+      'Use this scenario when a client says your quote is too high, but the pushback is still vague and no real budget has been shared. Get a reply that protects value without sounding defensive.',
     pagePromise:
-      'Generate a value-based reply that explains the price clearly and reopens the conversation without rushing into a discount.',
+      'Generate a price-defense reply that re-anchors value before the negotiation turns into a discount discussion.',
     cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:
@@ -64,11 +67,20 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'If budget is real, offer a smaller version or phased path instead of discounting the same work.',
     relatedScenarioSlugs: [
-      'out-of-budget-but-interested',
       'same-scope-lower-price',
-      'discount-request',
-      'found-someone-cheaper',
+      'lower-rate-after-proposal',
       'meet-their-budget',
+      'out-of-budget-but-interested',
+      'found-someone-cheaper',
+    ],
+    similarScenarioSlugs: [
+      'same-scope-lower-price',
+      'lower-rate-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'out-of-budget-but-interested',
+      'found-someone-cheaper',
     ],
     priority: 'p0',
   }),
@@ -88,6 +100,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a proposal follow-up that restarts the conversation without sounding pushy.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage:
@@ -112,9 +127,18 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'reviewing-internally-no-response',
       'contract-sent-no-response',
-      'no-response-after-rate',
       'client-no-response-follow-up',
       'after-client-ghosted',
+      'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'reviewing-internally-no-response',
+      'contract-sent-no-response',
+    ],
+    nextStepScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+      'no-response-after-rate',
     ],
     priority: 'p0',
   }),
@@ -134,6 +158,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a pricing follow-up that surfaces whether budget, fit, or timing caused the silence.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage: 'What’s your rate for this kind of project?',
@@ -154,10 +181,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Make it easy for the client to reply by giving them a simple decision path.',
     relatedScenarioSlugs: [
-      'no-response-after-proposal',
-      'reviewing-internally-no-response',
       'after-client-ghosted',
       'client-no-response-follow-up',
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
+      'silent-after-discovery-call',
+    ],
+    similarScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+    ],
+    nextStepScenarioSlugs: [
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
       'silent-after-discovery-call',
     ],
     priority: 'p0',
@@ -178,6 +214,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a pricing reply that protects scope integrity and offers a structured alternative.',
     cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'active_negotiation',
     primaryClientMessage:
@@ -201,10 +240,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'If the budget must change, make the client choose what gets reduced, delayed, or moved into a later phase.',
     relatedScenarioSlugs: [
       'quote-too-high',
-      'discount-request',
-      'best-price-before-signing',
-      'meet-their-budget',
       'lower-rate-after-proposal',
+      'meet-their-budget',
+      'best-price-before-signing',
+      'discount-request',
+    ],
+    similarScenarioSlugs: [
+      'quote-too-high',
+      'lower-rate-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'best-price-before-signing',
+      'discount-request',
     ],
     priority: 'p0',
   }),
@@ -296,6 +344,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a final-price reply that keeps the deal moving without training the client to expect a discount.',
     cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'active_negotiation',
     primaryClientMessage:
@@ -416,6 +467,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a review-follow-up that feels professional, patient, and easy to answer.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage:
@@ -440,9 +494,18 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'no-response-after-proposal',
       'contract-sent-no-response',
-      'no-response-after-rate',
       'client-no-response-follow-up',
       'after-client-ghosted',
+      'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'no-response-after-proposal',
+      'contract-sent-no-response',
+    ],
+    nextStepScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+      'no-response-after-rate',
     ],
     priority: 'p0',
   }),
@@ -462,6 +525,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a contract follow-up that surfaces blockers and moves the deal toward a decision.',
     cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'contract_terms',
     primaryClientMessage: 'Please send over the contract and we’ll review.',
@@ -485,9 +551,18 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'reviewing-internally-no-response',
       'no-response-after-proposal',
+      'after-client-ghosted',
       'client-no-response-follow-up',
       'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'reviewing-internally-no-response',
+      'no-response-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
       'after-client-ghosted',
+      'client-no-response-follow-up',
+      'no-response-after-rate',
     ],
     priority: 'p1',
   }),
@@ -507,6 +582,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a clear payment follow-up that asks for a date, surfaces blockers, and keeps the message professional.',
     cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     relatedSectionTitle: 'More client payment scripts',
     relatedSectionDescription:
       'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
@@ -531,11 +609,20 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Ask for a concrete payment date or blocking issue instead of sending another vague reminder.',
     relatedScenarioSlugs: [
-      'ask-for-payment-politely',
       'unpaid-invoice-follow-up',
       'payment-overdue-reminder',
       'second-payment-reminder',
       'final-payment-reminder',
+      'ask-for-payment-politely',
+    ],
+    similarScenarioSlugs: [
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
+    ],
+    nextStepScenarioSlugs: [
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'ask-for-payment-politely',
     ],
     priority: 'p1',
   }),
@@ -548,6 +635,10 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Wants More Revisions Than Agreed | Flowdockr',
     metaDescription:
       'Use this scenario when a client wants more revisions than agreed. Enforce the revision boundary and offer a paid path forward.',
+    cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage:
@@ -703,6 +794,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a budget-response reply that protects your pricing logic while offering a credible path forward.',
     cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:
@@ -749,6 +843,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     pagePromise:
       'Generate a one-more-page reply that protects scope without making the project relationship tense.',
     cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'pre_kickoff',
     primaryClientMessage:

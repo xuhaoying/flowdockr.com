@@ -36,6 +36,18 @@ export const scenarioLinkClusterValues = [
   'scope',
   'client_management',
 ] as const;
+export const scenarioIntentTierValues = ['core', 'supporting'] as const;
+export const scenarioValueIntentValues = [
+  'money',
+  'boundary',
+  'followup',
+  'soft',
+] as const;
+export const scenarioCommercialPriorityValues = [
+  'high',
+  'medium',
+  'low',
+] as const;
 
 export type ScenarioArchetype = (typeof scenarioArchetypeValues)[number];
 export type NegotiationStage = (typeof negotiationStageValues)[number];
@@ -44,6 +56,10 @@ export type ScenarioStatus = (typeof scenarioStatusValues)[number];
 export type ScenarioPriority = (typeof scenarioPriorityValues)[number];
 export type ScenarioLinkCluster =
   (typeof scenarioLinkClusterValues)[number];
+export type ScenarioIntentTier = (typeof scenarioIntentTierValues)[number];
+export type ScenarioValueIntent = (typeof scenarioValueIntentValues)[number];
+export type ScenarioCommercialPriority =
+  (typeof scenarioCommercialPriorityValues)[number];
 
 export type CanonicalScenario = {
   id: string;
@@ -70,6 +86,11 @@ export type CanonicalScenario = {
   strategySecondary?: string;
   toolPromptIntent: string;
   relatedScenarioSlugs?: string[];
+  similarScenarioSlugs?: string[];
+  nextStepScenarioSlugs?: string[];
+  intentTier?: ScenarioIntentTier;
+  valueIntent?: ScenarioValueIntent;
+  commercialPriority?: ScenarioCommercialPriority;
   isPriority?: boolean;
   sourceType: ScenarioSourceType;
   sourceNote: string;
@@ -82,4 +103,11 @@ export type ScenarioRelatedLink = {
   slug: string;
   title: string;
   description: string;
+};
+
+export type ScenarioRelatedGroup = {
+  id: 'similar' | 'next_step' | 'related';
+  title: string;
+  description: string;
+  items: ScenarioRelatedLink[];
 };
