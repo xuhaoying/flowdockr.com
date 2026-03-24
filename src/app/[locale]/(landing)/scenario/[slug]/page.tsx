@@ -14,9 +14,13 @@ import {
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
   getRelatedScenarioLinks,
+  getRelatedScenarioSectionCopy,
   getScenarioArchetypeLabel,
+  getScenarioHeroDescription,
   getScenarioMetaDescription,
+  getScenarioMetaTitle,
   getScenarioPageBySlug,
+  getScenarioPagePromise,
 } from '@/lib/content/scenarioPages';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
@@ -54,9 +58,9 @@ const LEGACY_SCENARIO_REDIRECTS: Record<string, string> = {
   'delayed-decision': '/scenario/ghosted-after-rate',
   'small-extra-free': '/scenario/extra-work-outside-scope',
   'free-sample-work': '/pricing/free-trial-work-request',
-  'client-delays-payment': '/scenario',
-  'late-payment': '/scenario',
-  'invoice-follow-up': '/scenario',
+  'client-delays-payment': '/scenario/ask-for-payment-politely',
+  'late-payment': '/scenario/final-payment-reminder',
+  'invoice-follow-up': '/scenario/overdue-invoice-no-response',
   'rush-delivery': '/scenario',
   'faster-turnaround': '/scenario',
   'timeline-pressure': '/scenario',
@@ -126,7 +130,7 @@ export async function generateMetadata({
   return buildScenarioPageMetadata({
     page: {
       title: page.title,
-      metaTitle: page.metaTitle,
+      metaTitle: getScenarioMetaTitle(page),
       metaDescription: getScenarioMetaDescription(page),
     },
     canonical,
@@ -151,6 +155,8 @@ export default async function ScenarioPage({
   if (page) {
     const generatorScenario = getGeneratorScenarioBySlug(page.slug);
     const previewReply = page.previewReply || generatorScenario?.exampleReply;
+    const relatedSection = getRelatedScenarioSectionCopy(page);
+    const pagePromise = getScenarioPagePromise(page);
 
     return (
       <>
@@ -163,8 +169,13 @@ export default async function ScenarioPage({
               page.negotiationStage
             )}
             primaryClientMessage={page.primaryClientMessage}
+            description={getScenarioHeroDescription(page)}
+            ctaLabel="Generate a better reply"
           />
-          <ScenarioOverview userSituation={page.userSituation} />
+          <ScenarioOverview
+            userSituation={page.userSituation}
+            replyGoal={page.userGoal || page.strategyPrimary}
+          />
           <ScenarioClientMessages
             primaryClientMessage={page.primaryClientMessage}
             clientMessageVariants={page.clientMessageVariants}
@@ -176,12 +187,20 @@ export default async function ScenarioPage({
           <ScenarioInlineTool
             analyticsScenarioSlug={page.slug}
             defaultScenarioSlug={page.slug}
-            title="Draft a reply for this situation"
-            description={page.userGoal || page.toolPromptIntent}
+            title="Generate a reply you can send"
+            description={pagePromise}
             primaryClientMessage={page.primaryClientMessage}
           />
-          <RelatedScenarios items={getRelatedScenarioLinks(page.slug)} />
-          <ScenarioCTA title={page.h1 || page.title} />
+          <RelatedScenarios
+            items={getRelatedScenarioLinks(page.slug)}
+            title={relatedSection.title}
+            description={relatedSection.description}
+          />
+          <ScenarioCTA
+            title={page.h1 || page.title}
+            description={pagePromise}
+            ctaLabel="Generate a better reply"
+          />
         </PageContainer>
         <ScenarioStickyBottomCta />
       </>

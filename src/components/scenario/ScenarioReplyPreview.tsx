@@ -23,7 +23,7 @@ export function ScenarioReplyPreview({
           Reply preview
         </p>
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          A strong starting reply
+          Preview a stronger reply
         </h2>
       </CardHeader>
 
@@ -36,7 +36,7 @@ export function ScenarioReplyPreview({
 
         <div className="flex flex-col gap-3 border-t border-slate-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-slate-600">
-            Use the generator to adapt this to the exact wording in your thread.
+            Use the generator to tailor this reply to the exact client message.
           </p>
           <Button
             asChild

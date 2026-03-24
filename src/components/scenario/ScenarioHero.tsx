@@ -10,6 +10,8 @@ type ScenarioHeroProps = {
   archetypeLabel: string;
   negotiationStageLabel: string;
   primaryClientMessage: string;
+  description: string;
+  ctaLabel: string;
 };
 
 export function ScenarioHero({
@@ -17,6 +19,8 @@ export function ScenarioHero({
   archetypeLabel,
   negotiationStageLabel,
   primaryClientMessage,
+  description,
+  ctaLabel,
 }: ScenarioHeroProps) {
   return (
     <Card className="border-border/80 overflow-hidden rounded-[24px] bg-white py-0 shadow-sm">
@@ -55,15 +59,14 @@ export function ScenarioHero({
             {title}
           </h1>
           <p className="max-w-3xl text-base leading-7 text-slate-700 md:text-lg">
-            Review the pressure behind this objection, then draft a send-ready
-            reply from the exact client wording.
+            {description}
           </p>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Button asChild size="lg" className="w-full sm:w-auto">
             <a href="#scenario-inline-tool" id="scenario-hero-primary-cta">
-              Draft a reply for this scenario
+              {ctaLabel}
               <ArrowRight className="size-4" />
             </a>
           </Button>

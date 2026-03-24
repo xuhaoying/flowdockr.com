@@ -1,6 +1,9 @@
 import {
   getRelatedScenarioLinks,
   getScenarioMetaDescription,
+  getScenarioMetaTitle,
+  getScenarioHeroDescription,
+  getScenarioPagePromise,
   scenarioPages,
 } from '@/content/scenario-pages';
 import type {
@@ -105,11 +108,11 @@ function buildGeneratorScenario(page: CanonicalScenario): Scenario {
     slug: page.slug,
     category: categoryByArchetype[page.archetype],
     title: pageHeading,
-    seoTitle: page.metaTitle || `${page.title} | Flowdockr`,
+    seoTitle: getScenarioMetaTitle(page),
     metaDescription: getScenarioMetaDescription(page),
     h1: pageHeading,
-    heroIntro: `${page.userSituation} ${page.userGoal || page.strategyPrimary}`,
-    shortDescription: page.userSituation,
+    heroIntro: getScenarioHeroDescription(page),
+    shortDescription: page.pagePromise || page.userSituation,
     problemText: [
       page.userSituation,
       `Typical client wording includes: ${page.clientMessageVariants.join(' / ')}`,
@@ -124,7 +127,7 @@ function buildGeneratorScenario(page: CanonicalScenario): Scenario {
     relatedSlugs,
     promptContext: buildPromptContext(page),
     riskLevel: riskByArchetype[page.archetype],
-    primaryGoal: page.userGoal || page.strategyPrimary,
+    primaryGoal: getScenarioPagePromise(page),
     avoid,
     preferredMoves,
     toneProfile: toneByArchetype[page.archetype],

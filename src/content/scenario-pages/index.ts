@@ -3,6 +3,7 @@ import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1'
 import type {
   CanonicalScenario,
   ScenarioArchetype,
+  ScenarioLinkCluster,
   ScenarioRelatedLink,
 } from '@/types/scenario-catalog';
 
@@ -10,13 +11,6 @@ export const scenarioPages: CanonicalScenario[] = mergeScenarioPages(
   scenarioDatasetV1,
   canonicalScenarioSeeds
 );
-
-type ScenarioLinkCluster =
-  | 'pricing'
-  | 'ghosting'
-  | 'payment'
-  | 'scope'
-  | 'client_management';
 
 const scenarioPageMap = new Map<string, CanonicalScenario>(
   scenarioPages.map((page) => [page.slug, page])
@@ -85,20 +79,107 @@ export function getNegotiationStageLabel(
 export function getScenarioMetaDescription(
   scenario: Pick<
     CanonicalScenario,
-    'title' | 'userSituation' | 'primaryClientMessage' | 'metaDescription'
+    'userSituation' | 'userGoal' | 'metaDescription'
   >
 ): string {
   if (scenario.metaDescription?.trim()) {
     return scenario.metaDescription.trim();
   }
 
-  const description = `${scenario.title}. ${scenario.userSituation} Typical client message: ${scenario.primaryClientMessage}`;
+  const description = [
+    scenario.userSituation.trim(),
+    scenario.userGoal?.trim() || 'Get a professional reply you can adapt and send.',
+  ].join(' ');
 
   if (description.length <= 155) {
     return description;
   }
 
   return `${description.slice(0, 152).trimEnd()}...`;
+}
+
+export function getScenarioMetaTitle(
+  scenario: Pick<CanonicalScenario, 'title' | 'metaTitle'>
+): string {
+  return scenario.metaTitle?.trim() || `${scenario.title} | Flowdockr`;
+}
+
+export function getScenarioHeroDescription(
+  scenario: Pick<
+    CanonicalScenario,
+    'heroDescription' | 'userSituation' | 'userGoal' | 'strategyPrimary'
+  >
+): string {
+  if (scenario.heroDescription?.trim()) {
+    return scenario.heroDescription.trim();
+  }
+
+  return `${scenario.userSituation} Get a professional reply you can adapt and send.`;
+}
+
+export function getScenarioPagePromise(
+  scenario: Pick<CanonicalScenario, 'pagePromise' | 'userGoal' | 'toolPromptIntent'>
+): string {
+  return (
+    scenario.pagePromise?.trim() ||
+    scenario.userGoal?.trim() ||
+    scenario.toolPromptIntent.trim()
+  );
+}
+
+export function getRelatedScenarioSectionCopy(
+  scenario: Pick<
+    CanonicalScenario,
+    'cluster' | 'archetype' | 'relatedSectionTitle' | 'relatedSectionDescription'
+  >
+): {
+  title: string;
+  description: string;
+} {
+  if (
+    scenario.relatedSectionTitle?.trim() &&
+    scenario.relatedSectionDescription?.trim()
+  ) {
+    return {
+      title: scenario.relatedSectionTitle.trim(),
+      description: scenario.relatedSectionDescription.trim(),
+    };
+  }
+
+  const cluster = getScenarioLinkCluster(scenario);
+
+  switch (cluster) {
+    case 'payment':
+      return {
+        title: 'More client payment scripts',
+        description:
+          'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
+      };
+    case 'pricing':
+      return {
+        title: 'Related pricing scenarios',
+        description:
+          'More client replies for rate objections, discount requests, and budget pushback.',
+      };
+    case 'scope':
+      return {
+        title: 'Related boundary-setting scenarios',
+        description:
+          'Similar scripts for revisions, extra work, scope creep, and changing deliverables.',
+      };
+    case 'ghosting':
+      return {
+        title: 'Related follow-up scenarios',
+        description:
+          'More client no-response, delayed decision, and proposal follow-up conversations.',
+      };
+    case 'client_management':
+      return {
+        title: 'Related client communication scenarios',
+        description:
+          'More expectation-setting and difficult client conversation templates.',
+      };
+  }
 }
 
 export function getRelatedScenarioLinks(
@@ -255,8 +336,12 @@ type RelatedScenarioCandidate = {
 };
 
 function getScenarioLinkCluster(
-  scenario: Pick<CanonicalScenario, 'archetype'>
+  scenario: Pick<CanonicalScenario, 'archetype' | 'cluster'>
 ): ScenarioLinkCluster {
+  if (scenario.cluster) {
+    return scenario.cluster;
+  }
+
   if (
     scenario.archetype === 'pricing_objection' ||
     scenario.archetype === 'price_comparison' ||

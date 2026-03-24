@@ -4,8 +4,12 @@ export {
   getNegotiationStageLabel,
   getPopularScenarioPages,
   getRelatedScenarioLinks,
+  getRelatedScenarioSectionCopy,
   getScenarioArchetypeLabel,
+  getScenarioHeroDescription,
   getScenarioPageBySlug,
   getScenarioMetaDescription,
+  getScenarioMetaTitle,
+  getScenarioPagePromise,
   scenarioPages,
 } from '@/content/scenario-pages';

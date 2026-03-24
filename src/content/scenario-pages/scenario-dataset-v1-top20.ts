@@ -31,9 +31,17 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'quote-too-high',
     title: 'Client says your quote is too high',
     h1: 'Client says your quote is too high',
-    metaTitle: 'Client Says Your Quote Is Too High: How to Respond | Flowdockr',
+    metaTitle:
+      'Client Says Your Quote Is Too High? What to Say Next | Flowdockr',
     metaDescription:
-      'Use this scenario when a client says your quote is too high after seeing your proposal. Protect value, reframe scope, and keep the deal moving.',
+      'Use this scenario to draft a calm reply when a client says your quote is too high. Protect value, explain the scope, and keep the deal moving without discounting too fast.',
+    previewReply:
+      'Thanks for flagging that. The quote reflects the scope, timeline, and level of work needed to get the result we discussed. If budget is the constraint, I can outline a leaner version so we adjust scope rather than cut the same work blindly.',
+    heroDescription:
+      'Use this scenario when a client says your quote is too high and you need to protect value without sounding defensive. Get a stronger pricing reply you can adapt and send.',
+    pagePromise:
+      'Generate a value-based reply that explains the price clearly and reopens the conversation without rushing into a discount.',
+    cluster: 'pricing',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:
@@ -433,9 +441,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client has not paid the invoice and stopped replying',
     h1: 'Client has not paid the invoice and stopped replying',
     metaTitle:
-      'Client Has Not Paid the Invoice and Stopped Replying | Flowdockr',
+      'Client Not Paying the Invoice? What to Say Next | Flowdockr',
     metaDescription:
-      'Use this scenario when a client has not paid the invoice and stopped replying. Push for payment while keeping the message professional.',
+      'Use this scenario to write an overdue invoice follow-up when a client stopped replying. Ask for a payment date clearly without sounding vague, awkward, or hostile.',
+    previewReply:
+      'Hi [Name] — following up on invoice [number], which is now overdue. Please let me know the payment date on your side, or tell me if anything is blocking it so we can close it out quickly.',
+    heroDescription:
+      'Use this scenario when a client is late paying and the thread has gone quiet. Get a professional overdue invoice follow-up you can send without sounding rude.',
+    pagePromise:
+      'Generate a clear payment follow-up that asks for a date, surfaces blockers, and keeps the message professional.',
+    cluster: 'payment',
+    relatedSectionTitle: 'More client payment scripts',
+    relatedSectionDescription:
+      'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Got it, thanks. We’ll process this.',
@@ -457,9 +475,9 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Ask for a concrete payment date or blocking issue instead of sending another vague reminder.',
     relatedScenarioSlugs: [
-      'contract-sent-no-response',
-      'post-project-support-request',
-      'reviewing-internally-no-response',
+      'ask-for-payment-politely',
+      'final-payment-reminder',
+      'start-before-payment',
     ],
     priority: 'p1',
   }),
@@ -617,9 +635,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client says it is out of budget but still interested',
     h1: 'Client says it is out of budget but still interested',
     metaTitle:
-      'Client Says It Is Out of Budget but Still Interested | Flowdockr',
+      'Out of Budget but Still Interested? What to Say | Flowdockr',
     metaDescription:
-      'Use this scenario when a client says they want to work with you but your price is out of budget. Keep the deal alive without discounting the same scope.',
+      'Use this scenario to reply when a client says they want to work with you but the current proposal is out of budget. Keep the deal alive without shrinking the same scope into a weaker price.',
+    previewReply:
+      'I appreciate that, and I\'m glad there\'s real interest here. Rather than reduce the same scope and weaken the result, the better move is to look at a smaller first phase or a leaner version that fits the budget more cleanly.',
+    heroDescription:
+      'Use this scenario when the client wants to move forward, but the current proposal is out of budget. Get a reply that keeps momentum without defaulting to a discount.',
+    pagePromise:
+      'Generate a budget-response reply that protects your pricing logic while offering a credible path forward.',
+    cluster: 'pricing',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:

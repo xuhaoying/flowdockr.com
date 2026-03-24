@@ -16,6 +16,9 @@ const DIRECT_REDIRECT_CASES = [
   ['no-response-after-contract-sent', 'contract-sent-no-response'],
   ['rate-before-project-details', 'price-before-scope'],
   ['final-price-before-signing', 'best-price-before-signing'],
+  ['client-delays-payment', 'ask-for-payment-politely'],
+  ['late-payment', 'final-payment-reminder'],
+  ['invoice-follow-up', 'overdue-invoice-no-response'],
 ] as const;
 
 describe('legacy scenario redirects', () => {
