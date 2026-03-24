@@ -7,6 +7,7 @@ import { ToolExample } from '@/components/tool/ToolExample';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolHero } from '@/components/tool/ToolHero';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
+import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
 import {
   getDefaultGeneratorScenarioSlug,
@@ -104,6 +105,14 @@ export default async function ToolPage({
       'quote-too-high';
 
   const previewScenario = getGeneratorScenarioBySlug(defaultScenarioSlug);
+  const curatedRelatedScenarioLinks = getToolSurfaceScenarioLinks(
+    tool.slug,
+    tool.relatedScenarios.length
+  );
+  const relatedScenarioLinks =
+    curatedRelatedScenarioLinks.length > 0
+      ? curatedRelatedScenarioLinks
+      : tool.relatedScenarios;
   const clientMessageInput = tool.inputs.find(
     (input) => input.name === 'clientMessage'
   );
@@ -144,7 +153,7 @@ export default async function ToolPage({
       ) : null}
       <ToolBestFor items={tool.bestFor} />
       <ToolUseCases useCases={tool.exampleUseCases} />
-      <RelatedScenarios links={tool.relatedScenarios} />
+      <RelatedScenarios links={relatedScenarioLinks} />
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">
@@ -165,10 +174,10 @@ export default async function ToolPage({
           Back to tools
         </Link>
         <Link
-          href="/pricing/"
+          href="/scenario/"
           className="text-sm font-semibold text-slate-900 underline underline-offset-2"
         >
-          Browse pricing scenarios
+          Browse scenarios
         </Link>
       </section>
     </main>

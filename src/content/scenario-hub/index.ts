@@ -1,9 +1,11 @@
 import {
-  compareScenarioPageExposure,
-  getPopularScenarioPages,
   getScenarioPageBySlug,
   scenarioPages,
 } from '@/content/scenario-pages';
+import {
+  getScenarioHubClusterSurfaceEntries,
+  getScenarioHubPopularSurfaceEntries,
+} from '@/content/scenario-pages/surfaces';
 import type {
   ScenarioHubCluster,
   ScenarioHubData,
@@ -51,63 +53,57 @@ const clusters: ScenarioHubCluster[] = [
     'pricing-objection',
     'Pricing objection',
     'When the client reacts to your quote with direct budget or value pushback.',
-    scenarioPages
-      .filter((page) => page.archetype === 'pricing_objection')
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter((page) => page.archetype === 'pricing_objection')
+    ).map((page) => page.slug)
   ),
   cluster(
     'price-comparison',
     'Price comparison',
     'When the client brings up cheaper options or tries to force a rate match.',
-    scenarioPages
-      .filter((page) => page.archetype === 'price_comparison')
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter((page) => page.archetype === 'price_comparison')
+    ).map((page) => page.slug)
   ),
   cluster(
     'pricing-probe',
     'Early pricing probe',
     'When the client wants numbers before the project is scoped well enough to quote cleanly.',
-    scenarioPages
-      .filter((page) => page.archetype === 'pricing_probe')
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter((page) => page.archetype === 'pricing_probe')
+    ).map((page) => page.slug)
   ),
   cluster(
     'scope-control',
     'Scope and revision control',
     'When the work, revision policy, or effort assumptions start to drift.',
-    scenarioPages
-      .filter((page) => page.archetype === 'scope_control')
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter((page) => page.archetype === 'scope_control')
+    ).map((page) => page.slug)
   ),
   cluster(
     'deal-protection',
     'Payment and contract protection',
     'When the client wants a stronger commitment than the current payment or contract terms support.',
-    scenarioPages
-      .filter(
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter(
         (page) =>
           page.archetype === 'payment_protection' ||
           page.archetype === 'contract_terms'
       )
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    ).map((page) => page.slug)
   ),
   cluster(
     'momentum-and-expectations',
     'Momentum and expectation management',
     'When the deal stalls after pricing or the client asks for promises you should not make.',
-    scenarioPages
-      .filter(
+    getScenarioHubClusterSurfaceEntries(
+      scenarioPages.filter(
         (page) =>
           page.archetype === 'follow_up' ||
           page.archetype === 'expectation_management'
       )
-      .sort(compareScenarioPageExposure)
-      .map((page) => page.slug)
+    ).map((page) => page.slug)
   ),
 ];
 
@@ -151,8 +147,8 @@ export const scenarioHubData: ScenarioHubData = {
     },
   ],
   clusters,
-  popularScenarios: getPopularScenarioPages(8)
-    .map((page) => scenario(page.slug, summarize(page.userSituation))),
+  popularScenarios: getScenarioHubPopularSurfaceEntries(8)
+    .map((page) => scenario(page.slug, summarize(page.description || ''))),
   why: {
     title: 'Why scenario-based guidance works',
     paragraphs: [

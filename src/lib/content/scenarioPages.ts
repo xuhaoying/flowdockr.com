@@ -17,3 +17,13 @@ export {
   getScenarioPagePromise,
   scenarioPages,
 } from '@/content/scenario-pages';
+
+export {
+  getHomepageScenarioSurfaceGroups,
+  getScenarioHubClusterSurfaceEntries,
+  getScenarioHubClusterSurfacePages,
+  getScenarioHubPopularSurfaceEntries,
+  getToolSurfaceScenarioEntries,
+  getToolSurfaceScenarioLinks,
+  getToolsIndexScenarioSurfaceEntries,
+} from '@/content/scenario-pages/surfaces';
