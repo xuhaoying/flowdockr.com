@@ -39,9 +39,8 @@ export function PricingScenarioInlineTool({
             {scenario.toolCta.title}
           </h2>
           <p className="text-sm leading-relaxed text-slate-700">
-            {scenario.toolCta.body} Start with the exact message, add your quote
-            or scope context, choose the tone, and generate without leaving this
-            scenario page.
+            {scenario.toolCta.body} Start with the exact message and generate
+            without leaving this scenario page.
           </p>
         </div>
       </div>
@@ -56,7 +55,7 @@ export function PricingScenarioInlineTool({
           'Paste the exact prospect message that pushed back on price...'
         }
         workspaceTitle="Start with the real client message"
-        workspaceDescription="Paste the prospect's wording, add your quote or scope context, and generate a reply tuned for this pricing situation."
+        workspaceDescription="Paste the prospect's wording and generate a reply tuned for this pricing situation."
         submitLabel={scenario.toolCta.buttonLabel}
       />
 

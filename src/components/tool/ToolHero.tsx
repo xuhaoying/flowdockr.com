@@ -4,7 +4,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 
 type ToolHeroProps = {
-  tool: Pick<ToolPageData, 'h1' | 'heroSubheading' | 'intro'>;
+  tool: Pick<ToolPageData, 'h1' | 'heroSubheading'>;
 };
 
 export function ToolHero({ tool }: ToolHeroProps) {
@@ -17,9 +17,6 @@ export function ToolHero({ tool }: ToolHeroProps) {
           </h1>
           <p className="max-w-4xl text-base leading-7 text-slate-700">
             {tool.heroSubheading}
-          </p>
-          <p className="max-w-4xl text-sm leading-6 text-slate-700">
-            {tool.intro}
           </p>
         </div>
 

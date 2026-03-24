@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  scenarioDatasetV1,
-  scenarioDatasetV1Top20,
-} from '@/content/scenario-pages/scenario-dataset-v1';
+  getScenarioDistributionPriority,
+  getScenarioPageBySlug,
+} from '@/content/scenario-pages';
+import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
 
 import { scenarioHubData } from './index';
 
@@ -20,13 +21,15 @@ describe('scenario hub launch surface', () => {
     }
   });
 
-  it('uses the top20 dataset as the prioritized popular scenario entry point', () => {
-    const top20Slugs = new Set(scenarioDatasetV1Top20.map((page) => page.slug));
-
+  it('uses primary attack pages as the prioritized popular scenario entry point', () => {
     expect(scenarioHubData.popularScenarios).toHaveLength(8);
 
     for (const scenario of scenarioHubData.popularScenarios) {
-      expect(top20Slugs.has(scenario.slug)).toBe(true);
+      const page = getScenarioPageBySlug(scenario.slug);
+
+      expect(page).toBeTruthy();
+      expect(getScenarioDistributionPriority(page!)).toBe('primary');
+      expect(page?.clusterCore).toBe(true);
     }
   });
 });

@@ -1,10 +1,12 @@
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
-import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
+import {
+  getToolSurfaceScenarioLinks,
+  getToolsIndexScenarioSurfaceEntries,
+} from '@/lib/content/scenarioPages';
 import { getAllTools } from '@/lib/content/getToolBySlug';
 import { getMetadata } from '@/shared/lib/seo';
-import type { ScenarioPageData } from '@/types/content';
 
 export const generateMetadata = getMetadata({
   title: 'Negotiation Tools | Flowdockr',
@@ -12,13 +14,6 @@ export const generateMetadata = getMetadata({
     'Use pricing-focused negotiation tools to draft client replies and move deal conversations forward.',
   canonicalUrl: '/tools',
 });
-
-const STARTING_SCENARIO_SLUGS = [
-  'price-pushback-after-proposal',
-  'discount-pressure-before-signing',
-  'budget-lower-than-expected',
-  'cheaper-competitor-comparison',
-] as const;
 
 export default async function ToolsPage({
   params,
@@ -29,10 +24,7 @@ export default async function ToolsPage({
   setRequestLocale(locale);
 
   const tools = getAllTools();
-  const scenariosBySlug = new Map(getAllScenarios().map((scenario) => [scenario.slug, scenario]));
-  const startingScenarios = STARTING_SCENARIO_SLUGS
-    .map((slug) => scenariosBySlug.get(slug))
-    .filter((scenario): scenario is ScenarioPageData => Boolean(scenario));
+  const startingScenarios = getToolsIndexScenarioSurfaceEntries(4);
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -52,10 +44,10 @@ export default async function ToolsPage({
             Open pricing reply workspace
           </Link>
           <Link
-            href="/pricing"
+            href="/scenario"
             className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-semibold text-slate-900"
           >
-            Choose a pricing situation first
+            Choose a scenario first
           </Link>
         </div>
       </section>
@@ -87,8 +79,8 @@ export default async function ToolsPage({
           <p className="mt-2 text-sm text-slate-700">
             Tool definitions are temporarily unavailable. Use pricing scenarios to keep moving.
           </p>
-          <Link href="/pricing" className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
-            Open pricing scenarios
+          <Link href="/scenario" className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
+            Open scenarios
           </Link>
         </section>
       ) : (
@@ -114,7 +106,7 @@ export default async function ToolsPage({
                 Linked situations
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {tool.relatedScenarios.slice(0, 3).map((link) => (
+                {getToolSurfaceScenarioLinks(tool.slug, 3).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -139,16 +131,16 @@ export default async function ToolsPage({
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">Need scenario context first?</h2>
         <p className="text-sm text-slate-700">
-          Start in the pricing console to pick the right decision path before generating a reply.
+          Start in the scenario library to open the closest client situation before generating a reply.
         </p>
         <div className="grid gap-2 md:grid-cols-2">
           {startingScenarios.map((scenario) => (
             <Link
               key={scenario.slug}
-              href={scenario.url}
+              href={scenario.href}
               className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm font-semibold text-slate-900 transition-colors hover:border-slate-400"
             >
-              {scenario.h1}
+              {scenario.title}
             </Link>
           ))}
         </div>

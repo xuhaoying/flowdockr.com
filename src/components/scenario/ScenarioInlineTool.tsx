@@ -40,9 +40,9 @@ export function ScenarioInlineTool({
           defaultScenarioSlug={defaultScenarioSlug}
           showScenarioSelector={false}
           placeholder={`Paste the exact version of "${primaryClientMessage}" or the closest message from the thread...`}
-          submitLabel="Draft reply"
+          submitLabel="Generate reply"
           workspaceTitle="Client message"
-          workspaceDescription="Paste the exact wording from the conversation and review the suggested approach before you reply."
+          workspaceDescription="Paste the exact wording from the conversation and generate a stronger reply you can edit before sending."
         />
       </CardContent>
     </Card>

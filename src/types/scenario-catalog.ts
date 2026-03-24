@@ -29,12 +29,44 @@ export const scenarioSourceTypeValues = [
 
 export const scenarioStatusValues = ['draft', 'ready', 'published'] as const;
 export const scenarioPriorityValues = ['p0', 'p1', 'p2'] as const;
+export const scenarioLinkClusterValues = [
+  'pricing',
+  'ghosting',
+  'payment',
+  'scope',
+  'client_management',
+] as const;
+export const scenarioIntentTierValues = ['core', 'supporting'] as const;
+export const scenarioValueIntentValues = [
+  'money',
+  'boundary',
+  'followup',
+  'soft',
+] as const;
+export const scenarioCommercialPriorityValues = [
+  'high',
+  'medium',
+  'low',
+] as const;
+export const scenarioDistributionPriorityValues = [
+  'primary',
+  'secondary',
+  'monitor',
+] as const;
 
 export type ScenarioArchetype = (typeof scenarioArchetypeValues)[number];
 export type NegotiationStage = (typeof negotiationStageValues)[number];
 export type ScenarioSourceType = (typeof scenarioSourceTypeValues)[number];
 export type ScenarioStatus = (typeof scenarioStatusValues)[number];
 export type ScenarioPriority = (typeof scenarioPriorityValues)[number];
+export type ScenarioLinkCluster =
+  (typeof scenarioLinkClusterValues)[number];
+export type ScenarioIntentTier = (typeof scenarioIntentTierValues)[number];
+export type ScenarioValueIntent = (typeof scenarioValueIntentValues)[number];
+export type ScenarioCommercialPriority =
+  (typeof scenarioCommercialPriorityValues)[number];
+export type ScenarioDistributionPriority =
+  (typeof scenarioDistributionPriorityValues)[number];
 
 export type CanonicalScenario = {
   id: string;
@@ -43,6 +75,12 @@ export type CanonicalScenario = {
   h1?: string;
   metaTitle?: string;
   metaDescription?: string;
+  previewReply?: string;
+  heroDescription?: string;
+  pagePromise?: string;
+  cluster?: ScenarioLinkCluster;
+  relatedSectionTitle?: string;
+  relatedSectionDescription?: string;
   archetype: ScenarioArchetype;
   negotiationStage: NegotiationStage;
   primaryClientMessage: string;
@@ -55,6 +93,13 @@ export type CanonicalScenario = {
   strategySecondary?: string;
   toolPromptIntent: string;
   relatedScenarioSlugs?: string[];
+  similarScenarioSlugs?: string[];
+  nextStepScenarioSlugs?: string[];
+  intentTier?: ScenarioIntentTier;
+  valueIntent?: ScenarioValueIntent;
+  commercialPriority?: ScenarioCommercialPriority;
+  distributionPriority?: ScenarioDistributionPriority;
+  clusterCore?: boolean;
   isPriority?: boolean;
   sourceType: ScenarioSourceType;
   sourceNote: string;
@@ -67,4 +112,11 @@ export type ScenarioRelatedLink = {
   slug: string;
   title: string;
   description: string;
+};
+
+export type ScenarioRelatedGroup = {
+  id: 'similar' | 'next_step' | 'related';
+  title: string;
+  description: string;
+  items: ScenarioRelatedLink[];
 };

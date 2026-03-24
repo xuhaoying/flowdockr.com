@@ -8,6 +8,7 @@ import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolHero } from '@/components/tool/ToolHero';
 import { ToolInputPreview } from '@/components/tool/ToolInputPreview';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
+import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
 import {
   getDefaultGeneratorScenarioSlug,
@@ -105,6 +106,14 @@ export default async function ToolPage({
       'quote-too-high';
 
   const previewScenario = getGeneratorScenarioBySlug(defaultScenarioSlug);
+  const curatedRelatedScenarioLinks = getToolSurfaceScenarioLinks(
+    tool.slug,
+    tool.relatedScenarios.length
+  );
+  const relatedScenarioLinks =
+    curatedRelatedScenarioLinks.length > 0
+      ? curatedRelatedScenarioLinks
+      : tool.relatedScenarios;
   const clientMessageInput = tool.inputs.find(
     (input) => input.name === 'clientMessage'
   );
@@ -112,7 +121,6 @@ export default async function ToolPage({
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <ToolHero tool={tool} />
-      <ToolBestFor items={tool.bestFor} />
 
       {pricingScenario ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
@@ -128,8 +136,8 @@ export default async function ToolPage({
           Paste the message now
         </h2>
         <p className="text-sm text-slate-700">
-          Add the exact client message, choose the situation, and generate a
-          draft built for negotiation outcomes instead of generic AI tone.
+          Paste the exact client message and generate a draft built for the
+          pressure in the conversation.
         </p>
       </section>
 
@@ -137,16 +145,17 @@ export default async function ToolPage({
         analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
-        showScenarioSelector={true}
+        showScenarioSelector={false}
         placeholder={clientMessageInput?.placeholder}
       />
 
       {previewScenario ? (
         <ToolExample scenario={previewScenario} title="Example output" />
       ) : null}
+      <ToolBestFor items={tool.bestFor} />
       <ToolInputPreview inputs={tool.inputs} />
       <ToolUseCases useCases={tool.exampleUseCases} />
-      <RelatedScenarios links={tool.relatedScenarios} />
+      <RelatedScenarios links={relatedScenarioLinks} />
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">
@@ -167,10 +176,10 @@ export default async function ToolPage({
           Back to tools
         </Link>
         <Link
-          href="/pricing/"
+          href="/scenario/"
           className="text-sm font-semibold text-slate-900 underline underline-offset-2"
         >
-          Browse pricing scenarios
+          Browse scenarios
         </Link>
       </section>
     </main>

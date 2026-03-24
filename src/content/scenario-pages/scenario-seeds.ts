@@ -3,6 +3,8 @@ import { canonicalScenarioBatchTwo } from '@/content/scenario-pages/scenario-bat
 import type { CanonicalScenario } from '@/types/scenario-catalog';
 
 export const canonicalScenarioSeeds: CanonicalScenario[] = [
+  ...canonicalScenarioBatchOne,
+  ...canonicalScenarioBatchTwo,
   {
     id: 'scn_quote_too_high',
     title: 'Client says your quote is too high',
@@ -145,6 +147,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     id: 'scn_discount_request',
     title: 'Client asks for a discount',
     slug: 'discount-request',
+    metaTitle:
+      'How to Respond When a Client Asks for a Discount (Without Weakening Your Rate) | Flowdockr',
+    metaDescription:
+      'Use this scenario when a client asks for a discount before committing. Get a reply that protects your rate, slows the concession, and gives you cleaner tradeoff language you can send.',
+    previewReply:
+      'I\'m open to finding a structure that works, but I do not usually reduce the same scope without changing something real behind it. If budget is the issue, we can look at priorities, timing, or a smaller first phase rather than discount the full version by default.',
+    heroDescription:
+      'Use this scenario when a client asks for a discount and you need to stay cooperative without teaching them that your rate is flexible on command. Get a reply you can adapt and send.',
+    pagePromise:
+      'Generate a discount reply that protects margin, slows the concession, and keeps you in control of the negotiation.',
+    cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
     archetype: 'pricing_objection',
     negotiationStage: 'active_negotiation',
     primaryClientMessage: 'Can you give us a discount?',
@@ -161,6 +179,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Keep the base rate intact and make any concession conditional on a real tradeoff such as scope, commitment speed, or a defined long-term arrangement.',
     strategySecondary:
       'If the client promises future work, convert that into a concrete retainer, package, or volume commitment instead of accepting a vague discount request.',
+    relatedScenarioSlugs: [
+      'same-scope-lower-price',
+      'lower-rate-after-proposal',
+      'meet-their-budget',
+      'out-of-budget-but-interested',
+      'best-price-before-signing',
+    ],
+    similarScenarioSlugs: [
+      'same-scope-lower-price',
+      'lower-rate-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'out-of-budget-but-interested',
+      'best-price-before-signing',
+    ],
     toolPromptIntent:
       'Draft a confident response when a client asks for a discount. Protect the base rate, stay cooperative, and offer structured alternatives instead of an unearned price cut.',
     sourceType: 'synthesized',
@@ -431,6 +465,20 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     id: 'scn_extra_work_outside_scope',
     title: 'Client asks for extra work outside the agreed scope',
     slug: 'extra-work-outside-scope',
+    metaTitle:
+      'Client Asks for Extra Work Outside Scope | Flowdockr',
+    metaDescription:
+      'Use this scenario when a client adds work that was never in the agreement. Draw a clean scope boundary and offer structured next-step options you can actually send.',
+    previewReply:
+      'Happy to look at that. Since it falls outside the scope we agreed, the cleanest next step is to add it as a separate item, swap it against something already included, or queue it for a later phase.',
+    heroDescription:
+      'Use this scenario when a client adds work that was not part of the agreed scope and treats it like a normal extension of the project. Get a boundary-setting reply that stays calm and practical.',
+    pagePromise:
+      'Generate an outside-scope reply that names the change clearly and gives the client structured options.',
+    cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Can you also add this?',
@@ -443,6 +491,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Separate the new request from the original agreement and make the client choose between extra budget, reduced scope elsewhere, or a later phase.',
     strategySecondary:
       'If you make a small courtesy exception, name it as one-time so it does not reset the baseline.',
+    relatedScenarioSlugs: [
+      'out-of-scope-professionally',
+      'extra-work-for-free',
+      'scope-creep-polite-response',
+      'extra-page-request',
+      'changing-requirements-response',
+    ],
+    similarScenarioSlugs: [
+      'out-of-scope-professionally',
+      'extra-work-for-free',
+    ],
+    nextStepScenarioSlugs: [
+      'scope-creep-polite-response',
+      'extra-page-request',
+      'changing-requirements-response',
+    ],
     toolPromptIntent:
       'Draft a professional reply when a client asks for extra work outside the agreed scope. Clarify the boundary and offer structured options instead of absorbing the request silently.',
     sourceType: 'community_discussion',
@@ -456,6 +520,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     id: 'scn_unlimited_revisions',
     title: 'Client asks for unlimited revisions',
     slug: 'unlimited-revisions',
+    metaTitle:
+      'Client Wants Unlimited Revisions? Set the Boundary Clearly | Flowdockr',
+    metaDescription:
+      'Use this scenario when a client asks for unlimited revisions. Set a firm revision boundary, explain why it matters, and offer a paid path forward without sounding rigid.',
+    previewReply:
+      'I do not work on an unlimited revisions basis because it makes approvals, timeline, and scope hard to manage well. The cleaner approach is to keep a defined revision cap and add extra rounds only if you decide you need them.',
+    heroDescription:
+      'Use this scenario when a client pushes for unlimited revisions and you need a boundary that protects decision-making, timeline, and scope without sounding inflexible. Get a revision-policy reply you can send.',
+    pagePromise:
+      'Generate a revision-policy reply that protects the project from open-ended changes.',
+    cluster: 'scope',
+    intentTier: 'core',
+    valueIntent: 'boundary',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
     archetype: 'scope_control',
     negotiationStage: 'contract_terms',
     primaryClientMessage: 'Can we do unlimited revisions?',
@@ -468,6 +548,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Set a revision boundary that protects quality, timeline, and decision-making.',
     strategySecondary:
       'If they need more flexibility, convert it into a paid revision policy, support package, or change-order structure.',
+    relatedScenarioSlugs: [
+      'extra-revision-rounds',
+      'extra-work-for-free',
+      'scope-creep-polite-response',
+      'changing-requirements-response',
+      'out-of-scope-professionally',
+    ],
+    similarScenarioSlugs: [
+      'extra-revision-rounds',
+      'extra-work-for-free',
+    ],
+    nextStepScenarioSlugs: [
+      'scope-creep-polite-response',
+      'changing-requirements-response',
+      'out-of-scope-professionally',
+    ],
     toolPromptIntent:
       'Write a clear reply when a client asks for unlimited revisions. Keep the tone professional and explain the revision boundary without sounding inflexible.',
     sourceType: 'community_discussion',
@@ -506,6 +602,25 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     id: 'scn_start_before_payment',
     title: 'Client asks you to start work before payment',
     slug: 'start-before-payment',
+    metaTitle:
+      'Client Wants You to Start Before Payment? What to Say | Flowdockr',
+    metaDescription:
+      'Use this scenario when a client asks you to begin before the deposit is paid. Hold the pre-kickoff boundary clearly and show the fastest proper next step.',
+    previewReply:
+      'I\'m happy to reserve the time, but I start once the deposit and kickoff step are in place. As soon as those are handled, I can begin right away and the project stays protected on both sides.',
+    heroDescription:
+      'Use this scenario when a client wants you to begin immediately, but the deposit or kickoff step is still open. Get wording that holds the boundary without killing momentum.',
+    pagePromise:
+      'Generate a pre-kickoff payment reply that keeps work tied to deposit completion.',
+    cluster: 'payment',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
+    relatedSectionTitle: 'More client payment scripts',
+    relatedSectionDescription:
+      'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
     archetype: 'payment_protection',
     negotiationStage: 'pre_kickoff',
     primaryClientMessage: "Can you start now and we'll handle payment later?",
@@ -520,6 +635,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Hold the deposit and kickoff boundary before doing billable work.',
     strategySecondary:
       'If urgency is real, give the client the fastest path to start once payment or contract steps are complete.',
+    relatedScenarioSlugs: [
+      'deposit-not-paid-yet',
+      'pay-later-request',
+      'payment-extension-request',
+      'ask-for-payment-politely',
+      'overdue-invoice-no-response',
+    ],
+    similarScenarioSlugs: [
+      'deposit-not-paid-yet',
+      'pay-later-request',
+    ],
+    nextStepScenarioSlugs: [
+      'payment-extension-request',
+      'ask-for-payment-politely',
+      'overdue-invoice-no-response',
+    ],
     toolPromptIntent:
       'Draft a reply when a client asks you to start work before payment. Keep the tone calm, hold the deposit boundary, and show the next step to begin properly.',
     sourceType: 'community_discussion',
@@ -527,6 +658,141 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Based on raw scenario 25 about clients requesting work before deposit or payment.',
     status: 'ready',
     priority: 'p0',
+    isSeed: true,
+  },
+  {
+    id: 'scn_ask_for_payment_politely',
+    title: 'How to ask a client for payment politely',
+    slug: 'ask-for-payment-politely',
+    h1: 'How to ask a client for payment politely',
+    metaTitle:
+      'How to Ask a Client for Payment Politely (Without Sounding Awkward or Too Soft) | Flowdockr',
+    metaDescription:
+      'Use this scenario to write a polite payment reminder when a client is slow to pay. Get professional wording you can actually send without sounding awkward, apologetic, or too soft.',
+    previewReply:
+      'Hi [Name] — just following up on invoice [number]. I wanted to check whether you have an estimated payment date on your side. If anything is holding it up, let me know and I can help close the loop cleanly.',
+    heroDescription:
+      'Use this scenario when you need to ask for payment clearly, but you do not want the message to sound awkward, emotional, or overly soft. Get a payment follow-up you can adapt and send right away.',
+    pagePromise:
+      'Generate a polite payment follow-up that asks for timing clearly without over-escalating too soon.',
+    cluster: 'payment',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
+    relatedSectionTitle: 'More client payment scripts',
+    relatedSectionDescription:
+      'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
+    archetype: 'payment_protection',
+    negotiationStage: 'in_project',
+    primaryClientMessage:
+      'Sorry for the delay — we should be able to process this soon.',
+    clientMessageVariants: [
+      'Sorry for the delay — we should be able to process this soon.',
+      'We\'re still sorting this on our side.',
+      'Finance is running behind, but we should have this handled shortly.',
+    ],
+    userSituation:
+      'You sent the invoice, payment is taking longer than expected, and you need a clear nudge that does not sound rude or apologetic.',
+    userGoal:
+      'Ask for payment clearly while keeping the tone professional and calm.',
+    searchIntentPrimary: 'how to ask client for payment politely',
+    searchIntentSecondary: 'payment reminder without sounding rude',
+    strategyPrimary:
+      'Keep the reminder short, specific, and centered on the payment date or blocker.',
+    strategySecondary:
+      'Do not apologize for following up or make the ask sound optional.',
+    relatedScenarioSlugs: [
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'payment-extension-request',
+    ],
+    similarScenarioSlugs: [
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
+    ],
+    nextStepScenarioSlugs: [
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'payment-extension-request',
+    ],
+    toolPromptIntent:
+      'Draft a polite but clear payment follow-up when a client is late paying. Ask for the payment date or blocker without sounding awkward.',
+    sourceType: 'synthesized',
+    sourceNote:
+      'SEO seed added for direct payment reminder intent and client-payment cluster coverage.',
+    status: 'ready',
+    priority: 'p0',
+    isSeed: true,
+  },
+  {
+    id: 'scn_final_payment_reminder',
+    title: 'How to send a final payment reminder',
+    slug: 'final-payment-reminder',
+    h1: 'How to send a final payment reminder',
+    metaTitle:
+      'Final Payment Reminder Before You Escalate | Flowdockr',
+    metaDescription:
+      'Use this scenario when earlier reminders failed and you need a final payment message that sets a deadline, asks for a concrete answer, and still sounds professional.',
+    previewReply:
+      'Hi [Name] — this is my final follow-up on invoice [number], which remains overdue. Please confirm the payment date by [day]. If there is a blocker on your side, let me know today so we can close this out cleanly.',
+    heroDescription:
+      'Use this scenario when earlier reminders did not work and you need the last clear nudge before escalating or changing the closeout process. Get a final reminder you can edit and send.',
+    pagePromise:
+      'Generate a final payment reminder that sets a clear response deadline before escalation.',
+    cluster: 'payment',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
+    relatedSectionTitle: 'More client payment scripts',
+    relatedSectionDescription:
+      'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
+    archetype: 'payment_protection',
+    negotiationStage: 'in_project',
+    primaryClientMessage: 'We\'re still sorting this internally.',
+    clientMessageVariants: [
+      'We\'re still sorting this internally.',
+      'I know this is still open — finance has not cleared it yet.',
+      'We haven\'t closed the loop on this payment yet.',
+    ],
+    userSituation:
+      'The invoice is overdue, earlier reminders did not resolve it, and you need a more direct follow-up that asks for a concrete next step.',
+    userGoal:
+      'Escalate the reminder professionally and push for a payment date or resolution.',
+    searchIntentPrimary: 'final payment reminder to client',
+    searchIntentSecondary: 'overdue invoice final notice client',
+    strategyPrimary:
+      'Make the due status, requested payment date, and next step explicit.',
+    strategySecondary:
+      'Keep the tone factual and professional instead of emotional or vague.',
+    relatedScenarioSlugs: [
+      'second-payment-reminder',
+      'payment-overdue-reminder',
+      'pay-later-request',
+      'payment-extension-request',
+      'overdue-invoice-no-response',
+    ],
+    similarScenarioSlugs: [
+      'second-payment-reminder',
+      'payment-overdue-reminder',
+    ],
+    nextStepScenarioSlugs: [
+      'pay-later-request',
+      'payment-extension-request',
+      'overdue-invoice-no-response',
+    ],
+    toolPromptIntent:
+      'Draft a final payment reminder for an overdue client invoice. Keep the tone firm, professional, and clear about the next step.',
+    sourceType: 'synthesized',
+    sourceNote:
+      'SEO seed added for final payment notice intent and payment cluster coverage.',
+    status: 'ready',
+    priority: 'p1',
     isSeed: true,
   },
   {
@@ -633,6 +899,4 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     priority: 'p1',
     isSeed: true,
   },
-  ...canonicalScenarioBatchOne,
-  ...canonicalScenarioBatchTwo,
 ];

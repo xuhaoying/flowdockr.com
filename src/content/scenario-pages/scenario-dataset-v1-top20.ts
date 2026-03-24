@@ -31,9 +31,22 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'quote-too-high',
     title: 'Client says your quote is too high',
     h1: 'Client says your quote is too high',
-    metaTitle: 'Client Says Your Quote Is Too High: How to Respond | Flowdockr',
+    metaTitle:
+      'Client Says Your Quote Is Too High? Reply Without Discounting Too Fast | Flowdockr',
     metaDescription:
-      'Use this scenario when a client says your quote is too high after seeing your proposal. Protect value, reframe scope, and keep the deal moving.',
+      'Use this scenario when a client says your quote is too high but has not given you a real budget yet. Get a reply that defends value, explains scope, and avoids a premature discount.',
+    previewReply:
+      'Thanks for flagging that. The quote reflects the scope, timeline, and level of work needed to get the result we discussed, so I would want to clarify the constraint before I start moving the number. If budget is the issue, I can outline a leaner version instead of weakening the original scope.',
+    heroDescription:
+      'Use this scenario when a client says your quote is too high, but the pushback is still vague and no real budget has been shared. Get a reply that protects value without sounding defensive.',
+    pagePromise:
+      'Generate a price-defense reply that re-anchors value before the negotiation turns into a discount discussion.',
+    cluster: 'pricing',
+    intentTier: 'core',
+    valueIntent: 'money',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:
@@ -57,8 +70,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'If budget is real, offer a smaller version or phased path instead of discounting the same work.',
     relatedScenarioSlugs: [
       'same-scope-lower-price',
+      'lower-rate-after-proposal',
+      'meet-their-budget',
       'out-of-budget-but-interested',
-      'best-price-before-signing',
+      'found-someone-cheaper',
+    ],
+    similarScenarioSlugs: [
+      'same-scope-lower-price',
+      'lower-rate-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'out-of-budget-but-interested',
+      'found-someone-cheaper',
     ],
     priority: 'p0',
   }),
@@ -71,6 +95,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Goes Quiet After You Send a Proposal: How to Follow Up | Flowdockr',
     metaDescription:
       'Use this scenario when a client goes quiet after you send a proposal. Get a yes, no, or timeline update without sounding pushy.',
+    previewReply:
+      'Hi [Name] — following up on the proposal I sent over. If it would help, I can clarify anything or adjust around timing, but if priorities shifted, a quick update on your side would help me close the loop cleanly.',
+    heroDescription:
+      'Use this scenario when a client acknowledged your proposal and then went quiet. Get a professional follow-up you can send to prompt a decision, question, or timing update.',
+    pagePromise:
+      'Generate a proposal follow-up that restarts the conversation without sounding pushy.',
+    cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage:
@@ -95,6 +129,17 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'reviewing-internally-no-response',
       'contract-sent-no-response',
+      'client-no-response-follow-up',
+      'after-client-ghosted',
+      'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'reviewing-internally-no-response',
+      'contract-sent-no-response',
+    ],
+    nextStepScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
       'no-response-after-rate',
     ],
     priority: 'p0',
@@ -108,6 +153,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Ghosts After Asking Your Rate: How to Follow Up | Flowdockr',
     metaDescription:
       'Use this scenario when a client ghosts after asking your rate. Re-engage without sounding needy and diagnose whether price was the blocker.',
+    previewReply:
+      'Hi [Name] — just checking back on the pricing I sent over. If the budget, timing, or scope changed on your side, no problem, but if it would help I can suggest a version that fits what you are trying to decide.',
+    heroDescription:
+      'Use this scenario when a lead asked for your rate and then disappeared. Get a low-pressure follow-up that reopens the thread without sounding needy.',
+    pagePromise:
+      'Generate a pricing follow-up that surfaces whether budget, fit, or timing caused the silence.',
+    cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage: 'What’s your rate for this kind of project?',
@@ -128,9 +183,20 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Make it easy for the client to reply by giving them a simple decision path.',
     relatedScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
       'no-response-after-proposal',
-      'quote-too-high',
       'reviewing-internally-no-response',
+      'silent-after-discovery-call',
+    ],
+    similarScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+    ],
+    nextStepScenarioSlugs: [
+      'no-response-after-proposal',
+      'reviewing-internally-no-response',
+      'silent-after-discovery-call',
     ],
     priority: 'p0',
   }),
@@ -143,6 +209,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Wants the Same Scope for a Lower Price | Flowdockr',
     metaDescription:
       'Use this scenario when a client wants the same scope for a lower price. Hold the line that scope and price move together.',
+    previewReply:
+      'I can absolutely look at ways to bring the budget down, but keeping the full scope the same would mean changing the assumptions behind the quote. If you need a lower number, the cleanest option is to adjust scope, timing, or phasing rather than compress the same work.',
+    heroDescription:
+      'Use this scenario when a client wants the full project but asks for a lower price anyway. Get a reply that keeps the scope-price link clear without making the exchange confrontational.',
+    pagePromise:
+      'Generate a pricing reply that protects scope integrity and offers a structured alternative.',
+    cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'active_negotiation',
     primaryClientMessage:
@@ -166,8 +242,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'If the budget must change, make the client choose what gets reduced, delayed, or moved into a later phase.',
     relatedScenarioSlugs: [
       'quote-too-high',
-      'discount-after-scope-approved',
+      'lower-rate-after-proposal',
+      'meet-their-budget',
       'best-price-before-signing',
+      'discount-request',
+    ],
+    similarScenarioSlugs: [
+      'quote-too-high',
+      'lower-rate-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'meet-their-budget',
+      'best-price-before-signing',
+      'discount-request',
     ],
     priority: 'p0',
   }),
@@ -252,6 +339,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Asks for Your Best Price Before Signing | Flowdockr',
     metaDescription:
       'Use this scenario when a client asks for your best price before signing. Avoid a last-minute discount becoming the default close tactic.',
+    previewReply:
+      'The proposal already reflects the scope and terms we discussed, so I would not usually reduce the number further without changing something meaningful. If there is a budget constraint we should solve, I am happy to look at scope, timing, or structure rather than rush into a last-minute discount.',
+    heroDescription:
+      'Use this scenario when a client is close to signing and asks for your best price at the last minute. Get a reply that protects margin without derailing the close.',
+    pagePromise:
+      'Generate a final-price reply that keeps the deal moving without training the client to expect a discount.',
+    cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'active_negotiation',
     primaryClientMessage:
@@ -275,8 +372,10 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'If you offer anything, make it deliberate and conditional rather than a free last-minute concession.',
     relatedScenarioSlugs: [
       'same-scope-lower-price',
-      'ten-percent-off-request',
-      'discount-after-scope-approved',
+      'discount-request',
+      'quote-too-high',
+      'meet-their-budget',
+      'found-someone-cheaper',
     ],
     priority: 'p0',
   }),
@@ -363,6 +462,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Reviewing Internally Then No Response: How to Follow Up | Flowdockr',
     metaDescription:
       'Use this scenario when a client says they are reviewing internally and then disappears. Prompt a decision or concrete next step.',
+    previewReply:
+      'Hi [Name] — just checking back on the proposal you were reviewing internally. If it helps, I can answer any questions or adjust around timing, but even a quick update on where this stands would help me plan next steps on my side.',
+    heroDescription:
+      'Use this scenario when a client says they are reviewing internally and then disappears. Get a follow-up you can send to prompt a real timing update or next step.',
+    pagePromise:
+      'Generate a review-follow-up that feels professional, patient, and easy to answer.',
+    cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
     primaryClientMessage:
@@ -387,6 +496,17 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'no-response-after-proposal',
       'contract-sent-no-response',
+      'client-no-response-follow-up',
+      'after-client-ghosted',
+      'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'no-response-after-proposal',
+      'contract-sent-no-response',
+    ],
+    nextStepScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
       'no-response-after-rate',
     ],
     priority: 'p0',
@@ -400,6 +520,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Asked for the Contract Then Disappeared | Flowdockr',
     metaDescription:
       'Use this scenario when a client asks for the contract and then disappears. Recover the deal and surface any hidden friction.',
+    previewReply:
+      'Hi [Name] — following up on the agreement I sent over. If anything is holding up review or sign-off on your side, let me know and I can help close it out, but if timing changed, a quick update would help me plan accordingly.',
+    heroDescription:
+      'Use this scenario when a client asked for the contract, seemed ready, and then stopped replying. Get a calm follow-up that reopens the signing step without sounding anxious.',
+    pagePromise:
+      'Generate a contract follow-up that surfaces blockers and moves the deal toward a decision.',
+    cluster: 'ghosting',
+    intentTier: 'supporting',
+    valueIntent: 'followup',
+    commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'contract_terms',
     primaryClientMessage: 'Please send over the contract and we’ll review.',
@@ -423,7 +553,18 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'reviewing-internally-no-response',
       'no-response-after-proposal',
-      'best-price-before-signing',
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+      'no-response-after-rate',
+    ],
+    similarScenarioSlugs: [
+      'reviewing-internally-no-response',
+      'no-response-after-proposal',
+    ],
+    nextStepScenarioSlugs: [
+      'after-client-ghosted',
+      'client-no-response-follow-up',
+      'no-response-after-rate',
     ],
     priority: 'p1',
   }),
@@ -433,9 +574,22 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client has not paid the invoice and stopped replying',
     h1: 'Client has not paid the invoice and stopped replying',
     metaTitle:
-      'Client Has Not Paid the Invoice and Stopped Replying | Flowdockr',
+      'Client Not Paying the Invoice? What to Say Next | Flowdockr',
     metaDescription:
-      'Use this scenario when a client has not paid the invoice and stopped replying. Push for payment while keeping the message professional.',
+      'Use this scenario to write an overdue invoice follow-up when a client stopped replying. Ask for a payment date clearly without sounding vague, awkward, or hostile.',
+    previewReply:
+      'Hi [Name] — following up on invoice [number], which is now overdue. Please let me know the payment date on your side, or tell me if anything is blocking it so we can close it out quickly.',
+    heroDescription:
+      'Use this scenario when a client is late paying and the thread has gone quiet. Get a professional overdue invoice follow-up you can send without sounding rude.',
+    pagePromise:
+      'Generate a clear payment follow-up that asks for a date, surfaces blockers, and keeps the message professional.',
+    cluster: 'payment',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
+    relatedSectionTitle: 'More client payment scripts',
+    relatedSectionDescription:
+      'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
     primaryClientMessage: 'Got it, thanks. We’ll process this.',
@@ -457,9 +611,20 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Ask for a concrete payment date or blocking issue instead of sending another vague reminder.',
     relatedScenarioSlugs: [
-      'contract-sent-no-response',
-      'post-project-support-request',
-      'reviewing-internally-no-response',
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'ask-for-payment-politely',
+    ],
+    similarScenarioSlugs: [
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
+    ],
+    nextStepScenarioSlugs: [
+      'second-payment-reminder',
+      'final-payment-reminder',
+      'ask-for-payment-politely',
     ],
     priority: 'p1',
   }),
@@ -472,6 +637,10 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Wants More Revisions Than Agreed | Flowdockr',
     metaDescription:
       'Use this scenario when a client wants more revisions than agreed. Enforce the revision boundary and offer a paid path forward.',
+    cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'in_project',
     primaryClientMessage:
@@ -617,9 +786,19 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client says it is out of budget but still interested',
     h1: 'Client says it is out of budget but still interested',
     metaTitle:
-      'Client Says It Is Out of Budget but Still Interested | Flowdockr',
+      'Out of Budget but Still Interested? What to Say | Flowdockr',
     metaDescription:
-      'Use this scenario when a client says they want to work with you but your price is out of budget. Keep the deal alive without discounting the same scope.',
+      'Use this scenario to reply when a client says they want to work with you but the current proposal is out of budget. Keep the deal alive without shrinking the same scope into a weaker price.',
+    previewReply:
+      'I appreciate that, and I\'m glad there\'s real interest here. Rather than reduce the same scope and weaken the result, the better move is to look at a smaller first phase or a leaner version that fits the budget more cleanly.',
+    heroDescription:
+      'Use this scenario when the client wants to move forward, but the current proposal is out of budget. Get a reply that keeps momentum without defaulting to a discount.',
+    pagePromise:
+      'Generate a budget-response reply that protects your pricing logic while offering a credible path forward.',
+    cluster: 'pricing',
+    intentTier: 'supporting',
+    valueIntent: 'money',
+    commercialPriority: 'medium',
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:
@@ -643,8 +822,10 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Keep the original pricing logic intact so the tradeoff stays visible.',
     relatedScenarioSlugs: [
       'quote-too-high',
-      'discount-for-future-work',
       'same-scope-lower-price',
+      'meet-their-budget',
+      'discount-request',
+      'lower-rate-after-proposal',
     ],
     priority: 'p1',
   }),
@@ -657,6 +838,16 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Client Asks for One More Page After Scope Is Agreed | Flowdockr',
     metaDescription:
       'Use this scenario when a client asks for one more page after scope is already agreed. Make the scope change explicit and billable.',
+    previewReply:
+      'Happy to add that page. Since it sits outside the scope we already agreed, the clean options are to add it as an extra item, swap it with something currently included, or update the scope and budget so everything stays clear.',
+    heroDescription:
+      'Use this scenario when a client casually asks for one more page after scope is already agreed. Get a reply that keeps the tone cooperative while making the change explicit and billable.',
+    pagePromise:
+      'Generate a one-more-page reply that protects scope without making the project relationship tense.',
+    cluster: 'scope',
+    intentTier: 'supporting',
+    valueIntent: 'boundary',
+    commercialPriority: 'medium',
     archetype: 'scope_control',
     negotiationStage: 'pre_kickoff',
     primaryClientMessage:
@@ -679,9 +870,11 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     strategySecondary:
       'Offer a simple choice between keeping the current scope or updating scope and budget.',
     relatedScenarioSlugs: [
-      'extra-revision-rounds',
-      'urgent-add-on-same-budget',
-      'post-project-support-request',
+      'extra-work-outside-scope',
+      'out-of-scope-professionally',
+      'adding-small-requests',
+      'unlimited-revisions',
+      'changing-requirements-response',
     ],
     priority: 'p1',
   }),

@@ -2,16 +2,15 @@ import { Link } from '@/core/i18n/navigation';
 
 const PRIMARY_LINKS = [
   { href: '/scenario', label: 'Scenario hub' },
-  { href: '/guides', label: 'Guides' },
   { href: '/tools', label: 'Tools' },
-  { href: '/pricing#pricing-cards', label: 'Pricing' },
+  { href: '/guides', label: 'Guides' },
   { href: '/signin', label: 'Sign in' },
 ];
 
 const USE_CASE_LINKS = [
-  { href: '/pricing/price-pushback-after-proposal', label: 'Price pushback after proposal' },
-  { href: '/pricing/discount-pressure-before-signing', label: 'Discount pressure before signing' },
-  { href: '/pricing/more-work-same-price', label: 'More work for the same price' },
+  { href: '/scenario/quote-too-high', label: 'Client says your quote is too high' },
+  { href: '/scenario/discount-request', label: 'Client asks for a discount' },
+  { href: '/scenario/extra-work-for-free', label: 'Client wants extra work for free' },
 ];
 
 const LEGAL_LINKS = [
