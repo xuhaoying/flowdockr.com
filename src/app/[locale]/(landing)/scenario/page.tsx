@@ -11,7 +11,6 @@ import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
-import { defaultLocale } from '@/config/locale';
 
 function normalizePath(path: string): string {
   if (path.length > 1 && path.endsWith('/')) {
@@ -26,11 +25,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(
-    scenarioHubData.canonicalPath
-  )}`;
+  await params;
+  const canonical = `${envConfigs.site_url}${normalizePath(scenarioHubData.canonicalPath)}`;
 
   return buildScenarioPageMetadata({
     page: {

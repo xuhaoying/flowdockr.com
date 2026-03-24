@@ -8,7 +8,7 @@ import { GuideHero } from '@/components/guide/GuideHero';
 import { GuideSectionBlocks } from '@/components/guide/GuideSectionBlocks';
 import { GuideTakeaways } from '@/components/guide/GuideTakeaways';
 import { RecommendedScenarios } from '@/components/guide/RecommendedScenarios';
-import { defaultLocale, locales } from '@/config/locale';
+import { locales } from '@/config/locale';
 import { Link } from '@/core/i18n/navigation';
 import { getAllGuideSlugs } from '@/lib/content/getAllGuideSlugs';
 import { getGuideBySlug } from '@/lib/content/getGuideBySlug';
@@ -45,7 +45,7 @@ export async function generateMetadata({
 }: {
   params: Promise<GuidePageParams>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const guide = getGuideBySlug(slug);
 
   if (!guide) {
@@ -58,8 +58,7 @@ export async function generateMetadata({
     };
   }
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(guide.url)}`;
+  const canonical = `${envConfigs.site_url}${normalizePath(guide.url)}`;
 
   return buildGuideMetadata({
     guide,

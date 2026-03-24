@@ -28,7 +28,7 @@ import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
-import { defaultLocale, locales } from '@/config/locale';
+import { locales } from '@/config/locale';
 
 const SCENARIO_ALIAS_REDIRECTS: Record<string, string> = {
   'client-says-rate-too-high': 'quote-too-high',
@@ -123,10 +123,7 @@ export async function generateMetadata({
     };
   }
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(
-    `/scenario/${page.slug}`
-  )}`;
+  const canonical = `${envConfigs.site_url}${normalizePath(`/scenario/${page.slug}`)}`;
 
   return buildScenarioPageMetadata({
     page: {
@@ -146,10 +143,9 @@ export default async function ScenarioPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
   const scenarioAliasSlug = SCENARIO_ALIAS_REDIRECTS[slug];
   if (scenarioAliasSlug) {
-    redirect(`${localePrefix}/scenario/${scenarioAliasSlug}`);
+    redirect(`/scenario/${scenarioAliasSlug}`);
   }
 
   const page = getScenarioPageBySlug(slug);
@@ -211,7 +207,7 @@ export default async function ScenarioPage({
 
   const legacyPath = LEGACY_SCENARIO_REDIRECTS[slug];
   if (legacyPath) {
-    redirect(`${localePrefix}${legacyPath}`);
+    redirect(legacyPath);
   }
 
   notFound();

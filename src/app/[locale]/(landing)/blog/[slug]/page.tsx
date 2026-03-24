@@ -14,10 +14,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const t = await getTranslations('blog.metadata');
 
-  const canonicalUrl =
-    locale !== envConfigs.locale
-      ? `${envConfigs.site_url}/${locale}/blog/${slug}`
-      : `${envConfigs.site_url}/blog/${slug}`;
+  const canonicalUrl = `${envConfigs.site_url}/blog/${slug}`;
 
   const post = await getPost({ slug, locale });
   if (!post) {

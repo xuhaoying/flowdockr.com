@@ -11,6 +11,7 @@ import {
 import { shouldBlockSearchIndexingForHost } from '@/shared/lib/search-indexing';
 
 const intlMiddleware = createIntlMiddleware(routing);
+const COLLAPSED_LOCALES = new Set(['es', 'zh']);
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) {
@@ -22,9 +23,19 @@ function normalizePath(path: string) {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const localeSegment = pathname.split('/')[1] || '';
+
+  if (COLLAPSED_LOCALES.has(localeSegment)) {
+    const redirectUrl = request.nextUrl.clone();
+    const strippedPath = normalizePath(pathname.slice(localeSegment.length + 1) || '/');
+
+    redirectUrl.pathname = strippedPath || '/';
+
+    return NextResponse.redirect(redirectUrl, 301);
+  }
 
   // Extract locale from pathname
-  const locale = pathname.split('/')[1];
+  const locale = localeSegment;
   const isValidLocale = routing.locales.includes(locale as any);
   const pathWithoutLocale = normalizePath(
     isValidLocale ? pathname.slice(locale.length + 1) || '/' : pathname

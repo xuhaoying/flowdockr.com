@@ -26,10 +26,7 @@ export async function generateMetadata({
     typeof slug === 'string' ? slug : (slug as string[]).join('/') || '';
 
   // build canonical url
-  canonicalUrl =
-    locale !== envConfigs.locale
-      ? `${envConfigs.site_url}/${locale}/${staticPageSlug}`
-      : `${envConfigs.site_url}/${staticPageSlug}`;
+  canonicalUrl = `${envConfigs.site_url}/${staticPageSlug}`;
 
   // get static page content
   const staticPage = await getLocalPage({ slug: staticPageSlug, locale });

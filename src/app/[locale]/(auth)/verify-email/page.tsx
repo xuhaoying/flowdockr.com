@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { redirect } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
-import { defaultLocale } from '@/config/locale';
 import { VerifyEmailPage } from '@/shared/blocks/sign/verify-email';
 
 export async function generateMetadata({
@@ -10,16 +9,13 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  await params;
   const t = await getTranslations('common');
 
   return {
     title: `${t('sign.verify_email_page_title')} - ${t('metadata.title')}`,
     alternates: {
-      canonical:
-        locale !== defaultLocale
-          ? `${envConfigs.site_url}/${locale}/verify-email`
-          : `${envConfigs.site_url}/verify-email`,
+      canonical: `${envConfigs.site_url}/verify-email`,
     },
   };
 }
