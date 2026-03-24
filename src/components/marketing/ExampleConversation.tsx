@@ -31,7 +31,7 @@ export function ExampleConversation() {
         </article>
       </div>
       <Link
-        href="/pricing/price-pushback-after-proposal"
+        href="/scenario/quote-too-high"
         className="inline-flex text-sm font-semibold text-slate-900 underline"
       >
         See full scenario

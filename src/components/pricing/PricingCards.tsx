@@ -33,6 +33,20 @@ const CTA_LABELS: Record<string, string> = {
   studio: 'Get Studio',
 };
 
+function getFreeTrialCta(sourcePage: PricingCardsProps['sourcePage']) {
+  if (sourcePage === 'tool') {
+    return {
+      href: '/scenario',
+      label: 'Browse scenarios',
+    };
+  }
+
+  return {
+    href: '/tools/reply-generator',
+    label: CTA_LABELS.free_trial,
+  };
+}
+
 export function PricingCards({
   sourcePage = 'pricing',
   scenarioSlug = '',
@@ -41,6 +55,7 @@ export function PricingCards({
 }: PricingCardsProps) {
   const [loadingId, setLoadingId] = useState<CreditPackageId | null>(null);
   const [error, setError] = useState('');
+  const freeTrialCta = getFreeTrialCta(sourcePage);
   const wrapperClassName = showSectionHeader
     ? 'space-y-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8'
     : 'space-y-5';
@@ -172,7 +187,7 @@ export function PricingCards({
 
           <div className="mt-5">
             <Button asChild className="w-full">
-              <Link href="/tools/reply-generator">{CTA_LABELS.free_trial}</Link>
+              <Link href={freeTrialCta.href}>{freeTrialCta.label}</Link>
             </Button>
           </div>
         </article>

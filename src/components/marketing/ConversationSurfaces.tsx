@@ -5,21 +5,21 @@ export function ConversationSurfaces() {
         Where Flowdockr helps today
       </h2>
       <p className="text-sm text-slate-700">
-        Pricing conversations are live now. Scope, payment, and proposal follow-up
-        workflows are next.
+        Pricing, payment, scope, and proposal follow-up scenarios are live now.
+        Start from the situation that matches the conversation you are in.
       </p>
       <div className="flex flex-wrap gap-2 text-xs">
         <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 font-medium text-slate-700">
           Pricing conversations (live)
         </span>
-        <span className="rounded-full border border-slate-200 bg-white px-3 py-1 font-medium text-slate-600">
-          Scope workflow (next)
+        <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 font-medium text-slate-700">
+          Scope scenarios (live)
         </span>
-        <span className="rounded-full border border-slate-200 bg-white px-3 py-1 font-medium text-slate-600">
-          Payment workflow (next)
+        <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 font-medium text-slate-700">
+          Payment scenarios (live)
         </span>
-        <span className="rounded-full border border-slate-200 bg-white px-3 py-1 font-medium text-slate-600">
-          Proposal follow-up (next)
+        <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 font-medium text-slate-700">
+          Proposal follow-up (live)
         </span>
       </div>
     </section>

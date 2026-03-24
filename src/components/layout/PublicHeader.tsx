@@ -10,14 +10,14 @@ import { cn } from '@/shared/lib/utils';
 
 const LOGGED_OUT_NAV_ITEMS = [
   { href: '/scenario', label: 'Use Cases' },
-  { href: '/pricing#pricing-cards', label: 'Pricing' },
+  { href: '/tools', label: 'Tools' },
   { href: '/guides', label: 'Guides' },
 ];
 
 const LOGGED_IN_NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/scenario', label: 'Use Cases' },
-  { href: '/pricing#pricing-cards', label: 'Pricing' },
+  { href: '/tools', label: 'Tools' },
 ];
 
 const AUTHENTICATED_USER_NAV = {

@@ -35,15 +35,67 @@ function normalizeUrl(url: string) {
   }
 }
 
-function getAppUrl() {
-  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
-  if (configuredUrl) {
-    return normalizeUrl(configuredUrl);
+function normalizeLocalHostname(hostname: string) {
+  const trimmed = hostname.trim();
+  if (!trimmed || trimmed === '0.0.0.0' || trimmed === '::' || trimmed === '[::]') {
+    return 'localhost';
   }
 
-  return process.env.NODE_ENV === 'production'
-    ? FLOWDOCKR_PRODUCTION_SITE_URL
-    : LOCAL_APP_URL;
+  return trimmed;
+}
+
+function isLocalHostname(hostname: string) {
+  const normalized = hostname.trim();
+  return (
+    normalized === 'localhost' ||
+    normalized === '127.0.0.1' ||
+    normalized === '0.0.0.0' ||
+    normalized === '::' ||
+    normalized === '[::]'
+  );
+}
+
+function getConfiguredHostname(configuredUrl: string) {
+  if (!configuredUrl) {
+    return '';
+  }
+
+  try {
+    return new URL(configuredUrl).hostname;
+  } catch {
+    return '';
+  }
+}
+
+function getDevelopmentAppUrl(configuredUrl: string) {
+  const port = process.env.PORT?.trim();
+  const explicitHost = process.env.HOSTNAME?.trim() || process.env.HOST?.trim() || '';
+  const configuredHostname = getConfiguredHostname(configuredUrl);
+  const hostname = isLocalHostname(explicitHost)
+    ? normalizeLocalHostname(explicitHost)
+    : configuredHostname
+      ? normalizeLocalHostname(configuredHostname)
+      : 'localhost';
+
+  if (port) {
+    return `http://${hostname}:${port}`;
+  }
+
+  return configuredUrl || LOCAL_APP_URL;
+}
+
+function getAppUrl() {
+  const configuredUrl = normalizeUrl(process.env.NEXT_PUBLIC_APP_URL?.trim() || '');
+
+  if (process.env.NODE_ENV !== 'production') {
+    return normalizeUrl(getDevelopmentAppUrl(configuredUrl));
+  }
+
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  return FLOWDOCKR_PRODUCTION_SITE_URL;
 }
 
 function getSiteUrl(appUrl: string) {
@@ -86,7 +138,7 @@ export const envConfigs: ConfigMap = {
     process.env.DB_MIGRATIONS_OUT ?? './src/config/db/migrations',
   db_singleton_enabled: process.env.DB_SINGLETON_ENABLED || 'false',
   db_max_connections: process.env.DB_MAX_CONNECTIONS || '1',
-  auth_url: process.env.AUTH_URL || process.env.NEXT_PUBLIC_APP_URL || '',
+  auth_url: normalizeUrl(process.env.AUTH_URL?.trim() || appUrl),
   auth_secret: process.env.AUTH_SECRET ?? '', // openssl rand -base64 32
   version: packageJson.version,
   locale_detect_enabled:

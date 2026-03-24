@@ -6,28 +6,28 @@ export function HomepageHero() {
       <div className="grid gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1.08fr_0.92fr] lg:p-6">
         <div className="space-y-4">
           <p className="inline-flex rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-            Built for pricing conversations
+            Built for difficult client conversations
           </p>
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-            A weak pricing reply can cost the deal or your margin.
+            A weak client reply can cost the deal, the margin, or the boundary.
           </h1>
           <p className="max-w-3xl text-base text-slate-700 md:text-lg">
-            Flowdockr helps freelancers, consultants, and agencies choose the right
-            next move under pricing pressure, then draft a send-ready reply from the
-            exact client message.
+            Flowdockr helps freelancers, consultants, and agencies handle pricing,
+            payment, scope, and follow-up pressure with scenario-based guidance and
+            send-ready replies built from the exact client message.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <Link
-              href="/tools/price-negotiation-email-generator"
+              href="/scenario"
               className="inline-flex rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800"
             >
-              Draft my pricing reply
+              Browse reply scenarios
             </Link>
             <Link
-              href="/pricing"
+              href="/tools/reply-generator"
               className="inline-flex rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-800 transition-colors hover:border-slate-400"
             >
-              Open pricing decision paths
+              Open reply generator
             </Link>
           </div>
         </div>
@@ -51,7 +51,7 @@ export function HomepageHero() {
               </p>
             </div>
             <p className="text-xs text-emerald-700">
-              Decision path selected, draft ready to send
+              Scenario selected, draft ready to send
             </p>
           </div>
         </article>
