@@ -474,7 +474,41 @@ function mergeScenarioPages(
   preferred: CanonicalScenario[],
   existing: CanonicalScenario[]
 ): CanonicalScenario[] {
-  const preferredSlugs = new Set(preferred.map((item) => item.slug));
+  const preferredUnique = dedupeScenarioPages(preferred);
+  const preferredSlugs = new Set(preferredUnique.map((item) => item.slug));
+  const existingUnique = dedupeScenarioPages(existing).filter(
+    (item) => !preferredSlugs.has(item.slug)
+  );
 
-  return [...preferred, ...existing.filter((item) => !preferredSlugs.has(item.slug))];
+  return [...preferredUnique, ...existingUnique].map((item) =>
+    normalizeScenarioPage(item)
+  );
+}
+
+function dedupeScenarioPages(
+  pages: CanonicalScenario[]
+): CanonicalScenario[] {
+  const seen = new Set<string>();
+  const deduped: CanonicalScenario[] = [];
+
+  for (let index = pages.length - 1; index >= 0; index -= 1) {
+    const page = pages[index];
+    if (seen.has(page.slug)) {
+      continue;
+    }
+
+    seen.add(page.slug);
+    deduped.push(page);
+  }
+
+  return deduped.reverse();
+}
+
+function normalizeScenarioPage(
+  page: CanonicalScenario
+): CanonicalScenario {
+  return {
+    ...page,
+    cluster: page.cluster || getScenarioLinkCluster(page),
+  };
 }

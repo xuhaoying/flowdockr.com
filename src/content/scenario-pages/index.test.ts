@@ -91,6 +91,21 @@ describe('scenario dataset v1 integration', () => {
     }
   });
 
+  it('keeps canonical scenario slugs unique and fills cluster tags for every generated page', () => {
+    const pages = getAllScenarioPages();
+    const uniqueSlugs = new Set(pages.map((page) => page.slug));
+
+    expect(uniqueSlugs.size).toBe(pages.length);
+
+    for (const page of pages) {
+      expect(page.cluster).toBeTruthy();
+    }
+
+    expect(getScenarioPageBySlug('ask-for-payment-politely')?.cluster).toBe(
+      'payment'
+    );
+  });
+
   it('keeps metadata, related links, and generator content driven by dataset fields', () => {
     for (const scenario of scenarioDatasetV1) {
       const page = getScenarioPageBySlug(scenario.slug);
