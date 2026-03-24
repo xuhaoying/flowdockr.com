@@ -6,6 +6,7 @@ import { ToolBestFor } from '@/components/tool/ToolBestFor';
 import { ToolExample } from '@/components/tool/ToolExample';
 import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolHero } from '@/components/tool/ToolHero';
+import { ToolInputPreview } from '@/components/tool/ToolInputPreview';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
 import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
@@ -152,6 +153,7 @@ export default async function ToolPage({
         <ToolExample scenario={previewScenario} title="Example output" />
       ) : null}
       <ToolBestFor items={tool.bestFor} />
+      <ToolInputPreview inputs={tool.inputs} />
       <ToolUseCases useCases={tool.exampleUseCases} />
       <RelatedScenarios links={relatedScenarioLinks} />
 
