@@ -21,7 +21,7 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
-import { defaultLocale, locales } from '@/config/locale';
+import { locales } from '@/config/locale';
 
 const defaultGeneratorScenarioByToolSlug: Record<string, string> = {
   'reply-generator': 'discount-request',
@@ -53,7 +53,7 @@ export async function generateMetadata({
 }: {
   params: Promise<ToolPageParams>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const tool = getToolBySlug(slug);
 
   if (!tool) {
@@ -66,8 +66,7 @@ export async function generateMetadata({
     };
   }
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(tool.url)}`;
+  const canonical = `${envConfigs.site_url}${normalizePath(tool.url)}`;
 
   return buildToolMetadata({
     tool,

@@ -96,7 +96,7 @@ export function getMetadata(
 
       openGraph: {
         type: 'website',
-        locale: locale,
+        locale: defaultLocale,
         url: canonicalUrl,
         title,
         description,
@@ -133,7 +133,7 @@ async function getTranslatedMetadata(metadataKey: string, locale: string) {
   };
 }
 
-async function getCanonicalUrl(canonicalUrl: string, locale: string) {
+async function getCanonicalUrl(canonicalUrl: string, _locale: string) {
   if (!canonicalUrl) {
     canonicalUrl = '/';
   }
@@ -147,11 +147,9 @@ async function getCanonicalUrl(canonicalUrl: string, locale: string) {
       canonicalUrl = `/${canonicalUrl}`;
     }
 
-    canonicalUrl = `${envConfigs.site_url}${
-      !locale || locale === defaultLocale ? '' : `/${locale}`
-    }${canonicalUrl}`;
+    canonicalUrl = `${envConfigs.site_url}${canonicalUrl}`;
 
-    if (locale !== defaultLocale && canonicalUrl.endsWith('/')) {
+    if (canonicalUrl.endsWith('/') && canonicalUrl !== `${envConfigs.site_url}/`) {
       canonicalUrl = canonicalUrl.slice(0, -1);
     }
   }

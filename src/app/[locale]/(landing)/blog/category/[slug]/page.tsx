@@ -34,10 +34,7 @@ export async function generateMetadata({
     title: `${slug} | ${t('title')}`,
     description: t('description'),
     alternates: {
-      canonical:
-        locale !== envConfigs.locale
-          ? `${envConfigs.site_url}/${locale}/blog/category/${slug}`
-          : `${envConfigs.site_url}/blog/category/${slug}`,
+      canonical: `${envConfigs.site_url}/blog/category/${slug}`,
     },
   };
 }

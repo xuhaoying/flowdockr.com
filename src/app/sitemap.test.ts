@@ -14,4 +14,10 @@ describe('scenario sitemap coverage', () => {
       ).toBe(true);
     }
   });
+
+  it('only emits english canonical urls', () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    expect(urls.some((url) => /\/(?:es|zh)(?:\/|$)/.test(url))).toBe(false);
+  });
 });

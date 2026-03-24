@@ -20,7 +20,7 @@ import { buildScenarioHowToSchema } from '@/lib/seo/buildScenarioSchema';
 import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
-import { defaultLocale, locales } from '@/config/locale';
+import { locales } from '@/config/locale';
 
 type PricingScenarioPageParams = {
   locale: string;
@@ -47,7 +47,7 @@ export async function generateMetadata({
 }: {
   params: Promise<PricingScenarioPageParams>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const scenario = getScenarioBySlug(slug);
 
   if (!scenario) {
@@ -60,8 +60,7 @@ export async function generateMetadata({
     };
   }
 
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
-  const canonical = `${envConfigs.site_url}${localePrefix}${normalizePath(scenario.url)}`;
+  const canonical = `${envConfigs.site_url}${normalizePath(scenario.url)}`;
 
   return buildScenarioMetadata({
     scenario,

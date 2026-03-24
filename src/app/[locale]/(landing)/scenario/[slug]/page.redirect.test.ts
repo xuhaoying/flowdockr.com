@@ -2,9 +2,10 @@
 
 import { describe, expect, it, vi } from 'vitest';
 
-import { defaultLocale, locales } from '@/config/locale';
+import { envConfigs } from '@/config';
+import { defaultLocale } from '@/config/locale';
 
-import ScenarioPage from './page';
+import ScenarioPage, { generateMetadata } from './page';
 
 const mocks = vi.hoisted(() => ({
   redirect: vi.fn((path: string) => {
@@ -86,8 +87,6 @@ const DIRECT_REDIRECT_CASES = [
   ['invoice-follow-up', 'overdue-invoice-no-response'],
 ] as const;
 
-const nonDefaultLocale = locales.find((locale) => locale !== defaultLocale);
-
 describe('scenario page canonical redirects', () => {
   it.each(DIRECT_REDIRECT_CASES)(
     'redirects %s to the canonical slug for the default locale',
@@ -109,27 +108,16 @@ describe('scenario page canonical redirects', () => {
     }
   );
 
-  it.each(DIRECT_REDIRECT_CASES)(
-    'redirects %s to the localized canonical slug for a non-default locale',
-    async (oldSlug, canonicalSlug) => {
-      expect(nonDefaultLocale).toBeTruthy();
+  it('always emits the english canonical url in metadata', async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({
+        locale: 'zh',
+        slug: 'discount-request',
+      }),
+    });
 
-      await expect(
-        ScenarioPage({
-          params: Promise.resolve({
-            locale: nonDefaultLocale!,
-            slug: oldSlug,
-          }),
-        })
-      ).rejects.toMatchObject({
-        digest: expect.stringContaining(
-          `/${nonDefaultLocale}/scenario/${canonicalSlug}`
-        ),
-      });
-
-      expect(mocks.redirect).toHaveBeenLastCalledWith(
-        `/${nonDefaultLocale}/scenario/${canonicalSlug}`
-      );
-    }
-  );
+    expect(metadata.alternates?.canonical).toBe(
+      `${envConfigs.site_url}/scenario/discount-request`
+    );
+  });
 });
