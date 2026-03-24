@@ -45,6 +45,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     intentTier: 'core',
     valueIntent: 'money',
     commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
     archetype: 'pricing_objection',
     negotiationStage: 'quote_pushback',
     primaryClientMessage:

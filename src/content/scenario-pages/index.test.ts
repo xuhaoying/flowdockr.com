@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import {
   scenarioCommercialPriorityValues,
+  scenarioDistributionPriorityValues,
   scenarioIntentTierValues,
   scenarioValueIntentValues,
 } from '@/types/scenario-catalog';
@@ -9,14 +10,17 @@ import {
 import { scenarioDatasetV1 } from './scenario-dataset-v1';
 import {
   getAllScenarioPages,
+  getPopularScenarioPages,
   getRelatedScenarioGroups,
   getRelatedScenarioSectionCopy,
   getScenarioHeroDescription,
   getRelatedScenarioLinks,
+  getScenarioDistributionPriority,
   getScenarioMetaDescription,
   getScenarioMetaTitle,
   getScenarioPageBySlug,
   getScenarioPagePromise,
+  getScenarioPagesByDistributionPriority,
 } from './index';
 
 const EXPANDED_CLUSTER_SLUGS = {
@@ -81,6 +85,39 @@ const HIGH_VALUE_SCENARIO_SLUGS = [
   'changing-requirements-response',
 ] as const;
 
+const PRIMARY_ATTACK_PAGE_SLUGS = [
+  'ask-for-payment-politely',
+  'final-payment-reminder',
+  'start-before-payment',
+  'deposit-not-paid-yet',
+  'payment-extension-request',
+  'quote-too-high',
+  'discount-request',
+  'found-someone-cheaper',
+  'lower-rate-after-proposal',
+  'extra-work-for-free',
+  'unlimited-revisions',
+  'changing-requirements-response',
+  'out-of-scope-professionally',
+] as const;
+
+const SECONDARY_SUPPORT_PAGE_SLUGS = [
+  'unpaid-invoice-follow-up',
+  'second-payment-reminder',
+  'same-scope-lower-price',
+  'out-of-budget-but-interested',
+  'client-no-response-follow-up',
+  'no-response-after-proposal',
+  'extra-work-outside-scope',
+] as const;
+
+const MONITOR_PAGE_SLUGS = [
+  'price-before-scope',
+  'fixed-price-unclear-scope',
+  'what-is-included',
+  'deliverables-vs-outcomes',
+] as const;
+
 describe('scenario dataset v1 integration', () => {
   it('wires all 50 dataset scenarios into the page catalog and generator catalog', () => {
     expect(scenarioDatasetV1).toHaveLength(50);
@@ -99,6 +136,9 @@ describe('scenario dataset v1 integration', () => {
 
     for (const page of pages) {
       expect(page.cluster).toBeTruthy();
+      expect(scenarioDistributionPriorityValues).toContain(
+        page.distributionPriority
+      );
     }
 
     expect(getScenarioPageBySlug('ask-for-payment-politely')?.cluster).toBe(
@@ -110,14 +150,15 @@ describe('scenario dataset v1 integration', () => {
     for (const scenario of scenarioDatasetV1) {
       const page = getScenarioPageBySlug(scenario.slug);
       const generatorScenario = getGeneratorScenarioBySlug(scenario.slug);
+      const explicitRenderedSlugs = getRelatedScenarioLinks(scenario.slug)
+        .slice(0, scenario.relatedScenarioSlugs?.length || 0)
+        .map((item) => item.slug);
 
       expect(page?.metaDescription).toBe(scenario.metaDescription);
       expect(getScenarioMetaDescription(page!)).toBe(scenario.metaDescription);
-      expect(
-        getRelatedScenarioLinks(scenario.slug)
-          .slice(0, scenario.relatedScenarioSlugs?.length || 0)
-          .map((item) => item.slug)
-      ).toEqual(scenario.relatedScenarioSlugs);
+      expect(new Set(explicitRenderedSlugs)).toEqual(
+        new Set(scenario.relatedScenarioSlugs || [])
+      );
       expect(generatorScenario?.seoTitle).toBe(getScenarioMetaTitle(scenario));
       expect(generatorScenario?.primaryGoal).toBe(
         getScenarioPagePromise(page!)
@@ -236,6 +277,60 @@ describe('scenario dataset v1 integration', () => {
     }
   });
 
+  it('derives primary, support, and monitor layers from the scenario labels', () => {
+    for (const slug of PRIMARY_ATTACK_PAGE_SLUGS) {
+      const page = getScenarioPageBySlug(slug);
+
+      expect(page).toBeTruthy();
+      expect(getScenarioDistributionPriority(page!)).toBe('primary');
+    }
+
+    for (const slug of SECONDARY_SUPPORT_PAGE_SLUGS) {
+      const page = getScenarioPageBySlug(slug);
+
+      expect(page).toBeTruthy();
+      expect(getScenarioDistributionPriority(page!)).toBe('secondary');
+    }
+
+    for (const slug of MONITOR_PAGE_SLUGS) {
+      const page = getScenarioPageBySlug(slug);
+
+      expect(page).toBeTruthy();
+      expect(getScenarioDistributionPriority(page!)).toBe('monitor');
+    }
+  });
+
+  it('surfaces primary attack pages ahead of support pages in hub and related exposure helpers', () => {
+    const popularScenarios = getPopularScenarioPages(8);
+    const paymentPrimaryPages = getScenarioPagesByDistributionPriority('primary', {
+      cluster: 'payment',
+      limit: 5,
+    });
+
+    expect(popularScenarios).toHaveLength(8);
+    for (const page of popularScenarios) {
+      expect(page.distributionPriority).toBe('primary');
+      expect(page.clusterCore).toBe(true);
+    }
+
+    expect(
+      new Set(paymentPrimaryPages.map((page) => page.slug))
+    ).toEqual(
+      new Set([
+        'ask-for-payment-politely',
+        'final-payment-reminder',
+        'start-before-payment',
+        'deposit-not-paid-yet',
+        'payment-extension-request',
+      ])
+    );
+    expect(
+      getScenarioPagesByDistributionPriority('primary', {
+        cluster: 'ghosting',
+      })
+    ).toHaveLength(0);
+  });
+
   it('builds grouped related paths for the strengthened payment and pricing pages', () => {
     expect(getRelatedScenarioGroups('ask-for-payment-politely')).toEqual([
       {
@@ -244,8 +339,8 @@ describe('scenario dataset v1 integration', () => {
         description:
           'Close variants of this client conversation that need a similar kind of reply.',
         items: [
-          expect.objectContaining({ slug: 'unpaid-invoice-follow-up' }),
           expect.objectContaining({ slug: 'payment-overdue-reminder' }),
+          expect.objectContaining({ slug: 'unpaid-invoice-follow-up' }),
         ],
       },
       {
@@ -254,9 +349,9 @@ describe('scenario dataset v1 integration', () => {
         description:
           'If the payment issue keeps dragging, these are the next money conversations you are likely to hit.',
         items: [
-          expect.objectContaining({ slug: 'second-payment-reminder' }),
-          expect.objectContaining({ slug: 'final-payment-reminder' }),
           expect.objectContaining({ slug: 'payment-extension-request' }),
+          expect.objectContaining({ slug: 'final-payment-reminder' }),
+          expect.objectContaining({ slug: 'second-payment-reminder' }),
         ],
       },
     ]);
@@ -268,8 +363,8 @@ describe('scenario dataset v1 integration', () => {
         description:
           'Close variants of this client conversation that need a similar kind of reply.',
         items: [
-          expect.objectContaining({ slug: 'same-scope-lower-price' }),
           expect.objectContaining({ slug: 'lower-rate-after-proposal' }),
+          expect.objectContaining({ slug: 'same-scope-lower-price' }),
         ],
       },
       {
@@ -279,8 +374,8 @@ describe('scenario dataset v1 integration', () => {
           'If the client keeps pushing on price, these are the next pricing conversations likely to follow.',
         items: [
           expect.objectContaining({ slug: 'meet-their-budget' }),
-          expect.objectContaining({ slug: 'out-of-budget-but-interested' }),
           expect.objectContaining({ slug: 'best-price-before-signing' }),
+          expect.objectContaining({ slug: 'out-of-budget-but-interested' }),
         ],
       },
     ]);

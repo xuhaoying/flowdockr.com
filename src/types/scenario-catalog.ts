@@ -48,6 +48,11 @@ export const scenarioCommercialPriorityValues = [
   'medium',
   'low',
 ] as const;
+export const scenarioDistributionPriorityValues = [
+  'primary',
+  'secondary',
+  'monitor',
+] as const;
 
 export type ScenarioArchetype = (typeof scenarioArchetypeValues)[number];
 export type NegotiationStage = (typeof negotiationStageValues)[number];
@@ -60,6 +65,8 @@ export type ScenarioIntentTier = (typeof scenarioIntentTierValues)[number];
 export type ScenarioValueIntent = (typeof scenarioValueIntentValues)[number];
 export type ScenarioCommercialPriority =
   (typeof scenarioCommercialPriorityValues)[number];
+export type ScenarioDistributionPriority =
+  (typeof scenarioDistributionPriorityValues)[number];
 
 export type CanonicalScenario = {
   id: string;
@@ -91,6 +98,8 @@ export type CanonicalScenario = {
   intentTier?: ScenarioIntentTier;
   valueIntent?: ScenarioValueIntent;
   commercialPriority?: ScenarioCommercialPriority;
+  distributionPriority?: ScenarioDistributionPriority;
+  clusterCore?: boolean;
   isPriority?: boolean;
   sourceType: ScenarioSourceType;
   sourceNote: string;

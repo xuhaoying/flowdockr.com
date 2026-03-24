@@ -1,8 +1,11 @@
 export {
+  compareScenarioPageExposure,
   getAllScenarioPages,
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
   getPopularScenarioPages,
+  getScenarioDistributionPriority,
+  getScenarioPagesByDistributionPriority,
   getRelatedScenarioGroups,
   getRelatedScenarioLinks,
   getRelatedScenarioSectionCopy,

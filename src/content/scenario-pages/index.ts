@@ -3,6 +3,7 @@ import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1'
 import type {
   CanonicalScenario,
   ScenarioArchetype,
+  ScenarioDistributionPriority,
   ScenarioLinkCluster,
   ScenarioRelatedGroup,
   ScenarioRelatedLink,
@@ -49,6 +50,28 @@ const adjacentScenarioClusters: Record<
   client_management: ['scope', 'ghosting', 'pricing', 'payment'],
 };
 
+const distributionPriorityWeights: Record<
+  ScenarioDistributionPriority,
+  number
+> = {
+  primary: 3,
+  secondary: 2,
+  monitor: 1,
+};
+
+const commercialPriorityWeights = {
+  high: 3,
+  medium: 2,
+  low: 1,
+} as const;
+
+const valueIntentWeights = {
+  money: 3,
+  boundary: 2,
+  followup: 1,
+  soft: 0,
+} as const;
+
 export function getScenarioPageBySlug(slug: string): CanonicalScenario | null {
   return scenarioPageMap.get(slug) || null;
 }
@@ -62,7 +85,78 @@ export function getAllScenarioPages(): CanonicalScenario[] {
 }
 
 export function getPopularScenarioPages(limit = 4): CanonicalScenario[] {
-  return scenarioPages.filter((page) => page.priority === 'p0').slice(0, limit);
+  return scenarioPages
+    .filter((page) => getScenarioDistributionPriority(page) === 'primary')
+    .sort(compareScenarioPageExposure)
+    .slice(0, limit);
+}
+
+export function getScenarioDistributionPriority(
+  scenario: Pick<
+    CanonicalScenario,
+    | 'distributionPriority'
+    | 'intentTier'
+    | 'commercialPriority'
+    | 'valueIntent'
+    | 'cluster'
+    | 'archetype'
+  >
+): ScenarioDistributionPriority {
+  if (scenario.distributionPriority) {
+    return scenario.distributionPriority;
+  }
+
+  const cluster = getScenarioLinkCluster(scenario);
+  if (
+    scenario.intentTier === 'core' &&
+    scenario.commercialPriority === 'high' &&
+    scenario.valueIntent !== 'followup' &&
+    (cluster === 'payment' || cluster === 'pricing' || cluster === 'scope')
+  ) {
+    return 'primary';
+  }
+
+  if (
+    scenario.intentTier === 'supporting' ||
+    scenario.commercialPriority === 'medium' ||
+    scenario.valueIntent === 'followup' ||
+    cluster === 'ghosting'
+  ) {
+    return 'secondary';
+  }
+
+  return 'monitor';
+}
+
+export function compareScenarioPageExposure(
+  left: CanonicalScenario,
+  right: CanonicalScenario
+): number {
+  const scoreDifference =
+    getScenarioExposureScore(right) - getScenarioExposureScore(left);
+
+  if (scoreDifference !== 0) {
+    return scoreDifference;
+  }
+
+  return left.title.localeCompare(right.title);
+}
+
+export function getScenarioPagesByDistributionPriority(
+  priority: ScenarioDistributionPriority,
+  options?: {
+    cluster?: ScenarioLinkCluster;
+    limit?: number;
+  }
+): CanonicalScenario[] {
+  const filtered = scenarioPages
+    .filter((page) => getScenarioDistributionPriority(page) === priority)
+    .filter((page) => !options?.cluster || page.cluster === options.cluster)
+    .sort(compareScenarioPageExposure);
+
+  return typeof options?.limit === 'number'
+    ? filtered.slice(0, options.limit)
+    : filtered;
 }
 
 export function getScenarioArchetypeLabel(
@@ -245,6 +339,15 @@ export function getRelatedScenarioLinks(
   ) => {
     if (right.score !== left.score) {
       return right.score - left.score;
+    }
+
+    const exposureDifference = compareScenarioPageExposure(
+      left.candidate,
+      right.candidate
+    );
+
+    if (exposureDifference !== 0) {
+      return exposureDifference;
     }
 
     return left.candidate.title.localeCompare(right.candidate.title);
@@ -431,13 +534,31 @@ function getScenarioLinksBySlugs(
   }
 
   return slugs
-    .map((relatedSlug) => scenarioPageMap.get(relatedSlug))
-    .filter((item): item is CanonicalScenario => Boolean(item))
+    .map((relatedSlug, index) => ({
+      index,
+      page: scenarioPageMap.get(relatedSlug),
+    }))
+    .filter(
+      (item): item is { index: number; page: CanonicalScenario } =>
+        Boolean(item.page)
+    )
+    .sort((left, right) => {
+      const exposureDifference = compareScenarioPageExposure(
+        left.page,
+        right.page
+      );
+
+      if (exposureDifference !== 0) {
+        return exposureDifference;
+      }
+
+      return left.index - right.index;
+    })
     .slice(0, limit)
-    .map((item) => ({
-      slug: item.slug,
-      title: item.title,
-      description: item.userSituation,
+    .map(({ page }) => ({
+      slug: page.slug,
+      title: page.title,
+      description: page.userSituation,
     }));
 }
 
@@ -507,8 +628,28 @@ function dedupeScenarioPages(
 function normalizeScenarioPage(
   page: CanonicalScenario
 ): CanonicalScenario {
+  const cluster = page.cluster || getScenarioLinkCluster(page);
+
   return {
     ...page,
-    cluster: page.cluster || getScenarioLinkCluster(page),
+    cluster,
+    distributionPriority:
+      page.distributionPriority ||
+      getScenarioDistributionPriority({
+        ...page,
+        cluster,
+      }),
   };
+}
+
+function getScenarioExposureScore(page: CanonicalScenario): number {
+  const distributionPriority = getScenarioDistributionPriority(page);
+
+  return (
+    distributionPriorityWeights[distributionPriority] * 100 +
+    (page.clusterCore ? 20 : 0) +
+    commercialPriorityWeights[page.commercialPriority || 'low'] * 10 +
+    valueIntentWeights[page.valueIntent || 'soft'] * 2 +
+    (page.intentTier === 'core' ? 1 : 0)
+  );
 }

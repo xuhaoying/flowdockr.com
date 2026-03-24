@@ -1,8 +1,9 @@
 import {
+  compareScenarioPageExposure,
+  getPopularScenarioPages,
   getScenarioPageBySlug,
   scenarioPages,
 } from '@/content/scenario-pages';
-import { scenarioDatasetV1Top20 } from '@/content/scenario-pages/scenario-dataset-v1';
 import type {
   ScenarioHubCluster,
   ScenarioHubData,
@@ -52,6 +53,7 @@ const clusters: ScenarioHubCluster[] = [
     'When the client reacts to your quote with direct budget or value pushback.',
     scenarioPages
       .filter((page) => page.archetype === 'pricing_objection')
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
   cluster(
@@ -60,6 +62,7 @@ const clusters: ScenarioHubCluster[] = [
     'When the client brings up cheaper options or tries to force a rate match.',
     scenarioPages
       .filter((page) => page.archetype === 'price_comparison')
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
   cluster(
@@ -68,6 +71,7 @@ const clusters: ScenarioHubCluster[] = [
     'When the client wants numbers before the project is scoped well enough to quote cleanly.',
     scenarioPages
       .filter((page) => page.archetype === 'pricing_probe')
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
   cluster(
@@ -76,6 +80,7 @@ const clusters: ScenarioHubCluster[] = [
     'When the work, revision policy, or effort assumptions start to drift.',
     scenarioPages
       .filter((page) => page.archetype === 'scope_control')
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
   cluster(
@@ -88,6 +93,7 @@ const clusters: ScenarioHubCluster[] = [
           page.archetype === 'payment_protection' ||
           page.archetype === 'contract_terms'
       )
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
   cluster(
@@ -100,6 +106,7 @@ const clusters: ScenarioHubCluster[] = [
           page.archetype === 'follow_up' ||
           page.archetype === 'expectation_management'
       )
+      .sort(compareScenarioPageExposure)
       .map((page) => page.slug)
   ),
 ];
@@ -144,8 +151,7 @@ export const scenarioHubData: ScenarioHubData = {
     },
   ],
   clusters,
-  popularScenarios: scenarioDatasetV1Top20
-    .slice(0, 8)
+  popularScenarios: getPopularScenarioPages(8)
     .map((page) => scenario(page.slug, summarize(page.userSituation))),
   why: {
     title: 'Why scenario-based guidance works',
