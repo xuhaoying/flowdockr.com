@@ -175,9 +175,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     strategySecondary:
       'If the client promises future work, convert that into a concrete retainer, package, or volume commitment instead of accepting a vague discount request.',
     relatedScenarioSlugs: [
-      'discount-before-starting',
-      'discount-after-scope-approved',
-      'discount-for-future-work',
+      'best-price-before-signing',
+      'same-scope-lower-price',
+      'quote-too-high',
+      'lower-rate-after-proposal',
+      'meet-their-budget',
     ],
     toolPromptIntent:
       'Draft a confident response when a client asks for a discount. Protect the base rate, stay cooperative, and offer structured alternatives instead of an unearned price cut.',
@@ -473,9 +475,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     strategySecondary:
       'If you make a small courtesy exception, name it as one-time so it does not reset the baseline.',
     relatedScenarioSlugs: [
+      'out-of-scope-professionally',
+      'extra-work-for-free',
+      'scope-creep-polite-response',
       'extra-page-request',
-      'urgent-add-on-same-budget',
-      'unlimited-revisions',
+      'changing-requirements-response',
     ],
     toolPromptIntent:
       'Draft a professional reply when a client asks for extra work outside the agreed scope. Clarify the boundary and offer structured options instead of absorbing the request silently.',
@@ -514,9 +518,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     strategySecondary:
       'If they need more flexibility, convert it into a paid revision policy, support package, or change-order structure.',
     relatedScenarioSlugs: [
-      'extra-revision-rounds',
       'extra-work-outside-scope',
-      'post-project-support-request',
+      'extra-work-for-free',
+      'adding-small-requests',
+      'extra-page-request',
+      'out-of-scope-professionally',
     ],
     toolPromptIntent:
       'Write a clear reply when a client asks for unlimited revisions. Keep the tone professional and explain the revision boundary without sounding inflexible.',
@@ -585,8 +591,10 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     strategySecondary:
       'If urgency is real, give the client the fastest path to start once payment or contract steps are complete.',
     relatedScenarioSlugs: [
+      'deposit-not-paid-yet',
       'ask-for-payment-politely',
-      'final-payment-reminder',
+      'pay-later-request',
+      'payment-extension-request',
       'overdue-invoice-no-response',
     ],
     toolPromptIntent:
@@ -639,7 +647,9 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     relatedScenarioSlugs: [
       'overdue-invoice-no-response',
       'final-payment-reminder',
-      'start-before-payment',
+      'second-payment-reminder',
+      'unpaid-invoice-follow-up',
+      'payment-overdue-reminder',
     ],
     toolPromptIntent:
       'Draft a polite but clear payment follow-up when a client is late paying. Ask for the payment date or blocker without sounding awkward.',
@@ -688,9 +698,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     strategySecondary:
       'Keep the tone factual and professional instead of emotional or vague.',
     relatedScenarioSlugs: [
-      'ask-for-payment-politely',
+      'second-payment-reminder',
       'overdue-invoice-no-response',
-      'start-before-payment',
+      'ask-for-payment-politely',
+      'payment-overdue-reminder',
+      'unpaid-invoice-follow-up',
     ],
     toolPromptIntent:
       'Draft a final payment reminder for an overdue client invoice. Keep the tone firm, professional, and clear about the next step.',
