@@ -1,57 +1,117 @@
 {
   "metadata": {
-    "title": "Payment Reminder Template | FlowDockr",
-    "description": "A clear payment reminder structure for overdue freelance invoices."
+    "title": "Payment Reminder Templates for Freelancers | FlowDockr",
+    "description": "Structured overdue payment reminder examples for freelancers, with three distinct reminder stages and a direct path into the live overdue invoice scenario."
   },
   "page": {
-    "title": "Payment Reminder Template",
+    "title": "Payment Reminder Templates",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Payment Reminder Template",
-        "description": "Use this sequence to follow up professionally and increase payment response rate.",
+        "title": "Payment reminder templates for overdue invoices",
+        "description": "This page handles one job only: overdue payment reminder wording after the due date has passed. Use the overdue-payment guide for stage logic, then use these examples before moving into the scenario for a thread-specific version.",
         "buttons": [
           {
-            "title": "Apply in Payment Module",
-            "url": "/payment",
-            "icon": "CreditCard",
+            "title": "Read overdue payment guide",
+            "url": "/guides/how-to-remind-a-client-about-overdue-payment/",
+            "icon": "BookOpen",
             "variant": "default"
+          },
+          {
+            "title": "Open overdue invoice scenario",
+            "url": "/scenario/overdue-invoice-no-response",
+            "icon": "ArrowUpRight",
+            "variant": "outline"
           }
         ],
         "show_avatars": false,
         "show_award": false
       },
-      "features": {
-        "id": "features",
-        "title": "Template blocks",
-        "description": "Keep reminders concise and action-oriented.",
+      "examples": {
+        "id": "examples",
+        "title": "Three strategically different overdue reminder versions",
+        "description": "These are three reminder stages for late payment, not three rewrites of the same message.",
         "items": [
           {
-            "title": "Invoice reference",
-            "description": "Include amount, invoice number, and due date.",
-            "icon": "FileText"
+            "title": "First overdue reminder",
+            "description": "Example: \"Invoice [number] is now past due, so I wanted to follow up directly on the payment date. Please let me know when I should expect it.\"",
+            "icon": "BellRing"
           },
           {
-            "title": "Direct payment request",
-            "description": "Ask for payment confirmation with specific timeline.",
-            "icon": "Mail"
+            "title": "Second reminder after weak movement",
+            "description": "Example: \"Following up again on invoice [number], which is still outstanding after my last reminder. Please confirm the payment date today so I can plan next steps clearly on my side.\"",
+            "icon": "RotateCcw"
           },
           {
-            "title": "Escalation note",
-            "description": "State next step if payment is not received.",
+            "title": "Deadline-setting follow-up",
+            "description": "Example: \"This invoice remains outstanding, so I need to confirm the payment date now in order to decide the next step on my side. Please reply today with the date or the blocker.\"",
             "icon": "ShieldAlert"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "When to use each",
+        "title": "Choose the version by overdue stage",
+        "description": "Use the reminder that matches how late the invoice is and how much movement you have already had from the client.",
+        "items": [
+          {
+            "title": "Use the first overdue version right after the due date",
+            "description": "Best when payment has just become late and you need a direct reminder without over-escalating.",
+            "icon": "Clock3"
+          },
+          {
+            "title": "Use the second reminder after soft replies or no movement",
+            "description": "Best when the client has acknowledged the invoice but still has not given you a clear payment date.",
+            "icon": "CalendarClock"
+          },
+          {
+            "title": "Use the deadline-setting version before real escalation",
+            "description": "Best when previous reminders have not moved the thread and you need stronger accountability without turning hostile.",
+            "icon": "AlertCircle"
           }
         ]
       },
+      "bridge": {
+        "id": "bridge",
+        "title": "When the example is no longer enough",
+        "description": "Templates are useful until the thread becomes specific enough that the wording has to react to the actual client behavior.",
+        "items": [
+          {
+            "title": "The client stopped replying",
+            "description": "Use the overdue invoice scenario if silence is now part of the problem, not just lateness.",
+            "icon": "MessageCircleOff"
+          },
+          {
+            "title": "You need the wording to react to the exact thread",
+            "description": "Use the scenario if you need the message tailored to the client's last excuse, blocker, or promise.",
+            "icon": "FileCog"
+          },
+          {
+            "title": "You need help choosing the right pressure level",
+            "description": "Use the scenario if you are unsure whether to stay calm, get firmer, or signal the next action now.",
+            "icon": "GitBranch"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
       "cta": {
         "id": "cta",
-        "title": "Turn reminders into a repeatable workflow.",
-        "description": "Use Payment Protection to standardize your sequence.",
+        "title": "Use the scenario when the thread needs a tailored overdue reply.",
+        "description": "These examples give you reusable overdue wording. If the thread is already messy, quiet, or excuse-heavy, move into the scenario page to draft the next message from the real conversation.",
         "buttons": [
           {
-            "title": "Open Payment Protection",
-            "url": "/payment",
+            "title": "Open overdue invoice scenario",
+            "url": "/scenario/overdue-invoice-no-response",
             "icon": "ArrowRight"
+          },
+          {
+            "title": "Back to payment hub",
+            "url": "/payment",
+            "icon": "Home",
+            "variant": "outline"
           }
         ],
         "className": "bg-muted/50"

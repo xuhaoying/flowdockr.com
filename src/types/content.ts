@@ -134,6 +134,9 @@ export type GuidePageData = {
   intro: string;
   coreTakeaways: string[];
   sections: GuideSection[];
+  hubLink?: NextDecisionLink | null;
+  relatedGuides?: NextDecisionLink[];
+  recommendedTemplates?: NextDecisionLink[];
   recommendedScenarios: NextDecisionLink[];
   toolCta: ToolCTA;
   faq: FAQItem[];
@@ -278,6 +281,9 @@ export const guidePageDataSchema = z.object({
   intro: z.string().min(1),
   coreTakeaways: z.array(z.string().min(1)).min(1),
   sections: z.array(guideSectionSchema).min(1),
+  hubLink: nextDecisionLinkSchema.nullish(),
+  relatedGuides: z.array(nextDecisionLinkSchema).default([]),
+  recommendedTemplates: z.array(nextDecisionLinkSchema).default([]),
   recommendedScenarios: z.array(nextDecisionLinkSchema).min(1),
   toolCta: toolCtaSchema,
   faq: z.array(faqItemSchema).min(1),

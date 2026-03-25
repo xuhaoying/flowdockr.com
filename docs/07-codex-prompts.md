@@ -49,3 +49,30 @@ Constraints:
 - Do not add external UI libraries.
 ```
 
+## Prompt D: 执行 payment cluster phase-1 SEO 框架
+```text
+Context:
+Read:
+- product/seo/payment-cluster-phase1-execution-spec.md
+- product/seo/payment-cluster-phase1.manifest.json
+
+Task:
+Execute Flowdockr's phase-1 payment communication cluster.
+
+Hard constraints:
+- Only work inside the payment communication cluster.
+- Keep route ownership:
+  - /payment = hub
+  - /guides/* = guide
+  - /templates/* = template
+  - /scenario/* = scenario
+- Do not expand /pricing or unrelated communication topics.
+- Prefer strengthening existing payment scenarios before creating new pages.
+
+Required output:
+1. Summary of changes
+2. Page inventory by type
+3. Internal linking map
+4. Cannibalization risks avoided
+5. Why the structure supports ranking and product handoff
+```

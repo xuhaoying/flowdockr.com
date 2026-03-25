@@ -313,5 +313,379 @@
       }
     ],
     "notes": "Methodology guide and one of the most strategically important pages in the pricing cluster."
+  },
+  {
+    "slug": "how-to-follow-up-an-unpaid-invoice",
+    "pageType": "guide",
+    "cluster": "payment",
+    "tier": 1,
+    "url": "/guides/how-to-follow-up-an-unpaid-invoice/",
+    "h1": "How to follow up an unpaid invoice before it becomes overdue",
+    "metaTitle": "How to Follow Up an Unpaid Invoice Before It Becomes Overdue | Flowdockr",
+    "metaDescription": "Learn how to send the first unpaid-invoice follow-up while the invoice is still open or only just due. Use Flowdockr to move into the right next-stage payment asset if the thread becomes overdue.",
+    "heroSubheading": "This page owns the first payment-status follow-up, before you move into overdue reminders or escalation.",
+    "primaryIntent": "Help freelancers send the first unpaid-invoice follow-up while the invoice is still open, newly due, or vaguely delayed, before it becomes a true overdue reminder sequence.",
+    "primaryKeywords": [
+      "how to follow up an unpaid invoice",
+      "unpaid invoice follow up",
+      "follow up on unpaid invoice client"
+    ],
+    "supportKeywords": [
+      "invoice follow up email freelancer",
+      "open invoice follow up",
+      "how to ask for payment date",
+      "professional unpaid invoice follow up"
+    ],
+    "doNotCompeteWith": [
+      "how-to-remind-a-client-about-overdue-payment",
+      "payment-reminder",
+      "overdue-invoice-no-response"
+    ],
+    "intro": "This guide is for the first payment-status follow-up, when the invoice is still open or only just due and you want clarity before the situation becomes an overdue collection problem. The goal is to ask for timing cleanly without escalating too early.",
+    "coreTakeaways": [
+      "This page owns the first unpaid-invoice follow-up, not the overdue reminder sequence.",
+      "Treat the note as a payment-status message, not a relationship check-in.",
+      "Ask for a concrete payment date before the thread turns into a late-payment problem."
+    ],
+    "sections": [
+      {
+        "id": "define-the-stage",
+        "title": "Define the first unpaid-invoice stage correctly",
+        "summary": "An invoice can be unpaid without yet being a true overdue-payment problem. That stage needs a cleaner first follow-up, not a firmer reminder sequence.",
+        "points": [
+          "Use this page when the invoice is open, newly due, or still pending on their side.",
+          "Do not jump straight into overdue language if the due date has not clearly passed.",
+          "The first job is to get a date or blocker, not to escalate."
+        ]
+      },
+      {
+        "id": "decision-boundary",
+        "title": "Know when this page stops and the overdue guide starts",
+        "summary": "The query boundary is stage-based. This page owns the first follow-up. The overdue guide starts once the due date has clearly passed.",
+        "points": [
+          "If the invoice is open or just due, ask for timing calmly and directly.",
+          "If the due date has clearly passed, move to the overdue-payment guide instead of repeating this stage.",
+          "If the client stops replying after reminders, move into the live overdue scenario."
+        ]
+      },
+      {
+        "id": "example-wording",
+        "title": "Use wording for a first payment-status follow-up",
+        "summary": "The best first message sounds specific, direct, and invoice-led without sounding like a threat.",
+        "points": [
+          "Open-invoice version: \"Following up on invoice [number], which is still open on my side. Could you confirm the expected payment date?\"",
+          "Processing-delay version: \"Could you let me know whether there is anything blocking payment processing there that I should account for?\"",
+          "Avoid overdue language, deadline-setting, or escalation framing at this stage."
+        ]
+      },
+      {
+        "id": "what-to-do-next",
+        "title": "Move forward by stage, not by repeating the same note",
+        "summary": "Once the first follow-up has done its job, the next asset should match the new payment stage.",
+        "points": [
+          "If the invoice is still only open, use the unpaid-invoice scenario for a tailored first follow-up.",
+          "If the due date has passed, move sideways to the overdue-payment guide.",
+          "If the client goes quiet, move into the overdue invoice no-response scenario."
+        ]
+      }
+    ],
+    "hubLink": {
+      "href": "/payment",
+      "label": "Payment communication hub"
+    },
+    "relatedGuides": [
+      {
+        "href": "/guides/how-to-remind-a-client-about-overdue-payment/",
+        "label": "If the due date has passed, move to overdue payment reminders"
+      },
+      {
+        "href": "/guides/when-to-ask-for-a-deposit-before-work/",
+        "label": "If the issue is pre-kickoff, use the deposit guide instead"
+      }
+    ],
+    "recommendedTemplates": [],
+    "recommendedScenarios": [
+      {
+        "href": "/scenario/unpaid-invoice-follow-up",
+        "label": "Unpaid invoice follow-up scenario"
+      },
+      {
+        "href": "/scenario/payment-overdue-reminder",
+        "label": "If it is now overdue, use the overdue reminder scenario"
+      }
+    ],
+    "toolCta": {
+      "title": "Draft the next unpaid-invoice follow-up",
+      "body": "Paste the latest invoice thread and payment context. Flowdockr will help you draft the first follow-up without jumping too early into overdue escalation.",
+      "buttonLabel": "Draft this payment follow-up",
+      "toolSlug": "reply-generator"
+    },
+    "faq": [
+      {
+        "question": "Should you sound apologetic when following up on an unpaid invoice?",
+        "answer": "No. You can stay polite without weakening the payment ask. The key is invoice-specific wording, not apology."
+      },
+      {
+        "question": "What should you ask for in the follow-up?",
+        "answer": "Ask for a concrete payment date or the blocker preventing payment. That creates a clearer next step than a generic check-in."
+      },
+      {
+        "question": "When should you move beyond a basic follow-up?",
+        "answer": "Once the due date has clearly passed, this page stops being the right play. Move into the overdue reminder path instead of reusing first-follow-up language."
+      }
+    ],
+    "notes": "Core payment guide for first-stage unpaid-invoice follow-up intent. Explicitly separated from overdue reminder ownership."
+  },
+  {
+    "slug": "how-to-remind-a-client-about-overdue-payment",
+    "pageType": "guide",
+    "cluster": "payment",
+    "tier": 1,
+    "url": "/guides/how-to-remind-a-client-about-overdue-payment/",
+    "h1": "How to remind a client about overdue payment after the due date passes",
+    "metaTitle": "How to Remind a Client About Overdue Payment After the Due Date | Flowdockr",
+    "metaDescription": "Learn how to send overdue payment reminders after the due date has passed, with a staged reminder sequence, firmer wording, and a clean handoff into the live overdue scenario.",
+    "heroSubheading": "This page starts after the due date, when you need a real reminder sequence instead of a first invoice follow-up.",
+    "primaryIntent": "Help freelancers handle post-due-date payment reminders with staged escalation logic instead of repeating first-follow-up language.",
+    "primaryKeywords": [
+      "how to remind a client about overdue payment",
+      "overdue payment reminder to client",
+      "client payment overdue follow up"
+    ],
+    "supportKeywords": [
+      "overdue invoice reminder freelancer",
+      "late payment reminder client",
+      "how to escalate overdue payment"
+    ],
+    "doNotCompeteWith": [
+      "how-to-follow-up-an-unpaid-invoice",
+      "payment-reminder",
+      "overdue-invoice-no-response"
+    ],
+    "intro": "This guide owns the stage after the due date has passed. Once payment is late, your job changes from asking for status to running a controlled reminder sequence with stronger wording and clearer next-step pressure.",
+    "coreTakeaways": [
+      "This page owns overdue reminders, not the first unpaid-invoice check-in.",
+      "Overdue reminders should state the late status plainly and ask for a date.",
+      "Each reminder stage should become firmer while staying commercially clean."
+    ],
+    "sections": [
+      {
+        "id": "stage-boundary",
+        "title": "Start this page only after the due date has passed",
+        "summary": "This guide is not for the first unpaid-invoice follow-up. It starts when the payment is late and the reminder needs stronger structure.",
+        "points": [
+          "If the invoice is still open but not overdue, go back to the unpaid-invoice guide.",
+          "If the due date has passed, say so directly instead of writing another status check.",
+          "Once you are in overdue territory, each reminder should clarify the next consequence or next step."
+        ]
+      },
+      {
+        "id": "reminder-stages",
+        "title": "Use a real overdue reminder sequence",
+        "summary": "The message should change with the stage of lateness, not stay stuck in the same tone.",
+        "points": [
+          "First overdue reminder: name the late status and ask for the payment date.",
+          "Second reminder: ask for a confirmed date today and make the thread harder to ignore.",
+          "Later-stage reminder: make the next action or boundary explicit instead of sending another generic nudge."
+        ]
+      },
+      {
+        "id": "example-wording",
+        "title": "Use wording that fits the overdue stage",
+        "summary": "Overdue reminder wording should sound firmer than the first follow-up because the commercial fact has changed.",
+        "points": [
+          "First overdue version: \"Invoice [number] is now past due, so I wanted to follow up directly on the payment date.\"",
+          "Second reminder version: \"Please confirm the payment date today so I can plan the next step clearly on my side.\"",
+          "Avoid slipping back into soft check-in language that belongs to the earlier unpaid-invoice stage."
+        ]
+      },
+      {
+        "id": "what-to-do-next",
+        "title": "Move from reminder logic into execution",
+        "summary": "Once the payment is overdue, the cluster path should get more specific rather than more repetitive.",
+        "points": [
+          "Use the payment reminder template when you want copy-ready overdue reminder versions.",
+          "Use the overdue invoice no-response scenario when the thread has gone quiet or prior reminders failed.",
+          "Move sideways to the unpaid invoice guide only if you realize the invoice is not actually overdue yet."
+        ]
+      }
+    ],
+    "hubLink": {
+      "href": "/payment",
+      "label": "Payment communication hub"
+    },
+    "relatedGuides": [
+      {
+        "href": "/guides/how-to-follow-up-an-unpaid-invoice/",
+        "label": "If the invoice is not overdue yet, start with the first follow-up guide"
+      },
+      {
+        "href": "/guides/when-to-ask-for-a-deposit-before-work/",
+        "label": "If the issue is pre-kickoff, use the deposit guide instead"
+      }
+    ],
+    "recommendedTemplates": [
+      {
+        "href": "/templates/payment-reminder",
+        "label": "Payment reminder templates for overdue invoices"
+      }
+    ],
+    "recommendedScenarios": [
+      {
+        "href": "/scenario/overdue-invoice-no-response",
+        "label": "Overdue invoice no-response scenario"
+      },
+      {
+        "href": "/scenario/payment-overdue-reminder",
+        "label": "First overdue reminder scenario"
+      }
+    ],
+    "toolCta": {
+      "title": "Draft the right overdue reminder",
+      "body": "Paste the late-payment thread and say whether this is the first overdue reminder, a second reminder, or a later-stage follow-up. Flowdockr will help you match the right level of pressure.",
+      "buttonLabel": "Draft this overdue reminder",
+      "toolSlug": "reply-generator"
+    },
+    "faq": [
+      {
+        "question": "How is an overdue reminder different from a normal invoice follow-up?",
+        "answer": "Once the due date passes, this page takes over. You can state the overdue status directly and run a reminder sequence instead of sending another early-stage status check."
+      },
+      {
+        "question": "Should each overdue reminder use completely different wording?",
+        "answer": "No. The structure should stay consistent while the urgency becomes firmer and the next step becomes clearer."
+      },
+      {
+        "question": "What is the biggest mistake with overdue reminders?",
+        "answer": "Repeating vague language without a stronger ask. That creates more delay without creating accountability."
+      }
+    ],
+    "notes": "Core payment guide for post-due-date reminder intent. Explicitly separated from first unpaid-invoice follow-up ownership."
+  },
+  {
+    "slug": "when-to-ask-for-a-deposit-before-work",
+    "pageType": "guide",
+    "cluster": "payment",
+    "tier": 1,
+    "url": "/guides/when-to-ask-for-a-deposit-before-work/",
+    "h1": "When to ask for a deposit before work",
+    "metaTitle": "When to Ask for a Deposit Before Work | Flowdockr",
+    "metaDescription": "Learn when to ask for a deposit before work starts, how to protect kickoff without sounding rigid, and how to move into the right deposit scenario in Flowdockr.",
+    "heroSubheading": "A deposit is not just a payment request. It is the boundary that protects kickoff.",
+    "primaryIntent": "Help freelancers decide when a deposit should be required before work starts and how to communicate that rule clearly.",
+    "primaryKeywords": [
+      "when to ask for a deposit before work",
+      "deposit before starting freelance project",
+      "when to require deposit from client"
+    ],
+    "supportKeywords": [
+      "advance payment before work",
+      "deposit policy freelancer",
+      "start after deposit"
+    ],
+    "doNotCompeteWith": [
+      "advance-payment-message-examples",
+      "deposit-not-paid-yet",
+      "how-to-follow-up-an-unpaid-invoice"
+    ],
+    "intro": "The right time to ask for a deposit is before kickoff becomes ambiguous. A deposit protects time, reserves the project slot, and stops the work from starting on promises alone.",
+    "coreTakeaways": [
+      "Ask for the deposit before reserving the real start date.",
+      "Explain the deposit as part of the project structure, not as a trust test.",
+      "If the client hesitates, reduce friction without removing the payment boundary."
+    ],
+    "sections": [
+      {
+        "id": "why-deposit-timing-matters",
+        "title": "Why deposit timing matters",
+        "summary": "Late deposit conversations usually happen because the payment step was left too vague before kickoff.",
+        "points": [
+          "A deposit marks commitment and protects your time allocation.",
+          "Starting early makes the payment rule harder to enforce later.",
+          "The cleanest deposit boundary is attached to kickoff, not to a vague future moment."
+        ]
+      },
+      {
+        "id": "when-deposit-is-required",
+        "title": "Know when the deposit should be non-negotiable",
+        "summary": "Some projects can absorb small delays. Others become risky immediately if work starts before payment.",
+        "points": [
+          "Use a firm deposit rule for custom work, booked production time, and work with a hard start date.",
+          "Use the same rule when the client needs fast turnaround or reserved availability.",
+          "Do not let enthusiasm about the project replace the payment step."
+        ]
+      },
+      {
+        "id": "situation-branches",
+        "title": "Use different wording for different client pushback",
+        "summary": "The right message depends on whether the client is organized, hesitant, or trying to start before paying.",
+        "points": [
+          "If they are simply organizing payment, restate the deposit step and next action clearly.",
+          "If they need reassurance, offer proof or clarification without adding unpaid custom work.",
+          "If they want to start before paying, keep kickoff explicitly tied to the deposit."
+        ]
+      },
+      {
+        "id": "what-to-do-next",
+        "title": "Move into the right deposit asset",
+        "summary": "Once you know the deposit pressure type, use the matching template or live scenario.",
+        "points": [
+          "Use the advance-payment template when you need message options right now.",
+          "Use the unpaid deposit scenario when kickoff is already blocked.",
+          "Move sideways to the unpaid invoice guide when the payment issue happens later in the project instead of before kickoff."
+        ]
+      }
+    ],
+    "hubLink": {
+      "href": "/payment",
+      "label": "Payment communication hub"
+    },
+    "relatedGuides": [
+      {
+        "href": "/guides/how-to-follow-up-an-unpaid-invoice/",
+        "label": "How to follow up an unpaid invoice"
+      },
+      {
+        "href": "/guides/how-to-remind-a-client-about-overdue-payment/",
+        "label": "How to remind a client about overdue payment"
+      }
+    ],
+    "recommendedTemplates": [
+      {
+        "href": "/templates/advance-payment-message-examples",
+        "label": "Advance payment message examples"
+      }
+    ],
+    "recommendedScenarios": [
+      {
+        "href": "/scenario/deposit-not-paid-yet",
+        "label": "Deposit not paid yet scenario"
+      },
+      {
+        "href": "/scenario/start-before-payment",
+        "label": "Client wants you to start before payment"
+      }
+    ],
+    "toolCta": {
+      "title": "Draft the deposit message before kickoff slips",
+      "body": "Paste the client's latest note and where the deposit stands. Flowdockr will help you keep the start-after-payment boundary clear without sounding stiff.",
+      "buttonLabel": "Draft this deposit message",
+      "toolSlug": "reply-generator"
+    },
+    "faq": [
+      {
+        "question": "When should a freelancer ask for the deposit?",
+        "answer": "Before the real start date is reserved and before meaningful work begins. That keeps the deposit tied to commitment, not to cleanup after the fact."
+      },
+      {
+        "question": "How do you ask for a deposit without sounding distrustful?",
+        "answer": "Frame it as part of the project structure: once the deposit is in place, kickoff is locked and the project can move forward cleanly."
+      },
+      {
+        "question": "What if the client asks to start first and pay later?",
+        "answer": "Keep kickoff tied to the deposit. You can reduce friction and explain the next step clearly, but do not turn the payment condition into an optional preference."
+      }
+    ],
+    "notes": "Core payment guide for deposit timing and advance-payment boundary intent."
   }
 ]
