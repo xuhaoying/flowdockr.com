@@ -63,6 +63,7 @@
     "seo:factory:content": "node scripts/seo/generate-content-prompt-jobs-v2.mjs --source=seo-pages && node scripts/seo/generate-content-drafts-v2.mjs && node scripts/seo/publish-content-drafts-v2.mjs && node scripts/seo/quality-gate-content-v2.mjs --source=prompt-jobs && node scripts/seo/build-internal-links-graph-v2.mjs && node scripts/seo/generate-sitemap-v2.mjs",
     "qa:deal-quality": "tsx scripts/flowdockr/evaluate-deal-strategy-quality.ts",
     "qa:pricing-audit": "tsx scripts/flowdockr/export-pricing-cluster-audit.ts",
+    "qa:pricing-performance": "tsx scripts/flowdockr/export-pricing-cluster-performance.ts",
     "qa:pricing-content": "tsx scripts/flowdockr/validate-pricing-content.ts",
     "qa:pricing-taxonomy": "tsx scripts/flowdockr/validate-pricing-taxonomy.ts",
     "qa:pricing-runtime-smoke": "tsx scripts/flowdockr/smoke-pricing-runtime.ts",

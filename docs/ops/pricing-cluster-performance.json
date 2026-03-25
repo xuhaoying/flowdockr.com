@@ -1,0 +1,751 @@
+{
+  "generatedAt": "2026-03-25T08:49:39.080Z",
+  "filters": {
+    "days": 30,
+    "limit": 500
+  },
+  "thresholds": {
+    "insufficientDataViewThreshold": 10,
+    "discoverabilityViewThreshold": 25,
+    "ctaViewThreshold": 40,
+    "lowGeneratorClickRateThreshold": 0.08,
+    "generationClickThreshold": 8,
+    "lowGenerationSuccessRateThreshold": 0.6,
+    "monetizationGenerationThreshold": 5,
+    "lowCheckoutIntentRateThreshold": 0.15,
+    "purchaseClickThreshold": 3,
+    "lowPurchaseRateThreshold": 0.35,
+    "highPotentialViewThreshold": 30,
+    "highPotentialClickRateThreshold": 0.14,
+    "highPotentialGenerationSuccessRateThreshold": 0.75,
+    "highPotentialCheckoutIntentRateThreshold": 0.2,
+    "highPotentialPurchaseRateThreshold": 0.4
+  },
+  "dataAvailability": {
+    "analyticsEvents": false,
+    "generationHistory": false,
+    "purchases": false
+  },
+  "dataSources": {
+    "views": "scenario_analytics_event rows mirrored from page_view_pricing_scenario as fd_scenario_view with pageType=pricing",
+    "generateClicks": "scenario_analytics_event rows mirrored from click_generate_from_pricing_scenario as fd_tool_start with pageType=pricing",
+    "generateSuccesses": "scenario_analytics_event rows mirrored from generate_success_from_pricing_scenario as fd_generation_success with pageType=pricing",
+    "historySaves": "derived from generation rows with pricing attribution and history-enabled support levels (pro/studio)",
+    "checkoutClicks": "derived from persisted purchase rows with pricing attribution metadata; represents checkout session starts that reached the server",
+    "purchaseSuccesses": "derived from persisted purchase rows with pricing attribution metadata and paid status with credits granted"
+  },
+  "limitations": [
+    "History saves are derived from stored generation rows with pricing attribution plus history-enabled support levels, not from a separate persisted save_history analytics table.",
+    "Checkout clicks are derived from persisted purchase rows with pricing attribution metadata, so they represent checkout sessions created server-side rather than every client-side click attempt.",
+    "Purchase successes are counted from purchase rows created inside the reporting window that later resolved to paid with credits granted.",
+    "Pricing view/generate/success analytics were unavailable when this report ran, so those fields are null rather than estimated.",
+    "Generation history rows were unavailable when this report ran, so historySaves is null rather than inferred.",
+    "Purchase rows were unavailable when this report ran, so checkout and purchase metrics are null rather than estimated."
+  ],
+  "summary": {
+    "totalPages": 28,
+    "pagesWithTraffic": 0,
+    "pagesWithGeneratorClicks": 0,
+    "pagesWithCheckoutIntent": 0,
+    "pagesWithPurchaseSignals": 0,
+    "highPotentialPages": [],
+    "needsMappingUpgradePages": [],
+    "topFamiliesByViews": [],
+    "topFamiliesByCheckoutIntent": []
+  },
+  "prioritizedActions": [],
+  "pages": [
+    {
+      "slug": "budget-lower-than-expected",
+      "title": "Budget lower than expected",
+      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | Flowdockr",
+      "family": "budget-mismatch",
+      "canonicalRoute": "/pricing/budget-lower-than-expected/",
+      "generatorScenarioSlug": "budget-limited",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "can-you-do-it-cheaper",
+      "title": "Can you do it cheaper?",
+      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/can-you-do-it-cheaper/",
+      "generatorScenarioSlug": "discount-request",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "cheaper-competitor-comparison",
+      "title": "Cheaper competitor comparison",
+      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr",
+      "family": "competitor-comparison",
+      "canonicalRoute": "/pricing/cheaper-competitor-comparison/",
+      "generatorScenarioSlug": "cheaper-freelancer",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-asking-for-discount",
+      "title": "How to respond when a client asks for a discount",
+      "seoTitle": "How to Respond When a Client Asks for a Discount | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/client-asking-for-discount/",
+      "generatorScenarioSlug": "discount-request",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-asking-for-extra-work",
+      "title": "How to respond when a client asks for extra work",
+      "seoTitle": "How to Respond When a Client Asks for Extra Work | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/client-asking-for-extra-work/",
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-expects-immediate-response",
+      "title": "Client expects an immediate response: what to say",
+      "seoTitle": "Client Expects an Immediate Response? What to Say | Flowdockr",
+      "family": "availability-boundary",
+      "canonicalRoute": "/pricing/client-expects-immediate-response/",
+      "generatorScenarioSlug": "client-expects-immediate-response",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-messaging-outside-work-hours",
+      "title": "Client messaging outside work hours: what to say",
+      "seoTitle": "Client Messaging Outside Work Hours? What to Say | Flowdockr",
+      "family": "availability-boundary",
+      "canonicalRoute": "/pricing/client-messaging-outside-work-hours/",
+      "generatorScenarioSlug": "client-messaging-outside-work-hours",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-negotiating-price",
+      "title": "Client is negotiating price: what to say",
+      "seoTitle": "Client Negotiating Price? What to Say Next | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/client-negotiating-price/",
+      "generatorScenarioSlug": "discount-request",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "client-requesting-additional-revisions",
+      "title": "How to handle a client requesting additional revisions",
+      "seoTitle": "How to Handle a Client Requesting Additional Revisions | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/client-requesting-additional-revisions/",
+      "generatorScenarioSlug": "unlimited-revisions",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "decline-project-politely",
+      "title": "How to decline a project politely",
+      "seoTitle": "How to Decline a Project Politely | Flowdockr",
+      "family": "project-decline",
+      "canonicalRoute": "/pricing/decline-project-politely/",
+      "generatorScenarioSlug": "decline-project-politely",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "decline-underpaid-project-politely",
+      "title": "How to decline an underpaid project politely",
+      "seoTitle": "How to Decline an Underpaid Project Politely | Flowdockr",
+      "family": "budget-mismatch",
+      "canonicalRoute": "/pricing/decline-underpaid-project-politely/",
+      "generatorScenarioSlug": "do-it-for-less",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "discount-pressure-before-signing",
+      "title": "Discount pressure before signing",
+      "seoTitle": "How to Handle Discount Pressure Before Signing | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/discount-pressure-before-signing/",
+      "generatorScenarioSlug": "discount-request",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "free-trial-work-request",
+      "title": "Free trial work request",
+      "seoTitle": "How to Respond to a Free Trial Work Request | Flowdockr",
+      "family": "free-work-boundary",
+      "canonicalRoute": "/pricing/free-trial-work-request/",
+      "generatorScenarioSlug": "free-sample-request-response",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "more-work-same-price",
+      "title": "More work for the same price",
+      "seoTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/more-work-same-price/",
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "more-work-than-agreed",
+      "title": "Client wants more work than agreed",
+      "seoTitle": "Client Wants More Work Than Agreed? What to Say | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/more-work-than-agreed/",
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "price-pushback-after-proposal",
+      "title": "Price pushback after proposal",
+      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr",
+      "family": "price-pushback",
+      "canonicalRoute": "/pricing/price-pushback-after-proposal/",
+      "generatorScenarioSlug": "quote-too-high",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "refuse-extra-work-without-losing-client",
+      "title": "How to refuse extra work without losing the client",
+      "seoTitle": "How to Refuse Extra Work Without Losing the Client | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/refuse-extra-work-without-losing-client/",
+      "generatorScenarioSlug": "set-boundaries-politely",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "refuse-project-due-to-workload",
+      "title": "How to refuse a project due to workload",
+      "seoTitle": "How to Refuse a Project Due to Workload | Flowdockr",
+      "family": "project-decline",
+      "canonicalRoute": "/pricing/refuse-project-due-to-workload/",
+      "generatorScenarioSlug": "refuse-project-due-to-workload",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "reject-client-without-burning-bridge",
+      "title": "How to reject a client without burning the bridge",
+      "seoTitle": "How to Reject a Client Without Burning the Bridge | Flowdockr",
+      "family": "project-decline",
+      "canonicalRoute": "/pricing/reject-client-without-burning-bridge/",
+      "generatorScenarioSlug": "reject-client-without-burning-bridge",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "say-no-to-client-professionally",
+      "title": "How to say no to a client professionally",
+      "seoTitle": "How to Say No to a Client Professionally | Flowdockr",
+      "family": "project-decline",
+      "canonicalRoute": "/pricing/say-no-to-client-professionally/",
+      "generatorScenarioSlug": "say-no-to-client-professionally",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "say-no-to-low-budget-client",
+      "title": "How to say no to a low-budget client",
+      "seoTitle": "How to Say No to a Low-Budget Client | Flowdockr",
+      "family": "budget-mismatch",
+      "canonicalRoute": "/pricing/say-no-to-low-budget-client/",
+      "generatorScenarioSlug": "say-no-to-low-budget-client",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "say-no-to-scope-creep-politely",
+      "title": "How to say no to scope creep politely",
+      "seoTitle": "How to Say No to Scope Creep Politely | Flowdockr",
+      "family": "scope-boundary",
+      "canonicalRoute": "/pricing/say-no-to-scope-creep-politely/",
+      "generatorScenarioSlug": "set-boundaries-politely",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "set-boundaries-with-demanding-client",
+      "title": "How to set boundaries with a demanding client",
+      "seoTitle": "How to Set Boundaries With a Demanding Client | Flowdockr",
+      "family": "availability-boundary",
+      "canonicalRoute": "/pricing/set-boundaries-with-demanding-client/",
+      "generatorScenarioSlug": "set-boundaries-with-demanding-client",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "small-discount-before-closing",
+      "title": "Small discount before closing",
+      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/small-discount-before-closing/",
+      "generatorScenarioSlug": "discount-request",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "auditFlags": [
+        "weak-generator-fit"
+      ],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "stand-firm-on-pricing",
+      "title": "How to stand firm on pricing as a freelancer",
+      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | Flowdockr",
+      "family": "discount-pressure",
+      "canonicalRoute": "/pricing/stand-firm-on-pricing/",
+      "generatorScenarioSlug": "stand-firm-on-pricing",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "tell-client-you-are-unavailable",
+      "title": "How to tell a client you are unavailable",
+      "seoTitle": "How to Tell a Client You Are Unavailable | Flowdockr",
+      "family": "availability-boundary",
+      "canonicalRoute": "/pricing/tell-client-you-are-unavailable/",
+      "generatorScenarioSlug": "tell-client-you-are-unavailable",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "turn-down-freelance-work-nicely",
+      "title": "How to turn down freelance work nicely",
+      "seoTitle": "How to Turn Down Freelance Work Nicely | Flowdockr",
+      "family": "project-decline",
+      "canonicalRoute": "/pricing/turn-down-freelance-work-nicely/",
+      "generatorScenarioSlug": "turn-down-freelance-work-nicely",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    },
+    {
+      "slug": "urgent-request-last-minute",
+      "title": "How to respond to an urgent last-minute request",
+      "seoTitle": "How to Respond to an Urgent Last-Minute Request | Flowdockr",
+      "family": "availability-boundary",
+      "canonicalRoute": "/pricing/urgent-request-last-minute/",
+      "generatorScenarioSlug": "urgent-request-last-minute",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "auditFlags": [],
+      "views": null,
+      "generateClicks": null,
+      "generateSuccesses": null,
+      "historySaves": null,
+      "checkoutClicks": null,
+      "purchaseSuccesses": null,
+      "generatorClickRate": null,
+      "generationSuccessRate": null,
+      "checkoutIntentRate": null,
+      "purchaseRate": null,
+      "diagnostics": [
+        "insufficient_data"
+      ]
+    }
+  ]
+}
