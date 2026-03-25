@@ -44,7 +44,7 @@ function validatePricingContent(): Issue[] {
   const issues: Issue[] = [];
 
   const scenarios = getAllScenarios();
-  const guides = getAllGuides();
+  const guides = getAllGuides().filter((guide) => guide.cluster === 'pricing');
   const tools = getAllTools();
   const hub = getPricingHub();
 
@@ -56,7 +56,10 @@ function validatePricingContent(): Issue[] {
   }
 
   if (guides.length !== 3) {
-    pushWarn(issues, `Expected 3 launch guides, found ${guides.length}.`);
+    pushWarn(
+      issues,
+      `Expected 3 launch guides in pricing cluster, found ${guides.length}.`
+    );
   }
 
   if (tools.length !== 2) {
