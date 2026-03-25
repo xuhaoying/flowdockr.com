@@ -1,0 +1,451 @@
+{
+  "name": "payment_cluster_phase1",
+  "generated_at": "2026-03-25",
+  "strategic_goal": "Build Flowdockr's first structured SEO to product handoff system around freelance client communication, starting with payment communication.",
+  "root_topic": "freelance client communication",
+  "phase_1_cluster": "payment communication",
+  "future_clusters": [
+    "scope / boundary communication",
+    "discount / negotiation communication"
+  ],
+  "priority_order": [
+    "payment",
+    "scope_boundary",
+    "discount_negotiation"
+  ],
+  "allowed_page_types": [
+    "hub",
+    "guide",
+    "template",
+    "scenario"
+  ],
+  "do_not_expand": [
+    "generic professional email topics",
+    "employee / manager communication",
+    "recruiter / interview communication",
+    "dating / breakup / friendship communication",
+    "generic life communication content",
+    "pricing / discount cluster expansion during payment phase"
+  ],
+  "route_ownership": {
+    "/payment": "hub",
+    "/guides/*": "guide",
+    "/templates/*": "template",
+    "/scenario/*": "scenario"
+  },
+  "repo_sources": {
+    "hub": [
+      "src/config/locale/messages/en/pages/payment.json"
+    ],
+    "guides": [
+      "src/config/locale/messages/en/pages/guides/client-not-paying.json",
+      "content/guides/guides.json"
+    ],
+    "templates": [
+      "src/config/locale/messages/en/pages/templates/payment-reminder.json"
+    ],
+    "scenarios": [
+      "src/content/scenario-pages/scenario-seeds.ts",
+      "src/content/scenario-pages/scenario-dataset-v1-top20.ts",
+      "src/content/scenario-pages/scenario-batch-1.ts",
+      "src/content/scenario-pages/scenario-batch-2.ts"
+    ],
+    "out_of_scope_pricing": [
+      "content/pricing/hub.json",
+      "content/pricing/scenarios.json",
+      "src/data/pricing-cluster.ts"
+    ]
+  },
+  "audit": [
+    {
+      "route": "/payment",
+      "type": "hub",
+      "status": "salvageable",
+      "alignment": "phase1_core",
+      "source": [
+        "src/config/locale/messages/en/pages/payment.json"
+      ],
+      "action": "rebuild_as_payment_cluster_hub"
+    },
+    {
+      "route": "/guides/client-not-paying",
+      "type": "guide",
+      "status": "salvageable",
+      "alignment": "phase1_adjacent",
+      "source": [
+        "src/config/locale/messages/en/pages/guides/client-not-paying.json"
+      ],
+      "action": "demote_or_consolidate_after_narrow_guides_exist"
+    },
+    {
+      "route": "/templates/payment-reminder",
+      "type": "template",
+      "status": "thin_weak",
+      "alignment": "phase1_core",
+      "source": [
+        "src/config/locale/messages/en/pages/templates/payment-reminder.json"
+      ],
+      "action": "rebuild_as_single_task_bridge_page"
+    },
+    {
+      "route": "/scenario/ask-for-payment-politely",
+      "type": "scenario",
+      "status": "already_strong",
+      "alignment": "phase1_core",
+      "source": [
+        "src/content/scenario-pages/scenario-seeds.ts"
+      ],
+      "action": "strengthen_backlinks_and_keep_as_seed"
+    },
+    {
+      "route": "/scenario/payment-extension-request",
+      "type": "scenario",
+      "status": "already_strong",
+      "alignment": "phase1_core",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "strengthen_backlinks_and_keep_as_seed"
+    },
+    {
+      "route": "/scenario/deposit-not-paid-yet",
+      "type": "scenario",
+      "status": "already_strong",
+      "alignment": "phase1_core",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "strengthen_backlinks_and_keep_as_seed"
+    },
+    {
+      "route": "/scenario/overdue-invoice-no-response",
+      "type": "scenario",
+      "status": "already_strong",
+      "alignment": "phase1_core",
+      "source": [
+        "src/content/scenario-pages/scenario-dataset-v1-top20.ts"
+      ],
+      "action": "strengthen_backlinks_and_keep_as_seed"
+    },
+    {
+      "route": "/scenario/unpaid-invoice-follow-up",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/scenario/payment-overdue-reminder",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/scenario/second-payment-reminder",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/scenario/final-payment-after-completion",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/scenario/pay-later-request",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-batch-2.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/scenario/final-payment-reminder",
+      "type": "scenario",
+      "status": "salvageable",
+      "alignment": "phase1_supporting",
+      "source": [
+        "src/content/scenario-pages/scenario-seeds.ts"
+      ],
+      "action": "connect_into_cluster"
+    },
+    {
+      "route": "/pricing",
+      "type": "hub",
+      "status": "not_aligned",
+      "alignment": "future_phase3",
+      "source": [
+        "content/pricing/hub.json",
+        "src/app/[locale]/(landing)/pricing/page.tsx"
+      ],
+      "action": "freeze_for_phase1"
+    },
+    {
+      "route": "/pricing/*",
+      "type": "scenario",
+      "status": "not_aligned",
+      "alignment": "future_phase3",
+      "source": [
+        "content/pricing/scenarios.json",
+        "src/data/pricing-cluster.ts"
+      ],
+      "action": "freeze_for_phase1"
+    },
+    {
+      "route": "content/guides/guides.json existing three pricing guides",
+      "type": "guide",
+      "status": "not_aligned",
+      "alignment": "future_phase3",
+      "source": [
+        "content/guides/guides.json"
+      ],
+      "action": "preserve_without_expansion"
+    }
+  ],
+  "seed_nodes": [
+    "/scenario/ask-for-payment-politely",
+    "/scenario/payment-extension-request",
+    "/scenario/deposit-not-paid-yet",
+    "/scenario/overdue-invoice-no-response"
+  ],
+  "phase1_deliverable": {
+    "hub": [
+      "/payment"
+    ],
+    "guides": [
+      "/guides/how-to-ask-a-client-for-payment",
+      "/guides/how-to-follow-up-an-unpaid-invoice",
+      "/guides/how-to-remind-a-client-about-overdue-payment",
+      "/guides/when-to-ask-for-a-deposit-before-work",
+      "/guides/how-to-ask-for-advance-payment-politely",
+      "/guides/how-to-ask-for-final-payment-professionally"
+    ],
+    "templates": [
+      "/templates/payment-reminder",
+      "/templates/advance-payment-message-examples",
+      "/templates/overdue-invoice-follow-up-examples"
+    ],
+    "strengthen_scenarios": [
+      "/scenario/ask-for-payment-politely",
+      "/scenario/deposit-not-paid-yet",
+      "/scenario/payment-extension-request",
+      "/scenario/overdue-invoice-no-response",
+      "/scenario/final-payment-after-completion"
+    ],
+    "supporting_scenarios": [
+      "/scenario/unpaid-invoice-follow-up",
+      "/scenario/payment-overdue-reminder",
+      "/scenario/second-payment-reminder",
+      "/scenario/pay-later-request",
+      "/scenario/final-payment-reminder",
+      "/scenario/delayed-payment-follow-up"
+    ]
+  },
+  "link_graph": {
+    "/payment": {
+      "guides": [
+        "/guides/how-to-ask-a-client-for-payment",
+        "/guides/how-to-follow-up-an-unpaid-invoice",
+        "/guides/how-to-remind-a-client-about-overdue-payment",
+        "/guides/when-to-ask-for-a-deposit-before-work",
+        "/guides/how-to-ask-for-advance-payment-politely",
+        "/guides/how-to-ask-for-final-payment-professionally"
+      ],
+      "templates": [
+        "/templates/payment-reminder",
+        "/templates/advance-payment-message-examples",
+        "/templates/overdue-invoice-follow-up-examples"
+      ],
+      "scenarios": [
+        "/scenario/ask-for-payment-politely",
+        "/scenario/payment-extension-request",
+        "/scenario/deposit-not-paid-yet",
+        "/scenario/overdue-invoice-no-response"
+      ]
+    },
+    "/guides/how-to-ask-a-client-for-payment": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/how-to-follow-up-an-unpaid-invoice",
+        "/guides/how-to-ask-for-final-payment-professionally"
+      ],
+      "down": [
+        "/templates/payment-reminder",
+        "/scenario/ask-for-payment-politely",
+        "/scenario/final-payment-after-completion"
+      ]
+    },
+    "/guides/how-to-follow-up-an-unpaid-invoice": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/how-to-ask-a-client-for-payment",
+        "/guides/how-to-remind-a-client-about-overdue-payment"
+      ],
+      "down": [
+        "/templates/overdue-invoice-follow-up-examples",
+        "/scenario/unpaid-invoice-follow-up",
+        "/scenario/overdue-invoice-no-response"
+      ]
+    },
+    "/guides/how-to-remind-a-client-about-overdue-payment": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/how-to-follow-up-an-unpaid-invoice",
+        "/guides/how-to-ask-for-final-payment-professionally"
+      ],
+      "down": [
+        "/templates/payment-reminder",
+        "/scenario/payment-overdue-reminder",
+        "/scenario/second-payment-reminder"
+      ]
+    },
+    "/guides/when-to-ask-for-a-deposit-before-work": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/how-to-ask-for-advance-payment-politely",
+        "/guides/how-to-ask-a-client-for-payment"
+      ],
+      "down": [
+        "/templates/advance-payment-message-examples",
+        "/scenario/deposit-not-paid-yet",
+        "/scenario/start-before-payment"
+      ]
+    },
+    "/guides/how-to-ask-for-advance-payment-politely": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/when-to-ask-for-a-deposit-before-work",
+        "/guides/how-to-ask-a-client-for-payment"
+      ],
+      "down": [
+        "/templates/advance-payment-message-examples",
+        "/scenario/deposit-not-paid-yet",
+        "/scenario/payment-extension-request"
+      ]
+    },
+    "/guides/how-to-ask-for-final-payment-professionally": {
+      "up": "/payment",
+      "sideways": [
+        "/guides/how-to-ask-a-client-for-payment",
+        "/guides/how-to-remind-a-client-about-overdue-payment"
+      ],
+      "down": [
+        "/templates/payment-reminder",
+        "/scenario/final-payment-after-completion",
+        "/scenario/final-payment-reminder"
+      ]
+    },
+    "/scenario/ask-for-payment-politely": {
+      "backlinks": [
+        "/guides/how-to-ask-a-client-for-payment",
+        "/templates/payment-reminder"
+      ],
+      "nearby": [
+        "/scenario/final-payment-after-completion"
+      ]
+    },
+    "/scenario/deposit-not-paid-yet": {
+      "backlinks": [
+        "/guides/when-to-ask-for-a-deposit-before-work",
+        "/templates/advance-payment-message-examples"
+      ],
+      "nearby": [
+        "/scenario/start-before-payment"
+      ]
+    },
+    "/scenario/payment-extension-request": {
+      "backlinks": [
+        "/guides/how-to-remind-a-client-about-overdue-payment",
+        "/templates/payment-reminder"
+      ],
+      "nearby": [
+        "/scenario/pay-later-request"
+      ]
+    },
+    "/scenario/overdue-invoice-no-response": {
+      "backlinks": [
+        "/guides/how-to-follow-up-an-unpaid-invoice",
+        "/templates/overdue-invoice-follow-up-examples"
+      ],
+      "nearby": [
+        "/scenario/unpaid-invoice-follow-up",
+        "/scenario/second-payment-reminder"
+      ]
+    },
+    "/scenario/final-payment-after-completion": {
+      "backlinks": [
+        "/guides/how-to-ask-for-final-payment-professionally",
+        "/templates/payment-reminder"
+      ],
+      "nearby": [
+        "/scenario/final-payment-reminder"
+      ]
+    }
+  },
+  "cannibalization_rules": [
+    {
+      "owner": "/guides/how-to-ask-a-client-for-payment",
+      "do_not_compete_with": [
+        "/scenario/ask-for-payment-politely"
+      ],
+      "rule": "Guide owns broad education and judgment. Scenario owns execution in a live message situation."
+    },
+    {
+      "owner": "/guides/when-to-ask-for-a-deposit-before-work",
+      "do_not_compete_with": [
+        "/guides/how-to-ask-for-advance-payment-politely",
+        "/templates/advance-payment-message-examples"
+      ],
+      "rule": "Decision intent stays on the guide. Wording examples stay on the template."
+    },
+    {
+      "owner": "/templates/payment-reminder",
+      "do_not_compete_with": [
+        "/guides/how-to-remind-a-client-about-overdue-payment",
+        "/guides/how-to-follow-up-an-unpaid-invoice"
+      ],
+      "rule": "Examples and copy-ready variations stay on the template. Process and judgment stay on the guides."
+    },
+    {
+      "owner": "payment cluster",
+      "do_not_compete_with": [
+        "/pricing",
+        "/pricing/*"
+      ],
+      "rule": "Payment collection and payment-boundary pages must not be absorbed into the pricing negotiation cluster in phase 1."
+    }
+  ],
+  "acceptance": {
+    "structural": [
+      "Every changed page is labeled hub, guide, template, or scenario.",
+      "Every guide has one upstream hub link, two to four same-cluster sideways links, and one to two downstream template or scenario links.",
+      "Every template links back to its owner guide and at least one scenario.",
+      "Every strengthened scenario links back to one guide and one template when one exists.",
+      "No phase-1 work expands into scope or discount clusters."
+    ],
+    "business": [
+      "A user can enter through a payment guide, move into a template, and end on a matching scenario page.",
+      "Scenario pages are no longer isolated tool shells.",
+      "The payment cluster reads as one coherent topical network.",
+      "The structure supports search entry, trust-building, and product handoff."
+    ]
+  }
+}

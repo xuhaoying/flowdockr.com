@@ -4,6 +4,9 @@ Generated: 2026-03-04
 
 ## Files
 
+- `payment-cluster-phase1-execution-spec.md`: repo-grounded execution contract for the first payment communication cluster.
+- `payment-cluster-phase1.manifest.json`: machine-readable page inventory, link map, and acceptance criteria for payment phase 1.
+- `payment-cluster-phase1.codex-prompt.md`: copy-paste prompt for future Codex runs executing the payment cluster.
 - `flowdockr-keyword-library-v1.csv`: 300-keyword master library (clustered + prioritized).
 - `flowdockr-build-queue-first-100.csv`: first 100-page publishing queue (10 weeks, 10 pages/week).
 - `flowdockr-keyword-library-v1.md`: assumptions, KPI loop, and known gaps.
@@ -42,6 +45,9 @@ Generated: 2026-03-04
 
 ## Suggested Workflow (V2 Factory)
 
+0. Read the current phase execution contract before creating or editing pages:
+   - `payment-cluster-phase1-execution-spec.md`
+   - `payment-cluster-phase1.manifest.json`
 1. Generate curated demand database (`120` keywords).
 2. Build factory datasets (`intents.v2.json` + `assets.v2.json`).
 3. Initialize/refresh `seo_pages` database (`status` + refs + target tool).
