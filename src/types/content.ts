@@ -17,7 +17,10 @@ export const scenarioIntentTypeValues = [
   'budget_mismatch',
   'competitor_comparison',
   'scope_for_price',
+  'scope_boundary',
   'free_work_boundary',
+  'availability_boundary',
+  'project_decline',
 ] as const;
 
 export type ClusterSlug = (typeof clusterSlugValues)[number];

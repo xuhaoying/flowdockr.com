@@ -1,5 +1,8 @@
 import { pricingScenarios as basePricingScenarios } from '@/data/pricing-cluster';
-import { pricingScenarioFamilies, pricingScenarioSchemas } from '@/data/pricing-taxonomy';
+import {
+  pricingScenarioFamilies,
+  pricingScenarioSchemas,
+} from '@/data/pricing-taxonomy';
 import type {
   PricingIntentType,
   PricingScenario,
@@ -14,17 +17,25 @@ function unique(values: string[]): string[] {
   return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
 }
 
-function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSchema {
+function attachScenarioSchema(
+  scenario: PricingScenario
+): PricingScenarioWithSchema {
   const schema = pricingScenarioSchemas[scenario.slug as PricingScenarioSlug];
 
   if (!schema) {
-    throw new Error(`Missing pricing taxonomy schema for slug: ${scenario.slug}`);
+    throw new Error(
+      `Missing pricing taxonomy schema for slug: ${scenario.slug}`
+    );
   }
 
-  const primaryKeywords = unique([scenario.primaryKeyword, ...schema.page.primaryKeywords]);
-  const supportKeywords = unique([...scenario.keywordVariants, ...schema.page.supportKeywords]).filter(
-    (keyword) => !primaryKeywords.includes(keyword)
-  );
+  const primaryKeywords = unique([
+    scenario.primaryKeyword,
+    ...schema.page.primaryKeywords,
+  ]);
+  const supportKeywords = unique([
+    ...scenario.keywordVariants,
+    ...schema.page.supportKeywords,
+  ]).filter((keyword) => !primaryKeywords.includes(keyword));
 
   return {
     ...scenario,
@@ -42,7 +53,8 @@ function attachScenarioSchema(scenario: PricingScenario): PricingScenarioWithSch
 export const pricingScenarios: PricingScenarioWithSchema[] =
   basePricingScenarios.map(attachScenarioSchema);
 
-export const pricingFamilies: PricingScenarioFamilyDefinition[] = pricingScenarioFamilies;
+export const pricingFamilies: PricingScenarioFamilyDefinition[] =
+  pricingScenarioFamilies;
 
 function tierToNumber(tier: 'tier1' | 'tier2' | 'tier3'): 1 | 2 | 3 {
   if (tier === 'tier1') return 1;
@@ -60,10 +72,14 @@ function pressureTypeToIntentType(pressureType: string): PricingIntentType {
       return 'budget_mismatch';
     case 'competitor-comparison':
       return 'competitor_comparison';
-    case 'more-work-same-price':
-      return 'scope_for_price';
+    case 'scope-boundary':
+      return 'scope_boundary';
     case 'free-work-boundary':
       return 'free_work_boundary';
+    case 'availability-boundary':
+      return 'availability_boundary';
+    case 'project-decline':
+      return 'project_decline';
     default:
       return 'price_objection';
   }
@@ -87,12 +103,20 @@ function humanizeRisk(risk: string): string {
       return 'Push too hard and stall or lose the deal';
     case 'payment-risk':
       return 'Increase payment risk through weak negotiation structure';
+    case 'boundary-erosion':
+      return 'Let the client normalize weak boundaries and blurred expectations';
+    case 'burnout-risk':
+      return 'Create availability pressure that leads to burnout and reactive replies';
+    case 'bad-fit-lock-in':
+      return 'Stay trapped in a bad-fit engagement you should have declined earlier';
     default:
       return normalizePoint(risk);
   }
 }
 
-function buildPathKeyPoints(path: PricingScenario['responsePaths'][number]): string[] {
+function buildPathKeyPoints(
+  path: PricingScenario['responsePaths'][number]
+): string[] {
   return [
     normalizePoint(path.whenToUse),
     `Watch for: ${normalizePoint(path.risk).replace(/^If\s+/i, '')}`,
@@ -104,7 +128,9 @@ function getExampleReply(
   scenario: PricingScenario,
   tone: 'Concise' | 'Warm' | 'Firm'
 ): string {
-  return scenario.copyReadyExamples.find((item) => item.tone === tone)?.text || '';
+  return (
+    scenario.copyReadyExamples.find((item) => item.tone === tone)?.text || ''
+  );
 }
 
 const futureBridgeToBySlug: Partial<Record<PricingScenarioSlug, string[]>> = {
@@ -138,27 +164,35 @@ const nextDecisionLabelsBySource: Partial<
   'price-pushback-after-proposal': {
     'discount-pressure-before-signing': 'If they ask for a direct discount',
     'budget-lower-than-expected': 'If they say the budget is genuinely lower',
-    'cheaper-competitor-comparison': 'If they compare you with a cheaper option',
+    'cheaper-competitor-comparison':
+      'If they compare you with a cheaper option',
   },
   'discount-pressure-before-signing': {
-    'small-discount-before-closing': 'If they only ask for a small final reduction',
+    'small-discount-before-closing':
+      'If they only ask for a small final reduction',
     'budget-lower-than-expected': 'If the issue is really overall budget',
-    'cheaper-competitor-comparison': 'If they now reference a cheaper competitor',
+    'cheaper-competitor-comparison':
+      'If they now reference a cheaper competitor',
   },
   'budget-lower-than-expected': {
     'more-work-same-price': 'If they want more work for the same budget',
-    'discount-pressure-before-signing': 'If they switch to a direct discount ask',
-    'price-pushback-after-proposal': 'If the issue returns to post-proposal price pushback',
+    'discount-pressure-before-signing':
+      'If they switch to a direct discount ask',
+    'price-pushback-after-proposal':
+      'If the issue returns to post-proposal price pushback',
   },
   'cheaper-competitor-comparison': {
-    'discount-pressure-before-signing': 'If they ask you to lower price to continue',
+    'discount-pressure-before-signing':
+      'If they ask you to lower price to continue',
     'budget-lower-than-expected': 'If it is really a budget mismatch',
-    'price-pushback-after-proposal': 'If they drop competitor talk and just say it feels expensive',
+    'price-pushback-after-proposal':
+      'If they drop competitor talk and just say it feels expensive',
   },
   'more-work-same-price': {
     'budget-lower-than-expected': 'If they frame it as a budget limit',
     'can-you-do-it-cheaper': 'If they ask for a cheaper version instead',
-    'discount-pressure-before-signing': 'If they push for direct price cuts before approval',
+    'discount-pressure-before-signing':
+      'If they push for direct price cuts before approval',
   },
   'free-trial-work-request': {
     'can-you-do-it-cheaper': 'If they pivot to asking for a cheaper option',
@@ -167,13 +201,16 @@ const nextDecisionLabelsBySource: Partial<
   },
   'can-you-do-it-cheaper': {
     'price-pushback-after-proposal': 'If this is post-proposal price pushback',
-    'discount-pressure-before-signing': 'If they want direct discount before moving forward',
+    'discount-pressure-before-signing':
+      'If they want direct discount before moving forward',
     'budget-lower-than-expected': 'If budget is truly below your quote',
   },
   'small-discount-before-closing': {
-    'discount-pressure-before-signing': 'If discount pressure is broader and earlier',
+    'discount-pressure-before-signing':
+      'If discount pressure is broader and earlier',
     'budget-lower-than-expected': 'If they claim total budget is lower',
-    'cheaper-competitor-comparison': 'If they justify the ask with cheaper alternatives',
+    'cheaper-competitor-comparison':
+      'If they justify the ask with cheaper alternatives',
   },
 };
 
@@ -191,8 +228,8 @@ function buildNextDecisionLinks(
   });
 }
 
-export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScenarios.map(
-  (scenario) => {
+export const pricingScenarioBlueprints: PricingScenarioBlueprint[] =
+  pricingScenarios.map((scenario) => {
     const concise = getExampleReply(scenario, 'Concise');
     const warm = getExampleReply(scenario, 'Warm');
     const firm = getExampleReply(scenario, 'Firm');
@@ -215,7 +252,10 @@ export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScen
       situationSummary: scenario.situationSnapshot[0] || '',
       coreFear: scenario.schema.content.realRisks.map(humanizeRisk),
       strategyPaths: scenario.responsePaths.map((path) => ({
-        id: path.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+        id: path.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, ''),
         title: path.title,
         whenToUse: path.whenToUse,
         keyPoints: buildPathKeyPoints(path),
@@ -229,7 +269,10 @@ export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScen
         question: item.q,
         answer: item.a,
       })),
-      nextDecisionLinks: buildNextDecisionLinks(scenario.slug, scenario.nextDecisionSlugs),
+      nextDecisionLinks: buildNextDecisionLinks(
+        scenario.slug,
+        scenario.nextDecisionSlugs
+      ),
       toolCta: {
         title: 'Generate a tailored reply',
         body:
@@ -242,23 +285,30 @@ export const pricingScenarioBlueprints: PricingScenarioBlueprint[] = pricingScen
       futureBridgeTo: futureBridgeToBySlug[scenario.slug] || [],
       notes: notesBySlug[scenario.slug] || '',
     };
-  }
-);
+  });
 
-export function getPricingScenarioBySlug(slug: string): PricingScenarioWithSchema | undefined {
+export function getPricingScenarioBySlug(
+  slug: string
+): PricingScenarioWithSchema | undefined {
   return pricingScenarios.find((scenario) => scenario.slug === slug);
 }
 
-export function getRelatedPricingScenarios(slugs: string[]): PricingScenarioWithSchema[] {
+export function getRelatedPricingScenarios(
+  slugs: string[]
+): PricingScenarioWithSchema[] {
   return slugs
     .map((slug) => getPricingScenarioBySlug(slug))
-    .filter((scenario): scenario is PricingScenarioWithSchema => Boolean(scenario));
+    .filter((scenario): scenario is PricingScenarioWithSchema =>
+      Boolean(scenario)
+    );
 }
 
 export function getPricingScenariosByFamily(
   family: PricingScenarioFamily
 ): PricingScenarioWithSchema[] {
-  return pricingScenarios.filter((scenario) => scenario.schema.page.family === family);
+  return pricingScenarios.filter(
+    (scenario) => scenario.schema.page.family === family
+  );
 }
 
 export function getPricingFamilyById(
@@ -267,7 +317,9 @@ export function getPricingFamilyById(
   return pricingFamilies.find((family) => family.id === id);
 }
 
-export function getPricingBlueprintBySlug(slug: string): PricingScenarioBlueprint | undefined {
+export function getPricingBlueprintBySlug(
+  slug: string
+): PricingScenarioBlueprint | undefined {
   return pricingScenarioBlueprints.find((scenario) => scenario.slug === slug);
 }
 

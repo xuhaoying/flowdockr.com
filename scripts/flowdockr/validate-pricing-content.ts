@@ -1,7 +1,7 @@
 import { getAllGuides } from '../../src/lib/content/getGuideBySlug';
+import { getPricingHub } from '../../src/lib/content/getPricingHub';
 import { getAllScenarios } from '../../src/lib/content/getScenarioBySlug';
 import { getAllTools } from '../../src/lib/content/getToolBySlug';
-import { getPricingHub } from '../../src/lib/content/getPricingHub';
 
 type Issue = {
   level: 'error' | 'warn';
@@ -47,8 +47,11 @@ function validatePricingContent(): Issue[] {
   const tools = getAllTools();
   const hub = getPricingHub();
 
-  if (scenarios.length !== 8) {
-    pushWarn(issues, `Expected 8 launch scenarios, found ${scenarios.length}.`);
+  if (scenarios.length < 8) {
+    pushWarn(
+      issues,
+      `Expected at least 8 pricing scenarios, found ${scenarios.length}.`
+    );
   }
 
   if (guides.length !== 3) {
@@ -75,14 +78,27 @@ function validatePricingContent(): Issue[] {
 
   const scenarioSlugsSet = new Set(scenarioSlugs);
   const toolSlugsSet = new Set(toolSlugs);
-  const pageRoleByScenarioSlug = new Map(scenarios.map((scenario) => [scenario.slug, scenario.pageRole]));
+  const pageRoleByScenarioSlug = new Map(
+    scenarios.map((scenario) => [scenario.slug, scenario.pageRole])
+  );
 
-  const scenarioUrlSet = new Set(scenarios.map((scenario) => normalizePath(scenario.url)));
+  const scenarioUrlSet = new Set(
+    scenarios.map((scenario) => normalizePath(scenario.url))
+  );
   const guideUrlSet = new Set(guides.map((guide) => normalizePath(guide.url)));
   const toolUrlSet = new Set(tools.map((tool) => normalizePath(tool.url)));
-  const disallowedToolCtaLabels = new Set(['try tool', 'use ai', 'generate reply']);
+  const disallowedToolCtaLabels = new Set([
+    'try tool',
+    'use ai',
+    'generate reply',
+  ]);
 
-  const allH1s = [hub.h1, ...scenarios.map((scenario) => scenario.h1), ...guides.map((guide) => guide.h1), ...tools.map((tool) => tool.h1)];
+  const allH1s = [
+    hub.h1,
+    ...scenarios.map((scenario) => scenario.h1),
+    ...guides.map((guide) => guide.h1),
+    ...tools.map((tool) => tool.h1),
+  ];
   const allMetaTitles = [
     hub.metaTitle,
     ...scenarios.map((scenario) => scenario.metaTitle),
@@ -96,16 +112,31 @@ function validatePricingContent(): Issue[] {
     ...tools.map((tool) => tool.metaDescription),
   ];
 
-  for (const duplicate of findDuplicateValues(allH1s.map((value) => value.trim().toLowerCase()))) {
-    pushError(issues, `Duplicate h1 detected across pricing cluster pages: '${duplicate}'.`);
+  for (const duplicate of findDuplicateValues(
+    allH1s.map((value) => value.trim().toLowerCase())
+  )) {
+    pushError(
+      issues,
+      `Duplicate h1 detected across pricing cluster pages: '${duplicate}'.`
+    );
   }
 
-  for (const duplicate of findDuplicateValues(allMetaTitles.map((value) => value.trim().toLowerCase()))) {
-    pushError(issues, `Duplicate metaTitle detected across pricing cluster pages: '${duplicate}'.`);
+  for (const duplicate of findDuplicateValues(
+    allMetaTitles.map((value) => value.trim().toLowerCase())
+  )) {
+    pushError(
+      issues,
+      `Duplicate metaTitle detected across pricing cluster pages: '${duplicate}'.`
+    );
   }
 
-  for (const duplicate of findDuplicateValues(allMetaDescriptions.map((value) => value.trim().toLowerCase()))) {
-    pushError(issues, `Duplicate metaDescription detected across pricing cluster pages: '${duplicate}'.`);
+  for (const duplicate of findDuplicateValues(
+    allMetaDescriptions.map((value) => value.trim().toLowerCase())
+  )) {
+    pushError(
+      issues,
+      `Duplicate metaDescription detected across pricing cluster pages: '${duplicate}'.`
+    );
   }
 
   for (const scenario of scenarios) {
@@ -125,11 +156,17 @@ function validatePricingContent(): Issue[] {
     }
 
     if (scenario.strategyPaths.length !== 3) {
-      pushError(issues, `${scenario.slug}: strategyPaths must contain exactly 3 paths.`);
+      pushError(
+        issues,
+        `${scenario.slug}: strategyPaths must contain exactly 3 paths.`
+      );
     }
 
     if (scenario.nextDecisionLinks.length < 3) {
-      pushError(issues, `${scenario.slug}: nextDecisionLinks must contain at least 3 links.`);
+      pushError(
+        issues,
+        `${scenario.slug}: nextDecisionLinks must contain at least 3 links.`
+      );
     }
 
     for (const link of scenario.nextDecisionLinks) {
@@ -137,21 +174,30 @@ function validatePricingContent(): Issue[] {
 
       if (href.startsWith('/pricing/')) {
         if (!scenarioUrlSet.has(href)) {
-          pushError(issues, `${scenario.slug}: nextDecisionLinks contains unknown scenario href '${link.href}'.`);
+          pushError(
+            issues,
+            `${scenario.slug}: nextDecisionLinks contains unknown scenario href '${link.href}'.`
+          );
         }
         continue;
       }
 
       if (href.startsWith('/guides/')) {
         if (!guideUrlSet.has(href)) {
-          pushError(issues, `${scenario.slug}: nextDecisionLinks contains unknown guide href '${link.href}'.`);
+          pushError(
+            issues,
+            `${scenario.slug}: nextDecisionLinks contains unknown guide href '${link.href}'.`
+          );
         }
         continue;
       }
 
       if (href.startsWith('/tools/')) {
         if (!toolUrlSet.has(href)) {
-          pushError(issues, `${scenario.slug}: nextDecisionLinks contains unknown tool href '${link.href}'.`);
+          pushError(
+            issues,
+            `${scenario.slug}: nextDecisionLinks contains unknown tool href '${link.href}'.`
+          );
         }
         continue;
       }
@@ -164,12 +210,18 @@ function validatePricingContent(): Issue[] {
         continue;
       }
 
-      pushWarn(issues, `${scenario.slug}: nextDecisionLinks uses non-standard href '${link.href}'.`);
+      pushWarn(
+        issues,
+        `${scenario.slug}: nextDecisionLinks uses non-standard href '${link.href}'.`
+      );
     }
 
     for (const blockedSlug of scenario.doNotCompeteWith) {
       if (blockedSlug === scenario.slug) {
-        pushError(issues, `${scenario.slug}: doNotCompeteWith cannot include itself.`);
+        pushError(
+          issues,
+          `${scenario.slug}: doNotCompeteWith cannot include itself.`
+        );
         continue;
       }
 
@@ -188,7 +240,9 @@ function validatePricingContent(): Issue[] {
       );
     }
 
-    const normalizedButtonLabel = scenario.toolCta.buttonLabel.trim().toLowerCase();
+    const normalizedButtonLabel = scenario.toolCta.buttonLabel
+      .trim()
+      .toLowerCase();
     if (disallowedToolCtaLabels.has(normalizedButtonLabel)) {
       pushError(
         issues,
@@ -198,7 +252,10 @@ function validatePricingContent(): Issue[] {
   }
 
   if (hub.cluster !== 'pricing') {
-    pushError(issues, `Hub cluster must be 'pricing' (actual: '${hub.cluster}').`);
+    pushError(
+      issues,
+      `Hub cluster must be 'pricing' (actual: '${hub.cluster}').`
+    );
   }
 
   if (normalizePath(hub.url) !== '/pricing') {
@@ -208,19 +265,28 @@ function validatePricingContent(): Issue[] {
   for (const bucket of hub.decisionBuckets) {
     const href = normalizePath(bucket.href);
     if (!scenarioUrlSet.has(href)) {
-      pushError(issues, `Hub decision bucket references unknown scenario href '${bucket.href}'.`);
+      pushError(
+        issues,
+        `Hub decision bucket references unknown scenario href '${bucket.href}'.`
+      );
     }
   }
 
   for (const href of hub.featuredScenarios) {
     const normalizedHref = normalizePath(href);
     if (!scenarioUrlSet.has(normalizedHref)) {
-      pushError(issues, `Hub featuredScenarios contains unknown href '${href}'.`);
+      pushError(
+        issues,
+        `Hub featuredScenarios contains unknown href '${href}'.`
+      );
     }
 
     const featuredSlug = normalizedHref.split('/').filter(Boolean).at(-1);
     if (!featuredSlug) {
-      pushError(issues, `Hub featuredScenarios contains invalid href '${href}'.`);
+      pushError(
+        issues,
+        `Hub featuredScenarios contains invalid href '${href}'.`
+      );
       continue;
     }
 
@@ -258,7 +324,10 @@ function validatePricingContent(): Issue[] {
     }
 
     if (normalizePath(guide.url) !== `/guides/${guide.slug}`) {
-      pushError(issues, `${guide.slug}: url must match '/guides/${guide.slug}/' (actual: '${guide.url}').`);
+      pushError(
+        issues,
+        `${guide.slug}: url must match '/guides/${guide.slug}/' (actual: '${guide.url}').`
+      );
     }
 
     if (!toolSlugsSet.has(guide.toolCta.toolSlug)) {
@@ -284,7 +353,10 @@ function validatePricingContent(): Issue[] {
     }
 
     if (normalizePath(tool.url) !== `/tools/${tool.slug}`) {
-      pushError(issues, `${tool.slug}: url must match '/tools/${tool.slug}/' (actual: '${tool.url}').`);
+      pushError(
+        issues,
+        `${tool.slug}: url must match '/tools/${tool.slug}/' (actual: '${tool.url}').`
+      );
     }
 
     const inputNames = tool.inputs.map((input) => input.name);
@@ -292,16 +364,24 @@ function validatePricingContent(): Issue[] {
       pushError(issues, `${tool.slug}: duplicate input.name '${duplicate}'.`);
     }
 
-    const clientMessageInput = tool.inputs.find((input) => input.name === 'clientMessage');
+    const clientMessageInput = tool.inputs.find(
+      (input) => input.name === 'clientMessage'
+    );
     if (!clientMessageInput) {
       pushError(issues, `${tool.slug}: inputs must include 'clientMessage'.`);
     } else if (!clientMessageInput.required) {
-      pushError(issues, `${tool.slug}: 'clientMessage' input must be required.`);
+      pushError(
+        issues,
+        `${tool.slug}: 'clientMessage' input must be required.`
+      );
     }
 
     for (const link of tool.relatedScenarios) {
       if (!scenarioUrlSet.has(normalizePath(link.href))) {
-        pushError(issues, `${tool.slug}: relatedScenarios contains unknown scenario href '${link.href}'.`);
+        pushError(
+          issues,
+          `${tool.slug}: relatedScenarios contains unknown scenario href '${link.href}'.`
+        );
       }
     }
   }
@@ -324,7 +404,9 @@ function main() {
     console.log(`${prefix} ${issue.message}`);
   }
 
-  console.log(`\nSummary: ${errors.length} error(s), ${warnings.length} warning(s).`);
+  console.log(
+    `\nSummary: ${errors.length} error(s), ${warnings.length} warning(s).`
+  );
 
   if (errors.length > 0) {
     process.exit(1);

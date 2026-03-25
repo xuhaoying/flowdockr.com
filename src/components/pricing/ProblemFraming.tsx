@@ -2,8 +2,8 @@ const PROBLEM_BULLETS = [
   'A client asks for a discount right before signing.',
   'A lead compares your quote with a cheaper freelancer.',
   'A project starts expanding without a budget change.',
-  'A client pushes for faster delivery at the same price.',
-  'You need to hold a pricing boundary without sounding rigid.',
+  'A client pushes for faster delivery or instant replies as if it is included.',
+  'You need to say no to a client or project without burning the bridge.',
 ];
 
 export function ProblemFraming() {

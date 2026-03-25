@@ -13,8 +13,8 @@ export function PricingHero() {
         </h1>
         <p className="text-base text-slate-700 md:text-lg">
           Flowdockr helps freelancers and agencies handle pricing pressure,
-          discount requests, scope creep, and difficult client conversations
-          with clearer negotiation guidance.
+          discount requests, scope creep, demanding-client boundaries, and
+          difficult no-thanks conversations with clearer negotiation guidance.
         </p>
         <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
           Review the situation, compare response strategies, and choose a reply
