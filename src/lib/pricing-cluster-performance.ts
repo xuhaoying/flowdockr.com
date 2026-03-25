@@ -49,6 +49,15 @@ export type PricingClusterPerformanceSourceState =
 export type PricingClusterPerformanceSourceStatus = {
   state: PricingClusterPerformanceSourceState;
   reason: string | null;
+  recordCount: number | null;
+  signalCount: number;
+  pagesWithSignals: number;
+};
+
+export type PricingClusterPerformanceSourceCounts = {
+  recordCount: number | null;
+  signalCount: number;
+  pagesWithSignals: number;
 };
 
 export type PricingClusterPerformanceAvailability = {
@@ -112,16 +121,34 @@ export type PricingClusterOperatingRow = {
 
 export type PricingClusterPerformanceReport = {
   generatedAt: string;
+  reportingWindow: {
+    days: number;
+    limit: number;
+    from: string;
+    to: string;
+  };
   filters: {
     days: number;
     limit: number;
   };
+  snapshotState: PricingClusterPerformanceSourceState;
+  hasRealSignals: boolean;
   thresholds: PricingClusterPerformanceThresholds;
   dataAvailability: PricingClusterPerformanceAvailability;
   sourceStates: {
     analyticsEvents: PricingClusterPerformanceSourceStatus;
     generationHistory: PricingClusterPerformanceSourceStatus;
     purchases: PricingClusterPerformanceSourceStatus;
+  };
+  sourceReasons: {
+    analyticsEvents: string | null;
+    generationHistory: string | null;
+    purchases: string | null;
+  };
+  sourceRowCounts: {
+    analyticsEvents: PricingClusterPerformanceSourceCounts;
+    generationHistory: PricingClusterPerformanceSourceCounts;
+    purchases: PricingClusterPerformanceSourceCounts;
   };
   dataSources: {
     views: string;
@@ -142,6 +169,21 @@ export type PricingClusterPerformanceReport = {
     needsMappingUpgradePages: string[];
     topFamiliesByViews: PricingClusterFamilyPerformanceSummary[];
     topFamiliesByCheckoutIntent: PricingClusterFamilyPerformanceSummary[];
+  };
+  operatorGuidance: {
+    interpretation: string;
+    verificationChecklist: string[];
+    firstPagesToInspect: {
+      byViews: string[];
+      byGeneratorClicks: string[];
+      byCheckoutIntent: string[];
+      byPurchaseSignals: string[];
+      weakMappingWarningsWithSignals: string[];
+    };
+    firstFamiliesToInspect: {
+      byViews: string[];
+      byCheckoutIntent: string[];
+    };
   };
   prioritizedActions: PricingClusterPrioritizedAction[];
   pages: PricingClusterOperatingRow[];
@@ -220,6 +262,9 @@ export function buildPricingClusterPerformanceReport(params: {
   }>;
 }): PricingClusterPerformanceReport {
   const auditReport = params.auditReport || buildPricingClusterAuditReport();
+  const generatedAt = params.generatedAt || new Date().toISOString();
+  const days = Math.max(1, params.days || 30);
+  const limit = Math.max(1, params.limit || 500);
   const thresholds = {
     ...DEFAULT_PRICING_CLUSTER_PERFORMANCE_THRESHOLDS,
     ...(params.thresholds || {}),
@@ -316,21 +361,47 @@ export function buildPricingClusterPerformanceReport(params: {
       sourceAvailable: dataAvailability.purchases,
     }),
   };
+  const snapshotState = deriveSnapshotState(sourceStates);
+  const operatorGuidance = buildOperatorGuidance({
+    pages,
+    sourceStates,
+    snapshotState,
+  });
 
   return {
-    generatedAt: params.generatedAt || new Date().toISOString(),
-    filters: {
-      days: Math.max(1, params.days || 30),
-      limit: Math.max(1, params.limit || 500),
+    generatedAt,
+    reportingWindow: {
+      days,
+      limit,
+      from: new Date(Date.parse(generatedAt) - days * 24 * 60 * 60 * 1000)
+        .toISOString(),
+      to: generatedAt,
     },
+    filters: {
+      days,
+      limit,
+    },
+    snapshotState,
+    hasRealSignals: snapshotState === 'populated',
     thresholds,
     dataAvailability,
     sourceStates,
+    sourceReasons: {
+      analyticsEvents: sourceStates.analyticsEvents.reason,
+      generationHistory: sourceStates.generationHistory.reason,
+      purchases: sourceStates.purchases.reason,
+    },
+    sourceRowCounts: {
+      analyticsEvents: summarizeSourceCounts(sourceStates.analyticsEvents),
+      generationHistory: summarizeSourceCounts(sourceStates.generationHistory),
+      purchases: summarizeSourceCounts(sourceStates.purchases),
+    },
     dataSources: {
       ...DEFAULT_DATA_SOURCES,
     },
     limitations: buildLimitations(sourceStates),
     summary,
+    operatorGuidance,
     prioritizedActions: buildPrioritizedActions(pages),
     pages,
   };
@@ -709,6 +780,194 @@ function buildPrioritizedActions(
   return actions;
 }
 
+function deriveSnapshotState(sourceStates: {
+  analyticsEvents: PricingClusterPerformanceSourceStatus;
+  generationHistory: PricingClusterPerformanceSourceStatus;
+  purchases: PricingClusterPerformanceSourceStatus;
+}): PricingClusterPerformanceSourceState {
+  const states = Object.values(sourceStates).map((source) => source.state);
+
+  if (states.some((state) => state === 'populated')) {
+    return 'populated';
+  }
+
+  if (states.some((state) => state === 'reachable_empty')) {
+    return 'reachable_empty';
+  }
+
+  return 'unavailable';
+}
+
+function buildOperatorGuidance(params: {
+  pages: PricingClusterOperatingRow[];
+  sourceStates: {
+    analyticsEvents: PricingClusterPerformanceSourceStatus;
+    generationHistory: PricingClusterPerformanceSourceStatus;
+    purchases: PricingClusterPerformanceSourceStatus;
+  };
+  snapshotState: PricingClusterPerformanceSourceState;
+}) {
+  const { pages, sourceStates, snapshotState } = params;
+  const byViews = [...pages]
+    .filter((page) => (page.views || 0) > 0)
+    .sort((left, right) => (right.views || 0) - (left.views || 0))
+    .slice(0, 5)
+    .map((page) => page.slug);
+  const byGeneratorClicks = [...pages]
+    .filter((page) => (page.generateClicks || 0) > 0)
+    .sort(
+      (left, right) =>
+        (right.generateClicks || 0) - (left.generateClicks || 0) ||
+        (right.views || 0) - (left.views || 0)
+    )
+    .slice(0, 5)
+    .map((page) => page.slug);
+  const byCheckoutIntent = [...pages]
+    .filter((page) => (page.checkoutClicks || 0) > 0)
+    .sort(
+      (left, right) =>
+        (right.checkoutClicks || 0) - (left.checkoutClicks || 0) ||
+        (right.generateSuccesses || 0) - (left.generateSuccesses || 0)
+    )
+    .slice(0, 5)
+    .map((page) => page.slug);
+  const byPurchaseSignals = [...pages]
+    .filter((page) => (page.purchaseSuccesses || 0) > 0)
+    .sort(
+      (left, right) =>
+        (right.purchaseSuccesses || 0) - (left.purchaseSuccesses || 0) ||
+        (right.checkoutClicks || 0) - (left.checkoutClicks || 0)
+    )
+    .slice(0, 5)
+    .map((page) => page.slug);
+  const weakMappingWarningsWithSignals = [...pages]
+    .filter(
+      (page) =>
+        page.auditFlags.includes('weak-generator-fit') &&
+        ((page.views || 0) > 0 ||
+          (page.generateClicks || 0) > 0 ||
+          (page.checkoutClicks || 0) > 0)
+    )
+    .sort(
+      (left, right) =>
+        (right.generateClicks || 0) - (left.generateClicks || 0) ||
+        (right.views || 0) - (left.views || 0)
+    )
+    .slice(0, 5)
+    .map((page) => page.slug);
+  const unavailableSources = getUnavailableSourceEntries(sourceStates);
+  const analyticsConnected = sourceStates.analyticsEvents.state !== 'unavailable';
+  const purchasesConnected = sourceStates.purchases.state !== 'unavailable';
+
+  return {
+    interpretation: buildOperatorInterpretation({
+      snapshotState,
+      unavailableSources,
+      byViews,
+      byGeneratorClicks,
+      byCheckoutIntent,
+      byPurchaseSignals,
+    }),
+    verificationChecklist: buildVerificationChecklist({
+      snapshotState,
+      unavailableSources,
+    }),
+    firstPagesToInspect: {
+      byViews,
+      byGeneratorClicks,
+      byCheckoutIntent,
+      byPurchaseSignals,
+      weakMappingWarningsWithSignals,
+    },
+    firstFamiliesToInspect: {
+      byViews: summarizeFamilyNames(
+        buildTopFamilySummaries({
+          pages,
+          metric: 'views',
+          sourceAvailable: analyticsConnected,
+        })
+      ),
+      byCheckoutIntent: summarizeFamilyNames(
+        buildTopFamilySummaries({
+          pages,
+          metric: 'checkoutClicks',
+          sourceAvailable: purchasesConnected,
+        })
+      ),
+    },
+  };
+}
+
+function buildOperatorInterpretation(params: {
+  snapshotState: PricingClusterPerformanceSourceState;
+  unavailableSources: Array<[string, PricingClusterPerformanceSourceStatus]>;
+  byViews: string[];
+  byGeneratorClicks: string[];
+  byCheckoutIntent: string[];
+  byPurchaseSignals: string[];
+}) {
+  if (params.unavailableSources.length > 0) {
+    const unavailableLabels = params.unavailableSources.map(([name, source]) =>
+      `${name} (${source.reason || 'UNKNOWN'})`
+    );
+    return `Pricing-cluster performance is not fully queryable yet. Fix unavailable sources first: ${unavailableLabels.join(', ')}.`;
+  }
+
+  if (params.snapshotState === 'reachable_empty') {
+    return 'Pricing-cluster sources are connected, but this reporting window is still empty. Start by confirming a real attributed pricing-page session landed inside the current window.';
+  }
+
+  if (params.byPurchaseSignals.length > 0) {
+    return 'Pricing-cluster performance is populated with real purchase signals. Start with purchase pages, then compare checkout intent and mapping fit.';
+  }
+
+  if (params.byCheckoutIntent.length > 0) {
+    return 'Pricing-cluster performance is populated through checkout intent. Start with checkout-intent pages, then review whether purchase completion is lagging.';
+  }
+
+  if (params.byGeneratorClicks.length > 0) {
+    return 'Pricing-cluster performance is populated through generator engagement. Start with click-driving pages, then verify checkout and purchase follow-through.';
+  }
+
+  if (params.byViews.length > 0) {
+    return 'Pricing-cluster sources are connected and page views are arriving, but deeper product signals are still sparse.';
+  }
+
+  return 'Pricing-cluster sources are connected but no attributed pricing-page signals were found in this reporting window yet.';
+}
+
+function buildVerificationChecklist(params: {
+  snapshotState: PricingClusterPerformanceSourceState;
+  unavailableSources: Array<[string, PricingClusterPerformanceSourceStatus]>;
+}) {
+  if (params.unavailableSources.length > 0) {
+    return [
+      'Confirm the deployed environment has DATABASE_URL configured and the report process can open the production database.',
+      'Re-run `pnpm qa:pricing-performance` in the deployed environment and verify sourceStates move from unavailable to reachable_empty or populated.',
+      'Once sources are reachable, trigger one attributed pricing-page flow and rerun the export to confirm the first populated page row.',
+    ];
+  }
+
+  if (params.snapshotState === 'reachable_empty') {
+    return [
+      'Confirm sourceStates are reachable_empty rather than unavailable, which means the database queries worked.',
+      'Drive one real pricing-page funnel: open a pricing page, start the generator, complete one checkout path if possible, then rerun the export.',
+      'Check firstPagesToInspect and summary counts after the next export to confirm the first attributed rows appeared.',
+    ];
+  }
+
+  return [
+    'Check sourceStates first: populated means attributed rows were found in the reporting window.',
+    'Check summary.pagesWithTraffic and firstPagesToInspect.byViews to confirm pricing page exposure is arriving.',
+    'Check firstPagesToInspect.byGeneratorClicks and byCheckoutIntent to confirm page-to-product continuity.',
+    'Check firstPagesToInspect.weakMappingWarningsWithSignals to find pages that now have real traffic but still sit behind weak generator mappings.',
+  ];
+}
+
+function summarizeFamilyNames(rows: PricingClusterFamilyPerformanceSummary[]) {
+  return rows.map((row) => row.family);
+}
+
 function aggregateFamilyHighPotentialPages(pages: PricingClusterOperatingRow[]) {
   const familyMap = new Map<string, { family: string; slugs: string[]; views: number }>();
 
@@ -766,6 +1025,26 @@ function buildLimitations(
   return limitations;
 }
 
+function getUnavailableSourceEntries(sourceStates: {
+  analyticsEvents: PricingClusterPerformanceSourceStatus;
+  generationHistory: PricingClusterPerformanceSourceStatus;
+  purchases: PricingClusterPerformanceSourceStatus;
+}) {
+  return (Object.entries(sourceStates) as Array<
+    [string, PricingClusterPerformanceSourceStatus]
+  >).filter(([, source]) => source.state === 'unavailable');
+}
+
+function summarizeSourceCounts(
+  source: PricingClusterPerformanceSourceStatus
+): PricingClusterPerformanceSourceCounts {
+  return {
+    recordCount: source.recordCount,
+    signalCount: source.signalCount,
+    pagesWithSignals: source.pagesWithSignals,
+  };
+}
+
 async function loadPricingAnalyticsSignals(params: {
   days: number;
   limit: number;
@@ -784,6 +1063,12 @@ async function loadPricingAnalyticsSignals(params: {
     return {
       status: buildSourceStatus({
         available: true,
+        recordCount: analytics.eventCounts.length,
+        signalCount: analytics.eventCounts.reduce(
+          (total, row) => total + Number(row.total || 0),
+          0
+        ),
+        pagesWithSignals: rows.length,
         signalRows: rows,
       }),
       rows,
@@ -803,7 +1088,7 @@ async function loadPricingGenerationSignals(params: {
   rows: PricingClusterGenerationSignalRow[];
 }> {
   try {
-    const rows = await db()
+    const rows: PricingClusterGenerationStorageRow[] = await db()
       .select({
         userId: generation.userId,
         supportLevel: generation.supportLevel,
@@ -812,10 +1097,16 @@ async function loadPricingGenerationSignals(params: {
       .from(generation)
       .where(gte(generation.createdAt, params.createdAfter));
     const aggregatedRows = buildPricingGenerationSignals(rows);
+    const attributedGenerationRows = rows.filter(
+      (row) => !!parsePricingSlugFromGenerationStrategyJson(row.strategyJson)
+    ).length;
 
     return {
       status: buildSourceStatus({
         available: true,
+        recordCount: rows.length,
+        signalCount: attributedGenerationRows,
+        pagesWithSignals: aggregatedRows.length,
         signalRows: aggregatedRows,
       }),
       rows: aggregatedRows,
@@ -835,7 +1126,7 @@ async function loadPricingPurchaseSignals(params: {
   rows: PricingClusterPurchaseSignalRow[];
 }> {
   try {
-    const rows = await db()
+    const rows: PricingClusterPurchaseStorageRow[] = await db()
       .select({
         status: purchase.status,
         creditsGranted: purchase.creditsGranted,
@@ -844,10 +1135,16 @@ async function loadPricingPurchaseSignals(params: {
       .from(purchase)
       .where(gte(purchase.createdAt, params.createdAfter));
     const aggregatedRows = buildPricingPurchaseSignals(rows);
+    const attributedPurchaseRows = rows.filter(
+      (row) => !!parsePurchaseMetadata(row.metadata)
+    ).length;
 
     return {
       status: buildSourceStatus({
         available: true,
+        recordCount: rows.length,
+        signalCount: attributedPurchaseRows,
+        pagesWithSignals: aggregatedRows.length,
         signalRows: aggregatedRows,
       }),
       rows: aggregatedRows,
@@ -992,22 +1289,36 @@ function getPricingPerformanceDbUnavailableReason() {
 function buildSourceStatus(params: {
   available: boolean;
   signalRows?: Array<unknown>;
+  recordCount?: number | null;
+  signalCount?: number;
+  pagesWithSignals?: number;
   reason?: string | null;
 }): PricingClusterPerformanceSourceStatus {
   if (!params.available) {
     return buildUnavailableSourceStatus(params.reason);
   }
 
-  if ((params.signalRows || []).length > 0) {
+  const signalRows = params.signalRows || [];
+  const recordCount = params.recordCount ?? signalRows.length;
+  const signalCount = params.signalCount ?? signalRows.length;
+  const pagesWithSignals = params.pagesWithSignals ?? signalRows.length;
+
+  if (pagesWithSignals > 0 || signalCount > 0) {
     return {
       state: 'populated',
       reason: null,
+      recordCount,
+      signalCount,
+      pagesWithSignals,
     };
   }
 
   return {
     state: 'reachable_empty',
     reason: null,
+    recordCount,
+    signalCount,
+    pagesWithSignals,
   };
 }
 
@@ -1015,7 +1326,74 @@ function buildUnavailableSourceStatus(reason?: string | null) {
   return {
     state: 'unavailable' as const,
     reason: reason || 'UNKNOWN',
+    recordCount: null,
+    signalCount: 0,
+    pagesWithSignals: 0,
   };
+}
+
+export function buildPricingClusterPerformanceSnapshotMarkdown(
+  report: PricingClusterPerformanceReport
+) {
+  const renderSourceLine = (
+    label: string,
+    source: PricingClusterPerformanceSourceStatus
+  ) =>
+    `- ${label}: ${source.state}; reason=${source.reason || 'none'}; recordCount=${
+      source.recordCount === null ? 'null' : source.recordCount
+    }; signalCount=${source.signalCount}; pagesWithSignals=${source.pagesWithSignals}`;
+  const prioritizedActions =
+    report.prioritizedActions.length > 0
+      ? report.prioritizedActions
+          .map(
+            (item) =>
+              `- ${item.action}: ${item.reason} (${item.slugs.join(', ')})`
+          )
+          .join('\n')
+      : '- None yet. Wait for populated source data or more traffic.';
+
+  return [
+    '# Pricing Cluster Performance Snapshot',
+    '',
+    `- Generated at: ${report.generatedAt}`,
+    `- Reporting window: ${report.reportingWindow.from} -> ${report.reportingWindow.to} (${report.reportingWindow.days} days, limit ${report.reportingWindow.limit})`,
+    `- Snapshot state: ${report.snapshotState}`,
+    `- Based on real populated data: ${report.hasRealSignals ? 'yes' : 'no'}`,
+    '',
+    '## Source states',
+    renderSourceLine('analyticsEvents', report.sourceStates.analyticsEvents),
+    renderSourceLine('generationHistory', report.sourceStates.generationHistory),
+    renderSourceLine('purchases', report.sourceStates.purchases),
+    '',
+    '## How to interpret',
+    report.operatorGuidance.interpretation,
+    '',
+    '## Verification checklist',
+    ...report.operatorGuidance.verificationChecklist.map((item) => `- ${item}`),
+    '',
+    '## First pages to inspect',
+    `- By views: ${report.operatorGuidance.firstPagesToInspect.byViews.join(', ') || 'none'}`,
+    `- By generator clicks: ${report.operatorGuidance.firstPagesToInspect.byGeneratorClicks.join(', ') || 'none'}`,
+    `- By checkout intent: ${report.operatorGuidance.firstPagesToInspect.byCheckoutIntent.join(', ') || 'none'}`,
+    `- By purchase signals: ${report.operatorGuidance.firstPagesToInspect.byPurchaseSignals.join(', ') || 'none'}`,
+    `- Weak mapping warnings with signals: ${report.operatorGuidance.firstPagesToInspect.weakMappingWarningsWithSignals.join(', ') || 'none'}`,
+    '',
+    '## First families to inspect',
+    `- By views: ${report.operatorGuidance.firstFamiliesToInspect.byViews.join(', ') || 'none'}`,
+    `- By checkout intent: ${report.operatorGuidance.firstFamiliesToInspect.byCheckoutIntent.join(', ') || 'none'}`,
+    '',
+    '## Summary',
+    `- Pages with traffic: ${report.summary.pagesWithTraffic}`,
+    `- Pages with generator clicks: ${report.summary.pagesWithGeneratorClicks}`,
+    `- Pages with checkout intent: ${report.summary.pagesWithCheckoutIntent}`,
+    `- Pages with purchase signals: ${report.summary.pagesWithPurchaseSignals}`,
+    `- High-potential pages: ${report.summary.highPotentialPages.join(', ') || 'none'}`,
+    `- Needs mapping upgrade pages: ${report.summary.needsMappingUpgradePages.join(', ') || 'none'}`,
+    '',
+    '## Prioritized actions',
+    prioritizedActions,
+    '',
+  ].join('\n');
 }
 
 function getErrorReason(error: unknown) {

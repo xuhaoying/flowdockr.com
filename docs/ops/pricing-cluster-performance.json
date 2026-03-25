@@ -1,9 +1,17 @@
 {
-  "generatedAt": "2026-03-25T08:58:00.481Z",
+  "generatedAt": "2026-03-25T09:10:53.095Z",
+  "reportingWindow": {
+    "days": 30,
+    "limit": 500,
+    "from": "2026-02-23T09:10:53.095Z",
+    "to": "2026-03-25T09:10:53.095Z"
+  },
   "filters": {
     "days": 30,
     "limit": 500
   },
+  "snapshotState": "unavailable",
+  "hasRealSignals": false,
   "thresholds": {
     "insufficientDataViewThreshold": 10,
     "discoverabilityViewThreshold": 25,
@@ -29,15 +37,46 @@
   "sourceStates": {
     "analyticsEvents": {
       "state": "unavailable",
-      "reason": "DATABASE_URL_MISSING"
+      "reason": "DATABASE_URL_MISSING",
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
     },
     "generationHistory": {
       "state": "unavailable",
-      "reason": "DATABASE_URL_MISSING"
+      "reason": "DATABASE_URL_MISSING",
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
     },
     "purchases": {
       "state": "unavailable",
-      "reason": "DATABASE_URL_MISSING"
+      "reason": "DATABASE_URL_MISSING",
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
+    }
+  },
+  "sourceReasons": {
+    "analyticsEvents": "DATABASE_URL_MISSING",
+    "generationHistory": "DATABASE_URL_MISSING",
+    "purchases": "DATABASE_URL_MISSING"
+  },
+  "sourceRowCounts": {
+    "analyticsEvents": {
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
+    },
+    "generationHistory": {
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
+    },
+    "purchases": {
+      "recordCount": null,
+      "signalCount": 0,
+      "pagesWithSignals": 0
     }
   },
   "dataSources": {
@@ -66,6 +105,25 @@
     "needsMappingUpgradePages": [],
     "topFamiliesByViews": [],
     "topFamiliesByCheckoutIntent": []
+  },
+  "operatorGuidance": {
+    "interpretation": "Pricing-cluster performance is not fully queryable yet. Fix unavailable sources first: analyticsEvents (DATABASE_URL_MISSING), generationHistory (DATABASE_URL_MISSING), purchases (DATABASE_URL_MISSING).",
+    "verificationChecklist": [
+      "Confirm the deployed environment has DATABASE_URL configured and the report process can open the production database.",
+      "Re-run `pnpm qa:pricing-performance` in the deployed environment and verify sourceStates move from unavailable to reachable_empty or populated.",
+      "Once sources are reachable, trigger one attributed pricing-page flow and rerun the export to confirm the first populated page row."
+    ],
+    "firstPagesToInspect": {
+      "byViews": [],
+      "byGeneratorClicks": [],
+      "byCheckoutIntent": [],
+      "byPurchaseSignals": [],
+      "weakMappingWarningsWithSignals": []
+    },
+    "firstFamiliesToInspect": {
+      "byViews": [],
+      "byCheckoutIntent": []
+    }
   },
   "prioritizedActions": [],
   "pages": [

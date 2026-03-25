@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildPricingAnalyticsSignals,
   buildPricingClusterPerformanceReport,
+  buildPricingClusterPerformanceSnapshotMarkdown,
   buildPricingGenerationSignals,
   buildPricingPurchaseSignals,
   deriveRate,
@@ -110,9 +111,16 @@ describe('pricing cluster performance report', () => {
     expect(report.summary.needsMappingUpgradePages).toContain(
       'decline-underpaid-project-politely'
     );
+    expect(report.snapshotState).toBe('populated');
+    expect(report.hasRealSignals).toBe(true);
     expect(report.sourceStates.analyticsEvents.state).toBe('populated');
     expect(report.sourceStates.generationHistory.state).toBe('populated');
     expect(report.sourceStates.purchases.state).toBe('populated');
+    expect(report.sourceRowCounts.analyticsEvents).toMatchObject({
+      recordCount: 4,
+      signalCount: 4,
+      pagesWithSignals: 4,
+    });
     expect(report.prioritizedActions.find((item) => item.action === 'improve_cta'))
       .toBeTruthy();
     expect(
@@ -146,6 +154,10 @@ describe('pricing cluster performance report', () => {
     expect(page?.diagnostics).toContain('insufficient_data');
     expect(report.sourceStates.analyticsEvents).toMatchObject({
       state: 'unavailable',
+      reason: 'UNKNOWN',
+      recordCount: null,
+      signalCount: 0,
+      pagesWithSignals: 0,
     });
     expect(report.sourceStates.generationHistory).toMatchObject({
       state: 'unavailable',
@@ -153,8 +165,13 @@ describe('pricing cluster performance report', () => {
     expect(report.sourceStates.purchases).toMatchObject({
       state: 'unavailable',
     });
+    expect(report.snapshotState).toBe('unavailable');
+    expect(report.hasRealSignals).toBe(false);
     expect(report.summary.topFamiliesByViews).toEqual([]);
     expect(report.summary.topFamiliesByCheckoutIntent).toEqual([]);
+    expect(report.operatorGuidance.interpretation).toContain(
+      'not fully queryable yet'
+    );
   });
 
   it('distinguishes reachable empty sources from unavailable ones', () => {
@@ -167,6 +184,9 @@ describe('pricing cluster performance report', () => {
     expect(report.sourceStates.analyticsEvents).toMatchObject({
       state: 'reachable_empty',
       reason: null,
+      recordCount: 0,
+      signalCount: 0,
+      pagesWithSignals: 0,
     });
     expect(report.sourceStates.generationHistory).toMatchObject({
       state: 'reachable_empty',
@@ -176,6 +196,10 @@ describe('pricing cluster performance report', () => {
       state: 'reachable_empty',
       reason: null,
     });
+    expect(report.snapshotState).toBe('reachable_empty');
+    expect(report.operatorGuidance.interpretation).toContain(
+      'reporting window is still empty'
+    );
   });
 
   it('parses persisted pricing attribution from generation and purchase storage shapes', () => {
@@ -280,6 +304,43 @@ describe('pricing cluster performance report', () => {
       purchaseSuccesses: 1,
     });
     expect(row?.generatorClickRate).toBeCloseTo(5 / 14);
+  });
+
+  it('renders a production-friendly markdown snapshot summary', () => {
+    const report = buildPricingClusterPerformanceReport({
+      analyticsSignals: [
+        {
+          pricingSlug: 'client-messaging-outside-work-hours',
+          views: 20,
+          generateClicks: 6,
+          generateSuccesses: 5,
+        },
+      ],
+      generationSignals: [
+        {
+          pricingSlug: 'client-messaging-outside-work-hours',
+          historySaves: 2,
+        },
+      ],
+      purchaseSignals: [
+        {
+          pricingSlug: 'client-messaging-outside-work-hours',
+          checkoutClicks: 2,
+          purchaseSuccesses: 1,
+        },
+      ],
+      generatedAt: '2026-03-25T00:00:00.000Z',
+      days: 7,
+      limit: 100,
+    });
+
+    const markdown = buildPricingClusterPerformanceSnapshotMarkdown(report);
+
+    expect(markdown).toContain('# Pricing Cluster Performance Snapshot');
+    expect(markdown).toContain('Snapshot state: populated');
+    expect(markdown).toContain('analyticsEvents: populated');
+    expect(markdown).toContain('client-messaging-outside-work-hours');
+    expect(markdown).toContain('Verification checklist');
   });
 
   it('derives null rate when the denominator is zero or unavailable', () => {

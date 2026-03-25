@@ -72,3 +72,28 @@ The CI workflow must include:
 - `pnpm qa:pricing-runtime-smoke`
 
 Merges to `main` are allowed only when all checks are green.
+
+## 5. Post-deploy pricing performance verification
+
+Run the pricing performance export in a deployed environment where `DATABASE_URL` is configured:
+
+```bash
+pnpm qa:pricing-performance -- --days=7 --limit=500
+```
+
+Inspect both exported artifacts:
+
+- `docs/ops/pricing-cluster-performance.json`
+- `docs/ops/pricing-cluster-performance-summary.md`
+
+Interpretation rules:
+
+- `snapshotState=unavailable`: environment or database access is not configured correctly.
+- `snapshotState=reachable_empty`: queries work, but no attributed pricing-funnel data was found in the current reporting window yet.
+- `snapshotState=populated`: real pricing-cluster signals were found and page-level funnel analysis is now meaningful.
+
+Minimum first-snapshot check:
+
+- Confirm all three sources are no longer `unavailable`.
+- Confirm at least one page appears in `firstPagesToInspect.byViews` or `firstPagesToInspect.byGeneratorClicks`.
+- Confirm `weakMappingWarningsWithSignals` is reviewed before expanding the next pricing batch.
