@@ -17,9 +17,11 @@ import { CommonMistakes } from '@/components/scenario/CommonMistakes';
 import { HubBackLink } from '@/components/scenario/HubBackLink';
 import { PricingScenarioInlineTool } from '@/components/scenario/PricingScenarioInlineTool';
 import { ToolCtaBlock } from '@/components/scenario/ToolCtaBlock';
+import { PricingScenarioViewTracker } from '@/components/analytics/PricingScenarioViewTracker';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { getAllScenarioSlugs } from '@/lib/content/getAllScenarioSlugs';
 import { getScenarioBySlug } from '@/lib/content/getScenarioBySlug';
+import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import {
   getPricingBlueprintBySlug,
   getPricingScenarioBySlug,
@@ -93,6 +95,12 @@ export default async function PricingScenarioPage({
     notFound();
   }
 
+  const pricingAttribution = buildPricingScenarioAttribution({
+    pricingSlug: scenario.slug,
+    sourceSurface: 'pricing_page',
+    locale,
+  });
+
   const schema = buildScenarioHowToSchema({
     h1: page.h1,
     metaDescription: page.metaDescription,
@@ -105,8 +113,14 @@ export default async function PricingScenarioPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+      {pricingAttribution ? (
+        <PricingScenarioViewTracker attribution={pricingAttribution} />
+      ) : null}
       <ScenarioHero scenario={scenario} />
-      <PricingScenarioInlineTool scenario={page} />
+      <PricingScenarioInlineTool
+        scenario={page}
+        pricingAttribution={pricingAttribution || undefined}
+      />
       <SituationSnapshot scenario={scenario} />
       <WhatsReallyHappening scenario={scenario} />
       <CommonClientMessages scenario={page} />

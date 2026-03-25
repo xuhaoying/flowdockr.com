@@ -3,15 +3,18 @@ import { getDefaultGeneratorScenarioSlug } from '@/lib/content/getScenarioBySlug
 import { getToolBySlug } from '@/lib/content/getToolBySlug';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import type { ScenarioPageData } from '@/types/content';
+import type { PricingScenarioAttribution } from '@/types/pricing-analytics';
 
 import { Link } from '@/core/i18n/navigation';
 
 type PricingScenarioInlineToolProps = {
   scenario: ScenarioPageData;
+  pricingAttribution?: PricingScenarioAttribution;
 };
 
 export function PricingScenarioInlineTool({
   scenario,
+  pricingAttribution,
 }: PricingScenarioInlineToolProps) {
   const generatorScenarioSlug = getDefaultGeneratorScenarioSlug(scenario.slug);
   const generatorScenario = getGeneratorScenarioBySlug(generatorScenarioSlug);
@@ -48,6 +51,15 @@ export function PricingScenarioInlineTool({
       <ToolForm
         analyticsScenarioSlug={scenario.slug}
         defaultScenarioSlug={generatorScenarioSlug}
+        pricingAttribution={
+          pricingAttribution
+            ? {
+                pricingSlug: pricingAttribution.pricingSlug,
+                sourceSurface: pricingAttribution.sourceSurface,
+                locale: pricingAttribution.locale,
+              }
+            : undefined
+        }
         showScenarioSelector={false}
         sourcePage="scenario"
         placeholder={

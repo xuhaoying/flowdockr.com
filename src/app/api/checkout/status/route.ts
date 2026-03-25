@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
     creditsRemaining: status.creditsRemaining,
     supportLevel: status.supportLevel,
     purchasedPlan: status.purchasedPlan,
+    pricingAttribution: status.pricingAttribution,
     error: status.error,
   });
 }

@@ -1,4 +1,5 @@
 import type { BillingSupportLevel, CreditPackCode } from '@/types/billing';
+import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
 
 export type PurchaseStatus =
   | 'pending'
@@ -9,6 +10,7 @@ export type PurchaseStatus =
 
 export type CreateCheckoutSessionRequest = {
   packCode: CreditPackCode;
+  pricingAttribution?: PricingScenarioAttributionSeedInput;
 };
 
 export type CreateCheckoutSessionResponse = {
@@ -26,6 +28,7 @@ export type CheckoutStatusResponse = {
   creditsRemaining?: number;
   supportLevel?: BillingSupportLevel;
   purchasedPlan?: string;
+  pricingAttribution?: PricingScenarioAttributionSeedInput;
   error?: string;
 };
 

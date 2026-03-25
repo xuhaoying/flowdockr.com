@@ -1,9 +1,14 @@
 import type { BillingSupportLevel, FeatureEntitlements } from '@/types/billing';
+import type {
+  PricingScenarioAttribution,
+  PricingScenarioAttributionSeedInput,
+} from '@/types/pricing-analytics';
 
 export type GenerateReplyRequest = {
   scenarioSlug: string;
   message: string;
   sourcePage?: 'home' | 'scenario' | 'tool';
+  pricingAttribution?: PricingScenarioAttributionSeedInput;
   serviceType?:
     | 'designer'
     | 'developer'
@@ -102,6 +107,7 @@ export type GenerationLogRecord = {
   strategyCardSource: 'top10' | 'compat';
   calibrationExampleCount: number;
   usedServiceAdjustment: boolean;
+  pricingAttribution?: PricingScenarioAttribution | null;
 };
 
 export type GenerateReplyResult = {

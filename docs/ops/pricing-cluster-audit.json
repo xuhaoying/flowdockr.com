@@ -1,0 +1,943 @@
+{
+  "generatedAt": "2026-03-25T08:25:34.972Z",
+  "summary": {
+    "totalPages": 28,
+    "dedicatedGeneratorMappings": 12,
+    "reusedGeneratorMappings": 16,
+    "weakGeneratorFitPages": 10,
+    "missingHubExposurePages": 0,
+    "keywordOverlapRiskPages": 0,
+    "lowRelatedLinkDensityPages": 0,
+    "scenarioViewInstrumentedPages": 28,
+    "generatorClickAttributedPages": 28,
+    "generationSuccessAttributedPages": 28,
+    "historyAttributedPages": 28,
+    "checkoutAttributedPages": 28
+  },
+  "pages": [
+    {
+      "slug": "price-pushback-after-proposal",
+      "title": "Price pushback after proposal",
+      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr",
+      "family": "price-pushback",
+      "primaryKeywords": [
+        "quote too high",
+        "price too high",
+        "too expensive proposal"
+      ],
+      "canonicalRoute": "/pricing/price-pushback-after-proposal/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": true,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "discount-pressure-before-signing",
+        "budget-lower-than-expected",
+        "cheaper-competitor-comparison"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "quote-too-high",
+      "generatorScenarioTitle": "Client says your quote is too high",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "discount-pressure-before-signing",
+      "title": "Discount pressure before signing",
+      "seoTitle": "How to Handle Discount Pressure Before Signing | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "ask for discount before signing",
+        "discount before closing",
+        "lower price before moving forward"
+      ],
+      "canonicalRoute": "/pricing/discount-pressure-before-signing/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": true,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-asking-for-discount",
+        "small-discount-before-closing",
+        "stand-firm-on-pricing"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "discount-request",
+      "generatorScenarioTitle": "Client asks for a discount",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "budget-lower-than-expected",
+      "title": "Budget lower than expected",
+      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | Flowdockr",
+      "family": "budget-mismatch",
+      "primaryKeywords": [
+        "budget lower than quote",
+        "lower budget than expected",
+        "limited budget project"
+      ],
+      "canonicalRoute": "/pricing/budget-lower-than-expected/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": true,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "more-work-same-price",
+        "say-no-to-low-budget-client",
+        "decline-underpaid-project-politely"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "budget-limited",
+      "generatorScenarioTitle": "Client says they don't have the budget",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "cheaper-competitor-comparison",
+      "title": "Cheaper competitor comparison",
+      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr",
+      "family": "competitor-comparison",
+      "primaryKeywords": [
+        "another freelancer is cheaper",
+        "competitor quoted less",
+        "someone else offered a lower price"
+      ],
+      "canonicalRoute": "/pricing/cheaper-competitor-comparison/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": true,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "discount-pressure-before-signing",
+        "budget-lower-than-expected",
+        "price-pushback-after-proposal"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "cheaper-freelancer",
+      "generatorScenarioTitle": "Client says another freelancer is cheaper",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "more-work-same-price",
+      "title": "More work for the same price",
+      "seoTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "more work same price",
+        "extra deliverables same budget",
+        "more scope without more pay"
+      ],
+      "canonicalRoute": "/pricing/more-work-same-price/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-asking-for-extra-work",
+        "client-requesting-additional-revisions",
+        "say-no-to-scope-creep-politely"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorScenarioTitle": "Client asks for extra work outside the agreed scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "free-trial-work-request",
+      "title": "Free trial work request",
+      "seoTitle": "How to Respond to a Free Trial Work Request | Flowdockr",
+      "family": "free-work-boundary",
+      "primaryKeywords": [
+        "free trial work request",
+        "unpaid sample work",
+        "unpaid test project"
+      ],
+      "canonicalRoute": "/pricing/free-trial-work-request/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "can-you-do-it-cheaper",
+        "budget-lower-than-expected",
+        "more-work-same-price"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "free-sample-request-response",
+      "generatorScenarioTitle": "How to respond when a client asks for a free sample",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "can-you-do-it-cheaper",
+      "title": "Can you do it cheaper?",
+      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "can you do it cheaper",
+        "can you make it cheaper",
+        "do you offer a lower price"
+      ],
+      "canonicalRoute": "/pricing/can-you-do-it-cheaper/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-negotiating-price",
+        "client-asking-for-discount",
+        "budget-lower-than-expected"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "discount-request",
+      "generatorScenarioTitle": "Client asks for a discount",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "small-discount-before-closing",
+      "title": "Small discount before closing",
+      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "small discount before signing",
+        "final small discount request",
+        "one last discount before close"
+      ],
+      "canonicalRoute": "/pricing/small-discount-before-closing/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "discount-pressure-before-signing",
+        "budget-lower-than-expected",
+        "cheaper-competitor-comparison"
+      ],
+      "relatedLinkCount": 3,
+      "generatorScenarioSlug": "discount-request",
+      "generatorScenarioTitle": "Client asks for a discount",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "client-asking-for-extra-work",
+      "title": "How to respond when a client asks for extra work",
+      "seoTitle": "How to Respond When a Client Asks for Extra Work | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "how to respond to client asking for extra work"
+      ],
+      "canonicalRoute": "/pricing/client-asking-for-extra-work/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "more-work-same-price",
+        "client-requesting-additional-revisions",
+        "say-no-to-scope-creep-politely",
+        "more-work-than-agreed"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorScenarioTitle": "Client asks for extra work outside the agreed scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "say-no-to-scope-creep-politely",
+      "title": "How to say no to scope creep politely",
+      "seoTitle": "How to Say No to Scope Creep Politely | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "how to say no to scope creep politely"
+      ],
+      "canonicalRoute": "/pricing/say-no-to-scope-creep-politely/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-asking-for-extra-work",
+        "refuse-extra-work-without-losing-client",
+        "more-work-same-price",
+        "client-requesting-additional-revisions"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "set-boundaries-politely",
+      "generatorScenarioTitle": "How to set boundaries with a client politely",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "more-work-than-agreed",
+      "title": "Client wants more work than agreed",
+      "seoTitle": "Client Wants More Work Than Agreed? What to Say | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "client asking for more work than agreed what to say"
+      ],
+      "canonicalRoute": "/pricing/more-work-than-agreed/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-asking-for-extra-work",
+        "more-work-same-price",
+        "say-no-to-scope-creep-politely",
+        "refuse-extra-work-without-losing-client"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "extra-work-outside-scope",
+      "generatorScenarioTitle": "Client asks for extra work outside the agreed scope",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "client-requesting-additional-revisions",
+      "title": "How to handle a client requesting additional revisions",
+      "seoTitle": "How to Handle a Client Requesting Additional Revisions | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "how to handle client requesting additional revisions"
+      ],
+      "canonicalRoute": "/pricing/client-requesting-additional-revisions/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "more-work-same-price",
+        "client-asking-for-extra-work",
+        "refuse-extra-work-without-losing-client",
+        "say-no-to-scope-creep-politely"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "unlimited-revisions",
+      "generatorScenarioTitle": "Client asks for unlimited revisions",
+      "generatorMappingKind": "reused",
+      "generatorFit": "reused",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "refuse-extra-work-without-losing-client",
+      "title": "How to refuse extra work without losing the client",
+      "seoTitle": "How to Refuse Extra Work Without Losing the Client | Flowdockr",
+      "family": "scope-boundary",
+      "primaryKeywords": [
+        "how to refuse extra work without losing client"
+      ],
+      "canonicalRoute": "/pricing/refuse-extra-work-without-losing-client/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "say-no-to-scope-creep-politely",
+        "client-asking-for-extra-work",
+        "client-requesting-additional-revisions",
+        "say-no-to-client-professionally"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "set-boundaries-politely",
+      "generatorScenarioTitle": "How to set boundaries with a client politely",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "client-asking-for-discount",
+      "title": "How to respond when a client asks for a discount",
+      "seoTitle": "How to Respond When a Client Asks for a Discount | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "how to respond to client asking for discount"
+      ],
+      "canonicalRoute": "/pricing/client-asking-for-discount/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "discount-pressure-before-signing",
+        "client-negotiating-price",
+        "stand-firm-on-pricing",
+        "say-no-to-low-budget-client"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "discount-request",
+      "generatorScenarioTitle": "Client asks for a discount",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "say-no-to-low-budget-client",
+      "title": "How to say no to a low-budget client",
+      "seoTitle": "How to Say No to a Low-Budget Client | Flowdockr",
+      "family": "budget-mismatch",
+      "primaryKeywords": [
+        "how to say no to low budget client"
+      ],
+      "canonicalRoute": "/pricing/say-no-to-low-budget-client/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "budget-lower-than-expected",
+        "decline-underpaid-project-politely",
+        "stand-firm-on-pricing",
+        "client-asking-for-discount"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "say-no-to-low-budget-client",
+      "generatorScenarioTitle": "Say no to a low-budget client",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "client-negotiating-price",
+      "title": "Client is negotiating price: what to say",
+      "seoTitle": "Client Negotiating Price? What to Say Next | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "client negotiating price what to say"
+      ],
+      "canonicalRoute": "/pricing/client-negotiating-price/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-asking-for-discount",
+        "stand-firm-on-pricing",
+        "discount-pressure-before-signing",
+        "budget-lower-than-expected"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "discount-request",
+      "generatorScenarioTitle": "Client asks for a discount",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "decline-underpaid-project-politely",
+      "title": "How to decline an underpaid project politely",
+      "seoTitle": "How to Decline an Underpaid Project Politely | Flowdockr",
+      "family": "budget-mismatch",
+      "primaryKeywords": [
+        "how to decline underpaid project politely"
+      ],
+      "canonicalRoute": "/pricing/decline-underpaid-project-politely/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "say-no-to-low-budget-client",
+        "budget-lower-than-expected",
+        "stand-firm-on-pricing",
+        "decline-project-politely"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "do-it-for-less",
+      "generatorScenarioTitle": "Client asks if you can do it for less",
+      "generatorMappingKind": "reused",
+      "generatorFit": "weak",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": [
+        "weak-generator-fit"
+      ]
+    },
+    {
+      "slug": "stand-firm-on-pricing",
+      "title": "How to stand firm on pricing as a freelancer",
+      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | Flowdockr",
+      "family": "discount-pressure",
+      "primaryKeywords": [
+        "how to stand firm on pricing freelance"
+      ],
+      "canonicalRoute": "/pricing/stand-firm-on-pricing/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-negotiating-price",
+        "client-asking-for-discount",
+        "discount-pressure-before-signing",
+        "cheaper-competitor-comparison"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "stand-firm-on-pricing",
+      "generatorScenarioTitle": "Stand firm on pricing",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "client-messaging-outside-work-hours",
+      "title": "Client messaging outside work hours: what to say",
+      "seoTitle": "Client Messaging Outside Work Hours? What to Say | Flowdockr",
+      "family": "availability-boundary",
+      "primaryKeywords": [
+        "client messaging outside work hours what to say"
+      ],
+      "canonicalRoute": "/pricing/client-messaging-outside-work-hours/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "set-boundaries-with-demanding-client",
+        "tell-client-you-are-unavailable",
+        "client-expects-immediate-response",
+        "urgent-request-last-minute"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "client-messaging-outside-work-hours",
+      "generatorScenarioTitle": "Client messaging outside work hours",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "set-boundaries-with-demanding-client",
+      "title": "How to set boundaries with a demanding client",
+      "seoTitle": "How to Set Boundaries With a Demanding Client | Flowdockr",
+      "family": "availability-boundary",
+      "primaryKeywords": [
+        "how to set boundaries with demanding client"
+      ],
+      "canonicalRoute": "/pricing/set-boundaries-with-demanding-client/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-messaging-outside-work-hours",
+        "tell-client-you-are-unavailable",
+        "client-expects-immediate-response",
+        "say-no-to-client-professionally"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "set-boundaries-with-demanding-client",
+      "generatorScenarioTitle": "Set boundaries with a demanding client",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "tell-client-you-are-unavailable",
+      "title": "How to tell a client you are unavailable",
+      "seoTitle": "How to Tell a Client You Are Unavailable | Flowdockr",
+      "family": "availability-boundary",
+      "primaryKeywords": [
+        "how to tell client you are unavailable"
+      ],
+      "canonicalRoute": "/pricing/tell-client-you-are-unavailable/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-messaging-outside-work-hours",
+        "set-boundaries-with-demanding-client",
+        "urgent-request-last-minute",
+        "refuse-project-due-to-workload"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "tell-client-you-are-unavailable",
+      "generatorScenarioTitle": "Tell a client you are unavailable",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "urgent-request-last-minute",
+      "title": "How to respond to an urgent last-minute request",
+      "seoTitle": "How to Respond to an Urgent Last-Minute Request | Flowdockr",
+      "family": "availability-boundary",
+      "primaryKeywords": [
+        "how to respond to urgent request last minute"
+      ],
+      "canonicalRoute": "/pricing/urgent-request-last-minute/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-expects-immediate-response",
+        "client-messaging-outside-work-hours",
+        "set-boundaries-with-demanding-client",
+        "more-work-same-price"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "urgent-request-last-minute",
+      "generatorScenarioTitle": "Respond to an urgent last-minute request",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "client-expects-immediate-response",
+      "title": "Client expects an immediate response: what to say",
+      "seoTitle": "Client Expects an Immediate Response? What to Say | Flowdockr",
+      "family": "availability-boundary",
+      "primaryKeywords": [
+        "client expects immediate response what to say"
+      ],
+      "canonicalRoute": "/pricing/client-expects-immediate-response/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "client-messaging-outside-work-hours",
+        "tell-client-you-are-unavailable",
+        "set-boundaries-with-demanding-client",
+        "urgent-request-last-minute"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "client-expects-immediate-response",
+      "generatorScenarioTitle": "Client expects an immediate response",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "say-no-to-client-professionally",
+      "title": "How to say no to a client professionally",
+      "seoTitle": "How to Say No to a Client Professionally | Flowdockr",
+      "family": "project-decline",
+      "primaryKeywords": [
+        "how to say no to a client professionally"
+      ],
+      "canonicalRoute": "/pricing/say-no-to-client-professionally/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "decline-project-politely",
+        "reject-client-without-burning-bridge",
+        "turn-down-freelance-work-nicely",
+        "refuse-project-due-to-workload"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "say-no-to-client-professionally",
+      "generatorScenarioTitle": "Say no to a client professionally",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "decline-project-politely",
+      "title": "How to decline a project politely",
+      "seoTitle": "How to Decline a Project Politely | Flowdockr",
+      "family": "project-decline",
+      "primaryKeywords": [
+        "how to decline a project politely"
+      ],
+      "canonicalRoute": "/pricing/decline-project-politely/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "say-no-to-client-professionally",
+        "reject-client-without-burning-bridge",
+        "turn-down-freelance-work-nicely",
+        "refuse-project-due-to-workload"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "decline-project-politely",
+      "generatorScenarioTitle": "Decline a project politely",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "reject-client-without-burning-bridge",
+      "title": "How to reject a client without burning the bridge",
+      "seoTitle": "How to Reject a Client Without Burning the Bridge | Flowdockr",
+      "family": "project-decline",
+      "primaryKeywords": [
+        "how to reject a client without burning bridge"
+      ],
+      "canonicalRoute": "/pricing/reject-client-without-burning-bridge/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "say-no-to-client-professionally",
+        "decline-project-politely",
+        "turn-down-freelance-work-nicely",
+        "decline-underpaid-project-politely"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "reject-client-without-burning-bridge",
+      "generatorScenarioTitle": "Reject a client without burning the bridge",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "turn-down-freelance-work-nicely",
+      "title": "How to turn down freelance work nicely",
+      "seoTitle": "How to Turn Down Freelance Work Nicely | Flowdockr",
+      "family": "project-decline",
+      "primaryKeywords": [
+        "how to turn down freelance work nicely"
+      ],
+      "canonicalRoute": "/pricing/turn-down-freelance-work-nicely/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "say-no-to-client-professionally",
+        "decline-project-politely",
+        "reject-client-without-burning-bridge",
+        "refuse-project-due-to-workload"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "turn-down-freelance-work-nicely",
+      "generatorScenarioTitle": "Turn down freelance work nicely",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    },
+    {
+      "slug": "refuse-project-due-to-workload",
+      "title": "How to refuse a project due to workload",
+      "seoTitle": "How to Refuse a Project Due to Workload | Flowdockr",
+      "family": "project-decline",
+      "primaryKeywords": [
+        "how to refuse a project due to workload"
+      ],
+      "canonicalRoute": "/pricing/refuse-project-due-to-workload/",
+      "includedInScenarioDiscovery": true,
+      "includedInSitemap": true,
+      "surfacedOnHubFeatured": false,
+      "surfacedInHubLibrary": true,
+      "relatedSlugs": [
+        "decline-project-politely",
+        "turn-down-freelance-work-nicely",
+        "tell-client-you-are-unavailable",
+        "say-no-to-client-professionally"
+      ],
+      "relatedLinkCount": 4,
+      "generatorScenarioSlug": "refuse-project-due-to-workload",
+      "generatorScenarioTitle": "Refuse a project due to workload",
+      "generatorMappingKind": "dedicated",
+      "generatorFit": "strong",
+      "hasScenarioViewEvent": true,
+      "hasGeneratorClickAttribution": true,
+      "hasGenerationSuccessAttribution": true,
+      "hasHistoryAttribution": true,
+      "hasCheckoutAttribution": true,
+      "keywordOverlapWith": [],
+      "flags": []
+    }
+  ]
+}

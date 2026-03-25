@@ -131,7 +131,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'When to discount and when not to',
       },
     ],
-    generatorScenarioSlug: 'lowball-offer',
+    generatorScenarioSlug: 'quote-too-high',
     toolCta:
       'Paste the prospect’s exact message, your quote, and the tone you want. Flowdockr will draft a reply that protects your rate without sounding defensive.',
   },
@@ -242,7 +242,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'How to negotiate freelance pricing',
       },
     ],
-    generatorScenarioSlug: 'client-asks-discount',
+    generatorScenarioSlug: 'discount-request',
     toolCta:
       'Paste the exact discount request and your current offer. Flowdockr will help you reply without weakening your position right before the deal closes.',
   },
@@ -572,7 +572,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'Reduce scope instead of lowering your rate',
       },
     ],
-    generatorScenarioSlug: 'more-work-same-budget',
+    generatorScenarioSlug: 'extra-work-outside-scope',
     toolCta:
       'Paste the extra request and your original scope. Flowdockr will help you respond clearly without sounding defensive or opening the door to unpaid work.',
   },
@@ -675,7 +675,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'How to negotiate freelance pricing',
       },
     ],
-    generatorScenarioSlug: 'free-sample-work',
+    generatorScenarioSlug: 'free-sample-request-response',
     toolCta:
       'Paste the free-trial request and your preferred boundary. Flowdockr will draft a response that stays professional without giving away unpaid work.',
   },
@@ -781,7 +781,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'When to discount and when not to',
       },
     ],
-    generatorScenarioSlug: 'client-asks-discount',
+    generatorScenarioSlug: 'discount-request',
     toolCta:
       'Paste the exact message and Flowdockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure, then draft the right reply.',
   },
@@ -887,7 +887,7 @@ const corePricingScenarios: PricingScenario[] = [
         label: 'When to discount and when not to',
       },
     ],
-    generatorScenarioSlug: 'client-asks-discount',
+    generatorScenarioSlug: 'discount-request',
     toolCta:
       'Paste the final discount request and your current offer. Flowdockr will help you close professionally without undermining your pricing at the last minute.',
   },
@@ -1674,7 +1674,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'client-asking-for-discount',
     ],
     guideLinks: scopeGuideLinks,
-    generatorScenarioSlug: 'budget-limited',
+    generatorScenarioSlug: 'say-no-to-low-budget-client',
     toolCta:
       'Paste the budget message and your minimum workable range. Flowdockr will help you say no cleanly without making the reply feel hostile or defensive.',
   },
@@ -2010,7 +2010,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'cheaper-competitor-comparison',
     ],
     guideLinks: pricingGuideLinks,
-    generatorScenarioSlug: 'quote-too-high',
+    generatorScenarioSlug: 'stand-firm-on-pricing',
     toolCta:
       'Paste the latest pricing pushback and your current offer. Flowdockr will help you hold the line in a way that sounds structured instead of stiff.',
   },
@@ -2121,7 +2121,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'client-expects-immediate-response',
       'urgent-request-last-minute',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'client-messaging-outside-work-hours',
     toolCta:
       'Paste the after-hours message and the boundary you want to keep. Flowdockr will draft a reply that resets expectations without sounding sharp.',
   },
@@ -2233,7 +2233,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'client-expects-immediate-response',
       'say-no-to-client-professionally',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'set-boundaries-with-demanding-client',
     toolCta:
       'Paste the demanding message pattern and the boundary you want to hold. Flowdockr will help you reset expectations without escalating the relationship.',
   },
@@ -2343,7 +2343,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'urgent-request-last-minute',
       'refuse-project-due-to-workload',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'tell-client-you-are-unavailable',
     toolCta:
       'Paste the client message and the next time you can realistically respond. Flowdockr will help you say unavailable clearly without sounding flaky.',
   },
@@ -2453,7 +2453,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'set-boundaries-with-demanding-client',
       'more-work-same-price',
     ],
-    generatorScenarioSlug: 'urgent-request-response',
+    generatorScenarioSlug: 'urgent-request-last-minute',
     toolCta:
       'Paste the urgent request and the real timeline constraints. Flowdockr will help you answer quickly without overpromising or giving away rush work for free.',
   },
@@ -2563,7 +2563,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'set-boundaries-with-demanding-client',
       'urgent-request-last-minute',
     ],
-    generatorScenarioSlug: 'client-rushing-you-response',
+    generatorScenarioSlug: 'client-expects-immediate-response',
     toolCta:
       'Paste the message and the response rhythm you want to keep. Flowdockr will help you reset immediate-response expectations without sounding checked out.',
   },
@@ -2675,7 +2675,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'turn-down-freelance-work-nicely',
       'refuse-project-due-to-workload',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'say-no-to-client-professionally',
     toolCta:
       'Paste the inquiry and the reason you want to decline. Flowdockr will help you say no professionally without sounding awkward, guilty, or overly sharp.',
   },
@@ -2786,7 +2786,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'turn-down-freelance-work-nicely',
       'refuse-project-due-to-workload',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'decline-project-politely',
     toolCta:
       'Paste the project request and how direct you want to be. Flowdockr will help you decline politely without leaving the thread confusingly open.',
   },
@@ -2897,7 +2897,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'turn-down-freelance-work-nicely',
       'decline-underpaid-project-politely',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'reject-client-without-burning-bridge',
     toolCta:
       'Paste the inquiry and the relationship context. Flowdockr will help you reject the client cleanly while keeping the tone respectful and bridge-safe.',
   },
@@ -3006,7 +3006,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'reject-client-without-burning-bridge',
       'refuse-project-due-to-workload',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'turn-down-freelance-work-nicely',
     toolCta:
       'Paste the project request and the tone you want. Flowdockr will help you turn the work down nicely without making the no ambiguous.',
   },
@@ -3117,7 +3117,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
       'tell-client-you-are-unavailable',
       'say-no-to-client-professionally',
     ],
-    generatorScenarioSlug: 'set-boundaries-politely',
+    generatorScenarioSlug: 'refuse-project-due-to-workload',
     toolCta:
       'Paste the project request and your workload context. Flowdockr will help you say no in a way that sounds responsible rather than overloaded.',
   },

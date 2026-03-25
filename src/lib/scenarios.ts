@@ -4,7 +4,6 @@ export {
   isScenarioSlug,
   scenarioOptions,
   scenarios,
-  type ScenarioSlug,
 } from '@/data/scenarios';
 
-export type { Scenario } from '@/types/scenario';
+export type { Scenario, ScenarioSlug } from '@/types/scenario';

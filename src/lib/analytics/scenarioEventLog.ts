@@ -41,6 +41,7 @@ export async function getScenarioAnalyticsSlugCounts(params?: {
   days?: number;
   eventName?: CanonicalScenarioAnalyticsEventName;
   scenarioSlug?: string;
+  pageType?: string;
   limit?: number;
 }) {
   const days = Math.max(1, params?.days || 30);
@@ -54,6 +55,9 @@ export async function getScenarioAnalyticsSlugCounts(params?: {
       : undefined,
     params?.scenarioSlug
       ? eq(scenarioAnalyticsEvent.scenarioSlug, params.scenarioSlug)
+      : undefined,
+    params?.pageType
+      ? eq(scenarioAnalyticsEvent.pageType, params.pageType)
       : undefined,
   ].filter(Boolean);
 

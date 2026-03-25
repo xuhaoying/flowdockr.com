@@ -1,8 +1,11 @@
 import { eq } from 'drizzle-orm';
 
 import { getUserBillingProfile } from '@/lib/billing';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import { db, purchase, user } from '@/lib/db';
+import { isPricingAnalyticsSourceSurface } from '@/lib/analytics/pricingAttribution';
 import type { CheckoutStatusResponse, PurchaseStatus } from '@/types/payments';
+import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
 
 function normalizePurchaseStatus(status: string): PurchaseStatus {
   if (status === 'paid') {
@@ -41,6 +44,7 @@ export async function getCheckoutStatus(params: {
           userId: purchase.userId,
           status: purchase.status,
           creditsGranted: purchase.creditsGranted,
+          metadata: purchase.metadata,
         })
         .from(purchase)
         .where(eq(purchase.stripeCheckoutSessionId, sessionId))
@@ -51,6 +55,7 @@ export async function getCheckoutStatus(params: {
           userId: purchase.userId,
           status: purchase.status,
           creditsGranted: purchase.creditsGranted,
+          metadata: purchase.metadata,
         })
         .from(purchase)
         .where(eq(purchase.id, purchaseId))
@@ -72,6 +77,7 @@ export async function getCheckoutStatus(params: {
   let creditsRemaining: number | undefined;
   let supportLevel: CheckoutStatusResponse['supportLevel'];
   let purchasedPlan: string | undefined;
+  const pricingAttribution = parsePricingAttribution(record.metadata);
   if (record.userId) {
     const [balance] = await db()
       .select({
@@ -96,5 +102,39 @@ export async function getCheckoutStatus(params: {
     creditsRemaining,
     supportLevel,
     purchasedPlan,
+    pricingAttribution,
   };
+}
+
+function parsePricingAttribution(
+  raw: string | null | undefined
+): PricingScenarioAttributionSeedInput | undefined {
+  if (!raw) {
+    return undefined;
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const pricingSlug = getPricingScenarioBySlug(
+      String(parsed.pricingSlug || '').trim()
+    )?.slug;
+    const sourceSurface = String(parsed.sourceSurface || '').trim();
+    const locale = String(parsed.locale || '').trim();
+
+    if (
+      !pricingSlug ||
+      !locale ||
+      !isPricingAnalyticsSourceSurface(sourceSurface)
+    ) {
+      return undefined;
+    }
+
+    return {
+      pricingSlug,
+      sourceSurface,
+      locale,
+    };
+  } catch {
+    return undefined;
+  }
 }

@@ -1,4 +1,3 @@
-import type { ScenarioSlug } from '@/data/scenarios';
 import type {
   ExampleReplies,
   FAQItem,
@@ -6,6 +5,7 @@ import type {
   StrategyPath,
   ToolCTA,
 } from '@/types/content';
+import type { ScenarioSlug } from '@/types/scenario';
 
 export type PricingScenarioSlug =
   | 'price-pushback-after-proposal'

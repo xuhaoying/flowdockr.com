@@ -87,4 +87,49 @@ describe('checkout analytics contract', () => {
     expect(payload).toBeDefined();
     expect(payload).not.toHaveProperty('scenario_slug');
   });
+
+  it('attaches pricing attribution on fd_purchase_success when checkout started from a pricing scenario', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () =>
+        buildJsonResponse({
+          success: true,
+          status: 'paid',
+          creditsGranted: true,
+          creditsAdded: 8,
+          purchasedPlan: 'pro',
+          pricingAttribution: {
+            pricingSlug: 'say-no-to-client-professionally',
+            sourceSurface: 'pricing_page',
+            locale: 'en',
+          },
+        })
+      )
+    );
+
+    render(
+      <CheckoutStatusCard
+        sessionId="cs_test_456"
+        continuePath="/pricing/say-no-to-client-professionally/"
+        pricingAttribution={{
+          pricingSlug: 'say-no-to-client-professionally',
+          sourceSurface: 'pricing_page',
+          locale: 'en',
+        }}
+      />
+    );
+
+    await waitFor(() => {
+      expect(trackEvent).toHaveBeenCalledWith(
+        'fd_purchase_success',
+        expect.objectContaining({
+          purchased_plan: 'pro',
+          pricing_slug: 'say-no-to-client-professionally',
+          pricing_family: 'project-decline',
+          source_surface: 'pricing_page',
+          page_type: 'checkout',
+        })
+      );
+    });
+  });
 });

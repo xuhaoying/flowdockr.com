@@ -1,6 +1,7 @@
 import { getAllGuides } from '../../src/lib/content/getGuideBySlug';
 import { getPricingHub } from '../../src/lib/content/getPricingHub';
 import { getAllScenarios } from '../../src/lib/content/getScenarioBySlug';
+import { buildPricingClusterAuditReport } from '../../src/lib/pricing-cluster-audit';
 import { getAllTools } from '../../src/lib/content/getToolBySlug';
 
 type Issue = {
@@ -92,6 +93,7 @@ function validatePricingContent(): Issue[] {
     'use ai',
     'generate reply',
   ]);
+  const audit = buildPricingClusterAuditReport();
 
   const allH1s = [
     hub.h1,
@@ -247,6 +249,54 @@ function validatePricingContent(): Issue[] {
       pushError(
         issues,
         `${scenario.slug}: toolCta.buttonLabel '${scenario.toolCta.buttonLabel}' is too generic. Use task-specific CTA language.`
+      );
+    }
+  }
+
+  for (const page of audit.pages) {
+    if (!page.includedInScenarioDiscovery) {
+      pushError(
+        issues,
+        `${page.slug}: pricing page is missing from scenario discovery.`
+      );
+    }
+
+    if (!page.includedInSitemap) {
+      pushError(issues, `${page.slug}: pricing page is missing from sitemap.`);
+    }
+
+    if (page.generatorScenarioTitle === null) {
+      pushError(
+        issues,
+        `${page.slug}: generator scenario '${page.generatorScenarioSlug}' does not resolve in the generator registry.`
+      );
+    }
+
+    if (page.flags.includes('missing-hub-exposure')) {
+      pushWarn(
+        issues,
+        `${page.slug}: page is not surfaced on the pricing hub or library section.`
+      );
+    }
+
+    if (page.flags.includes('weak-generator-fit')) {
+      pushWarn(
+        issues,
+        `${page.slug}: generator mapping '${page.generatorScenarioSlug}' looks generic or weak for this landing-page intent.`
+      );
+    }
+
+    if (page.flags.includes('low-related-link-density')) {
+      pushWarn(
+        issues,
+        `${page.slug}: related-link density is low (${page.relatedLinkCount}).`
+      );
+    }
+
+    if (page.flags.includes('keyword-overlap-risk')) {
+      pushWarn(
+        issues,
+        `${page.slug}: primary keyword overlaps with ${page.keywordOverlapWith.join(', ')}.`
       );
     }
   }

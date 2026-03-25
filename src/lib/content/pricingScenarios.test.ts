@@ -24,10 +24,25 @@ describe('pricing scenario content adapter', () => {
 
   it('uses typed pricing cluster mappings for generator defaults', () => {
     expect(getDefaultGeneratorScenarioSlug('urgent-request-last-minute')).toBe(
-      'urgent-request-response'
+      'urgent-request-last-minute'
+    );
+    expect(
+      getDefaultGeneratorScenarioSlug('client-messaging-outside-work-hours')
+    ).toBe('client-messaging-outside-work-hours');
+    expect(
+      getDefaultGeneratorScenarioSlug('say-no-to-client-professionally')
+    ).toBe('say-no-to-client-professionally');
+    expect(getDefaultGeneratorScenarioSlug('say-no-to-low-budget-client')).toBe(
+      'say-no-to-low-budget-client'
+    );
+    expect(getDefaultGeneratorScenarioSlug('stand-firm-on-pricing')).toBe(
+      'stand-firm-on-pricing'
     );
     expect(
       getDefaultGeneratorScenarioSlug('client-requesting-additional-revisions')
     ).toBe('unlimited-revisions');
+    expect(
+      getDefaultGeneratorScenarioSlug('price-pushback-after-proposal')
+    ).toBe('quote-too-high');
   });
 });

@@ -12,6 +12,12 @@ type PlausibleFn = (
 
 type GtagFn = (...args: unknown[]) => void;
 
+type MirroredScenarioEventConfig = {
+  canonicalEventName: 'fd_scenario_view' | 'fd_tool_start' | 'fd_generation_success';
+  slugParam: 'scenario_slug' | 'pricing_slug';
+  allowedPageTypes: string[];
+};
+
 declare global {
   interface Window {
     dataLayer?: unknown[];
@@ -29,11 +35,38 @@ export const ANALYTICS_ENABLED =
   Boolean(GA_MEASUREMENT_ID) &&
   (process.env.NODE_ENV === 'production' || ANALYTICS_DEBUG_ENABLED);
 
-const MIRRORED_SCENARIO_EVENTS = new Set([
-  'fd_scenario_view',
-  'fd_tool_start',
-  'fd_generation_success',
-]);
+const MIRRORED_SCENARIO_EVENTS: Record<string, MirroredScenarioEventConfig> = {
+  fd_scenario_view: {
+    canonicalEventName: 'fd_scenario_view',
+    slugParam: 'scenario_slug',
+    allowedPageTypes: ['scenario'],
+  },
+  fd_tool_start: {
+    canonicalEventName: 'fd_tool_start',
+    slugParam: 'scenario_slug',
+    allowedPageTypes: ['scenario'],
+  },
+  fd_generation_success: {
+    canonicalEventName: 'fd_generation_success',
+    slugParam: 'scenario_slug',
+    allowedPageTypes: ['scenario'],
+  },
+  page_view_pricing_scenario: {
+    canonicalEventName: 'fd_scenario_view',
+    slugParam: 'pricing_slug',
+    allowedPageTypes: ['pricing'],
+  },
+  click_generate_from_pricing_scenario: {
+    canonicalEventName: 'fd_tool_start',
+    slugParam: 'pricing_slug',
+    allowedPageTypes: ['pricing'],
+  },
+  generate_success_from_pricing_scenario: {
+    canonicalEventName: 'fd_generation_success',
+    slugParam: 'pricing_slug',
+    allowedPageTypes: ['pricing'],
+  },
+};
 
 function isBrowser() {
   return typeof window !== 'undefined';
@@ -59,16 +92,22 @@ function mirrorCanonicalScenarioEvent(
   eventName: string,
   params: Record<string, AnalyticsPrimitive>
 ) {
-  if (!isBrowser() || !MIRRORED_SCENARIO_EVENTS.has(eventName)) {
+  if (!isBrowser()) {
     return;
   }
 
+  const eventConfig = MIRRORED_SCENARIO_EVENTS[eventName];
+  if (!eventConfig) {
+    return;
+  }
+
+  const mirroredSlugValue = params[eventConfig.slugParam];
   const scenarioSlug =
-    typeof params.scenario_slug === 'string' ? params.scenario_slug.trim() : '';
+    typeof mirroredSlugValue === 'string' ? mirroredSlugValue.trim() : '';
   const pageType =
     typeof params.page_type === 'string' ? params.page_type.trim() : '';
 
-  if (!scenarioSlug || pageType !== 'scenario') {
+  if (!scenarioSlug || !eventConfig.allowedPageTypes.includes(pageType)) {
     return;
   }
 
@@ -79,7 +118,7 @@ function mirrorCanonicalScenarioEvent(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        eventName,
+        eventName: eventConfig.canonicalEventName,
         scenarioSlug,
         pageType,
         pathname: window.location.pathname,

@@ -1,11 +1,18 @@
 import { z } from 'zod';
 
+const pricingAttributionSeedSchema = z.object({
+  pricingSlug: z.string().min(1).max(120),
+  sourceSurface: z.enum(['pricing_page', 'tool_page', 'pricing_hub']),
+  locale: z.string().min(2).max(16),
+});
+
 export const generateSchema = z
   .object({
     scenarioSlug: z.string().min(1).max(120),
     message: z.string().min(6).max(4000).optional(),
     clientMessage: z.string().min(6).max(4000).optional(),
     sourcePage: z.enum(['home', 'scenario', 'tool']).optional(),
+    pricingAttribution: pricingAttributionSeedSchema.optional(),
     serviceType: z
       .enum([
         'designer',
@@ -43,6 +50,7 @@ export const generateSchema = z
     scenarioSlug: data.scenarioSlug,
     message: (data.message || data.clientMessage || '').trim(),
     sourcePage: data.sourcePage || 'tool',
+    pricingAttribution: data.pricingAttribution,
     serviceType: data.serviceType || 'other',
     tone: data.tone || 'professional_firm',
     goal: data.goal || 'protect_price',
@@ -57,6 +65,7 @@ export const checkoutSchema = z
     anonymousSessionId: z.string().min(10).max(120).optional(),
     scenarioSlug: z.string().min(1).max(120).optional(),
     returnTo: z.string().max(500).optional(),
+    pricingAttribution: pricingAttributionSeedSchema.optional(),
   })
   .superRefine((data, ctx) => {
     if (!data.packageId && !data.packCode) {
@@ -73,6 +82,7 @@ export const checkoutSchema = z
     anonymousSessionId: data.anonymousSessionId,
     scenarioSlug: data.scenarioSlug,
     returnTo: data.returnTo,
+    pricingAttribution: data.pricingAttribution,
   }));
 
 export const magicLinkSchema = z.object({

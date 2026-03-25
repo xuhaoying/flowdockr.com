@@ -13,6 +13,7 @@ export async function createPendingPurchase(params: {
   returnTo?: string;
   scenarioSlug?: string;
   anonymousSessionId?: string;
+  pricingMetadata?: Record<string, string>;
 }): Promise<{ id: string }> {
   const {
     userId,
@@ -26,6 +27,7 @@ export async function createPendingPurchase(params: {
     returnTo = '',
     scenarioSlug = '',
     anonymousSessionId = '',
+    pricingMetadata = {},
   } = params;
 
   const purchaseId = getUuid();
@@ -55,6 +57,7 @@ export async function createPendingPurchase(params: {
       scenarioSlug,
       returnTo,
       anonymousSessionId,
+      ...pricingMetadata,
       source: 'flowdockr_checkout',
     }),
   });
