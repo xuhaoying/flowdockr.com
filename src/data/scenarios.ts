@@ -6,10 +6,12 @@ import {
   getScenarioPagePromise,
   scenarioPages,
 } from '@/content/scenario-pages';
+import { pricingGeneratorScenarios } from '@/lib/pricing-generator-scenarios';
 import type {
   Scenario,
   ScenarioCategory,
   ScenarioRiskLevel,
+  ScenarioSlug,
   ScenarioToneProfile,
 } from '@/types/scenario';
 import type { CanonicalScenario } from '@/types/scenario-catalog';
@@ -56,16 +58,15 @@ const toneByArchetype: Record<
   contract_terms: 'firm',
 };
 
-export const scenarios: Scenario[] = scenarioPages.map((page) =>
-  buildGeneratorScenario(page)
-);
+export const scenarios: Scenario[] = [
+  ...scenarioPages.map((page) => buildGeneratorScenario(page)),
+  ...pricingGeneratorScenarios,
+];
 
 export const scenarioOptions = scenarios.map((scenario) => ({
   value: scenario.slug,
   label: scenario.title,
 })) as ReadonlyArray<{ value: string; label: string }>;
-
-export type ScenarioSlug = string;
 
 const scenarioMap = new Map<string, Scenario>(
   scenarios.map((scenario) => [scenario.slug, scenario])

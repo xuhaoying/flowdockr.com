@@ -4,30 +4,27 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Link } from '@/core/i18n/navigation';
 import { trackEvent } from '@/lib/analytics';
+import {
+  buildPricingScenarioAnalyticsParams,
+  buildPricingScenarioAttribution,
+} from '@/lib/analytics/pricingAttribution';
 import { BillingSupportLevel } from '@/types/billing';
+import type { CheckoutStatusResponse } from '@/types/payments';
+import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
 import { Button } from '@/shared/components/ui/button';
-
-type CheckoutStatusResponse = {
-  success: boolean;
-  status: 'pending' | 'paid' | 'failed' | 'canceled' | 'refunded';
-  creditsGranted: boolean;
-  creditsAdded: number;
-  creditsRemaining?: number;
-  supportLevel?: BillingSupportLevel;
-  purchasedPlan?: string;
-  error?: string;
-};
 
 type CheckoutStatusCardProps = {
   sessionId?: string;
   purchaseId?: string;
   continuePath: string;
+  pricingAttribution?: PricingScenarioAttributionSeedInput;
 };
 
 export function CheckoutStatusCard({
   sessionId = '',
   purchaseId = '',
   continuePath,
+  pricingAttribution: pricingAttributionSeed,
 }: CheckoutStatusCardProps) {
   const [status, setStatus] = useState<CheckoutStatusResponse>({
     success: true,
@@ -48,6 +45,17 @@ export function CheckoutStatusCard({
     return params.toString();
   }, [purchaseId, sessionId]);
   const hasCheckoutReference = Boolean(queryString);
+  const resolvedPricingAttribution = useMemo(
+    () =>
+      buildPricingScenarioAttribution(
+        status.pricingAttribution || pricingAttributionSeed
+      ),
+    [pricingAttributionSeed, status.pricingAttribution]
+  );
+  const pricingAnalyticsParams = useMemo(
+    () => buildPricingScenarioAnalyticsParams(resolvedPricingAttribution),
+    [resolvedPricingAttribution]
+  );
 
   useEffect(() => {
     if (!hasCheckoutReference) {
@@ -136,11 +144,13 @@ export function CheckoutStatusCard({
       purchased_plan: status.purchasedPlan || 'unknown',
       credits_added: Math.max(0, status.creditsAdded || 0),
       return_to: continuePath,
+      ...pricingAnalyticsParams,
       page_type: 'checkout',
     });
   }, [
     continuePath,
     isFinalized,
+    pricingAnalyticsParams,
     status.creditsAdded,
     status.creditsGranted,
     status.purchasedPlan,

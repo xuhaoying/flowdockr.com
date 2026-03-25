@@ -10,6 +10,7 @@ import {
   consumeUsage,
   getGenerationIdentity,
 } from '@/lib/credits';
+import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { filterOutputByEntitlements } from '@/lib/generation/filterOutputByEntitlements';
 import { generateReply } from '@/lib/generation/generateReply';
 import { saveGeneration } from '@/lib/generation/saveGeneration';
@@ -180,6 +181,9 @@ export async function POST(request: NextRequest) {
       status.isLoggedIn && status.userId
         ? await getUserBillingProfile(status.userId)
         : getDefaultBillingProfile();
+    const pricingAttribution = buildPricingScenarioAttribution(
+      input.pricingAttribution
+    );
 
     let pipeline: Awaited<ReturnType<typeof generateReply>>;
     try {
@@ -273,6 +277,7 @@ export async function POST(request: NextRequest) {
     const generationLog = {
       ...pipeline.generationLog,
       entitlementTier: billingProfile.supportLevel,
+      pricingAttribution,
     };
 
     if (generationLog.schemaRetryCount > 0) {

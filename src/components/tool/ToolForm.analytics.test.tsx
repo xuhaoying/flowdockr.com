@@ -79,6 +79,14 @@ function buildSuccessResponse(): GenerateReplyResponse {
     replyVersions: [],
     riskInsights: [],
     supportLevel: 'free',
+    entitlements: {
+      multiVersionEnabled: false,
+      strategyExplanationEnabled: false,
+      riskAlertEnabled: false,
+      historyEnabled: false,
+      followUpEnabled: false,
+      advancedModesEnabled: false,
+    },
   };
 }
 
@@ -161,15 +169,23 @@ async function renderToolForm(params?: {
   funnelScenarioSlug?: string;
   remainingFreeGenerations?: number;
   sourcePage?: 'home' | 'scenario' | 'tool';
+  pricingAttribution?: {
+    pricingSlug: 'client-messaging-outside-work-hours';
+    sourceSurface: 'pricing_page' | 'tool_page';
+    locale: 'en';
+  };
+  generateResponse?: GenerateReplyResponse;
 }) {
-  installFetchMock({
+  const fetchMock = installFetchMock({
     remainingFreeGenerations: params?.remainingFreeGenerations,
+    generateResponse: params?.generateResponse,
   });
 
   render(
     <ToolForm
       analyticsScenarioSlug="quote-too-high"
       funnelScenarioSlug={params?.funnelScenarioSlug}
+      pricingAttribution={params?.pricingAttribution}
       sourcePage={params?.sourcePage || 'scenario'}
       defaultScenarioSlug="quote-too-high"
       showScenarioSelector={false}
@@ -179,6 +195,8 @@ async function renderToolForm(params?: {
   await waitFor(() => {
     expect(global.fetch).toHaveBeenCalled();
   });
+
+  return fetchMock;
 }
 
 describe('ToolForm analytics funnel guard', () => {
@@ -307,6 +325,123 @@ describe('ToolForm analytics funnel guard', () => {
     expect(getEventPayloads('generate_click')[0]).not.toHaveProperty(
       'scenario_slug'
     );
+  });
+
+  it('emits pricing-attributed funnel events and request bodies for pricing-origin sessions', async () => {
+    const generateResponse: GenerateReplyResponse = {
+      ...buildSuccessResponse(),
+      entitlements: {
+        multiVersionEnabled: false,
+        strategyExplanationEnabled: false,
+        riskAlertEnabled: false,
+        historyEnabled: true,
+        followUpEnabled: false,
+        advancedModesEnabled: false,
+      },
+    };
+    const fetchMock = await renderToolForm({
+      remainingFreeGenerations: 2,
+      sourcePage: 'tool',
+      pricingAttribution: {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        sourceSurface: 'tool_page',
+        locale: 'en',
+      },
+      generateResponse,
+    });
+
+    fireEvent.change(getClientMessageInput(), {
+      target: { value: 'Can you answer tonight? I need this now.' },
+    });
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Draft negotiation reply' })
+    );
+
+    await waitFor(() => {
+      expect(getEventPayloads('generate_success_from_pricing_scenario')).toHaveLength(
+        1
+      );
+    });
+
+    expect(
+      getEventPayloads('click_generate_from_pricing_scenario')[0]
+    ).toMatchObject({
+      pricing_slug: 'client-messaging-outside-work-hours',
+      pricing_family: 'availability-boundary',
+      generator_scenario_slug: 'client-messaging-outside-work-hours',
+      generator_mapping_kind: 'dedicated',
+      source_surface: 'tool_page',
+      page_type: 'pricing',
+    });
+    expect(
+      getEventPayloads('generate_success_from_pricing_scenario')[0]
+    ).toMatchObject({
+      pricing_slug: 'client-messaging-outside-work-hours',
+      generation_id: 'gen_test_123',
+    });
+    expect(getEventPayloads('save_history_from_pricing_scenario')[0]).toMatchObject(
+      {
+        pricing_slug: 'client-messaging-outside-work-hours',
+        generation_id: 'gen_test_123',
+      }
+    );
+
+    const generateCall = fetchMock.mock.calls.find(
+      ([input]) => getRequestUrl(input) === '/api/generate'
+    ) as [RequestInfo | URL, RequestInit?] | undefined;
+    expect(generateCall).toBeDefined();
+    const generateInit = (generateCall?.[1] || {}) as RequestInit;
+    expect(JSON.parse(String(generateInit.body))).toMatchObject({
+      pricingAttribution: {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        sourceSurface: 'tool_page',
+        locale: 'en',
+      },
+    });
+  });
+
+  it('emits pricing-attributed checkout click events and checkout request bodies', async () => {
+    const fetchMock = await renderToolForm({
+      remainingFreeGenerations: 0,
+      sourcePage: 'tool',
+      pricingAttribution: {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        sourceSurface: 'tool_page',
+        locale: 'en',
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Mock checkout' })).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Mock checkout' }));
+
+    await waitFor(() => {
+      expect(getEventPayloads('click_checkout_from_pricing_scenario')).toHaveLength(
+        1
+      );
+    });
+
+    expect(getEventPayloads('click_checkout_from_pricing_scenario')[0]).toMatchObject(
+      {
+        pricing_slug: 'client-messaging-outside-work-hours',
+        source_surface: 'tool_page',
+      }
+    );
+
+    const checkoutCall = fetchMock.mock.calls.find(
+      ([input]) => getRequestUrl(input) === '/api/checkout/session'
+    ) as [RequestInfo | URL, RequestInit?] | undefined;
+    expect(checkoutCall).toBeDefined();
+    const checkoutInit = (checkoutCall?.[1] || {}) as RequestInit;
+    expect(JSON.parse(String(checkoutInit.body))).toMatchObject({
+      pricingAttribution: {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        sourceSurface: 'tool_page',
+        locale: 'en',
+      },
+    });
   });
 
   it('does not leak scenario_slug on non-canonical paywall and checkout events', async () => {

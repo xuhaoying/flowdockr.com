@@ -2,6 +2,10 @@ import { and, eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
 
 import { getAnonymousSessionIdFromRequest } from '@/lib/anonymous';
+import {
+  buildPricingAttributionMetadataRecord,
+  buildPricingScenarioAttribution,
+} from '@/lib/analytics/pricingAttribution';
 import { getCurrentUser } from '@/lib/auth';
 import { anonymousLinkSession, db } from '@/lib/db';
 import {
@@ -76,6 +80,12 @@ export async function createCheckoutSession(
     input.anonymousSessionId || getAnonymousSessionIdFromRequest(request) || '';
   const returnTo = sanitizeReturnPath(input.returnTo, request);
   const scenarioSlug = input.scenarioSlug || '';
+  const pricingAttribution = buildPricingScenarioAttribution(
+    input.pricingAttribution
+  );
+  const pricingMetadata = buildPricingAttributionMetadataRecord(
+    pricingAttribution
+  );
 
   const email = currentUser.email.trim().toLowerCase();
   const pendingPurchase = await createPendingPurchase({
@@ -90,6 +100,7 @@ export async function createCheckoutSession(
     returnTo,
     scenarioSlug,
     anonymousSessionId,
+    pricingMetadata,
   });
 
   try {
@@ -102,6 +113,7 @@ export async function createCheckoutSession(
       returnTo,
       scenarioSlug,
       anonymousSessionId,
+      pricingAttribution,
     });
 
     await attachStripeSessionToPurchase({
@@ -117,6 +129,7 @@ export async function createCheckoutSession(
         scenarioSlug,
         returnTo,
         anonymousSessionId,
+        ...pricingMetadata,
         credits: pack.credits,
         credits_amount: pack.credits,
         sessionId: session.sessionId,

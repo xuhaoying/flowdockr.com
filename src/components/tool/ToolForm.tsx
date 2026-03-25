@@ -6,6 +6,10 @@ import {
   type ToolGenerationState,
 } from '@/hooks/useToolGeneration';
 import { trackEvent } from '@/lib/analytics';
+import {
+  buildPricingScenarioAnalyticsParams,
+  buildPricingScenarioAttribution,
+} from '@/lib/analytics/pricingAttribution';
 import { hasCanonicalScenarioFunnel } from '@/lib/analytics/scenarioFunnel';
 import { getCreditPackageById } from '@/lib/credits/packages';
 import { getScenarioBySlug, scenarios } from '@/lib/scenarios';
@@ -20,6 +24,7 @@ import {
   type GenerationFeedbackReason,
   type GenerationFeedbackType,
 } from '@/types/generation';
+import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
 import { useLocale } from 'next-intl';
 
 import { Badge } from '@/shared/components/ui/badge';
@@ -41,6 +46,7 @@ type ToolFormProps = {
   analyticsScenarioSlug?: string;
   funnelScenarioSlug?: string;
   defaultScenarioSlug?: string;
+  pricingAttribution?: PricingScenarioAttributionSeedInput;
   showScenarioSelector?: boolean;
   showAdvancedFields?: boolean;
   placeholder?: string;
@@ -103,6 +109,7 @@ export function ToolForm({
   analyticsScenarioSlug: initialAnalyticsScenarioSlug,
   funnelScenarioSlug = '',
   defaultScenarioSlug,
+  pricingAttribution: pricingAttributionSeed,
   showScenarioSelector = false,
   showAdvancedFields = false,
   placeholder,
@@ -151,6 +158,14 @@ export function ToolForm({
   const scenario = useMemo(
     () => getScenarioBySlug(scenarioSlug),
     [scenarioSlug]
+  );
+  const pricingAttribution = useMemo(
+    () => buildPricingScenarioAttribution(pricingAttributionSeed),
+    [pricingAttributionSeed]
+  );
+  const pricingAnalyticsParams = useMemo(
+    () => buildPricingScenarioAnalyticsParams(pricingAttribution),
+    [pricingAttribution]
   );
 
   const textareaPlaceholder =
@@ -211,6 +226,7 @@ export function ToolForm({
     toolOpenTrackedRef.current = true;
     trackEvent('tool_open', {
       ...canonicalScenarioSlugParams,
+      ...pricingAnalyticsParams,
       locale,
     });
   };
@@ -301,6 +317,7 @@ export function ToolForm({
 
     trackEvent('paywall_trigger', {
       ...canonicalScenarioSlugParams,
+      ...pricingAnalyticsParams,
       locale,
       trigger_type: paywallTriggerTypeRef.current || 'usage_state',
     });
@@ -320,6 +337,7 @@ export function ToolForm({
     canonicalScenarioSlugParams,
     canonicalFunnelScenarioSlug,
     isCanonicalScenarioFunnel,
+    pricingAnalyticsParams,
     usage.supportLevel,
   ]);
 
@@ -332,21 +350,43 @@ export function ToolForm({
     }
 
     generationSuccessPendingRef.current = false;
-    if (!isCanonicalScenarioFunnel) {
-      return;
+    if (isCanonicalScenarioFunnel) {
+      trackEvent('fd_generation_success', {
+        scenario_slug: canonicalFunnelScenarioSlug,
+        support_level: pendingGenerationSupportLevelRef.current,
+        remaining_credits: pendingGenerationRemainingCreditsRef.current,
+        page_type: 'scenario',
+      });
     }
 
-    trackEvent('fd_generation_success', {
-      scenario_slug: canonicalFunnelScenarioSlug,
-      support_level: pendingGenerationSupportLevelRef.current,
-      remaining_credits: pendingGenerationRemainingCreditsRef.current,
-      page_type: 'scenario',
-    });
+    if (pricingAttribution) {
+      trackEvent('generate_success_from_pricing_scenario', {
+        ...pricingAnalyticsParams,
+        generation_id: result?.generationId || '',
+        support_level:
+          result?.supportLevel || pendingGenerationSupportLevelRef.current,
+        remaining_credits: pendingGenerationRemainingCreditsRef.current,
+      });
+
+      const historyEnabled =
+        result?.entitlements?.historyEnabled ?? usage.entitlements.historyEnabled;
+      if (historyEnabled && result?.generationId) {
+        trackEvent('save_history_from_pricing_scenario', {
+          ...pricingAnalyticsParams,
+          generation_id: result.generationId,
+          support_level:
+            result?.supportLevel || pendingGenerationSupportLevelRef.current,
+        });
+      }
+    }
   }, [
     result,
     canonicalFunnelScenarioSlug,
     isCanonicalScenarioFunnel,
+    pricingAnalyticsParams,
+    pricingAttribution,
     trackedScenarioSlug,
+    usage.entitlements.historyEnabled,
   ]);
 
   const onGenerate = async (
@@ -359,6 +399,7 @@ export function ToolForm({
       trackEvent('tool_submit_failed', {
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
         reason: validationError || 'INVALID_INPUT',
       });
       return;
@@ -381,8 +422,15 @@ export function ToolForm({
       trackToolOpen();
       trackEvent('generate_click', {
         ...canonicalScenarioSlugParams,
+        ...pricingAnalyticsParams,
         locale,
       });
+      if (pricingAttribution) {
+        trackEvent('click_generate_from_pricing_scenario', {
+          ...pricingAnalyticsParams,
+          trigger,
+        });
+      }
       if (isCanonicalScenarioFunnel && trigger === 'main_button') {
         trackEvent('fd_tool_start', {
           scenario_slug: canonicalFunnelScenarioSlug,
@@ -399,6 +447,7 @@ export function ToolForm({
         trackEvent('free_limit_reached', {
           scenarioSlug,
           sourcePage,
+          ...pricingAnalyticsParams,
         });
         return;
       }
@@ -406,12 +455,14 @@ export function ToolForm({
       trackEvent('tool_submit_started', {
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
       });
 
       const response = await submit({
         scenarioSlug,
         message: trimmedMessage,
         sourcePage,
+        pricingAttribution: pricingAttributionSeed,
         serviceType: projectType,
         tone: mapToneToApiTone(tone),
         userRateContext: userRateContext.trim() || undefined,
@@ -421,6 +472,7 @@ export function ToolForm({
         trackEvent('tool_submit_failed', {
           scenarioSlug,
           sourcePage,
+          ...pricingAnalyticsParams,
           reason: 'NETWORK_ERROR',
         });
         return;
@@ -437,12 +489,14 @@ export function ToolForm({
           trackEvent('free_limit_reached', {
             scenarioSlug,
             sourcePage,
+            ...pricingAnalyticsParams,
           });
         }
 
         trackEvent('tool_submit_failed', {
           scenarioSlug,
           sourcePage,
+          ...pricingAnalyticsParams,
           reason: response.error || 'GENERATION_FAILED',
         });
         return;
@@ -508,6 +562,7 @@ export function ToolForm({
       trackEvent('tool_submit_success', {
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
       });
 
       window.requestAnimationFrame(() => {
@@ -539,19 +594,29 @@ export function ToolForm({
 
       trackEvent('checkout_click', {
         ...canonicalScenarioSlugParams,
+        ...pricingAnalyticsParams,
         locale,
         plan_id: pack?.id || packageId,
         price_id: pack?.stripePriceId || undefined,
       });
+      if (pricingAttribution) {
+        trackEvent('click_checkout_from_pricing_scenario', {
+          ...pricingAnalyticsParams,
+          plan_id: pack?.id || packageId,
+          price_id: pack?.stripePriceId || undefined,
+        });
+      }
       trackEvent('pricing_card_clicked', {
         packageId,
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
       });
       trackEvent('checkout_started', {
         packageId,
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
       });
 
       const checkoutResponse = await fetch('/api/checkout/session', {
@@ -563,6 +628,7 @@ export function ToolForm({
           packCode: packageId,
           scenarioSlug,
           returnTo: `${window.location.pathname}${window.location.search}`,
+          pricingAttribution: pricingAttributionSeed,
         }),
       });
 
@@ -590,6 +656,7 @@ export function ToolForm({
       trackEvent('tool_submit_failed', {
         scenarioSlug,
         sourcePage,
+        ...pricingAnalyticsParams,
         reason: 'CHECKOUT_FAILED',
       });
     } finally {
@@ -603,6 +670,7 @@ export function ToolForm({
       target,
       scenarioSlug,
       sourcePage,
+      ...pricingAnalyticsParams,
     });
   };
 
@@ -633,6 +701,7 @@ export function ToolForm({
     trackEvent('generation_feedback_submitted', {
       generation_id: result.generationId,
       ...canonicalScenarioSlugParams,
+      ...pricingAnalyticsParams,
       source_page: sourcePage,
       feedback_type: params.type,
       feedback_reason: params.reason,

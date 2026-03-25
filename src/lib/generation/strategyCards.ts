@@ -23,7 +23,10 @@ export type StrategyCard = {
     | 'payment_collection'
     | 'scope_expansion'
     | 'revision_pressure'
-    | 'start_without_commitment';
+    | 'start_without_commitment'
+    | 'availability_boundary'
+    | 'urgency_pressure'
+    | 'project_decline';
   userPositioning: string;
   counterpartMindset: string;
   requiredReframe: string;
@@ -503,6 +506,477 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
       'As soon as that step is in place, I can start and keep the timeline moving.',
     ],
     toneProfile: 'Calm, protected, and operationally clear.',
+  },
+  {
+    slug: 'client-messaging-outside-work-hours',
+    title: 'Client messages outside work hours',
+    primaryGoal:
+      'Reset after-hours messaging expectations without turning one message into a confrontation.',
+    pressureType: 'availability_boundary',
+    userPositioning:
+      'You want to stay responsive, but not teach the client that off-hours access is part of the service.',
+    counterpartMindset:
+      'They may be stressed or simply following the responsiveness pattern they have seen from you.',
+    requiredReframe:
+      'Treat the issue as a communication-structure boundary, not a personal annoyance.',
+    allowedConcessions: [
+      'Acknowledge the message and give the next working window.',
+      'Define urgent exceptions only if they are truly needed.',
+    ],
+    forbiddenConcessions: [
+      'Normalize instant after-hours replies.',
+      'Scold the client for messaging late.',
+    ],
+    redFlags: [
+      'Every instant after-hours reply becomes a new expectation.',
+      'A defensive tone makes the boundary feel personal instead of professional.',
+    ],
+    preferredMoves: [
+      'Acknowledge the message calmly.',
+      'Set the normal response window clearly.',
+      'Separate urgent from normal communication only if needed.',
+    ],
+    avoidMoves: [
+      'Complaining about your personal time.',
+      'Leaving the next response window vague.',
+    ],
+    nextStepTemplates: [
+      'I have seen this and will pick it up in my next working window so timing stays predictable on both sides.',
+      'For normal project items I reply during working hours, and if something is genuinely urgent we can define that separately.',
+    ],
+    toneProfile: 'Calm, matter-of-fact, and boundary-led.',
+  },
+  {
+    slug: 'set-boundaries-with-demanding-client',
+    title: 'Set boundaries with a demanding client',
+    primaryGoal:
+      'Reset a demanding-client relationship into a clearer working structure before it becomes fully reactive.',
+    pressureType: 'availability_boundary',
+    userPositioning:
+      'You need to sound structured and commercially steady, not emotional or resentful.',
+    counterpartMindset:
+      'They are pushing on access, responsiveness, or flexibility and will keep testing the edges until the structure is visible.',
+    requiredReframe:
+      'Make the reply about the working model, not about the client being difficult.',
+    allowedConcessions: [
+      'Clarify how requests, revisions, and response timing should run going forward.',
+      'Offer to revisit scope or support structure if the client truly needs more access.',
+    ],
+    forbiddenConcessions: [
+      'Keep solving a pattern one message at a time.',
+      'Turn the reply into criticism of the client’s behavior.',
+    ],
+    redFlags: [
+      'Fragmented one-off resets train the client to negotiate every boundary separately.',
+      'Personal or emotional language invites argument instead of compliance.',
+    ],
+    preferredMoves: [
+      'Define the working model clearly.',
+      'Reset the drifting expectation directly.',
+      'Escalate into scope, timing, or support changes only if needed.',
+    ],
+    avoidMoves: [
+      'Sounding annoyed.',
+      'Threatening consequences before you have stated the structure.',
+    ],
+    nextStepTemplates: [
+      'To keep this working cleanly, I need to handle requests and response timing inside a clearer structure rather than as open-ended live asks.',
+      'If you need a higher-touch setup than the current arrangement supports, we can revisit scope, timing, or support structure directly.',
+    ],
+    toneProfile: 'Firm, structured, and low-drama.',
+  },
+  {
+    slug: 'tell-client-you-are-unavailable',
+    title: 'Tell a client you are unavailable',
+    primaryGoal:
+      'Communicate unavailability in a way that sounds reliable rather than flaky or guilty.',
+    pressureType: 'availability_boundary',
+    userPositioning:
+      'You need a short, clear answer that protects the current window without sounding evasive.',
+    counterpartMindset:
+      'They mostly need timing clarity, not a long explanation of why you are unavailable.',
+    requiredReframe:
+      'Treat the reply as expectation-setting, not permission-seeking.',
+    allowedConcessions: [
+      'Give the next realistic response window.',
+      'Offer a fallback only if there is a real deadline to solve around.',
+    ],
+    forbiddenConcessions: [
+      'Over-explaining the reason for being unavailable.',
+      'Leaving the next touchpoint so vague that pressure stays high.',
+    ],
+    redFlags: [
+      'Long apologetic explanations sound unstable.',
+      'A vague “later” answer does not actually reduce the client’s uncertainty.',
+    ],
+    preferredMoves: [
+      'State that you are unavailable directly.',
+      'Give the next realistic window.',
+      'Keep the tone calm and brief.',
+    ],
+    avoidMoves: [
+      'Guilt-heavy language.',
+      'Softening the boundary until it no longer exists.',
+    ],
+    nextStepTemplates: [
+      'I am not available to pick this up right now, but I can return to it in the next working window and update you from there.',
+      'If there is a hard deadline before then, let me know and I can tell you whether there is a realistic way to handle it cleanly.',
+    ],
+    toneProfile: 'Calm, brief, and dependable.',
+  },
+  {
+    slug: 'urgent-request-last-minute',
+    title: 'Respond to an urgent last-minute request',
+    primaryGoal:
+      'Acknowledge urgency while forcing the real scope, timing, or rush tradeoff into the open.',
+    pressureType: 'urgency_pressure',
+    userPositioning:
+      'You want to stay helpful without turning last-minute urgency into a free automatic yes.',
+    counterpartMindset:
+      'They want relief fast and may not have thought through what has to change to make the timeline real.',
+    requiredReframe:
+      'Treat urgency as a new decision point with tradeoffs, not as a command to compress the same work for free.',
+    allowedConcessions: [
+      'Offer a smaller immediate scope.',
+      'Define an explicit rush path or realistic delivery window.',
+    ],
+    forbiddenConcessions: [
+      'Promise the full request before checking feasibility.',
+      'Absorb rush work into the normal timeline assumptions.',
+    ],
+    redFlags: [
+      'Urgency language can hide a scope or availability tradeoff no one has named yet.',
+      'Panic promises create delivery and relationship risk later.',
+    ],
+    preferredMoves: [
+      'Acknowledge the urgency first.',
+      'Set the realistic window before you commit.',
+      'Tie speed to scope reduction or explicit rush conditions.',
+    ],
+    avoidMoves: [
+      'Reacting as if urgency automatically decides the plan.',
+      'Using defensive language about the client’s timing.',
+    ],
+    nextStepTemplates: [
+      'I understand this is urgent, and before I commit I want to be clear about what is realistically possible in this window.',
+      'If speed is the priority, the cleanest route is to reduce the immediate scope or treat it as a rush request rather than force the full version through unchanged.',
+    ],
+    toneProfile: 'Decision-oriented, realistic, and unflustered.',
+    serviceAdjustments: SCOPE_SERVICE_ADJUSTMENTS,
+  },
+  {
+    slug: 'client-expects-immediate-response',
+    title: 'Client expects an immediate response',
+    primaryGoal:
+      'Reset the expectation from instant replies to a predictable communication rhythm.',
+    pressureType: 'availability_boundary',
+    userPositioning:
+      'You want to stay engaged and responsive, but not on an always-on basis.',
+    counterpartMindset:
+      'They are anchoring on the fastest response pattern they have seen from you and treating it as the standard.',
+    requiredReframe:
+      'Frame the boundary around predictability and service quality, not personal convenience.',
+    allowedConcessions: [
+      'Offer a clear response window during working hours.',
+      'Define what genuinely urgent communication looks like.',
+    ],
+    forbiddenConcessions: [
+      'Accept immediate replies as the default norm.',
+      'Make the boundary sound like disinterest or withdrawal.',
+    ],
+    redFlags: [
+      'The fastest past reply quickly becomes the future baseline.',
+      'Vague timing language does not reset the expectation.',
+    ],
+    preferredMoves: [
+      'Set the normal response cadence.',
+      'Separate urgent from non-urgent communication.',
+      'Anchor on dependable, predictable timing.',
+    ],
+    avoidMoves: [
+      'Talking about your frustration.',
+      'Promising faster replies than you actually want to keep.',
+    ],
+    nextStepTemplates: [
+      'I am not always available to reply immediately, but I do keep a consistent response window during working hours so communication stays predictable.',
+      'For normal project items I reply in that standard window, and if something is genuinely urgent we can define that separately.',
+    ],
+    toneProfile: 'Calm, predictable, and clear.',
+  },
+  {
+    slug: 'say-no-to-client-professionally',
+    title: 'Say no to a client professionally',
+    primaryGoal:
+      'Deliver a clear professional no that closes the loop without unnecessary awkwardness or guilt.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You need the reply to feel respectful and complete, but not so soft that it invites more pressure.',
+    counterpartMindset:
+      'They mostly need clarity, and they will often push harder if the no sounds uncertain.',
+    requiredReframe:
+      'Treat the message as a closed-loop professional decision, not an apology for declining.',
+    allowedConcessions: [
+      'Offer a short fit-based reason if it helps land the no.',
+      'Use a warm closing line that does not reopen the discussion.',
+    ],
+    forbiddenConcessions: [
+      'Burying the no under too much politeness.',
+      'Giving a long explanation that becomes negotiable.',
+    ],
+    redFlags: [
+      'Ambiguous declines create more pressure than honest ones.',
+      'Guilt-heavy wording invites the client to solve your reason.',
+    ],
+    preferredMoves: [
+      'Thank them briefly.',
+      'State the no clearly.',
+      'Close the loop without leaving a vague maybe.',
+    ],
+    avoidMoves: [
+      'Over-apologizing.',
+      'Offering false future optionality.',
+    ],
+    nextStepTemplates: [
+      'Thanks for thinking of me for this. I am going to pass, but I wanted to let you know clearly rather than leave the conversation hanging.',
+      'I appreciate the opportunity. I do not think I would be the right fit for this as it stands, so I am going to step back rather than force it.',
+    ],
+    toneProfile: 'Warm-firm, respectful, and settled.',
+  },
+  {
+    slug: 'decline-project-politely',
+    title: 'Decline a project politely',
+    primaryGoal:
+      'Close the thread with a polite decline that still sounds decisive enough to end the conversation.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You want to be kind and clear at the same time, without writing a long explanation.',
+    counterpartMindset:
+      'They mainly need to understand whether this is a real no or just hesitation.',
+    requiredReframe:
+      'Polite does not mean vague; a good decline is respectful and settled.',
+    allowedConcessions: [
+      'Use a brief fit-based reason if it helps the reply land.',
+      'Offer a warm closing line that does not reopen the project.',
+    ],
+    forbiddenConcessions: [
+      'Turning the no into a maybe.',
+      'Explaining enough detail for the client to negotiate every reason.',
+    ],
+    redFlags: [
+      'A polite-but-unclear reply keeps the thread alive.',
+      'Over-explaining weakens the finality of the decision.',
+    ],
+    preferredMoves: [
+      'Lead with a quick thank-you.',
+      'Decline in plain language.',
+      'End cleanly rather than inviting more questions.',
+    ],
+    avoidMoves: [
+      'Long prefacing before the actual no.',
+      'Hedging the decision at the end.',
+    ],
+    nextStepTemplates: [
+      'Thanks for considering me for this. I am going to pass on the project, but I wanted to let you know clearly rather than leave it open-ended.',
+      'I appreciate the opportunity, but I am going to step back on this one rather than take it on without the right fit.',
+    ],
+    toneProfile: 'Warm-firm and complete.',
+  },
+  {
+    slug: 'reject-client-without-burning-bridge',
+    title: 'Reject a client without burning the bridge',
+    primaryGoal:
+      'Hold a clear no while preserving goodwill and future optionality where it is genuine.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You want the decline to feel settled and respectful, not slippery or personal.',
+    counterpartMindset:
+      'They will usually trust a calm, honest no more than a vague attempt to sound nice.',
+    requiredReframe:
+      'Protect the bridge through clarity and tone, not by weakening the decision.',
+    allowedConcessions: [
+      'Frame the no around fit rather than criticism.',
+      'Use a selective positive close if it does not reopen the current project.',
+    ],
+    forbiddenConcessions: [
+      'Criticizing the client or project unnecessarily.',
+      'Leaving the no ambiguous in the name of being nice.',
+    ],
+    redFlags: [
+      'Trying too hard to preserve goodwill can make the message less trustworthy.',
+      'A fake future invitation is easy for the client to test immediately.',
+    ],
+    preferredMoves: [
+      'Decline with appreciation.',
+      'Ground the no in fit or alignment.',
+      'Keep any future-open line narrow and genuine.',
+    ],
+    avoidMoves: [
+      'Personal criticism.',
+      'Overly open-ended future language.',
+    ],
+    nextStepTemplates: [
+      'I appreciate you thinking of me for this. I am going to pass on the current opportunity, but I wanted to let you know directly and respectfully.',
+      'I do not think I would be the right fit for the current version, so I would rather be honest now than create friction later.',
+    ],
+    toneProfile: 'Warm, clear, and bridge-safe.',
+  },
+  {
+    slug: 'turn-down-freelance-work-nicely',
+    title: 'Turn down freelance work nicely',
+    primaryGoal:
+      'Keep the decline kind and concise while still making it unmistakably clear that the answer is no.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You want a friendly message that still sounds like a decision rather than hesitation.',
+    counterpartMindset:
+      'They mostly want a quick clear answer and can misread overly gentle phrasing as maybe.',
+    requiredReframe:
+      'Nice should describe the tone, not the certainty level.',
+    allowedConcessions: [
+      'Add a light fit reason if it helps.',
+      'Close warmly without promising future availability you do not mean.',
+    ],
+    forbiddenConcessions: [
+      'Using vague wording that keeps the project alive.',
+      'Adding a long explanation for a query that mostly needs a simple answer.',
+    ],
+    redFlags: [
+      'Kind-but-unclear wording often creates more follow-up than a direct reply.',
+      'A fake future maybe makes the decline less credible.',
+    ],
+    preferredMoves: [
+      'Thank them quickly.',
+      'Say no in plain language.',
+      'End on a warm but settled line.',
+    ],
+    avoidMoves: [
+      'Over-explaining.',
+      'Turning the close into another opening.',
+    ],
+    nextStepTemplates: [
+      'Thanks for thinking of me for this. I am going to pass on the project, but I wanted to let you know clearly and promptly.',
+      'Thanks again for reaching out. I do not think I would be the right fit for this one, so I am going to step back rather than take it on without the right alignment.',
+    ],
+    toneProfile: 'Warm, simple, and settled.',
+  },
+  {
+    slug: 'refuse-project-due-to-workload',
+    title: 'Refuse a project due to workload',
+    primaryGoal:
+      'Decline due to workload in a way that sounds responsible and quality-protective rather than chaotic.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You know capacity is the honest answer and want the message to sound deliberate, not overloaded.',
+    counterpartMindset:
+      'They need confidence that the decline reflects responsible judgment, not instability.',
+    requiredReframe:
+      'Frame workload as a delivery-quality and capacity decision, not as an excuse.',
+    allowedConcessions: [
+      'Explain the capacity limit briefly.',
+      'Mention a future reconnect only if it is genuinely realistic.',
+    ],
+    forbiddenConcessions: [
+      'Describing yourself as chaotic or overwhelmed.',
+      'Leaving the client waiting on a maybe when capacity is the real answer.',
+    ],
+    redFlags: [
+      'Workload becomes a weak excuse only when it is phrased vaguely or frantically.',
+      'An unclear future-open line can keep the client stalled on your capacity.',
+    ],
+    preferredMoves: [
+      'Name the capacity constraint clearly.',
+      'Tie the decline to doing the work well.',
+      'Keep any future-open option narrow and real.',
+    ],
+    avoidMoves: [
+      'Rambling about how busy you are.',
+      'Sounding apologetic enough to invite negotiation.',
+    ],
+    nextStepTemplates: [
+      'I am at capacity on current commitments, so I would rather decline this now than take it on without enough room to do it well.',
+      'I would not want to commit to this without the bandwidth to handle it properly, so I think the better call is for me to step back on this one.',
+    ],
+    toneProfile: 'Decision-oriented and responsible.',
+  },
+  {
+    slug: 'say-no-to-low-budget-client',
+    title: 'Say no to a low-budget client',
+    primaryGoal:
+      'Turn an unworkable low-budget inquiry into a clear professional no instead of a prolonged underpricing negotiation.',
+    pressureType: 'project_decline',
+    userPositioning:
+      'You need to protect your economics without sounding dismissive or bitter.',
+    counterpartMindset:
+      'They want to know whether you will collapse your standards to make the current budget work.',
+    requiredReframe:
+      'Treat the issue as a fit decision when the budget is fundamentally non-viable, not as a negotiation puzzle you must solve.',
+    allowedConcessions: [
+      'Offer a materially smaller version only if it is truly viable.',
+      'Leave the door open only for a real scope or budget change.',
+    ],
+    forbiddenConcessions: [
+      'Accepting a non-viable budget to keep the lead alive.',
+      'Shaming the client for the budget level.',
+    ],
+    redFlags: [
+      'Trying to rescue a deeply low-budget lead often creates low-margin scope debt later.',
+      'A vague future-open line brings the same weak budget back again.',
+    ],
+    preferredMoves: [
+      'Name the fit mismatch plainly.',
+      'Protect the quality and scope standard.',
+      'Use a smaller-scope alternative only if it is genuinely workable.',
+    ],
+    avoidMoves: [
+      'Defensive explanations about your rates.',
+      'Leaving the decline half-open.',
+    ],
+    nextStepTemplates: [
+      'At that budget, I would not be able to deliver the work to the standard I would be comfortable putting my name on, so I would rather be honest than force a weak fit.',
+      'If the range is fixed, the only workable path would be a materially smaller version rather than the current scope at a lower fee.',
+    ],
+    toneProfile: 'Warm-firm, selective, and economically clear.',
+    serviceAdjustments: PRICING_SERVICE_ADJUSTMENTS,
+  },
+  {
+    slug: 'stand-firm-on-pricing',
+    title: 'Stand firm on pricing',
+    primaryGoal:
+      'Hold the current pricing in a calm, structured way that keeps the conversation commercially workable.',
+    pressureType: 'pricing_pushback',
+    userPositioning:
+      'You want to sound deliberate and credible, not rigid or defensive.',
+    counterpartMindset:
+      'They are testing whether the number is a real position or just an opening ask.',
+    requiredReframe:
+      'Treat the rate as a consequence of scope and delivery standard, not a number to defend emotionally.',
+    allowedConcessions: [
+      'Offer a smaller version or different structure if the budget is real.',
+      'Clarify what the rate is tied to without over-explaining.',
+    ],
+    forbiddenConcessions: [
+      'Lowering the same scope just to ease the pressure.',
+      'Sounding combative to prove firmness.',
+    ],
+    redFlags: [
+      'Over-explaining makes the rate sound more negotiable, not less.',
+      'A hard wall with no alternative path can stall a workable conversation.',
+    ],
+    preferredMoves: [
+      'State the hold calmly.',
+      'Tie the number back to scope and standard.',
+      'Offer a structured alternative instead of a blind discount.',
+    ],
+    avoidMoves: [
+      'Defensive essays about your pricing.',
+      'Cold or ego-driven language.',
+    ],
+    nextStepTemplates: [
+      'I would prefer to keep the pricing where it is, since it reflects the current scope and the standard needed for the result we discussed.',
+      'If budget is the issue, the cleaner path is a smaller version rather than the same scope at a lower fee.',
+    ],
+    toneProfile: 'Calm, commercially steady, and structured.',
+    serviceAdjustments: PRICING_SERVICE_ADJUSTMENTS,
   },
 ];
 

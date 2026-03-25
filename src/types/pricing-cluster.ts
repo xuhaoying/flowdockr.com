@@ -1,11 +1,11 @@
-import type { ScenarioSlug } from '@/data/scenarios';
 import type {
   ExampleReplies,
   FAQItem,
   NextDecisionLink,
-  ToolCTA,
   StrategyPath,
+  ToolCTA,
 } from '@/types/content';
+import type { ScenarioSlug } from '@/types/scenario';
 
 export type PricingScenarioSlug =
   | 'price-pushback-after-proposal'
@@ -15,7 +15,27 @@ export type PricingScenarioSlug =
   | 'more-work-same-price'
   | 'free-trial-work-request'
   | 'can-you-do-it-cheaper'
-  | 'small-discount-before-closing';
+  | 'small-discount-before-closing'
+  | 'client-asking-for-extra-work'
+  | 'say-no-to-scope-creep-politely'
+  | 'more-work-than-agreed'
+  | 'client-requesting-additional-revisions'
+  | 'refuse-extra-work-without-losing-client'
+  | 'client-asking-for-discount'
+  | 'say-no-to-low-budget-client'
+  | 'client-negotiating-price'
+  | 'decline-underpaid-project-politely'
+  | 'stand-firm-on-pricing'
+  | 'client-messaging-outside-work-hours'
+  | 'set-boundaries-with-demanding-client'
+  | 'tell-client-you-are-unavailable'
+  | 'urgent-request-last-minute'
+  | 'client-expects-immediate-response'
+  | 'say-no-to-client-professionally'
+  | 'decline-project-politely'
+  | 'reject-client-without-burning-bridge'
+  | 'turn-down-freelance-work-nicely'
+  | 'refuse-project-due-to-workload';
 
 export type PricingScenarioTier = 'tier1' | 'tier2' | 'tier3';
 
@@ -33,8 +53,10 @@ export type PricingPressureType =
   | 'discount-pressure'
   | 'budget-mismatch'
   | 'competitor-comparison'
-  | 'more-work-same-price'
-  | 'free-work-boundary';
+  | 'scope-boundary'
+  | 'free-work-boundary'
+  | 'availability-boundary'
+  | 'project-decline';
 
 export type PricingRealRisk =
   | 'lose-leverage'
@@ -42,7 +64,10 @@ export type PricingRealRisk =
   | 'open-scope-creep'
   | 'low-margin-trap'
   | 'lose-deal'
-  | 'payment-risk';
+  | 'payment-risk'
+  | 'boundary-erosion'
+  | 'burnout-risk'
+  | 'bad-fit-lock-in';
 
 export type PricingDecisionGoal =
   | 'hold-price'
@@ -50,23 +75,28 @@ export type PricingDecisionGoal =
   | 'reduce-scope'
   | 'move-to-close'
   | 'set-boundary'
-  | 'exit-politely';
+  | 'exit-politely'
+  | 'protect-capacity';
 
 export type PricingScenarioFamily =
   | 'price-pushback'
   | 'discount-pressure'
   | 'budget-mismatch'
   | 'competitor-comparison'
-  | 'more-work-same-price'
-  | 'free-work-boundary';
+  | 'scope-boundary'
+  | 'free-work-boundary'
+  | 'availability-boundary'
+  | 'project-decline';
 
 export type PricingIntentType =
   | 'price_objection'
   | 'discount_pressure'
   | 'budget_mismatch'
   | 'competitor_comparison'
-  | 'scope_for_price'
-  | 'free_work_boundary';
+  | 'scope_boundary'
+  | 'free_work_boundary'
+  | 'availability_boundary'
+  | 'project_decline';
 
 export type PricingScenarioSchema = {
   page: {
@@ -130,6 +160,8 @@ export type PricingScenario = {
   realGoals: string[];
   responsePaths: PricingResponsePath[];
   copyReadyExamples: PricingCopyExample[];
+  commonClientMessages?: string[];
+  commonMistakes?: string[];
   faq: PricingFaqItem[];
   nextDecisionSlugs: PricingScenarioSlug[];
   guideLinks?: PricingGuideLink[];

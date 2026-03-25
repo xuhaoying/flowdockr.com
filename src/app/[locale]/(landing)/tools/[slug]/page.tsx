@@ -8,6 +8,7 @@ import { ToolForm } from '@/components/tool/ToolForm';
 import { ToolHero } from '@/components/tool/ToolHero';
 import { ToolInputPreview } from '@/components/tool/ToolInputPreview';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
+import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
 import {
@@ -15,6 +16,7 @@ import {
   getScenarioBySlug as getPricingScenarioBySlug,
 } from '@/lib/content/getScenarioBySlug';
 import { getToolBySlug } from '@/lib/content/getToolBySlug';
+import { getPricingScenarioBySlug as getPricingClusterScenarioBySlug } from '@/lib/pricing-cluster';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildToolMetadata } from '@/lib/seo/buildToolMetadata';
 import { setRequestLocale } from 'next-intl/server';
@@ -94,6 +96,9 @@ export default async function ToolPage({
   const pricingScenario = requestedScenario
     ? getPricingScenarioBySlug(requestedScenario)
     : null;
+  const pricingClusterScenario = requestedScenario
+    ? getPricingClusterScenarioBySlug(requestedScenario)
+    : null;
   const generatorScenario = requestedScenario
     ? getGeneratorScenarioBySlug(requestedScenario)
     : null;
@@ -103,6 +108,13 @@ export default async function ToolPage({
     : generatorScenario?.slug ||
       defaultGeneratorScenarioByToolSlug[tool.slug] ||
       'quote-too-high';
+  const pricingAttribution = pricingScenario
+    ? buildPricingScenarioAttribution({
+        pricingSlug: pricingClusterScenario?.slug || '',
+        sourceSurface: 'tool_page',
+        locale,
+      })
+    : null;
 
   const previewScenario = getGeneratorScenarioBySlug(defaultScenarioSlug);
   const curatedRelatedScenarioLinks = getToolSurfaceScenarioLinks(
@@ -144,6 +156,15 @@ export default async function ToolPage({
         analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
+        pricingAttribution={
+          pricingAttribution
+            ? {
+                pricingSlug: pricingAttribution.pricingSlug,
+                sourceSurface: pricingAttribution.sourceSurface,
+                locale: pricingAttribution.locale,
+              }
+            : undefined
+        }
         showScenarioSelector={false}
         placeholder={clientMessageInput?.placeholder}
       />

@@ -169,6 +169,7 @@ cp .env.example .env.local
 至少需要配置：
 - `DATABASE_URL`
 - `AUTH_SECRET`
+- `CRON_SECRET`（用于内部定时刷新 pricing performance snapshot）
 - `FLOWDOCKR_MODEL`（默认 `gpt-5-mini`）
 - `OPENAI_API_KEY` 或 `FAL_API_KEY`（按你的 provider）
 - `STRIPE_SECRET_KEY`

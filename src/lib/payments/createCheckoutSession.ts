@@ -2,6 +2,7 @@ import type { CreditPack } from '@/config/creditPacks';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
 import { getStripeClient } from '@/lib/stripe';
+import type { PricingScenarioAttribution } from '@/types/pricing-analytics';
 
 function sanitizeReturnPath(value: string | undefined): string {
   const trimmed = String(value || '').trim();
@@ -25,6 +26,7 @@ export async function createCheckoutSession(params: {
   returnTo?: string;
   scenarioSlug?: string;
   anonymousSessionId?: string;
+  pricingAttribution?: PricingScenarioAttribution | null;
 }): Promise<{
   sessionId: string;
   checkoutUrl: string;
@@ -38,6 +40,7 @@ export async function createCheckoutSession(params: {
     returnTo = '/scenario',
     scenarioSlug = '',
     anonymousSessionId = '',
+    pricingAttribution = null,
   } = params;
 
   if (!pack.stripePriceId) {
@@ -52,6 +55,9 @@ export async function createCheckoutSession(params: {
     throw new Error('App origin is required for checkout session.');
   }
 
+  const pricingSlug = pricingAttribution?.pricingSlug || '';
+  const pricingSourceSurface = pricingAttribution?.sourceSurface || '';
+
   const session = await stripe.checkout.sessions.create(
     {
       mode: 'payment',
@@ -61,8 +67,8 @@ export async function createCheckoutSession(params: {
           quantity: 1,
         },
       ],
-      success_url: `${safeOrigin}${localePrefix}/checkout/success?session_id={CHECKOUT_SESSION_ID}&purchase_id=${purchaseId}&return_to=${encodeURIComponent(safeReturnTo)}&scenario=${encodeURIComponent(scenarioSlug)}`,
-      cancel_url: `${safeOrigin}${localePrefix}/checkout/canceled?return_to=${encodeURIComponent(safeReturnTo)}&scenario=${encodeURIComponent(scenarioSlug)}`,
+      success_url: `${safeOrigin}${localePrefix}/checkout/success?session_id={CHECKOUT_SESSION_ID}&purchase_id=${purchaseId}&return_to=${encodeURIComponent(safeReturnTo)}&scenario=${encodeURIComponent(scenarioSlug)}&pricing_slug=${encodeURIComponent(pricingSlug)}&pricing_source_surface=${encodeURIComponent(pricingSourceSurface)}`,
+      cancel_url: `${safeOrigin}${localePrefix}/checkout/canceled?return_to=${encodeURIComponent(safeReturnTo)}&scenario=${encodeURIComponent(scenarioSlug)}&pricing_slug=${encodeURIComponent(pricingSlug)}&pricing_source_surface=${encodeURIComponent(pricingSourceSurface)}`,
       customer_email: userEmail,
       client_reference_id: purchaseId,
       metadata: {
@@ -80,6 +86,17 @@ export async function createCheckoutSession(params: {
         anonymousSessionId,
         scenarioSlug,
         returnTo: safeReturnTo,
+        pricingSlug,
+        pricingSourceSurface,
+        pricingLocale: pricingAttribution?.locale || '',
+        pricingFamily: pricingAttribution?.pricingFamily || '',
+        generatorScenarioSlug: pricingAttribution?.generatorScenarioSlug || '',
+        generatorMappingKind: pricingAttribution?.generatorMappingKind || '',
+        pageRole: pricingAttribution?.pageRole || '',
+        canonicalRoute: pricingAttribution?.canonicalRoute || '',
+        dedicatedGeneratorMapping: pricingAttribution
+          ? String(pricingAttribution.isDedicatedGeneratorMapping)
+          : '',
         email: userEmail,
       },
     },

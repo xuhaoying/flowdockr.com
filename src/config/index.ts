@@ -140,6 +140,7 @@ export const envConfigs: ConfigMap = {
   db_max_connections: process.env.DB_MAX_CONNECTIONS || '1',
   auth_url: normalizeUrl(process.env.AUTH_URL?.trim() || appUrl),
   auth_secret: process.env.AUTH_SECRET ?? '', // openssl rand -base64 32
+  cron_secret: process.env.CRON_SECRET ?? '',
   version: packageJson.version,
   locale_detect_enabled:
     process.env.NEXT_PUBLIC_LOCALE_DETECT_ENABLED ?? 'false',

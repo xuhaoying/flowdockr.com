@@ -72,3 +72,35 @@ The CI workflow must include:
 - `pnpm qa:pricing-runtime-smoke`
 
 Merges to `main` are allowed only when all checks are green.
+
+## 5. Post-deploy pricing performance verification
+
+The deployed app now refreshes the pricing-cluster snapshot automatically once per day through Vercel Cron:
+
+- `GET /api/internal/pricing-cluster-performance/refresh`
+
+The latest durable snapshot is stored in the database-backed `config` table, not in runtime filesystem files.
+
+Use the internal snapshot endpoints with `Authorization: Bearer $CRON_SECRET`:
+
+- `GET /api/internal/pricing-cluster-performance`
+- `GET /api/internal/pricing-cluster-performance?format=summary`
+
+Manual local export remains available for development:
+
+```bash
+pnpm qa:pricing-performance -- --days=7 --limit=500
+```
+
+Interpretation rules:
+
+- `snapshotState=unavailable`: environment or database access is not configured correctly.
+- `snapshotState=reachable_empty`: queries work, but no attributed pricing-funnel data was found in the current reporting window yet.
+- `snapshotState=populated`: real pricing-cluster signals were found and page-level funnel analysis is now meaningful.
+
+Minimum first-snapshot check:
+
+- Confirm the stored snapshot `refresh.status` is `success`.
+- Confirm all three sources are no longer `unavailable`.
+- Confirm at least one page appears in `firstPagesToInspect.byViews` or `firstPagesToInspect.byGeneratorClicks`.
+- Confirm `weakMappingWarningsWithSignals` is reviewed before expanding the next pricing batch.

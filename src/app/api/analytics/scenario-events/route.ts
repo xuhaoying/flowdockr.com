@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getScenarioPageBySlug } from '@/content/scenario-pages';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import {
   getScenarioAnalyticsSlugCounts,
   isCanonicalScenarioAnalyticsEventName,
@@ -29,7 +30,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!scenarioSlug || !getScenarioPageBySlug(scenarioSlug)) {
+    const isKnownSlug =
+      pageType === 'pricing'
+        ? Boolean(getPricingScenarioBySlug(scenarioSlug))
+        : Boolean(getScenarioPageBySlug(scenarioSlug));
+
+    if (!scenarioSlug || !isKnownSlug) {
       return NextResponse.json(
         { ok: false, message: 'Unknown scenario slug.' },
         { status: 400 }
@@ -65,6 +71,7 @@ export async function GET(request: NextRequest) {
     const limit = Number.parseInt(searchParams.get('limit') || '200', 10);
     const requestedEvent = String(searchParams.get('event') || '').trim();
     const scenarioSlug = String(searchParams.get('slug') || '').trim();
+    const pageType = String(searchParams.get('pageType') || '').trim();
     const eventName = isCanonicalScenarioAnalyticsEventName(requestedEvent)
       ? requestedEvent
       : undefined;
@@ -74,6 +81,7 @@ export async function GET(request: NextRequest) {
       limit,
       eventName,
       scenarioSlug: scenarioSlug || undefined,
+      pageType: pageType || undefined,
     });
 
     return NextResponse.json({
@@ -84,6 +92,7 @@ export async function GET(request: NextRequest) {
         limit: result.limit,
         eventName: eventName || null,
         scenarioSlug: scenarioSlug || null,
+        pageType: pageType || null,
       },
       countsBySlug: result.countsBySlug,
       eventCounts: result.eventCounts,
