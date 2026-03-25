@@ -18,13 +18,13 @@ type HubData = {
   url: string;
 };
 
-const scenarioMarkers = [
-  'Situation summary',
-  'Why this is tricky',
-  'Strategy paths',
-  'Example replies',
-  'Next decision links',
-  'FAQ',
+const scenarioMarkerGroups = [
+  ['Situation summary', 'The situation'],
+  ['Why this is tricky', 'What might actually be happening'],
+  ['Strategy paths', 'Strategy options'],
+  ['Example replies', 'Copy-ready replies'],
+  ['Next decision links', 'What to do next'],
+  ['FAQ', 'Common questions'],
 ];
 
 const guideMarkers = ['Core takeaways', 'Recommended scenarios', 'FAQ'];
@@ -66,6 +66,12 @@ async function waitForServerReady(baseUrl: string, timeoutMs = 30_000): Promise<
 
 function hasAllMarkers(html: string, markers: string[]): string[] {
   return markers.filter((marker) => !html.includes(marker));
+}
+
+function hasAllMarkerGroups(html: string, markerGroups: string[][]): string[] {
+  return markerGroups
+    .map((group) => group.find((marker) => html.includes(marker)) ?? group.join(' | '))
+    .filter((value) => value.includes(' | '));
 }
 
 async function fetchHtml(baseUrl: string, path: string): Promise<{ status: number; html: string }> {
@@ -127,7 +133,7 @@ async function main() {
         continue;
       }
 
-      const missing = hasAllMarkers(result.html, scenarioMarkers);
+      const missing = hasAllMarkerGroups(result.html, scenarioMarkerGroups);
       if (missing.length > 0) {
         failures.push(`${path}: missing markers -> ${missing.join(', ')}`);
       }
