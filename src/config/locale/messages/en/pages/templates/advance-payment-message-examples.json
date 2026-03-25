@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "Advance Payment Message Examples | FlowDockr",
+    "description": "Deposit and advance-payment message examples for freelancers, with three distinct strategies and a direct path into the unpaid deposit scenario."
+  },
+  "page": {
+    "title": "Advance Payment Message Examples",
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Advance payment message examples",
+        "description": "This template page handles one job: asking for payment before work starts. Use it when you need deposit wording that stays professional without weakening the start-after-payment boundary.",
+        "buttons": [
+          {
+            "title": "Read deposit guide",
+            "url": "/guides/when-to-ask-for-a-deposit-before-work/",
+            "icon": "BookOpen",
+            "variant": "default"
+          },
+          {
+            "title": "Open unpaid deposit scenario",
+            "url": "/scenario/deposit-not-paid-yet",
+            "icon": "ArrowUpRight",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": false,
+        "show_award": false
+      },
+      "examples": {
+        "id": "examples",
+        "title": "Three strategically different advance-payment versions",
+        "description": "Each version protects the payment boundary in a different way depending on how much commitment or reassurance the client needs.",
+        "items": [
+          {
+            "title": "Standard kickoff confirmation",
+            "description": "Example: \"Once the deposit is in place, I can lock the kickoff and move forward right away. Let me know as soon as that step is completed on your side.\"",
+            "icon": "PlayCircle"
+          },
+          {
+            "title": "Trust-building deposit ask",
+            "description": "Example: \"Happy to answer any final questions before kickoff. Once the deposit is confirmed, I can reserve the start date and send over the next project steps.\"",
+            "icon": "Handshake"
+          },
+          {
+            "title": "Firm start-after-payment boundary",
+            "description": "Example: \"I start once the agreed deposit is in place so the timeline stays protected on both sides. As soon as that is confirmed, I can begin.\"",
+            "icon": "ShieldCheck"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "label": "When to use each",
+        "title": "Pick the version by client pressure",
+        "description": "Choose the message style based on whether the client is simply organizing payment, needs reassurance, or is pushing to start before paying.",
+        "items": [
+          {
+            "title": "Use the standard version for normal kickoff",
+            "description": "Best when the client is moving ahead and you just need to keep the deposit step explicit.",
+            "icon": "CalendarCheck"
+          },
+          {
+            "title": "Use the trust-building version when they hesitate",
+            "description": "Best when the client wants reassurance before sending the deposit but you do not want to add unpaid custom work.",
+            "icon": "BadgeHelp"
+          },
+          {
+            "title": "Use the firm version when they want to start now",
+            "description": "Best when the client treats the deposit like an optional step and you need to protect the payment boundary clearly.",
+            "icon": "ShieldAlert"
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Move from example wording into the live deposit scenario.",
+        "description": "If the deposit was promised but still has not arrived, open the scenario page and draft the exact follow-up for that situation.",
+        "buttons": [
+          {
+            "title": "Open unpaid deposit scenario",
+            "url": "/scenario/deposit-not-paid-yet",
+            "icon": "ArrowRight"
+          },
+          {
+            "title": "Back to payment hub",
+            "url": "/payment",
+            "icon": "Home",
+            "variant": "outline"
+          }
+        ],
+        "className": "bg-muted/50"
+      }
+    }
+  }
+}

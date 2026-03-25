@@ -1,93 +1,128 @@
 {
   "metadata": {
-    "title": "FlowDockr Payment",
-    "description": "Send stronger payment reminders and reduce outstanding invoices."
+    "title": "Freelance Payment Communication Guide | FlowDockr",
+    "description": "Start with the right payment guide, move into a reusable template, and finish with a live scenario for overdue invoices, deposits, and payment follow-ups."
   },
   "page": {
-    "title": "FlowDockr Payment",
+    "title": "Freelance Payment Communication Guide",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Get paid without awkward follow-ups.",
-        "description": "FlowDockr Payment gives you structured reminder messages and payment term language for late invoices.",
+        "title": "Freelance payment communication, organized by decision stage.",
+        "description": "This is FlowDockr's payment cluster hub. Start with the guide that matches your situation, move into a template when you need wording, and then use a scenario page for the live client message.",
         "buttons": [
           {
-            "title": "Use Payment Reminder Template",
-            "url": "/templates/payment-reminder",
-            "icon": "FileText",
+            "title": "Follow up an unpaid invoice",
+            "url": "/guides/how-to-follow-up-an-unpaid-invoice/",
+            "icon": "BookOpen",
             "variant": "default"
           },
           {
-            "title": "Read Client Not Paying Guide",
-            "url": "/guides/client-not-paying",
-            "icon": "BookOpen",
+            "title": "Use payment reminder template",
+            "url": "/templates/payment-reminder",
+            "icon": "FileText",
             "variant": "outline"
           }
         ],
         "show_avatars": false,
         "show_award": false
       },
-      "features": {
-        "id": "features",
-        "title": "What Payment solves",
-        "description": "Standardize follow-up and protect payment terms from day one.",
+      "guides": {
+        "id": "guides",
+        "title": "Start with the payment task you need to solve",
+        "description": "These three guides own the core payment questions in phase 1. Read the guide first when you need judgment, sequencing, or a clean decision path.",
         "items": [
           {
-            "title": "Late final payment",
-            "description": "Use firm, professional reminders tied to agreed terms.",
-            "icon": "AlarmClock"
+            "title": "How to follow up an unpaid invoice",
+            "description": "Use this when an invoice is open and you need the first clear follow-up before the thread gets more tense.",
+            "icon": "ReceiptText",
+            "url": "/guides/how-to-follow-up-an-unpaid-invoice/"
           },
           {
-            "title": "Unclear payment deadlines",
-            "description": "Clarify due date windows and next actions in one message.",
-            "icon": "CalendarClock"
+            "title": "How to remind a client about overdue payment",
+            "description": "Use this when the due date has passed and the reminder now needs more urgency and structure.",
+            "icon": "BellRing",
+            "url": "/guides/how-to-remind-a-client-about-overdue-payment/"
           },
           {
-            "title": "Need escalation path",
-            "description": "Move from friendly reminder to formal follow-up with consistency.",
-            "icon": "ShieldAlert"
+            "title": "When to ask for a deposit before work",
+            "description": "Use this when you need to protect kickoff with a clear deposit rule instead of starting on promises.",
+            "icon": "ShieldCheck",
+            "url": "/guides/when-to-ask-for-a-deposit-before-work/"
           }
         ],
         "className": "bg-muted/50"
       },
-      "usage": {
+      "flow": {
         "block": "features-step",
-        "id": "usage",
-        "label": "Workflow",
-        "title": "Recover payment in 3 steps",
-        "description": "Keep tone professional while increasing response rate.",
+        "id": "flow",
+        "label": "Cluster flow",
+        "title": "The payment cluster works in a fixed hierarchy",
+        "description": "Use the hub for orientation, the guide for decision-making, the template for wording, and the scenario for the live execution step.",
         "items": [
           {
-            "title": "Capture invoice context",
-            "description": "Amount, due date, and delivery status.",
-            "icon": "ClipboardList"
+            "title": "Pick the right guide",
+            "description": "Choose the payment situation: unpaid invoice, overdue reminder, or deposit timing.",
+            "icon": "Map"
           },
           {
-            "title": "Generate reminder",
-            "description": "Create an email-ready follow-up with clear ask and deadline.",
-            "icon": "Mail"
+            "title": "Use the matching template",
+            "description": "Move to a structured wording page when you know what kind of message you need to send.",
+            "icon": "FileText"
           },
           {
-            "title": "Escalate with structure",
-            "description": "Use tiered follow-ups if payment remains overdue.",
+            "title": "Finish in the scenario",
+            "description": "Open the live scenario page when the conversation has real pressure, risk, or timing stakes.",
             "icon": "ArrowUpRight"
           }
         ]
       },
-      "cta": {
-        "id": "cta",
-        "title": "Pair Payment with Scope for stronger terms.",
-        "description": "Clear scope + clear payment terms = fewer disputes and faster collections.",
-        "buttons": [
+      "execution": {
+        "id": "execution",
+        "title": "Templates and live scenarios",
+        "description": "These are the first execution nodes connected to the payment guides in phase 1.",
+        "items": [
           {
-            "title": "Open Scope Module",
-            "url": "/scope",
-            "icon": "ShieldCheck"
+            "title": "Payment reminder templates",
+            "description": "Three overdue follow-up styles with usage boundaries and a direct path into the overdue invoice scenario.",
+            "icon": "Mail",
+            "url": "/templates/payment-reminder"
           },
           {
-            "title": "Open Deal Module",
-            "url": "/deal",
-            "icon": "Handshake",
+            "title": "Advance payment message examples",
+            "description": "Three deposit and advance-payment approaches for pre-kickoff messages.",
+            "icon": "Wallet",
+            "url": "/templates/advance-payment-message-examples"
+          },
+          {
+            "title": "Overdue invoice no-response scenario",
+            "description": "Use this when payment is overdue and the client has stopped replying.",
+            "icon": "AlertCircle",
+            "url": "/scenario/overdue-invoice-no-response"
+          },
+          {
+            "title": "Deposit not paid yet scenario",
+            "description": "Use this when kickoff is blocked because the promised deposit still has not arrived.",
+            "icon": "Clock3",
+            "url": "/scenario/deposit-not-paid-yet"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Enter the payment cluster from the correct page type.",
+        "description": "If you need judgment, start with a guide. If you need copy, open a template. If the message is already live and high-pressure, go straight to the scenario.",
+        "buttons": [
+          {
+            "title": "Open overdue invoice guide",
+            "url": "/guides/how-to-follow-up-an-unpaid-invoice/",
+            "icon": "ArrowRight"
+          },
+          {
+            "title": "Open deposit guide",
+            "url": "/guides/when-to-ask-for-a-deposit-before-work/",
+            "icon": "ArrowRight",
             "variant": "outline"
           }
         ],

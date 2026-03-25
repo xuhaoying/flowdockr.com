@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker';
+import { PaymentScenarioSupport } from '@/components/scenario/PaymentScenarioSupport';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioClientMessages } from '@/components/scenario/ScenarioClientMessages';
 import { ScenarioCTA } from '@/components/scenario/ScenarioCTA';
@@ -23,6 +24,7 @@ import {
   getScenarioPageBySlug,
   getScenarioPagePromise,
 } from '@/lib/content/scenarioPages';
+import { getPaymentScenarioSupport } from '@/lib/content/paymentCluster';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 import { setRequestLocale } from 'next-intl/server';
@@ -154,6 +156,7 @@ export default async function ScenarioPage({
     const previewReply = page.previewReply || generatorScenario?.exampleReply;
     const relatedSection = getRelatedScenarioSectionCopy(page);
     const pagePromise = getScenarioPagePromise(page);
+    const paymentSupport = getPaymentScenarioSupport(page.slug);
 
     return (
       <>
@@ -173,6 +176,9 @@ export default async function ScenarioPage({
             userSituation={page.userSituation}
             replyGoal={page.userGoal || page.strategyPrimary}
           />
+          {paymentSupport ? (
+            <PaymentScenarioSupport support={paymentSupport} />
+          ) : null}
           <ScenarioClientMessages
             primaryClientMessage={page.primaryClientMessage}
             clientMessageVariants={page.clientMessageVariants}
