@@ -27,6 +27,17 @@ export function PaymentScenarioSupport({
       <CardContent className="space-y-8">
         <div className="space-y-3">
           <h3 className="text-lg font-semibold text-slate-900">
+            Scenario definition
+          </h3>
+          <div className="rounded-[18px] border border-slate-200 bg-slate-50/70 p-4">
+            <p className="text-sm leading-6 text-slate-700">
+              {support.scenarioDefinition}
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-slate-900">
             Communication risks
           </h3>
           <ul className="space-y-2 text-sm text-slate-700">
@@ -58,6 +69,20 @@ export function PaymentScenarioSupport({
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-slate-900">
+            After you send the reply
+          </h3>
+          <ul className="space-y-2 text-sm text-slate-700">
+            {support.nextSteps.map((step) => (
+              <li key={step} className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+                <span>{step}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">

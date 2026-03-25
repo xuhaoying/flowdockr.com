@@ -1,15 +1,15 @@
 {
   "metadata": {
     "title": "Advance Payment Message Examples | FlowDockr",
-    "description": "Deposit and advance-payment message examples for freelancers, with three distinct strategies and a direct path into the unpaid deposit scenario."
+    "description": "Deposit and advance-payment message examples for freelancers, with three distinct pre-kickoff strategies and a direct path into the unpaid deposit scenario."
   },
   "page": {
     "title": "Advance Payment Message Examples",
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Advance payment message examples",
-        "description": "This template page handles one job: asking for payment before work starts. Use it when you need deposit wording that stays professional without weakening the start-after-payment boundary.",
+        "title": "Advance payment message examples before kickoff",
+        "description": "This page handles one job only: pre-kickoff deposit and advance-payment wording. Use the guide for policy, use these examples for reusable phrasing, and move into the scenario when the client's exact hesitation needs a tailored response.",
         "buttons": [
           {
             "title": "Read deposit guide",
@@ -29,8 +29,8 @@
       },
       "examples": {
         "id": "examples",
-        "title": "Three strategically different advance-payment versions",
-        "description": "Each version protects the payment boundary in a different way depending on how much commitment or reassurance the client needs.",
+        "title": "Three strategically different pre-kickoff payment versions",
+        "description": "Each version protects the deposit boundary in a different way depending on the client's pressure or hesitation.",
         "items": [
           {
             "title": "Standard kickoff confirmation",
@@ -54,8 +54,8 @@
         "block": "features-step",
         "id": "usage",
         "label": "When to use each",
-        "title": "Pick the version by client pressure",
-        "description": "Choose the message style based on whether the client is simply organizing payment, needs reassurance, or is pushing to start before paying.",
+        "title": "Pick the version by pre-kickoff pressure",
+        "description": "Match the example to the real pre-kickoff issue instead of sending the same deposit line in every situation.",
         "items": [
           {
             "title": "Use the standard version for normal kickoff",
@@ -74,10 +74,33 @@
           }
         ]
       },
+      "bridge": {
+        "id": "bridge",
+        "title": "When the example should become a tailored scenario reply",
+        "description": "Templates work when the payment issue is still simple. Move into the scenario when the client's exact pushback needs a more specific response.",
+        "items": [
+          {
+            "title": "The deposit was promised but still has not arrived",
+            "description": "Use the scenario when the issue is no longer hypothetical and kickoff is now blocked.",
+            "icon": "Clock3"
+          },
+          {
+            "title": "The client wants to start now and pay later",
+            "description": "Use the scenario when you need wording that reacts to that exact boundary pressure.",
+            "icon": "PlayCircle"
+          },
+          {
+            "title": "You need to answer their specific hesitation",
+            "description": "Use the scenario when reassurance, timing, and payment need to be balanced in one thread-specific reply.",
+            "icon": "GitBranch"
+          }
+        ],
+        "className": "bg-muted/50"
+      },
       "cta": {
         "id": "cta",
-        "title": "Move from example wording into the live deposit scenario.",
-        "description": "If the deposit was promised but still has not arrived, open the scenario page and draft the exact follow-up for that situation.",
+        "title": "Move into the scenario when deposit wording needs judgment.",
+        "description": "These examples give you reusable pre-kickoff language. If the deposit was promised but still has not arrived, or the client is pushing the boundary, open the scenario page for a tailored reply.",
         "buttons": [
           {
             "title": "Open unpaid deposit scenario",
