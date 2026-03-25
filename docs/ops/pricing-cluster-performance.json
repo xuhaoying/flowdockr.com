@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T08:49:39.080Z",
+  "generatedAt": "2026-03-25T08:58:00.481Z",
   "filters": {
     "days": 30,
     "limit": 500
@@ -26,6 +26,20 @@
     "generationHistory": false,
     "purchases": false
   },
+  "sourceStates": {
+    "analyticsEvents": {
+      "state": "unavailable",
+      "reason": "DATABASE_URL_MISSING"
+    },
+    "generationHistory": {
+      "state": "unavailable",
+      "reason": "DATABASE_URL_MISSING"
+    },
+    "purchases": {
+      "state": "unavailable",
+      "reason": "DATABASE_URL_MISSING"
+    }
+  },
   "dataSources": {
     "views": "scenario_analytics_event rows mirrored from page_view_pricing_scenario as fd_scenario_view with pageType=pricing",
     "generateClicks": "scenario_analytics_event rows mirrored from click_generate_from_pricing_scenario as fd_tool_start with pageType=pricing",
@@ -38,9 +52,9 @@
     "History saves are derived from stored generation rows with pricing attribution plus history-enabled support levels, not from a separate persisted save_history analytics table.",
     "Checkout clicks are derived from persisted purchase rows with pricing attribution metadata, so they represent checkout sessions created server-side rather than every client-side click attempt.",
     "Purchase successes are counted from purchase rows created inside the reporting window that later resolved to paid with credits granted.",
-    "Pricing view/generate/success analytics were unavailable when this report ran, so those fields are null rather than estimated.",
-    "Generation history rows were unavailable when this report ran, so historySaves is null rather than inferred.",
-    "Purchase rows were unavailable when this report ran, so checkout and purchase metrics are null rather than estimated."
+    "Pricing view/generate/success analytics were unavailable when this report ran (DATABASE_URL_MISSING), so those fields are null rather than estimated.",
+    "Generation history rows were unavailable when this report ran (DATABASE_URL_MISSING), so historySaves is null rather than inferred.",
+    "Purchase rows were unavailable when this report ran (DATABASE_URL_MISSING), so checkout and purchase metrics are null rather than estimated."
   ],
   "summary": {
     "totalPages": 28,

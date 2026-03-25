@@ -19,6 +19,7 @@ async function main() {
     JSON.stringify(
       {
         totalPages: report.summary.totalPages,
+        sourceStates: report.sourceStates,
         pagesWithTraffic: report.summary.pagesWithTraffic,
         pagesWithGeneratorClicks: report.summary.pagesWithGeneratorClicks,
         pagesWithCheckoutIntent: report.summary.pagesWithCheckoutIntent,

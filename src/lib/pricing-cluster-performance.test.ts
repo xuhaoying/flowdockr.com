@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildPricingAnalyticsSignals,
   buildPricingClusterPerformanceReport,
+  buildPricingGenerationSignals,
+  buildPricingPurchaseSignals,
   deriveRate,
+  parsePricingSlugFromGenerationStrategyJson,
+  parsePurchaseMetadata,
 } from './pricing-cluster-performance';
 
 describe('pricing cluster performance report', () => {
@@ -105,6 +110,9 @@ describe('pricing cluster performance report', () => {
     expect(report.summary.needsMappingUpgradePages).toContain(
       'decline-underpaid-project-politely'
     );
+    expect(report.sourceStates.analyticsEvents.state).toBe('populated');
+    expect(report.sourceStates.generationHistory.state).toBe('populated');
+    expect(report.sourceStates.purchases.state).toBe('populated');
     expect(report.prioritizedActions.find((item) => item.action === 'improve_cta'))
       .toBeTruthy();
     expect(
@@ -136,8 +144,142 @@ describe('pricing cluster performance report', () => {
       purchaseSuccesses: null,
     });
     expect(page?.diagnostics).toContain('insufficient_data');
+    expect(report.sourceStates.analyticsEvents).toMatchObject({
+      state: 'unavailable',
+    });
+    expect(report.sourceStates.generationHistory).toMatchObject({
+      state: 'unavailable',
+    });
+    expect(report.sourceStates.purchases).toMatchObject({
+      state: 'unavailable',
+    });
     expect(report.summary.topFamiliesByViews).toEqual([]);
     expect(report.summary.topFamiliesByCheckoutIntent).toEqual([]);
+  });
+
+  it('distinguishes reachable empty sources from unavailable ones', () => {
+    const report = buildPricingClusterPerformanceReport({
+      analyticsSignals: [],
+      generationSignals: [],
+      purchaseSignals: [],
+    });
+
+    expect(report.sourceStates.analyticsEvents).toMatchObject({
+      state: 'reachable_empty',
+      reason: null,
+    });
+    expect(report.sourceStates.generationHistory).toMatchObject({
+      state: 'reachable_empty',
+      reason: null,
+    });
+    expect(report.sourceStates.purchases).toMatchObject({
+      state: 'reachable_empty',
+      reason: null,
+    });
+  });
+
+  it('parses persisted pricing attribution from generation and purchase storage shapes', () => {
+    const analyticsSignals = buildPricingAnalyticsSignals([
+      {
+        scenarioSlug: 'client-messaging-outside-work-hours',
+        fd_scenario_view: 14,
+        fd_tool_start: 5,
+        fd_generation_success: 4,
+      },
+    ]);
+    const generationSignals = buildPricingGenerationSignals([
+      {
+        userId: 'user_123',
+        supportLevel: 'pro',
+        strategyJson: JSON.stringify({
+          generationLog: {
+            pricingAttribution: {
+              pricingSlug: 'client-messaging-outside-work-hours',
+            },
+          },
+        }),
+      },
+      {
+        userId: 'user_456',
+        supportLevel: 'quick_help',
+        strategyJson: JSON.stringify({
+          generationLog: {
+            pricingAttribution: {
+              pricingSlug: 'client-messaging-outside-work-hours',
+            },
+          },
+        }),
+      },
+    ]);
+    const purchaseSignals = buildPricingPurchaseSignals([
+      {
+        status: 'pending',
+        creditsGranted: 0,
+        metadata: JSON.stringify({
+          pricingSlug: 'client-messaging-outside-work-hours',
+        }),
+      },
+      {
+        status: 'paid',
+        creditsGranted: 8,
+        metadata: JSON.stringify({
+          pricingSlug: 'client-messaging-outside-work-hours',
+        }),
+      },
+    ]);
+
+    expect(
+      parsePricingSlugFromGenerationStrategyJson(
+        JSON.stringify({
+          generationLog: {
+            pricingAttribution: {
+              pricingSlug: 'client-messaging-outside-work-hours',
+            },
+          },
+        })
+      )
+    ).toBe('client-messaging-outside-work-hours');
+    expect(
+      parsePurchaseMetadata(
+        JSON.stringify({
+          pricingSlug: 'client-messaging-outside-work-hours',
+        })
+      )
+    ).toMatchObject({
+      pricingSlug: 'client-messaging-outside-work-hours',
+    });
+
+    const report = buildPricingClusterPerformanceReport({
+      analyticsSignals,
+      generationSignals,
+      purchaseSignals,
+    });
+    const row = report.pages.find(
+      (page) => page.slug === 'client-messaging-outside-work-hours'
+    );
+
+    expect(generationSignals).toEqual([
+      {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        historySaves: 1,
+      },
+    ]);
+    expect(purchaseSignals).toEqual([
+      {
+        pricingSlug: 'client-messaging-outside-work-hours',
+        checkoutClicks: 2,
+        purchaseSuccesses: 1,
+      },
+    ]);
+    expect(row).toMatchObject({
+      views: 14,
+      generateClicks: 5,
+      generateSuccesses: 4,
+      historySaves: 1,
+      checkoutClicks: 2,
+      purchaseSuccesses: 1,
+    });
+    expect(row?.generatorClickRate).toBeCloseTo(5 / 14);
   });
 
   it('derives null rate when the denominator is zero or unavailable', () => {
