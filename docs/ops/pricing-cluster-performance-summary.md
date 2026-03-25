@@ -1,7 +1,16 @@
 # Pricing Cluster Performance Snapshot
 
-- Generated at: 2026-03-25T09:10:53.095Z
-- Reporting window: 2026-02-23T09:10:53.095Z -> 2026-03-25T09:10:53.095Z (30 days, limit 500)
+- Generated at: 2026-03-25T09:26:43.296Z
+- Refresh mode: manual
+- Refresh status: success
+- Storage backend: filesystem
+- Last refresh attempt: 2026-03-25T09:26:43.296Z
+- Last successful refresh: 2026-03-25T09:26:43.296Z
+- Last failure: none
+- Refresh failure reason: none
+- Stale after: 2026-03-26T09:26:43.296Z
+- Is stale: no
+- Reporting window: 2026-02-23T09:26:43.296Z -> 2026-03-25T09:26:43.296Z (30 days, limit 500)
 - Snapshot state: unavailable
 - Based on real populated data: no
 

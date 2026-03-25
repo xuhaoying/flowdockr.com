@@ -75,16 +75,22 @@ Merges to `main` are allowed only when all checks are green.
 
 ## 5. Post-deploy pricing performance verification
 
-Run the pricing performance export in a deployed environment where `DATABASE_URL` is configured:
+The deployed app now refreshes the pricing-cluster snapshot automatically once per day through Vercel Cron:
+
+- `GET /api/internal/pricing-cluster-performance/refresh`
+
+The latest durable snapshot is stored in the database-backed `config` table, not in runtime filesystem files.
+
+Use the internal snapshot endpoints with `Authorization: Bearer $CRON_SECRET`:
+
+- `GET /api/internal/pricing-cluster-performance`
+- `GET /api/internal/pricing-cluster-performance?format=summary`
+
+Manual local export remains available for development:
 
 ```bash
 pnpm qa:pricing-performance -- --days=7 --limit=500
 ```
-
-Inspect both exported artifacts:
-
-- `docs/ops/pricing-cluster-performance.json`
-- `docs/ops/pricing-cluster-performance-summary.md`
 
 Interpretation rules:
 
@@ -94,6 +100,7 @@ Interpretation rules:
 
 Minimum first-snapshot check:
 
+- Confirm the stored snapshot `refresh.status` is `success`.
 - Confirm all three sources are no longer `unavailable`.
 - Confirm at least one page appears in `firstPagesToInspect.byViews` or `firstPagesToInspect.byGeneratorClicks`.
 - Confirm `weakMappingWarningsWithSignals` is reviewed before expanding the next pricing batch.

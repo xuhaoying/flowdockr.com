@@ -113,6 +113,14 @@ describe('pricing cluster performance report', () => {
     );
     expect(report.snapshotState).toBe('populated');
     expect(report.hasRealSignals).toBe(true);
+    expect(report.refresh).toMatchObject({
+      mode: 'manual',
+      status: 'success',
+      storageBackend: 'filesystem',
+      lastSuccessfulRefreshAt: report.generatedAt,
+      refreshFailureReason: null,
+      isStale: false,
+    });
     expect(report.sourceStates.analyticsEvents.state).toBe('populated');
     expect(report.sourceStates.generationHistory.state).toBe('populated');
     expect(report.sourceStates.purchases.state).toBe('populated');
@@ -167,6 +175,7 @@ describe('pricing cluster performance report', () => {
     });
     expect(report.snapshotState).toBe('unavailable');
     expect(report.hasRealSignals).toBe(false);
+    expect(report.refresh.status).toBe('success');
     expect(report.summary.topFamiliesByViews).toEqual([]);
     expect(report.summary.topFamiliesByCheckoutIntent).toEqual([]);
     expect(report.operatorGuidance.interpretation).toContain(
@@ -337,6 +346,8 @@ describe('pricing cluster performance report', () => {
     const markdown = buildPricingClusterPerformanceSnapshotMarkdown(report);
 
     expect(markdown).toContain('# Pricing Cluster Performance Snapshot');
+    expect(markdown).toContain('Refresh mode: manual');
+    expect(markdown).toContain('Refresh status: success');
     expect(markdown).toContain('Snapshot state: populated');
     expect(markdown).toContain('analyticsEvents: populated');
     expect(markdown).toContain('client-messaging-outside-work-hours');

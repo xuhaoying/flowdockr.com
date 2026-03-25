@@ -35,6 +35,11 @@ async function main() {
   const report = await getPricingClusterPerformanceReport({
     days: Number.isFinite(daysArg) ? daysArg : 30,
     limit: Number.isFinite(limitArg) ? limitArg : 500,
+    refresh: {
+      mode: 'manual',
+      status: 'success',
+      storageBackend: 'filesystem',
+    },
   });
   const summaryMarkdown = buildPricingClusterPerformanceSnapshotMarkdown(report);
 

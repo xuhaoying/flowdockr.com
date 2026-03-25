@@ -60,6 +60,25 @@ export type PricingClusterPerformanceSourceCounts = {
   pagesWithSignals: number;
 };
 
+export type PricingClusterPerformanceRefreshMode = 'manual' | 'scheduled';
+
+export type PricingClusterPerformanceRefreshStatus = 'success' | 'failure';
+
+export type PricingClusterPerformanceStorageBackend = 'filesystem' | 'config';
+
+export type PricingClusterPerformanceRefreshMetadata = {
+  mode: PricingClusterPerformanceRefreshMode;
+  status: PricingClusterPerformanceRefreshStatus;
+  storageBackend: PricingClusterPerformanceStorageBackend;
+  refreshIntervalHours: number;
+  lastRefreshAttemptAt: string;
+  lastSuccessfulRefreshAt: string | null;
+  lastFailureAt: string | null;
+  refreshFailureReason: string | null;
+  staleAfter: string;
+  isStale: boolean;
+};
+
 export type PricingClusterPerformanceAvailability = {
   analyticsEvents: boolean;
   generationHistory: boolean;
@@ -133,6 +152,7 @@ export type PricingClusterPerformanceReport = {
   };
   snapshotState: PricingClusterPerformanceSourceState;
   hasRealSignals: boolean;
+  refresh: PricingClusterPerformanceRefreshMetadata;
   thresholds: PricingClusterPerformanceThresholds;
   dataAvailability: PricingClusterPerformanceAvailability;
   sourceStates: {
@@ -244,11 +264,13 @@ const DEFAULT_DATA_SOURCES = {
 } as const;
 
 const HISTORY_ENABLED_SUPPORT_LEVELS = new Set(['pro', 'studio']);
+export const DEFAULT_PRICING_CLUSTER_PERFORMANCE_REFRESH_INTERVAL_HOURS = 24;
 
 export function buildPricingClusterPerformanceReport(params: {
   days?: number;
   limit?: number;
   generatedAt?: string;
+  refresh?: Partial<PricingClusterPerformanceRefreshMetadata>;
   auditReport?: PricingClusterAuditReport;
   thresholds?: Partial<PricingClusterPerformanceThresholds>;
   analyticsSignals?: PricingClusterAnalyticsSignalRow[];
@@ -269,6 +291,10 @@ export function buildPricingClusterPerformanceReport(params: {
     ...DEFAULT_PRICING_CLUSTER_PERFORMANCE_THRESHOLDS,
     ...(params.thresholds || {}),
   };
+  const refresh = buildPricingClusterPerformanceRefreshMetadata({
+    generatedAt,
+    refresh: params.refresh,
+  });
   const sourceStates = {
     analyticsEvents:
       params.sourceStates?.analyticsEvents ||
@@ -383,6 +409,7 @@ export function buildPricingClusterPerformanceReport(params: {
     },
     snapshotState,
     hasRealSignals: snapshotState === 'populated',
+    refresh,
     thresholds,
     dataAvailability,
     sourceStates,
@@ -411,6 +438,7 @@ export async function getPricingClusterPerformanceReport(params?: {
   days?: number;
   limit?: number;
   thresholds?: Partial<PricingClusterPerformanceThresholds>;
+  refresh?: Partial<PricingClusterPerformanceRefreshMetadata>;
 }): Promise<PricingClusterPerformanceReport> {
   const days = Math.max(1, params?.days || 30);
   const limit = Math.max(1, params?.limit || 500);
@@ -423,6 +451,7 @@ export async function getPricingClusterPerformanceReport(params?: {
     return buildPricingClusterPerformanceReport({
       days,
       limit,
+      refresh: params?.refresh,
       thresholds: params?.thresholds,
       analyticsSignals: [],
       generationSignals: [],
@@ -444,6 +473,7 @@ export async function getPricingClusterPerformanceReport(params?: {
   return buildPricingClusterPerformanceReport({
     days,
     limit,
+    refresh: params?.refresh,
     thresholds: params?.thresholds,
     analyticsSignals: analyticsSource.rows,
     generationSignals: generationSource.rows,
@@ -454,6 +484,73 @@ export async function getPricingClusterPerformanceReport(params?: {
       purchases: purchaseSource.status,
     },
   });
+}
+
+export function buildPricingClusterPerformanceRefreshMetadata(params: {
+  generatedAt: string;
+  refresh?: Partial<PricingClusterPerformanceRefreshMetadata>;
+  now?: string;
+}): PricingClusterPerformanceRefreshMetadata {
+  const now = params.now || params.generatedAt;
+  const refreshIntervalHours = Math.max(
+    1,
+    Number(
+      params.refresh?.refreshIntervalHours ||
+        DEFAULT_PRICING_CLUSTER_PERFORMANCE_REFRESH_INTERVAL_HOURS
+    ) || DEFAULT_PRICING_CLUSTER_PERFORMANCE_REFRESH_INTERVAL_HOURS
+  );
+  const mode = params.refresh?.mode || 'manual';
+  const status = params.refresh?.status || 'success';
+  const storageBackend = params.refresh?.storageBackend || 'filesystem';
+  const lastRefreshAttemptAt =
+    params.refresh?.lastRefreshAttemptAt || params.generatedAt;
+  const lastSuccessfulRefreshAt =
+    params.refresh?.lastSuccessfulRefreshAt ??
+    (status === 'success' ? params.generatedAt : null);
+  const lastFailureAt =
+    params.refresh?.lastFailureAt ?? (status === 'failure' ? now : null);
+  const refreshFailureReason =
+    params.refresh?.refreshFailureReason ??
+    (status === 'failure' ? 'UNKNOWN' : null);
+  const staleBase = lastSuccessfulRefreshAt || params.generatedAt;
+  const staleAfter =
+    params.refresh?.staleAfter ||
+    new Date(
+      Date.parse(staleBase) + refreshIntervalHours * 60 * 60 * 1000
+    ).toISOString();
+  const isStale =
+    params.refresh?.isStale ?? Date.parse(now) > Date.parse(staleAfter);
+
+  return {
+    mode,
+    status,
+    storageBackend,
+    refreshIntervalHours,
+    lastRefreshAttemptAt,
+    lastSuccessfulRefreshAt,
+    lastFailureAt,
+    refreshFailureReason,
+    staleAfter,
+    isStale,
+  };
+}
+
+export function applyPricingClusterPerformanceRefreshMetadata(
+  report: PricingClusterPerformanceReport,
+  refresh: Partial<PricingClusterPerformanceRefreshMetadata>,
+  now?: string
+): PricingClusterPerformanceReport {
+  return {
+    ...report,
+    refresh: buildPricingClusterPerformanceRefreshMetadata({
+      generatedAt: report.generatedAt,
+      refresh: {
+        ...report.refresh,
+        ...refresh,
+      },
+      now,
+    }),
+  };
 }
 
 export function deriveRate(
@@ -1356,6 +1453,15 @@ export function buildPricingClusterPerformanceSnapshotMarkdown(
     '# Pricing Cluster Performance Snapshot',
     '',
     `- Generated at: ${report.generatedAt}`,
+    `- Refresh mode: ${report.refresh.mode}`,
+    `- Refresh status: ${report.refresh.status}`,
+    `- Storage backend: ${report.refresh.storageBackend}`,
+    `- Last refresh attempt: ${report.refresh.lastRefreshAttemptAt}`,
+    `- Last successful refresh: ${report.refresh.lastSuccessfulRefreshAt || 'none'}`,
+    `- Last failure: ${report.refresh.lastFailureAt || 'none'}`,
+    `- Refresh failure reason: ${report.refresh.refreshFailureReason || 'none'}`,
+    `- Stale after: ${report.refresh.staleAfter}`,
+    `- Is stale: ${report.refresh.isStale ? 'yes' : 'no'}`,
     `- Reporting window: ${report.reportingWindow.from} -> ${report.reportingWindow.to} (${report.reportingWindow.days} days, limit ${report.reportingWindow.limit})`,
     `- Snapshot state: ${report.snapshotState}`,
     `- Based on real populated data: ${report.hasRealSignals ? 'yes' : 'no'}`,
