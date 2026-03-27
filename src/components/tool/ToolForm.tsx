@@ -43,16 +43,27 @@ import { ToolPaywall } from './ToolPaywall';
 import { ToolResult } from './ToolResult';
 
 type ToolFormProps = {
+  toolSlug?: string;
   analyticsScenarioSlug?: string;
   funnelScenarioSlug?: string;
   defaultScenarioSlug?: string;
   pricingAttribution?: PricingScenarioAttributionSeedInput;
   showScenarioSelector?: boolean;
   showAdvancedFields?: boolean;
+  initialMessage?: string;
+  initialTone?: DealTone;
+  initialUserRateContext?: string;
+  prefillHint?: string;
   placeholder?: string;
   rateContextLabel?: string;
   rateContextPlaceholder?: string;
   sourcePage: 'home' | 'scenario' | 'tool';
+  sourceAttribution?: {
+    sourceOrigin?: string;
+    sourcePageType?: string;
+    sourcePageSlug?: string;
+    sourceCampaign?: string;
+  };
   workspaceTitle?: string;
   workspaceDescription?: string;
   submitLabel?: string;
@@ -106,16 +117,22 @@ const LIGHT_FIELD_STYLE = {
 };
 
 export function ToolForm({
+  toolSlug,
   analyticsScenarioSlug: initialAnalyticsScenarioSlug,
   funnelScenarioSlug = '',
   defaultScenarioSlug,
   pricingAttribution: pricingAttributionSeed,
   showScenarioSelector = false,
   showAdvancedFields = false,
+  initialMessage = '',
+  initialTone = 'professional',
+  initialUserRateContext = '',
+  prefillHint,
   placeholder,
   rateContextLabel = 'Quote / scope / deal context (optional)',
   rateContextPlaceholder = 'Example: Quote was $2,400 for strategy, copy, and 2 revision rounds over 10 days.',
   sourcePage,
+  sourceAttribution,
   workspaceTitle = 'Paste the exact client message',
   workspaceDescription = '2 free negotiation credits. No subscription required.',
   submitLabel = 'Draft negotiation reply',
@@ -129,19 +146,22 @@ export function ToolForm({
   const [analyticsScenarioSlug, setAnalyticsScenarioSlug] = useState(
     initialAnalyticsScenarioSlug || defaultScenarioSlug || fallbackSlug
   );
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(initialMessage);
   const [usage, setUsage] = useState<UsageState>(INITIAL_USAGE);
   const [upgradeVisible, setUpgradeVisible] = useState(false);
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [checkoutLoading, setCheckoutLoading] =
     useState<CreditPackageId | null>(null);
   const [projectType, setProjectType] = useState<DealProjectType>('other');
-  const [tone, setTone] = useState<DealTone>('professional');
-  const [userRateContext, setUserRateContext] = useState('');
+  const [tone, setTone] = useState<DealTone>(initialTone);
+  const [userRateContext, setUserRateContext] = useState(
+    initialUserRateContext
+  );
   const [savedHint, setSavedHint] = useState('');
 
   const resultRef = useRef<HTMLDivElement>(null);
   const toolOpenTrackedRef = useRef(false);
+  const replyGeneratorViewTrackedRef = useRef(false);
   const paywallWasVisibleRef = useRef(false);
   const paywallTriggerTypeRef = useRef('usage_state');
   const generationSuccessPendingRef = useRef(false);
@@ -204,6 +224,11 @@ export function ToolForm({
   const canSubmit = !validationError && !isLoading;
   const trackedScenarioSlug = analyticsScenarioSlug || scenarioSlug;
   const canonicalFunnelScenarioSlug = funnelScenarioSlug.trim();
+  const hasPrefillSeed = Boolean(
+    initialMessage.trim() || initialUserRateContext.trim()
+  );
+  const isReplyGeneratorToolPage =
+    toolSlug === 'reply-generator' && sourcePage === 'tool';
   const isCanonicalScenarioFunnel = hasCanonicalScenarioFunnel({
     sourcePage,
     funnelScenarioSlug: canonicalFunnelScenarioSlug,
@@ -217,6 +242,38 @@ export function ToolForm({
   );
   const paywallVisible = upgradeVisible || isExhausted;
   const currentRemainingCredits = getRemainingCredits(usage);
+  const replyGeneratorAnalyticsParams = useMemo(() => {
+    if (!isReplyGeneratorToolPage) {
+      return null;
+    }
+
+    return {
+      scenario_slug: scenarioSlug,
+      page_type: 'tool',
+      source_origin: normalizeAnalyticsValue(
+        sourceAttribution?.sourceOrigin,
+        'direct'
+      ),
+      source_page_type: normalizeSourcePageType(
+        sourceAttribution?.sourcePageType
+      ),
+      source_page_slug: normalizeAnalyticsValue(
+        sourceAttribution?.sourcePageSlug,
+        'direct'
+      ),
+      source_campaign: normalizeAnalyticsValue(
+        sourceAttribution?.sourceCampaign,
+        'direct'
+      ),
+    };
+  }, [
+    isReplyGeneratorToolPage,
+    scenarioSlug,
+    sourceAttribution?.sourceCampaign,
+    sourceAttribution?.sourceOrigin,
+    sourceAttribution?.sourcePageSlug,
+    sourceAttribution?.sourcePageType,
+  ]);
 
   const trackToolOpen = () => {
     if (toolOpenTrackedRef.current) {
@@ -230,6 +287,22 @@ export function ToolForm({
       locale,
     });
   };
+
+  useEffect(() => {
+    if (
+      !replyGeneratorAnalyticsParams ||
+      replyGeneratorViewTrackedRef.current
+    ) {
+      return;
+    }
+
+    replyGeneratorViewTrackedRef.current = true;
+    trackEvent('fd_reply_generator_view', {
+      ...replyGeneratorAnalyticsParams,
+      recommended_tone: tone,
+      prefill_applied: hasPrefillSeed,
+    });
+  }, [hasPrefillSeed, replyGeneratorAnalyticsParams, tone]);
 
   useEffect(() => {
     let active = true;
@@ -379,12 +452,24 @@ export function ToolForm({
         });
       }
     }
+
+    if (replyGeneratorAnalyticsParams) {
+      trackEvent('fd_reply_generator_generated', {
+        ...replyGeneratorAnalyticsParams,
+        recommended_tone: tone,
+        generation_id: result?.generationId || '',
+        prefill_applied: hasPrefillSeed,
+      });
+    }
   }, [
+    hasPrefillSeed,
     result,
     canonicalFunnelScenarioSlug,
     isCanonicalScenarioFunnel,
     pricingAnalyticsParams,
     pricingAttribution,
+    replyGeneratorAnalyticsParams,
+    tone,
     trackedScenarioSlug,
     usage.entitlements.historyEnabled,
   ]);
@@ -457,6 +542,15 @@ export function ToolForm({
         sourcePage,
         ...pricingAnalyticsParams,
       });
+      if (replyGeneratorAnalyticsParams) {
+        trackEvent('fd_reply_generator_start', {
+          ...replyGeneratorAnalyticsParams,
+          recommended_tone: tone,
+          message_length: trimmedMessage.length,
+          trigger_type: trigger,
+          prefill_applied: hasPrefillSeed,
+        });
+      }
 
       const response = await submit({
         scenarioSlug,
@@ -748,6 +842,12 @@ export function ToolForm({
             />
           ) : null}
 
+          {prefillHint ? (
+            <div className="rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              {prefillHint}
+            </div>
+          ) : null}
+
           <label className="block space-y-2.5">
             <div className="space-y-1">
               <span className="text-sm font-medium text-slate-800">
@@ -974,6 +1074,25 @@ function getRemainingCredits(usage: UsageState) {
     0,
     usage.loggedIn ? usage.creditsBalance : usage.remainingFreeGenerations
   );
+}
+
+function normalizeAnalyticsValue(value: string | undefined, fallback: string) {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : fallback;
+}
+
+function normalizeSourcePageType(value: string | undefined) {
+  const trimmed = value?.trim();
+
+  if (
+    trimmed === 'prompt_page' ||
+    trimmed === 'guide_page' ||
+    trimmed === 'ai_tools_page'
+  ) {
+    return trimmed;
+  }
+
+  return 'direct';
 }
 
 function hasRenderableGenerationResult(
