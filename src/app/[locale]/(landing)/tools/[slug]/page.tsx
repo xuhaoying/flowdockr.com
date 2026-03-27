@@ -108,6 +108,13 @@ export default async function ToolPage({
     : generatorScenario?.slug ||
       defaultGeneratorScenarioByToolSlug[tool.slug] ||
       'quote-too-high';
+  const loadedContextTitle =
+    pricingScenario?.h1 || generatorScenario?.h1 || '';
+  const loadedContextLabel = pricingScenario
+    ? 'Context loaded from scenario:'
+    : generatorScenario
+      ? 'Reply task loaded from source page:'
+      : '';
   const pricingAttribution = pricingScenario
     ? buildPricingScenarioAttribution({
         pricingSlug: pricingClusterScenario?.slug || '',
@@ -133,11 +140,11 @@ export default async function ToolPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <ToolHero tool={tool} />
 
-      {pricingScenario ? (
+      {loadedContextTitle ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          Context loaded from scenario:{' '}
+          {loadedContextLabel}{' '}
           <span className="font-semibold text-slate-900">
-            {pricingScenario.h1}
+            {loadedContextTitle}
           </span>
         </section>
       ) : null}
