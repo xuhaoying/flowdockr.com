@@ -3,6 +3,7 @@ import type { Scenario } from '@/types/scenario';
 
 import { formatCalibrationExamples } from './calibrationExamples';
 import { outputFormatInstructions } from './outputSchema';
+import { scenarioPromptConfigs } from './scenarioPromptConfigs';
 
 export type BuiltScenarioPrompt = {
   prompt: string;
@@ -31,6 +32,7 @@ export function buildScenarioPrompt(params: {
   } = params;
   const { card, source } = getStrategyCard(scenario);
   const calibrationExamples = formatCalibrationExamples(scenario.slug);
+  const promptConfig = scenarioPromptConfigs[scenario.slug];
   const serviceAdjustment =
     serviceType && card.serviceAdjustments
       ? card.serviceAdjustments[
@@ -38,8 +40,9 @@ export function buildScenarioPrompt(params: {
         ]
       : undefined;
   const sections = [
+    `Role:\n${promptConfig?.role || 'You are an expert client communication assistant for freelancers, consultants, and agencies.'}`,
+    `Scenario:\n${promptConfig?.scenarioContext || scenario.promptContext}`,
     `Scenario title:\n${scenario.title}`,
-    `Scenario context:\n${scenario.promptContext}`,
     `Strategy card:\n- Primary goal: ${card.primaryGoal}\n- Pressure type: ${card.pressureType}\n- User positioning: ${card.userPositioning}\n- Counterpart mindset: ${card.counterpartMindset}\n- Required reframe: ${card.requiredReframe}\n- Allowed concessions: ${card.allowedConcessions.join('; ')}\n- Forbidden concessions: ${card.forbiddenConcessions.join('; ')}\n- Red flags: ${card.redFlags.join('; ')}\n- Preferred moves: ${card.preferredMoves.join('; ')}\n- Avoid moves: ${card.avoidMoves.join('; ')}\n- Tone profile: ${card.toneProfile}\n- Next-step templates: ${card.nextStepTemplates.join(' | ')}`,
   ];
 
@@ -55,10 +58,28 @@ export function buildScenarioPrompt(params: {
 
   if (userGoal) {
     sections.push(`User goal:\n${userGoal}`);
+  } else if (promptConfig?.userGoal?.length) {
+    sections.push(
+      `Goal:\n${promptConfig.userGoal.map((item) => `- ${item}`).join('\n')}`
+    );
   }
 
   if (userRateContext) {
     sections.push(`Rate context:\n${userRateContext}`);
+  }
+
+  if (promptConfig?.toneConstraints?.length) {
+    sections.push(
+      `Tone:\n${promptConfig.toneConstraints.map((item) => `- ${item}`).join('\n')}`
+    );
+  }
+
+  if (promptConfig?.outputConstraints?.length) {
+    sections.push(
+      `Output requirements:\n${promptConfig.outputConstraints
+        .map((item) => `- ${item}`)
+        .join('\n')}`
+    );
   }
 
   sections.push(`User's client message:\n"""\n${message}\n"""`);
@@ -80,6 +101,12 @@ export function buildScenarioPrompt(params: {
   if (repairNotes.length > 0) {
     sections.push(
       `Repair requirements:\n${repairNotes.map((item) => `- ${item}`).join('\n')}`
+    );
+  }
+
+  if (promptConfig?.fewShotExample) {
+    sections.push(
+      `Few-shot example:\nClient: ${promptConfig.fewShotExample.client}\nReply: ${promptConfig.fewShotExample.reply}`
     );
   }
 

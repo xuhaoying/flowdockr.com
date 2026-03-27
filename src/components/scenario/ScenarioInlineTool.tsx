@@ -1,4 +1,4 @@
-import { ToolForm } from '@/components/tool/ToolForm';
+import { SharedGeneratorEntry } from '@/components/generator/SharedGeneratorEntry';
 
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 
@@ -33,16 +33,22 @@ export function ScenarioInlineTool({
       </CardHeader>
 
       <CardContent className="px-5 py-5 lg:px-6 lg:py-6">
-        <ToolForm
+        <SharedGeneratorEntry
+          sourcePage="scenario"
           analyticsScenarioSlug={analyticsScenarioSlug}
           funnelScenarioSlug={analyticsScenarioSlug}
-          sourcePage="scenario"
           defaultScenarioSlug={defaultScenarioSlug}
-          showScenarioSelector={false}
           placeholder={`Paste the exact version of "${primaryClientMessage}" or the closest message from the thread...`}
           submitLabel="Generate reply"
           workspaceTitle="Client message"
           workspaceDescription="Paste the exact wording from the conversation and generate a stronger reply you can edit before sending."
+          analyticsEvents={{
+            generateClick: 'scenario_generate_clicked',
+            generationCompleted: 'generation_completed',
+            replyCopied: 'reply_copied',
+            regenerateClicked: 'regenerate_clicked',
+            toneVariationClicked: 'tone_variation_clicked',
+          }}
         />
       </CardContent>
     </Card>

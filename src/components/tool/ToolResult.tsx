@@ -47,6 +47,7 @@ type ToolResultProps = {
   loading?: boolean;
   onRegenerate?: () => void;
   onCopy?: (target: string) => void;
+  onToneVariationClick?: (tone: 'softer' | 'firm') => void;
   onFeedback?: (params: {
     type: GenerationFeedbackType;
     reason?: GenerationFeedbackReason;
@@ -68,6 +69,7 @@ export function ToolResult({
   loading = false,
   onRegenerate,
   onCopy,
+  onToneVariationClick,
   onFeedback,
   savedHint,
 }: ToolResultProps) {
@@ -186,14 +188,15 @@ export function ToolResult({
                   type="button"
                   variant="outline"
                   className="h-10 justify-start rounded-xl border-slate-300 bg-white px-4 text-sm font-medium text-slate-900"
-                  onClick={() =>
+                  onClick={() => {
+                    onToneVariationClick?.('softer');
                     handleReplyAction({
                       targetId: softerVersion
                         ? `reply-version-${softerVersion.key}`
                         : null,
                       onFallback: onRegenerate,
-                    })
-                  }
+                    });
+                  }}
                   disabled={!softerVersion && !onRegenerate}
                 >
                   {softerVersion
@@ -204,14 +207,15 @@ export function ToolResult({
                   type="button"
                   variant="outline"
                   className="h-10 justify-start rounded-xl border-slate-300 bg-white px-4 text-sm font-medium text-slate-900"
-                  onClick={() =>
+                  onClick={() => {
+                    onToneVariationClick?.('firm');
                     handleReplyAction({
                       targetId: firmerVersion
                         ? `reply-version-${firmerVersion.key}`
                         : null,
                       onFallback: onRegenerate,
-                    })
-                  }
+                    });
+                  }}
                   disabled={!firmerVersion && !onRegenerate}
                 >
                   {firmerVersion

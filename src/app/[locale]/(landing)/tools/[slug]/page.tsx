@@ -19,6 +19,7 @@ import { getToolBySlug } from '@/lib/content/getToolBySlug';
 import { getPricingScenarioBySlug as getPricingClusterScenarioBySlug } from '@/lib/pricing-cluster';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildToolMetadata } from '@/lib/seo/buildToolMetadata';
+import type { DealTone } from '@/types/deals';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
@@ -28,6 +29,41 @@ import { locales } from '@/config/locale';
 const defaultGeneratorScenarioByToolSlug: Record<string, string> = {
   'reply-generator': 'discount-request',
   'price-negotiation-email-generator': 'quote-too-high',
+};
+
+const REPLY_GENERATOR_PREFILLS: Record<
+  string,
+  {
+    message: string;
+    tone: DealTone;
+    taskContext: string;
+    workspaceDescription: string;
+  }
+> = {
+  'unpaid-invoice-follow-up': {
+    message:
+      'Hi Sarah, following up on invoice #0187, which was due on March 20. It still appears open on my side, so I wanted to check whether payment is scheduled and if there is an expected date I should note.',
+    tone: 'professional',
+    taskContext: 'Goal: confirm payment timing without escalating too early.',
+    workspaceDescription:
+      'Loaded a starting unpaid-invoice follow-up draft. Recommended tone: Professional. Replace it with the real client thread or edit from this example.',
+  },
+  'extra-work-outside-scope': {
+    message:
+      'Thanks for sending these additions through. They go beyond the original scope we agreed, so I would need to treat them as extra work rather than include them in the current budget. I can either quote the added work separately or suggest a reduced-scope option that stays within the current budget.',
+    tone: 'firm',
+    taskContext: 'Goal: protect scope and keep the next step clear.',
+    workspaceDescription:
+      'Loaded a starting out-of-scope reply draft. Recommended tone: Firm. Edit the message or paste the exact client request before generating.',
+  },
+  'client-no-response-follow-up': {
+    message:
+      'Hi James, following up on the proposal I sent earlier this week in case it is still under review. If helpful, I can also summarize the recommended next step or adjust timing based on your schedule.',
+    tone: 'professional',
+    taskContext: 'Goal: reopen the conversation without sounding needy.',
+    workspaceDescription:
+      'Loaded a starting no-response follow-up draft. Recommended tone: Professional. Replace it with the real thread if you already have the exact message.',
+  },
 };
 
 function normalizePath(path: string): string {
@@ -41,6 +77,14 @@ function normalizePath(path: string): string {
 type ToolPageParams = {
   locale: string;
   slug: string;
+};
+
+type ToolPageSearchParams = {
+  scenario?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
 };
 
 export const dynamicParams = false;
@@ -81,10 +125,16 @@ export default async function ToolPage({
   searchParams,
 }: {
   params: Promise<ToolPageParams>;
-  searchParams: Promise<{ scenario?: string }>;
+  searchParams: Promise<ToolPageSearchParams>;
 }) {
   const { locale, slug } = await params;
-  const { scenario } = await searchParams;
+  const {
+    scenario,
+    utm_source: utmSource,
+    utm_medium: utmMedium,
+    utm_campaign: utmCampaign,
+    utm_content: utmContent,
+  } = await searchParams;
   setRequestLocale(locale);
 
   const tool = getToolBySlug(slug);
@@ -108,6 +158,18 @@ export default async function ToolPage({
     : generatorScenario?.slug ||
       defaultGeneratorScenarioByToolSlug[tool.slug] ||
       'quote-too-high';
+  const replyGeneratorPrefill =
+    tool.slug === 'reply-generator'
+      ? REPLY_GENERATOR_PREFILLS[defaultScenarioSlug] || null
+      : null;
+  const loadedContextTitle =
+    pricingScenario?.h1 || generatorScenario?.h1 || '';
+  const loadedContextLabel = pricingScenario
+    ? 'Context loaded from scenario:'
+    : generatorScenario
+      ? 'Reply task loaded from source page:'
+      : '';
+  const loadedContextSummary = replyGeneratorPrefill?.taskContext || '';
   const pricingAttribution = pricingScenario
     ? buildPricingScenarioAttribution({
         pricingSlug: pricingClusterScenario?.slug || '',
@@ -133,12 +195,17 @@ export default async function ToolPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
       <ToolHero tool={tool} />
 
-      {pricingScenario ? (
+      {loadedContextTitle ? (
         <section className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          Context loaded from scenario:{' '}
-          <span className="font-semibold text-slate-900">
-            {pricingScenario.h1}
-          </span>
+          <p>
+            {loadedContextLabel}{' '}
+            <span className="font-semibold text-slate-900">
+              {loadedContextTitle}
+            </span>
+          </p>
+          {loadedContextSummary ? (
+            <p className="mt-1 text-xs text-slate-600">{loadedContextSummary}</p>
+          ) : null}
         </section>
       ) : null}
 
@@ -153,9 +220,20 @@ export default async function ToolPage({
       </section>
 
       <ToolForm
+        toolSlug={tool.slug}
         analyticsScenarioSlug={requestedScenario || defaultScenarioSlug}
         sourcePage="tool"
         defaultScenarioSlug={defaultScenarioSlug}
+        initialMessage={replyGeneratorPrefill?.message}
+        initialTone={replyGeneratorPrefill?.tone}
+        initialUserRateContext={replyGeneratorPrefill?.taskContext}
+        prefillHint={replyGeneratorPrefill?.workspaceDescription}
+        sourceAttribution={{
+          sourceOrigin: utmSource,
+          sourcePageType: utmMedium,
+          sourcePageSlug: utmContent,
+          sourceCampaign: utmCampaign,
+        }}
         pricingAttribution={
           pricingAttribution
             ? {
@@ -167,6 +245,10 @@ export default async function ToolPage({
         }
         showScenarioSelector={false}
         placeholder={clientMessageInput?.placeholder}
+        workspaceDescription={
+          replyGeneratorPrefill?.workspaceDescription ||
+          '2 free negotiation credits. No subscription required.'
+        }
       />
 
       {previewScenario ? (
