@@ -194,6 +194,85 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
     serviceAdjustments: PRICING_SERVICE_ADJUSTMENTS,
   },
   {
+    slug: 'extra-work-outside-scope',
+    title: 'Client asks for extra work outside the agreed scope',
+    primaryGoal:
+      'Reinforce the scope boundary while keeping the relationship collaborative and commercially clear.',
+    pressureType: 'scope_expansion',
+    userPositioning:
+      'You want to stay helpful without training the client that extra work is automatically included.',
+    counterpartMindset:
+      'They see the request as a small add-on and are testing whether the boundary is real.',
+    requiredReframe:
+      'Treat the request as a scope change that needs a decision, not as a courtesy tweak you silently absorb.',
+    allowedConcessions: [
+      'Offer to swap priorities inside the current scope.',
+      'Price the add-on or move it into a later phase.',
+    ],
+    forbiddenConcessions: [
+      'Absorb the extra work without naming it.',
+      'Let quick or simple wording erase the commercial impact.',
+    ],
+    redFlags: [
+      'One silent exception becomes the new baseline.',
+      'Defensive language turns a boundary into an argument.',
+    ],
+    preferredMoves: [
+      'Acknowledge the request calmly.',
+      'Name the scope impact clearly.',
+      'Offer keep, swap, or expand paths.',
+    ],
+    avoidMoves: [
+      'Doing the extra work first and clarifying later.',
+      'Sounding irritated about the request itself.',
+    ],
+    nextStepTemplates: [
+      'The cleanest next step is to decide whether we keep the current scope, swap priorities, or add this as a scoped extension.',
+      'If you want this included, I can outline the scope, timing, and cost change so you can choose the best route.',
+    ],
+    toneProfile: 'Polite, boundary-clear, and commercially steady.',
+    serviceAdjustments: SCOPE_SERVICE_ADJUSTMENTS,
+  },
+  {
+    slug: 'ask-for-payment-politely',
+    title: 'How to ask a client for payment politely',
+    primaryGoal:
+      'Ask for the payment date clearly while keeping the tone calm, professional, and commercially firm.',
+    pressureType: 'payment_collection',
+    userPositioning:
+      'You are entitled to clarity on payment timing and do not need to soften the ask into a vague check-in.',
+    counterpartMindset:
+      'They may be delayed, disorganized, or hoping the payment timeline stays ambiguous.',
+    requiredReframe:
+      'Treat the message as a payment-status follow-up with a clear ask, not as a relationship-maintenance note.',
+    allowedConcessions: [
+      'Acknowledge internal processing delays briefly.',
+      'Ask whether there is a blocker if timing is unclear.',
+    ],
+    forbiddenConcessions: [
+      'Lead with just checking in phrasing.',
+      'Apologize for asking about the payment.',
+    ],
+    redFlags: [
+      'Soft wording keeps the payment timeline vague.',
+      'Missing dates or invoice references reduce urgency and clarity.',
+    ],
+    preferredMoves: [
+      'Reference the invoice or payment step plainly.',
+      'Ask for the exact payment date or blocker.',
+      'Keep the note short and professional.',
+    ],
+    avoidMoves: [
+      'Emotional frustration.',
+      'Passive wording with no clear next action.',
+    ],
+    nextStepTemplates: [
+      'Please let me know the expected payment date for the outstanding invoice so I can update my records accordingly.',
+      'If there is anything blocking the payment on your side, let me know what is needed so we can close it out cleanly.',
+    ],
+    toneProfile: 'Professional, firm, and timing-specific.',
+  },
+  {
     slug: 'cheaper-freelancer',
     title: 'Client says another freelancer is cheaper',
     primaryGoal:

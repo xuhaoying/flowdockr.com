@@ -67,6 +67,14 @@ type ToolFormProps = {
   workspaceTitle?: string;
   workspaceDescription?: string;
   submitLabel?: string;
+  analyticsEvents?: {
+    inputFocus?: string;
+    generateClick?: string;
+    generationCompleted?: string;
+    replyCopied?: string;
+    regenerateClicked?: string;
+    toneVariationClicked?: string;
+  };
 };
 
 type UsageState = {
@@ -136,6 +144,7 @@ export function ToolForm({
   workspaceTitle = 'Paste the exact client message',
   workspaceDescription = '2 free negotiation credits. No subscription required.',
   submitLabel = 'Draft negotiation reply',
+  analyticsEvents,
 }: ToolFormProps) {
   const fallbackSlug = scenarios[0]?.slug || 'quote-too-high';
   const locale = useLocale();
@@ -172,6 +181,7 @@ export function ToolForm({
   const lastGenerateAttemptAtRef = useRef(0);
   const checkoutInFlightRef = useRef(false);
   const paywallRemainingCreditsRef = useRef(0);
+  const inputFocusTrackedRef = useRef(false);
 
   const { isLoading, error, result, submit, setResult } = useToolGeneration();
 
@@ -461,7 +471,16 @@ export function ToolForm({
         prefill_applied: hasPrefillSeed,
       });
     }
+
+    if (analyticsEvents?.generationCompleted) {
+      trackEvent(analyticsEvents.generationCompleted, {
+        scenario_slug: trackedScenarioSlug,
+        source_page: sourcePage,
+        page_type: sourcePage,
+      });
+    }
   }, [
+    analyticsEvents?.generationCompleted,
     hasPrefillSeed,
     result,
     canonicalFunnelScenarioSlug,
@@ -469,6 +488,7 @@ export function ToolForm({
     pricingAnalyticsParams,
     pricingAttribution,
     replyGeneratorAnalyticsParams,
+    sourcePage,
     tone,
     trackedScenarioSlug,
     usage.entitlements.historyEnabled,
@@ -510,6 +530,14 @@ export function ToolForm({
         ...pricingAnalyticsParams,
         locale,
       });
+      if (analyticsEvents?.generateClick) {
+        trackEvent(analyticsEvents.generateClick, {
+          scenario_slug: trackedScenarioSlug,
+          source_page: sourcePage,
+          trigger_type: trigger,
+          page_type: sourcePage,
+        });
+      }
       if (pricingAttribution) {
         trackEvent('click_generate_from_pricing_scenario', {
           ...pricingAnalyticsParams,
@@ -766,6 +794,14 @@ export function ToolForm({
       sourcePage,
       ...pricingAnalyticsParams,
     });
+    if (analyticsEvents?.replyCopied) {
+      trackEvent(analyticsEvents.replyCopied, {
+        scenario_slug: trackedScenarioSlug,
+        source_page: sourcePage,
+        target,
+        page_type: sourcePage,
+      });
+    }
   };
 
   const onFeedback = async (params: {
@@ -863,6 +899,21 @@ export function ToolForm({
               onChange={(event) => {
                 trackToolOpen();
                 setMessage(event.target.value);
+              }}
+              onFocus={() => {
+                trackToolOpen();
+                if (inputFocusTrackedRef.current) {
+                  return;
+                }
+
+                inputFocusTrackedRef.current = true;
+                if (analyticsEvents?.inputFocus) {
+                  trackEvent(analyticsEvents.inputFocus, {
+                    scenario_slug: trackedScenarioSlug,
+                    source_page: sourcePage,
+                    page_type: sourcePage,
+                  });
+                }
               }}
               rows={10}
               maxLength={4000}
@@ -1021,9 +1072,28 @@ export function ToolForm({
           selectedTone={tone}
           loading={isLoading}
           onRegenerate={() => {
+            if (analyticsEvents?.regenerateClicked) {
+              trackEvent(analyticsEvents.regenerateClicked, {
+                scenario_slug: trackedScenarioSlug,
+                source_page: sourcePage,
+                page_type: sourcePage,
+              });
+            }
             void onGenerate('regenerate');
           }}
           onCopy={onCopy}
+          onToneVariationClick={(variation) => {
+            if (!analyticsEvents?.toneVariationClicked) {
+              return;
+            }
+
+            trackEvent(analyticsEvents.toneVariationClicked, {
+              scenario_slug: trackedScenarioSlug,
+              source_page: sourcePage,
+              variation,
+              page_type: sourcePage,
+            });
+          }}
           onFeedback={onFeedback}
           savedHint={savedHint}
         />

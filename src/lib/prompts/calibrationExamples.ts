@@ -72,6 +72,76 @@ const EXAMPLES_BY_SLUG: Record<string, CalibrationExample[]> = {
       ],
     },
   ],
+  'extra-work-outside-scope': [
+    {
+      kind: 'good',
+      clientMessage:
+        'Can you also add the mobile version and three extra graphics? They should be quick.',
+      sampleReply:
+        'I can help with that. Since those items sit outside the current scope, the cleanest route is to add them as an extension, swap them against work already included, or queue them for a later phase.',
+      notes: [
+        'Names the scope change without sounding annoyed.',
+        'Turns the request into clear commercial options.',
+      ],
+    },
+    {
+      kind: 'bad',
+      clientMessage:
+        'Can you also add the mobile version and three extra graphics? They should be quick.',
+      sampleReply:
+        'Sure, I will include it this time and we can figure it out later.',
+      notes: [
+        'Absorbs extra work silently.',
+        'Leaves the new baseline undefined.',
+      ],
+    },
+    {
+      kind: 'boundary',
+      clientMessage:
+        'Can you also add the mobile version and three extra graphics? They should be quick.',
+      sampleReply:
+        'Happy to look at that. Since it changes the agreed scope, the cleanest next step is to decide whether we add it as extra work, swap priorities, or save it for a later phase.',
+      notes: [
+        'Keeps the tone workable.',
+        'Names the boundary and the available options clearly.',
+      ],
+    },
+  ],
+  'ask-for-payment-politely': [
+    {
+      kind: 'good',
+      clientMessage:
+        'Sorry for the delay. Finance is still sorting this on our side.',
+      sampleReply:
+        'Thanks for the update. Please let me know the expected payment date for the outstanding invoice so I can update my records accordingly. If there is anything blocking it on your side, I am happy to help close that loop quickly.',
+      notes: [
+        'Asks for timing clearly.',
+        'Stays professional without sounding awkward or apologetic.',
+      ],
+    },
+    {
+      kind: 'bad',
+      clientMessage:
+        'Sorry for the delay. Finance is still sorting this on our side.',
+      sampleReply:
+        'No worries at all, just checking in whenever you get a chance.',
+      notes: [
+        'Too soft for a payment follow-up.',
+        'No clear ask for timing or blocker.',
+      ],
+    },
+    {
+      kind: 'boundary',
+      clientMessage:
+        'Sorry for the delay. Finance is still sorting this on our side.',
+      sampleReply:
+        'Thanks for the update. Please confirm the payment date for the outstanding invoice so I can plan accordingly. If there is a blocker, let me know what is needed to resolve it.',
+      notes: [
+        'Keeps the note commercially clear.',
+        'Pushes for a concrete next step without escalating too early.',
+      ],
+    },
+  ],
   'cheaper-freelancer': [
     {
       kind: 'good',
