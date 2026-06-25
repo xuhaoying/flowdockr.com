@@ -166,9 +166,22 @@ function getClientMessageInput() {
 }
 
 async function renderToolForm(params?: {
+  toolSlug?: string;
+  analyticsScenarioSlug?: string;
+  defaultScenarioSlug?: string;
   funnelScenarioSlug?: string;
   remainingFreeGenerations?: number;
   sourcePage?: 'home' | 'scenario' | 'tool';
+  initialMessage?: string;
+  initialTone?: 'professional' | 'friendly' | 'firm';
+  initialUserRateContext?: string;
+  prefillHint?: string;
+  sourceAttribution?: {
+    sourceOrigin?: string;
+    sourcePageType?: string;
+    sourcePageSlug?: string;
+    sourceCampaign?: string;
+  };
   pricingAttribution?: {
     pricingSlug: 'client-messaging-outside-work-hours';
     sourceSurface: 'pricing_page' | 'tool_page';
@@ -183,11 +196,17 @@ async function renderToolForm(params?: {
 
   render(
     <ToolForm
-      analyticsScenarioSlug="quote-too-high"
+      toolSlug={params?.toolSlug}
+      analyticsScenarioSlug={params?.analyticsScenarioSlug || 'quote-too-high'}
       funnelScenarioSlug={params?.funnelScenarioSlug}
+      initialMessage={params?.initialMessage}
+      initialTone={params?.initialTone}
+      initialUserRateContext={params?.initialUserRateContext}
+      prefillHint={params?.prefillHint}
+      sourceAttribution={params?.sourceAttribution}
       pricingAttribution={params?.pricingAttribution}
       sourcePage={params?.sourcePage || 'scenario'}
-      defaultScenarioSlug="quote-too-high"
+      defaultScenarioSlug={params?.defaultScenarioSlug || 'quote-too-high'}
       showScenarioSelector={false}
     />
   );
@@ -325,6 +344,71 @@ describe('ToolForm analytics funnel guard', () => {
     expect(getEventPayloads('generate_click')[0]).not.toHaveProperty(
       'scenario_slug'
     );
+  });
+
+  it('emits reply-generator view/start/generated events with source attribution and prefill', async () => {
+    await renderToolForm({
+      toolSlug: 'reply-generator',
+      analyticsScenarioSlug: 'unpaid-invoice-follow-up',
+      defaultScenarioSlug: 'unpaid-invoice-follow-up',
+      remainingFreeGenerations: 2,
+      sourcePage: 'tool',
+      initialMessage:
+        'Hi Sarah, following up on invoice #0187, which was due on March 20.',
+      initialTone: 'professional',
+      initialUserRateContext:
+        'Goal: confirm payment timing without escalating too early.',
+      prefillHint:
+        'Loaded a starting unpaid-invoice follow-up draft. Recommended tone: Professional.',
+      sourceAttribution: {
+        sourceOrigin: 'aipromptlibrary',
+        sourcePageType: 'prompt_page',
+        sourcePageSlug: 'unpaid_invoice_email_prompt',
+        sourceCampaign: 'flowdockr_reply_funnel',
+      },
+    });
+
+    await waitFor(() => {
+      expect(getEventPayloads('fd_reply_generator_view')).toHaveLength(1);
+    });
+
+    expect(getEventPayloads('fd_reply_generator_view')[0]).toMatchObject({
+      scenario_slug: 'unpaid-invoice-follow-up',
+      page_type: 'tool',
+      source_origin: 'aipromptlibrary',
+      source_page_type: 'prompt_page',
+      source_page_slug: 'unpaid_invoice_email_prompt',
+      source_campaign: 'flowdockr_reply_funnel',
+      recommended_tone: 'professional',
+      prefill_applied: true,
+    });
+    expect(
+      (getClientMessageInput() as HTMLTextAreaElement).value
+    ).toBe('Hi Sarah, following up on invoice #0187, which was due on March 20.');
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Draft negotiation reply' })
+    );
+
+    await waitFor(() => {
+      expect(getEventPayloads('fd_reply_generator_generated')).toHaveLength(1);
+    });
+
+    expect(getEventPayloads('fd_reply_generator_start')[0]).toMatchObject({
+      scenario_slug: 'unpaid-invoice-follow-up',
+      page_type: 'tool',
+      source_page_type: 'prompt_page',
+      recommended_tone: 'professional',
+      trigger_type: 'main_button',
+      prefill_applied: true,
+    });
+    expect(getEventPayloads('fd_reply_generator_generated')[0]).toMatchObject({
+      scenario_slug: 'unpaid-invoice-follow-up',
+      page_type: 'tool',
+      source_page_type: 'prompt_page',
+      generation_id: 'gen_test_123',
+      prefill_applied: true,
+    });
   });
 
   it('emits pricing-attributed funnel events and request bodies for pricing-origin sessions', async () => {

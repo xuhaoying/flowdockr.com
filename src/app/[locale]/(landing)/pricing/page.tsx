@@ -5,10 +5,8 @@ import { HowItWorks } from '@/components/pricing/HowItWorks';
 import { PricingCards } from '@/components/pricing/PricingCards';
 import { PricingCTA } from '@/components/pricing/PricingCTA';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
-import { PricingHero } from '@/components/pricing/PricingHero';
 import { PricingScenarioCard } from '@/components/pricing/PricingScenarioCard';
 import { ProblemFraming } from '@/components/pricing/ProblemFraming';
-import { getPricingHub } from '@/lib/content/getPricingHub';
 import {
   getPricingScenariosByFamily,
   pricingFamilies,
@@ -17,14 +15,13 @@ import { setRequestLocale } from 'next-intl/server';
 
 import { getMetadata } from '@/shared/lib/seo';
 
-const pricingHubPage = getPricingHub();
-
 export const generateMetadata = getMetadata({
-  title: pricingHubPage.metaTitle,
-  description: pricingHubPage.metaDescription,
+  title: 'Pricing | Flowdockr',
+  description:
+    'Flowdockr pricing includes a free plan and one-time paid credit packs for AI negotiation support.',
   canonicalUrl: '/pricing',
   keywords:
-    'freelance pricing negotiation scenarios, quote pushback, discount requests, budget mismatch, scope pressure',
+    'Flowdockr pricing, AI negotiation assistant pricing, negotiation credits, pricing negotiation support',
 });
 
 export default async function PricingHubPage({
@@ -37,7 +34,74 @@ export default async function PricingHubPage({
 
   return (
     <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 px-4 py-8 md:gap-8 md:py-10">
-      <PricingHero />
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="max-w-3xl space-y-4">
+          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
+            Pricing
+          </p>
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
+            Start free, then buy credits when you need more negotiation support
+          </h1>
+          <p className="text-base leading-7 text-slate-700 md:text-lg">
+            Flowdockr uses a simple credit model. Free users can try the product
+            first. Paid users buy one-time credit packs through checkout for
+            additional AI negotiation drafts, strategy notes, and saved workflow
+            support.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          {[
+            {
+              title: 'Free plan',
+              body: 'Try Flowdockr with free negotiation credits before making a purchase.',
+            },
+            {
+              title: 'Paid credit packs',
+              body: 'Quick Help, Pro, and Studio are one-time purchases in USD.',
+            },
+            {
+              title: 'Checkout',
+              body: 'Payments are processed through the Flowdockr checkout flow. The product does not require an auto-renewing subscription.',
+            },
+          ].map((item) => (
+            <article
+              key={item.title}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <h2 className="text-base font-semibold text-slate-900">
+                {item.title}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                {item.body}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="max-w-3xl space-y-2">
+          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
+            What users pay for
+          </p>
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+            Negotiation credits for real professional conversations
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-700">
+            Credits are used to generate and refine negotiation support inside
+            Flowdockr. Each paid plan increases the number of credits and the
+            depth of support available for harder conversations.
+          </p>
+        </div>
+      </section>
+      <PricingCards
+        sourcePage="pricing"
+        showSectionHeader={true}
+        sectionId="pricing-cards"
+      />
+      <BillingPolicy />
+      <CreditExplanation />
+      <FeatureComparison />
       <ProblemFraming />
       <HowItWorks />
       <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
@@ -80,14 +144,6 @@ export default async function PricingHubPage({
           })}
         </div>
       </section>
-      <PricingCards
-        sourcePage="pricing"
-        showSectionHeader={true}
-        sectionId="pricing-cards"
-      />
-      <BillingPolicy />
-      <CreditExplanation />
-      <FeatureComparison />
       <PricingFAQ />
       <PricingCTA />
     </main>

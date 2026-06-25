@@ -1,9 +1,12 @@
+'use client';
+
 import type {
   ScenarioRelatedGroup,
   ScenarioRelatedLink,
 } from '@/types/scenario-catalog';
 
 import { Link } from '@/core/i18n/navigation';
+import { trackEvent } from '@/lib/analytics';
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 
 type RelatedScenariosProps = {
@@ -60,6 +63,11 @@ export function RelatedScenarios({
                   <Link
                     href={`/scenario/${item.slug}`}
                     className="border-border/80 block rounded-[18px] border bg-slate-50/70 p-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                    onClick={() => {
+                      trackEvent('related_scenario_clicked', {
+                        related_scenario_slug: item.slug,
+                      });
+                    }}
                   >
                     <p className="text-sm font-semibold text-slate-900">
                       {item.title}

@@ -4,11 +4,9 @@ import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker'
 import { PaymentScenarioSupport } from '@/components/scenario/PaymentScenarioSupport';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioClientMessages } from '@/components/scenario/ScenarioClientMessages';
-import { ScenarioCTA } from '@/components/scenario/ScenarioCTA';
 import { ScenarioHero } from '@/components/scenario/ScenarioHero';
 import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
-import { ScenarioReplyPreview } from '@/components/scenario/ScenarioReplyPreview';
 import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { PageContainer } from '@/components/shared/PageContainer';
 import {
@@ -157,6 +155,11 @@ export default async function ScenarioPage({
     const relatedSection = getRelatedScenarioSectionCopy(page);
     const pagePromise = getScenarioPagePromise(page);
     const paymentSupport = getPaymentScenarioSupport(page.slug);
+    const relatedItems = getRelatedScenarioLinks(page.slug).slice(0, 3);
+    const relatedGroups = getRelatedScenarioGroups(page.slug).map((group) => ({
+      ...group,
+      items: group.items.slice(0, 3),
+    }));
 
     return (
       <>
@@ -176,6 +179,38 @@ export default async function ScenarioPage({
             userSituation={page.userSituation}
             replyGoal={page.userGoal || page.strategyPrimary}
           />
+          <ScenarioInlineTool
+            analyticsScenarioSlug={page.slug}
+            defaultScenarioSlug={page.slug}
+            title="Paste the client message and draft the reply now"
+            description={pagePromise}
+            primaryClientMessage={page.primaryClientMessage}
+          />
+          <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
+              Why this works
+            </p>
+            <div className="mt-3 grid gap-3 md:grid-cols-3">
+              <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
+                <p className="text-sm font-semibold text-slate-900">What it protects</p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  {page.userGoal || page.strategyPrimary}
+                </p>
+              </div>
+              <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
+                <p className="text-sm font-semibold text-slate-900">How it sounds</p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  {previewReply}
+                </p>
+              </div>
+              <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
+                <p className="text-sm font-semibold text-slate-900">Next step</p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  {page.strategySecondary || page.strategyPrimary}
+                </p>
+              </div>
+            </div>
+          </section>
           {paymentSupport ? (
             <PaymentScenarioSupport support={paymentSupport} />
           ) : null}
@@ -183,27 +218,11 @@ export default async function ScenarioPage({
             primaryClientMessage={page.primaryClientMessage}
             clientMessageVariants={page.clientMessageVariants}
           />
-          <ScenarioReplyPreview
-            reply={previewReply}
-            ctaLabel="Generate a better reply"
-          />
-          <ScenarioInlineTool
-            analyticsScenarioSlug={page.slug}
-            defaultScenarioSlug={page.slug}
-            title="Generate a reply you can send"
-            description={pagePromise}
-            primaryClientMessage={page.primaryClientMessage}
-          />
           <RelatedScenarios
-            items={getRelatedScenarioLinks(page.slug)}
-            groups={getRelatedScenarioGroups(page.slug)}
+            items={relatedItems}
+            groups={relatedGroups}
             title={relatedSection.title}
             description={relatedSection.description}
-          />
-          <ScenarioCTA
-            title={page.h1 || page.title}
-            description={pagePromise}
-            ctaLabel="Generate a better reply"
           />
         </PageContainer>
         <ScenarioStickyBottomCta />
