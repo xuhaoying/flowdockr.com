@@ -1,11 +1,13 @@
-import { setRequestLocale } from 'next-intl/server';
-
-import { TrustPageLayout, TrustSectionCard } from '@/components/trust/TrustPageLayout';
+import {
+  TrustPageLayout,
+  TrustSectionCard,
+} from '@/components/trust/TrustPageLayout';
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
+import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
@@ -33,13 +35,18 @@ export default async function TermsPage({
       <TrustSectionCard title="Use of service, acceptable use, and eligibility">
         <p>
           You may use Flowdockr only for lawful business or professional
-          communication workflows. You must be at least 18 years old and able
-          to enter a binding agreement to use paid features.
+          communication workflows. You must be at least 18 years old and able to
+          enter a binding agreement to use paid features.
         </p>
         <ul className="list-disc space-y-2 pl-5">
-          <li>Do not use the service to break the law or violate another party&apos;s rights.</li>
+          <li>
+            Do not use the service to break the law or violate another
+            party&apos;s rights.
+          </li>
           <li>Do not submit material you are not allowed to share with us.</li>
-          <li>Do not misuse, scrape, resell, or interfere with the platform.</li>
+          <li>
+            Do not misuse, scrape, resell, or interfere with the platform.
+          </li>
         </ul>
       </TrustSectionCard>
 
@@ -65,18 +72,33 @@ export default async function TermsPage({
 
       <TrustSectionCard title="Payments, credits, and subscriptions">
         <p>
-          Flowdockr currently offers free usage plus one-time paid credit packs.
-          The public checkout flow does not currently run as an auto-renewing
-          subscription.
+          Flowdockr currently offers free usage plus one-time paid credit packs
+          in USD. Purchases are processed through checkout and delivered as
+          credits inside the product. The public checkout flow does not
+          currently run as an auto-renewing subscription.
         </p>
         <ul className="list-disc space-y-2 pl-5">
-          <li>Credits are for use inside Flowdockr only and have no cash value.</li>
-          <li>Prices, credit amounts, and feature access may change over time.</li>
+          <li>
+            Credits are for use inside Flowdockr only and have no cash value.
+          </li>
+          <li>
+            Prices, credit amounts, and feature access may change over time.
+          </li>
           <li>
             Purchases are generally final unless a refund is required by law or
             we choose to resolve a billing issue manually.
           </li>
         </ul>
+        <p>
+          See our{' '}
+          <Link
+            href="/refund"
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            Refund Policy
+          </Link>{' '}
+          for more detail.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Termination or suspension">
@@ -89,10 +111,10 @@ export default async function TermsPage({
 
       <TrustSectionCard title="Limitation of liability">
         <p>
-          Flowdockr is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo;
-          basis. To the fullest extent permitted by law, we disclaim warranties
-          of uninterrupted availability, fitness for a particular purpose, and
-          non-infringement.
+          Flowdockr is provided on an &ldquo;as is&rdquo; and &ldquo;as
+          available&rdquo; basis. To the fullest extent permitted by law, we
+          disclaim warranties of uninterrupted availability, fitness for a
+          particular purpose, and non-infringement.
         </p>
         <p>
           To the fullest extent permitted by law, we are not liable for
@@ -103,9 +125,9 @@ export default async function TermsPage({
 
       <TrustSectionCard title="Governing law and dispute handling">
         <p>
-          These terms are governed by the laws that apply to {FLOWDOCKR_COMPANY_NAME}{' '}
-          and the jurisdiction where it is organized, without regard to
-          conflict-of-law rules.
+          These terms are governed by the laws that apply to{' '}
+          {FLOWDOCKR_COMPANY_NAME} and the jurisdiction where it is organized,
+          without regard to conflict-of-law rules.
         </p>
         <p>
           Before filing a formal claim, please contact us first through{' '}

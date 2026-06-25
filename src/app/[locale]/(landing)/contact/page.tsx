@@ -1,21 +1,26 @@
-import { setRequestLocale } from 'next-intl/server';
-
-import { TrustPageLayout, TrustSectionCard } from '@/components/trust/TrustPageLayout';
+import {
+  TrustPageLayout,
+  TrustSectionCard,
+} from '@/components/trust/TrustPageLayout';
 import { getPublicContactDetails } from '@/lib/publicContact';
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
+import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Contact | Flowdockr',
-  description: 'Support, billing, privacy, and legal contact information for Flowdockr.',
+  description:
+    'Support, billing, privacy, and legal contact information for Flowdockr.',
   canonicalUrl: '/contact',
 });
+
+const FALLBACK_SUPPORT_EMAIL = 'support@flowdockr.com';
 
 export default async function ContactPage({
   params,
@@ -26,6 +31,8 @@ export default async function ContactPage({
   setRequestLocale(locale);
 
   const { supportEmail, privacyEmail } = await getPublicContactDetails();
+  const publicSupportEmail = supportEmail || FALLBACK_SUPPORT_EMAIL;
+  const publicPrivacyEmail = privacyEmail || publicSupportEmail;
 
   return (
     <TrustPageLayout
@@ -34,89 +41,47 @@ export default async function ContactPage({
       effectiveDate={TRUST_EFFECTIVE_DATE}
     >
       <TrustSectionCard title="Support and billing">
-        {supportEmail ? (
-          <>
-            <p>
-              For account access, credits, checkout, or billing issues, email us
-              at{' '}
-              <a
-                href={`mailto:${supportEmail}`}
-                className="font-medium text-slate-900 underline underline-offset-2"
-              >
-                {supportEmail}
-              </a>
-              .
-            </p>
-            <p>
-              We handle support and billing questions manually, so include
-              enough detail for us to locate the account or purchase.
-            </p>
-          </>
-        ) : (
-          <>
-            <p>
-              Support and billing questions are currently handled manually
-              through Flowdockr account, verification, and purchase emails.
-            </p>
-            <p>
-              We do not currently publish a general support inbox. Review our{' '}
-              <Link
-                href="/terms"
-                className="font-medium text-slate-900 underline underline-offset-2"
-              >
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/privacy"
-                className="font-medium text-slate-900 underline underline-offset-2"
-              >
-                Privacy Policy
-              </Link>{' '}
-              for current policies. If a public support address is added later,
-              it will appear on this page.
-            </p>
-          </>
-        )}
+        <p>
+          For account access, credits, checkout, or billing issues, email us at{' '}
+          <a
+            href={`mailto:${publicSupportEmail}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {publicSupportEmail}
+          </a>
+          .
+        </p>
+        <p>
+          We handle support and billing questions manually, so include enough
+          detail for us to locate the account or purchase.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Privacy and legal inquiries">
-        {privacyEmail ? (
-          <>
-            <p>
-              For privacy, deletion, or legal questions, email{' '}
-              <a
-                href={`mailto:${privacyEmail}`}
-                className="font-medium text-slate-900 underline underline-offset-2"
-              >
-                {privacyEmail}
-              </a>
-              .
-            </p>
-            <p>
-              Please include enough context for us to understand the request and
-              route it correctly.
-            </p>
-          </>
-        ) : (
-          <>
-            <p>
-              Privacy and legal requests are currently routed through the same
-              active contact path used for Flowdockr account or billing
-              communications.
-            </p>
-            <p>
-              We keep this process manual for now so requests can be reviewed
-              carefully rather than forcing a self-serve workflow that is not
-              yet built.
-            </p>
-          </>
-        )}
+        <p>
+          For privacy, deletion, or legal questions, email{' '}
+          <a
+            href={`mailto:${publicPrivacyEmail}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {publicPrivacyEmail}
+          </a>
+          .
+        </p>
+        <p>
+          Please include enough context for us to understand the request and
+          route it correctly.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Company">
         <p>
           {FLOWDOCKR_PRODUCT_NAME} is a product of {FLOWDOCKR_COMPANY_NAME}.
+        </p>
+        <p>
+          Business owner/operator: {FLOWDOCKR_COMPANY_NAME}. Public business
+          address and registered agent information may be provided through
+          official verification or banking workflows when required.
         </p>
         <p>
           For product rules and data handling details, see our{' '}

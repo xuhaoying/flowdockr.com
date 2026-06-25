@@ -10,14 +10,16 @@ import { cn } from '@/shared/lib/utils';
 
 const LOGGED_OUT_NAV_ITEMS = [
   { href: '/scenario', label: 'Use Cases' },
-  { href: '/tools', label: 'Tools' },
-  { href: '/guides', label: 'Guides' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const LOGGED_IN_NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/scenario', label: 'Use Cases' },
-  { href: '/tools', label: 'Tools' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const AUTHENTICATED_USER_NAV = {
@@ -66,12 +68,15 @@ export function PublicHeader() {
   const signedIn = authState === 'authenticated';
   const isLoading = authState === 'loading';
   const navItems = signedIn ? LOGGED_IN_NAV_ITEMS : LOGGED_OUT_NAV_ITEMS;
-  const ctaLabel = signedIn ? 'New Reply' : 'Generate Reply';
+  const ctaLabel = signedIn ? 'New Reply' : 'Try Flowdockr';
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#f8faf8]/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900"
+        >
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-900 text-xs font-bold text-white">
             F
           </span>
@@ -120,9 +125,17 @@ export function PublicHeader() {
 
               <div className="flex w-full items-center gap-2 sm:w-auto">
                 {signedIn ? (
-                  <SignUser signButtonSize="sm" userNav={AUTHENTICATED_USER_NAV} />
+                  <SignUser
+                    signButtonSize="sm"
+                    userNav={AUTHENTICATED_USER_NAV}
+                  />
                 ) : (
-                  <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-none">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                  >
                     <Link href="/signin">Sign in</Link>
                   </Button>
                 )}

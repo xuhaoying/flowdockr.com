@@ -1,4 +1,5 @@
 import { SharedGeneratorEntry } from '@/components/generator/SharedGeneratorEntry';
+
 import { Link } from '@/core/i18n/navigation';
 
 export function HomepageHero() {
@@ -7,22 +8,24 @@ export function HomepageHero() {
       <div className="grid gap-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1.05fr_0.95fr] lg:p-6">
         <div className="space-y-5">
           <p className="inline-flex rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-            Built for difficult client conversations
+            AI negotiation assistant for professionals
           </p>
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-            Reply to difficult client messages with confidence
+            Prepare for difficult conversations before you reply
           </h1>
           <p className="max-w-3xl text-base text-slate-700 md:text-lg">
-            Paste what the client said. Get a reply you can actually send.
+            Flowdockr helps professionals turn pricing pushback, scope tension,
+            and sensitive negotiation moments into clear strategy and send-ready
+            language.
           </p>
           <SharedGeneratorEntry
             sourcePage="home"
             analyticsScenarioSlug="discount-request"
             defaultScenarioSlug="discount-request"
             initialMessage="Your quote is a bit above our budget. Can you do 20% off if we move forward this week?"
-            submitLabel="Generate reply"
-            workspaceTitle="Paste the client message"
-            workspaceDescription="Start with the exact wording. Flowdockr will draft a send-ready reply around the real negotiation pressure."
+            submitLabel="Generate negotiation draft"
+            workspaceTitle="Paste the message or situation"
+            workspaceDescription="Start with the exact wording. Flowdockr will draft a practical response around the real negotiation pressure."
             placeholder="Paste the client message here..."
             exampleShortcut={{
               label: 'Try example message',
@@ -39,7 +42,7 @@ export function HomepageHero() {
             }}
             quickLinks={[
               {
-                label: 'Ask for payment',
+                label: 'Payment follow-up',
                 href: '/scenario/ask-for-payment-politely',
               },
               {
@@ -56,24 +59,28 @@ export function HomepageHero() {
         </div>
 
         <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
-            Result preview
+          <p className="text-xs font-semibold tracking-wide text-slate-600 uppercase">
+            Negotiation draft preview
           </p>
           <div className="mt-3 space-y-3">
             <div className="rounded-lg border border-slate-200 bg-white p-3">
-              <p className="text-xs font-semibold text-slate-500">Client message</p>
+              <p className="text-xs font-semibold text-slate-500">
+                Client message
+              </p>
               <p className="mt-1 text-sm text-slate-700">
-                Your quote is a bit above our budget. Can you do 20% off if we move
-                forward this week?
+                Your quote is a bit above our budget. Can you do 20% off if we
+                move forward this week?
               </p>
             </div>
             <div className="rounded-lg border border-slate-200 bg-white p-3">
-              <p className="text-xs font-semibold text-slate-500">Flowdockr reply</p>
+              <p className="text-xs font-semibold text-slate-500">
+                Flowdockr reply
+              </p>
               <p className="mt-1 text-sm text-slate-700">
-                I&apos;m happy to keep this moving, but I would not reduce the same
-                scope without changing the structure behind it. If budget is the
-                issue, I can suggest a leaner version or a phased first step so the
-                tradeoff stays clear.
+                I&apos;m happy to keep this moving, but I would not reduce the
+                same scope without changing the structure behind it. If budget
+                is the issue, I can suggest a leaner version or a phased first
+                step so the tradeoff stays clear.
               </p>
             </div>
             <p className="text-xs text-emerald-700">
@@ -84,11 +91,14 @@ export function HomepageHero() {
       </div>
 
       <p className="text-sm text-slate-600">
-        Start with 2 free real-message drafts. No subscription required.
+        Start with 2 free negotiation drafts. No subscription required.
       </p>
       <p className="text-sm text-slate-600">
         Need a narrower entry point? Browse the full{' '}
-        <Link href="/scenario" className="font-semibold text-slate-900 underline">
+        <Link
+          href="/scenario"
+          className="font-semibold text-slate-900 underline"
+        >
           scenario library
         </Link>
         .
