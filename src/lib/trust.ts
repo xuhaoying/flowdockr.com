@@ -4,6 +4,7 @@ import type { Configs } from '@/shared/models/config';
 export const FLOWDOCKR_PRODUCT_NAME = 'Flowdockr';
 export const FLOWDOCKR_COMPANY_NAME = 'Auralis Labs LLC';
 export const TRUST_EFFECTIVE_DATE = 'March 17, 2026';
+export const FLOWDOCKR_PUBLIC_SUPPORT_EMAIL = 'support@flowdockr.com';
 
 export const TRACKING_CONSENT_COOKIE = 'flowdockr_tracking_consent';
 export const TRACKING_CONSENT_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
@@ -43,7 +44,9 @@ export function extractEmailAddress(value: string | null | undefined) {
 }
 
 export function isPublishedContactEmail(email: string | null | undefined) {
-  const normalized = String(email || '').trim().toLowerCase();
+  const normalized = String(email || '')
+    .trim()
+    .toLowerCase();
   if (!normalized) {
     return false;
   }

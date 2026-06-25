@@ -5,6 +5,7 @@ import {
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -14,7 +15,8 @@ import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Refund Policy | Flowdockr',
-  description: 'Refund policy for Flowdockr paid credit purchases.',
+  description:
+    'Refund policy for Flowdockr paid credit purchases, billing errors, and account access issues.',
   canonicalUrl: '/refund',
 });
 
@@ -67,7 +69,14 @@ export default async function RefundPolicyPage({
       <TrustSectionCard title="Contact">
         <p>
           Flowdockr is a product of {FLOWDOCKR_COMPANY_NAME}. Billing and refund
-          questions should be sent through{' '}
+          questions should be emailed to{' '}
+          <a
+            href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}
+          </a>{' '}
+          or sent through{' '}
           <Link
             href="/contact"
             className="font-medium text-slate-900 underline underline-offset-2"
