@@ -5,6 +5,7 @@ import {
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -13,8 +14,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Terms | Flowdockr',
-  description: 'Terms for using Flowdockr.',
+  title: 'Terms of Service | Flowdockr',
+  description:
+    'Terms of Service for Flowdockr, an AI negotiation assistant operated by Auralis Labs LLC.',
   canonicalUrl: '/terms',
 });
 
@@ -153,7 +155,14 @@ export default async function TermsPage({
       <TrustSectionCard title="Contact">
         <p>
           Flowdockr is a product of {FLOWDOCKR_COMPANY_NAME}. For support,
-          billing, privacy, or legal questions, use{' '}
+          billing, privacy, or legal questions, email{' '}
+          <a
+            href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}
+          </a>{' '}
+          or use{' '}
           <Link
             href="/contact"
             className="font-medium text-slate-900 underline underline-offset-2"

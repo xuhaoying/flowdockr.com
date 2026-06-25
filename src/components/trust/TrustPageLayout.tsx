@@ -1,11 +1,6 @@
 import type { ReactNode } from 'react';
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 
 type TrustPageLayoutProps = {
   title: string;
@@ -32,9 +27,9 @@ export function TrustPageLayout({
           <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
             Trust and policy
           </p>
-          <CardTitle className="text-3xl tracking-tight text-slate-900 md:text-4xl">
+          <h1 className="text-3xl leading-tight font-semibold tracking-tight text-slate-900 md:text-4xl">
             {title}
-          </CardTitle>
+          </h1>
           <p className="max-w-3xl text-sm leading-6 text-slate-700 md:text-base">
             {description}
           </p>
@@ -49,16 +44,13 @@ export function TrustPageLayout({
   );
 }
 
-export function TrustSectionCard({
-  title,
-  children,
-}: TrustSectionCardProps) {
+export function TrustSectionCard({ title, children }: TrustSectionCardProps) {
   return (
     <Card className="border-border/80 bg-white py-0 shadow-sm">
       <CardHeader className="gap-2 px-6 py-5 lg:px-8">
-        <CardTitle className="text-xl tracking-tight text-slate-900">
+        <h2 className="text-xl leading-tight font-semibold tracking-tight text-slate-900">
           {title}
-        </CardTitle>
+        </h2>
       </CardHeader>
       <CardContent className="space-y-3 px-6 pb-6 text-sm leading-6 text-slate-700 lg:px-8">
         {children}

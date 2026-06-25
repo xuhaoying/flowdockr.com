@@ -6,6 +6,7 @@ import { getPublicContactDetails } from '@/lib/publicContact';
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -14,13 +15,11 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Contact | Flowdockr',
+  title: 'Contact Flowdockr Support | Auralis Labs LLC',
   description:
-    'Support, billing, privacy, and legal contact information for Flowdockr.',
+    'Contact Flowdockr for support, billing, privacy, and legal requests. Flowdockr is operated by Auralis Labs LLC.',
   canonicalUrl: '/contact',
 });
-
-const FALLBACK_SUPPORT_EMAIL = 'support@flowdockr.com';
 
 export default async function ContactPage({
   params,
@@ -31,7 +30,7 @@ export default async function ContactPage({
   setRequestLocale(locale);
 
   const { supportEmail, privacyEmail } = await getPublicContactDetails();
-  const publicSupportEmail = supportEmail || FALLBACK_SUPPORT_EMAIL;
+  const publicSupportEmail = supportEmail || FLOWDOCKR_PUBLIC_SUPPORT_EMAIL;
   const publicPrivacyEmail = privacyEmail || publicSupportEmail;
 
   return (
@@ -76,12 +75,18 @@ export default async function ContactPage({
 
       <TrustSectionCard title="Company">
         <p>
-          {FLOWDOCKR_PRODUCT_NAME} is a product of {FLOWDOCKR_COMPANY_NAME}.
+          {FLOWDOCKR_PRODUCT_NAME} is built and operated by{' '}
+          {FLOWDOCKR_COMPANY_NAME}.
         </p>
         <p>
-          Business owner/operator: {FLOWDOCKR_COMPANY_NAME}. Public business
-          address and registered agent information may be provided through
-          official verification or banking workflows when required.
+          Business owner/operator: {FLOWDOCKR_COMPANY_NAME}. Flowdockr provides
+          AI-assisted negotiation preparation, reply drafting, and communication
+          workflow support for professionals.
+        </p>
+        <p>
+          Registered business details, mailing address, and verification
+          documents can be provided through official banking, payment processor,
+          or compliance workflows when required.
         </p>
         <p>
           For product rules and data handling details, see our{' '}

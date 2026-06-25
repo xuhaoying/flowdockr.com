@@ -5,6 +5,7 @@ import {
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -14,7 +15,8 @@ import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
   title: 'Cookie Policy | Flowdockr',
-  description: 'Cookie policy for Flowdockr.',
+  description:
+    'Cookie policy for Flowdockr, including necessary cookies and optional analytics or support tools.',
   canonicalUrl: '/cookies',
 });
 
@@ -66,7 +68,14 @@ export default async function CookiePolicyPage({
       <TrustSectionCard title="Contact">
         <p>
           Flowdockr is a product of {FLOWDOCKR_COMPANY_NAME}. For questions
-          about cookies or privacy, see our{' '}
+          about cookies or privacy, email{' '}
+          <a
+            href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}
+          </a>
+          , see our{' '}
           <Link
             href="/privacy"
             className="font-medium text-slate-900 underline underline-offset-2"

@@ -5,6 +5,7 @@ import {
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -13,7 +14,7 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'About | Flowdockr',
+  title: 'About Flowdockr | Auralis Labs LLC',
   description:
     'Flowdockr is an AI negotiation assistant for professionals, built by Auralis Labs LLC.',
   canonicalUrl: '/about',
@@ -58,7 +59,19 @@ export default async function AboutPage({
       <TrustSectionCard title="Company">
         <p>Flowdockr is built and operated by {FLOWDOCKR_COMPANY_NAME}.</p>
         <p>
-          For support, privacy, billing, or legal questions, visit{' '}
+          The service is operated as a commercial SaaS product for real users,
+          with public pricing, checkout, support, and legal policies maintained
+          by {FLOWDOCKR_COMPANY_NAME}.
+        </p>
+        <p>
+          For support, privacy, billing, or legal questions, email{' '}
+          <a
+            href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}
+          </a>{' '}
+          or visit{' '}
           <Link
             href="/contact"
             className="font-medium text-slate-900 underline underline-offset-2"

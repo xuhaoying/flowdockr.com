@@ -5,6 +5,7 @@ import {
 import {
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
@@ -13,8 +14,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Privacy | Flowdockr',
-  description: 'Privacy policy for Flowdockr.',
+  title: 'Privacy Policy | Flowdockr',
+  description:
+    'Privacy policy for Flowdockr, an AI negotiation assistant operated by Auralis Labs LLC.',
   canonicalUrl: '/privacy',
 });
 
@@ -142,7 +144,14 @@ export default async function PrivacyPage({
       <TrustSectionCard title="Contact">
         <p>
           {FLOWDOCKR_PRODUCT_NAME} is a product of {FLOWDOCKR_COMPANY_NAME}. If
-          you have a privacy request or question about this policy, use{' '}
+          you have a privacy request or question about this policy, email{' '}
+          <a
+            href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            {FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}
+          </a>{' '}
+          or use{' '}
           <Link
             href="/contact"
             className="font-medium text-slate-900 underline underline-offset-2"
