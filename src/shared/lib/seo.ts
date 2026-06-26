@@ -73,6 +73,7 @@ export function getMetadata(
     if (!appName) {
       appName = envConfigs.app_name || '';
     }
+    appName = normalizeBrandName(appName);
 
     const noIndex =
       options.noIndex || shouldBlockSearchIndexing(envConfigs.site_url);
@@ -122,6 +123,10 @@ export function getMetadata(
 
 const defaultMetadataKey = 'common.metadata';
 
+function normalizeBrandName(appName: string) {
+  return appName === 'FlowDockr' ? 'Flowdockr' : appName;
+}
+
 async function getTranslatedMetadata(metadataKey: string, locale: string) {
   setRequestLocale(locale);
   const t = await getTranslations(metadataKey);
@@ -149,7 +154,10 @@ async function getCanonicalUrl(canonicalUrl: string, _locale: string) {
 
     canonicalUrl = `${envConfigs.site_url}${canonicalUrl}`;
 
-    if (canonicalUrl.endsWith('/') && canonicalUrl !== `${envConfigs.site_url}/`) {
+    if (
+      canonicalUrl.endsWith('/') &&
+      canonicalUrl !== `${envConfigs.site_url}/`
+    ) {
       canonicalUrl = canonicalUrl.slice(0, -1);
     }
   }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import { useSession } from '@/core/auth/client';
 import { Link, usePathname } from '@/core/i18n/navigation';
@@ -77,8 +78,15 @@ export function PublicHeader() {
           href="/"
           className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-900 text-xs font-bold text-white">
-            F
+          <span className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-slate-200 bg-white">
+            <Image
+              src="/logo.png"
+              alt="Flowdockr logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-cover"
+              priority
+            />
           </span>
           Flowdockr
         </Link>

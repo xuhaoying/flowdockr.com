@@ -37,7 +37,12 @@ function normalizeUrl(url: string) {
 
 function normalizeLocalHostname(hostname: string) {
   const trimmed = hostname.trim();
-  if (!trimmed || trimmed === '0.0.0.0' || trimmed === '::' || trimmed === '[::]') {
+  if (
+    !trimmed ||
+    trimmed === '0.0.0.0' ||
+    trimmed === '::' ||
+    trimmed === '[::]'
+  ) {
     return 'localhost';
   }
 
@@ -69,7 +74,8 @@ function getConfiguredHostname(configuredUrl: string) {
 
 function getDevelopmentAppUrl(configuredUrl: string) {
   const port = process.env.PORT?.trim();
-  const explicitHost = process.env.HOSTNAME?.trim() || process.env.HOST?.trim() || '';
+  const explicitHost =
+    process.env.HOSTNAME?.trim() || process.env.HOST?.trim() || '';
   const configuredHostname = getConfiguredHostname(configuredUrl);
   const hostname = isLocalHostname(explicitHost)
     ? normalizeLocalHostname(explicitHost)
@@ -85,7 +91,9 @@ function getDevelopmentAppUrl(configuredUrl: string) {
 }
 
 function getAppUrl() {
-  const configuredUrl = normalizeUrl(process.env.NEXT_PUBLIC_APP_URL?.trim() || '');
+  const configuredUrl = normalizeUrl(
+    process.env.NEXT_PUBLIC_APP_URL?.trim() || ''
+  );
 
   if (process.env.NODE_ENV !== 'production') {
     return normalizeUrl(getDevelopmentAppUrl(configuredUrl));
@@ -110,10 +118,9 @@ const siteUrl = getSiteUrl(appUrl);
 export const envConfigs: ConfigMap = {
   app_url: appUrl,
   site_url: siteUrl,
-  app_name: process.env.NEXT_PUBLIC_APP_NAME ?? 'FlowDockr',
+  app_name: process.env.NEXT_PUBLIC_APP_NAME ?? 'Flowdockr',
   app_description:
-    process.env.NEXT_PUBLIC_APP_DESCRIPTION ??
-    'Client Work OS for freelancers',
+    process.env.NEXT_PUBLIC_APP_DESCRIPTION ?? 'Client Work OS for freelancers',
   app_logo: process.env.NEXT_PUBLIC_APP_LOGO ?? '/logo.png',
   app_favicon: process.env.NEXT_PUBLIC_APP_FAVICON ?? '/favicon.ico',
   app_preview_image:
