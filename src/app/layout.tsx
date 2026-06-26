@@ -1,24 +1,30 @@
 import '@/config/style/global.css';
 
 import { cookies } from 'next/headers';
-import { getLocale, setRequestLocale } from 'next-intl/server';
-import NextTopLoader from 'nextjs-toploader';
-
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { CookieConsentBanner } from '@/components/layout/CookieConsentBanner';
-import { envConfigs } from '@/config';
 import {
-  TRACKING_CONSENT_COOKIE,
   getLocalizedPublicPath,
   hasOptionalTrackingConfigured,
   parseTrackingConsent,
+  TRACKING_CONSENT_COOKIE,
 } from '@/lib/trust';
+import { getLocale, setRequestLocale } from 'next-intl/server';
+import NextTopLoader from 'nextjs-toploader';
+
+import { envConfigs } from '@/config';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
 import { getAllConfigs } from '@/shared/models/config';
 import { getAdsService } from '@/shared/services/ads';
 import { getAffiliateService } from '@/shared/services/affiliate';
 import { getAnalyticsService } from '@/shared/services/analytics';
 import { getCustomerService } from '@/shared/services/customer_service';
+
+const ICON_CACHE_VERSION = '20260626';
+
+function versionedIconHref(href: string) {
+  return href.includes('?') ? href : `${href}?v=${ICON_CACHE_VERSION}`;
+}
 
 export default async function RootLayout({
   children,
@@ -40,6 +46,9 @@ export default async function RootLayout({
   );
   const allowOptionalTracking = trackingConsent === 'accepted';
   const privacyHref = getLocalizedPublicPath('/privacy', locale);
+  const faviconHref = versionedIconHref(
+    envConfigs.app_favicon || '/favicon.ico'
+  );
 
   // app url
   const appUrl = envConfigs.site_url || '';
@@ -72,8 +81,7 @@ export default async function RootLayout({
       isDebug,
       isProduction,
     });
-    showCookieConsentBanner =
-      hasOptionalTracking && trackingConsent === null;
+    showCookieConsentBanner = hasOptionalTracking && trackingConsent === null;
 
     if (allowOptionalTracking) {
       const [adsService, analyticsService, affiliateService, customerService] =
@@ -109,12 +117,26 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="font-sans" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={envConfigs.app_favicon || "/favicon.ico"} />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href={faviconHref} />
+        <link rel="alternate icon" href={versionedIconHref('/favicon.ico')} />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href={versionedIconHref('/favicon-32x32.png')}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={versionedIconHref('/favicon-16x16.png')}
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={versionedIconHref('/apple-touch-icon.png')}
+        />
+        <link rel="manifest" href={versionedIconHref('/site.webmanifest')} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#ffffff" />
         {/* Optional: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to enable Search Console verification */}
