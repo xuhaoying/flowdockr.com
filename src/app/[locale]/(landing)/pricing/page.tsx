@@ -11,8 +11,10 @@ import {
   getPricingScenariosByFamily,
   pricingFamilies,
 } from '@/lib/pricing-cluster';
+import { FLOWDOCKR_PUBLIC_SUPPORT_EMAIL } from '@/lib/trust';
 import { setRequestLocale } from 'next-intl/server';
 
+import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -93,6 +95,41 @@ export default async function PricingHubPage({
             depth of support available for harder conversations.
           </p>
         </div>
+        <div className="grid gap-3 md:grid-cols-3">
+          {[
+            {
+              title: 'Account credits',
+              body: 'After checkout succeeds, credits are added to your Flowdockr account and shown in your dashboard.',
+            },
+            {
+              title: 'Negotiation output',
+              body: 'Each generation produces practical support for one conversation: strategy, risk notes when available, and a client-ready reply draft.',
+            },
+            {
+              title: 'Billing support',
+              body: `Payment or access issues can be sent to ${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}. Refund terms are published before purchase.`,
+            },
+          ].map((item) => (
+            <article
+              key={item.title}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <h3 className="text-base font-semibold text-slate-900">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                {item.body}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p className="text-sm leading-6 text-slate-700">
+          Flowdockr does not use an auto-renewing subscription today. See the{' '}
+          <Link href="/refund" className="font-semibold underline">
+            Refund Policy
+          </Link>{' '}
+          for refund eligibility and support timing.
+        </p>
       </section>
       <PricingCards
         sourcePage="pricing"
