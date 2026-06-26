@@ -1,9 +1,8 @@
-import { headers } from 'next/headers';
-import { count, desc, eq, inArray } from 'drizzle-orm';
+import { cookies } from 'next/headers';
+import { and, count, desc, eq, gt, inArray } from 'drizzle-orm';
 
-import { getAuth } from '@/core/auth';
 import { db } from '@/core/db';
-import { user } from '@/config/db/schema';
+import { session, user } from '@/config/db/schema';
 
 import { Permission, Role } from '../services/rbac';
 import { getRemainingCredits } from './credit';
@@ -88,16 +87,48 @@ export async function getUserCredits(userId: string) {
 }
 
 export async function getSignUser() {
-  const auth = await getAuth();
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const sessionToken = await getSessionTokenFromCookies();
+  if (!sessionToken) return null;
 
-  return session?.user;
+  const [result] = await db()
+    .select({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      image: user.image,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      ip: user.ip,
+      locale: user.locale,
+      utmSource: user.utmSource,
+      creditsBalance: user.creditsBalance,
+      magicLinkEnabled: user.magicLinkEnabled,
+    })
+    .from(session)
+    .innerJoin(user, eq(session.userId, user.id))
+    .where(
+      and(eq(session.token, sessionToken), gt(session.expiresAt, new Date()))
+    )
+    .limit(1);
+
+  return result || null;
+}
+
+async function getSessionTokenFromCookies() {
+  const cookieStore = await cookies();
+  const token =
+    cookieStore.get('better-auth.session_token')?.value ||
+    cookieStore.get('__Secure-better-auth.session_token')?.value ||
+    '';
+
+  return token.trim() || null;
 }
 
 export async function isEmailVerified(email: string): Promise<boolean> {
-  const normalized = String(email || '').trim().toLowerCase();
+  const normalized = String(email || '')
+    .trim()
+    .toLowerCase();
   if (!normalized) return false;
 
   const [row] = await db()

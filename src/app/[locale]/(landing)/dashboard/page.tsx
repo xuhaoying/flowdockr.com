@@ -1,9 +1,9 @@
+import { getCurrentUser } from '@/lib/auth';
+import { db, generation, user } from '@/lib/db';
 import { desc, eq } from 'drizzle-orm';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
-import { getCurrentUser } from '@/lib/auth';
-import { db, generation, user } from '@/lib/db';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
@@ -25,13 +25,19 @@ export default async function DashboardPage({
   if (!currentUser) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-16">
-        <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="mt-3 text-muted-foreground">
-          Please log in to view your credits and generation history.
-        </p>
-        <Link href="/signin?callbackUrl=/dashboard" className="mt-6 inline-block underline">
-          Send me a magic link
-        </Link>
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground mt-3 text-sm leading-6">
+            Sign in to view your Flowdockr credits, recent negotiation drafts,
+            and saved account activity.
+          </p>
+          <Link
+            href="/signin?callbackUrl=/dashboard"
+            className="mt-6 inline-flex rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+          >
+            Send me a magic link
+          </Link>
+        </section>
       </main>
     );
   }
@@ -77,22 +83,48 @@ export default async function DashboardPage({
       </section>
 
       <section className="mt-8 space-y-3">
-        <h2 className="text-2xl font-semibold tracking-tight">Recent generations</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">
+          Recent generations
+        </h2>
         {rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
-            No generations yet. Visit a scenario page and generate your first reply.
-          </p>
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h3 className="text-base font-semibold text-slate-900">
+              Your first negotiation output will appear here
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              After you generate a reply, this dashboard will show the scenario,
+              date, client-ready draft, and whether credits were charged.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/tools/reply-generator"
+                className="inline-flex rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+              >
+                Open conversation workspace
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-900"
+              >
+                View credit packs
+              </Link>
+            </div>
+          </div>
         ) : (
           <div className="space-y-3">
             {rows.map((row) => (
               <article key={row.id} className="rounded-md border p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+                <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-2 text-xs">
                   <span>{row.scenarioSlug}</span>
                   <span>{new Date(row.createdAt).toLocaleString()}</span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed">{row.recommendedReply}</p>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  {row.isFreeGeneration ? 'Free generation' : `Credits charged: ${row.creditsCharged}`}
+                <p className="mt-2 text-sm leading-relaxed">
+                  {row.recommendedReply}
+                </p>
+                <p className="text-muted-foreground mt-2 text-xs">
+                  {row.isFreeGeneration
+                    ? 'Free generation'
+                    : `Credits charged: ${row.creditsCharged}`}
                 </p>
               </article>
             ))}
