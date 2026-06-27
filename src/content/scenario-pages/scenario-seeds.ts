@@ -148,11 +148,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     title: 'Client asks for a discount',
     slug: 'discount-request',
     metaTitle:
-      'How to Respond When a Client Asks for a Discount (Without Weakening Your Rate) | Flowdockr',
+      'How to Respond When a Client Asks for a Discount (Without Weakening Your Rate) | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount before committing. Get a reply that protects your rate, slows the concession, and gives you cleaner tradeoff language you can send.',
     previewReply:
-      'I\'m open to finding a structure that works, but I do not usually reduce the same scope without changing something real behind it. If budget is the issue, we can look at priorities, timing, or a smaller first phase rather than discount the full version by default.',
+      "I'm open to finding a structure that works, but I do not usually reduce the same scope without changing something real behind it. If budget is the issue, we can look at priorities, timing, or a smaller first phase rather than discount the full version by default.",
     heroDescription:
       'Use this scenario when a client asks for a discount and you need to stay cooperative without teaching them that your rate is flexible on command. Get a reply you can adapt and send.',
     pagePromise:
@@ -465,8 +465,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     id: 'scn_extra_work_outside_scope',
     title: 'Client asks for extra work outside the agreed scope',
     slug: 'extra-work-outside-scope',
-    metaTitle:
-      'Client Asks for Extra Work Outside Scope | Flowdockr',
+    metaTitle: 'Client Asks for Extra Work Outside Scope | FlowDockr',
     metaDescription:
       'Use this scenario when a client adds work that was never in the agreement. Draw a clean scope boundary and offer structured next-step options you can actually send.',
     previewReply:
@@ -521,7 +520,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     title: 'Client asks for unlimited revisions',
     slug: 'unlimited-revisions',
     metaTitle:
-      'Client Wants Unlimited Revisions? Set the Boundary Clearly | Flowdockr',
+      'Client Wants Unlimited Revisions? Set the Boundary Clearly | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for unlimited revisions. Set a firm revision boundary, explain why it matters, and offer a paid path forward without sounding rigid.',
     previewReply:
@@ -555,10 +554,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'changing-requirements-response',
       'out-of-scope-professionally',
     ],
-    similarScenarioSlugs: [
-      'extra-revision-rounds',
-      'extra-work-for-free',
-    ],
+    similarScenarioSlugs: ['extra-revision-rounds', 'extra-work-for-free'],
     nextStepScenarioSlugs: [
       'scope-creep-polite-response',
       'changing-requirements-response',
@@ -603,11 +599,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     title: 'Client asks you to start work before payment',
     slug: 'start-before-payment',
     metaTitle:
-      'Client Wants You to Start Before Payment? What to Say | Flowdockr',
+      'Client Wants You to Start Before Payment? What to Say | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks you to begin before the deposit is paid. Hold the pre-kickoff boundary clearly and show the fastest proper next step.',
     previewReply:
-      'I\'m happy to reserve the time, but I start once the deposit and kickoff step are in place. As soon as those are handled, I can begin right away and the project stays protected on both sides.',
+      "I'm happy to reserve the time, but I start once the deposit and kickoff step are in place. As soon as those are handled, I can begin right away and the project stays protected on both sides.",
     heroDescription:
       'Use this scenario when a client wants you to begin immediately, but the deposit or kickoff step is still open. Get wording that holds the boundary without killing momentum.',
     pagePromise:
@@ -642,10 +638,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'ask-for-payment-politely',
       'overdue-invoice-no-response',
     ],
-    similarScenarioSlugs: [
-      'deposit-not-paid-yet',
-      'pay-later-request',
-    ],
+    similarScenarioSlugs: ['deposit-not-paid-yet', 'pay-later-request'],
     nextStepScenarioSlugs: [
       'payment-extension-request',
       'ask-for-payment-politely',
@@ -666,7 +659,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     slug: 'ask-for-payment-politely',
     h1: 'How to ask a client for payment politely',
     metaTitle:
-      'How to Ask a Client for Payment Politely (Without Sounding Awkward or Too Soft) | Flowdockr',
+      'How to Ask a Client for Payment Politely (Without Sounding Awkward or Too Soft) | FlowDockr',
     metaDescription:
       'Use this scenario to write a polite payment reminder when a client is slow to pay. Get professional wording you can actually send without sounding awkward, apologetic, or too soft.',
     previewReply:
@@ -690,7 +683,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Sorry for the delay — we should be able to process this soon.',
     clientMessageVariants: [
       'Sorry for the delay — we should be able to process this soon.',
-      'We\'re still sorting this on our side.',
+      "We're still sorting this on our side.",
       'Finance is running behind, but we should have this handled shortly.',
     ],
     userSituation:
@@ -733,8 +726,7 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
     title: 'How to send a final payment reminder',
     slug: 'final-payment-reminder',
     h1: 'How to send a final payment reminder',
-    metaTitle:
-      'Final Payment Reminder Before You Escalate | Flowdockr',
+    metaTitle: 'Final Payment Reminder Before You Escalate | FlowDockr',
     metaDescription:
       'Use this scenario when earlier reminders failed and you need a final payment message that sets a deadline, asks for a concrete answer, and still sounds professional.',
     previewReply:
@@ -754,11 +746,11 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',
     archetype: 'payment_protection',
     negotiationStage: 'in_project',
-    primaryClientMessage: 'We\'re still sorting this internally.',
+    primaryClientMessage: "We're still sorting this internally.",
     clientMessageVariants: [
-      'We\'re still sorting this internally.',
+      "We're still sorting this internally.",
       'I know this is still open — finance has not cleared it yet.',
-      'We haven\'t closed the loop on this payment yet.',
+      "We haven't closed the loop on this payment yet.",
     ],
     userSituation:
       'The invoice is overdue, earlier reminders did not resolve it, and you need a more direct follow-up that asks for a concrete next step.',

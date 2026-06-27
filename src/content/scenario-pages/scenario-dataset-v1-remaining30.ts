@@ -30,7 +30,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'cheaper-freelancer',
     title: 'Client says another freelancer is cheaper',
     h1: 'Client says another freelancer is cheaper',
-    metaTitle: 'Another Freelancer Is Cheaper: How to Respond | Flowdockr',
+    metaTitle: 'Another Freelancer Is Cheaper: How to Respond | FlowDockr',
     metaDescription:
       'Use this scenario when a client compares your quote to a cheaper freelancer. Defend value without turning the conversation into a price match.',
     archetype: 'price_comparison',
@@ -48,8 +48,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'Defend value and avoid getting dragged into a pure price comparison.',
     searchIntentPrimary:
       'client says another freelancer is cheaper how to respond',
-    searchIntentSecondary:
-      'another freelancer is cheaper client reply',
+    searchIntentSecondary: 'another freelancer is cheaper client reply',
     strategyPrimary:
       'Acknowledge the comparison without attacking the other option or racing to the bottom on price.',
     strategySecondary:
@@ -66,7 +65,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'why-so-expensive',
     title: 'Client asks why your price is so high',
     h1: 'Client asks why your price is so high',
-    metaTitle: 'Why Is Your Price So High? How to Reply | Flowdockr',
+    metaTitle: 'Why Is Your Price So High? How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks why your pricing is so high. Explain the pricing logic clearly without sounding defensive.',
     archetype: 'pricing_objection',
@@ -80,12 +79,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'A prospect reacts to your pricing call or proposal by directly asking why the fee is so high.',
-    userGoal:
-      'Explain the pricing logic clearly without sounding defensive.',
-    searchIntentPrimary:
-      'client asks why your price is so high how to respond',
-    searchIntentSecondary:
-      'why is your freelance price so high reply',
+    userGoal: 'Explain the pricing logic clearly without sounding defensive.',
+    searchIntentPrimary: 'client asks why your price is so high how to respond',
+    searchIntentSecondary: 'why is your freelance price so high reply',
     strategyPrimary:
       'Explain the price through scope, expertise, risk reduction, and delivery standard instead of hours alone.',
     strategySecondary:
@@ -102,7 +98,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'above-budget-range',
     title: 'Client says your proposal is above their budget range',
     h1: 'Client says your proposal is above their budget range',
-    metaTitle: 'Proposal Above Budget Range: How to Reply | Flowdockr',
+    metaTitle: 'Proposal Above Budget Range: How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client says your proposal is above their internal range. Find out if the budget issue is firm before conceding.',
     archetype: 'pricing_objection',
@@ -118,10 +114,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'A company contact says they like the proposal, but finance has a budget range ceiling that your quote exceeds.',
     userGoal:
       'Find out whether the issue is a hard budget limit or a negotiable range without conceding too early.',
-    searchIntentPrimary:
-      'proposal above budget range how to respond',
-    searchIntentSecondary:
-      'client says quote is above internal budget range',
+    searchIntentPrimary: 'proposal above budget range how to respond',
+    searchIntentSecondary: 'client says quote is above internal budget range',
     strategyPrimary:
       'Treat this as a budget-approval constraint first and ask enough to understand whether the range is fixed or flexible.',
     strategySecondary:
@@ -139,7 +133,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     title: 'Client says your price is hard to justify internally',
     h1: 'Client says your price is hard to justify internally',
     metaTitle:
-      'Price Is Hard to Justify Internally: How to Respond | Flowdockr',
+      'Price Is Hard to Justify Internally: How to Respond | FlowDockr',
     metaDescription:
       'Use this scenario when a client likes your work but says your price is hard to justify internally. Help them defend the spend without discounting first.',
     archetype: 'pricing_objection',
@@ -155,10 +149,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The decision-maker is interested, but says they need stronger reasoning before they can get internal approval for your fee.',
     userGoal:
       'Equip the client to defend the spend without immediately discounting.',
-    searchIntentPrimary:
-      'client says price is hard to justify internally',
-    searchIntentSecondary:
-      'justify freelance price internally client reply',
+    searchIntentPrimary: 'client says price is hard to justify internally',
+    searchIntentSecondary: 'justify freelance price internally client reply',
     strategyPrimary:
       'Give the client a concise justification framed around outcomes, risk reduction, and what the fee protects.',
     strategySecondary:
@@ -175,8 +167,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'in-house-cheaper',
     title: 'Client says they could do it in-house for less',
     h1: 'Client says they could do it in-house for less',
-    metaTitle:
-      'Client Says They Can Do It In-House for Less | Flowdockr',
+    metaTitle: 'Client Says They Can Do It In-House for Less | FlowDockr',
     metaDescription:
       'Use this scenario when a client says they could do the work in-house for less. Reframe around speed, expertise, and opportunity cost.',
     archetype: 'price_comparison',
@@ -192,10 +183,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'A client pushes back on your rate by saying their internal team could probably handle the work for a lower cost.',
     userGoal:
       'Reframe around speed, expertise, and opportunity cost instead of arguing line by line.',
-    searchIntentPrimary:
-      'client says they can do it in house for less',
-    searchIntentSecondary:
-      'in house cheaper than freelancer response',
+    searchIntentPrimary: 'client says they can do it in house for less',
+    searchIntentSecondary: 'in house cheaper than freelancer response',
     strategyPrimary:
       'Compare the decision on speed, reliability, and opportunity cost rather than on a simplistic internal cost assumption.',
     strategySecondary:
@@ -212,8 +201,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'too-expensive-for-small-project',
     title: 'Client says the project is too small for your price',
     h1: 'Client says the project is too small for your price',
-    metaTitle:
-      'Project Is Too Small for Your Price: How to Reply | Flowdockr',
+    metaTitle: 'Project Is Too Small for Your Price: How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client says the project is too small for your price. Explain the real work involved without over-justifying.',
     archetype: 'pricing_objection',
@@ -227,12 +215,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'A lead says the project scope sounds simple from their side and questions why the quote is not lower.',
-    userGoal:
-      'Explain the real work involved without over-justifying.',
-    searchIntentPrimary:
-      'client says project is too small for your price',
-    searchIntentSecondary:
-      'small project quote too high reply',
+    userGoal: 'Explain the real work involved without over-justifying.',
+    searchIntentPrimary: 'client says project is too small for your price',
+    searchIntentSecondary: 'small project quote too high reply',
     strategyPrimary:
       'Clarify the work hidden behind the deliverable so the client understands what the price actually covers.',
     strategySecondary:
@@ -249,8 +234,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'small-extra-tasks',
     title: 'Client keeps adding small extra tasks in chat',
     h1: 'Client keeps adding small extra tasks in chat',
-    metaTitle:
-      'Client Keeps Adding Small Extra Tasks in Chat | Flowdockr',
+    metaTitle: 'Client Keeps Adding Small Extra Tasks in Chat | FlowDockr',
     metaDescription:
       'Use this scenario when a client keeps adding small extra tasks in chat. Stop slow scope creep without sounding irritated.',
     archetype: 'scope_control',
@@ -264,12 +248,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'During delivery, the client keeps dropping extra requests in chat and framing each one as tiny, even though they are adding up.',
-    userGoal:
-      'Stop the slow scope creep without sounding irritated.',
-    searchIntentPrimary:
-      'client keeps adding small extra tasks how to respond',
-    searchIntentSecondary:
-      'small extra tasks scope creep reply',
+    userGoal: 'Stop the slow scope creep without sounding irritated.',
+    searchIntentPrimary: 'client keeps adding small extra tasks how to respond',
+    searchIntentSecondary: 'small extra tasks scope creep reply',
     strategyPrimary:
       'Name the pattern calmly and make the scope change visible before the requests keep accumulating.',
     strategySecondary:
@@ -286,8 +267,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'added-strategy-work',
     title: 'Client asks for extra strategy work that was not in scope',
     h1: 'Client asks for extra strategy work that was not in scope',
-    metaTitle:
-      'Client Asks for Extra Strategy Work Not in Scope | Flowdockr',
+    metaTitle: 'Client Asks for Extra Strategy Work Not in Scope | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for strategy work that was not part of the original scope. Separate advisory work from execution and price it properly.',
     archetype: 'scope_control',
@@ -303,10 +283,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'You were hired for execution, but the client now wants strategic recommendations, planning, or consulting that were never included.',
     userGoal:
       'Separate advisory work from execution scope and price it properly.',
-    searchIntentPrimary:
-      'client asks for extra strategy work not in scope',
-    searchIntentSecondary:
-      'out of scope strategy work client reply',
+    searchIntentPrimary: 'client asks for extra strategy work not in scope',
+    searchIntentSecondary: 'out of scope strategy work client reply',
     strategyPrimary:
       'Draw a clean line between execution and advisory work so the client understands this is a scope expansion, not a small extra.',
     strategySecondary:
@@ -323,8 +301,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'post-signoff-extra-deliverables',
     title: 'Client asks for more deliverables after signoff',
     h1: 'Client asks for more deliverables after signoff',
-    metaTitle:
-      'Client Asks for More Deliverables After Signoff | Flowdockr',
+    metaTitle: 'Client Asks for More Deliverables After Signoff | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for extra deliverables after signoff. Prevent completed work from reopening as unpaid extra work.',
     archetype: 'scope_control',
@@ -338,12 +315,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The main deliverable has already been approved, but the client comes back asking for extra assets related to the project.',
-    userGoal:
-      'Prevent completed work from reopening as unpaid extra work.',
-    searchIntentPrimary:
-      'client asks for more deliverables after signoff',
-    searchIntentSecondary:
-      'post signoff extra deliverables client reply',
+    userGoal: 'Prevent completed work from reopening as unpaid extra work.',
+    searchIntentPrimary: 'client asks for more deliverables after signoff',
+    searchIntentSecondary: 'post signoff extra deliverables client reply',
     strategyPrimary:
       'Treat signoff as a real project boundary and make any additional deliverables a new scoped request.',
     strategySecondary:
@@ -361,7 +335,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     title: 'Client expects extra meetings that were not included',
     h1: 'Client expects extra meetings that were not included',
     metaTitle:
-      'Client Expects Extra Meetings That Were Not Included | Flowdockr',
+      'Client Expects Extra Meetings That Were Not Included | FlowDockr',
     metaDescription:
       'Use this scenario when a client expects extra meetings that were not included. Set a boundary around communication overhead and billable time.',
     archetype: 'scope_control',
@@ -375,12 +349,10 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client starts inviting you to recurring syncs, review calls, or stakeholder meetings that were not part of the scoped time.',
-    userGoal:
-      'Set a boundary around communication overhead and billable time.',
+    userGoal: 'Set a boundary around communication overhead and billable time.',
     searchIntentPrimary:
       'client expects extra meetings not included how to respond',
-    searchIntentSecondary:
-      'extra meetings not in scope client reply',
+    searchIntentSecondary: 'extra meetings not in scope client reply',
     strategyPrimary:
       'Treat meeting time as real project scope and clarify what is included in the current engagement.',
     strategySecondary:
@@ -397,7 +369,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'changed-brief-mid-project',
     title: 'Client changes the brief after work has started',
     h1: 'Client changes the brief after work has started',
-    metaTitle: 'Client Changes the Brief After Work Starts | Flowdockr',
+    metaTitle: 'Client Changes the Brief After Work Starts | FlowDockr',
     metaDescription:
       'Use this scenario when a client changes the brief after work has started. Re-anchor to the original brief and define a change-order path.',
     archetype: 'scope_control',
@@ -411,12 +383,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'You began work based on one agreed brief, and the client now sends a broader direction that changes the project substantially.',
-    userGoal:
-      'Re-anchor to the original brief and define a change-order path.',
-    searchIntentPrimary:
-      'client changes the brief after work has started',
-    searchIntentSecondary:
-      'changed project brief mid project client reply',
+    userGoal: 'Re-anchor to the original brief and define a change-order path.',
+    searchIntentPrimary: 'client changes the brief after work has started',
+    searchIntentSecondary: 'changed project brief mid project client reply',
     strategyPrimary:
       'Reference the original brief clearly so the scope shift is visible and factual.',
     strategySecondary:
@@ -433,7 +402,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'multiple-format-request',
     title: 'Client assumes extra formats or versions are included',
     h1: 'Client assumes extra formats or versions are included',
-    metaTitle: 'Client Assumes Extra Formats Are Included | Flowdockr',
+    metaTitle: 'Client Assumes Extra Formats Are Included | FlowDockr',
     metaDescription:
       'Use this scenario when a client assumes extra formats or versions are included. Clarify what is included and price versioning separately.',
     archetype: 'scope_control',
@@ -447,12 +416,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The original scope covers one core deliverable, but the client assumes alternate sizes, formats, or channel versions are included automatically.',
-    userGoal:
-      'Clarify what is included and price versioning separately.',
-    searchIntentPrimary:
-      'client assumes extra formats are included',
-    searchIntentSecondary:
-      'extra versions included client reply',
+    userGoal: 'Clarify what is included and price versioning separately.',
+    searchIntentPrimary: 'client assumes extra formats are included',
+    searchIntentSecondary: 'extra versions included client reply',
     strategyPrimary:
       'Make versioning and repurposing visible as separate work rather than an invisible extension of the original deliverable.',
     strategySecondary:
@@ -469,8 +435,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'no-response-after-discovery-call',
     title: 'Client goes quiet after a discovery call',
     h1: 'Client goes quiet after a discovery call',
-    metaTitle:
-      'Client Goes Quiet After a Discovery Call | Flowdockr',
+    metaTitle: 'Client Goes Quiet After a Discovery Call | FlowDockr',
     metaDescription:
       'Use this scenario when a client goes quiet after a discovery call. Reconnect while referring back to the momentum from the call.',
     archetype: 'follow_up',
@@ -484,12 +449,10 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'You had a strong intro call and clear interest, but after the call the client stopped responding to next-step messages.',
-    userGoal:
-      'Reconnect while referencing the momentum from the call.',
+    userGoal: 'Reconnect while referencing the momentum from the call.',
     searchIntentPrimary:
       'client went quiet after discovery call how to follow up',
-    searchIntentSecondary:
-      'follow up after discovery call no response',
+    searchIntentSecondary: 'follow up after discovery call no response',
     strategyPrimary:
       'Reference the call briefly and make the next step easy to answer instead of sending a generic check-in.',
     strategySecondary:
@@ -506,8 +469,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'proposal-viewed-no-response',
     title: 'Client viewed your proposal but has not replied',
     h1: 'Client viewed your proposal but has not replied',
-    metaTitle:
-      'Client Viewed Your Proposal but Has Not Replied | Flowdockr',
+    metaTitle: 'Client Viewed Your Proposal but Has Not Replied | FlowDockr',
     metaDescription:
       'Use this scenario when a client viewed your proposal but has not replied. Nudge them without sounding like you are tracking them.',
     archetype: 'follow_up',
@@ -520,12 +482,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'You know the proposal was opened, but the client has not sent any questions or updates.',
-    userGoal:
-      'Nudge the client without sounding like you are monitoring them.',
-    searchIntentPrimary:
-      'client viewed proposal but has not replied',
-    searchIntentSecondary:
-      'proposal opened no response follow up',
+    userGoal: 'Nudge the client without sounding like you are monitoring them.',
+    searchIntentPrimary: 'client viewed proposal but has not replied',
+    searchIntentSecondary: 'proposal opened no response follow up',
     strategyPrimary:
       'Reference the proposal naturally and prompt a decision or question without mentioning view tracking.',
     strategySecondary:
@@ -543,7 +502,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     title: 'Client goes quiet after you answer their objections',
     h1: 'Client goes quiet after you answer their objections',
     metaTitle:
-      'Client Goes Quiet After You Answer Their Objections | Flowdockr',
+      'Client Goes Quiet After You Answer Their Objections | FlowDockr',
     metaDescription:
       'Use this scenario when a client goes quiet after you answer objections. Bring the conversation back to a decision point.',
     archetype: 'follow_up',
@@ -557,12 +516,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client raised concerns, you answered them clearly, and then they stopped replying instead of moving forward.',
-    userGoal:
-      'Bring the conversation back to a decision point.',
-    searchIntentPrimary:
-      'client goes quiet after you answer objections',
-    searchIntentSecondary:
-      'follow up after answering objections no response',
+    userGoal: 'Bring the conversation back to a decision point.',
+    searchIntentPrimary: 'client goes quiet after you answer objections',
+    searchIntentSecondary: 'follow up after answering objections no response',
     strategyPrimary:
       'Frame the follow-up around decision clarity, not another round of explanation.',
     strategySecondary:
@@ -579,8 +535,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'bad-timing-no-response',
     title: 'Client says timing is bad and then stops responding',
     h1: 'Client says timing is bad and then stops responding',
-    metaTitle:
-      'Client Says Timing Is Bad Then Stops Responding | Flowdockr',
+    metaTitle: 'Client Says Timing Is Bad Then Stops Responding | FlowDockr',
     metaDescription:
       'Use this scenario when a client says timing is bad and then stops responding. Check whether the opportunity is delayed or dead.',
     archetype: 'follow_up',
@@ -596,10 +551,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The client did not say no, only that timing was not ideal. Now the thread has gone cold and you want to reopen it without sounding like a hard sell.',
     userGoal:
       'Check whether the opportunity is delayed or dead and reopen the door cleanly.',
-    searchIntentPrimary:
-      'client says timing is bad then stops responding',
-    searchIntentSecondary:
-      'bad timing no response client follow up',
+    searchIntentPrimary: 'client says timing is bad then stops responding',
+    searchIntentSecondary: 'bad timing no response client follow up',
     strategyPrimary:
       'Treat the earlier message as a timing question and ask whether the opportunity is postponed, paused, or no longer active.',
     strategySecondary:
@@ -616,14 +569,12 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'keeps-delaying-decision',
     title: 'Client keeps saying they will get back to you soon',
     h1: 'Client keeps saying they will get back to you soon',
-    metaTitle:
-      'Client Keeps Saying They Will Get Back to You Soon | Flowdockr',
+    metaTitle: 'Client Keeps Saying They Will Get Back to You Soon | FlowDockr',
     metaDescription:
       'Use this scenario when a client keeps delaying a decision with vague updates. Move the conversation toward a real commitment or close.',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
-    primaryClientMessage:
-      'Sorry for the delay — I’ll get back to you soon.',
+    primaryClientMessage: 'Sorry for the delay — I’ll get back to you soon.',
     clientMessageVariants: [
       'Sorry for the delay — I’ll get back to you soon.',
       'Still with us. I’ll get back to you shortly.',
@@ -633,10 +584,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The client is not fully ghosting, but keeps sending vague delay messages without making a decision.',
     userGoal:
       'Move the conversation from soft delay to a real commitment or close.',
-    searchIntentPrimary:
-      'client keeps saying they will get back to you soon',
-    searchIntentSecondary:
-      'client delaying decision follow up',
+    searchIntentPrimary: 'client keeps saying they will get back to you soon',
+    searchIntentSecondary: 'client delaying decision follow up',
     strategyPrimary:
       'Push the conversation toward a concrete status or timeline instead of accepting endless soft delays.',
     strategySecondary:
@@ -653,8 +602,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'competitor-discount-pressure',
     title: 'Client says other vendors offered a discount',
     h1: 'Client says other vendors offered a discount',
-    metaTitle:
-      'Other Vendors Offered a Discount: How to Reply | Flowdockr',
+    metaTitle: 'Other Vendors Offered a Discount: How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client says other vendors offered a discount. Keep the conversation on fit and scope instead of reacting to market pressure.',
     archetype: 'price_comparison',
@@ -670,10 +618,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The client pressures you by saying competing vendors are offering discounts and implies you should do the same.',
     userGoal:
       'Keep the conversation on fit and scope instead of reacting to market pressure.',
-    searchIntentPrimary:
-      'client says other vendors offered a discount',
-    searchIntentSecondary:
-      'competitor discount pressure client reply',
+    searchIntentPrimary: 'client says other vendors offered a discount',
+    searchIntentSecondary: 'competitor discount pressure client reply',
     strategyPrimary:
       'Acknowledge the comparison without accepting that competitor discounting should set your pricing logic.',
     strategySecondary:
@@ -691,7 +637,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     title: 'Client asks for a partner rate before you have worked together',
     h1: 'Client asks for a partner rate before you have worked together',
     metaTitle:
-      'Client Asks for a Partner Rate Before You Have Worked Together | Flowdockr',
+      'Client Asks for a Partner Rate Before You Have Worked Together | FlowDockr',
     metaDescription:
       'Use this scenario when a new client asks for a partner rate before you have worked together. Stay warm without weakening your starting anchor.',
     archetype: 'pricing_objection',
@@ -705,12 +651,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'A new client uses relationship language early and asks for a discount as a gesture of partnership.',
-    userGoal:
-      'Stay warm while avoiding a weak starting anchor.',
-    searchIntentPrimary:
-      'client asks for partner rate before working together',
-    searchIntentSecondary:
-      'partner rate request client reply',
+    userGoal: 'Stay warm while avoiding a weak starting anchor.',
+    searchIntentPrimary: 'client asks for partner rate before working together',
+    searchIntentSecondary: 'partner rate request client reply',
     strategyPrimary:
       'Treat relationship language as goodwill, not as a substitute for a real commitment or pricing structure.',
     strategySecondary:
@@ -727,7 +670,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'nonprofit-discount-request',
     title: 'Client asks for a nonprofit discount',
     h1: 'Client asks for a nonprofit discount',
-    metaTitle: 'Client Asks for a Nonprofit Discount | Flowdockr',
+    metaTitle: 'Client Asks for a Nonprofit Discount | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a nonprofit discount. Respond respectfully without letting mission-based pressure override business boundaries.',
     archetype: 'pricing_objection',
@@ -743,10 +686,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The client appeals to mission, impact, or nonprofit status and asks whether you can lower the fee because of it.',
     userGoal:
       'Respond respectfully without letting values-based pressure override business boundaries.',
-    searchIntentPrimary:
-      'client asks for nonprofit discount how to respond',
-    searchIntentSecondary:
-      'nonprofit discount request client reply',
+    searchIntentPrimary: 'client asks for nonprofit discount how to respond',
+    searchIntentSecondary: 'nonprofit discount request client reply',
     strategyPrimary:
       'Acknowledge the mission respectfully while keeping your pricing logic anchored in the actual work and capacity required.',
     strategySecondary:
@@ -763,8 +704,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'budget-cycle-discount-request',
     title: 'Client asks for a discount because their budget cycle is tight',
     h1: 'Client asks for a discount because their budget cycle is tight',
-    metaTitle:
-      'Discount Request Because Budget Cycle Is Tight | Flowdockr',
+    metaTitle: 'Discount Request Because Budget Cycle Is Tight | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount because their budget cycle is tight. Offer alternatives that protect your rate integrity.',
     archetype: 'pricing_objection',
@@ -778,12 +718,10 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client says the timing of their budget is tight this quarter and asks for price relief rather than adjusting scope or timing.',
-    userGoal:
-      'Offer alternatives that protect rate integrity.',
+    userGoal: 'Offer alternatives that protect rate integrity.',
     searchIntentPrimary:
       'client asks for discount because budget cycle is tight',
-    searchIntentSecondary:
-      'quarterly budget discount request client reply',
+    searchIntentSecondary: 'quarterly budget discount request client reply',
     strategyPrimary:
       'Treat budget timing as a planning constraint, not an automatic reason to cut the same work.',
     strategySecondary:
@@ -800,7 +738,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'bulk-discount-request',
     title: 'Client asks for a bulk discount for multiple deliverables',
     h1: 'Client asks for a bulk discount for multiple deliverables',
-    metaTitle: 'Client Asks for a Bulk Discount | Flowdockr',
+    metaTitle: 'Client Asks for a Bulk Discount | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a bulk discount for multiple deliverables. Evaluate package logic without devaluing the work.',
     archetype: 'pricing_objection',
@@ -814,12 +752,10 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client bundles several items or phases together and asks for a discount on the whole package.',
-    userGoal:
-      'Evaluate package logic without devaluing the work.',
+    userGoal: 'Evaluate package logic without devaluing the work.',
     searchIntentPrimary:
       'client asks for bulk discount for multiple deliverables',
-    searchIntentSecondary:
-      'package pricing discount client reply',
+    searchIntentSecondary: 'package pricing discount client reply',
     strategyPrimary:
       'Assess whether the bundled work creates real efficiency before discussing price movement.',
     strategySecondary:
@@ -836,7 +772,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'quick-approval-discount',
     title: 'Client asks for a discount in exchange for approving quickly',
     h1: 'Client asks for a discount in exchange for approving quickly',
-    metaTitle: 'Discount in Exchange for Quick Approval | Flowdockr',
+    metaTitle: 'Discount in Exchange for Quick Approval | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount in exchange for quick approval. Decide whether speed is a real concession and respond clearly.',
     archetype: 'pricing_objection',
@@ -854,8 +790,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'Decide whether speed is a real concession and respond without sounding rigid.',
     searchIntentPrimary:
       'client asks for discount in exchange for quick approval',
-    searchIntentSecondary:
-      'quick approval discount request client reply',
+    searchIntentSecondary: 'quick approval discount request client reply',
     strategyPrimary:
       'Do not treat faster approval as valuable by default unless it changes something real about the engagement.',
     strategySecondary:
@@ -872,8 +807,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'vague-project-quote',
     title: 'Client message is too vague to quote the project properly',
     h1: 'Client message is too vague to quote the project properly',
-    metaTitle:
-      'Client Message Too Vague to Quote the Project | Flowdockr',
+    metaTitle: 'Client Message Too Vague to Quote the Project | FlowDockr',
     metaDescription:
       'Use this scenario when a client message is too vague to quote the project properly. Ask for the missing details without creating friction.',
     archetype: 'pricing_probe',
@@ -889,10 +823,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'A lead asks for a quote but gives very little usable detail, making it risky to price or promise anything accurately.',
     userGoal:
       'Ask for the missing details without sounding like you are creating friction.',
-    searchIntentPrimary:
-      'client message too vague to quote project',
-    searchIntentSecondary:
-      'vague brief quote request client reply',
+    searchIntentPrimary: 'client message too vague to quote project',
+    searchIntentSecondary: 'vague brief quote request client reply',
     strategyPrimary:
       'Ask for the minimum clarifying information needed to make the quote meaningful instead of guessing.',
     strategySecondary:
@@ -909,8 +841,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'changing-brief-before-quote',
     title: 'Client brief keeps changing before you quote',
     h1: 'Client brief keeps changing before you quote',
-    metaTitle:
-      'Client Brief Keeps Changing Before You Quote | Flowdockr',
+    metaTitle: 'Client Brief Keeps Changing Before You Quote | FlowDockr',
     metaDescription:
       'Use this scenario when the client brief keeps changing before you quote. Slow the process down enough to define a stable brief.',
     archetype: 'pricing_probe',
@@ -924,12 +855,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'You are still in the quoting stage, but each new message changes the deliverables, priorities, or timeline.',
-    userGoal:
-      'Slow the process down enough to define a stable brief.',
-    searchIntentPrimary:
-      'client brief keeps changing before quote',
-    searchIntentSecondary:
-      'changing brief before quote client reply',
+    userGoal: 'Slow the process down enough to define a stable brief.',
+    searchIntentPrimary: 'client brief keeps changing before quote',
+    searchIntentSecondary: 'changing brief before quote client reply',
     strategyPrimary:
       'Pause the quoting motion long enough to confirm a stable brief and the assumptions a quote would be based on.',
     strategySecondary:
@@ -946,8 +874,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'timeline-before-assets',
     title: 'Client asks for a timeline before sharing what you need',
     h1: 'Client asks for a timeline before sharing what you need',
-    metaTitle:
-      'Client Asks for a Timeline Before Sharing Assets | Flowdockr',
+    metaTitle: 'Client Asks for a Timeline Before Sharing Assets | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a timeline before sharing what you need. Clarify dependencies before committing to dates.',
     archetype: 'pricing_probe',
@@ -961,12 +888,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client wants a delivery estimate but has not sent the assets, content, access, or dependencies required to judge timing.',
-    userGoal:
-      'Clarify dependencies before committing to a timeline.',
-    searchIntentPrimary:
-      'client asks for timeline before sharing assets',
-    searchIntentSecondary:
-      'timeline estimate before assets client reply',
+    userGoal: 'Clarify dependencies before committing to a timeline.',
+    searchIntentPrimary: 'client asks for timeline before sharing assets',
+    searchIntentSecondary: 'timeline estimate before assets client reply',
     strategyPrimary:
       'Make the dependencies explicit so the client understands which inputs drive timing.',
     strategySecondary:
@@ -983,8 +907,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'what-is-included',
     title: 'Client asks exactly what is included before approving',
     h1: 'Client asks exactly what is included before approving',
-    metaTitle:
-      'What Is Included Before Approving: How to Reply | Flowdockr',
+    metaTitle: 'What Is Included Before Approving: How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks exactly what is included before approving. Clarify boundaries clearly so the deal closes with fewer surprises.',
     archetype: 'expectation_management',
@@ -1000,10 +923,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The client is close to moving forward but wants a tighter explanation of what is and is not included in the work.',
     userGoal:
       'Clarify boundaries clearly so the deal closes with fewer surprises later.',
-    searchIntentPrimary:
-      'client asks what is included before approving',
-    searchIntentSecondary:
-      'scope inclusions client reply',
+    searchIntentPrimary: 'client asks what is included before approving',
+    searchIntentSecondary: 'scope inclusions client reply',
     strategyPrimary:
       'Spell out inclusions and exclusions in plain language so the agreement is clearer before work begins.',
     strategySecondary:
@@ -1020,7 +941,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'unclear-process',
     title: 'Client is confused about your process or phases',
     h1: 'Client is confused about your process or phases',
-    metaTitle: 'Client Is Confused About Your Process | Flowdockr',
+    metaTitle: 'Client Is Confused About Your Process | FlowDockr',
     metaDescription:
       'Use this scenario when a client is confused about your process or phases. Increase trust by explaining how the project runs step by step.',
     archetype: 'expectation_management',
@@ -1034,12 +955,9 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'The client seems interested but is hesitant because they do not understand how the project will run from kickoff to delivery.',
-    userGoal:
-      'Increase trust by clarifying the process in simple terms.',
-    searchIntentPrimary:
-      'client is confused about your process how to respond',
-    searchIntentSecondary:
-      'explain project process to client reply',
+    userGoal: 'Increase trust by clarifying the process in simple terms.',
+    searchIntentPrimary: 'client is confused about your process how to respond',
+    searchIntentSecondary: 'explain project process to client reply',
     strategyPrimary:
       'Turn your process into a simple sequence the client can picture instead of abstract service language.',
     strategySecondary:
@@ -1057,7 +975,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     title: 'Client wants to skip discovery and go straight to execution',
     h1: 'Client wants to skip discovery and go straight to execution',
     metaTitle:
-      'Client Wants to Skip Discovery and Go Straight to Execution | Flowdockr',
+      'Client Wants to Skip Discovery and Go Straight to Execution | FlowDockr',
     metaDescription:
       'Use this scenario when a client wants to skip discovery and go straight to execution. Explain why discovery matters without sounding bureaucratic.',
     archetype: 'expectation_management',
@@ -1071,12 +989,10 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     ],
     userSituation:
       'You need a discovery or planning phase to do the work well, but the client wants to jump directly into deliverables to save time or money.',
-    userGoal:
-      'Explain why discovery matters without sounding bureaucratic.',
+    userGoal: 'Explain why discovery matters without sounding bureaucratic.',
     searchIntentPrimary:
       'client wants to skip discovery and go straight to execution',
-    searchIntentSecondary:
-      'skip discovery phase client reply',
+    searchIntentSecondary: 'skip discovery phase client reply',
     strategyPrimary:
       'Frame discovery as the step that reduces wasted work and protects the result, not as process for process’s sake.',
     strategySecondary:
@@ -1093,8 +1009,7 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
     slug: 'deliverables-vs-outcomes',
     title: 'Client is unclear on deliverables versus outcomes',
     h1: 'Client is unclear on deliverables versus outcomes',
-    metaTitle:
-      'Client Is Unclear on Deliverables vs Outcomes | Flowdockr',
+    metaTitle: 'Client Is Unclear on Deliverables vs Outcomes | FlowDockr',
     metaDescription:
       'Use this scenario when a client mixes deliverables with outcomes. Clarify what you are delivering and what depends on broader factors.',
     archetype: 'expectation_management',
@@ -1110,10 +1025,8 @@ export const scenarioDatasetV1Remaining30: CanonicalScenario[] = [
       'The conversation is getting messy because the client is mixing business goals with concrete deliverables and expects both to be guaranteed the same way.',
     userGoal:
       'Clarify what you are delivering versus what results depend on broader factors.',
-    searchIntentPrimary:
-      'client unclear on deliverables versus outcomes',
-    searchIntentSecondary:
-      'deliverables vs outcomes client reply',
+    searchIntentPrimary: 'client unclear on deliverables versus outcomes',
+    searchIntentSecondary: 'deliverables vs outcomes client reply',
     strategyPrimary:
       'Separate what you control directly from the broader business outcome so expectations stay realistic.',
     strategySecondary:

@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-
 import { trackEvent } from '@/lib/analytics';
 import { buildPricingScenarioAnalyticsParams } from '@/lib/analytics/pricingAttribution';
 import type { PricingScenarioAttribution } from '@/types/pricing-analytics';

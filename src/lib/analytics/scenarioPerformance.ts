@@ -204,7 +204,9 @@ export function normalizeScenarioSlugFromSearchConsoleRow(
   return '';
 }
 
-function buildSearchConsoleMetricsBySlug(rows: ScenarioSearchConsoleRowInput[]) {
+function buildSearchConsoleMetricsBySlug(
+  rows: ScenarioSearchConsoleRowInput[]
+) {
   const aggregated = new Map<string, AggregatedSearchConsoleAccumulator>();
 
   for (const row of rows) {
@@ -259,7 +261,11 @@ function buildSearchConsoleMetricsBySlug(rows: ScenarioSearchConsoleRowInput[]) 
 
     if (indexed !== null) {
       current.indexed = indexed;
-    } else if (current.indexed === null && impressions !== null && impressions > 0) {
+    } else if (
+      current.indexed === null &&
+      impressions !== null &&
+      impressions > 0
+    ) {
       current.indexed = true;
     }
 
@@ -274,7 +280,8 @@ function buildSearchConsoleMetricsBySlug(rows: ScenarioSearchConsoleRowInput[]) 
 
   for (const [scenarioSlug, row] of aggregated.entries()) {
     const impressions = row.impressions > 0 ? row.impressions : null;
-    const clicks = row.clicks > 0 ? row.clicks : impressions === null ? null : 0;
+    const clicks =
+      row.clicks > 0 ? row.clicks : impressions === null ? null : 0;
     const ctr =
       impressions && impressions > 0
         ? row.clicks / impressions
@@ -367,7 +374,9 @@ function parseIndexed(value: string | boolean | number | null | undefined) {
 
   const normalized = value.trim().toLowerCase();
 
-  if (['true', 'yes', 'indexed', 'submitted and indexed'].includes(normalized)) {
+  if (
+    ['true', 'yes', 'indexed', 'submitted and indexed'].includes(normalized)
+  ) {
     return true;
   }
 

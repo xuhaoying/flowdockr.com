@@ -50,7 +50,9 @@ export const userBillingState = table(
       .references(() => user.id, { onDelete: 'cascade' }),
     creditsRemaining: int('credits_remaining').default(0).notNull(),
     creditsTotal: int('credits_total').default(0).notNull(),
-    supportLevel: varchar('support_level', { length: 50 }).default('free').notNull(),
+    supportLevel: varchar('support_level', { length: 50 })
+      .default('free')
+      .notNull(),
     purchasedPlan: varchar191('purchased_plan').default('free_trial').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
@@ -67,14 +69,18 @@ export const featureEntitlement = table(
     userId: varchar191('user_id')
       .primaryKey()
       .references(() => user.id, { onDelete: 'cascade' }),
-    multiVersionEnabled: boolean('multi_version_enabled').default(false).notNull(),
+    multiVersionEnabled: boolean('multi_version_enabled')
+      .default(false)
+      .notNull(),
     strategyExplanationEnabled: boolean('strategy_explanation_enabled')
       .default(false)
       .notNull(),
     riskAlertEnabled: boolean('risk_alert_enabled').default(false).notNull(),
     historyEnabled: boolean('history_enabled').default(false).notNull(),
     followUpEnabled: boolean('follow_up_enabled').default(false).notNull(),
-    advancedModesEnabled: boolean('advanced_modes_enabled').default(false).notNull(),
+    advancedModesEnabled: boolean('advanced_modes_enabled')
+      .default(false)
+      .notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
   },
@@ -559,7 +565,7 @@ export const chatMessage = table(
   ]
 );
 
-// Business tables for Flowdockr prompt management
+// Business tables for FlowDockr prompt management
 export const prompt = table(
   'prompt',
   {

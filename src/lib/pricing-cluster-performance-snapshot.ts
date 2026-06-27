@@ -1,4 +1,3 @@
-import { envConfigs } from '@/config';
 import {
   applyPricingClusterPerformanceRefreshMetadata,
   buildPricingClusterPerformanceRefreshMetadata,
@@ -8,6 +7,8 @@ import {
   type PricingClusterPerformanceRefreshMode,
   type PricingClusterPerformanceReport,
 } from '@/lib/pricing-cluster-performance';
+
+import { envConfigs } from '@/config';
 import { getConfigs, saveConfigs } from '@/shared/models/config';
 
 export const PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY =
@@ -38,7 +39,9 @@ export function verifyPricingClusterPerformanceCronRequest(request: Request) {
     } as const;
   }
 
-  const authorization = String(request.headers.get('authorization') || '').trim();
+  const authorization = String(
+    request.headers.get('authorization') || ''
+  ).trim();
   if (authorization !== `Bearer ${cronSecret}`) {
     return {
       ok: false,
@@ -84,7 +87,8 @@ export async function refreshPricingClusterPerformanceSnapshot(params?: {
     },
     now
   );
-  const summaryMarkdown = buildPricingClusterPerformanceSnapshotMarkdown(report);
+  const summaryMarkdown =
+    buildPricingClusterPerformanceSnapshotMarkdown(report);
 
   await saveConfigs({
     [PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY]: JSON.stringify(report),
@@ -107,13 +111,12 @@ export async function recordPricingClusterPerformanceRefreshFailure(params: {
   attemptedAt?: string;
 }) {
   const attemptedAt = params.attemptedAt || new Date().toISOString();
-  const storedSnapshot = await getStoredPricingClusterPerformanceSnapshot().catch(
-    () => ({
+  const storedSnapshot =
+    await getStoredPricingClusterPerformanceSnapshot().catch(() => ({
       report: null,
       summaryMarkdown: '',
       refresh: null,
-    })
-  );
+    }));
   const refresh = buildPricingClusterPerformanceRefreshMetadata({
     generatedAt:
       storedSnapshot.report?.generatedAt ||
@@ -139,9 +142,8 @@ export async function recordPricingClusterPerformanceRefreshFailure(params: {
   });
 
   await saveConfigs({
-    [PRICING_CLUSTER_PERFORMANCE_REFRESH_STATUS_CONFIG_KEY]: JSON.stringify(
-      refresh
-    ),
+    [PRICING_CLUSTER_PERFORMANCE_REFRESH_STATUS_CONFIG_KEY]:
+      JSON.stringify(refresh),
   });
 
   return refresh;
@@ -169,7 +171,8 @@ export async function getStoredPricingClusterPerformanceSnapshot() {
   return {
     report,
     summaryMarkdown:
-      summaryMarkdown || (report ? buildPricingClusterPerformanceSnapshotMarkdown(report) : ''),
+      summaryMarkdown ||
+      (report ? buildPricingClusterPerformanceSnapshotMarkdown(report) : ''),
     refresh: report?.refresh || parsedRefresh,
   } satisfies StoredPricingClusterPerformanceSnapshot;
 }
@@ -207,10 +210,13 @@ export function parseStoredPricingClusterPerformanceRefreshMetadata(
   }
 
   try {
-    const parsed = JSON.parse(raw) as Partial<PricingClusterPerformanceRefreshMetadata>;
+    const parsed = JSON.parse(
+      raw
+    ) as Partial<PricingClusterPerformanceRefreshMetadata>;
     const generatedAt =
-      String(parsed.lastSuccessfulRefreshAt || parsed.lastRefreshAttemptAt || '').trim() ||
-      new Date().toISOString();
+      String(
+        parsed.lastSuccessfulRefreshAt || parsed.lastRefreshAttemptAt || ''
+      ).trim() || new Date().toISOString();
 
     return buildPricingClusterPerformanceRefreshMetadata({
       generatedAt,

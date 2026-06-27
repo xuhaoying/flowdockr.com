@@ -32,7 +32,10 @@ export function Image({
       width={width}
       height={height}
       style={{ width: `${width}px`, height: `${height}px` }}
-      className={cn('shrink-0 rounded-md object-cover overflow-hidden', className)}
+      className={cn(
+        'shrink-0 overflow-hidden rounded-md object-cover',
+        className
+      )}
     />
   );
 }

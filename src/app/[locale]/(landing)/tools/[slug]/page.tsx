@@ -9,13 +9,13 @@ import { ToolHero } from '@/components/tool/ToolHero';
 import { ToolInputPreview } from '@/components/tool/ToolInputPreview';
 import { ToolUseCases } from '@/components/tool/ToolUseCases';
 import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
-import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getAllToolSlugs } from '@/lib/content/getAllToolSlugs';
 import {
   getDefaultGeneratorScenarioSlug,
   getScenarioBySlug as getPricingScenarioBySlug,
 } from '@/lib/content/getScenarioBySlug';
 import { getToolBySlug } from '@/lib/content/getToolBySlug';
+import { getToolSurfaceScenarioLinks } from '@/lib/content/scenarioPages';
 import { getPricingScenarioBySlug as getPricingClusterScenarioBySlug } from '@/lib/pricing-cluster';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildToolMetadata } from '@/lib/seo/buildToolMetadata';
@@ -104,7 +104,7 @@ export async function generateMetadata({
 
   if (!tool) {
     return {
-      title: 'Tool not found | Flowdockr',
+      title: 'Tool not found | FlowDockr',
       robots: {
         index: false,
         follow: false,
@@ -162,8 +162,7 @@ export default async function ToolPage({
     tool.slug === 'reply-generator'
       ? REPLY_GENERATOR_PREFILLS[defaultScenarioSlug] || null
       : null;
-  const loadedContextTitle =
-    pricingScenario?.h1 || generatorScenario?.h1 || '';
+  const loadedContextTitle = pricingScenario?.h1 || generatorScenario?.h1 || '';
   const loadedContextLabel = pricingScenario
     ? 'Context loaded from scenario:'
     : generatorScenario
@@ -204,20 +203,12 @@ export default async function ToolPage({
             </span>
           </p>
           {loadedContextSummary ? (
-            <p className="mt-1 text-xs text-slate-600">{loadedContextSummary}</p>
+            <p className="mt-1 text-xs text-slate-600">
+              {loadedContextSummary}
+            </p>
           ) : null}
         </section>
       ) : null}
-
-      <section className="space-y-2 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 shadow-sm">
-        <h2 className="text-base font-semibold text-slate-900">
-          Paste the message now
-        </h2>
-        <p className="text-sm text-slate-700">
-          Paste the exact client message and generate a draft built for the
-          pressure in the conversation.
-        </p>
-      </section>
 
       <ToolForm
         toolSlug={tool.slug}

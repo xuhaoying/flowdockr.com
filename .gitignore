@@ -71,3 +71,11 @@ src/config/db/migrations
 .source
 
 .chats
+.env*
+!.env.example
+!.env.production
+!.env.sample
+.gstack/
+.playwright-cli/
+output/
+test-results/

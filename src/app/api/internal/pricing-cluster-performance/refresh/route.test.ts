@@ -3,6 +3,8 @@
 import { NextRequest } from 'next/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { GET, POST } from './route';
+
 const mocks = vi.hoisted(() => ({
   verifyPricingClusterPerformanceCronRequest: vi.fn(),
   refreshPricingClusterPerformanceSnapshot: vi.fn(),
@@ -17,8 +19,6 @@ vi.mock('@/lib/pricing-cluster-performance-snapshot', () => ({
   recordPricingClusterPerformanceRefreshFailure:
     mocks.recordPricingClusterPerformanceRefreshFailure,
 }));
-
-import { GET, POST } from './route';
 
 describe('/api/internal/pricing-cluster-performance/refresh', () => {
   beforeEach(() => {
@@ -86,7 +86,9 @@ describe('/api/internal/pricing-cluster-performance/refresh', () => {
     const payload = await response.json();
 
     expect(response.status).toBe(500);
-    expect(mocks.recordPricingClusterPerformanceRefreshFailure).toHaveBeenCalled();
+    expect(
+      mocks.recordPricingClusterPerformanceRefreshFailure
+    ).toHaveBeenCalled();
     expect(payload).toMatchObject({
       success: false,
       error: 'PRICING_CLUSTER_PERFORMANCE_REFRESH_FAILED',

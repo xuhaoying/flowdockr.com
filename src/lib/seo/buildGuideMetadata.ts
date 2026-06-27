@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-
 import type { GuidePageData } from '@/types/content';
 
 type GuideMetadataInput = Pick<

@@ -3,6 +3,7 @@
 You are implementing `<PRODUCT_NAME>` inside the existing Flowdockr codebase.
 
 ## Hard Constraints
+
 1. Follow `prd.md`, `architecture.md`, and `filetree.md` exactly.
 2. Implement only MVP scope.
 3. Do not introduce new frameworks or major dependencies.
@@ -10,6 +11,7 @@ You are implementing `<PRODUCT_NAME>` inside the existing Flowdockr codebase.
 5. Keep business logic in `/src/core`; keep route handlers in `/src/app/api`.
 
 ## Implementation Order
+
 1. Create schemas and core service in `/src/core/<product>/`.
 2. Create API route(s) in `/src/app/api/<feature>/`.
 3. Build UI generator block in `/src/shared/blocks/<feature>/generator.tsx`.
@@ -17,6 +19,7 @@ You are implementing `<PRODUCT_NAME>` inside the existing Flowdockr codebase.
 5. Add loading, copy feedback, and error states.
 
 ## Required Output
+
 - List changed files with purpose.
 - Confirm request/response schema alignment with PRD.
 - Report test/build command results.

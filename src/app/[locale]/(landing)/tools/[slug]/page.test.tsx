@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+import ToolPage from './page';
 
 const mocks = vi.hoisted(() => ({
   notFound: vi.fn(() => {
@@ -51,8 +53,6 @@ vi.mock('@/core/i18n/navigation', () => ({
   ),
 }));
 
-import ToolPage from './page';
-
 describe('tool page', () => {
   it('renders the expected inputs section for pricing tools', async () => {
     const view = await ToolPage({
@@ -69,6 +69,8 @@ describe('tool page', () => {
       screen.getByRole('heading', { name: 'Expected inputs' })
     ).toBeTruthy();
     expect(screen.getByText('Client message')).toBeTruthy();
-    expect(screen.getByText('Paste the exact client message here')).toBeTruthy();
+    expect(
+      screen.getByText('Paste the exact client message here')
+    ).toBeTruthy();
   });
 });

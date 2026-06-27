@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
+
 import { LazyImage } from './lazy-image';
 
 export type UploadStatus = 'idle' | 'uploading' | 'uploaded' | 'error';
@@ -47,7 +48,10 @@ const formatBytes = (bytes?: number) => {
 /**
  * Image compression utility
  */
-export const compressImage = async (file: File, quality = 0.7): Promise<File> => {
+export const compressImage = async (
+  file: File,
+  quality = 0.7
+): Promise<File> => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -84,7 +88,7 @@ export const compressImage = async (file: File, quality = 0.7): Promise<File> =>
 const uploadImageFile = async (file: File) => {
   // Compress before upload
   const compressedFile = await compressImage(file);
-  
+
   const formData = new FormData();
   formData.append('files', compressedFile);
 

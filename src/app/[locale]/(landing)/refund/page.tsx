@@ -14,9 +14,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Refund Policy | Flowdockr',
+  title: 'Refund Policy | FlowDockr',
   description:
-    'Refund policy for Flowdockr paid credit purchases, billing errors, and account access issues.',
+    'Refund policy for FlowDockr paid credit purchases, billing errors, and account access issues.',
   canonicalUrl: '/refund',
 });
 
@@ -36,14 +36,14 @@ export default async function RefundPolicyPage({
     >
       <TrustSectionCard title="Free usage">
         <p>
-          Flowdockr includes a free trial so users can test the product before
+          FlowDockr includes a free trial so users can test the product before
           buying paid credits.
         </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Paid credit packs">
         <p>
-          Paid Flowdockr plans are currently one-time credit-pack purchases, not
+          Paid FlowDockr plans are currently one-time credit-pack purchases, not
           automatically renewing subscriptions. Payment is processed through
           checkout, and access is delivered as credits inside the product.
         </p>
@@ -54,21 +54,69 @@ export default async function RefundPolicyPage({
         </p>
       </TrustSectionCard>
 
+      <TrustSectionCard title="Refund eligibility">
+        <p>
+          Because FlowDockr is a digital product, used credits are generally not
+          refundable. We review refund requests manually when there is a clear
+          billing or access issue.
+        </p>
+        <ul className="list-disc space-y-2 pl-5">
+          <li>Duplicate charges are eligible for review and correction.</li>
+          <li>
+            Successful payments where credits were not delivered are eligible
+            for correction or refund review.
+          </li>
+          <li>
+            Unused paid credits may be reviewed for refund within 14 days of
+            purchase.
+          </li>
+          <li>
+            Credits that have already been used to generate outputs are
+            generally final unless a refund is required by law or we decide
+            otherwise after review.
+          </li>
+          <li>
+            Abuse, fraud, chargeback misuse, prohibited use, or violation of the
+            Terms of Service may make an account ineligible for voluntary
+            refunds.
+          </li>
+        </ul>
+      </TrustSectionCard>
+
+      <TrustSectionCard title="Digital delivery and no shipping">
+        <p>
+          FlowDockr sells digital software access only. After a successful
+          checkout, credits are delivered to the user account and can be used in
+          the product.
+        </p>
+        <p>
+          We do not ship physical goods. There are no shipping fees, customs
+          fees, freight timelines, or physical delivery obligations.
+        </p>
+      </TrustSectionCard>
+
       <TrustSectionCard title="Refund requests">
         <p>
           If you believe there was a duplicate charge, checkout error, account
           access issue, or other billing problem, contact us as soon as possible
-          through the Contact page.
+          through the Contact page. For unused-credit refund review, contact us
+          within 14 days of purchase.
         </p>
         <p>
           Include the purchase email, approximate purchase date, and a short
           description of the issue so we can investigate.
         </p>
+        <p>
+          We aim to acknowledge billing requests within two business days.
+          Approved refunds are returned to the original payment method through
+          the payment processor when possible. If a refund is approved, related
+          paid credits may be removed from the account.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Contact">
         <p>
-          Flowdockr is a product of {FLOWDOCKR_COMPANY_NAME}. Billing and refund
+          FlowDockr is a product of {FLOWDOCKR_COMPANY_NAME}. Billing and refund
           questions should be emailed to{' '}
           <a
             href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}

@@ -277,7 +277,7 @@ export const pricingScenarioBlueprints: PricingScenarioBlueprint[] =
         title: 'Generate a tailored reply',
         body:
           scenario.toolCta ||
-          'Paste the exact client message and project context. Flowdockr will draft a response that protects your rate and fits this negotiation stage.',
+          'Paste the exact client message and project context. FlowDockr will draft a response that protects your rate and fits this negotiation stage.',
         buttonLabel: 'Generate my reply',
         toolSlug: 'price-negotiation-email-generator',
       },

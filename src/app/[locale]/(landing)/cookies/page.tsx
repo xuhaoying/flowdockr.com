@@ -14,9 +14,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Cookie Policy | Flowdockr',
+  title: 'Cookie Policy | FlowDockr',
   description:
-    'Cookie policy for Flowdockr, including necessary cookies and optional analytics or support tools.',
+    'Cookie policy for FlowDockr, including necessary cookies and optional analytics or support tools.',
   canonicalUrl: '/cookies',
 });
 
@@ -44,7 +44,7 @@ export default async function CookiePolicyPage({
 
       <TrustSectionCard title="Optional analytics and support tools">
         <p>
-          Flowdockr may use optional analytics, attribution, or customer support
+          FlowDockr may use optional analytics, attribution, or customer support
           tools to understand product usage, improve reliability, and respond to
           support requests. These tools may set cookies or use similar browser
           storage when enabled.
@@ -67,7 +67,7 @@ export default async function CookiePolicyPage({
 
       <TrustSectionCard title="Contact">
         <p>
-          Flowdockr is a product of {FLOWDOCKR_COMPANY_NAME}. For questions
+          FlowDockr is a product of {FLOWDOCKR_COMPANY_NAME}. For questions
           about cookies or privacy, email{' '}
           <a
             href={`mailto:${FLOWDOCKR_PUBLIC_SUPPORT_EMAIL}`}

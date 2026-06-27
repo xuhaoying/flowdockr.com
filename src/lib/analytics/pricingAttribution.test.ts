@@ -34,10 +34,12 @@ describe('pricing attribution helpers', () => {
 
   it('extracts pricing slugs from canonical pricing paths', () => {
     expect(
-      getPricingScenarioSlugFromPath('/en/pricing/client-messaging-outside-work-hours/?x=1')
+      getPricingScenarioSlugFromPath(
+        '/en/pricing/client-messaging-outside-work-hours/?x=1'
+      )
     ).toBe('client-messaging-outside-work-hours');
-    expect(getPricingScenarioSlugFromPath('/tools/reply-generator?scenario=foo')).toBe(
-      ''
-    );
+    expect(
+      getPricingScenarioSlugFromPath('/tools/reply-generator?scenario=foo')
+    ).toBe('');
   });
 });

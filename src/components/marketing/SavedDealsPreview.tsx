@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-
-import { Link } from '@/core/i18n/navigation';
 import { listSavedDeals } from '@/lib/deals-history';
 import { SavedDealRecord } from '@/types/deals';
+
+import { Link } from '@/core/i18n/navigation';
 
 export function SavedDealsPreview() {
   const [records, setRecords] = useState<SavedDealRecord[]>([]);
@@ -22,20 +22,28 @@ export function SavedDealsPreview() {
           Build a reusable negotiation library
         </h2>
         <p className="text-sm text-slate-700">
-          Save the exact client pressure, the reply you sent, and the strategy that
-          worked. Your next pricing conversation starts with evidence, not guesswork.
+          Save the exact client pressure, the reply you sent, and the strategy
+          that worked. Your next pricing conversation starts with evidence, not
+          guesswork.
         </p>
       </div>
 
       {latestRecords.length > 0 ? (
         <div className="grid gap-3 md:grid-cols-2">
           {latestRecords.map((record) => (
-            <article key={record.id} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+            <article
+              key={record.id}
+              className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+            >
+              <p className="text-xs font-semibold tracking-wide text-slate-600 uppercase">
                 Saved case
               </p>
-              <p className="mt-1 text-sm font-semibold text-slate-900">{record.scenarioTitle}</p>
-              <p className="mt-2 line-clamp-3 text-sm text-slate-700">{record.clientMessage}</p>
+              <p className="mt-1 text-sm font-semibold text-slate-900">
+                {record.scenarioTitle}
+              </p>
+              <p className="mt-2 line-clamp-3 text-sm text-slate-700">
+                {record.clientMessage}
+              </p>
             </article>
           ))}
         </div>
@@ -56,7 +64,10 @@ export function SavedDealsPreview() {
         </div>
       )}
 
-      <Link href="/history" className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
+      <Link
+        href="/history"
+        className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+      >
         Open negotiation library
       </Link>
     </section>

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-
 import type { ScenarioPageData } from '@/types/content';
 
 type ScenarioMetadataInput = Pick<

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-
 import { trackEvent } from '@/lib/analytics-client';
 import { CREDIT_PACKAGE_LIST } from '@/lib/credits/packages';
 import { CreditPackageId } from '@/types/billing';
@@ -13,9 +12,8 @@ type PricingPacksProps = {
 };
 
 export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
-  const [loadingPackageId, setLoadingPackageId] = useState<CreditPackageId | null>(
-    null
-  );
+  const [loadingPackageId, setLoadingPackageId] =
+    useState<CreditPackageId | null>(null);
   const [error, setError] = useState('');
 
   const startCheckout = async (packageId: CreditPackageId) => {
@@ -48,7 +46,9 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
 
       if (response.status === 401 || payload.error === 'UNAUTHORIZED') {
         const callbackUrl = `${window.location.pathname}${window.location.search}`;
-        window.location.assign(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        window.location.assign(
+          `/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
+        );
         return;
       }
 
@@ -78,22 +78,24 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
           >
             <h3 className="text-lg font-semibold">{pack.name}</h3>
             {pack.badge ? (
-              <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-muted-foreground mt-1 text-xs font-medium tracking-wide uppercase">
                 {pack.badge}
               </p>
             ) : null}
             <p className="mt-2 text-3xl font-bold">
               ${(pack.priceUsdCents / 100).toFixed(0)}
             </p>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-1 text-sm">
               {pack.credits} negotiation credits
             </p>
-            <p className="mt-3 text-sm text-muted-foreground">{pack.description}</p>
+            <p className="text-muted-foreground mt-3 text-sm">
+              {pack.description}
+            </p>
             {pack.featureSummary?.length ? (
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <ul className="text-muted-foreground mt-3 space-y-2 text-sm">
                 {pack.featureSummary.slice(0, 3).map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                    <span className="bg-muted-foreground mt-1 inline-block h-1.5 w-1.5 rounded-full" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -114,9 +116,9 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        Pay once. Credits never expire. Pro unlocks the most complete negotiation
-        support layer.
+      <p className="text-muted-foreground text-sm">
+        Pay once. Credits never expire. Pro unlocks the most complete
+        negotiation support layer.
       </p>
 
       {error ? (

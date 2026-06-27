@@ -69,7 +69,8 @@ export function Table({
                         placeholder={column.placeholder}
                         value={value}
                         alt={
-                          (column.metadata as { alt?: string } | undefined)?.alt ||
+                          (column.metadata as { alt?: string } | undefined)
+                            ?.alt ||
                           (typeof value === 'string' ? value : 'image')
                         }
                         metadata={column.metadata}

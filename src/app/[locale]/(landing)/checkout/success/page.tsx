@@ -12,9 +12,9 @@ import { setRequestLocale } from 'next-intl/server';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Payment successful | Flowdockr',
+  title: 'Payment successful | FlowDockr',
   description:
-    'Your Flowdockr negotiation credits and support level are being confirmed.',
+    'Your FlowDockr negotiation credits and support level are being confirmed.',
   canonicalUrl: '/checkout/success',
   noIndex: true,
 });
@@ -54,7 +54,9 @@ export default async function CheckoutSuccessPage({
     getPricingScenarioBySlug(String(query.pricing_slug || '').trim())?.slug ||
     getPricingScenarioSlugFromPath(returnTo);
   const sourceSurface = String(query.pricing_source_surface || '').trim();
-  const pricingScenario = pricingSlug ? getPricingScenarioBySlug(pricingSlug) : null;
+  const pricingScenario = pricingSlug
+    ? getPricingScenarioBySlug(pricingSlug)
+    : null;
   const pricingAttribution = pricingScenario
     ? {
         pricingSlug: pricingScenario.slug,

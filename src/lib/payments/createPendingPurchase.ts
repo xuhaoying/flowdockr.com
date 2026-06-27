@@ -1,4 +1,5 @@
 import { db, purchase } from '@/lib/db';
+
 import { getUuid } from '@/shared/lib/hash';
 
 export async function createPendingPurchase(params: {
@@ -33,34 +34,36 @@ export async function createPendingPurchase(params: {
   const purchaseId = getUuid();
   const provisionalSessionId = `pending_${purchaseId}`;
 
-  await db().insert(purchase).values({
-    id: purchaseId,
-    userId,
-    stripeCheckoutSessionId: provisionalSessionId,
-    stripePaymentIntentId: null,
-    stripeCustomerId: null,
-    email,
-    packageId: packCode,
-    creditsGranted: 0,
-    amountUsdCents: amountCents,
-    currency,
-    status: 'pending',
-    metadata: JSON.stringify({
-      purchaseId,
+  await db()
+    .insert(purchase)
+    .values({
+      id: purchaseId,
+      userId,
+      stripeCheckoutSessionId: provisionalSessionId,
+      stripePaymentIntentId: null,
+      stripeCustomerId: null,
+      email,
       packageId: packCode,
-      planName,
-      plan_name: planName,
-      supportLevel,
-      support_level: supportLevel,
-      credits,
-      credits_amount: credits,
-      scenarioSlug,
-      returnTo,
-      anonymousSessionId,
-      ...pricingMetadata,
-      source: 'flowdockr_checkout',
-    }),
-  });
+      creditsGranted: 0,
+      amountUsdCents: amountCents,
+      currency,
+      status: 'pending',
+      metadata: JSON.stringify({
+        purchaseId,
+        packageId: packCode,
+        planName,
+        plan_name: planName,
+        supportLevel,
+        support_level: supportLevel,
+        credits,
+        credits_amount: credits,
+        scenarioSlug,
+        returnTo,
+        anonymousSessionId,
+        ...pricingMetadata,
+        source: 'flowdockr_checkout',
+      }),
+    });
 
   return { id: purchaseId };
 }

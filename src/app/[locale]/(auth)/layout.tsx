@@ -11,13 +11,13 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="bg-brand-bg text-brand-text flex h-screen w-screen items-center justify-center">
       <div className="absolute top-4 left-4">
         <BrandLogo
           brand={{
             title: envConfigs.app_name,
             logo: {
-              src: '/logo.png',
+              src: '/logo-mark.svg',
               alt: envConfigs.app_name,
             },
             url: '/',

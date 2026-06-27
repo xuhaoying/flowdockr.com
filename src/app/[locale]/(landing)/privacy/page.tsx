@@ -14,9 +14,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Privacy Policy | Flowdockr',
+  title: 'Privacy Policy | FlowDockr',
   description:
-    'Privacy policy for Flowdockr, an AI negotiation assistant operated by Auralis Labs LLC.',
+    'Privacy policy for FlowDockr, an AI negotiation assistant operated by Auralis Labs LLC.',
   canonicalUrl: '/privacy',
 });
 
@@ -45,7 +45,8 @@ export default async function PrivacyPage({
           </li>
           <li>
             Purchase and billing metadata needed to complete and support
-            checkout.
+            checkout. Full card numbers are processed by payment providers and
+            are not stored by FlowDockr.
           </li>
           <li>
             Technical information such as browser, device, IP-derived signals,
@@ -80,7 +81,7 @@ export default async function PrivacyPage({
 
       <TrustSectionCard title="Third-party processors and service providers">
         <p>
-          Depending on how Flowdockr is configured, we may use service providers
+          Depending on how FlowDockr is configured, we may use service providers
           for payments, email delivery, authentication, hosting, database
           infrastructure, analytics, attribution, and customer support.
         </p>
@@ -96,12 +97,16 @@ export default async function PrivacyPage({
             Optional analytics or measurement tools such as Google Analytics,
             Plausible, Clarity, OpenPanel, or Vercel Analytics when configured.
           </li>
+          <li>
+            AI infrastructure providers used to generate draft replies and
+            strategy notes from the information you choose to submit.
+          </li>
         </ul>
       </TrustSectionCard>
 
       <TrustSectionCard title="Data retention">
         <p>
-          We keep information for as long as needed to operate Flowdockr, secure
+          We keep information for as long as needed to operate FlowDockr, secure
           the service, support billing, resolve disputes, and meet legal
           obligations.
         </p>
@@ -138,6 +143,20 @@ export default async function PrivacyPage({
           </Link>
           . We currently handle these requests manually rather than through a
           self-serve privacy dashboard.
+        </p>
+      </TrustSectionCard>
+
+      <TrustSectionCard title="AI processing">
+        <p>
+          When you request a generated reply, the client message, selected
+          scenario, and optional context you provide may be sent to an AI
+          provider so the product can generate the requested output.
+        </p>
+        <p>
+          Do not submit confidential, regulated, or sensitive information unless
+          you have permission to process it through FlowDockr and its service
+          providers. FlowDockr is not intended for medical, legal, financial,
+          debt, banking, or other regulated professional decisions.
         </p>
       </TrustSectionCard>
 

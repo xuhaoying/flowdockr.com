@@ -1,4 +1,4 @@
-# Flowdockr Analytics and Cookie Audit
+# FlowDockr Analytics and Cookie Audit
 
 Effective date: March 17, 2026
 

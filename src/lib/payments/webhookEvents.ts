@@ -1,10 +1,12 @@
+import { db, webhookEvent } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 import Stripe from 'stripe';
 
-import { db, webhookEvent } from '@/lib/db';
 import { getUuid } from '@/shared/lib/hash';
 
-export async function hasProcessedWebhookEvent(stripeEventId: string): Promise<boolean> {
+export async function hasProcessedWebhookEvent(
+  stripeEventId: string
+): Promise<boolean> {
   const [existing] = await db()
     .select({
       processed: webhookEvent.processed,
@@ -21,7 +23,9 @@ export async function markWebhookEventProcessed(
   rawPayload: string
 ): Promise<void> {
   const safePayload =
-    rawPayload.length > 20_000 ? `${rawPayload.slice(0, 20_000)}...` : rawPayload;
+    rawPayload.length > 20_000
+      ? `${rawPayload.slice(0, 20_000)}...`
+      : rawPayload;
 
   await db()
     .insert(webhookEvent)

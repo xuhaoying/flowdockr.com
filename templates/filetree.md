@@ -24,11 +24,13 @@
   - Product contract for handoff
 
 ## Naming Rules
+
 - API route: verb-light and feature-specific
 - Core files: noun-based and stable
 - Translation keys: deterministic and reusable
 
 ## Definition of Done
+
 - New files are isolated by feature
 - No framework-level files modified unless required
 - API + UI contracts match PRD output schema exactly

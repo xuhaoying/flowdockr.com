@@ -3,6 +3,7 @@ import {
   TrustSectionCard,
 } from '@/components/trust/TrustPageLayout';
 import {
+  FLOWDOCKR_COMPANY_JURISDICTION,
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
   FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
@@ -14,9 +15,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'About Flowdockr | Auralis Labs LLC',
+  title: 'About FlowDockr | Auralis Labs LLC',
   description:
-    'Flowdockr is an AI negotiation assistant for professionals, built by Auralis Labs LLC.',
+    'FlowDockr is an AI negotiation assistant for professionals, built by Auralis Labs LLC.',
   canonicalUrl: '/about',
 });
 
@@ -30,13 +31,13 @@ export default async function AboutPage({
 
   return (
     <TrustPageLayout
-      title="About Flowdockr"
+      title="About FlowDockr"
       description={`${FLOWDOCKR_PRODUCT_NAME} is an AI negotiation assistant that helps professionals prepare for difficult conversations, pricing pushback, and client decisions.`}
       effectiveDate={TRUST_EFFECTIVE_DATE}
     >
       <TrustSectionCard title="Product">
         <p>
-          Flowdockr helps users move from a difficult message or situation to a
+          FlowDockr helps users move from a difficult message or situation to a
           clearer negotiation plan. The product focuses on practical strategy,
           tone, tradeoffs, and reply drafts that can be reviewed before use.
         </p>
@@ -45,19 +46,30 @@ export default async function AboutPage({
           freelancers, and operators who need to handle commercial conversations
           without sounding defensive or unclear.
         </p>
+        <p>
+          FlowDockr is a digital software product. It does not ship physical
+          goods, move customer funds, lend money, broker financial products,
+          settle debts, or provide legal, tax, investment, or financial advice.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Mission">
         <p>
           Our mission is to make difficult professional conversations easier to
-          prepare for. Flowdockr gives users a structured way to think before
+          prepare for. FlowDockr gives users a structured way to think before
           responding, protect important boundaries, and keep relationships
           moving forward.
         </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Company">
-        <p>Flowdockr is built and operated by {FLOWDOCKR_COMPANY_NAME}.</p>
+        <p>FlowDockr is built and operated by {FLOWDOCKR_COMPANY_NAME}.</p>
+        <p>
+          Business jurisdiction: {FLOWDOCKR_COMPANY_JURISDICTION}. Registered
+          business records, ownership information, tax records, and banking
+          verification documents are supplied through official payment processor
+          or banking review workflows when required.
+        </p>
         <p>
           The service is operated as a commercial SaaS product for real users,
           with public pricing, checkout, support, and legal policies maintained
@@ -77,6 +89,16 @@ export default async function AboutPage({
             className="font-medium text-slate-900 underline underline-offset-2"
           >
             Contact
+          </Link>
+          .
+        </p>
+        <p>
+          For business verification context, see{' '}
+          <Link
+            href="/compliance"
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            Business and Compliance
           </Link>
           .
         </p>

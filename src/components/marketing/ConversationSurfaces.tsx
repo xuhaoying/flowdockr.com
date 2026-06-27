@@ -2,7 +2,7 @@ export function ConversationSurfaces() {
   return (
     <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-xl font-semibold tracking-tight text-slate-900">
-        Where Flowdockr helps today
+        Where FlowDockr helps today
       </h2>
       <p className="text-sm text-slate-700">
         Pricing, payment, scope, and proposal follow-up scenarios are live now.

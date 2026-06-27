@@ -185,7 +185,8 @@ function competitionGuess(keyword) {
 }
 
 function priority(keyword, score) {
-  if (/client says|client asking|client not|ghosting|budget/.test(keyword)) return 'P1';
+  if (/client says|client asking|client not|ghosting|budget/.test(keyword))
+    return 'P1';
   if (score >= 5) return 'P1';
   return 'P2';
 }
@@ -196,7 +197,10 @@ const summary = [];
 for (const [cluster, cfg] of Object.entries(CLUSTERS)) {
   const combined = [
     ...cfg.seed.map((keyword) => ({ keyword, source: 'user_seed' })),
-    ...cfg.expansion.map((keyword) => ({ keyword, source: 'programmatic_expand' })),
+    ...cfg.expansion.map((keyword) => ({
+      keyword,
+      source: 'programmatic_expand',
+    })),
   ];
 
   const unique = [];
@@ -261,18 +265,30 @@ const header = [
 
 const csv = [header.join(',')];
 for (const row of finalRows) {
-  const line = header.map((key) => `"${String(row[key]).replaceAll('"', '""')}"`).join(',');
+  const line = header
+    .map((key) => `"${String(row[key]).replaceAll('"', '""')}"`)
+    .join(',');
   csv.push(line);
 }
 
-writeFileSync('product/seo/flowdockr-keyword-library-curated-v1.csv', `${csv.join('\n')}\n`);
+writeFileSync(
+  'product/seo/flowdockr-keyword-library-curated-v1.csv',
+  `${csv.join('\n')}\n`
+);
 
 const totalSeed = finalRows.filter((r) => r.source === 'user_seed').length;
-const totalExpansion = finalRows.filter((r) => r.source === 'programmatic_expand').length;
+const totalExpansion = finalRows.filter(
+  (r) => r.source === 'programmatic_expand'
+).length;
 
 const md = `# Flowdockr Curated Keyword Library v1\n\nGenerated: 2026-03-04\n\n## Scope\n\n- Total keywords: 120\n- Source split: ${totalSeed} user-seed + ${totalExpansion} programmatic expansion\n- Positioning: problem-first, high-intent freelancer queries\n\n## Cluster Counts\n\n${summary
-  .map((s) => `- ${s.cluster}: ${s.total} (${s.seed} seed + ${s.expansion} expansion)`)
-  .join('\n')}\n\n## Notes\n\n- This dataset keeps your original seed wording and adds minimal expansion for programmatic scale.\n- Use source=user_seed when selecting the first publishing wave.\n`;
+  .map(
+    (s) =>
+      `- ${s.cluster}: ${s.total} (${s.seed} seed + ${s.expansion} expansion)`
+  )
+  .join(
+    '\n'
+  )}\n\n## Notes\n\n- This dataset keeps your original seed wording and adds minimal expansion for programmatic scale.\n- Use source=user_seed when selecting the first publishing wave.\n`;
 
 writeFileSync('product/seo/flowdockr-keyword-library-curated-v1.md', md);
 console.log('Generated curated keyword library (120).');

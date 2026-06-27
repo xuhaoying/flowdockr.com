@@ -129,8 +129,9 @@ describe('pricing cluster performance report', () => {
       signalCount: 4,
       pagesWithSignals: 4,
     });
-    expect(report.prioritizedActions.find((item) => item.action === 'improve_cta'))
-      .toBeTruthy();
+    expect(
+      report.prioritizedActions.find((item) => item.action === 'improve_cta')
+    ).toBeTruthy();
     expect(
       report.prioritizedActions.find(
         (item) => item.action === 'improve_generator_mapping'

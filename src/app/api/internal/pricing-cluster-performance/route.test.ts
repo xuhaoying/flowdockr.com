@@ -3,6 +3,8 @@
 import { NextRequest } from 'next/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { GET } from './route';
+
 const mocks = vi.hoisted(() => ({
   verifyPricingClusterPerformanceCronRequest: vi.fn(),
   getStoredPricingClusterPerformanceSnapshot: vi.fn(),
@@ -14,8 +16,6 @@ vi.mock('@/lib/pricing-cluster-performance-snapshot', () => ({
   getStoredPricingClusterPerformanceSnapshot:
     mocks.getStoredPricingClusterPerformanceSnapshot,
 }));
-
-import { GET } from './route';
 
 describe('/api/internal/pricing-cluster-performance', () => {
   beforeEach(() => {
@@ -41,7 +41,9 @@ describe('/api/internal/pricing-cluster-performance', () => {
     });
 
     const response = await GET(
-      new NextRequest('http://localhost/api/internal/pricing-cluster-performance')
+      new NextRequest(
+        'http://localhost/api/internal/pricing-cluster-performance'
+      )
     );
     const payload = await response.json();
 

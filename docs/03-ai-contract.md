@@ -3,6 +3,7 @@
 必须返回 JSON，禁止自由文本。
 
 ## Fields
+
 - `instant_reply`: `string`（20-80 字，能直接发客户，不承诺让价）
 - `client_analysis`: `object`
 - `client_analysis.intent`: one of `[budget_pressure, scope_push, timeline_pressure, comparison_shopping, unclear_requirements]`
@@ -23,10 +24,12 @@
 - `next_move`: one of `[ask_clarifying, send_reply, offer_options, propose_call, walk_away]`
 
 ## Failure Fallback (Required)
+
 - 如果输入不足：`next_move = "ask_clarifying"`，且 `instant_reply` 输出“先对齐需求/范围”的话术。
 - 如果价格字段缺失：只输出策略，不输出报价数字，`rationale` 写明 `"缺少 floor/quote"`。
 
 ## JSON Shape Example
+
 ```json
 {
   "instant_reply": "感谢你直说预算，我们先把目标和范围对齐，我再给你两个可执行方案。",
@@ -57,4 +60,3 @@
   "next_move": "offer_options"
 }
 ```
-

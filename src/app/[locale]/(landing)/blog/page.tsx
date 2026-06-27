@@ -4,9 +4,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Flowdockr Blog',
+  title: 'FlowDockr Blog',
   description:
-    'Flowdockr articles and scenario resources for preparing professional negotiation replies.',
+    'FlowDockr articles and scenario resources for preparing professional negotiation replies.',
   canonicalUrl: '/blog',
   noIndex: true,
 });
@@ -26,7 +26,7 @@ export default async function BlogPage({
           Blog
         </h1>
         <p className="mt-2 text-sm text-slate-700">
-          Use Flowdockr scenario resources and the reply generator to prepare
+          Use FlowDockr scenario resources and the reply generator to prepare
           clearer negotiation responses.
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">

@@ -2,9 +2,8 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useLocale } from 'next-intl';
-
 import { trackEvent } from '@/lib/analytics';
+import { useLocale } from 'next-intl';
 
 type ScenarioViewTrackerProps = {
   scenarioSlug: string;

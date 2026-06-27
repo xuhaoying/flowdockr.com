@@ -7,7 +7,9 @@ type SituationSnapshotProps = {
 export function SituationSnapshot({ scenario }: SituationSnapshotProps) {
   return (
     <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">The situation</h2>
+      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+        The situation
+      </h2>
       <ul className="space-y-2 text-sm text-slate-700">
         {scenario.situationSnapshot.map((item) => (
           <li key={item} className="flex items-start gap-2">

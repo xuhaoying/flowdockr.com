@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import {
   scenarioCommercialPriorityValues,
@@ -6,22 +5,23 @@ import {
   scenarioIntentTierValues,
   scenarioValueIntentValues,
 } from '@/types/scenario-catalog';
+import { describe, expect, it } from 'vitest';
 
-import { scenarioDatasetV1 } from './scenario-dataset-v1';
 import {
   getAllScenarioPages,
   getPopularScenarioPages,
   getRelatedScenarioGroups,
-  getRelatedScenarioSectionCopy,
-  getScenarioHeroDescription,
   getRelatedScenarioLinks,
+  getRelatedScenarioSectionCopy,
   getScenarioDistributionPriority,
+  getScenarioHeroDescription,
   getScenarioMetaDescription,
   getScenarioMetaTitle,
   getScenarioPageBySlug,
   getScenarioPagePromise,
   getScenarioPagesByDistributionPriority,
 } from './index';
+import { scenarioDatasetV1 } from './scenario-dataset-v1';
 
 const EXPANDED_CLUSTER_SLUGS = {
   payment: [
@@ -124,7 +124,9 @@ describe('scenario dataset v1 integration', () => {
 
     for (const scenario of scenarioDatasetV1) {
       expect(getScenarioPageBySlug(scenario.slug)?.slug).toBe(scenario.slug);
-      expect(getGeneratorScenarioBySlug(scenario.slug)?.slug).toBe(scenario.slug);
+      expect(getGeneratorScenarioBySlug(scenario.slug)?.slug).toBe(
+        scenario.slug
+      );
     }
   });
 
@@ -182,7 +184,9 @@ describe('scenario dataset v1 integration', () => {
       expect(getGeneratorScenarioBySlug(slug)?.slug).toBe(slug);
     }
 
-    expect(getScenarioPageBySlug('overdue-invoice-no-response')?.relatedScenarioSlugs).toEqual([
+    expect(
+      getScenarioPageBySlug('overdue-invoice-no-response')?.relatedScenarioSlugs
+    ).toEqual([
       'unpaid-invoice-follow-up',
       'payment-overdue-reminder',
       'second-payment-reminder',
@@ -259,9 +263,9 @@ describe('scenario dataset v1 integration', () => {
       }
     }
 
-    expect(getRelatedScenarioGroups('best-price-request').map((group) => group.id)).toEqual([
-      'related',
-    ]);
+    expect(
+      getRelatedScenarioGroups('best-price-request').map((group) => group.id)
+    ).toEqual(['related']);
   });
 
   it('marks high-value pages with valid intent and commercial labels', () => {
@@ -302,10 +306,13 @@ describe('scenario dataset v1 integration', () => {
 
   it('surfaces primary attack pages ahead of support pages in hub and related exposure helpers', () => {
     const popularScenarios = getPopularScenarioPages(8);
-    const paymentPrimaryPages = getScenarioPagesByDistributionPriority('primary', {
-      cluster: 'payment',
-      limit: 5,
-    });
+    const paymentPrimaryPages = getScenarioPagesByDistributionPriority(
+      'primary',
+      {
+        cluster: 'payment',
+        limit: 5,
+      }
+    );
 
     expect(popularScenarios).toHaveLength(8);
     for (const page of popularScenarios) {
@@ -313,9 +320,7 @@ describe('scenario dataset v1 integration', () => {
       expect(page.clusterCore).toBe(true);
     }
 
-    expect(
-      new Set(paymentPrimaryPages.map((page) => page.slug))
-    ).toEqual(
+    expect(new Set(paymentPrimaryPages.map((page) => page.slug))).toEqual(
       new Set([
         'ask-for-payment-politely',
         'final-payment-reminder',

@@ -1,14 +1,17 @@
+import { ScenarioContent } from '@/types/scenario';
 import { AlertTriangle, ShieldCheck, Workflow } from 'lucide-react';
 
 import { Link } from '@/core/i18n/navigation';
-import { ScenarioContent } from '@/types/scenario';
 import { Badge } from '@/shared/components/ui/badge';
 
 type ScenarioHeroProps = {
   scenario: ScenarioContent;
 };
 
-const RISK_LABEL: Record<ScenarioContent['promptContext']['riskLevel'], string> = {
+const RISK_LABEL: Record<
+  ScenarioContent['promptContext']['riskLevel'],
+  string
+> = {
   low: 'Low pressure',
   medium: 'Moderate pressure',
   high: 'High pressure',
@@ -17,7 +20,7 @@ const RISK_LABEL: Record<ScenarioContent['promptContext']['riskLevel'], string> 
 export function ScenarioHero({ scenario }: ScenarioHeroProps) {
   return (
     <header className="space-y-4">
-      <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
+      <nav aria-label="Breadcrumb" className="text-muted-foreground text-sm">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link href="/">Home</Link>
@@ -31,7 +34,7 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
         </ol>
       </nav>
 
-      <div className="rounded-2xl border bg-gradient-to-br from-indigo-50 via-background to-blue-50 p-6 md:p-7">
+      <div className="border-brand-lavender/25 via-brand-bg rounded-2xl border bg-linear-to-br from-white to-white p-6 shadow-sm shadow-slate-950/5 md:p-7">
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
@@ -42,23 +45,27 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
                 {scenario.promptContext.scenarioType.replaceAll('_', ' ')}
               </Badge>
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{scenario.h1}</h1>
-            <p className="max-w-3xl text-base text-muted-foreground">{scenario.intro}</p>
+            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+              {scenario.h1}
+            </h1>
+            <p className="text-muted-foreground max-w-3xl text-base">
+              {scenario.intro}
+            </p>
           </div>
 
-          <div className="rounded-xl border bg-background/70 p-4">
+          <div className="bg-background/70 rounded-xl border p-4">
             <p className="text-sm font-semibold">What this page gives you</p>
             <ul className="mt-3 space-y-2">
-              <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                <ShieldCheck className="mt-0.5 size-4 text-primary" />
+              <li className="text-muted-foreground flex items-start gap-2 text-sm">
+                <ShieldCheck className="text-primary mt-0.5 size-4" />
                 Strategy-based reply, not generic text.
               </li>
-              <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Workflow className="mt-0.5 size-4 text-primary" />
+              <li className="text-muted-foreground flex items-start gap-2 text-sm">
+                <Workflow className="text-primary mt-0.5 size-4" />
                 Recommended reply + alternative framing.
               </li>
-              <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                <AlertTriangle className="mt-0.5 size-4 text-primary" />
+              <li className="text-muted-foreground flex items-start gap-2 text-sm">
+                <AlertTriangle className="text-primary mt-0.5 size-4" />
                 Caution notes to avoid weak concessions.
               </li>
             </ul>

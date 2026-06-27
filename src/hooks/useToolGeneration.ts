@@ -1,14 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-
-import { GenerateReplyRequest, GenerateReplyResponse } from '@/types/generation';
+import {
+  GenerateReplyRequest,
+  GenerateReplyResponse,
+} from '@/types/generation';
 
 export type ToolGenerationState = {
   isLoading: boolean;
   error: string | null;
   result: GenerateReplyResponse | null;
-  submit: (payload: GenerateReplyRequest) => Promise<GenerateReplyResponse | null>;
+  submit: (
+    payload: GenerateReplyRequest
+  ) => Promise<GenerateReplyResponse | null>;
   setResult: (result: GenerateReplyResponse | null) => void;
 };
 
@@ -42,7 +46,9 @@ export function useToolGeneration(): ToolGenerationState {
       return data;
     } catch (requestError) {
       const nextError =
-        requestError instanceof Error ? requestError.message : 'GENERATION_FAILED';
+        requestError instanceof Error
+          ? requestError.message
+          : 'GENERATION_FAILED';
       setError(nextError);
       setResult(null);
       return null;

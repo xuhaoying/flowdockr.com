@@ -1,6 +1,6 @@
-import rawGuidePages from '../../../content/guides/guides.json';
-
 import { guidePageDataListSchema, type GuidePageData } from '@/types/content';
+
+import rawGuidePages from '../../../content/guides/guides.json';
 
 let cachedGuidePages: GuidePageData[] | null = null;
 
@@ -11,7 +11,10 @@ function loadGuidePages(): GuidePageData[] {
 
   const parsed = guidePageDataListSchema.safeParse(rawGuidePages);
   if (!parsed.success) {
-    console.error('[content] Failed to parse guides content:', parsed.error.flatten());
+    console.error(
+      '[content] Failed to parse guides content:',
+      parsed.error.flatten()
+    );
     cachedGuidePages = [];
     return cachedGuidePages;
   }

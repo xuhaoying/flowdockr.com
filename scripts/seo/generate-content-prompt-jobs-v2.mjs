@@ -5,7 +5,8 @@ const MAP_PATH = 'product/seo/factory/structure-map-v2-part1.core.csv';
 const SEO_PAGES_PATH = 'product/seo/factory/seo-pages.v2.csv';
 const PROMPT_SYSTEM_PATH = 'product/seo/factory/prompt-system-v2.json';
 const OUTPUT_JSONL = 'product/seo/generated/content-prompt-jobs-v2.jsonl';
-const OUTPUT_SUMMARY = 'product/seo/generated/content-prompt-jobs-v2.summary.md';
+const OUTPUT_SUMMARY =
+  'product/seo/generated/content-prompt-jobs-v2.summary.md';
 const GENERATED_AT = '2026-03-05';
 const CONTENT_ROOT = 'content/pages';
 
@@ -113,18 +114,30 @@ function ctaRouteFromToolName(targetTool, pageType, ownRoute) {
 }
 
 function toolRouteByType(rows, ctaType) {
-  const tools = rows.filter((row) => row.page_type === 'tool' || row.cluster === 'tools');
+  const tools = rows.filter(
+    (row) => row.page_type === 'tool' || row.cluster === 'tools'
+  );
   if (!tools.length) return '/tools/client-negotiation-reply-generator';
 
   if (ctaType === 'pricing') {
-    return tools.find((row) => /rate|pricing/i.test(row.route || row.slug || ''))?.route || '/tools/freelance-rate-calculator';
+    return (
+      tools.find((row) => /rate|pricing/i.test(row.route || row.slug || ''))
+        ?.route || '/tools/freelance-rate-calculator'
+    );
   }
 
   if (ctaType === 'proposal') {
-    return tools.find((row) => /proposal/i.test(row.route || row.slug || ''))?.route || '/tools/proposal-generator';
+    return (
+      tools.find((row) => /proposal/i.test(row.route || row.slug || ''))
+        ?.route || '/tools/proposal-generator'
+    );
   }
 
-  return tools.find((row) => /negotiation|reply|follow-up/i.test(row.route || row.slug || ''))?.route || '/tools/client-negotiation-reply-generator';
+  return (
+    tools.find((row) =>
+      /negotiation|reply|follow-up/i.test(row.route || row.slug || '')
+    )?.route || '/tools/client-negotiation-reply-generator'
+  );
 }
 
 function fillTemplateLines(lines, context) {
@@ -138,8 +151,14 @@ function fillTemplateLines(lines, context) {
         .replaceAll('{{cta_label}}', context.ctaLabel)
         .replaceAll('{{cta_route}}', context.ctaRoute)
         .replaceAll('{{pillar_link}}', context.pillarLink)
-        .replaceAll('{{related_link_1}}', context.relatedLinks[0] || context.pillarLink)
-        .replaceAll('{{related_link_2}}', context.relatedLinks[1] || context.toolLink)
+        .replaceAll(
+          '{{related_link_1}}',
+          context.relatedLinks[0] || context.pillarLink
+        )
+        .replaceAll(
+          '{{related_link_2}}',
+          context.relatedLinks[1] || context.toolLink
+        )
         .replaceAll('{{tool_link}}', context.toolLink)
         .replaceAll('{{description}}', context.description)
     )
@@ -184,14 +203,18 @@ function rowsFromMap(mapRows) {
 
 function filterSourceRows(rows, source) {
   if (source === 'map') return rows;
-  return rows.filter((row) => ['queued', 'update_needed'].includes((row.status || '').toLowerCase()));
+  return rows.filter((row) =>
+    ['queued', 'update_needed'].includes((row.status || '').toLowerCase())
+  );
 }
 
 const source = parseArgs();
 const promptSystem = readJson(PROMPT_SYSTEM_PATH);
 
 const sourceRows =
-  source === 'seo-pages' ? loadCsv(SEO_PAGES_PATH) : rowsFromMap(loadCsv(MAP_PATH));
+  source === 'seo-pages'
+    ? loadCsv(SEO_PAGES_PATH)
+    : rowsFromMap(loadCsv(MAP_PATH));
 
 const rows = filterSourceRows(sourceRows, source);
 const rowById = new Map(sourceRows.map((row) => [row.id || row.page_id, row]));
@@ -203,7 +226,9 @@ for (const row of rows) {
   const templateKey = inferTemplate(row.page_type);
   const template = getTemplate(promptSystem, templateKey);
 
-  const sameClusterRows = sourceRows.filter((item) => item.cluster === row.cluster || item.cluster_id === row.cluster);
+  const sameClusterRows = sourceRows.filter(
+    (item) => item.cluster === row.cluster || item.cluster_id === row.cluster
+  );
 
   const variableCandidates = sameClusterRows
     .map((item) => item.primary_keyword || item.variable_value)
@@ -211,14 +236,24 @@ for (const row of rows) {
     .filter((value) => value !== (row.primary_keyword || row.variable_value))
     .slice(0, 6);
 
-  const primaryKeyword = row.primary_keyword || row.variable_value || titleToKeyword(row.title);
+  const primaryKeyword =
+    row.primary_keyword || row.variable_value || titleToKeyword(row.title);
   const keywordVariants = variableCandidates.length
     ? variableCandidates
-    : [`${primaryKeyword} freelancer`, `${primaryKeyword} email`, `${primaryKeyword} example`];
+    : [
+        `${primaryKeyword} freelancer`,
+        `${primaryKeyword} email`,
+        `${primaryKeyword} example`,
+      ];
 
   const ctaType = row.cta_type === 'tool' ? 'tool' : row.cta_type || 'reply';
-  const ctaLabel = promptSystem.cta_catalog[ctaType] || promptSystem.cta_catalog.reply;
-  const ctaRoute = ctaRouteFromToolName(row.target_tool, row.page_type, row.route);
+  const ctaLabel =
+    promptSystem.cta_catalog[ctaType] || promptSystem.cta_catalog.reply;
+  const ctaRoute = ctaRouteFromToolName(
+    row.target_tool,
+    row.page_type,
+    row.route
+  );
 
   const relatedIds = String(row.related_refs || '')
     .split('|')
@@ -242,7 +277,9 @@ for (const row of rows) {
   }
 
   const clusterKey = row.cluster || row.cluster_id;
-  const pillarLink = row.pillar_ref ? `/${row.pillar_ref}` : pillarByCluster[clusterKey] || '/freelance-negotiation-guide';
+  const pillarLink = row.pillar_ref
+    ? `/${row.pillar_ref}`
+    : pillarByCluster[clusterKey] || '/freelance-negotiation-guide';
   const toolLink = toolRouteByType(sourceRows, row.cta_type || 'reply');
 
   const context = {
@@ -259,7 +296,10 @@ for (const row of rows) {
   };
 
   const systemPrompt = fillTemplateLines(template.system_prompt_lines, context);
-  const userPrompt = fillTemplateLines(template.user_prompt_template_lines, context);
+  const userPrompt = fillTemplateLines(
+    template.user_prompt_template_lines,
+    context
+  );
 
   jobs.push({
     job_id: `PROMPT-${String(counter).padStart(4, '0')}`,

@@ -2,12 +2,12 @@ name: Publish SEO Content
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
     paths:
-      - "content/**"
-      - "src/**"
-      - "scripts/**"
-      - "product/seo/**"
+      - 'content/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'product/seo/**'
   workflow_dispatch:
 
 jobs:
@@ -27,8 +27,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: '20'
+          cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies

@@ -1,12 +1,12 @@
-import { eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
-
 import {
   createAnonymousSessionId,
   ensureAnonymousUsageRecord,
   getAnonymousSessionIdFromRequest,
 } from '@/lib/anonymous';
-import { db, anonymousUsage } from '@/lib/db';
+import { anonymousUsage, db } from '@/lib/db';
+import { eq } from 'drizzle-orm';
+
 import { getUuid } from '@/shared/lib/hash';
 
 export const FREE_REPLY_LIMIT = 2;
@@ -105,7 +105,9 @@ export async function consumeFreeUsage(params: {
   });
 }
 
-export async function getAnonymousFreeUsageById(anonymousSessionId: string): Promise<{
+export async function getAnonymousFreeUsageById(
+  anonymousSessionId: string
+): Promise<{
   freeRepliesRemaining: number;
   freeRepliesUsed: number;
 }> {

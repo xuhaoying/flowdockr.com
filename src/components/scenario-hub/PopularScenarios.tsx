@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { ScenarioHubScenarioLink } from '@/types/scenario-hub';
+
+import { Link } from '@/core/i18n/navigation';
 
 type PopularScenariosProps = {
   items: ScenarioHubScenarioLink[];
@@ -10,7 +11,7 @@ export function PopularScenarios({ items }: PopularScenariosProps) {
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
       <div className="space-y-5">
         <div className="max-w-3xl space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
             Most Common Scenarios
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">

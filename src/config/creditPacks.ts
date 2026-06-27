@@ -1,7 +1,7 @@
 import type {
   BillingSupportLevel,
-  CreditPackCode,
   CreditPackage,
+  CreditPackCode,
   FeatureEntitlements,
   FreeTrialPlan,
 } from '@/types/billing';
@@ -63,7 +63,7 @@ export const freeTrialPlan: FreeTrialPlan = {
   supportLevel: 'free',
   credits: 2,
   priceUsdCents: 0,
-  description: 'Try Flowdockr on a real client situation before paying.',
+  description: 'Try FlowDockr on a real client situation before paying.',
   tagline: 'Single response only',
   badge: 'Start free',
   featureSummary: [
@@ -90,7 +90,8 @@ export const creditPacks: PurchasablePlanConfig[] = [
       process.env.STRIPE_PRICE_STARTER_10 ||
       '',
     active: true,
-    description: 'For occasional freelancers who need one clear answer right now.',
+    description:
+      'For occasional freelancers who need one clear answer right now.',
     tagline: 'Best for one-off deal pressure',
     badge: 'First purchase',
     ctaLabel: 'Buy Quick Help',
@@ -116,7 +117,8 @@ export const creditPacks: PurchasablePlanConfig[] = [
       process.env.STRIPE_PRICE_PRO_50 ||
       '',
     active: true,
-    description: 'For ongoing client work that needs stronger negotiation support.',
+    description:
+      'For ongoing client work that needs stronger negotiation support.',
     tagline: 'Most balanced support level',
     badge: 'Most Popular',
     popular: true,
@@ -139,7 +141,8 @@ export const creditPacks: PurchasablePlanConfig[] = [
     stripePriceId:
       process.env.STRIPE_PRICE_39 || process.env.STRIPE_PRICE_STUDIO || '',
     active: true,
-    description: 'For agencies and high-frequency deal operators who want a full support layer.',
+    description:
+      'For agencies and high-frequency deal operators who want a full support layer.',
     tagline: 'For the whole client negotiation workflow',
     badge: 'Advanced',
     ctaLabel: 'Buy Studio',

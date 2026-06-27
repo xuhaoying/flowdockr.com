@@ -1,10 +1,12 @@
-import { SavedDealInput, SavedDealRecord, DealStatus } from '@/types/deals';
+import { DealStatus, SavedDealInput, SavedDealRecord } from '@/types/deals';
 
 const STORAGE_KEY = 'flowdockr.saved.deals.v1';
 const MAX_DEALS = 200;
 
 function canUseStorage() {
-  return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  return (
+    typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+  );
 }
 
 function safeParse(raw: string | null): SavedDealRecord[] {
@@ -27,7 +29,8 @@ function safeParse(raw: string | null): SavedDealRecord[] {
         typeof record.alternativeReply === 'string' &&
         Array.isArray(record.strategy) &&
         typeof record.tone === 'string' &&
-        (typeof record.projectType === 'string' || typeof record.projectType === 'undefined') &&
+        (typeof record.projectType === 'string' ||
+          typeof record.projectType === 'undefined') &&
         typeof record.sourcePage === 'string' &&
         typeof record.status === 'string' &&
         typeof record.createdAt === 'string' &&
@@ -41,7 +44,10 @@ function safeParse(raw: string | null): SavedDealRecord[] {
 
 function persist(records: SavedDealRecord[]) {
   if (!canUseStorage()) return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(0, MAX_DEALS)));
+  window.localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(records.slice(0, MAX_DEALS))
+  );
 }
 
 export function listSavedDeals(): SavedDealRecord[] {
@@ -74,7 +80,10 @@ export function saveDealRecord(input: SavedDealInput): SavedDealRecord {
   return next;
 }
 
-export function updateDealStatus(id: string, status: DealStatus): SavedDealRecord | null {
+export function updateDealStatus(
+  id: string,
+  status: DealStatus
+): SavedDealRecord | null {
   const existing = listSavedDeals();
   const index = existing.findIndex((item) => item.id === id);
   if (index < 0) {

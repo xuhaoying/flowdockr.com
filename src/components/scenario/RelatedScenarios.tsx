@@ -1,12 +1,12 @@
 'use client';
 
+import { trackEvent } from '@/lib/analytics';
 import type {
   ScenarioRelatedGroup,
   ScenarioRelatedLink,
 } from '@/types/scenario-catalog';
 
 import { Link } from '@/core/i18n/navigation';
-import { trackEvent } from '@/lib/analytics';
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 
 type RelatedScenariosProps = {

@@ -10,16 +10,16 @@ Do not use it to justify new payment pages or a new cluster until the sample is 
 
 These are the only pages that count as the hardened phase-1 payment sample:
 
-| Route | Type | Owned role in the sample |
-| --- | --- | --- |
-| `/payment` | hub | cluster entry point and page-type map |
-| `/guides/how-to-follow-up-an-unpaid-invoice/` | guide | first unpaid-invoice follow-up before true overdue handling |
-| `/guides/how-to-remind-a-client-about-overdue-payment/` | guide | post-due-date overdue reminder logic |
-| `/guides/when-to-ask-for-a-deposit-before-work/` | guide | deposit timing and pre-kickoff boundary logic |
-| `/templates/payment-reminder` | template | overdue reminder wording examples by stage |
-| `/templates/advance-payment-message-examples` | template | pre-kickoff deposit wording examples |
-| `/scenario/overdue-invoice-no-response` | scenario | overdue invoice plus client silence |
-| `/scenario/deposit-not-paid-yet` | scenario | agreed deposit still missing and kickoff blocked |
+| Route                                                   | Type     | Owned role in the sample                                    |
+| ------------------------------------------------------- | -------- | ----------------------------------------------------------- |
+| `/payment`                                              | hub      | cluster entry point and page-type map                       |
+| `/guides/how-to-follow-up-an-unpaid-invoice/`           | guide    | first unpaid-invoice follow-up before true overdue handling |
+| `/guides/how-to-remind-a-client-about-overdue-payment/` | guide    | post-due-date overdue reminder logic                        |
+| `/guides/when-to-ask-for-a-deposit-before-work/`        | guide    | deposit timing and pre-kickoff boundary logic               |
+| `/templates/payment-reminder`                           | template | overdue reminder wording examples by stage                  |
+| `/templates/advance-payment-message-examples`           | template | pre-kickoff deposit wording examples                        |
+| `/scenario/overdue-invoice-no-response`                 | scenario | overdue invoice plus client silence                         |
+| `/scenario/deposit-not-paid-yet`                        | scenario | agreed deposit still missing and kickoff blocked            |
 
 Sample rule:
 
@@ -30,12 +30,12 @@ Sample rule:
 
 These payment scenarios sit close enough to the sample that they can blur query ownership:
 
-| Route | Current status | Why it is on the watchlist |
-| --- | --- | --- |
-| `/scenario/unpaid-invoice-follow-up` | support scenario | very close to the unpaid-invoice guide's core intent |
-| `/scenario/payment-overdue-reminder` | support scenario | sits between the overdue guide and overdue template |
-| `/scenario/second-payment-reminder` | support scenario | overlaps with the template's second-reminder wording lane |
-| `/scenario/final-payment-reminder` | legacy/core scenario outside the hardened sample | later-stage overdue intent, but still close to the template's deadline-setting lane |
+| Route                                | Current status                                   | Why it is on the watchlist                                                          |
+| ------------------------------------ | ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| `/scenario/unpaid-invoice-follow-up` | support scenario                                 | very close to the unpaid-invoice guide's core intent                                |
+| `/scenario/payment-overdue-reminder` | support scenario                                 | sits between the overdue guide and overdue template                                 |
+| `/scenario/second-payment-reminder`  | support scenario                                 | overlaps with the template's second-reminder wording lane                           |
+| `/scenario/final-payment-reminder`   | legacy/core scenario outside the hardened sample | later-stage overdue intent, but still close to the template's deadline-setting lane |
 | `/scenario/ask-for-payment-politely` | legacy/core scenario outside the hardened sample | broad payment reminder intent that can absorb both early unpaid and overdue traffic |
 
 Watchlist rule:

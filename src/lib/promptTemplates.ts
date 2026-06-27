@@ -26,7 +26,8 @@ export type ScenarioDefinition = {
 export const scenarioCatalog: ScenarioDefinition[] = [
   {
     slug: 'client-price-too-high',
-    pageTitle: 'Client Says Your Price Is Too High: Professional Reply Generator',
+    pageTitle:
+      'Client Says Your Price Is Too High: Professional Reply Generator',
     metaDescription:
       'Generate a calm, value-focused reply when a client says your freelance price is too high. Keep the conversation open without discounting immediately.',
     h1: 'Client says your price is too high: what to reply',
@@ -45,7 +46,7 @@ export const scenarioCatalog: ScenarioDefinition[] = [
       'Turning the reply into a long defense instead of a clear next step.',
     ],
     promptContext:
-      'Scenario: A client says the freelancer\'s price is too high. Goal: Generate a professional reply that maintains value, keeps the conversation open, and avoids sounding defensive.',
+      "Scenario: A client says the freelancer's price is too high. Goal: Generate a professional reply that maintains value, keeps the conversation open, and avoids sounding defensive.",
     related: [
       'client-asking-discount',
       'client-comparing-freelancers',
@@ -54,7 +55,8 @@ export const scenarioCatalog: ScenarioDefinition[] = [
   },
   {
     slug: 'client-asking-discount',
-    pageTitle: 'Client Asking for a Discount: Freelance Negotiation Reply Generator',
+    pageTitle:
+      'Client Asking for a Discount: Freelance Negotiation Reply Generator',
     metaDescription:
       'Write a confident discount response that protects your pricing integrity and offers smart alternatives instead of immediate concessions.',
     h1: 'Client asks for a discount: what to say',
@@ -82,7 +84,8 @@ export const scenarioCatalog: ScenarioDefinition[] = [
   },
   {
     slug: 'client-comparing-freelancers',
-    pageTitle: 'Client Comparing Freelancers: How to Reply Without Racing to the Bottom',
+    pageTitle:
+      'Client Comparing Freelancers: How to Reply Without Racing to the Bottom',
     metaDescription:
       'Generate a professional response when a client compares your quote with cheaper freelancers. Re-anchor on outcomes, risk, and reliability.',
     h1: 'Client is comparing you with other freelancers',
@@ -98,7 +101,7 @@ export const scenarioCatalog: ScenarioDefinition[] = [
     commonMistakes: [
       'Attacking competitors instead of positioning your value clearly.',
       'Reducing your offer to match price without changing scope.',
-      'Ignoring the client\'s real decision criteria and procurement process.',
+      "Ignoring the client's real decision criteria and procurement process.",
     ],
     promptContext:
       'Scenario: A client compares your quote against lower-cost freelancers. Goal: Generate a confident reply that differentiates on outcomes and execution reliability.',
@@ -222,7 +225,8 @@ export const scenarioCatalog: ScenarioDefinition[] = [
   },
   {
     slug: 'client-delaying-payment',
-    pageTitle: 'Client Delaying Payment: Professional Reminder Message Generator',
+    pageTitle:
+      'Client Delaying Payment: Professional Reminder Message Generator',
     metaDescription:
       'Generate a firm and professional payment reminder for overdue invoices. Maintain relationship quality while protecting cash flow.',
     h1: 'Client is delaying payment',
@@ -278,7 +282,8 @@ export const scenarioCatalog: ScenarioDefinition[] = [
   },
   {
     slug: 'client-requests-many-revisions',
-    pageTitle: 'Client Requests Too Many Revisions: Negotiation Reply Generator',
+    pageTitle:
+      'Client Requests Too Many Revisions: Negotiation Reply Generator',
     metaDescription:
       'Handle repeated revision requests with a professional response that protects scope and keeps client communication constructive.',
     h1: 'Client keeps requesting many revisions',
@@ -308,10 +313,13 @@ export const scenarioCatalog: ScenarioDefinition[] = [
 
 export const scenarioPrompts = scenarioCatalog.reduce<
   Record<ScenarioSlug, string>
->((acc, scenario) => {
-  acc[scenario.slug] = scenario.promptContext;
-  return acc;
-}, {} as Record<ScenarioSlug, string>);
+>(
+  (acc, scenario) => {
+    acc[scenario.slug] = scenario.promptContext;
+    return acc;
+  },
+  {} as Record<ScenarioSlug, string>
+);
 
 const scenarioMap = new Map<ScenarioSlug, ScenarioDefinition>(
   scenarioCatalog.map((scenario) => [scenario.slug, scenario])

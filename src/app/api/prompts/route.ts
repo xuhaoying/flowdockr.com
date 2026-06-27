@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getPrompts, PromptStatus } from '@/shared/models/prompt';
 
 export async function GET(request: NextRequest) {
@@ -22,7 +23,9 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Get prompts error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to get prompts' },
+      {
+        error: error instanceof Error ? error.message : 'Failed to get prompts',
+      },
       { status: 500 }
     );
   }

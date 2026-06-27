@@ -144,7 +144,11 @@ export function getScenarioHubClusterSurfacePages(
   pushPage(leadingPrimary[1]);
   pushPage(secondary[0]);
 
-  for (const page of [...leadingPrimary.slice(2), ...secondary.slice(1), ...monitor]) {
+  for (const page of [
+    ...leadingPrimary.slice(2),
+    ...secondary.slice(1),
+    ...monitor,
+  ]) {
     pushPage(page);
   }
 

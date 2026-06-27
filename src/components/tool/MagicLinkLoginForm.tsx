@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-
 import { trackEvent } from '@/lib/analytics-client';
 
 import { Button } from '@/shared/components/ui/button';
@@ -81,7 +80,7 @@ export function MagicLinkLoginForm({ callbackUrl }: MagicLinkLoginFormProps) {
       </Button>
 
       {sent ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Check your inbox for a secure sign-in link.
         </p>
       ) : null}

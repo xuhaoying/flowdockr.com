@@ -13,13 +13,13 @@ export function ScenarioExamples({ scenario }: ScenarioExamplesProps) {
         {scenario.examples.map((example) => (
           <article
             key={example.title}
-            className="rounded-xl border border-foreground/10 bg-muted/20 p-4"
+            className="border-foreground/10 bg-muted/20 rounded-xl border p-4"
           >
             <div className="flex items-center gap-2">
-              <Quote className="size-4 text-primary" />
+              <Quote className="text-primary size-4" />
               <h3 className="text-sm font-semibold">{example.title}</h3>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
               {example.reply}
             </p>
           </article>

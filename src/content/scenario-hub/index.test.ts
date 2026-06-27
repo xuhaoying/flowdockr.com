@@ -1,10 +1,9 @@
-import { describe, expect, it } from 'vitest';
-
 import {
   getScenarioDistributionPriority,
   getScenarioPageBySlug,
 } from '@/content/scenario-pages';
 import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
+import { describe, expect, it } from 'vitest';
 
 import { scenarioHubData } from './index';
 

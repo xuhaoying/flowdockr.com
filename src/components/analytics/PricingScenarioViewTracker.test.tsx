@@ -1,6 +1,8 @@
 import { render, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { PricingScenarioViewTracker } from './PricingScenarioViewTracker';
+
 const mocks = vi.hoisted(() => ({
   trackEvent: vi.fn(),
 }));
@@ -12,8 +14,6 @@ vi.mock('next/navigation', () => ({
 vi.mock('@/lib/analytics', () => ({
   trackEvent: mocks.trackEvent,
 }));
-
-import { PricingScenarioViewTracker } from './PricingScenarioViewTracker';
 
 describe('PricingScenarioViewTracker', () => {
   beforeEach(() => {

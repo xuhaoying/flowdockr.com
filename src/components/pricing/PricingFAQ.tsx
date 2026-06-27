@@ -15,17 +15,17 @@ const FAQ_ITEMS = [
     value: 'subscription',
     question: 'Is this a subscription?',
     answer:
-      'No. Flowdockr uses one-time credit packs, so you can buy support only when you need it.',
+      'No. FlowDockr uses one-time credit packs, so you can buy support only when you need it.',
   },
   {
     value: 'ai-tool',
     question: 'Is this just an AI writing tool?',
     answer:
-      'No. Flowdockr is built around negotiation guidance, response strategy, and client conversation decisions rather than generic writing prompts.',
+      'No. FlowDockr is built around negotiation guidance, response strategy, and client conversation decisions rather than generic writing prompts.',
   },
   {
     value: 'when-to-use',
-    question: 'When should I use Flowdockr?',
+    question: 'When should I use FlowDockr?',
     answer:
       'Use it when a client pushes on price, asks for a discount, expands scope, requests rush delivery, or when you need to respond clearly without weakening your position.',
   },
@@ -33,7 +33,7 @@ const FAQ_ITEMS = [
 
 export function PricingFAQ() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+    <section className="border-brand-lavender/25 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
       <div className="max-w-3xl space-y-4">
         <div className="space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">

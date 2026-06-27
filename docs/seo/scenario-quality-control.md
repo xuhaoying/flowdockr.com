@@ -1,6 +1,6 @@
 # Scenario Quality Control
 
-This note defines the lightweight rules for keeping Flowdockr's canonical scenario library differentiated and commercially useful without turning the dataset into a complex system.
+This note defines the lightweight rules for keeping FlowDockr's canonical scenario library differentiated and commercially useful without turning the dataset into a complex system.
 
 ## 1. Intent competition check
 

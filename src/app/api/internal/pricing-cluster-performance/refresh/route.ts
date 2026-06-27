@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   recordPricingClusterPerformanceRefreshFailure,
   refreshPricingClusterPerformanceSnapshot,
@@ -34,7 +33,10 @@ async function handleRefresh(
   }
 
   const days = parsePositiveInt(request.nextUrl.searchParams.get('days'), 30);
-  const limit = parsePositiveInt(request.nextUrl.searchParams.get('limit'), 500);
+  const limit = parsePositiveInt(
+    request.nextUrl.searchParams.get('limit'),
+    500
+  );
   const attemptedAt = new Date().toISOString();
 
   try {

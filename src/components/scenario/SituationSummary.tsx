@@ -10,8 +10,9 @@ export function SituationSummary({ scenario }: SituationSummaryProps) {
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
         Situation summary
       </h2>
-      <p className="text-sm leading-relaxed text-slate-700">{scenario.situationSummary}</p>
+      <p className="text-sm leading-relaxed text-slate-700">
+        {scenario.situationSummary}
+      </p>
     </section>
   );
 }
-

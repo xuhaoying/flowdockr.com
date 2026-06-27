@@ -11,9 +11,24 @@ const SPLIT = {
 };
 
 const WEEK_PLAN = [
-  { 'negotiation-discount': 4, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-close': 1 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-close': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-close': 2 },
+  {
+    'negotiation-discount': 4,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-close': 1,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-close': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-close': 2,
+  },
 ];
 
 const priorityRank = { P1: 1, P2: 2, P3: 3 };
@@ -59,7 +74,9 @@ for (const cluster of Object.keys(SPLIT)) {
 
 const selected = [];
 const used = new Set();
-const usedByCluster = Object.fromEntries(Object.keys(SPLIT).map((key) => [key, 0]));
+const usedByCluster = Object.fromEntries(
+  Object.keys(SPLIT).map((key) => [key, 0])
+);
 
 for (let week = 1; week <= WEEK_PLAN.length; week++) {
   const plan = WEEK_PLAN[week - 1];
@@ -67,7 +84,8 @@ for (let week = 1; week <= WEEK_PLAN.length; week++) {
     let needed = count;
     while (needed > 0) {
       const next = pools[cluster].find((row) => !used.has(row.id));
-      if (!next) throw new Error(`No available keyword left in cluster: ${cluster}`);
+      if (!next)
+        throw new Error(`No available keyword left in cluster: ${cluster}`);
       if (usedByCluster[cluster] >= SPLIT[cluster]) break;
 
       used.add(next.id);
@@ -110,7 +128,11 @@ const outHeader = [
 
 const out = [outHeader.join(',')];
 for (const row of selected) {
-  out.push(outHeader.map((key) => `"${String(row[key]).replaceAll('"', '""')}"`).join(','));
+  out.push(
+    outHeader
+      .map((key) => `"${String(row[key]).replaceAll('"', '""')}"`)
+      .join(',')
+  );
 }
 
 writeFileSync(OUTPUT, `${out.join('\n')}\n`);

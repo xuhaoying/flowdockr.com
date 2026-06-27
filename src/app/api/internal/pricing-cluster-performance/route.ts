@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   getStoredPricingClusterPerformanceSnapshot,
   verifyPricingClusterPerformanceCronRequest,
@@ -32,7 +31,9 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const format = String(request.nextUrl.searchParams.get('format') || 'json').trim();
+  const format = String(
+    request.nextUrl.searchParams.get('format') || 'json'
+  ).trim();
   if (format === 'summary') {
     return new NextResponse(snapshot.summaryMarkdown, {
       status: 200,

@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { NextDecisionLink } from '@/types/content';
+
+import { Link } from '@/core/i18n/navigation';
 
 type NextDecisionPathsProps = {
   links: NextDecisionLink[];
@@ -12,9 +13,12 @@ export function NextDecisionPaths({ links }: NextDecisionPathsProps) {
 
   return (
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">What to do next</h2>
+      <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+        What to do next
+      </h2>
       <p className="text-sm text-slate-700">
-        Move to the next likely decision path instead of restarting from scratch.
+        Move to the next likely decision path instead of restarting from
+        scratch.
       </p>
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -30,7 +34,10 @@ export function NextDecisionPaths({ links }: NextDecisionPathsProps) {
       </div>
 
       <div className="flex flex-wrap gap-4 text-sm">
-        <Link href="/pricing" className="font-semibold text-slate-900 underline underline-offset-2">
+        <Link
+          href="/pricing"
+          className="font-semibold text-slate-900 underline underline-offset-2"
+        >
           Back to pricing hub
         </Link>
         <Link

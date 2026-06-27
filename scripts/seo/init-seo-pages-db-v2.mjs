@@ -159,7 +159,8 @@ function makeVariablesJson(row) {
   const payload = {};
 
   if (row.variable_value) payload.seed = row.variable_value;
-  if (row.expansion_dimension) payload[row.expansion_dimension] = row.variable_value;
+  if (row.expansion_dimension)
+    payload[row.expansion_dimension] = row.variable_value;
   if (row.expansion_rule) payload.expansion_rule = row.expansion_rule;
 
   return JSON.stringify(payload);
@@ -170,7 +171,8 @@ const sourceRows = loadCsv(MAP_ALL_PATH);
 const countersByType = {};
 const seoRows = sourceRows.map((row) => {
   const pageType = row.page_type || 'cluster';
-  countersByType[`${row.tier}:${pageType}`] = (countersByType[`${row.tier}:${pageType}`] || 0) + 1;
+  countersByType[`${row.tier}:${pageType}`] =
+    (countersByType[`${row.tier}:${pageType}`] || 0) + 1;
 
   const cluster = row.cluster_id || clusterFromRoute(row.route);
   const slug = slugFromRoute(row.route);
@@ -188,7 +190,8 @@ const seoRows = sourceRows.map((row) => {
     slug,
     situation: situationFromKeyword(pageType, primaryKeyword),
     variables_json: makeVariablesJson(row),
-    target_tool: ctaToTool[row.cta_type] || 'client-negotiation-reply-generator',
+    target_tool:
+      ctaToTool[row.cta_type] || 'client-negotiation-reply-generator',
     pillar_ref: clusterToPillar[cluster] || 'freelance-negotiation-guide',
     related_refs: '',
     outline: '',

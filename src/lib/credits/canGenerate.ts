@@ -1,16 +1,24 @@
 import type { CreditStatus, GenerationIdentity } from '@/types/credits';
 
 import { getCredits } from './getCredits';
-import { getAnonymousFreeUsageById, FREE_REPLY_LIMIT } from './getFreeUsage';
+import { FREE_REPLY_LIMIT, getAnonymousFreeUsageById } from './getFreeUsage';
 import { getUserFreeRepliesRemaining } from './getUserFreeReplies';
 
-export async function canGenerate(identity: GenerationIdentity): Promise<CreditStatus> {
+export async function canGenerate(
+  identity: GenerationIdentity
+): Promise<CreditStatus> {
   if (identity.isLoggedIn && identity.userId) {
     const creditsRemaining = await getCredits(identity.userId);
-    const freeRepliesRemaining = await getUserFreeRepliesRemaining(identity.userId);
+    const freeRepliesRemaining = await getUserFreeRepliesRemaining(
+      identity.userId
+    );
 
     const mode: CreditStatus['mode'] =
-      freeRepliesRemaining > 0 ? 'free' : creditsRemaining > 0 ? 'paid' : 'blocked';
+      freeRepliesRemaining > 0
+        ? 'free'
+        : creditsRemaining > 0
+          ? 'paid'
+          : 'blocked';
 
     return {
       isLoggedIn: true,

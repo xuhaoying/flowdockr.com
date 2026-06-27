@@ -42,11 +42,13 @@ This project uses a PR-based workflow with Vercel Preview/Production separation.
 `main` should be protected in GitHub repository settings.
 
 Required:
+
 - Require a pull request before merging.
 - Require status checks to pass before merging.
 - Require branches to be up to date before merging.
 
 Recommended:
+
 - Restrict direct pushes (admins-only if your team needs emergency override).
 - Disable force pushes.
 - Require at least 1 approval.

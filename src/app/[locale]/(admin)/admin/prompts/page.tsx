@@ -3,7 +3,11 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { PERMISSIONS, requirePermission } from '@/core/rbac';
 import { Header, Main, MainHeader } from '@/shared/blocks/dashboard';
 import { TableCard } from '@/shared/blocks/table';
-import { getPrompts, getPromptsCount, type Prompt } from '@/shared/models/prompt';
+import {
+  getPrompts,
+  getPromptsCount,
+  type Prompt,
+} from '@/shared/models/prompt';
 import { Button, Crumb } from '@/shared/types/blocks/common';
 import { type Table } from '@/shared/types/blocks/table';
 
@@ -49,8 +53,8 @@ export default async function PromptsPage({
         },
       },
       { name: 'title', title: 'Title' },
-      { 
-        name: 'description', 
+      {
+        name: 'description',
         title: 'Description',
         callback: (item: Prompt) => {
           const text = item.description || '';
@@ -58,8 +62,8 @@ export default async function PromptsPage({
         },
       },
       { name: 'promptTitle', title: 'Prompt Title' },
-      { 
-        name: 'promptDescription', 
+      {
+        name: 'promptDescription',
         title: 'Prompt Description',
         callback: (item: Prompt) => {
           const text = item.promptDescription || '';

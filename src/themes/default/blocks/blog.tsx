@@ -77,7 +77,7 @@ export function Blog({
                   </div>
                   <div className="p-6">
                     <div className="mb-2 flex items-center gap-2">
-                      <span className="text-primary text-xs font-semibold uppercase tracking-wider">
+                      <span className="text-primary text-xs font-semibold tracking-wider uppercase">
                         {item.categories?.[0]?.title}
                       </span>
                       <span className="text-muted-foreground text-xs">•</span>
@@ -85,7 +85,7 @@ export function Blog({
                         {item.date}
                       </span>
                     </div>
-                    <h3 className="mb-3 text-xl font-bold transition-colors group-hover:text-primary">
+                    <h3 className="group-hover:text-primary mb-3 text-xl font-bold transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground line-clamp-2 text-sm">

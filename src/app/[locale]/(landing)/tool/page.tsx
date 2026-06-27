@@ -5,7 +5,7 @@ import { defaultLocale } from '@/config/locale';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Reply Generator | Flowdockr',
+  title: 'Reply Generator | FlowDockr',
   description: 'Redirecting to the tools workspace.',
   canonicalUrl: '/tools/reply-generator',
   noIndex: true,
@@ -20,6 +20,8 @@ export default async function LegacyToolRedirectPage({
   setRequestLocale(locale);
 
   redirect(
-    locale === defaultLocale ? '/tools/reply-generator' : `/${locale}/tools/reply-generator`
+    locale === defaultLocale
+      ? '/tools/reply-generator'
+      : `/${locale}/tools/reply-generator`
   );
 }

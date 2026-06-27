@@ -1,10 +1,22 @@
 import { defaultLocale } from '@/config/locale';
 import type { Configs } from '@/shared/models/config';
 
-export const FLOWDOCKR_PRODUCT_NAME = 'Flowdockr';
+export const FLOWDOCKR_PRODUCT_NAME = 'FlowDockr';
 export const FLOWDOCKR_COMPANY_NAME = 'Auralis Labs LLC';
 export const TRUST_EFFECTIVE_DATE = 'March 17, 2026';
 export const FLOWDOCKR_PUBLIC_SUPPORT_EMAIL = 'support@flowdockr.com';
+export const FLOWDOCKR_COMPANY_JURISDICTION =
+  process.env.NEXT_PUBLIC_COMPANY_JURISDICTION || 'United States';
+export const FLOWDOCKR_PUBLIC_BUSINESS_ADDRESS =
+  process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || '';
+
+export const FLOWDOCKR_PROHIBITED_USE_ITEMS = [
+  'Illegal activity, fraud, deceptive claims, impersonation, harassment, spam, or abusive automation.',
+  'Money services, money transmission, stored value, lending, brokerage, credit repair, debt settlement, debt negotiation, debt collection, investment advice, tax advice, or legal advice.',
+  'Adult entertainment, sexual content services, escort services, internet gambling, betting, casinos, cannabis, controlled substances, weapons, or other restricted or illegal goods and services.',
+  'Medical, mental health, emergency, legal, financial, or other regulated professional decisions where a licensed professional is required.',
+  'Selling, reselling, or white-labeling FlowDockr outputs as a regulated advisory, collections, banking, payments, or financial service.',
+] as const;
 
 export const TRACKING_CONSENT_COOKIE = 'flowdockr_tracking_consent';
 export const TRACKING_CONSENT_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;

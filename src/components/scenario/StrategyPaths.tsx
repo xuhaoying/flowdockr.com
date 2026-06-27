@@ -37,4 +37,3 @@ export function StrategyPaths({ scenario }: StrategyPathsProps) {
     </section>
   );
 }
-

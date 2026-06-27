@@ -2,10 +2,10 @@
   "sidebar": {
     "header": {
       "brand": {
-        "title": "Flowdockr Assistant",
+        "title": "FlowDockr Assistant",
         "logo": {
-          "src": "/logo.png",
-          "alt": "Flowdockr Assistant"
+          "src": "/logo-mark.svg",
+          "alt": "FlowDockr Assistant"
         },
         "url": "/chat"
       },
@@ -51,7 +51,7 @@
     },
     "footer": {
       "nav": {
-      "items": []
+        "items": []
       },
       "show_theme": true,
       "show_locale": false
@@ -79,7 +79,7 @@
     "empty": "No conversations yet.",
     "error": "Failed to load conversations.",
     "retry": "Try again",
-    "signin": "Sign in to view your Flowdockr chat history.",
+    "signin": "Sign in to view your FlowDockr chat history.",
     "summary": "Showing {from}-{to} of {total}",
     "perPage": "Per page",
     "prev": "Previous",

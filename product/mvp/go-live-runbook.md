@@ -3,12 +3,14 @@
 Updated: 2026-03-04
 
 ## 1. Scope of this release
+
 - Landing page (`/`)
 - Scope Guard tool (`/scope`)
 - Guides hub + 5 guide pages (`/guides/*`)
 - Pricing page (`/pricing`)
 
 ## 2. Required environment variables
+
 - `NEXT_PUBLIC_APP_URL` (production domain)
 - `NEXT_PUBLIC_APP_NAME` (`FlowDockr`)
 - `NEXT_PUBLIC_APP_DESCRIPTION`
@@ -19,6 +21,7 @@ Updated: 2026-03-04
 - `SCOPE_GUARD_MODEL` (default: `gpt-4.1-mini`)
 
 ## 3. Build and deploy checks
+
 1. `pnpm install`
 2. `pnpm build`
 3. Verify routes:
@@ -31,6 +34,7 @@ Updated: 2026-03-04
    - `POST /api/generate-scope-policy`
 
 ## 4. Functional QA
+
 - Scope form accepts 4 fields and blocks invalid input.
 - Generation succeeds with OpenAI key.
 - Generation falls back gracefully when provider fails.
@@ -40,6 +44,7 @@ Updated: 2026-03-04
 - Mobile layout has full-width primary action.
 
 ## 5. Analytics QA
+
 - `scope_form_started`
 - `scope_output_generated`
 - `scope_block_copied`
@@ -48,12 +53,15 @@ Updated: 2026-03-04
 Note: events are emitted to `window.dataLayer` when available.
 
 ## 6. SEO QA
+
 - `robots.txt` points to sitemap.
 - `public/sitemap.xml` includes only live MVP URLs.
 - Guide pages include CTA to `/scope`.
 
 ## 7. Launch decision
+
 Go only if:
+
 - Build passes
 - Core generation flow works on desktop + mobile
 - No blocking issue in copy/generation/upgrade flow

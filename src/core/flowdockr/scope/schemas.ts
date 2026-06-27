@@ -44,7 +44,8 @@ export function validateScopeInput(payload: unknown): ScopeInput {
   const projectPrice = Number(body.project_price);
   const revisionCount = Number(body.revision_count);
   const extraRevisionPrice =
-    body.extra_revision_price === null || body.extra_revision_price === undefined
+    body.extra_revision_price === null ||
+    body.extra_revision_price === undefined
       ? null
       : Number(body.extra_revision_price);
 
@@ -60,7 +61,11 @@ export function validateScopeInput(payload: unknown): ScopeInput {
     throw new Error('project_price must be greater than zero');
   }
 
-  if (!Number.isFinite(revisionCount) || revisionCount < 1 || revisionCount > 5) {
+  if (
+    !Number.isFinite(revisionCount) ||
+    revisionCount < 1 ||
+    revisionCount > 5
+  ) {
     throw new Error('revision_count must be between 1 and 5');
   }
 

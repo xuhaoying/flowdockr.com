@@ -25,10 +25,11 @@ export function ClientMessageInput({
         className="resize-y"
       />
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs text-muted-foreground">
-          Tip: keep your own wording. Flowdockr performs better with real context.
+        <p className="text-muted-foreground text-xs">
+          Tip: keep your own wording. FlowDockr performs better with real
+          context.
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-muted-foreground text-xs">
           {value.length}/{maxLength}
         </p>
       </div>

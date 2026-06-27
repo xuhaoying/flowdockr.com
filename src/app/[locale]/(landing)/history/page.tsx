@@ -4,7 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Negotiation Library | Flowdockr',
+  title: 'Negotiation Library | FlowDockr',
   description:
     'Your reusable negotiation library. Revisit saved strategy, reply variants, risk notes, and follow-up guidance from previous client negotiations.',
   canonicalUrl: '/history',

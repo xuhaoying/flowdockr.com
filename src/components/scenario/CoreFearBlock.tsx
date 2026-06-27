@@ -21,4 +21,3 @@ export function CoreFearBlock({ scenario }: CoreFearBlockProps) {
     </section>
   );
 }
-

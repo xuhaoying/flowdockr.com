@@ -29,8 +29,23 @@ vi.mock('next-intl/server', () => ({
   setRequestLocale: mocks.setRequestLocale,
 }));
 
+vi.mock('@/core/i18n/navigation', () => ({
+  Link: () => null,
+  redirect: mocks.redirect,
+  usePathname: () => '/',
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+  }),
+  getPathname: ({ href }: { href: string }) => href,
+}));
+
 vi.mock('@/components/analytics/ScenarioViewTracker', () => ({
   ScenarioViewTracker: () => null,
+}));
+
+vi.mock('@/components/scenario/PaymentScenarioSupport', () => ({
+  PaymentScenarioSupport: () => null,
 }));
 
 vi.mock('@/components/scenario/RelatedScenarios', () => ({

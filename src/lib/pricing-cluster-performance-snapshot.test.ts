@@ -1,5 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import {
+  getStoredPricingClusterPerformanceSnapshot,
+  PRICING_CLUSTER_PERFORMANCE_REFRESH_STATUS_CONFIG_KEY,
+  PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY,
+  PRICING_CLUSTER_PERFORMANCE_SUMMARY_CONFIG_KEY,
+  recordPricingClusterPerformanceRefreshFailure,
+  refreshPricingClusterPerformanceSnapshot,
+  verifyPricingClusterPerformanceCronRequest,
+} from './pricing-cluster-performance-snapshot';
+
 const mockState = vi.hoisted(() => {
   const configs: Record<string, string> = {};
 
@@ -32,16 +42,6 @@ vi.mock('@/config', async (importOriginal) => {
   };
 });
 
-import {
-  PRICING_CLUSTER_PERFORMANCE_REFRESH_STATUS_CONFIG_KEY,
-  PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY,
-  PRICING_CLUSTER_PERFORMANCE_SUMMARY_CONFIG_KEY,
-  getStoredPricingClusterPerformanceSnapshot,
-  recordPricingClusterPerformanceRefreshFailure,
-  refreshPricingClusterPerformanceSnapshot,
-  verifyPricingClusterPerformanceCronRequest,
-} from './pricing-cluster-performance-snapshot';
-
 describe('pricing cluster performance snapshot storage', () => {
   beforeEach(() => {
     Object.keys(mockState.configs).forEach((key) => {
@@ -60,10 +60,12 @@ describe('pricing cluster performance snapshot storage', () => {
     });
 
     expect(mockState.saveConfigs).toHaveBeenCalledTimes(1);
-    expect(mockState.configs[PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY]).toBeTruthy();
-    expect(mockState.configs[PRICING_CLUSTER_PERFORMANCE_SUMMARY_CONFIG_KEY]).toContain(
-      '# Pricing Cluster Performance Snapshot'
-    );
+    expect(
+      mockState.configs[PRICING_CLUSTER_PERFORMANCE_REPORT_CONFIG_KEY]
+    ).toBeTruthy();
+    expect(
+      mockState.configs[PRICING_CLUSTER_PERFORMANCE_SUMMARY_CONFIG_KEY]
+    ).toContain('# Pricing Cluster Performance Snapshot');
     expect(
       mockState.configs[PRICING_CLUSTER_PERFORMANCE_REFRESH_STATUS_CONFIG_KEY]
     ).toContain('"status":"success"');
@@ -95,11 +97,14 @@ describe('pricing cluster performance snapshot storage', () => {
       status: 'failure',
       storageBackend: 'config',
       lastRefreshAttemptAt: '2026-03-25T06:00:00.000Z',
-      lastSuccessfulRefreshAt: firstSnapshot.report.refresh.lastSuccessfulRefreshAt,
+      lastSuccessfulRefreshAt:
+        firstSnapshot.report.refresh.lastSuccessfulRefreshAt,
       lastFailureAt: '2026-03-25T06:00:00.000Z',
       refreshFailureReason: 'DATABASE_TIMEOUT',
     });
-    expect(stored.summaryMarkdown).toContain('Pricing Cluster Performance Snapshot');
+    expect(stored.summaryMarkdown).toContain(
+      'Pricing Cluster Performance Snapshot'
+    );
   });
 
   it('verifies bearer auth using the cron secret', () => {

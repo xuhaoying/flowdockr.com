@@ -1,5 +1,6 @@
-import { envConfigs } from '@/config';
 import { Scenario } from '@/lib/scenarios';
+
+import { envConfigs } from '@/config';
 
 const baseUrl = envConfigs.app_url.replace(/\/$/, '');
 
@@ -19,11 +20,11 @@ export function buildScenarioArticleSchema(scenario: Scenario) {
     url,
     author: {
       '@type': 'Organization',
-      name: 'Flowdockr',
+      name: 'FlowDockr',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Flowdockr',
+      name: 'FlowDockr',
     },
   };
 }

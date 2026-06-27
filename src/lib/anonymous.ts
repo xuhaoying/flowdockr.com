@@ -1,8 +1,8 @@
-import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
+import { eq } from 'drizzle-orm';
 
-import { anonymousUsage } from '@/config/db/schema';
 import { db } from '@/core/db';
+import { anonymousUsage } from '@/config/db/schema';
 import { getUuid, md5 } from '@/shared/lib/hash';
 
 export const ANONYMOUS_SESSION_COOKIE = 'fd_anonymous_session';

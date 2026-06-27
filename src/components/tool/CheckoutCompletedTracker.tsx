@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { trackEvent } from '@/lib/analytics-client';
 
-type CheckoutCompletedTrackerProps = {
-};
+type CheckoutCompletedTrackerProps = {};
 
 export function CheckoutCompletedTracker({}: CheckoutCompletedTrackerProps) {
   useEffect(() => {

@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { getCheckoutStatus } from '@/lib/payments';
 
 export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
-  const sessionId = String(request.nextUrl.searchParams.get('sessionId') || '').trim();
-  const purchaseId = String(request.nextUrl.searchParams.get('purchaseId') || '').trim();
+  const sessionId = String(
+    request.nextUrl.searchParams.get('sessionId') || ''
+  ).trim();
+  const purchaseId = String(
+    request.nextUrl.searchParams.get('purchaseId') || ''
+  ).trim();
 
   const status = await getCheckoutStatus({
     sessionId,

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
+
 import { db } from '@/core/db';
 import { prompt } from '@/config/db/schema';
 
@@ -22,10 +23,7 @@ export async function GET(request: NextRequest) {
       .limit(1);
 
     if (!result || result.length === 0) {
-      return NextResponse.json(
-        { error: 'Prompt not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Prompt not found' }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -35,7 +33,9 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Get prompt by title error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to get prompt' },
+      {
+        error: error instanceof Error ? error.message : 'Failed to get prompt',
+      },
       { status: 500 }
     );
   }

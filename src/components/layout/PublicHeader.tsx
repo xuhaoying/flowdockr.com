@@ -37,7 +37,7 @@ export function PublicHeader() {
   const { data: session, isPending } = useSession();
   const [mounted, setMounted] = useState(false);
   const [resolvedAuthState, setResolvedAuthState] =
-    useState<HeaderAuthState>('loading');
+    useState<HeaderAuthState>('unauthenticated');
 
   useEffect(() => {
     setMounted(true);
@@ -54,7 +54,7 @@ export function PublicHeader() {
     }
   }, [isPending, session?.user]);
 
-  let authState: HeaderAuthState = 'loading';
+  let authState: HeaderAuthState = resolvedAuthState;
 
   if (mounted) {
     if (session?.user) {
@@ -69,40 +69,38 @@ export function PublicHeader() {
   const signedIn = authState === 'authenticated';
   const isLoading = authState === 'loading';
   const navItems = signedIn ? LOGGED_IN_NAV_ITEMS : LOGGED_OUT_NAV_ITEMS;
-  const ctaLabel = signedIn ? 'New Reply' : 'Try Flowdockr';
+  const ctaLabel = signedIn ? 'New Reply' : 'Try FlowDockr';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#f8faf8]/95 backdrop-blur">
+    <header className="border-brand-lavender/25 bg-brand-bg/90 sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900"
+          className="inline-flex w-fit items-center"
+          aria-label="FlowDockr home"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border border-slate-200 bg-white">
-            <Image
-              src="/logo.png"
-              alt="Flowdockr logo"
-              width={28}
-              height={28}
-              className="h-7 w-7 object-cover"
-              priority
-            />
-          </span>
-          Flowdockr
+          <Image
+            src="/logo.svg"
+            alt="FlowDockr"
+            width={162}
+            height={36}
+            className="h-9 w-auto"
+            priority
+          />
         </Link>
 
         <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-center md:gap-4">
           {isLoading ? (
             <>
               <div className="flex w-full flex-wrap items-center gap-1.5 md:w-auto md:flex-nowrap">
-                <div className="h-9 w-24 animate-pulse rounded-md bg-slate-200" />
-                <div className="h-9 w-24 animate-pulse rounded-md bg-slate-200" />
-                <div className="h-9 w-20 animate-pulse rounded-md bg-slate-200" />
+                <div className="bg-brand-lavender/20 h-9 w-24 animate-pulse rounded-md" />
+                <div className="bg-brand-lavender/20 h-9 w-24 animate-pulse rounded-md" />
+                <div className="bg-brand-lavender/20 h-9 w-20 animate-pulse rounded-md" />
               </div>
 
               <div className="flex w-full items-center gap-2 sm:w-auto">
-                <div className="h-9 w-9 animate-pulse rounded-full bg-slate-200" />
-                <div className="h-9 flex-1 animate-pulse rounded-md bg-slate-200 sm:w-28 sm:flex-none" />
+                <div className="bg-brand-lavender/20 h-9 w-9 animate-pulse rounded-full" />
+                <div className="bg-brand-lavender/20 h-9 flex-1 animate-pulse rounded-md sm:w-28 sm:flex-none" />
               </div>
             </>
           ) : (
@@ -121,8 +119,8 @@ export function PublicHeader() {
                       className={cn(
                         'rounded-md px-3 py-2 text-xs transition-colors sm:text-sm',
                         active
-                          ? 'bg-slate-900 text-white'
-                          : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-brand-primary shadow-brand-primary/20 text-white shadow-sm'
+                          : 'hover:text-brand-primary text-slate-700 hover:bg-white'
                       )}
                     >
                       {item.label}

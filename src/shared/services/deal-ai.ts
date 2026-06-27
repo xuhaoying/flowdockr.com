@@ -157,7 +157,11 @@ function clampProbability(value: unknown, fallback: number): number {
   return Math.round(n * 100) / 100;
 }
 
-function toTextArray(value: unknown, fallback: string[], maxItems = 3): string[] {
+function toTextArray(
+  value: unknown,
+  fallback: string[],
+  maxItems = 3
+): string[] {
   if (!Array.isArray(value)) {
     return fallback.slice(0, maxItems);
   }
@@ -222,7 +226,11 @@ function normalizeWithFallback(
   const strategy = (raw.strategy || {}) as Record<string, unknown>;
   const risk = (raw.risk || {}) as Record<string, unknown>;
 
-  const instantReply = sanitizeText(raw.instant_reply, fallback.instant_reply, 180);
+  const instantReply = sanitizeText(
+    raw.instant_reply,
+    fallback.instant_reply,
+    180
+  );
 
   return {
     instant_reply:
@@ -269,7 +277,11 @@ function normalizeWithFallback(
       ),
       red_flags: toTextArray(risk.red_flags, fallback.risk.red_flags, 5),
     },
-    next_move: normalizeEnum(raw.next_move, DEAL_NEXT_MOVES, fallback.next_move),
+    next_move: normalizeEnum(
+      raw.next_move,
+      DEAL_NEXT_MOVES,
+      fallback.next_move
+    ),
   };
 }
 
@@ -279,10 +291,18 @@ function inferIntentFromInput(input: DealInput): DealIntent {
   if (/(competitor|cheaper|compare|comparison|别人更便宜|对比)/.test(text)) {
     return 'comparison_shopping';
   }
-  if (/(scope|revision|extra work|additional|change request|返工|加需求|超范围)/.test(text)) {
+  if (
+    /(scope|revision|extra work|additional|change request|返工|加需求|超范围)/.test(
+      text
+    )
+  ) {
     return 'scope_push';
   }
-  if (/(timeline|deadline|urgent|asap|rush|today|tomorrow|this week|赶工|加急)/.test(text)) {
+  if (
+    /(timeline|deadline|urgent|asap|rush|today|tomorrow|this week|赶工|加急)/.test(
+      text
+    )
+  ) {
     return 'timeline_pressure';
   }
   if (/(budget|price|expensive|discount|cost|太贵|预算|降价)/.test(text)) {
@@ -294,7 +314,8 @@ function inferIntentFromInput(input: DealInput): DealIntent {
 
 function mapApproach(value: string): DealStrategyApproach {
   const text = value.toLowerCase();
-  if (/(scope|revision|boundary|trade[-_\s]?off)/.test(text)) return 'scope_trade';
+  if (/(scope|revision|boundary|trade[-_\s]?off)/.test(text))
+    return 'scope_trade';
   if (/(deadline|timeline|rush|time)/.test(text)) return 'deadline_trade';
   if (/(risk|proof|case|credibility|trust)/.test(text)) return 'risk_reverse';
   if (/(walk|away|exit|decline)/.test(text)) return 'walkaway_ready';
@@ -318,10 +339,7 @@ function mapLegacyToContract(
     .slice(0, 5);
 
   const fallbackSignals = signals.length ? signals : ['Need more context'];
-  const concessionSteps = [
-    ...fallback.next_actions,
-    ...fallback.decision_logic,
-  ]
+  const concessionSteps = [...fallback.next_actions, ...fallback.decision_logic]
     .map((x) => sanitizeText(x, '', 160))
     .filter(Boolean)
     .slice(0, 3);
@@ -361,7 +379,11 @@ function mapLegacyToContract(
       concession_steps:
         concessionSteps.length > 0
           ? concessionSteps
-          : ['Align scope first', 'Offer reduced scope option', 'Walk away if needed'],
+          : [
+              'Align scope first',
+              'Offer reduced scope option',
+              'Walk away if needed',
+            ],
     },
     risk: {
       deal_risk: normalizeEnum(
@@ -386,7 +408,12 @@ export function makeDealPreview(
   strategy: DealContractResult,
   locale: string
 ): DealContractResult {
-  const hint = locale === 'zh' ? '解锁后查看完整建议。' : locale === 'es' ? 'Desbloquea para ver completo.' : 'Unlock to view full guidance.';
+  const hint =
+    locale === 'zh'
+      ? '解锁后查看完整建议。'
+      : locale === 'es'
+        ? 'Desbloquea para ver completo.'
+        : 'Unlock to view full guidance.';
 
   return {
     ...strategy,
@@ -396,10 +423,10 @@ export function makeDealPreview(
     },
     strategy: {
       ...strategy.strategy,
-      concession_steps: [strategy.strategy.concession_steps[0] || hint, hint].slice(
-        0,
-        2
-      ),
+      concession_steps: [
+        strategy.strategy.concession_steps[0] || hint,
+        hint,
+      ].slice(0, 2),
     },
     risk: {
       ...strategy.risk,
@@ -460,7 +487,9 @@ export async function generateDealStrategyWithMode(
   const locale = pickLocale(input.locale);
   const apiKey = process.env.OPENAI_API_KEY || '';
   const model =
-    process.env.DEAL_STRATEGY_MODEL || process.env.SCOPE_GUARD_MODEL || 'gpt-4.1-mini';
+    process.env.DEAL_STRATEGY_MODEL ||
+    process.env.SCOPE_GUARD_MODEL ||
+    'gpt-4.1-mini';
 
   if (!apiKey) {
     return buildFallbackResult(fallback, fallbackLegacy, 'missing_api_key');
@@ -520,4 +549,3 @@ export async function generateDealStrategyWithMode(
     return buildFallbackResult(fallback, fallbackLegacy, 'unexpected_error');
   }
 }
-

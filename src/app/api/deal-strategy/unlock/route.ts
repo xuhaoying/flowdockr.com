@@ -31,8 +31,7 @@ export async function POST(request: Request) {
 
     const taskInfo = task.taskInfo ? JSON.parse(task.taskInfo) : {};
     const taskResult = task.taskResult ? JSON.parse(task.taskResult) : {};
-    const generationMode =
-      taskInfo?.generation_mode === 'ai' ? 'ai' : 'rules';
+    const generationMode = taskInfo?.generation_mode === 'ai' ? 'ai' : 'rules';
 
     if (!taskResult?.strategy) {
       throw new Error('strategy content missing');

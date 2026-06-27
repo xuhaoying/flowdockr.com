@@ -452,7 +452,8 @@ export function ToolForm({
       });
 
       const historyEnabled =
-        result?.entitlements?.historyEnabled ?? usage.entitlements.historyEnabled;
+        result?.entitlements?.historyEnabled ??
+        usage.entitlements.historyEnabled;
       if (historyEnabled && result?.generationId) {
         trackEvent('save_history_from_pricing_scenario', {
           ...pricingAnalyticsParams,
@@ -842,12 +843,12 @@ export function ToolForm({
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
       <Card
         id="tool-workspace"
-        className="border-border/80 overflow-hidden bg-white py-0"
+        className="border-brand-lavender/25 overflow-hidden bg-white py-0"
       >
-        <CardHeader className="border-border/70 gap-3 border-b bg-gradient-to-br from-white via-white to-slate-50/80 px-5 py-5 lg:px-6 lg:py-6">
+        <CardHeader className="border-brand-lavender/20 to-brand-bg/70 gap-3 border-b bg-linear-to-br from-white via-white px-5 py-5 lg:px-6 lg:py-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="space-y-1">
-              <CardTitle className="text-xl tracking-tight text-slate-900">
+              <CardTitle className="text-brand-text text-xl tracking-tight">
                 {workspaceTitle}
               </CardTitle>
               <CardDescription className="max-w-2xl text-sm leading-6 text-slate-600">
@@ -856,7 +857,7 @@ export function ToolForm({
             </div>
             <Badge
               variant="outline"
-              className="rounded-full border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+              className="border-brand-lavender/35 text-brand-primary rounded-full bg-white px-3 py-1 text-xs font-medium"
             >
               {usageText}
             </Badge>
@@ -879,7 +880,7 @@ export function ToolForm({
           ) : null}
 
           {prefillHint ? (
-            <div className="rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+            <div className="border-brand-lavender/20 bg-brand-bg/55 rounded-[18px] border px-4 py-3 text-sm text-slate-700">
               {prefillHint}
             </div>
           ) : null}
@@ -918,7 +919,7 @@ export function ToolForm({
               rows={10}
               maxLength={4000}
               placeholder={textareaPlaceholder}
-              className="min-h-[220px] resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+              className="border-brand-lavender/40 focus-visible:border-brand-primary min-h-[170px] resize-y rounded-xl bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 md:min-h-[220px] dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
               style={LIGHT_FIELD_STYLE}
             />
             <div className="flex items-center justify-end text-xs text-slate-500">
@@ -939,7 +940,7 @@ export function ToolForm({
                       trackToolOpen();
                       setTone(event.target.value as DealTone);
                     }}
-                    className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                    className="border-brand-lavender/40 focus:border-brand-primary h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none dark:bg-white dark:text-slate-900"
                     style={LIGHT_FIELD_STYLE}
                   >
                     {TONE_OPTIONS.map((item) => (
@@ -960,7 +961,7 @@ export function ToolForm({
                       trackToolOpen();
                       setProjectType(event.target.value as DealProjectType);
                     }}
-                    className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none focus:border-slate-500 dark:bg-white dark:text-slate-900"
+                    className="border-brand-lavender/40 focus:border-brand-primary h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-slate-900 shadow-xs transition outline-none dark:bg-white dark:text-slate-900"
                     style={LIGHT_FIELD_STYLE}
                   >
                     {PROJECT_TYPE_OPTIONS.map((item) => (
@@ -991,7 +992,7 @@ export function ToolForm({
                   rows={4}
                   maxLength={500}
                   placeholder={rateContextPlaceholder}
-                  className="resize-y rounded-xl border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
+                  className="border-brand-lavender/40 focus-visible:border-brand-primary resize-y rounded-xl bg-white px-4 py-3 text-slate-900 shadow-xs placeholder:text-slate-500 dark:bg-white dark:text-slate-900 dark:placeholder:text-slate-500"
                   style={LIGHT_FIELD_STYLE}
                 />
               </label>

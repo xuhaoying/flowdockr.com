@@ -1,8 +1,8 @@
 import { getAllGuides } from '../../src/lib/content/getGuideBySlug';
 import { getPricingHub } from '../../src/lib/content/getPricingHub';
 import { getAllScenarios } from '../../src/lib/content/getScenarioBySlug';
-import { buildPricingClusterAuditReport } from '../../src/lib/pricing-cluster-audit';
 import { getAllTools } from '../../src/lib/content/getToolBySlug';
+import { buildPricingClusterAuditReport } from '../../src/lib/pricing-cluster-audit';
 
 type Issue = {
   level: 'error' | 'warn';

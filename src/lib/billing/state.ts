@@ -1,9 +1,3 @@
-import { eq, sql } from 'drizzle-orm';
-
-import {
-  getFeatureEntitlements,
-  getHigherSupportLevel,
-} from '@/config/creditPacks';
 import {
   db,
   featureEntitlement,
@@ -17,6 +11,12 @@ import type {
   CreditPackCode,
   FeatureEntitlements,
 } from '@/types/billing';
+import { eq, sql } from 'drizzle-orm';
+
+import {
+  getFeatureEntitlements,
+  getHigherSupportLevel,
+} from '@/config/creditPacks';
 
 type TxLike = ReturnType<typeof db> | any;
 
@@ -33,13 +33,17 @@ export function getDefaultBillingProfile(): BillingProfile {
   };
 }
 
-export async function getUserBillingProfile(userId: string): Promise<BillingProfile> {
+export async function getUserBillingProfile(
+  userId: string
+): Promise<BillingProfile> {
   const normalizedUserId = String(userId || '').trim();
   if (!normalizedUserId) {
     return getDefaultBillingProfile();
   }
 
-  return db().transaction(async (tx: TxLike) => ensureUserBillingProfileTx(tx, normalizedUserId));
+  return db().transaction(async (tx: TxLike) =>
+    ensureUserBillingProfileTx(tx, normalizedUserId)
+  );
 }
 
 export async function ensureUserBillingProfileTx(
@@ -71,7 +75,11 @@ export async function ensureUserBillingProfileTx(
       supportLevel: inferredState.supportLevel,
       purchasedPlan: inferredState.purchasedPlan,
     });
-    await upsertFeatureEntitlementsTx(tx, normalizedUserId, inferredState.supportLevel);
+    await upsertFeatureEntitlementsTx(
+      tx,
+      normalizedUserId,
+      inferredState.supportLevel
+    );
 
     return {
       ...inferredState,
@@ -81,8 +89,13 @@ export async function ensureUserBillingProfileTx(
 
   const supportLevel = normalizeSupportLevel(stateRow.supportLevel);
   const creditsRemaining = Math.max(0, Number(stateRow.creditsRemaining || 0));
-  const creditsTotal = Math.max(creditsRemaining, Number(stateRow.creditsTotal || 0));
-  const purchasedPlan = String(stateRow.purchasedPlan || DEFAULT_PURCHASED_PLAN);
+  const creditsTotal = Math.max(
+    creditsRemaining,
+    Number(stateRow.creditsTotal || 0)
+  );
+  const purchasedPlan = String(
+    stateRow.purchasedPlan || DEFAULT_PURCHASED_PLAN
+  );
   const entitlements = await ensureFeatureEntitlementsTx(
     tx,
     normalizedUserId,
@@ -142,7 +155,13 @@ export async function applyPackPurchaseToBillingTx(
     creditsRemaining: number;
   }
 ): Promise<BillingProfile> {
-  const { userId, purchasedPlan, supportLevel, creditsAdded, creditsRemaining } = params;
+  const {
+    userId,
+    purchasedPlan,
+    supportLevel,
+    creditsAdded,
+    creditsRemaining,
+  } = params;
   const [existingState] = await tx
     .select({
       creditsRemaining: userBillingState.creditsRemaining,
@@ -154,7 +173,10 @@ export async function applyPackPurchaseToBillingTx(
     .where(eq(userBillingState.userId, userId))
     .limit(1);
 
-  const previousBalance = Math.max(0, creditsRemaining - Math.max(0, creditsAdded));
+  const previousBalance = Math.max(
+    0,
+    creditsRemaining - Math.max(0, creditsAdded)
+  );
   const [purchaseSummary] = existingState
     ? [{ totalCreditsGranted: Number(existingState.creditsTotal || 0) }]
     : await tx
@@ -166,10 +188,15 @@ export async function applyPackPurchaseToBillingTx(
 
   const current: BillingProfile = existingState
     ? {
-        creditsRemaining: Math.max(0, Number(existingState.creditsRemaining || 0)),
+        creditsRemaining: Math.max(
+          0,
+          Number(existingState.creditsRemaining || 0)
+        ),
         creditsTotal: Math.max(0, Number(existingState.creditsTotal || 0)),
         supportLevel: normalizeSupportLevel(existingState.supportLevel),
-        purchasedPlan: String(existingState.purchasedPlan || DEFAULT_PURCHASED_PLAN),
+        purchasedPlan: String(
+          existingState.purchasedPlan || DEFAULT_PURCHASED_PLAN
+        ),
         entitlements: getFeatureEntitlements(
           normalizeSupportLevel(existingState.supportLevel)
         ),
@@ -181,23 +208,31 @@ export async function applyPackPurchaseToBillingTx(
           Number(purchaseSummary?.totalCreditsGranted || 0)
         ),
         supportLevel:
-          previousBalance > 0 || Number(purchaseSummary?.totalCreditsGranted || 0) > 0
+          previousBalance > 0 ||
+          Number(purchaseSummary?.totalCreditsGranted || 0) > 0
             ? 'pro'
             : 'free',
         purchasedPlan:
-          previousBalance > 0 || Number(purchaseSummary?.totalCreditsGranted || 0) > 0
+          previousBalance > 0 ||
+          Number(purchaseSummary?.totalCreditsGranted || 0) > 0
             ? 'legacy_paid'
             : DEFAULT_PURCHASED_PLAN,
         entitlements: getFeatureEntitlements(
-          previousBalance > 0 || Number(purchaseSummary?.totalCreditsGranted || 0) > 0
+          previousBalance > 0 ||
+            Number(purchaseSummary?.totalCreditsGranted || 0) > 0
             ? 'pro'
             : 'free'
         ),
       };
 
-  const effectiveSupportLevel = getHigherSupportLevel(current.supportLevel, supportLevel);
+  const effectiveSupportLevel = getHigherSupportLevel(
+    current.supportLevel,
+    supportLevel
+  );
   const effectivePurchasedPlan =
-    effectiveSupportLevel === supportLevel ? purchasedPlan : current.purchasedPlan;
+    effectiveSupportLevel === supportLevel
+      ? purchasedPlan
+      : current.purchasedPlan;
   const nextCreditsRemaining = Math.max(0, creditsRemaining);
   const nextCreditsTotal = Math.max(
     nextCreditsRemaining,
@@ -247,11 +282,18 @@ async function inferLegacyBillingState(
     .where(eq(purchase.userId, userId));
 
   const creditsRemaining = Math.max(0, Number(userRow?.creditsBalance || 0));
-  const creditsGranted = Math.max(0, Number(purchaseSummary?.totalCreditsGranted || 0));
+  const creditsGranted = Math.max(
+    0,
+    Number(purchaseSummary?.totalCreditsGranted || 0)
+  );
   const hasLegacyPaidAccess = creditsRemaining > 0 || creditsGranted > 0;
 
-  const supportLevel: BillingSupportLevel = hasLegacyPaidAccess ? 'pro' : 'free';
-  const purchasedPlan = hasLegacyPaidAccess ? 'legacy_paid' : DEFAULT_PURCHASED_PLAN;
+  const supportLevel: BillingSupportLevel = hasLegacyPaidAccess
+    ? 'pro'
+    : 'free';
+  const purchasedPlan = hasLegacyPaidAccess
+    ? 'legacy_paid'
+    : DEFAULT_PURCHASED_PLAN;
 
   return {
     creditsRemaining,
@@ -352,7 +394,9 @@ async function upsertUserBillingStateTx(
     });
 }
 
-function normalizeSupportLevel(value: string | null | undefined): BillingSupportLevel {
+function normalizeSupportLevel(
+  value: string | null | undefined
+): BillingSupportLevel {
   const raw = String(value || '').trim();
   if (raw === 'quick_help' || raw === 'pro' || raw === 'studio') {
     return raw;
@@ -366,7 +410,8 @@ function entitlementsMatchRow(
 ): boolean {
   return (
     Boolean(row.multiVersionEnabled) === expected.multiVersionEnabled &&
-    Boolean(row.strategyExplanationEnabled) === expected.strategyExplanationEnabled &&
+    Boolean(row.strategyExplanationEnabled) ===
+      expected.strategyExplanationEnabled &&
     Boolean(row.riskAlertEnabled) === expected.riskAlertEnabled &&
     Boolean(row.historyEnabled) === expected.historyEnabled &&
     Boolean(row.followUpEnabled) === expected.followUpEnabled &&

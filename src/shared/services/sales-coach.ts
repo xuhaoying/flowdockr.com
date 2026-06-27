@@ -80,7 +80,10 @@ type DealInput = {
   locale?: string;
 };
 
-const cardsPath = path.join(process.cwd(), 'src/data/sales-coach/strategy_cards_live.jsonl');
+const cardsPath = path.join(
+  process.cwd(),
+  'src/data/sales-coach/strategy_cards_live.jsonl'
+);
 let cachedCards: CoachCard[] | null = null;
 
 function loadCards(): CoachCard[] {
@@ -121,10 +124,12 @@ function computePriceRange(yourQuote: number, floorPrice: number) {
 
 function inferStage(clientNeed: string): string {
   const text = clientNeed.toLowerCase();
-  if (/(follow[\s-]?up|ghost|after call|reconnect)/.test(text)) return 'follow_up';
+  if (/(follow[\s-]?up|ghost|after call|reconnect)/.test(text))
+    return 'follow_up';
   if (/(close|contract|sign|decision|buy now)/.test(text)) return 'closing';
   if (/(proposal|demo|presentation|offer)/.test(text)) return 'presentation';
-  if (/(objection|hesitant|pushback|concern)/.test(text)) return 'objection_handling';
+  if (/(objection|hesitant|pushback|concern)/.test(text))
+    return 'objection_handling';
   if (/(intro|first touch|cold|opening)/.test(text)) return 'opening';
   return 'discovery';
 }
@@ -134,7 +139,8 @@ function inferObjection(objection: string): string {
   if (/(price|budget|expensive|cost|贵|预算)/.test(text)) return 'price';
   if (/(later|wait|timing|quarter|下次|之后)/.test(text)) return 'timing';
   if (/(trust|proof|legit|case|信任|担心)/.test(text)) return 'trust';
-  if (/(boss|approve|decision maker|authority|谁决定)/.test(text)) return 'decision_authority';
+  if (/(boss|approve|decision maker|authority|谁决定)/.test(text))
+    return 'decision_authority';
   if (/(need|fit|not sure|适合|需要吗)/.test(text)) return 'need_fit';
   return 'implicit';
 }
@@ -205,7 +211,8 @@ function inferRiskAssessment(
 
   return {
     deal_risk: leverage,
-    ghosting_probability: leverage === 'low' ? 0.18 : leverage === 'medium' ? 0.3 : 0.42,
+    ghosting_probability:
+      leverage === 'low' ? 0.18 : leverage === 'medium' ? 0.3 : 0.42,
     price_collapse_probability:
       leverage === 'low' ? 0.2 : leverage === 'medium' ? 0.34 : 0.5,
   };

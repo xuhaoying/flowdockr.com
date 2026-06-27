@@ -68,7 +68,9 @@ function isObject(v: unknown): v is Record<string, unknown> {
   return Boolean(v) && typeof v === 'object' && !Array.isArray(v);
 }
 
-export function isDealContractResult(value: unknown): value is DealContractResult {
+export function isDealContractResult(
+  value: unknown
+): value is DealContractResult {
   if (!isObject(value)) return false;
 
   const clientAnalysis = value.client_analysis;
@@ -88,9 +90,12 @@ export function isDealContractResult(value: unknown): value is DealContractResul
   }
 
   const hasValidPriceField =
-    (pricePlan.floor_price === null || typeof pricePlan.floor_price === 'number') &&
-    (pricePlan.anchor_price === null || typeof pricePlan.anchor_price === 'number') &&
-    (pricePlan.negotiable_price === null || typeof pricePlan.negotiable_price === 'number');
+    (pricePlan.floor_price === null ||
+      typeof pricePlan.floor_price === 'number') &&
+    (pricePlan.anchor_price === null ||
+      typeof pricePlan.anchor_price === 'number') &&
+    (pricePlan.negotiable_price === null ||
+      typeof pricePlan.negotiable_price === 'number');
 
   return (
     DEAL_INTENTS.includes(clientAnalysis.intent as DealIntent) &&
@@ -112,4 +117,3 @@ export function isDealContractResult(value: unknown): value is DealContractResul
     risk.red_flags.every((x) => typeof x === 'string')
   );
 }
-

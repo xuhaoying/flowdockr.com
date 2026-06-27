@@ -16,10 +16,10 @@ describe('buildScenarioMetadata', () => {
     });
 
     expect(metadata.title).toBe(
-      'Client Messaging Outside Work Hours? What to Say | Flowdockr'
+      'Client Messaging Outside Work Hours? What to Say | FlowDockr'
     );
     expect(metadata.description).toBe(
-      'Learn what to say when a client messages outside work hours. Set a calm boundary, reset expectations, and draft the reply with Flowdockr.'
+      'Learn what to say when a client messages outside work hours. Set a calm boundary, reset expectations, and draft the reply with FlowDockr.'
     );
     expect(metadata.alternates?.canonical).toBe(
       'https://www.flowdockr.com/pricing/client-messaging-outside-work-hours'

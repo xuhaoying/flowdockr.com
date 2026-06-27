@@ -100,13 +100,13 @@ export function ToolResult({
     <Card
       id="tool-result-panel"
       data-result-ready={hasResult ? 'true' : 'false'}
-      className="overflow-hidden border-slate-200 bg-white py-0 shadow-sm"
+      className="border-brand-lavender/25 overflow-hidden bg-white py-0 shadow-sm shadow-slate-950/5"
     >
-      <CardHeader className="gap-3 border-b border-slate-200 bg-slate-50 px-5 py-5 lg:px-6">
+      <CardHeader className="border-brand-lavender/20 bg-brand-bg/55 gap-3 border-b px-5 py-5 lg:px-6">
         <div className="flex flex-wrap items-center gap-2">
           <Badge
             variant="outline"
-            className="rounded-full border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+            className="border-brand-lavender/35 text-brand-primary rounded-full bg-white px-3 py-1 text-xs font-medium"
           >
             Generated guidance
           </Badge>
@@ -122,7 +122,7 @@ export function ToolResult({
 
       <CardContent className="space-y-6 px-5 py-5 lg:px-6 lg:py-6">
         {loading ? (
-          <div className="space-y-3 rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs">
+          <div className="border-brand-lavender/20 space-y-3 rounded-[18px] border bg-white p-5 shadow-xs">
             <div className="h-3 w-full animate-pulse rounded bg-slate-200" />
             <div className="h-3 w-11/12 animate-pulse rounded bg-slate-200" />
             <div className="h-3 w-9/12 animate-pulse rounded bg-slate-200" />
@@ -130,7 +130,7 @@ export function ToolResult({
         ) : null}
 
         {!hasResult && !loading ? (
-          <div className="rounded-[18px] border border-dashed border-slate-300 bg-white p-5 text-sm text-slate-700 shadow-xs">
+          <div className="border-brand-lavender/45 rounded-[18px] border border-dashed bg-white p-5 text-sm text-slate-700 shadow-xs">
             <div className="flex items-center gap-2 text-slate-900">
               <Sparkles className="size-4" />
               <p className="font-semibold">
@@ -187,7 +187,7 @@ export function ToolResult({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-10 justify-start rounded-xl border-slate-300 bg-white px-4 text-sm font-medium text-slate-900"
+                  className="border-brand-lavender/40 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary h-10 justify-start rounded-xl bg-white px-4 text-sm font-medium"
                   onClick={() => {
                     onToneVariationClick?.('softer');
                     handleReplyAction({
@@ -206,7 +206,7 @@ export function ToolResult({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-10 justify-start rounded-xl border-slate-300 bg-white px-4 text-sm font-medium text-slate-900"
+                  className="border-brand-lavender/40 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary h-10 justify-start rounded-xl bg-white px-4 text-sm font-medium"
                   onClick={() => {
                     onToneVariationClick?.('firm');
                     handleReplyAction({
@@ -225,7 +225,7 @@ export function ToolResult({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-10 justify-start rounded-xl border-slate-300 bg-white px-4 text-sm font-medium text-slate-900"
+                  className="border-brand-lavender/40 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary h-10 justify-start rounded-xl bg-white px-4 text-sm font-medium"
                   onClick={() =>
                     handleReplyAction({
                       targetId: followUpAvailable
@@ -260,9 +260,9 @@ export function ToolResult({
                     <Card
                       id={`reply-version-${version.key}`}
                       key={version.key}
-                      className="overflow-hidden border-slate-200 bg-white py-0 shadow-xs"
+                      className="border-brand-lavender/20 overflow-hidden bg-white py-0 shadow-xs"
                     >
-                      <CardHeader className="gap-2 border-b border-slate-200 bg-slate-50 px-5 py-4">
+                      <CardHeader className="border-brand-lavender/20 bg-brand-bg/55 gap-2 border-b px-5 py-4">
                         <div className="flex items-center justify-between gap-3">
                           <div>
                             <h5 className="text-sm font-semibold text-slate-900">
@@ -281,7 +281,7 @@ export function ToolResult({
                         </div>
                       </CardHeader>
                       <CardContent className="px-5 py-5">
-                        <div className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs sm:p-6">
+                        <div className="border-brand-lavender/20 rounded-[18px] border bg-white p-5 shadow-xs sm:p-6">
                           <p className="text-[15px] leading-7 whitespace-pre-wrap text-slate-900 sm:text-base">
                             {version.text}
                           </p>
@@ -359,7 +359,7 @@ export function ToolResult({
             ) : null}
 
             {historyEnabled ? (
-              <section className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-xs">
+              <section className="border-brand-lavender/20 rounded-[18px] border bg-white p-5 shadow-xs">
                 <div className="flex items-center gap-2 text-slate-900">
                   <History className="size-4" />
                   <h4 className="text-sm font-semibold">Actions</h4>
@@ -377,7 +377,7 @@ export function ToolResult({
             ) : null}
 
             {showUpgradeNudge ? (
-              <div className="rounded-[18px] border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-xs">
+              <div className="border-brand-lavender/20 rounded-[18px] border bg-white p-5 text-sm text-slate-700 shadow-xs">
                 <p className="font-semibold text-slate-900">
                   {supportLevel === 'quick_help'
                     ? 'Upgrade to Pro for deeper negotiation support.'

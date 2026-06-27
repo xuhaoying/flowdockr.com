@@ -13,7 +13,10 @@ type PlausibleFn = (
 type GtagFn = (...args: unknown[]) => void;
 
 type MirroredScenarioEventConfig = {
-  canonicalEventName: 'fd_scenario_view' | 'fd_tool_start' | 'fd_generation_success';
+  canonicalEventName:
+    | 'fd_scenario_view'
+    | 'fd_tool_start'
+    | 'fd_generation_success';
   slugParam: 'scenario_slug' | 'pricing_slug';
   allowedPageTypes: string[];
 };

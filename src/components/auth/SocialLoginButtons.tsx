@@ -1,10 +1,10 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
+import { trackEvent } from '@/lib/analytics-client';
 import { RiGoogleFill } from 'react-icons/ri';
 
 import { signIn } from '@/core/auth/client';
-import { trackEvent } from '@/lib/analytics-client';
 import { Button } from '@/shared/components/ui/button';
 
 type SocialLoginButtonsProps = {
@@ -25,7 +25,9 @@ const PROVIDERS: Array<{
   },
 ];
 
-export function SocialLoginButtons({ callbackUrl = '/dashboard' }: SocialLoginButtonsProps) {
+export function SocialLoginButtons({
+  callbackUrl = '/dashboard',
+}: SocialLoginButtonsProps) {
   const [loading, setLoading] = useState<Provider | null>(null);
   const [error, setError] = useState('');
 
@@ -47,7 +49,9 @@ export function SocialLoginButtons({ callbackUrl = '/dashboard' }: SocialLoginBu
         },
         onError: (event) => {
           setLoading(null);
-          setError(event?.error?.message || 'Failed to continue. Please try again.');
+          setError(
+            event?.error?.message || 'Failed to continue. Please try again.'
+          );
           trackEvent('social_login_failed', {
             provider,
             callbackUrl,

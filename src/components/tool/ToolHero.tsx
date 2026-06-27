@@ -12,7 +12,7 @@ export function ToolHero({ tool }: ToolHeroProps) {
     <Card className="border-border/80 overflow-hidden bg-white py-0 shadow-sm">
       <CardHeader className="border-border/70 gap-4 border-b bg-gradient-to-br from-white via-white to-slate-50/80 px-5 py-5 md:px-6 md:py-6">
         <div className="space-y-3">
-          <h1 className="max-w-4xl text-3xl font-semibold tracking-tight text-balance text-slate-900 md:text-4xl">
+          <h1 className="text-brand-text max-w-4xl text-3xl font-semibold tracking-tight text-balance md:text-4xl">
             {tool.h1}
           </h1>
           <p className="max-w-4xl text-base leading-7 text-slate-700">
@@ -31,10 +31,10 @@ export function ToolHero({ tool }: ToolHeroProps) {
       </CardHeader>
 
       <CardContent className="flex flex-wrap gap-2 px-5 py-4 text-xs md:px-6">
-        <span className="rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+        <span className="border-brand-lavender/35 bg-brand-bg text-brand-primary rounded-full border px-2.5 py-1 font-medium">
           Paste exact client wording
         </span>
-        <span className="rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+        <span className="border-brand-lavender/35 bg-brand-bg text-brand-primary rounded-full border px-2.5 py-1 font-medium">
           Get negotiation-aware draft
         </span>
       </CardContent>

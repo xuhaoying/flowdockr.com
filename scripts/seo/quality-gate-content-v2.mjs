@@ -7,7 +7,8 @@ const SEO_PAGES_PATH = 'product/seo/factory/seo-pages.v2.csv';
 const QUALITY_RULES_PATH = 'product/seo/factory/quality-gates-v2.json';
 const REPORT_JSON = 'product/seo/generated/content-quality-report-v2.json';
 const REPORT_MD = 'product/seo/generated/content-quality-report-v2.md';
-const REWRITE_QUEUE_JSONL = 'product/seo/generated/content-rewrite-queue-v2.jsonl';
+const REWRITE_QUEUE_JSONL =
+  'product/seo/generated/content-rewrite-queue-v2.jsonl';
 const CONTENT_ROOT = 'content/pages';
 const GENERATED_AT = '2026-03-05';
 
@@ -149,7 +150,8 @@ function buildTargetsFromManifest(manifestPath) {
 
     if (page.page_type === 'problem') profile = 'problem';
     if (page.page_type === 'tool') profile = 'tool';
-    if (page.page_type === 'cluster' || page.page_type === 'pillar') profile = 'cluster';
+    if (page.page_type === 'cluster' || page.page_type === 'pillar')
+      profile = 'cluster';
 
     if (!profile) continue;
 
@@ -175,7 +177,11 @@ function buildTargetsFromPromptJobs(jobPath) {
     route: job.route,
     output_path: job.output_path,
     profile:
-      job.template_key === 'problem' ? 'problem' : job.template_key === 'tool' ? 'tool' : 'cluster',
+      job.template_key === 'problem'
+        ? 'problem'
+        : job.template_key === 'tool'
+          ? 'tool'
+          : 'cluster',
     page_type: job.page_type,
     title: job.title,
     job_id: job.job_id,
@@ -189,9 +195,13 @@ function buildRepairPrompt(target, failures, profileSpec, bannedPhrases) {
     .map((item) => `- ${item.code}${item.detail ? `: ${item.detail}` : ''}`)
     .join('\n');
 
-  const headingLines = (profileSpec.required_headings || []).map((item) => `- ${item}`).join('\n');
+  const headingLines = (profileSpec.required_headings || [])
+    .map((item) => `- ${item}`)
+    .join('\n');
 
-  const ctaLine = (profileSpec.required_cta_patterns || []).map((item) => `- ${item}`).join('\n');
+  const ctaLine = (profileSpec.required_cta_patterns || [])
+    .map((item) => `- ${item}`)
+    .join('\n');
 
   return [
     'Rewrite this SEO page to pass a strict quality gate.',
@@ -231,7 +241,10 @@ function uniqueIssueCodes(issues) {
 }
 
 const rules = readJson(QUALITY_RULES_PATH);
-const targets = source === 'prompt-jobs' ? buildTargetsFromPromptJobs(PROMPT_JOBS_PATH) : buildTargetsFromManifest(MANIFEST_PATH);
+const targets =
+  source === 'prompt-jobs'
+    ? buildTargetsFromPromptJobs(PROMPT_JOBS_PATH)
+    : buildTargetsFromManifest(MANIFEST_PATH);
 const { headers: seoHeaders, rows: seoRows } = loadCsv(SEO_PAGES_PATH);
 const seoByRoute = new Map(seoRows.map((row) => [row.route, row]));
 const seoById = new Map(seoRows.map((row) => [row.id, row]));
@@ -250,7 +263,11 @@ for (const target of targets) {
     content = readFileSync(target.output_path, 'utf8');
   } catch {
     const issue = [{ code: 'file_missing', detail: target.output_path }];
-    failures.push({ route: target.route, profile: target.profile, issues: issue });
+    failures.push({
+      route: target.route,
+      profile: target.profile,
+      issues: issue,
+    });
 
     rewriteQueue.push({
       rewrite_id: `REWRITE-${String(rewriteCounter).padStart(4, '0')}`,
@@ -259,11 +276,18 @@ for (const target of targets) {
       output_path: target.output_path,
       profile: target.profile,
       issues: issue,
-      repair_prompt: buildRepairPrompt(target, issue, profileSpec, rules.banned_phrases),
+      repair_prompt: buildRepairPrompt(
+        target,
+        issue,
+        profileSpec,
+        rules.banned_phrases
+      ),
     });
     rewriteCounter += 1;
 
-    const seoRow = (target.seo_page_id && seoById.get(target.seo_page_id)) || seoByRoute.get(target.route);
+    const seoRow =
+      (target.seo_page_id && seoById.get(target.seo_page_id)) ||
+      seoByRoute.get(target.route);
     if (seoRow) {
       seoRow.status = 'reviewed';
       seoRow.quality_score = '0';
@@ -276,7 +300,10 @@ for (const target of targets) {
   const issues = [];
   const wordCount = countWords(content);
 
-  if (wordCount < profileSpec.word_count.min || wordCount > profileSpec.word_count.max) {
+  if (
+    wordCount < profileSpec.word_count.min ||
+    wordCount > profileSpec.word_count.max
+  ) {
     issues.push({
       code: 'word_count_out_of_range',
       detail: `expected ${profileSpec.word_count.min}-${profileSpec.word_count.max}, got ${wordCount}`,
@@ -297,7 +324,9 @@ for (const target of targets) {
   }
 
   if (profileSpec.required_cta_patterns?.length) {
-    const hasCta = profileSpec.required_cta_patterns.some((pattern) => content.includes(pattern));
+    const hasCta = profileSpec.required_cta_patterns.some((pattern) =>
+      content.includes(pattern)
+    );
     if (!hasCta) {
       issues.push({ code: 'missing_task_cta' });
     }
@@ -372,10 +401,17 @@ for (const target of targets) {
   }
 
   const score = qualityScoreFromIssues(issues);
-  const seoRow = (target.seo_page_id && seoById.get(target.seo_page_id)) || seoByRoute.get(target.route);
+  const seoRow =
+    (target.seo_page_id && seoById.get(target.seo_page_id)) ||
+    seoByRoute.get(target.route);
 
   if (issues.length) {
-    failures.push({ route: target.route, profile: target.profile, quality_score: score, issues });
+    failures.push({
+      route: target.route,
+      profile: target.profile,
+      quality_score: score,
+      issues,
+    });
 
     rewriteQueue.push({
       rewrite_id: `REWRITE-${String(rewriteCounter).padStart(4, '0')}`,
@@ -384,7 +420,12 @@ for (const target of targets) {
       output_path: target.output_path,
       profile: target.profile,
       issues,
-      repair_prompt: buildRepairPrompt(target, issues, profileSpec, rules.banned_phrases),
+      repair_prompt: buildRepairPrompt(
+        target,
+        issues,
+        profileSpec,
+        rules.banned_phrases
+      ),
     });
     rewriteCounter += 1;
 
@@ -396,7 +437,12 @@ for (const target of targets) {
     }
   } else {
     const autoPublish = score >= 80;
-    passed.push({ route: target.route, profile: target.profile, quality_score: score, auto_publish: autoPublish });
+    passed.push({
+      route: target.route,
+      profile: target.profile,
+      quality_score: score,
+      auto_publish: autoPublish,
+    });
 
     if (seoRow) {
       seoRow.quality_score = String(score);
@@ -455,8 +501,12 @@ if (!failures.length) {
   mdLines.push('- No failures.');
 } else {
   for (const item of failures.slice(0, 120)) {
-    const details = item.issues.map((issue) => `${issue.code}${issue.detail ? ` (${issue.detail})` : ''}`);
-    mdLines.push(`- ${item.route}: score=${item.quality_score}; ${details.join('; ')}`);
+    const details = item.issues.map(
+      (issue) => `${issue.code}${issue.detail ? ` (${issue.detail})` : ''}`
+    );
+    mdLines.push(
+      `- ${item.route}: score=${item.quality_score}; ${details.join('; ')}`
+    );
   }
 }
 
@@ -464,13 +514,17 @@ mdLines.push('');
 writeFileSync(REPORT_MD, mdLines.join('\n'));
 
 if (failures.length && !allowFailures) {
-  console.error(`Quality gate failed: ${failures.length}/${targets.length} pages.`);
+  console.error(
+    `Quality gate failed: ${failures.length}/${targets.length} pages.`
+  );
   console.error(`Report: ${REPORT_JSON}`);
   console.error(`Rewrite queue: ${REWRITE_QUEUE_JSONL}`);
   process.exit(1);
 }
 
-console.log(`Quality gate completed: ${passed.length} passed, ${failures.length} failed.`);
+console.log(
+  `Quality gate completed: ${passed.length} passed, ${failures.length} failed.`
+);
 console.log(`Report: ${REPORT_JSON}`);
 console.log(`Rewrite queue: ${REWRITE_QUEUE_JSONL}`);
 console.log(`Status DB: ${SEO_PAGES_PATH}`);

@@ -1,5 +1,6 @@
-import { envConfigs } from '@/config';
 import { redirect } from 'next/navigation';
+
+import { envConfigs } from '@/config';
 
 export async function generateMetadata({
   params,
@@ -9,7 +10,7 @@ export async function generateMetadata({
   await params;
 
   return {
-    title: 'Sign in | Flowdockr',
+    title: 'Sign in | FlowDockr',
     alternates: {
       canonical: `${envConfigs.site_url}/signin`,
     },
@@ -29,6 +30,8 @@ export default async function SignInPage({
 }) {
   await params;
   const { callbackUrl } = await searchParams;
-  const query = callbackUrl ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : '';
+  const query = callbackUrl
+    ? `?callbackUrl=${encodeURIComponent(callbackUrl)}`
+    : '';
   redirect(`/signin${query}`);
 }

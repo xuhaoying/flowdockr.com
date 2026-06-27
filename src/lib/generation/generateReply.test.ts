@@ -1,23 +1,24 @@
 // @vitest-environment node
 
+import { getScenarioBySlug } from '@/lib/scenarios';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { generateReply } from './generateReply';
 
 const mocks = vi.hoisted(() => ({
   generateReplyWithAI: vi.fn(),
+  isAIProviderTimeoutError: vi.fn(),
   evaluateReplyQuality: vi.fn(),
 }));
 
 vi.mock('@/lib/generation-ai', () => ({
   generateReplyWithAI: mocks.generateReplyWithAI,
+  isAIProviderTimeoutError: mocks.isAIProviderTimeoutError,
 }));
 
 vi.mock('./replyQualityRubric', () => ({
   evaluateReplyQuality: mocks.evaluateReplyQuality,
 }));
-
-import { getScenarioBySlug } from '@/lib/scenarios';
-
-import { generateReply } from './generateReply';
 
 const MODEL_OUTPUT = JSON.stringify({
   strategy: {
@@ -26,17 +27,14 @@ const MODEL_OUTPUT = JSON.stringify({
     why_it_works: [
       'It keeps the price anchor tied to scope and delivery risk.',
     ],
-    what_to_avoid: [
-      'Do not reduce the same scope without a tradeoff.',
-    ],
+    what_to_avoid: ['Do not reduce the same scope without a tradeoff.'],
     negotiation_framing:
       'Treat price as a function of scope and delivery risk.',
   },
   replies: {
     professional:
       'Thanks for flagging that. The quote reflects the full scope we discussed, so I would not lower the same scope without changing something else. If budget is the issue, I can outline a smaller first phase.',
-    firm:
-      'I would not reduce the same scope to a different number. If the budget needs to change, the clean path is to reduce scope or phase the work.',
+    firm: 'I would not reduce the same scope to a different number. If the budget needs to change, the clean path is to reduce scope or phase the work.',
     softer:
       'I understand the budget concern. If it helps, I can suggest a smaller first phase rather than force the same scope into a lower fee.',
   },
@@ -54,6 +52,8 @@ const MODEL_OUTPUT = JSON.stringify({
 describe('generateReply log semantics', () => {
   beforeEach(() => {
     mocks.generateReplyWithAI.mockReset();
+    mocks.isAIProviderTimeoutError.mockReset();
+    mocks.isAIProviderTimeoutError.mockReturnValue(false);
     mocks.evaluateReplyQuality.mockReset();
   });
 
@@ -99,8 +99,41 @@ describe('generateReply log semantics', () => {
 
     expect(result.generationLog.rubricPassed).toBe(true);
     expect(result.generationLog.rubricFailReasons).toEqual([]);
+    expect(result.generationLog.rubricWarningReasons).toEqual(['sendability']);
+  });
+
+  it('returns a structured fallback when the provider times out', async () => {
+    const timeoutError = {
+      attemptMeta: {
+        model: 'openai/gpt-5-mini',
+        provider: 'fal',
+        promptMeta: {
+          strategyCardSource: 'top10',
+          calibrationExampleCount: 3,
+          usedServiceAdjustment: true,
+        },
+      },
+      timeoutMs: 30000,
+    };
+    mocks.generateReplyWithAI.mockRejectedValue(timeoutError);
+    mocks.isAIProviderTimeoutError.mockImplementation(
+      (error) => error === timeoutError
+    );
+
+    const result = await generateReply({
+      scenario: getScenarioBySlug('quote-too-high')!,
+      message: 'Your quote seems a bit high.',
+      sourcePage: 'tool',
+      serviceType: 'developer',
+      goal: 'protect_price',
+    });
+
+    expect(result.output.reply).toContain('commercial logic');
+    expect(result.generationLog.fallbackUsed).toBe(true);
+    expect(result.generationLog.fallbackReason).toBe('provider_timeout');
+    expect(result.generationLog.provider).toBe('fal');
     expect(result.generationLog.rubricWarningReasons).toEqual([
-      'sendability',
+      'Provider timed out after 30000ms.',
     ]);
   });
 });

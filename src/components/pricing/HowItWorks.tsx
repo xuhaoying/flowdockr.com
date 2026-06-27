@@ -27,11 +27,11 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+    <section className="border-brand-lavender/25 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
       <div className="space-y-5">
         <div className="max-w-2xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
-            How Flowdockr Helps
+            How FlowDockr Helps
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             A simple workflow for high-stakes client conversations
@@ -41,10 +41,10 @@ export function HowItWorks() {
           {STEPS.map((item) => (
             <article
               key={item.step}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+              className="border-brand-lavender/20 bg-brand-bg/55 rounded-2xl border p-4"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex size-8 items-center justify-center rounded-full border border-slate-300 bg-white text-sm font-semibold text-slate-900">
+                <span className="border-brand-lavender/35 text-brand-primary inline-flex size-8 items-center justify-center rounded-full border bg-white text-sm font-semibold">
                   {item.step}
                 </span>
                 <h3 className="text-base font-semibold text-slate-900">

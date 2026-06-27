@@ -668,7 +668,7 @@ export const chatMessage = table(
   ]
 );
 
-// Business tables for Flowdockr prompt management
+// Business tables for FlowDockr prompt management
 export const prompt = table(
   'prompt',
   {

@@ -8,6 +8,7 @@ export type GenerationFallbackReason =
   | 'schema_validation_failed'
   | 'schema_validation_failed_after_retry'
   | 'rubric_failed_after_retry'
+  | 'provider_timeout'
   | 'provider_error';
 
 export function buildFallbackReply(params: {
@@ -97,9 +98,11 @@ export function buildFallbackReply(params: {
         card.redFlags[0] || 'Avoid making an unstructured concession.'
       ),
       normalizeSentence(
-        params.reason === 'rubric_failed_after_retry'
-          ? 'Fallback was used because the repaired draft still missed the quality rubric.'
-          : 'Fallback was used because the structured model output was invalid after retry.'
+        params.reason === 'provider_timeout'
+          ? 'Fallback was used because the AI provider took too long to respond.'
+          : params.reason === 'rubric_failed_after_retry'
+            ? 'Fallback was used because the repaired draft still missed the quality rubric.'
+            : 'Fallback was used because the structured model output was invalid after retry.'
       ),
     ].slice(0, 2),
     followUpSuggestion: {

@@ -1,5 +1,9 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { generateDealStrategy, pickLocale } from '../../src/shared/services/sales-coach';
+
+import {
+  generateDealStrategy,
+  pickLocale,
+} from '../../src/shared/services/sales-coach';
 
 type Scenario = {
   id: string;
@@ -38,7 +42,8 @@ const scenarios: Scenario[] = [
   {
     id: 'S1-price-too-high-1200-700',
     locale: 'en',
-    client_need: 'Client needs a landing page redesign for Q2 launch in 2 weeks',
+    client_need:
+      'Client needs a landing page redesign for Q2 launch in 2 weeks',
     client_objection: 'Your price is too high. Budget is around 700',
     your_quote: 1200,
     your_floor_price: 700,
@@ -71,7 +76,8 @@ const scenarios: Scenario[] = [
     id: 'S5-timeline-risk-1800-1200',
     locale: 'en',
     client_need: 'Logo + mini brand guide with urgent 7-day deadline',
-    client_objection: 'Can you lower the price and still keep the same timeline?',
+    client_objection:
+      'Can you lower the price and still keep the same timeline?',
     your_quote: 1800,
     your_floor_price: 1200,
   },
@@ -107,7 +113,7 @@ const STOPWORDS = new Set([
 ]);
 
 const AI_CLICHE = [
-  'in today\'s fast-paced world',
+  "in today's fast-paced world",
   'as a freelancer, it is important to',
   'in conclusion',
   'as an ai',
@@ -192,8 +198,10 @@ function evaluateScenario(input: Scenario): ScenarioReport {
   }
 
   if (
-    strategy.scripts.strong.toLowerCase() === strategy.scripts.warm.toLowerCase() ||
-    strategy.scripts.strong.toLowerCase() === strategy.scripts.concession.toLowerCase()
+    strategy.scripts.strong.toLowerCase() ===
+      strategy.scripts.warm.toLowerCase() ||
+    strategy.scripts.strong.toLowerCase() ===
+      strategy.scripts.concession.toLowerCase()
   ) {
     humanTone -= 8;
     issues.push('scripts_not_distinct');
@@ -201,9 +209,13 @@ function evaluateScenario(input: Scenario): ScenarioReport {
 
   if (humanTone < 0) humanTone = 0;
 
-  const inputKeywords = unique(tokenize(`${input.client_need} ${input.client_objection}`)).slice(0, 12);
+  const inputKeywords = unique(
+    tokenize(`${input.client_need} ${input.client_objection}`)
+  ).slice(0, 12);
   const matched = inputKeywords.filter((k) => allText.includes(k));
-  const groundingRatio = inputKeywords.length ? matched.length / inputKeywords.length : 0;
+  const groundingRatio = inputKeywords.length
+    ? matched.length / inputKeywords.length
+    : 0;
 
   let grounding = Math.round(groundingRatio * 30);
   if (grounding < 12) {
@@ -211,7 +223,8 @@ function evaluateScenario(input: Scenario): ScenarioReport {
   }
 
   let actionability = 0;
-  const actionableCount = strategy.next_actions.filter(startsWithVerbLike).length;
+  const actionableCount =
+    strategy.next_actions.filter(startsWithVerbLike).length;
   actionability += Math.min(actionableCount, 3) * 2;
   if (/if\b|when\b|unless\b/.test(strategy.scripts.concession.toLowerCase())) {
     actionability += 2;
@@ -225,8 +238,10 @@ function evaluateScenario(input: Scenario): ScenarioReport {
   }
 
   let pricingLogic = 0;
-  const { ideal_price, negotiable_price, bottom_price } = strategy.suggested_price_range;
-  const validRange = ideal_price >= negotiable_price && negotiable_price >= bottom_price;
+  const { ideal_price, negotiable_price, bottom_price } =
+    strategy.suggested_price_range;
+  const validRange =
+    ideal_price >= negotiable_price && negotiable_price >= bottom_price;
   if (validRange) pricingLogic += 5;
   else issues.push('invalid_price_range');
 

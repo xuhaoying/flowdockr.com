@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { sendMagicLink } from '@/lib/magic-link';
 import { magicLinkSchema } from '@/lib/validators';
 
@@ -28,7 +27,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         ok: false,
-        message: error instanceof Error ? error.message : 'Failed to send magic link.',
+        message:
+          error instanceof Error ? error.message : 'Failed to send magic link.',
       },
       { status: 500 }
     );

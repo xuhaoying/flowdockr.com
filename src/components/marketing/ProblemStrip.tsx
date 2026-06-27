@@ -8,12 +8,15 @@ const PRESSURE_ITEMS = [
   { label: 'Final payment reminder', slug: 'final-payment-reminder' },
   { label: 'Client wants extra work for free', slug: 'extra-work-for-free' },
   { label: 'Unlimited revisions request', slug: 'unlimited-revisions' },
-  { label: 'That request is out of scope', slug: 'out-of-scope-professionally' },
+  {
+    label: 'That request is out of scope',
+    slug: 'out-of-scope-professionally',
+  },
 ];
 
 export function ProblemStrip() {
   return (
-    <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="border-brand-lavender/25 space-y-3 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
       <h2 className="text-xl font-semibold tracking-tight text-slate-900">
         Common client reply situations
       </h2>
@@ -22,7 +25,7 @@ export function ProblemStrip() {
           <Link
             key={item.slug}
             href={`/scenario/${item.slug}`}
-            className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 transition-colors hover:border-slate-400 hover:bg-white hover:text-slate-900"
+            className="border-brand-lavender/35 bg-brand-bg/60 hover:border-brand-primary/55 hover:text-brand-primary rounded-full border px-3 py-1.5 text-sm text-slate-700 transition-colors hover:bg-white"
           >
             {item.label}
           </Link>

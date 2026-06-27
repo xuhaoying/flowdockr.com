@@ -1,6 +1,5 @@
 import { readFileSync } from 'node:fs';
 import { extname } from 'node:path';
-
 import {
   getScenarioPerformanceReport,
   type ScenarioSearchConsoleRowInput,
@@ -88,7 +87,9 @@ async function main() {
   const format = (getArg('format') || 'json').trim().toLowerCase();
   const priorityOnlyArg = (getArg('priority-only') || '').trim().toLowerCase();
   const priorityOnly =
-    priorityOnlyArg === 'true' || priorityOnlyArg === '1' || priorityOnlyArg === 'yes';
+    priorityOnlyArg === 'true' ||
+    priorityOnlyArg === '1' ||
+    priorityOnlyArg === 'yes';
   const searchConsolePath = (getArg('search-console') || '').trim();
 
   const report = await getScenarioPerformanceReport({

@@ -88,7 +88,8 @@ function routeToFilePath(route) {
 
 function ctaLabel(route) {
   if (route === '/deal') return 'Generate your negotiation reply in Flowdockr';
-  if (route === '/pricing') return 'Generate your pricing strategy in Flowdockr';
+  if (route === '/pricing')
+    return 'Generate your pricing strategy in Flowdockr';
   if (route === '/scope') return 'Generate your scope policy in Flowdockr';
   return 'Open Flowdockr';
 }
@@ -345,5 +346,7 @@ const manifest = {
 
 writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
 
-console.log(`Generated ${pages.length} programmatic pages and ${hubs.length} hubs.`);
+console.log(
+  `Generated ${pages.length} programmatic pages and ${hubs.length} hubs.`
+);
 console.log(`Manifest: ${MANIFEST_PATH}`);

@@ -66,17 +66,29 @@ for (const page of manifest.pages) {
 
     for (const heading of REQUIRED_HEADINGS_PROBLEM) {
       if (!content.includes(heading)) {
-        failures.push({ route: page.route, reason: 'missing_heading', details: heading });
+        failures.push({
+          route: page.route,
+          reason: 'missing_heading',
+          details: heading,
+        });
       }
     }
 
     for (const variant of REQUIRED_REPLY_VARIANTS) {
       if (!content.includes(variant)) {
-        failures.push({ route: page.route, reason: 'missing_reply_variant', details: variant });
+        failures.push({
+          route: page.route,
+          reason: 'missing_reply_variant',
+          details: variant,
+        });
       }
     }
 
-    if (!/Generate my reply \(20s\)|Calculate my minimum and ideal price|Create my proposal draft now/.test(content)) {
+    if (
+      !/Generate my reply \(20s\)|Calculate my minimum and ideal price|Create my proposal draft now/.test(
+        content
+      )
+    ) {
       failures.push({ route: page.route, reason: 'missing_task_cta' });
     }
   }

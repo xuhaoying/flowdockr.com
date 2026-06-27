@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-import { Link } from '@/core/i18n/navigation';
 import { trackEvent } from '@/lib/analytics';
 import {
   buildPricingScenarioAnalyticsParams,
@@ -11,6 +9,8 @@ import {
 import { BillingSupportLevel } from '@/types/billing';
 import type { CheckoutStatusResponse } from '@/types/payments';
 import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
+
+import { Link } from '@/core/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
 
 type CheckoutStatusCardProps = {
@@ -88,11 +88,10 @@ export function CheckoutStatusCard({
           payload.status === 'failed' ||
           payload.status === 'canceled' ||
           payload.status === 'refunded';
-        const isFinalSuccess = payload.status === 'paid' && payload.creditsGranted;
+        const isFinalSuccess =
+          payload.status === 'paid' && payload.creditsGranted;
         const shouldKeepPolling =
-          !isFinalSuccess &&
-          !isFinalFailure &&
-          attemptsRef.current < 20;
+          !isFinalSuccess && !isFinalFailure && attemptsRef.current < 20;
         if (shouldKeepPolling) {
           timeoutId = setTimeout(() => {
             void tick();
@@ -168,22 +167,22 @@ export function CheckoutStatusCard({
 
       {!hasCheckoutReference ? (
         <p className="text-muted-foreground">
-          We could not find a checkout reference for this page. Please retry from the
-          pricing page.
+          We could not find a checkout reference for this page. Please retry
+          from the pricing page.
         </p>
       ) : null}
 
       {!isFinalized && !isFinalFailure && hasCheckoutReference ? (
         <p className="text-muted-foreground">
-          Payment completed. We are confirming your negotiation credits and support
-          level. This usually takes a few seconds.
+          Payment completed. We are confirming your negotiation credits and
+          support level. This usually takes a few seconds.
         </p>
       ) : null}
 
       {isFinalized ? (
         <p className="text-muted-foreground">
-          Your negotiation credits are now available. You can continue with deeper
-          client support right away.
+          Your negotiation credits are now available. You can continue with
+          deeper client support right away.
         </p>
       ) : null}
 
@@ -193,7 +192,7 @@ export function CheckoutStatusCard({
         </p>
       ) : null}
 
-      <div className="rounded-md border bg-muted/30 p-4 text-sm">
+      <div className="bg-muted/30 rounded-md border p-4 text-sm">
         <p>
           <span className="font-semibold">Status:</span> {status.status}
         </p>
@@ -213,7 +212,8 @@ export function CheckoutStatusCard({
         ) : null}
         {status.supportLevel ? (
           <p>
-            <span className="font-semibold">Support level:</span> {formatSupportLevel(status.supportLevel)}
+            <span className="font-semibold">Support level:</span>{' '}
+            {formatSupportLevel(status.supportLevel)}
           </p>
         ) : null}
       </div>

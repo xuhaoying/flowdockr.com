@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getScenarioPageBySlug } from '@/content/scenario-pages';
-import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import {
   getScenarioAnalyticsSlugCounts,
   isCanonicalScenarioAnalyticsEventName,
   recordScenarioAnalyticsEvent,
 } from '@/lib/analytics/scenarioEventLog';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 
 export const runtime = 'nodejs';
 

@@ -1,9 +1,9 @@
 import { permanentRedirect } from 'next/navigation';
+import { getLegacyScenarioRedirectPath } from '@/lib/routing/legacyScenarioRedirects';
 import { scenarios } from '@/lib/scenarios';
 import { setRequestLocale } from 'next-intl/server';
 
 import { locales } from '@/config/locale';
-import { getLegacyScenarioRedirectPath } from '@/lib/routing/legacyScenarioRedirects';
 
 type LegacyScenarioPageParams = {
   locale: string;

@@ -1,6 +1,14 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { PublicFooter } from '@/components/layout/PublicFooter';
+import { PublicHeader } from '@/components/layout/PublicHeader';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+import { ConversationSurfaces } from './ConversationSurfaces';
+import { ExampleConversation } from './ExampleConversation';
+import { FinalCta } from './FinalCta';
+import { HomepageHero } from './HomepageHero';
+import { ProblemStrip } from './ProblemStrip';
 
 vi.mock('@/core/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: ReactNode }) => (
@@ -16,18 +24,13 @@ vi.mock('@/core/auth/client', () => ({
   }),
 }));
 
+vi.mock('next-intl', () => ({
+  useLocale: () => 'en',
+}));
+
 vi.mock('@/shared/blocks/sign/sign-user', () => ({
   SignUser: () => <div data-testid="sign-user" />,
 }));
-
-import { PublicFooter } from '@/components/layout/PublicFooter';
-import { PublicHeader } from '@/components/layout/PublicHeader';
-
-import { ConversationSurfaces } from './ConversationSurfaces';
-import { ExampleConversation } from './ExampleConversation';
-import { FinalCta } from './FinalCta';
-import { HomepageHero } from './HomepageHero';
-import { ProblemStrip } from './ProblemStrip';
 
 describe('public marketing entry alignment', () => {
   it('points homepage hero and final CTA toward canonical scenario-first entry points', () => {
@@ -64,11 +67,15 @@ describe('public marketing entry alignment', () => {
     });
 
     expect(
-      stripLinks.every((link) => link.getAttribute('href')?.startsWith('/scenario/'))
+      stripLinks.every((link) =>
+        link.getAttribute('href')?.startsWith('/scenario/')
+      )
     ).toBe(true);
-    expect(screen.getByRole('link', { name: 'See full scenario' }).getAttribute('href')).toBe(
-      '/scenario/quote-too-high'
-    );
+    expect(
+      screen
+        .getByRole('link', { name: 'See full scenario' })
+        .getAttribute('href')
+    ).toBe('/scenario/quote-too-high');
   });
 
   it('describes payment, scope, and proposal follow-up scenarios as live', () => {
@@ -84,7 +91,7 @@ describe('public marketing entry alignment', () => {
     expect(screen.getByText('Proposal follow-up (live)')).toBeTruthy();
   });
 
-  it('removes pricing as a primary public navigation destination', async () => {
+  it('keeps pricing, compliance, and legal policy routes visible in public navigation', async () => {
     render(
       <>
         <PublicHeader />
@@ -93,18 +100,48 @@ describe('public marketing entry alignment', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getAllByRole('link', { name: 'Tools' }).length).toBeGreaterThan(0);
+      expect(
+        screen.getAllByRole('link', { name: 'Tools' }).length
+      ).toBeGreaterThan(0);
     });
 
-    expect(screen.queryByRole('link', { name: 'Pricing' })).toBeNull();
+    expect(
+      screen
+        .getAllByRole('link', { name: 'Pricing' })
+        .every((link) => link.getAttribute('href') === '/pricing')
+    ).toBe(true);
 
-    const footerUseCaseLinks = screen.getAllByRole('link').filter((link) =>
-      [
-        'Client says your quote is too high',
-        'Client asks for a discount',
-        'Client wants extra work for free',
-      ].includes(link.textContent || '')
-    );
+    expect(
+      screen
+        .getByRole('link', { name: 'Business Compliance' })
+        .getAttribute('href')
+    ).toBe('/compliance');
+    expect(
+      screen
+        .getByRole('link', { name: 'Terms of Service' })
+        .getAttribute('href')
+    ).toBe('/terms');
+    expect(
+      screen.getByRole('link', { name: 'Privacy Policy' }).getAttribute('href')
+    ).toBe('/privacy');
+    expect(
+      screen.getByRole('link', { name: 'Refund Policy' }).getAttribute('href')
+    ).toBe('/refund');
+    expect(
+      screen
+        .getAllByRole('link', { name: 'Contact' })
+        .every((link) => link.getAttribute('href') === '/contact')
+    ).toBe(true);
+
+    const footerUseCaseLinks = screen
+      .getAllByRole('link')
+      .filter((link) =>
+        [
+          'Client says your quote is too high',
+          'Client asks for a discount',
+          'Client wants extra work for free',
+        ].includes(link.textContent || '')
+      );
 
     expect(
       footerUseCaseLinks.every((link) =>

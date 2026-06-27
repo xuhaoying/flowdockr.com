@@ -2,10 +2,10 @@
   "sidebar": {
     "header": {
       "brand": {
-        "title": "Flowdockr Assistant",
+        "title": "FlowDockr Assistant",
         "logo": {
-          "src": "/logo.png",
-          "alt": "Flowdockr Assistant"
+          "src": "/logo-mark.svg",
+          "alt": "FlowDockr Assistant"
         },
         "url": "/chat"
       },
@@ -51,7 +51,7 @@
     },
     "footer": {
       "nav": {
-      "items": []
+        "items": []
       },
       "show_theme": true,
       "show_locale": false
@@ -79,7 +79,7 @@
     "empty": "暂无对话记录。",
     "error": "加载对话列表失败。",
     "retry": "重试",
-    "signin": "登录后可查看你的 Flowdockr 对话历史。",
+    "signin": "登录后可查看你的 FlowDockr 对话历史。",
     "summary": "正在显示第 {from}-{to} 条，共 {total} 条",
     "perPage": "每页",
     "prev": "上一页",

@@ -9,8 +9,8 @@ export function ScenarioHubIntro({ items }: ScenarioHubIntroProps) {
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
       <div className="space-y-5">
         <div className="max-w-3xl space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-            What Flowdockr Helps You Handle
+          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
+            What FlowDockr Helps You Handle
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             Common client situations that need clearer negotiation judgment

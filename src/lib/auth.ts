@@ -1,6 +1,6 @@
+import { db, user } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 
-import { db, user } from '@/lib/db';
 import { getUuid } from '@/shared/lib/hash';
 import { getUserInfo } from '@/shared/models/user';
 
@@ -26,7 +26,7 @@ export async function findOrCreateUserByEmail(email: string) {
     return existing;
   }
 
-  const fallbackName = normalizedEmail.split('@')[0] || 'Flowdockr User';
+  const fallbackName = normalizedEmail.split('@')[0] || 'FlowDockr User';
 
   const [created] = await db()
     .insert(user)

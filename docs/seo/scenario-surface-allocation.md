@@ -1,6 +1,6 @@
 # Scenario Surface Allocation
 
-This document defines which canonical scenario pages should appear on each real scenario-exposure surface in Flowdockr.
+This document defines which canonical scenario pages should appear on each real scenario-exposure surface in FlowDockr.
 
 ## Real surfaces in the codebase
 

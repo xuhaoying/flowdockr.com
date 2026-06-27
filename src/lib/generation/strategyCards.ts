@@ -811,10 +811,7 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
       'State the no clearly.',
       'Close the loop without leaving a vague maybe.',
     ],
-    avoidMoves: [
-      'Over-apologizing.',
-      'Offering false future optionality.',
-    ],
+    avoidMoves: ['Over-apologizing.', 'Offering false future optionality.'],
     nextStepTemplates: [
       'Thanks for thinking of me for this. I am going to pass, but I wanted to let you know clearly rather than leave the conversation hanging.',
       'I appreciate the opportunity. I do not think I would be the right fit for this as it stands, so I am going to step back rather than force it.',
@@ -889,10 +886,7 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
       'Ground the no in fit or alignment.',
       'Keep any future-open line narrow and genuine.',
     ],
-    avoidMoves: [
-      'Personal criticism.',
-      'Overly open-ended future language.',
-    ],
+    avoidMoves: ['Personal criticism.', 'Overly open-ended future language.'],
     nextStepTemplates: [
       'I appreciate you thinking of me for this. I am going to pass on the current opportunity, but I wanted to let you know directly and respectfully.',
       'I do not think I would be the right fit for the current version, so I would rather be honest now than create friction later.',
@@ -909,8 +903,7 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
       'You want a friendly message that still sounds like a decision rather than hesitation.',
     counterpartMindset:
       'They mostly want a quick clear answer and can misread overly gentle phrasing as maybe.',
-    requiredReframe:
-      'Nice should describe the tone, not the certainty level.',
+    requiredReframe: 'Nice should describe the tone, not the certainty level.',
     allowedConcessions: [
       'Add a light fit reason if it helps.',
       'Close warmly without promising future availability you do not mean.',
@@ -928,10 +921,7 @@ const TOP_STRATEGY_CARDS: StrategyCard[] = [
       'Say no in plain language.',
       'End on a warm but settled line.',
     ],
-    avoidMoves: [
-      'Over-explaining.',
-      'Turning the close into another opening.',
-    ],
+    avoidMoves: ['Over-explaining.', 'Turning the close into another opening.'],
     nextStepTemplates: [
       'Thanks for thinking of me for this. I am going to pass on the project, but I wanted to let you know clearly and promptly.',
       'Thanks again for reaching out. I do not think I would be the right fit for this one, so I am going to step back rather than take it on without the right alignment.',

@@ -142,15 +142,13 @@
     {
       "slug": "budget-lower-than-expected",
       "title": "Budget lower than expected",
-      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | Flowdockr",
+      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | FlowDockr",
       "family": "budget-mismatch",
       "canonicalRoute": "/pricing/budget-lower-than-expected/",
       "generatorScenarioSlug": "budget-limited",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -161,22 +159,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "can-you-do-it-cheaper",
       "title": "Can you do it cheaper?",
-      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr",
+      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/can-you-do-it-cheaper/",
       "generatorScenarioSlug": "discount-request",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -187,14 +181,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "cheaper-competitor-comparison",
       "title": "Cheaper competitor comparison",
-      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr",
+      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | FlowDockr",
       "family": "competitor-comparison",
       "canonicalRoute": "/pricing/cheaper-competitor-comparison/",
       "generatorScenarioSlug": "cheaper-freelancer",
@@ -211,22 +203,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-asking-for-discount",
       "title": "How to respond when a client asks for a discount",
-      "seoTitle": "How to Respond When a Client Asks for a Discount | Flowdockr",
+      "seoTitle": "How to Respond When a Client Asks for a Discount | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/client-asking-for-discount/",
       "generatorScenarioSlug": "discount-request",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -237,14 +225,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-asking-for-extra-work",
       "title": "How to respond when a client asks for extra work",
-      "seoTitle": "How to Respond When a Client Asks for Extra Work | Flowdockr",
+      "seoTitle": "How to Respond When a Client Asks for Extra Work | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/client-asking-for-extra-work/",
       "generatorScenarioSlug": "extra-work-outside-scope",
@@ -261,14 +247,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-expects-immediate-response",
       "title": "Client expects an immediate response: what to say",
-      "seoTitle": "Client Expects an Immediate Response? What to Say | Flowdockr",
+      "seoTitle": "Client Expects an Immediate Response? What to Say | FlowDockr",
       "family": "availability-boundary",
       "canonicalRoute": "/pricing/client-expects-immediate-response/",
       "generatorScenarioSlug": "client-expects-immediate-response",
@@ -285,14 +269,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-messaging-outside-work-hours",
       "title": "Client messaging outside work hours: what to say",
-      "seoTitle": "Client Messaging Outside Work Hours? What to Say | Flowdockr",
+      "seoTitle": "Client Messaging Outside Work Hours? What to Say | FlowDockr",
       "family": "availability-boundary",
       "canonicalRoute": "/pricing/client-messaging-outside-work-hours/",
       "generatorScenarioSlug": "client-messaging-outside-work-hours",
@@ -309,22 +291,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-negotiating-price",
       "title": "Client is negotiating price: what to say",
-      "seoTitle": "Client Negotiating Price? What to Say Next | Flowdockr",
+      "seoTitle": "Client Negotiating Price? What to Say Next | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/client-negotiating-price/",
       "generatorScenarioSlug": "discount-request",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -335,14 +313,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "client-requesting-additional-revisions",
       "title": "How to handle a client requesting additional revisions",
-      "seoTitle": "How to Handle a Client Requesting Additional Revisions | Flowdockr",
+      "seoTitle": "How to Handle a Client Requesting Additional Revisions | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/client-requesting-additional-revisions/",
       "generatorScenarioSlug": "unlimited-revisions",
@@ -359,14 +335,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "decline-project-politely",
       "title": "How to decline a project politely",
-      "seoTitle": "How to Decline a Project Politely | Flowdockr",
+      "seoTitle": "How to Decline a Project Politely | FlowDockr",
       "family": "project-decline",
       "canonicalRoute": "/pricing/decline-project-politely/",
       "generatorScenarioSlug": "decline-project-politely",
@@ -383,22 +357,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "decline-underpaid-project-politely",
       "title": "How to decline an underpaid project politely",
-      "seoTitle": "How to Decline an Underpaid Project Politely | Flowdockr",
+      "seoTitle": "How to Decline an Underpaid Project Politely | FlowDockr",
       "family": "budget-mismatch",
       "canonicalRoute": "/pricing/decline-underpaid-project-politely/",
       "generatorScenarioSlug": "do-it-for-less",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -409,22 +379,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "discount-pressure-before-signing",
       "title": "Discount pressure before signing",
-      "seoTitle": "How to Handle Discount Pressure Before Signing | Flowdockr",
+      "seoTitle": "How to Handle Discount Pressure Before Signing | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/discount-pressure-before-signing/",
       "generatorScenarioSlug": "discount-request",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -435,14 +401,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "free-trial-work-request",
       "title": "Free trial work request",
-      "seoTitle": "How to Respond to a Free Trial Work Request | Flowdockr",
+      "seoTitle": "How to Respond to a Free Trial Work Request | FlowDockr",
       "family": "free-work-boundary",
       "canonicalRoute": "/pricing/free-trial-work-request/",
       "generatorScenarioSlug": "free-sample-request-response",
@@ -459,14 +423,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "more-work-same-price",
       "title": "More work for the same price",
-      "seoTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
+      "seoTitle": "How to Respond When They Want More Work for the Same Price | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/more-work-same-price/",
       "generatorScenarioSlug": "extra-work-outside-scope",
@@ -483,14 +445,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "more-work-than-agreed",
       "title": "Client wants more work than agreed",
-      "seoTitle": "Client Wants More Work Than Agreed? What to Say | Flowdockr",
+      "seoTitle": "Client Wants More Work Than Agreed? What to Say | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/more-work-than-agreed/",
       "generatorScenarioSlug": "extra-work-outside-scope",
@@ -507,22 +467,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "price-pushback-after-proposal",
       "title": "Price pushback after proposal",
-      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr",
+      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | FlowDockr",
       "family": "price-pushback",
       "canonicalRoute": "/pricing/price-pushback-after-proposal/",
       "generatorScenarioSlug": "quote-too-high",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -533,22 +489,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "refuse-extra-work-without-losing-client",
       "title": "How to refuse extra work without losing the client",
-      "seoTitle": "How to Refuse Extra Work Without Losing the Client | Flowdockr",
+      "seoTitle": "How to Refuse Extra Work Without Losing the Client | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/refuse-extra-work-without-losing-client/",
       "generatorScenarioSlug": "set-boundaries-politely",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -559,14 +511,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "refuse-project-due-to-workload",
       "title": "How to refuse a project due to workload",
-      "seoTitle": "How to Refuse a Project Due to Workload | Flowdockr",
+      "seoTitle": "How to Refuse a Project Due to Workload | FlowDockr",
       "family": "project-decline",
       "canonicalRoute": "/pricing/refuse-project-due-to-workload/",
       "generatorScenarioSlug": "refuse-project-due-to-workload",
@@ -583,14 +533,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "reject-client-without-burning-bridge",
       "title": "How to reject a client without burning the bridge",
-      "seoTitle": "How to Reject a Client Without Burning the Bridge | Flowdockr",
+      "seoTitle": "How to Reject a Client Without Burning the Bridge | FlowDockr",
       "family": "project-decline",
       "canonicalRoute": "/pricing/reject-client-without-burning-bridge/",
       "generatorScenarioSlug": "reject-client-without-burning-bridge",
@@ -607,14 +555,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "say-no-to-client-professionally",
       "title": "How to say no to a client professionally",
-      "seoTitle": "How to Say No to a Client Professionally | Flowdockr",
+      "seoTitle": "How to Say No to a Client Professionally | FlowDockr",
       "family": "project-decline",
       "canonicalRoute": "/pricing/say-no-to-client-professionally/",
       "generatorScenarioSlug": "say-no-to-client-professionally",
@@ -631,14 +577,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "say-no-to-low-budget-client",
       "title": "How to say no to a low-budget client",
-      "seoTitle": "How to Say No to a Low-Budget Client | Flowdockr",
+      "seoTitle": "How to Say No to a Low-Budget Client | FlowDockr",
       "family": "budget-mismatch",
       "canonicalRoute": "/pricing/say-no-to-low-budget-client/",
       "generatorScenarioSlug": "say-no-to-low-budget-client",
@@ -655,22 +599,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "say-no-to-scope-creep-politely",
       "title": "How to say no to scope creep politely",
-      "seoTitle": "How to Say No to Scope Creep Politely | Flowdockr",
+      "seoTitle": "How to Say No to Scope Creep Politely | FlowDockr",
       "family": "scope-boundary",
       "canonicalRoute": "/pricing/say-no-to-scope-creep-politely/",
       "generatorScenarioSlug": "set-boundaries-politely",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -681,14 +621,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "set-boundaries-with-demanding-client",
       "title": "How to set boundaries with a demanding client",
-      "seoTitle": "How to Set Boundaries With a Demanding Client | Flowdockr",
+      "seoTitle": "How to Set Boundaries With a Demanding Client | FlowDockr",
       "family": "availability-boundary",
       "canonicalRoute": "/pricing/set-boundaries-with-demanding-client/",
       "generatorScenarioSlug": "set-boundaries-with-demanding-client",
@@ -705,22 +643,18 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "small-discount-before-closing",
       "title": "Small discount before closing",
-      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | Flowdockr",
+      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/small-discount-before-closing/",
       "generatorScenarioSlug": "discount-request",
       "generatorMappingKind": "reused",
       "generatorFit": "weak",
-      "auditFlags": [
-        "weak-generator-fit"
-      ],
+      "auditFlags": ["weak-generator-fit"],
       "views": null,
       "generateClicks": null,
       "generateSuccesses": null,
@@ -731,14 +665,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "stand-firm-on-pricing",
       "title": "How to stand firm on pricing as a freelancer",
-      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | Flowdockr",
+      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | FlowDockr",
       "family": "discount-pressure",
       "canonicalRoute": "/pricing/stand-firm-on-pricing/",
       "generatorScenarioSlug": "stand-firm-on-pricing",
@@ -755,14 +687,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "tell-client-you-are-unavailable",
       "title": "How to tell a client you are unavailable",
-      "seoTitle": "How to Tell a Client You Are Unavailable | Flowdockr",
+      "seoTitle": "How to Tell a Client You Are Unavailable | FlowDockr",
       "family": "availability-boundary",
       "canonicalRoute": "/pricing/tell-client-you-are-unavailable/",
       "generatorScenarioSlug": "tell-client-you-are-unavailable",
@@ -779,14 +709,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "turn-down-freelance-work-nicely",
       "title": "How to turn down freelance work nicely",
-      "seoTitle": "How to Turn Down Freelance Work Nicely | Flowdockr",
+      "seoTitle": "How to Turn Down Freelance Work Nicely | FlowDockr",
       "family": "project-decline",
       "canonicalRoute": "/pricing/turn-down-freelance-work-nicely/",
       "generatorScenarioSlug": "turn-down-freelance-work-nicely",
@@ -803,14 +731,12 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     },
     {
       "slug": "urgent-request-last-minute",
       "title": "How to respond to an urgent last-minute request",
-      "seoTitle": "How to Respond to an Urgent Last-Minute Request | Flowdockr",
+      "seoTitle": "How to Respond to an Urgent Last-Minute Request | FlowDockr",
       "family": "availability-boundary",
       "canonicalRoute": "/pricing/urgent-request-last-minute/",
       "generatorScenarioSlug": "urgent-request-last-minute",
@@ -827,9 +753,7 @@
       "generationSuccessRate": null,
       "checkoutIntentRate": null,
       "purchaseRate": null,
-      "diagnostics": [
-        "insufficient_data"
-      ]
+      "diagnostics": ["insufficient_data"]
     }
   ]
 }

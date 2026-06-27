@@ -47,7 +47,7 @@ export default async function RootLayout({
   const allowOptionalTracking = trackingConsent === 'accepted';
   const privacyHref = getLocalizedPublicPath('/privacy', locale);
   const faviconHref = versionedIconHref(
-    envConfigs.app_favicon || '/favicon.ico'
+    envConfigs.app_favicon || '/favicon.svg'
   );
 
   // app url
@@ -117,28 +117,14 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="font-sans" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={faviconHref} />
-        <link rel="alternate icon" href={versionedIconHref('/favicon.ico')} />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={versionedIconHref('/favicon-32x32.png')}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={versionedIconHref('/favicon-16x16.png')}
-        />
+        <link rel="icon" type="image/svg+xml" href={faviconHref} />
         <link
           rel="apple-touch-icon"
-          sizes="180x180"
-          href={versionedIconHref('/apple-touch-icon.png')}
+          href={versionedIconHref('/app-icon.svg')}
         />
         <link rel="manifest" href={versionedIconHref('/site.webmanifest')} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#F3F4FA" />
         {/* Optional: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to enable Search Console verification */}
         {googleSearchConsoleVerification ? (
           <meta
@@ -169,7 +155,7 @@ export default async function RootLayout({
       </head>
       <body suppressHydrationWarning className="overflow-x-hidden">
         <NextTopLoader
-          color="#6466F1"
+          color="#6C63FF"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}

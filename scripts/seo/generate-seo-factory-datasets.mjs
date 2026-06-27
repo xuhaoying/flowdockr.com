@@ -67,14 +67,32 @@ function inferAudience(keyword) {
 
 function inferVariables(ctaType) {
   if (ctaType === 'pricing') {
-    return ['quoted_price', 'minimum_price', 'timeline_days', 'deliverables', 'client_type'];
+    return [
+      'quoted_price',
+      'minimum_price',
+      'timeline_days',
+      'deliverables',
+      'client_type',
+    ];
   }
 
   if (ctaType === 'proposal') {
-    return ['deliverables', 'timeline_days', 'revision_limit', 'client_type', 'payment_terms'];
+    return [
+      'deliverables',
+      'timeline_days',
+      'revision_limit',
+      'client_type',
+      'payment_terms',
+    ];
   }
 
-  return ['quoted_price', 'deadline', 'scope', 'client_type', 'relationship_stage'];
+  return [
+    'quoted_price',
+    'deadline',
+    'scope',
+    'client_type',
+    'relationship_stage',
+  ];
 }
 
 function toSlug(text) {
@@ -120,7 +138,9 @@ const intents = curatedRows.map((row) => {
     canonical_url: canonicalUrl,
     internal_links: {
       pillar: routeBase,
-      related: siblingKeywords.map((keyword) => `${routeBase}/${toSlug(keyword)}`),
+      related: siblingKeywords.map(
+        (keyword) => `${routeBase}/${toSlug(keyword)}`
+      ),
     },
     tool_cta_type: ctaType,
     target_route: row.target_route,

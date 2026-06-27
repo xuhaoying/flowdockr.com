@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
 import { Copy, Sparkles } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { useRouter } from '@/core/i18n/navigation';
@@ -26,7 +26,10 @@ import {
 
 type GenerationMode = 'ai' | 'rules';
 
-function i18nText(locale: string, text: { en: string; zh: string; es: string }) {
+function i18nText(
+  locale: string,
+  text: { en: string; zh: string; es: string }
+) {
   if (locale.startsWith('zh')) return text.zh;
   if (locale.startsWith('es')) return text.es;
   return text.en;
@@ -39,7 +42,10 @@ function formatPrice(value: number | null) {
   return String(value);
 }
 
-function fallbackNotice(locale: string, reason?: DealFallbackReason): string | null {
+function fallbackNotice(
+  locale: string,
+  reason?: DealFallbackReason
+): string | null {
   if (!reason || reason === 'missing_api_key') return null;
 
   if (reason === 'parse_failed') {
@@ -69,11 +75,7 @@ export function DealStrategyGenerator() {
   const t = useTranslations('pages.create.deal_strategy');
   const locale = useLocale();
   const router = useRouter();
-  const {
-    user,
-    setIsShowSignModal,
-    fetchUserCredits,
-  } = useAppContext();
+  const { user, setIsShowSignModal, fetchUserCredits } = useAppContext();
 
   const [loading, setLoading] = useState(false);
   const [unlocking, setUnlocking] = useState(false);
@@ -258,7 +260,11 @@ export function DealStrategyGenerator() {
         note: feedback.note,
       };
 
-      if (Number.isFinite(ratingNumber) && ratingNumber >= 1 && ratingNumber <= 5) {
+      if (
+        Number.isFinite(ratingNumber) &&
+        ratingNumber >= 1 &&
+        ratingNumber <= 5
+      ) {
         payload.rating = ratingNumber;
       }
 
@@ -331,7 +337,7 @@ export function DealStrategyGenerator() {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 pb-12 pt-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 pt-4 pb-12">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-2xl">
@@ -341,8 +347,10 @@ export function DealStrategyGenerator() {
           <CardDescription>{t('description')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="text-sm text-muted-foreground">
-            {t('credits_remaining', { credits: user?.credits?.remainingCredits ?? '-' })}
+          <div className="text-muted-foreground text-sm">
+            {t('credits_remaining', {
+              credits: user?.credits?.remainingCredits ?? '-',
+            })}
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -387,7 +395,11 @@ export function DealStrategyGenerator() {
             </div>
           </div>
 
-          <Button onClick={onSubmit} disabled={!canSubmit || loading} className="w-full md:w-auto">
+          <Button
+            onClick={onSubmit}
+            disabled={!canSubmit || loading}
+            className="w-full md:w-auto"
+          >
             {loading ? t('actions.generating') : t('actions.generate')}
           </Button>
         </CardContent>
@@ -398,13 +410,13 @@ export function DealStrategyGenerator() {
           <CardHeader>
             <CardTitle>{t('result.title')}</CardTitle>
             <CardDescription>{t('result.subtitle')}</CardDescription>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-muted-foreground text-sm">
               {modeTitle}: <span className="font-medium">{modeValue}</span>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
             {generationNotice && (
-              <div className="rounded-md border border-dashed p-3 text-sm text-muted-foreground">
+              <div className="text-muted-foreground rounded-md border border-dashed p-3 text-sm">
                 {generationNotice}
               </div>
             )}
@@ -417,7 +429,10 @@ export function DealStrategyGenerator() {
                     {unlocking ? t('actions.unlocking') : t('actions.unlock')}
                   </Button>
                   {needTopup && (
-                    <Button variant="outline" onClick={() => router.push('/pricing')}>
+                    <Button
+                      variant="outline"
+                      onClick={() => router.push('/pricing')}
+                    >
                       {t('actions.buy_credits')}
                     </Button>
                   )}
@@ -428,20 +443,30 @@ export function DealStrategyGenerator() {
             <section className="space-y-2">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold">{cardLabels.instantReply}</h3>
-                <Button variant="outline" size="sm" onClick={() => copyText(result.instant_reply)}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyText(result.instant_reply)}
+                >
                   <Copy className="mr-1 h-4 w-4" />
                   {t('actions.copy')}
                 </Button>
               </div>
-              <div className="rounded-md border p-3 text-sm">{result.instant_reply}</div>
+              <div className="rounded-md border p-3 text-sm">
+                {result.instant_reply}
+              </div>
             </section>
 
             <section className="grid gap-3 md:grid-cols-2">
               <article className="rounded-md border p-3 text-sm">
-                <h3 className="mb-2 font-semibold">{cardLabels.clientAnalysis}</h3>
-                <div className="space-y-1 text-muted-foreground">
+                <h3 className="mb-2 font-semibold">
+                  {cardLabels.clientAnalysis}
+                </h3>
+                <div className="text-muted-foreground space-y-1">
                   <div>intent: {result.client_analysis.intent}</div>
-                  <div>leverage_level: {result.client_analysis.leverage_level}</div>
+                  <div>
+                    leverage_level: {result.client_analysis.leverage_level}
+                  </div>
                   <div className="pt-1">signals:</div>
                   <ul className="list-disc space-y-1 pl-5">
                     {result.client_analysis.signals.map((signal, idx) => (
@@ -453,17 +478,26 @@ export function DealStrategyGenerator() {
 
               <article className="rounded-md border p-3 text-sm">
                 <h3 className="mb-2 font-semibold">{cardLabels.pricePlan}</h3>
-                <div className="space-y-1 text-muted-foreground">
-                  <div>anchor_price: {formatPrice(result.price_plan.anchor_price)}</div>
-                  <div>negotiable_price: {formatPrice(result.price_plan.negotiable_price)}</div>
-                  <div>floor_price: {formatPrice(result.price_plan.floor_price)}</div>
-                  <div className="pt-1">rationale: {result.price_plan.rationale}</div>
+                <div className="text-muted-foreground space-y-1">
+                  <div>
+                    anchor_price: {formatPrice(result.price_plan.anchor_price)}
+                  </div>
+                  <div>
+                    negotiable_price:{' '}
+                    {formatPrice(result.price_plan.negotiable_price)}
+                  </div>
+                  <div>
+                    floor_price: {formatPrice(result.price_plan.floor_price)}
+                  </div>
+                  <div className="pt-1">
+                    rationale: {result.price_plan.rationale}
+                  </div>
                 </div>
               </article>
 
               <article className="rounded-md border p-3 text-sm">
                 <h3 className="mb-2 font-semibold">{cardLabels.strategy}</h3>
-                <div className="space-y-1 text-muted-foreground">
+                <div className="text-muted-foreground space-y-1">
                   <div>approach: {result.strategy.approach}</div>
                   <div className="pt-1">concession_steps:</div>
                   <ul className="list-disc space-y-1 pl-5">
@@ -476,9 +510,11 @@ export function DealStrategyGenerator() {
 
               <article className="rounded-md border p-3 text-sm">
                 <h3 className="mb-2 font-semibold">{cardLabels.risk}</h3>
-                <div className="space-y-1 text-muted-foreground">
+                <div className="text-muted-foreground space-y-1">
                   <div>deal_risk: {result.risk.deal_risk}</div>
-                  <div>ghosting_probability: {result.risk.ghosting_probability}</div>
+                  <div>
+                    ghosting_probability: {result.risk.ghosting_probability}
+                  </div>
                   <div className="pt-1">red_flags:</div>
                   <ul className="list-disc space-y-1 pl-5">
                     {result.risk.red_flags.map((flag, idx) => (
@@ -501,7 +537,7 @@ export function DealStrategyGenerator() {
                   <div className="space-y-2">
                     <Label>{t('feedback.adopted_script')}</Label>
                     <select
-                      className="h-10 w-full rounded-md border bg-background px-3 text-sm"
+                      className="bg-background h-10 w-full rounded-md border px-3 text-sm"
                       value={feedback.adopted_script}
                       onChange={(e) =>
                         setFeedback((prev) => ({
@@ -510,10 +546,16 @@ export function DealStrategyGenerator() {
                         }))
                       }
                     >
-                      <option value="instant_reply">{t('feedback.script_instant')}</option>
-                      <option value="strong">{t('feedback.script_strong')}</option>
+                      <option value="instant_reply">
+                        {t('feedback.script_instant')}
+                      </option>
+                      <option value="strong">
+                        {t('feedback.script_strong')}
+                      </option>
                       <option value="warm">{t('feedback.script_warm')}</option>
-                      <option value="concession">{t('feedback.script_concession')}</option>
+                      <option value="concession">
+                        {t('feedback.script_concession')}
+                      </option>
                       <option value="none">{t('feedback.script_none')}</option>
                     </select>
                   </div>
@@ -521,7 +563,7 @@ export function DealStrategyGenerator() {
                   <div className="space-y-2">
                     <Label>{t('feedback.outcome')}</Label>
                     <select
-                      className="h-10 w-full rounded-md border bg-background px-3 text-sm"
+                      className="bg-background h-10 w-full rounded-md border px-3 text-sm"
                       value={feedback.outcome}
                       onChange={(e) =>
                         setFeedback((prev) => ({
@@ -530,7 +572,9 @@ export function DealStrategyGenerator() {
                         }))
                       }
                     >
-                      <option value="pending">{t('feedback.outcome_pending')}</option>
+                      <option value="pending">
+                        {t('feedback.outcome_pending')}
+                      </option>
                       <option value="won">{t('feedback.outcome_won')}</option>
                       <option value="lost">{t('feedback.outcome_lost')}</option>
                     </select>
@@ -568,8 +612,13 @@ export function DealStrategyGenerator() {
                   </div>
                 </div>
 
-                <Button onClick={onSubmitFeedback} disabled={submittingFeedback}>
-                  {submittingFeedback ? t('actions.saving') : t('actions.save_feedback')}
+                <Button
+                  onClick={onSubmitFeedback}
+                  disabled={submittingFeedback}
+                >
+                  {submittingFeedback
+                    ? t('actions.saving')
+                    : t('actions.save_feedback')}
                 </Button>
               </section>
             )}
@@ -579,4 +628,3 @@ export function DealStrategyGenerator() {
     </div>
   );
 }
-

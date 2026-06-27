@@ -7,7 +7,10 @@ type ScenarioStrategicPrinciplesProps = {
 export function ScenarioStrategicPrinciples({
   scenario,
 }: ScenarioStrategicPrinciplesProps) {
-  const principles = [scenario.primaryGoal, ...scenario.preferredMoves].slice(0, 3);
+  const principles = [scenario.primaryGoal, ...scenario.preferredMoves].slice(
+    0,
+    3
+  );
 
   return (
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -16,7 +19,10 @@ export function ScenarioStrategicPrinciples({
       </h2>
       <div className="grid gap-3 md:grid-cols-3">
         {principles.map((principle) => (
-          <article key={principle} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <article
+            key={principle}
+            className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+          >
             <p className="text-sm font-medium text-slate-800">{principle}</p>
           </article>
         ))}

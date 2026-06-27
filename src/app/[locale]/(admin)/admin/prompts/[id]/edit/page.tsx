@@ -4,7 +4,12 @@ import { PERMISSIONS, requirePermission } from '@/core/rbac';
 import { Empty } from '@/shared/blocks/common';
 import { Header, Main, MainHeader } from '@/shared/blocks/dashboard';
 import { FormCard } from '@/shared/blocks/form';
-import { findPrompt, updatePrompt, UpdatePrompt, PromptStatus } from '@/shared/models/prompt';
+import {
+  findPrompt,
+  PromptStatus,
+  updatePrompt,
+  UpdatePrompt,
+} from '@/shared/models/prompt';
 import { getUserInfo } from '@/shared/models/user';
 import { Crumb } from '@/shared/types/blocks/common';
 import { Form } from '@/shared/types/blocks/form';

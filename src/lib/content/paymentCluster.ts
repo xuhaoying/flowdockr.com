@@ -54,8 +54,8 @@ const paymentScenarioSupportBySlug: Record<string, PaymentScenarioSupport> = {
     nextSteps: [
       'Send the reply with the invoice number, overdue status, and one clear ask for the payment date.',
       'If they reply with a vague promise, move to a firmer reminder instead of restarting the thread from zero.',
-      'If they still do not respond, use the next boundary or escalation step you referenced in the reply.'
-    ]
+      'If they still do not respond, use the next boundary or escalation step you referenced in the reply.',
+    ],
   },
   'deposit-not-paid-yet': {
     scenarioDefinition:
@@ -93,8 +93,8 @@ const paymentScenarioSupportBySlug: Record<string, PaymentScenarioSupport> = {
     nextSteps: [
       'Send the reply with one clear payment step and keep kickoff tied to the deposit instead of a verbal promise.',
       'If the client hesitates, answer the hesitation directly without adding unpaid custom work or starting early.',
-      'If they keep pushing to begin before paying, move into a firmer start-after-payment boundary.'
-    ]
+      'If they keep pushing to begin before paying, move into a firmer start-after-payment boundary.',
+    ],
   },
 };
 

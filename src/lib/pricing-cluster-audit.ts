@@ -1,13 +1,13 @@
 import sitemap from '@/app/sitemap';
 import { getPricingHub } from '@/lib/content/getPricingHub';
 import { pricingScenarioPages } from '@/lib/content/pricingScenarios';
-import { dedicatedPricingGeneratorScenarioSlugs } from '@/lib/pricing-generator-scenarios';
-import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import {
   getPricingScenariosByFamily,
   pricingFamilies,
   pricingScenarios,
 } from '@/lib/pricing-cluster';
+import { dedicatedPricingGeneratorScenarioSlugs } from '@/lib/pricing-generator-scenarios';
+import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 
 type GeneratorMappingKind = 'dedicated' | 'reused';
 type GeneratorFit = 'strong' | 'reused' | 'weak';
@@ -96,7 +96,9 @@ function normalizePath(path: string): string {
 
 export function buildPricingClusterAuditReport(): PricingClusterAuditReport {
   const hub = getPricingHub();
-  const scenarioDiscoverySlugs = new Set(pricingScenarioPages.map((item) => item.slug));
+  const scenarioDiscoverySlugs = new Set(
+    pricingScenarioPages.map((item) => item.slug)
+  );
   const sitemapUrls = new Set(
     sitemap().map((entry) => normalizePath(String(entry.url || '')))
   );
@@ -108,11 +110,15 @@ export function buildPricingClusterAuditReport(): PricingClusterAuditReport {
       getPricingScenariosByFamily(family.id).map((scenario) => scenario.slug)
     )
   );
-  const dedicatedGeneratorSlugSet = new Set(dedicatedPricingGeneratorScenarioSlugs);
+  const dedicatedGeneratorSlugSet = new Set(
+    dedicatedPricingGeneratorScenarioSlugs
+  );
   const keywordOwners = buildKeywordOwnerMap();
 
   const pages = pricingScenarios.map((scenario) => {
-    const page = pricingScenarioPages.find((item) => item.slug === scenario.slug);
+    const page = pricingScenarioPages.find(
+      (item) => item.slug === scenario.slug
+    );
     const generatorScenario = getGeneratorScenarioBySlug(
       scenario.generatorScenarioSlug
     );
@@ -169,7 +175,9 @@ export function buildPricingClusterAuditReport(): PricingClusterAuditReport {
       primaryKeywords: page?.primaryKeywords || [scenario.primaryKeyword],
       canonicalRoute: page?.url || `/pricing/${scenario.slug}/`,
       includedInScenarioDiscovery: scenarioDiscoverySlugs.has(scenario.slug),
-      includedInSitemap: sitemapUrls.has(normalizePath(`/pricing/${scenario.slug}/`)),
+      includedInSitemap: sitemapUrls.has(
+        normalizePath(`/pricing/${scenario.slug}/`)
+      ),
       surfacedOnHubFeatured,
       surfacedInHubLibrary,
       relatedSlugs,

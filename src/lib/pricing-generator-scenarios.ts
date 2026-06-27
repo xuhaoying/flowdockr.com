@@ -36,7 +36,7 @@ function buildPricingGeneratorScenario(
     slug: definition.slug,
     category: definition.category,
     title: definition.title,
-    seoTitle: `${definition.title} | Flowdockr`,
+    seoTitle: `${definition.title} | FlowDockr`,
     metaDescription: definition.metaDescription,
     h1: definition.title,
     heroIntro: definition.heroIntro,
@@ -46,17 +46,16 @@ function buildPricingGeneratorScenario(
     exampleReply: definition.exampleReply,
     exampleAltReply: definition.exampleAltReply,
     strategyBullets: definition.preferredMoves,
-    faq:
-      definition.faq || [
-        {
-          q: `What matters most in "${definition.title}"?`,
-          a: definition.primaryGoal,
-        },
-        {
-          q: 'What should I avoid?',
-          a: definition.avoid.join(' '),
-        },
-      ],
+    faq: definition.faq || [
+      {
+        q: `What matters most in "${definition.title}"?`,
+        a: definition.primaryGoal,
+      },
+      {
+        q: 'What should I avoid?',
+        a: definition.avoid.join(' '),
+      },
+    ],
     relatedSlugs: definition.relatedSlugs,
     promptContext: definition.promptContext,
     riskLevel: definition.riskLevel,
@@ -319,8 +318,7 @@ export const pricingGeneratorScenarios: Scenario[] = [
       'Over-explaining turns the reply into a negotiation target.',
       'The message should be respectful, final enough to close, and easy to send.',
     ],
-    exampleClientMessage:
-      'Would you be interested in taking this on for us?',
+    exampleClientMessage: 'Would you be interested in taking this on for us?',
     exampleReply:
       'Thanks for thinking of me for this. I am going to pass, but I wanted to let you know clearly rather than leave the conversation hanging.',
     exampleAltReply:
@@ -346,8 +344,7 @@ export const pricingGeneratorScenarios: Scenario[] = [
       'Scenario: say no to a client professionally. The user needs a decline that is clear, respectful, and final enough to close the thread. Keep the explanation brief and avoid making the no sound negotiable.',
     riskLevel: 'medium',
     toneProfile: 'warm-firm',
-    placeholder:
-      'Paste the inquiry and the main reason you want to say no...',
+    placeholder: 'Paste the inquiry and the main reason you want to say no...',
   }),
   buildPricingGeneratorScenario({
     slug: 'decline-project-politely',
@@ -582,8 +579,7 @@ export const pricingGeneratorScenarios: Scenario[] = [
       'Draft a calm, structured hold on pricing that sounds deliberate rather than stiff or defensive.',
     heroIntro:
       'Use this when the client is pushing for movement on price and you want to hold the line without sounding tense.',
-    shortDescription:
-      'Hold price through structure, not bravado.',
+    shortDescription: 'Hold price through structure, not bravado.',
     problemText: [
       'The client is pushing for a lower number, but conceding would weaken the deal.',
       'The tone needs to sound calm and commercially grounded.',
@@ -621,9 +617,8 @@ export const pricingGeneratorScenarios: Scenario[] = [
   }),
 ];
 
-export const dedicatedPricingGeneratorScenarioSlugs = pricingGeneratorScenarios.map(
-  (scenario) => scenario.slug
-);
+export const dedicatedPricingGeneratorScenarioSlugs =
+  pricingGeneratorScenarios.map((scenario) => scenario.slug);
 
 const dedicatedPricingGeneratorScenarioSlugSet = new Set<ScenarioSlug>(
   dedicatedPricingGeneratorScenarioSlugs

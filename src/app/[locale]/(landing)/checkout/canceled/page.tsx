@@ -1,12 +1,12 @@
+import { getPricingScenarioSlugFromPath } from '@/lib/analytics/pricingAttribution';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
-import { getPricingScenarioSlugFromPath } from '@/lib/analytics/pricingAttribution';
-import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Checkout canceled | Flowdockr',
+  title: 'Checkout canceled | FlowDockr',
   description: 'Your checkout was canceled. You can restart anytime.',
   canonicalUrl: '/checkout/canceled',
   noIndex: true,

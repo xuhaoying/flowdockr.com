@@ -1,7 +1,6 @@
 import { permanentRedirect } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
-
 import { getLocalizedPublicPath } from '@/lib/trust';
+import { setRequestLocale } from 'next-intl/server';
 
 export default async function LegacyTermsPage({
   params,

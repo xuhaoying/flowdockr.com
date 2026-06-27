@@ -89,7 +89,9 @@ export async function getThemeBlock(blockName: string, theme?: string) {
 
   try {
     // load theme block
-    const blockModule = await import(`@/themes/${loadTheme}/blocks/${blockName}`);
+    const blockModule = await import(
+      `@/themes/${loadTheme}/blocks/${blockName}`
+    );
     // Try PascalCase named export first, then original blockName
     const component = blockModule[pascalCaseName] || blockModule[blockName];
     if (!component) {

@@ -53,10 +53,18 @@ function toolCtaLabel(toolType) {
   return 'Open Deal Module';
 }
 
-function buildProblemPage({ intent, asset, related, pillarRoute, toolPageRoute }) {
+function buildProblemPage({
+  intent,
+  asset,
+  related,
+  pillarRoute,
+  toolPageRoute,
+}) {
   const title = toTitle(intent.situation);
   const description = `Action-ready playbook for ${intent.situation}: strategy summary, mistakes to avoid, and 3 copy-paste replies.`;
-  const strategyLines = asset.strategy_steps.map((step) => `1. ${step}`).join('\n');
+  const strategyLines = asset.strategy_steps
+    .map((step) => `1. ${step}`)
+    .join('\n');
   const pitfalls = asset.pitfalls.map((item) => `- ${item}`).join('\n');
 
   const replies = asset.reply_templates
@@ -143,8 +151,12 @@ ${faqLines}
 }
 
 function buildPillarPage({ pillar, clusterIntents, toolLinks }) {
-  const publishedIntents = clusterIntents.filter((intent) => intent.page_type === 'problem');
-  const backlogIntents = clusterIntents.filter((intent) => intent.page_type !== 'problem');
+  const publishedIntents = clusterIntents.filter(
+    (intent) => intent.page_type === 'problem'
+  );
+  const backlogIntents = clusterIntents.filter(
+    (intent) => intent.page_type !== 'problem'
+  );
 
   const list = publishedIntents.slice(0, 40).map((intent) => {
     return `- [${toTitle(intent.situation)}](${intent.canonical_url})`;
@@ -155,7 +167,9 @@ function buildPillarPage({ pillar, clusterIntents, toolLinks }) {
     .map((intent) => `- ${toTitle(intent.situation)}`)
     .join('\n');
 
-  const toolList = toolLinks.map((tool) => `- [${tool.title}](${tool.route})`).join('\n');
+  const toolList = toolLinks
+    .map((tool) => `- [${tool.title}](${tool.route})`)
+    .join('\n');
 
   return `---
 title: ${pillar.title}
@@ -228,7 +242,9 @@ Users arrive with active urgency and leave with ready-to-send output in under a 
 }
 
 function buildToolsHub(tools) {
-  const links = tools.map((tool) => `- [${tool.title}](${tool.route})`).join('\n');
+  const links = tools
+    .map((tool) => `- [${tool.title}](${tool.route})`)
+    .join('\n');
 
   return `---
 title: Flowdockr Tools Hub
@@ -296,18 +312,22 @@ const toolByType = {
 
 for (const intent of intents.filter((item) => item.page_type === 'problem')) {
   const routeBase = clusterRouteMap[intent.cluster] || '/negotiation';
-  const route = intent.canonical_url || `${routeBase}/${toSlug(intent.situation)}`;
+  const route =
+    intent.canonical_url || `${routeBase}/${toSlug(intent.situation)}`;
 
   const asset = assetMap.get(intent.intent_id);
   if (!asset) continue;
 
-  const clusterPillar = pillars.find((pillar) => pillar.cluster === intent.cluster) || pillars[0];
+  const clusterPillar =
+    pillars.find((pillar) => pillar.cluster === intent.cluster) || pillars[0];
   const toolPage = toolByType[intent.tool_cta_type] || tools[0];
 
   const related = intents
     .filter(
       (item) =>
-        item.page_type === 'problem' && item.cluster === intent.cluster && item.intent_id !== intent.intent_id
+        item.page_type === 'problem' &&
+        item.cluster === intent.cluster &&
+        item.intent_id !== intent.intent_id
     )
     .slice(0, 4)
     .map((item) => ({
@@ -337,9 +357,13 @@ for (const intent of intents.filter((item) => item.page_type === 'problem')) {
 }
 
 for (const pillar of pillars) {
-  const clusterIntents = intents.filter((intent) => intent.cluster === pillar.cluster);
+  const clusterIntents = intents.filter(
+    (intent) => intent.cluster === pillar.cluster
+  );
   const toolLinks = tools.filter(
-    (tool) => tool.tool_cta_type === pillar.tool_cta_type || pillar.tool_cta_type === 'reply'
+    (tool) =>
+      tool.tool_cta_type === pillar.tool_cta_type ||
+      pillar.tool_cta_type === 'reply'
   );
 
   const content = buildPillarPage({
