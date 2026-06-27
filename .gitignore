@@ -73,7 +73,9 @@ src/config/db/migrations
 .chats
 .env*
 !.env.example
+!.env.production
 !.env.sample
 .gstack/
 .playwright-cli/
 output/
+test-results/
