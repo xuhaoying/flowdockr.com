@@ -1,8 +1,8 @@
 import {
   getRelatedScenarioLinks,
+  getScenarioHeroDescription,
   getScenarioMetaDescription,
   getScenarioMetaTitle,
-  getScenarioHeroDescription,
   getScenarioPagePromise,
   scenarioPages,
 } from '@/content/scenario-pages';
@@ -100,10 +100,9 @@ function buildGeneratorScenario(page: CanonicalScenario): Scenario {
   preferredMoves.push(getFallbackMove(page));
 
   const avoid = getAvoidList(page);
-  const relatedSlugs =
-    page.relatedScenarioSlugs?.length
-      ? page.relatedScenarioSlugs
-      : getRelatedScenarioLinks(page.slug).map((item) => item.slug);
+  const relatedSlugs = page.relatedScenarioSlugs?.length
+    ? page.relatedScenarioSlugs
+    : getRelatedScenarioLinks(page.slug).map((item) => item.slug);
 
   return {
     slug: page.slug,

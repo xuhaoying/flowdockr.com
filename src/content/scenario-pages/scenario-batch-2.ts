@@ -52,7 +52,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks if you can meet their budget',
     slug: 'meet-their-budget',
     metaTitle:
-      'Can You Meet Their Budget Without Undercutting the Scope? | Flowdockr',
+      'Can You Meet Their Budget Without Undercutting the Scope? | FlowDockr',
     metaDescription:
       'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Draft a reply that protects your pricing logic and offers a scoped alternative instead of squeezing the same work into a smaller fee.',
     previewReply:
@@ -80,10 +80,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Treat the budget as a planning constraint, not an automatic reason to cut the same scope.',
     strategySecondary:
       'Offer a leaner version, phased rollout, or smaller first step if there is still a workable deal.',
-    similarScenarioSlugs: [
-      'out-of-budget-but-interested',
-      'quote-too-high',
-    ],
+    similarScenarioSlugs: ['out-of-budget-but-interested', 'quote-too-high'],
     nextStepScenarioSlugs: [
       'same-scope-lower-price',
       'lower-rate-after-proposal',
@@ -222,8 +219,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     id: 'scn_silent_after_discovery_call',
     title: 'Client went silent after the discovery call',
     slug: 'silent-after-discovery-call',
-    metaTitle:
-      'Client Went Silent After the Discovery Call | Flowdockr',
+    metaTitle: 'Client Went Silent After the Discovery Call | FlowDockr',
     metaDescription:
       'Use this scenario when a client went silent after the discovery call. Send a useful follow-up that references the conversation and makes the next step easy.',
     previewReply:
@@ -252,10 +248,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Reference the call briefly and give the client a simple next step instead of a vague check-in.',
     strategySecondary:
       'Keep the tone light so the message feels like a helpful nudge, not pressure.',
-    similarScenarioSlugs: [
-      'no-response-after-rate',
-      'after-client-ghosted',
-    ],
+    similarScenarioSlugs: ['no-response-after-rate', 'after-client-ghosted'],
     nextStepScenarioSlugs: [
       'client-no-response-follow-up',
       'no-response-after-proposal',
@@ -419,7 +412,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'How to follow up on an unpaid invoice',
     slug: 'unpaid-invoice-follow-up',
     metaTitle:
-      'How to Follow Up on an Unpaid Invoice Before Escalating | Flowdockr',
+      'How to Follow Up on an Unpaid Invoice Before Escalating | FlowDockr',
     metaDescription:
       'Use this scenario when an invoice is unpaid and you want a professional follow-up before the reminders turn more forceful. Ask for a concrete payment date without sounding apologetic or vague.',
     previewReply:
@@ -471,8 +464,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     id: 'scn_payment_overdue_reminder',
     title: 'Client payment is overdue',
     slug: 'payment-overdue-reminder',
-    metaTitle:
-      'First Overdue Payment Reminder After the Due Date | Flowdockr',
+    metaTitle: 'First Overdue Payment Reminder After the Due Date | FlowDockr',
     metaDescription:
       'Use this scenario when the due date has passed and you need your first firmer overdue-payment reminder. Ask for a specific payment date clearly, without jumping straight to a final notice.',
     previewReply:
@@ -524,8 +516,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     id: 'scn_second_payment_reminder',
     title: 'Second payment reminder to a client',
     slug: 'second-payment-reminder',
-    metaTitle:
-      'Second Payment Reminder Before a Final Notice | Flowdockr',
+    metaTitle: 'Second Payment Reminder Before a Final Notice | FlowDockr',
     metaDescription:
       'Use this scenario when you already sent one overdue reminder and still have not been paid. Draft a firmer second reminder that stays professional and sets up the next step clearly.',
     previewReply:
@@ -603,7 +594,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks to pay later',
     slug: 'pay-later-request',
     metaTitle:
-      'Client Wants to Pay Later? How to Reply Without Leaving It Open-Ended | Flowdockr',
+      'Client Wants to Pay Later? How to Reply Without Leaving It Open-Ended | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks to pay later than agreed, but has not proposed clear revised terms yet. Protect the payment boundary and avoid leaving the delay open-ended.',
     previewReply:
@@ -631,10 +622,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Respond to the request directly and decide whether you are offering an exception, a condition, or a firm no.',
     strategySecondary:
       'If you allow extra time, document the new date clearly so the delay does not become open-ended.',
-    similarScenarioSlugs: [
-      'payment-extension-request',
-      'deposit-not-paid-yet',
-    ],
+    similarScenarioSlugs: ['payment-extension-request', 'deposit-not-paid-yet'],
     nextStepScenarioSlugs: [
       'ask-for-payment-politely',
       'payment-overdue-reminder',
@@ -656,7 +644,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     title: 'Client asks for more time to pay',
     slug: 'payment-extension-request',
     metaTitle:
-      'Client Asks for More Time to Pay? How to Set Clear Extension Terms | Flowdockr',
+      'Client Asks for More Time to Pay? How to Set Clear Extension Terms | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a payment extension on a specific invoice. Draft a reply that sets a revised date clearly and avoids leaving the new payment window vague.',
     previewReply:
@@ -686,10 +674,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Decide quickly whether to allow the extension and spell out the revised date and any conditions in clear language.',
     strategySecondary:
       'Avoid soft wording that leaves the payment window open-ended or unclear.',
-    similarScenarioSlugs: [
-      'pay-later-request',
-      'deposit-not-paid-yet',
-    ],
+    similarScenarioSlugs: ['pay-later-request', 'deposit-not-paid-yet'],
     nextStepScenarioSlugs: [
       'payment-overdue-reminder',
       'second-payment-reminder',
@@ -710,8 +695,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
     id: 'scn_deposit_not_paid_yet',
     title: 'Client has not paid the deposit yet',
     slug: 'deposit-not-paid-yet',
-    metaTitle:
-      'Deposit Still Not Paid? What to Say Before Kickoff | Flowdockr',
+    metaTitle: 'Deposit Still Not Paid? What to Say Before Kickoff | FlowDockr',
     metaDescription:
       'Use this scenario when the kickoff deposit was promised but still has not arrived. Follow up clearly and keep the start-after-payment boundary intact without sounding awkward.',
     previewReply:
@@ -741,10 +725,7 @@ export const canonicalScenarioBatchTwo: CanonicalScenario[] = [
       'Restate the deposit step clearly and tie kickoff to payment completion, not good intentions.',
     strategySecondary:
       'Keep the tone professional and give the client the fastest path to start once the deposit is paid.',
-    similarScenarioSlugs: [
-      'start-before-payment',
-      'pay-later-request',
-    ],
+    similarScenarioSlugs: ['start-before-payment', 'pay-later-request'],
     nextStepScenarioSlugs: [
       'payment-extension-request',
       'ask-for-payment-politely',

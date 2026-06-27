@@ -4,8 +4,8 @@
     "brand": {
       "title": "",
       "logo": {
-        "src": "/logo.png",
-        "alt": "Flowdockr"
+        "src": "/logo.svg",
+        "alt": "FlowDockr"
       },
       "url": "/"
     },
@@ -165,8 +165,8 @@
       "title": "",
       "description": "面向自由职业者的场景化谈判副驾。",
       "logo": {
-        "src": "/logo.png",
-        "alt": "Flowdockr"
+        "src": "/logo.svg",
+        "alt": "FlowDockr"
       },
       "url": "/"
     },

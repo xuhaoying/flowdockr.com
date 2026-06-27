@@ -3,6 +3,8 @@
 import { NextRequest } from 'next/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { POST } from './route';
+
 const mocks = vi.hoisted(() => ({
   hashRequestIp: vi.fn(() => 'ip_hash'),
   hashRequestUserAgent: vi.fn(() => 'ua_hash'),
@@ -36,8 +38,6 @@ vi.mock('@/lib/generation/saveGeneration', () => ({
   saveGeneration: mocks.saveGeneration,
 }));
 
-import { POST } from './route';
-
 const PROVIDER_OUTPUT = {
   strategy: {
     objective:
@@ -56,8 +56,7 @@ const PROVIDER_OUTPUT = {
   replies: {
     professional:
       'Thanks for flagging that. The quote reflects the full scope and delivery standard we discussed, so I would not reduce the same scope without changing something else. If budget is the real constraint, I can outline a leaner first phase or a reduced-scope option so you can compare clear paths forward.',
-    firm:
-      'I would not lower the same scope to a different number. If the budget needs to change, the clean route is to reduce scope, phase the work, or narrow priorities so the tradeoff is explicit.',
+    firm: 'I would not lower the same scope to a different number. If the budget needs to change, the clean route is to reduce scope, phase the work, or narrow priorities so the tradeoff is explicit.',
     softer:
       'I understand the budget concern. The current quote is built around the full scope we discussed, but if it helps I can suggest a smaller first phase that keeps the core priority moving without forcing the same scope into a lower fee.',
   },
@@ -121,40 +120,39 @@ describe('/api/generate route smoke', () => {
 
   it('returns success true through the route and provider request path', async () => {
     const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
-    const providerFetch = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
-      expect(String(input)).toBe(
-        'https://fal.run/openrouter/router/openai/v1/responses'
-      );
-      expect(init?.method).toBe('POST');
+    const providerFetch = vi.fn(
+      async (input: RequestInfo | URL, init?: RequestInit) => {
+        expect(String(input)).toBe(
+          'https://fal.run/openrouter/router/openai/v1/responses'
+        );
+        expect(init?.method).toBe('POST');
 
-      const body = JSON.parse(String(init?.body));
-      expect(body).toMatchObject({
-        model: 'openai/gpt-5-mini',
-        input: [
-          { role: 'system' },
-          { role: 'user' },
-        ],
-      });
-      expect(body).not.toHaveProperty('messages');
-      expect(body).not.toHaveProperty('response_format');
-      expect(body).not.toHaveProperty('text');
-      expect(body).not.toHaveProperty('tools');
-      expect(body).not.toHaveProperty('metadata');
-      expect(body).not.toHaveProperty('temperature');
-      expect(body).not.toHaveProperty('max_output_tokens');
+        const body = JSON.parse(String(init?.body));
+        expect(body).toMatchObject({
+          model: 'openai/gpt-5-mini',
+          input: [{ role: 'system' }, { role: 'user' }],
+        });
+        expect(body).not.toHaveProperty('messages');
+        expect(body).not.toHaveProperty('response_format');
+        expect(body).not.toHaveProperty('text');
+        expect(body).not.toHaveProperty('tools');
+        expect(body).not.toHaveProperty('metadata');
+        expect(body).not.toHaveProperty('temperature');
+        expect(body).not.toHaveProperty('max_output_tokens');
 
-      return new Response(
-        JSON.stringify({
-          output_text: JSON.stringify(PROVIDER_OUTPUT),
-        }),
-        {
-          status: 200,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    });
+        return new Response(
+          JSON.stringify({
+            output_text: JSON.stringify(PROVIDER_OUTPUT),
+          }),
+          {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+      }
+    );
 
     vi.stubGlobal('fetch', providerFetch);
 

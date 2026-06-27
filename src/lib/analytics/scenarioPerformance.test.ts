@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
-
 import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
+import { describe, expect, it } from 'vitest';
 
 import {
   buildScenarioPerformanceRows,
@@ -98,8 +97,8 @@ describe('scenario performance mapping', () => {
   });
 
   it('keeps dataset coverage aligned with the top20 priority flag', () => {
-    expect(scenarioDatasetV1.filter((scenario) => scenario.isPriority)).toHaveLength(
-      20
-    );
+    expect(
+      scenarioDatasetV1.filter((scenario) => scenario.isPriority)
+    ).toHaveLength(20);
   });
 });

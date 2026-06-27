@@ -10,7 +10,9 @@ export function CreditsBadge(props: CreditsBadgeProps) {
   const { loggedIn, creditsBalance, remainingFreeGenerations } = props;
 
   if (loggedIn) {
-    return <Badge variant="outline">Credits: {Math.max(0, creditsBalance)}</Badge>;
+    return (
+      <Badge variant="outline">Credits: {Math.max(0, creditsBalance)}</Badge>
+    );
   }
 
   return (

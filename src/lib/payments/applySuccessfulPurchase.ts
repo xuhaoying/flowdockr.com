@@ -1,6 +1,3 @@
-import { and, eq } from 'drizzle-orm';
-
-import { creditPacks } from '@/config/creditPacks';
 import { applyPackPurchaseToBillingTx } from '@/lib/billing';
 import {
   anonymousLinkSession,
@@ -9,6 +6,9 @@ import {
   purchase,
   user,
 } from '@/lib/db';
+import { and, eq } from 'drizzle-orm';
+
+import { creditPacks } from '@/config/creditPacks';
 import { getUuid } from '@/shared/lib/hash';
 
 type ApplySuccessfulPurchaseParams = {
@@ -53,7 +53,9 @@ export async function applySuccessfulPurchase(
       throw new Error('PURCHASE_NOT_FOUND');
     }
 
-    const pack = creditPacks.find((item) => item.code === targetPurchase.packageId);
+    const pack = creditPacks.find(
+      (item) => item.code === targetPurchase.packageId
+    );
     if (!pack) {
       throw new Error(`INVALID_PACK:${targetPurchase.packageId}`);
     }
@@ -115,7 +117,8 @@ export async function applySuccessfulPurchase(
       .update(user)
       .set({
         creditsBalance: nextBalance,
-        stripeCustomerId: lockedUser.stripeCustomerId || stripeCustomerId || null,
+        stripeCustomerId:
+          lockedUser.stripeCustomerId || stripeCustomerId || null,
       })
       .where(eq(user.id, lockedUser.id));
 
@@ -154,7 +157,9 @@ export async function applySuccessfulPurchase(
     const anonymousSessionId = String(
       metadata.anonymousSessionId || mergedMetadata.anonymousSessionId || ''
     ).trim();
-    const returnTo = String(metadata.returnTo || mergedMetadata.returnTo || '').trim();
+    const returnTo = String(
+      metadata.returnTo || mergedMetadata.returnTo || ''
+    ).trim();
     const normalizedEmail = normalizeEmail(
       targetPurchase.email || customerEmail || lockedUser.email
     );
@@ -303,13 +308,13 @@ async function resolvePurchaseUser(
     return existingByEmail;
   }
 
-  const fallbackName = (email.split('@')[0] || 'Flowdockr User').slice(0, 80);
+  const fallbackName = (email.split('@')[0] || 'FlowDockr User').slice(0, 80);
 
   await tx
     .insert(user)
     .values({
       id: getUuid(),
-      name: fallbackName || 'Flowdockr User',
+      name: fallbackName || 'FlowDockr User',
       email,
       emailVerified: false,
       creditsBalance: 0,
@@ -345,7 +350,9 @@ async function getUserBalance(tx: any, userId: string): Promise<number> {
 }
 
 function normalizeEmail(value: string | undefined | null): string {
-  return String(value || '').trim().toLowerCase();
+  return String(value || '')
+    .trim()
+    .toLowerCase();
 }
 
 function parseRecord(value: string | null | undefined): Record<string, string> {

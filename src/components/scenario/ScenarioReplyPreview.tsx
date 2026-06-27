@@ -38,11 +38,7 @@ export function ScenarioReplyPreview({
           <p className="text-sm text-slate-600">
             Use the generator to tailor this reply to the exact client message.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="w-full bg-slate-900 text-white hover:bg-slate-800 sm:w-auto"
-          >
+          <Button asChild size="lg" className="w-full sm:w-auto">
             <a href={ctaHref}>{ctaLabel}</a>
           </Button>
         </div>

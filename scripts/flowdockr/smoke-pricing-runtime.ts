@@ -1,6 +1,6 @@
+import { spawn } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { spawn } from 'node:child_process';
 
 type ScenarioData = {
   url: string;
@@ -42,7 +42,10 @@ function normalizeRoute(path: string): string {
   return path;
 }
 
-async function waitForServerReady(baseUrl: string, timeoutMs = 30_000): Promise<void> {
+async function waitForServerReady(
+  baseUrl: string,
+  timeoutMs = 30_000
+): Promise<void> {
   const startedAt = Date.now();
   const probePath = '/pricing';
 
@@ -61,7 +64,9 @@ async function waitForServerReady(baseUrl: string, timeoutMs = 30_000): Promise<
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
 
-  throw new Error(`Server did not become ready within ${timeoutMs}ms at ${baseUrl}${probePath}`);
+  throw new Error(
+    `Server did not become ready within ${timeoutMs}ms at ${baseUrl}${probePath}`
+  );
 }
 
 function hasAllMarkers(html: string, markers: string[]): string[] {
@@ -70,11 +75,17 @@ function hasAllMarkers(html: string, markers: string[]): string[] {
 
 function hasAllMarkerGroups(html: string, markerGroups: string[][]): string[] {
   return markerGroups
-    .map((group) => group.find((marker) => html.includes(marker)) ?? group.join(' | '))
+    .map(
+      (group) =>
+        group.find((marker) => html.includes(marker)) ?? group.join(' | ')
+    )
     .filter((value) => value.includes(' | '));
 }
 
-async function fetchHtml(baseUrl: string, path: string): Promise<{ status: number; html: string }> {
+async function fetchHtml(
+  baseUrl: string,
+  path: string
+): Promise<{ status: number; html: string }> {
   const response = await fetch(`${baseUrl}${path}`, { redirect: 'follow' });
   const html = await response.text();
   return { status: response.status, html };
@@ -84,13 +95,23 @@ async function main() {
   const cwd = process.cwd();
   const standaloneEntry = join(cwd, '.next', 'standalone', 'server.js');
   if (!existsSync(standaloneEntry)) {
-    throw new Error(`Missing standalone server entry: ${standaloneEntry}. Run 'pnpm build' first.`);
+    throw new Error(
+      `Missing standalone server entry: ${standaloneEntry}. Run 'pnpm build' first.`
+    );
   }
 
-  const scenarios = readJsonFile<ScenarioData[]>(join(cwd, 'content', 'pricing', 'scenarios.json'));
-  const guides = readJsonFile<GuideData[]>(join(cwd, 'content', 'guides', 'guides.json'));
-  const tools = readJsonFile<ToolData[]>(join(cwd, 'content', 'tools', 'tools.json'));
-  const hub = readJsonFile<HubData>(join(cwd, 'content', 'pricing', 'hub.json'));
+  const scenarios = readJsonFile<ScenarioData[]>(
+    join(cwd, 'content', 'pricing', 'scenarios.json')
+  );
+  const guides = readJsonFile<GuideData[]>(
+    join(cwd, 'content', 'guides', 'guides.json')
+  );
+  const tools = readJsonFile<ToolData[]>(
+    join(cwd, 'content', 'tools', 'tools.json')
+  );
+  const hub = readJsonFile<HubData>(
+    join(cwd, 'content', 'pricing', 'hub.json')
+  );
 
   const port = Number(process.env.PRICE_SMOKE_PORT ?? 4120);
   const baseUrl = `http://localhost:${port}`;
@@ -173,7 +194,9 @@ async function main() {
       '/tools/price-negotiation-email-generator/?scenario=price-pushback-after-proposal';
     const contextResult = await fetchHtml(baseUrl, contextPath);
     if (contextResult.status !== 200) {
-      failures.push(`${contextPath}: expected 200, got ${contextResult.status}`);
+      failures.push(
+        `${contextPath}: expected 200, got ${contextResult.status}`
+      );
     } else if (!contextResult.html.includes('Context loaded from scenario')) {
       failures.push(`${contextPath}: missing scenario context hint`);
     }

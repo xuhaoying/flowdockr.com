@@ -1,7 +1,4 @@
-import {
-  getScenarioPageBySlug,
-  scenarioPages,
-} from '@/content/scenario-pages';
+import { getScenarioPageBySlug, scenarioPages } from '@/content/scenario-pages';
 import {
   getScenarioHubClusterSurfaceEntries,
   getScenarioHubPopularSurfaceEntries,
@@ -108,7 +105,7 @@ const clusters: ScenarioHubCluster[] = [
 ];
 
 export const scenarioHubData: ScenarioHubData = {
-  seoTitle: 'Freelance Client Negotiation Scenarios | Flowdockr',
+  seoTitle: 'Freelance Client Negotiation Scenarios | FlowDockr',
   metaDescription:
     'Browse real freelance client negotiation scenarios across pricing, scope, payment, contract, and follow-up pressure.',
   canonicalPath: '/scenario',
@@ -147,14 +144,15 @@ export const scenarioHubData: ScenarioHubData = {
     },
   ],
   clusters,
-  popularScenarios: getScenarioHubPopularSurfaceEntries(8)
-    .map((page) => scenario(page.slug, summarize(page.description || ''))),
+  popularScenarios: getScenarioHubPopularSurfaceEntries(8).map((page) =>
+    scenario(page.slug, summarize(page.description || ''))
+  ),
   why: {
     title: 'Why scenario-based guidance works',
     paragraphs: [
       'Freelance client negotiation problems are specific, not abstract.',
       'A cheaper-freelancer comparison, a rate probe, and a start-before-payment request need different judgment.',
-      'Flowdockr starts from the actual situation so the reply path is easier to trust and reuse.',
+      'FlowDockr starts from the actual situation so the reply path is easier to trust and reuse.',
     ],
   },
   cta: {

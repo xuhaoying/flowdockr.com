@@ -1,8 +1,9 @@
-import type { CreditPack } from '@/config/creditPacks';
-import { envConfigs } from '@/config';
-import { locales } from '@/config/locale';
 import { getStripeClient } from '@/lib/stripe';
 import type { PricingScenarioAttribution } from '@/types/pricing-analytics';
+
+import { envConfigs } from '@/config';
+import type { CreditPack } from '@/config/creditPacks';
+import { locales } from '@/config/locale';
 
 function sanitizeReturnPath(value: string | undefined): string {
   const trimmed = String(value || '').trim();

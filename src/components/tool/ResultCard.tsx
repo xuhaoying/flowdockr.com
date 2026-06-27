@@ -107,7 +107,7 @@ export function ResultCard({
   return (
     <section className="space-y-4">
       {situationTitle || situationClientMessage ? (
-        <Card className="border-slate-200 bg-white py-0 shadow-xs">
+        <Card className="border-brand-lavender/25 bg-white py-0 shadow-xs">
           <CardContent className="space-y-2 px-5 py-4">
             <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
               Situation
@@ -127,8 +127,8 @@ export function ResultCard({
       ) : null}
 
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)]">
-        <Card className="overflow-hidden border-slate-200 bg-white py-0 shadow-xs">
-          <CardHeader className="gap-4 border-b border-slate-200 bg-slate-50 px-5 py-5">
+        <Card className="border-brand-lavender/25 overflow-hidden bg-white py-0 shadow-xs">
+          <CardHeader className="border-brand-lavender/20 bg-brand-bg/55 gap-4 border-b px-5 py-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2 text-slate-900">
@@ -140,13 +140,13 @@ export function ResultCard({
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge
                     variant="outline"
-                    className="rounded-full border-slate-900 bg-slate-900 px-2.5 py-1 text-white"
+                    className="border-brand-primary bg-brand-primary rounded-full px-2.5 py-1 text-white"
                   >
                     Main suggestion
                   </Badge>
                   <Badge
                     variant="outline"
-                    className="rounded-full border-slate-300 bg-white px-2.5 py-1 text-slate-700"
+                    className="border-brand-lavender/35 text-brand-primary rounded-full bg-white px-2.5 py-1"
                   >
                     Tone: {toneLabel}
                   </Badge>
@@ -167,8 +167,8 @@ export function ResultCard({
           </CardHeader>
 
           <CardContent className="px-5 py-5">
-            <div className="overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-xs">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3.5">
+            <div className="border-brand-lavender/20 overflow-hidden rounded-[20px] border bg-white shadow-xs">
+              <div className="border-brand-lavender/20 bg-brand-bg/55 flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3.5">
                 <div>
                   <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
                     Message draft
@@ -188,12 +188,12 @@ export function ResultCard({
             <div className="mt-3 space-y-1 text-xs leading-5 text-slate-600">
               <p>AI-generated draft. Please review and adapt before sending.</p>
               <p>
-                Flowdockr provides communication suggestions, not legal or
+                FlowDockr provides communication suggestions, not legal or
                 financial advice.
               </p>
             </div>
             {onFeedback ? (
-              <div className="mt-4 rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-4">
+              <div className="border-brand-lavender/20 bg-brand-bg/55 mt-4 rounded-[18px] border px-4 py-4">
                 <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
                   Quick feedback
                 </p>
@@ -239,7 +239,7 @@ export function ResultCard({
         </Card>
 
         <div className="space-y-4">
-          <Card className="border-slate-200 bg-white py-0 shadow-xs">
+          <Card className="border-brand-lavender/25 bg-white py-0 shadow-xs">
             <CardContent className="space-y-2 px-5 py-4">
               <div className="flex items-center gap-2 text-slate-900">
                 <ShieldCheck className="size-4" />
@@ -253,7 +253,7 @@ export function ResultCard({
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200 bg-white py-0 shadow-xs">
+          <Card className="border-brand-lavender/25 bg-white py-0 shadow-xs">
             <CardContent className="space-y-3 px-5 py-4">
               <div className="flex items-center gap-2 text-slate-900">
                 <Lightbulb className="size-4" />
@@ -272,7 +272,7 @@ export function ResultCard({
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200 bg-white py-0 shadow-xs">
+          <Card className="border-brand-lavender/25 bg-white py-0 shadow-xs">
             <CardContent className="space-y-2 px-5 py-4">
               <p className="text-xs font-semibold tracking-[0.16em] text-slate-900 uppercase">
                 Negotiation tip

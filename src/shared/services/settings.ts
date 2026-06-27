@@ -280,7 +280,7 @@ export async function getSettings() {
     {
       name: 'app_name',
       title: 'App Name',
-      placeholder: 'Flowdockr',
+      placeholder: 'FlowDockr',
       type: 'text',
       group: 'appinfo',
       tab: 'general',
@@ -289,7 +289,7 @@ export async function getSettings() {
       name: 'app_description',
       title: 'App Description',
       placeholder:
-        'Flowdockr is an AI negotiation assistant for pricing conversations, reply generation, and reusable deal history.',
+        'FlowDockr is an AI negotiation assistant for pricing conversations, reply generation, and reusable deal history.',
       type: 'textarea',
       group: 'appinfo',
       tab: 'general',
@@ -704,7 +704,7 @@ export async function getSettings() {
       name: 'resend_sender_email',
       title: 'Resend Sender Email',
       type: 'text',
-      placeholder: 'Flowdockr <no-reply@flowdockr.com>',
+      placeholder: 'FlowDockr <no-reply@flowdockr.com>',
       group: 'resend',
       tab: 'email',
     },

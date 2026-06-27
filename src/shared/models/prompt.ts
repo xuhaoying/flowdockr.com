@@ -54,7 +54,7 @@ export async function getPrompts({
   status?: string;
 } = {}): Promise<Prompt[]> {
   const offset = (page - 1) * limit;
-  
+
   const conditions = [];
   if (status) {
     conditions.push(eq(prompt.status, status));
@@ -63,7 +63,7 @@ export async function getPrompts({
   const where = conditions.length > 0 ? and(...conditions) : undefined;
 
   const database = await db();
-  
+
   return database
     .select()
     .from(prompt)
@@ -86,7 +86,7 @@ export async function getPromptsCount({
   const where = conditions.length > 0 ? and(...conditions) : undefined;
 
   const database = await db();
-  
+
   const result = await database
     .select({ count: count() })
     .from(prompt)
@@ -95,9 +95,17 @@ export async function getPromptsCount({
   return result[0]?.count || 0;
 }
 
-export async function findPrompt({ id }: { id: string }): Promise<Prompt | null> {
+export async function findPrompt({
+  id,
+}: {
+  id: string;
+}): Promise<Prompt | null> {
   const database = await db();
-  const result = await database.select().from(prompt).where(eq(prompt.id, id)).limit(1);
+  const result = await database
+    .select()
+    .from(prompt)
+    .where(eq(prompt.id, id))
+    .limit(1);
   return result[0] || null;
 }
 
@@ -112,7 +120,10 @@ export async function addPrompt(data: NewPrompt): Promise<boolean> {
   }
 }
 
-export async function updatePrompt(id: string, data: UpdatePrompt): Promise<boolean> {
+export async function updatePrompt(
+  id: string,
+  data: UpdatePrompt
+): Promise<boolean> {
   try {
     const database = await db();
     await database.update(prompt).set(data).where(eq(prompt.id, id));

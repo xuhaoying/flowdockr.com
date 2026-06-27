@@ -1,7 +1,7 @@
+import { syncBillingStateCreditsTx } from '@/lib/billing';
+import { creditTransaction, db, user } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 
-import { syncBillingStateCreditsTx } from '@/lib/billing';
-import { db, creditTransaction, user } from '@/lib/db';
 import { getUuid } from '@/shared/lib/hash';
 
 export async function consumeCredit(params: {

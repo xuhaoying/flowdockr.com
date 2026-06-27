@@ -1,8 +1,7 @@
 // @vitest-environment node
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-
 import { getScenarioBySlug } from '@/lib/scenarios';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { generateReplyWithAI } from './generation-ai';
 
@@ -13,17 +12,14 @@ const PROVIDER_OUTPUT = {
     why_it_works: [
       'It keeps the price anchor tied to scope and delivery risk.',
     ],
-    what_to_avoid: [
-      'Do not reduce the same scope without a tradeoff.',
-    ],
+    what_to_avoid: ['Do not reduce the same scope without a tradeoff.'],
     negotiation_framing:
       'Treat price as a function of scope and delivery risk.',
   },
   replies: {
     professional:
       'Thanks for flagging that. The quote reflects the full scope we discussed, so I would not lower the same scope without changing something else. If budget is the issue, I can outline a smaller first phase.',
-    firm:
-      'I would not reduce the same scope to a different number. If the budget needs to change, the clean path is to reduce scope or phase the work.',
+    firm: 'I would not reduce the same scope to a different number. If the budget needs to change, the clean path is to reduce scope or phase the work.',
     softer:
       'I understand the budget concern. If it helps, I can suggest a smaller first phase rather than force the same scope into a lower fee.',
   },

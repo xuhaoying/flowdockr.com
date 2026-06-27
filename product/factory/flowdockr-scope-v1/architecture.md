@@ -1,11 +1,13 @@
 # System Architecture Overview
 
 ## Principles
+
 - Keep logic feature-scoped and testable.
 - Use existing Flowdockr platform infra for user, credits, subscription, and billing.
 - Do not alter framework internals.
 
 ## Core Modules
+
 1. **Scope Validation Module**
    - Responsibility: enforce input contract and value ranges.
    - Suggested path: `/src/core/flowdockr/scope/schemas.ts`
@@ -19,6 +21,7 @@
    - Suggested path: `/src/core/flowdockr/scope/formatter.ts`
 
 ## Data Flow
+
 1. Form input from `/scope`
 2. API receives request at `/api/generate-scope-policy`
 3. Validation and access/usage gating
@@ -27,17 +30,20 @@
 6. UI renders blocks and copy actions
 
 ## API Endpoints
+
 - `POST /api/generate-scope-policy`
   - Public alias endpoint used by frontend
 - `POST /api/scope-policy/generate`
   - Internal feature endpoint with core logic
 
 ## Observability
+
 - Log validation failures and provider failures.
 - Track generation latency and success rate.
 - Track `generate`, `copy`, and `upgrade_click` events.
 
 ## Security and Boundaries
+
 - Validate input server-side only.
 - Never expose API keys to client.
 - Keep usage checks behind secure cookies/subscription verification.

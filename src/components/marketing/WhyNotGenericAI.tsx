@@ -21,16 +21,22 @@ export function WhyNotGenericAI() {
     <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="space-y-1">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Why Flowdockr instead of generic AI
+          Why FlowDockr instead of generic AI
         </h2>
         <p className="text-sm text-slate-700">
-          Built for real client negotiation decisions, not one-off copy generation.
+          Built for real client negotiation decisions, not one-off copy
+          generation.
         </p>
       </div>
       <div className="grid gap-3 md:grid-cols-3">
         {DIFFERENTIATORS.map((item) => (
-          <article key={item.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
+          <article
+            key={item.title}
+            className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+          >
+            <h3 className="text-sm font-semibold text-slate-900">
+              {item.title}
+            </h3>
             <p className="mt-1 text-sm text-slate-700">{item.description}</p>
           </article>
         ))}

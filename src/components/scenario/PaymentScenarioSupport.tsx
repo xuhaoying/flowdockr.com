@@ -1,6 +1,7 @@
+import type { PaymentScenarioSupport as PaymentScenarioSupportData } from '@/lib/content/paymentCluster';
+
 import { Link } from '@/core/i18n/navigation';
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
-import type { PaymentScenarioSupport as PaymentScenarioSupportData } from '@/lib/content/paymentCluster';
 
 type PaymentScenarioSupportProps = {
   support: PaymentScenarioSupportData;

@@ -13,6 +13,9 @@ build
 
 # Testing
 coverage
+.gstack
+.playwright-cli
+output
 *.test.ts
 *.test.tsx
 *.spec.ts
@@ -26,6 +29,8 @@ yarn-error.log*
 
 # Local files
 .DS_Store
+.env
+.env.*
 *.db
 *.db-shm
 *.db-wal
@@ -41,4 +46,3 @@ yarn-error.log*
 .test
 wrangler.toml
 wrangler.toml.example
-

@@ -1,7 +1,4 @@
-import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
-
 import { db, purchase } from '@/lib/db';
 import {
   applySuccessfulPurchase,
@@ -9,6 +6,8 @@ import {
   markWebhookEventProcessed,
 } from '@/lib/payments';
 import { verifyWebhookSignature } from '@/lib/stripe';
+import { eq } from 'drizzle-orm';
+import Stripe from 'stripe';
 
 export const runtime = 'nodejs';
 
@@ -46,12 +45,16 @@ export async function POST(request: NextRequest) {
                 ? session.payment_intent
                 : undefined,
             stripeCustomerId:
-              typeof session.customer === 'string' ? session.customer : undefined,
+              typeof session.customer === 'string'
+                ? session.customer
+                : undefined,
             purchaseIdHint: String(
               session.metadata?.purchaseId || session.client_reference_id || ''
             ).trim(),
             customerEmail:
-              session.customer_details?.email || session.customer_email || undefined,
+              session.customer_details?.email ||
+              session.customer_email ||
+              undefined,
             metadata: session.metadata || {},
           });
         } else {
@@ -76,7 +79,9 @@ export async function POST(request: NextRequest) {
             session.metadata?.purchaseId || session.client_reference_id || ''
           ).trim(),
           customerEmail:
-            session.customer_details?.email || session.customer_email || undefined,
+            session.customer_details?.email ||
+            session.customer_email ||
+            undefined,
           metadata: session.metadata || {},
         });
         break;

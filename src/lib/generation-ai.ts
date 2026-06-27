@@ -17,6 +17,9 @@ type OpenAIResponsePayload = {
 
 const DEFAULT_MODEL = 'gpt-5-mini';
 const DEFAULT_FAL_OPENROUTER_MODEL = 'openai/gpt-4.1-mini';
+const DEFAULT_PROVIDER_TIMEOUT_MS = 30_000;
+const MIN_PROVIDER_TIMEOUT_MS = 5_000;
+const MAX_PROVIDER_TIMEOUT_MS = 40_000;
 const OPENAI_RESPONSES_ENDPOINT = 'https://api.openai.com/v1/responses';
 const FAL_OPENROUTER_RESPONSES_ENDPOINT =
   'https://fal.run/openrouter/router/openai/v1/responses';
@@ -64,6 +67,26 @@ export type AIReplyResult = {
   };
 };
 
+export type AIReplyAttemptMeta = Omit<AIReplyResult, 'text'>;
+
+export class AIProviderTimeoutError extends Error {
+  readonly attemptMeta: AIReplyAttemptMeta;
+  readonly timeoutMs: number;
+
+  constructor(attemptMeta: AIReplyAttemptMeta, timeoutMs: number) {
+    super(`AI provider timed out after ${timeoutMs}ms.`);
+    this.name = 'AIProviderTimeoutError';
+    this.attemptMeta = attemptMeta;
+    this.timeoutMs = timeoutMs;
+  }
+}
+
+export function isAIProviderTimeoutError(
+  error: unknown
+): error is AIProviderTimeoutError {
+  return error instanceof AIProviderTimeoutError;
+}
+
 export async function generateReplyWithAI(
   input: GenerateReplyInput,
   scenario: Scenario,
@@ -74,14 +97,43 @@ export async function generateReplyWithAI(
   const outbound = prepareProviderRequest(input, scenario, options);
   logOutboundDebugShape('provider_request_preflight', outbound.debugShape);
 
-  const response = await fetch(outbound.providerConfig.endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: outbound.providerConfig.authorizationHeader,
-    },
-    body: outbound.body,
-  });
+  const timeoutMs = resolveProviderTimeoutMs();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  let response: Response;
+
+  try {
+    response = await fetch(outbound.providerConfig.endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: outbound.providerConfig.authorizationHeader,
+      },
+      body: outbound.body,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (isAbortError(error)) {
+      logOutboundDebugShape('provider_request_failed', {
+        ...outbound.debugShape,
+        responseStatus: null,
+        providerErrorMessage: `Timed out after ${timeoutMs}ms.`,
+      });
+
+      throw new AIProviderTimeoutError(
+        {
+          model: outbound.model,
+          provider: outbound.providerConfig.provider,
+          promptMeta: outbound.promptMeta,
+        },
+        timeoutMs
+      );
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   const payload = (await response.json()) as OpenAIResponsePayload;
   if (!response.ok) {
@@ -299,4 +351,25 @@ function resolveModel(provider: GenerationProvider): string {
   }
 
   return rawModel;
+}
+
+function resolveProviderTimeoutMs(): number {
+  const rawTimeout = Number(process.env.FLOWDOCKR_AI_TIMEOUT_MS || '');
+
+  if (!Number.isFinite(rawTimeout) || rawTimeout <= 0) {
+    return DEFAULT_PROVIDER_TIMEOUT_MS;
+  }
+
+  return Math.min(
+    MAX_PROVIDER_TIMEOUT_MS,
+    Math.max(MIN_PROVIDER_TIMEOUT_MS, Math.round(rawTimeout))
+  );
+}
+
+function isAbortError(error: unknown): boolean {
+  return (
+    (error instanceof DOMException && error.name === 'AbortError') ||
+    (error instanceof Error &&
+      (error.name === 'AbortError' || error.message.includes('aborted')))
+  );
 }

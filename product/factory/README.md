@@ -3,6 +3,7 @@
 This folder packages a repeatable execution system for new AI SaaS modules.
 
 ## Workflow
+
 1. Copy `/templates/*` into a new feature folder.
 2. Fill `prd.md` first (problem, user, output schema).
 3. Derive `architecture.md` and `filetree.md` from PRD.
@@ -10,6 +11,7 @@ This folder packages a repeatable execution system for new AI SaaS modules.
 5. Track MVP scope and release gates in `mvp.md`.
 
 ## Folder Convention
+
 - `/product/factory/<product-or-module>/`
   - `prd.md`
   - `architecture.md`
@@ -18,4 +20,5 @@ This folder packages a repeatable execution system for new AI SaaS modules.
   - `mvp.md`
 
 ## Current Instance
+
 - `flowdockr-scope-v1/`

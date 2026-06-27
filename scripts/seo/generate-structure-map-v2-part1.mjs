@@ -2,7 +2,8 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const CONFIG_PATH = 'product/seo/factory/structure-map-v2-part1.config.json';
 const OUTPUT_CORE_CSV = 'product/seo/factory/structure-map-v2-part1.core.csv';
-const OUTPUT_EXPANDED_CSV = 'product/seo/factory/structure-map-v2-part1.expanded.csv';
+const OUTPUT_EXPANDED_CSV =
+  'product/seo/factory/structure-map-v2-part1.expanded.csv';
 const OUTPUT_ALL_CSV = 'product/seo/factory/structure-map-v2-part1.all.csv';
 const OUTPUT_JSON = 'product/seo/factory/structure-map-v2-part1.generated.json';
 const OUTPUT_SUMMARY = 'product/seo/factory/structure-map-v2-part1.summary.md';
@@ -151,8 +152,13 @@ for (const cluster of config.clusters) {
     }
   }
 
-  const actualCount = core.filter((row) => row.template_id === cluster.template_id).length;
-  if (cluster.expected_count !== undefined && actualCount < cluster.expected_count) {
+  const actualCount = core.filter(
+    (row) => row.template_id === cluster.template_id
+  ).length;
+  if (
+    cluster.expected_count !== undefined &&
+    actualCount < cluster.expected_count
+  ) {
     throw new Error(
       `Cluster ${cluster.template_id} expected at least ${cluster.expected_count}, got ${actualCount}`
     );
@@ -161,7 +167,9 @@ for (const cluster of config.clusters) {
 
 const coreExpectedTotal = 114;
 if (core.length !== coreExpectedTotal) {
-  throw new Error(`Core page total mismatch. Expected ${coreExpectedTotal}, got ${core.length}`);
+  throw new Error(
+    `Core page total mismatch. Expected ${coreExpectedTotal}, got ${core.length}`
+  );
 }
 
 const coreRouteSet = new Set(core.map((row) => row.route));
@@ -173,7 +181,9 @@ const expanded = [];
 let expCounter = 1;
 
 for (const rule of config.expansion_rules) {
-  const sources = core.filter((row) => row.template_id === rule.source_template_id);
+  const sources = core.filter(
+    (row) => row.template_id === rule.source_template_id
+  );
   const values = config.dimensions[rule.dimension];
 
   if (!values || !values.length) {
@@ -184,7 +194,9 @@ for (const rule of config.expansion_rules) {
     for (const value of values) {
       const route = buildExpansionRoute(source.route, rule.dimension, value);
       const title = `${source.title} ${
-        rule.dimension === 'country' ? `in ${titleCase(value)}` : `for ${titleCase(value)}`
+        rule.dimension === 'country'
+          ? `in ${titleCase(value)}`
+          : `for ${titleCase(value)}`
       }`;
 
       expanded.push({
@@ -280,7 +292,9 @@ const summaryLines = [
   '',
   '## Core Pages',
   '',
-  ...Object.entries(byClusterCore).map(([cluster, count]) => `- ${cluster}: ${count}`),
+  ...Object.entries(byClusterCore).map(
+    ([cluster, count]) => `- ${cluster}: ${count}`
+  ),
   '',
   `- core total: ${core.length}`,
   '',

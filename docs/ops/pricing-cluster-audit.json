@@ -18,7 +18,7 @@
     {
       "slug": "price-pushback-after-proposal",
       "title": "Price pushback after proposal",
-      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr",
+      "seoTitle": "How to Respond When a Prospect Says Your Quote Is Too High | FlowDockr",
       "family": "price-pushback",
       "primaryKeywords": [
         "quote too high",
@@ -46,14 +46,12 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "discount-pressure-before-signing",
       "title": "Discount pressure before signing",
-      "seoTitle": "How to Handle Discount Pressure Before Signing | Flowdockr",
+      "seoTitle": "How to Handle Discount Pressure Before Signing | FlowDockr",
       "family": "discount-pressure",
       "primaryKeywords": [
         "ask for discount before signing",
@@ -81,14 +79,12 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "budget-lower-than-expected",
       "title": "Budget lower than expected",
-      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | Flowdockr",
+      "seoTitle": "How to Respond When the Budget Is Lower Than Your Quote | FlowDockr",
       "family": "budget-mismatch",
       "primaryKeywords": [
         "budget lower than quote",
@@ -116,14 +112,12 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "cheaper-competitor-comparison",
       "title": "Cheaper competitor comparison",
-      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr",
+      "seoTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | FlowDockr",
       "family": "competitor-comparison",
       "primaryKeywords": [
         "another freelancer is cheaper",
@@ -156,7 +150,7 @@
     {
       "slug": "more-work-same-price",
       "title": "More work for the same price",
-      "seoTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
+      "seoTitle": "How to Respond When They Want More Work for the Same Price | FlowDockr",
       "family": "scope-boundary",
       "primaryKeywords": [
         "more work same price",
@@ -189,7 +183,7 @@
     {
       "slug": "free-trial-work-request",
       "title": "Free trial work request",
-      "seoTitle": "How to Respond to a Free Trial Work Request | Flowdockr",
+      "seoTitle": "How to Respond to a Free Trial Work Request | FlowDockr",
       "family": "free-work-boundary",
       "primaryKeywords": [
         "free trial work request",
@@ -222,7 +216,7 @@
     {
       "slug": "can-you-do-it-cheaper",
       "title": "Can you do it cheaper?",
-      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr",
+      "seoTitle": "How to Respond When They Ask “Can You Do It Cheaper?” | FlowDockr",
       "family": "discount-pressure",
       "primaryKeywords": [
         "can you do it cheaper",
@@ -250,14 +244,12 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "small-discount-before-closing",
       "title": "Small discount before closing",
-      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | Flowdockr",
+      "seoTitle": "How to Handle a Small Discount Request Right Before Closing | FlowDockr",
       "family": "discount-pressure",
       "primaryKeywords": [
         "small discount before signing",
@@ -285,18 +277,14 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "client-asking-for-extra-work",
       "title": "How to respond when a client asks for extra work",
-      "seoTitle": "How to Respond When a Client Asks for Extra Work | Flowdockr",
+      "seoTitle": "How to Respond When a Client Asks for Extra Work | FlowDockr",
       "family": "scope-boundary",
-      "primaryKeywords": [
-        "how to respond to client asking for extra work"
-      ],
+      "primaryKeywords": ["how to respond to client asking for extra work"],
       "canonicalRoute": "/pricing/client-asking-for-extra-work/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -324,11 +312,9 @@
     {
       "slug": "say-no-to-scope-creep-politely",
       "title": "How to say no to scope creep politely",
-      "seoTitle": "How to Say No to Scope Creep Politely | Flowdockr",
+      "seoTitle": "How to Say No to Scope Creep Politely | FlowDockr",
       "family": "scope-boundary",
-      "primaryKeywords": [
-        "how to say no to scope creep politely"
-      ],
+      "primaryKeywords": ["how to say no to scope creep politely"],
       "canonicalRoute": "/pricing/say-no-to-scope-creep-politely/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -351,14 +337,12 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "more-work-than-agreed",
       "title": "Client wants more work than agreed",
-      "seoTitle": "Client Wants More Work Than Agreed? What to Say | Flowdockr",
+      "seoTitle": "Client Wants More Work Than Agreed? What to Say | FlowDockr",
       "family": "scope-boundary",
       "primaryKeywords": [
         "client asking for more work than agreed what to say"
@@ -390,7 +374,7 @@
     {
       "slug": "client-requesting-additional-revisions",
       "title": "How to handle a client requesting additional revisions",
-      "seoTitle": "How to Handle a Client Requesting Additional Revisions | Flowdockr",
+      "seoTitle": "How to Handle a Client Requesting Additional Revisions | FlowDockr",
       "family": "scope-boundary",
       "primaryKeywords": [
         "how to handle client requesting additional revisions"
@@ -422,11 +406,9 @@
     {
       "slug": "refuse-extra-work-without-losing-client",
       "title": "How to refuse extra work without losing the client",
-      "seoTitle": "How to Refuse Extra Work Without Losing the Client | Flowdockr",
+      "seoTitle": "How to Refuse Extra Work Without Losing the Client | FlowDockr",
       "family": "scope-boundary",
-      "primaryKeywords": [
-        "how to refuse extra work without losing client"
-      ],
+      "primaryKeywords": ["how to refuse extra work without losing client"],
       "canonicalRoute": "/pricing/refuse-extra-work-without-losing-client/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -449,18 +431,14 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "client-asking-for-discount",
       "title": "How to respond when a client asks for a discount",
-      "seoTitle": "How to Respond When a Client Asks for a Discount | Flowdockr",
+      "seoTitle": "How to Respond When a Client Asks for a Discount | FlowDockr",
       "family": "discount-pressure",
-      "primaryKeywords": [
-        "how to respond to client asking for discount"
-      ],
+      "primaryKeywords": ["how to respond to client asking for discount"],
       "canonicalRoute": "/pricing/client-asking-for-discount/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -483,18 +461,14 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "say-no-to-low-budget-client",
       "title": "How to say no to a low-budget client",
-      "seoTitle": "How to Say No to a Low-Budget Client | Flowdockr",
+      "seoTitle": "How to Say No to a Low-Budget Client | FlowDockr",
       "family": "budget-mismatch",
-      "primaryKeywords": [
-        "how to say no to low budget client"
-      ],
+      "primaryKeywords": ["how to say no to low budget client"],
       "canonicalRoute": "/pricing/say-no-to-low-budget-client/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -522,11 +496,9 @@
     {
       "slug": "client-negotiating-price",
       "title": "Client is negotiating price: what to say",
-      "seoTitle": "Client Negotiating Price? What to Say Next | Flowdockr",
+      "seoTitle": "Client Negotiating Price? What to Say Next | FlowDockr",
       "family": "discount-pressure",
-      "primaryKeywords": [
-        "client negotiating price what to say"
-      ],
+      "primaryKeywords": ["client negotiating price what to say"],
       "canonicalRoute": "/pricing/client-negotiating-price/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -549,18 +521,14 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "decline-underpaid-project-politely",
       "title": "How to decline an underpaid project politely",
-      "seoTitle": "How to Decline an Underpaid Project Politely | Flowdockr",
+      "seoTitle": "How to Decline an Underpaid Project Politely | FlowDockr",
       "family": "budget-mismatch",
-      "primaryKeywords": [
-        "how to decline underpaid project politely"
-      ],
+      "primaryKeywords": ["how to decline underpaid project politely"],
       "canonicalRoute": "/pricing/decline-underpaid-project-politely/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -583,18 +551,14 @@
       "hasHistoryAttribution": true,
       "hasCheckoutAttribution": true,
       "keywordOverlapWith": [],
-      "flags": [
-        "weak-generator-fit"
-      ]
+      "flags": ["weak-generator-fit"]
     },
     {
       "slug": "stand-firm-on-pricing",
       "title": "How to stand firm on pricing as a freelancer",
-      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | Flowdockr",
+      "seoTitle": "How to Stand Firm on Pricing as a Freelancer | FlowDockr",
       "family": "discount-pressure",
-      "primaryKeywords": [
-        "how to stand firm on pricing freelance"
-      ],
+      "primaryKeywords": ["how to stand firm on pricing freelance"],
       "canonicalRoute": "/pricing/stand-firm-on-pricing/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -622,11 +586,9 @@
     {
       "slug": "client-messaging-outside-work-hours",
       "title": "Client messaging outside work hours: what to say",
-      "seoTitle": "Client Messaging Outside Work Hours? What to Say | Flowdockr",
+      "seoTitle": "Client Messaging Outside Work Hours? What to Say | FlowDockr",
       "family": "availability-boundary",
-      "primaryKeywords": [
-        "client messaging outside work hours what to say"
-      ],
+      "primaryKeywords": ["client messaging outside work hours what to say"],
       "canonicalRoute": "/pricing/client-messaging-outside-work-hours/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -654,11 +616,9 @@
     {
       "slug": "set-boundaries-with-demanding-client",
       "title": "How to set boundaries with a demanding client",
-      "seoTitle": "How to Set Boundaries With a Demanding Client | Flowdockr",
+      "seoTitle": "How to Set Boundaries With a Demanding Client | FlowDockr",
       "family": "availability-boundary",
-      "primaryKeywords": [
-        "how to set boundaries with demanding client"
-      ],
+      "primaryKeywords": ["how to set boundaries with demanding client"],
       "canonicalRoute": "/pricing/set-boundaries-with-demanding-client/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -686,11 +646,9 @@
     {
       "slug": "tell-client-you-are-unavailable",
       "title": "How to tell a client you are unavailable",
-      "seoTitle": "How to Tell a Client You Are Unavailable | Flowdockr",
+      "seoTitle": "How to Tell a Client You Are Unavailable | FlowDockr",
       "family": "availability-boundary",
-      "primaryKeywords": [
-        "how to tell client you are unavailable"
-      ],
+      "primaryKeywords": ["how to tell client you are unavailable"],
       "canonicalRoute": "/pricing/tell-client-you-are-unavailable/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -718,11 +676,9 @@
     {
       "slug": "urgent-request-last-minute",
       "title": "How to respond to an urgent last-minute request",
-      "seoTitle": "How to Respond to an Urgent Last-Minute Request | Flowdockr",
+      "seoTitle": "How to Respond to an Urgent Last-Minute Request | FlowDockr",
       "family": "availability-boundary",
-      "primaryKeywords": [
-        "how to respond to urgent request last minute"
-      ],
+      "primaryKeywords": ["how to respond to urgent request last minute"],
       "canonicalRoute": "/pricing/urgent-request-last-minute/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -750,11 +706,9 @@
     {
       "slug": "client-expects-immediate-response",
       "title": "Client expects an immediate response: what to say",
-      "seoTitle": "Client Expects an Immediate Response? What to Say | Flowdockr",
+      "seoTitle": "Client Expects an Immediate Response? What to Say | FlowDockr",
       "family": "availability-boundary",
-      "primaryKeywords": [
-        "client expects immediate response what to say"
-      ],
+      "primaryKeywords": ["client expects immediate response what to say"],
       "canonicalRoute": "/pricing/client-expects-immediate-response/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -782,11 +736,9 @@
     {
       "slug": "say-no-to-client-professionally",
       "title": "How to say no to a client professionally",
-      "seoTitle": "How to Say No to a Client Professionally | Flowdockr",
+      "seoTitle": "How to Say No to a Client Professionally | FlowDockr",
       "family": "project-decline",
-      "primaryKeywords": [
-        "how to say no to a client professionally"
-      ],
+      "primaryKeywords": ["how to say no to a client professionally"],
       "canonicalRoute": "/pricing/say-no-to-client-professionally/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -814,11 +766,9 @@
     {
       "slug": "decline-project-politely",
       "title": "How to decline a project politely",
-      "seoTitle": "How to Decline a Project Politely | Flowdockr",
+      "seoTitle": "How to Decline a Project Politely | FlowDockr",
       "family": "project-decline",
-      "primaryKeywords": [
-        "how to decline a project politely"
-      ],
+      "primaryKeywords": ["how to decline a project politely"],
       "canonicalRoute": "/pricing/decline-project-politely/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -846,11 +796,9 @@
     {
       "slug": "reject-client-without-burning-bridge",
       "title": "How to reject a client without burning the bridge",
-      "seoTitle": "How to Reject a Client Without Burning the Bridge | Flowdockr",
+      "seoTitle": "How to Reject a Client Without Burning the Bridge | FlowDockr",
       "family": "project-decline",
-      "primaryKeywords": [
-        "how to reject a client without burning bridge"
-      ],
+      "primaryKeywords": ["how to reject a client without burning bridge"],
       "canonicalRoute": "/pricing/reject-client-without-burning-bridge/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -878,11 +826,9 @@
     {
       "slug": "turn-down-freelance-work-nicely",
       "title": "How to turn down freelance work nicely",
-      "seoTitle": "How to Turn Down Freelance Work Nicely | Flowdockr",
+      "seoTitle": "How to Turn Down Freelance Work Nicely | FlowDockr",
       "family": "project-decline",
-      "primaryKeywords": [
-        "how to turn down freelance work nicely"
-      ],
+      "primaryKeywords": ["how to turn down freelance work nicely"],
       "canonicalRoute": "/pricing/turn-down-freelance-work-nicely/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,
@@ -910,11 +856,9 @@
     {
       "slug": "refuse-project-due-to-workload",
       "title": "How to refuse a project due to workload",
-      "seoTitle": "How to Refuse a Project Due to Workload | Flowdockr",
+      "seoTitle": "How to Refuse a Project Due to Workload | FlowDockr",
       "family": "project-decline",
-      "primaryKeywords": [
-        "how to refuse a project due to workload"
-      ],
+      "primaryKeywords": ["how to refuse a project due to workload"],
       "canonicalRoute": "/pricing/refuse-project-due-to-workload/",
       "includedInScenarioDiscovery": true,
       "includedInSitemap": true,

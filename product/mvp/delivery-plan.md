@@ -3,18 +3,21 @@
 Generated: 2026-03-04
 
 ## Week 1 - Build and Launch
+
 - Scope: Ship homepage problem-entry UI, Scope module flow, one SEO guide page, signup capture, and analytics events
 - Owner: Founder
 - Risks: Prompt quality drift, unclear output format, low mobile UX quality
 - Exit criteria: Public MVP live with working Scope Guard generation and event tracking
 
 ## Week 2 - Validation and Optimization
+
 - Scope: Run 5-user usability test, fix top P1/P2 issues, publish 2 more SEO pages, tune copy and CTA placement
 - Owner: Founder
 - Risks: Traffic quality too low, weak retention signal, insufficient sample size
 - Exit criteria: Activation and engagement metrics have first stable read; top 3 iteration priorities locked
 
 ## Post-Launch Week 1
+
 - Scope: Expand to Payment module beta and test cross-module conversion from Scope results
 - Owner: Founder
 - Risks: Building too broad before Scope PMF signal

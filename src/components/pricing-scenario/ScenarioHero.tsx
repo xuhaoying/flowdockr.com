@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { PricingScenario } from '@/types/pricing-cluster';
+
+import { Link } from '@/core/i18n/navigation';
 
 type ScenarioHeroProps = {
   scenario: PricingScenario;
@@ -28,8 +29,13 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
       <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
         {scenario.title}
       </h1>
-      <p className="max-w-3xl text-base text-slate-700">{scenario.heroSubtitle}</p>
-      <a href="#pricing-tool" className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
+      <p className="max-w-3xl text-base text-slate-700">
+        {scenario.heroSubtitle}
+      </p>
+      <a
+        href="#pricing-tool"
+        className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+      >
         Paste your client message
       </a>
     </section>

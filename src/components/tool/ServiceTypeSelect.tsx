@@ -22,7 +22,10 @@ type ServiceTypeSelectProps = {
   onValueChange: (value: string) => void;
 };
 
-export function ServiceTypeSelect({ value, onValueChange }: ServiceTypeSelectProps) {
+export function ServiceTypeSelect({
+  value,
+  onValueChange,
+}: ServiceTypeSelectProps) {
   return (
     <div className="space-y-2">
       <Label htmlFor="service_type">Service type</Label>

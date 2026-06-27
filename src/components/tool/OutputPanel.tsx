@@ -1,11 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
-
-import { GeneratedReplyResult } from '@/types/generation';
-
 import { StrategyPanel } from '@/components/tool/StrategyPanel';
+import { GeneratedReplyResult } from '@/types/generation';
+import { Check, Copy } from 'lucide-react';
+
 import { Button } from '@/shared/components/ui/button';
 import {
   Card,
@@ -36,7 +35,7 @@ function ReplyCard({
   const copied = copiedKey === copyKey;
 
   return (
-    <div className="space-y-2 rounded-[18px] border border-slate-200 bg-white p-4 shadow-xs sm:p-5">
+    <div className="border-brand-lavender/20 space-y-2 rounded-[18px] border bg-white p-4 shadow-xs sm:p-5">
       <div className="flex items-center justify-between gap-2">
         <h4 className="text-sm font-semibold text-slate-900">{title}</h4>
         <Button
@@ -60,14 +59,17 @@ function ReplyCard({
           )}
         </Button>
       </div>
-      <p className="whitespace-pre-wrap text-[15px] leading-7 text-slate-900 sm:text-base">
+      <p className="text-[15px] leading-7 whitespace-pre-wrap text-slate-900 sm:text-base">
         {content}
       </p>
     </div>
   );
 }
 
-export function OutputPanel({ result, isGenerating = false }: OutputPanelProps) {
+export function OutputPanel({
+  result,
+  isGenerating = false,
+}: OutputPanelProps) {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const handleCopy = async (key: string, value: string) => {
@@ -87,7 +89,7 @@ export function OutputPanel({ result, isGenerating = false }: OutputPanelProps) 
   };
 
   const emptyState = (
-    <div className="rounded-[18px] border border-dashed border-slate-300 bg-white p-5 text-sm text-slate-700 shadow-xs">
+    <div className="border-brand-lavender/45 rounded-[18px] border border-dashed bg-white p-5 text-sm text-slate-700 shadow-xs">
       Start by pasting a real client message on the left, then click
       <span className="px-1 font-medium text-slate-900">
         Generate strategic reply
@@ -97,7 +99,7 @@ export function OutputPanel({ result, isGenerating = false }: OutputPanelProps) 
   );
 
   return (
-    <Card className="border-slate-200 bg-white shadow-sm">
+    <Card className="border-brand-lavender/25 bg-white shadow-sm shadow-slate-950/5">
       <CardHeader>
         <CardTitle>Generated output</CardTitle>
         <CardDescription>
@@ -106,7 +108,7 @@ export function OutputPanel({ result, isGenerating = false }: OutputPanelProps) 
       </CardHeader>
       <CardContent className="space-y-4">
         {isGenerating && !result ? (
-          <div className="space-y-3 rounded-[18px] border border-slate-200 bg-white p-4 shadow-xs sm:p-5">
+          <div className="border-brand-lavender/20 space-y-3 rounded-[18px] border bg-white p-4 shadow-xs sm:p-5">
             <p className="text-sm font-medium text-slate-900">
               Building your negotiation reply...
             </p>
@@ -135,7 +137,7 @@ export function OutputPanel({ result, isGenerating = false }: OutputPanelProps) 
               copiedKey={copiedKey}
               onCopy={handleCopy}
             />
-            <div className="rounded-[18px] border border-slate-200 bg-white p-4 text-sm text-slate-800 shadow-xs sm:p-5">
+            <div className="border-brand-lavender/20 rounded-[18px] border bg-white p-4 text-sm text-slate-800 shadow-xs sm:p-5">
               <p className="text-slate-900">
                 <span className="font-semibold">Confidence:</span>{' '}
                 <span className="uppercase">{result.confidence}</span>

@@ -5,8 +5,9 @@ import { defaultLocale } from '@/config/locale';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Freelance Negotiation Scenarios | Flowdockr',
-  description: 'Open scenario-first negotiation flows and generate client replies instantly.',
+  title: 'Freelance Negotiation Scenarios | FlowDockr',
+  description:
+    'Open scenario-first negotiation flows and generate client replies instantly.',
   canonicalUrl: '/pricing',
 });
 

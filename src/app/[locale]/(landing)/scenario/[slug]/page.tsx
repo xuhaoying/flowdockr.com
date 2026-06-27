@@ -9,6 +9,7 @@ import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
 import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { PageContainer } from '@/components/shared/PageContainer';
+import { getPaymentScenarioSupport } from '@/lib/content/paymentCluster';
 import {
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
@@ -22,7 +23,6 @@ import {
   getScenarioPageBySlug,
   getScenarioPagePromise,
 } from '@/lib/content/scenarioPages';
-import { getPaymentScenarioSupport } from '@/lib/content/paymentCluster';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
 import { setRequestLocale } from 'next-intl/server';
@@ -104,7 +104,7 @@ export async function generateMetadata({
 
   if (SCENARIO_ALIAS_REDIRECTS[slug] || LEGACY_SCENARIO_REDIRECTS[slug]) {
     return {
-      title: 'Negotiation scenario | Flowdockr',
+      title: 'Negotiation scenario | FlowDockr',
       robots: {
         index: false,
         follow: false,
@@ -115,7 +115,7 @@ export async function generateMetadata({
   const page = getScenarioPageBySlug(slug);
   if (!page) {
     return {
-      title: 'Scenario not found | Flowdockr',
+      title: 'Scenario not found | FlowDockr',
       robots: {
         index: false,
         follow: false,
@@ -192,19 +192,25 @@ export default async function ScenarioPage({
             </p>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
               <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">What it protects</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  What it protects
+                </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
                   {page.userGoal || page.strategyPrimary}
                 </p>
               </div>
               <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">How it sounds</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  How it sounds
+                </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
                   {previewReply}
                 </p>
               </div>
               <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">Next step</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  Next step
+                </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
                   {page.strategySecondary || page.strategyPrimary}
                 </p>

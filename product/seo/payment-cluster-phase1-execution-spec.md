@@ -17,30 +17,30 @@ Phase 1 exists to create the first clear:
 
 ### Current payment-adjacent assets
 
-| Route | Intended type | Source | Status | Reason |
-| --- | --- | --- | --- | --- |
-| `/payment` | hub | `src/config/locale/messages/en/pages/payment.json` | salvageable | Existing page is a generic module landing page. It does not yet behave like a topic hub. |
-| `/guides/client-not-paying` | guide | `src/config/locale/messages/en/pages/guides/client-not-paying.json` | salvageable | Strong problem adjacency, but too broad and too thin to own multiple payment sub-queries. |
-| `/templates/payment-reminder` | template | `src/config/locale/messages/en/pages/templates/payment-reminder.json` | thin / weak | Has the right topic, but only one sequence block and no strategic variants or usage boundaries. |
-| `/scenario/ask-for-payment-politely` | scenario | `src/content/scenario-pages/scenario-seeds.ts` | already strong | Good direct-intent execution page and a strong product handoff candidate. |
-| `/scenario/payment-extension-request` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | already strong | High-intent payment scenario with explicit SEO metadata and clear commercial stakes. |
-| `/scenario/deposit-not-paid-yet` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | already strong | Strong pre-kickoff payment boundary scenario; should anchor deposit/advance-payment handoff. |
-| `/scenario/overdue-invoice-no-response` | scenario | `src/content/scenario-pages/scenario-dataset-v1-top20.ts` | already strong | High-pressure late-payment scenario with strong search intent and clear next-step logic. |
-| `/scenario/unpaid-invoice-follow-up` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | salvageable | Good supporting scenario, but needs explicit guide/template backlinks in the cluster. |
-| `/scenario/payment-overdue-reminder` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | salvageable | Good supporting scenario; keep and connect. |
-| `/scenario/second-payment-reminder` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | salvageable | Useful supporting scenario for escalation sequencing. |
-| `/scenario/final-payment-after-completion` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | salvageable | Valuable closeout scenario, but not yet integrated into a payment cluster path. |
-| `/scenario/pay-later-request` | scenario | `src/content/scenario-pages/scenario-batch-2.ts` | salvageable | Useful adjacent payment-delay scenario; keep links limited and specific. |
-| `/scenario/final-payment-reminder` | scenario | `src/content/scenario-pages/scenario-seeds.ts` | salvageable | Useful late-sequence scenario, but currently not anchored from a dedicated payment hub or guide. |
+| Route                                      | Intended type | Source                                                                | Status         | Reason                                                                                           |
+| ------------------------------------------ | ------------- | --------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------ |
+| `/payment`                                 | hub           | `src/config/locale/messages/en/pages/payment.json`                    | salvageable    | Existing page is a generic module landing page. It does not yet behave like a topic hub.         |
+| `/guides/client-not-paying`                | guide         | `src/config/locale/messages/en/pages/guides/client-not-paying.json`   | salvageable    | Strong problem adjacency, but too broad and too thin to own multiple payment sub-queries.        |
+| `/templates/payment-reminder`              | template      | `src/config/locale/messages/en/pages/templates/payment-reminder.json` | thin / weak    | Has the right topic, but only one sequence block and no strategic variants or usage boundaries.  |
+| `/scenario/ask-for-payment-politely`       | scenario      | `src/content/scenario-pages/scenario-seeds.ts`                        | already strong | Good direct-intent execution page and a strong product handoff candidate.                        |
+| `/scenario/payment-extension-request`      | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | already strong | High-intent payment scenario with explicit SEO metadata and clear commercial stakes.             |
+| `/scenario/deposit-not-paid-yet`           | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | already strong | Strong pre-kickoff payment boundary scenario; should anchor deposit/advance-payment handoff.     |
+| `/scenario/overdue-invoice-no-response`    | scenario      | `src/content/scenario-pages/scenario-dataset-v1-top20.ts`             | already strong | High-pressure late-payment scenario with strong search intent and clear next-step logic.         |
+| `/scenario/unpaid-invoice-follow-up`       | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | salvageable    | Good supporting scenario, but needs explicit guide/template backlinks in the cluster.            |
+| `/scenario/payment-overdue-reminder`       | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | salvageable    | Good supporting scenario; keep and connect.                                                      |
+| `/scenario/second-payment-reminder`        | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | salvageable    | Useful supporting scenario for escalation sequencing.                                            |
+| `/scenario/final-payment-after-completion` | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | salvageable    | Valuable closeout scenario, but not yet integrated into a payment cluster path.                  |
+| `/scenario/pay-later-request`              | scenario      | `src/content/scenario-pages/scenario-batch-2.ts`                      | salvageable    | Useful adjacent payment-delay scenario; keep links limited and specific.                         |
+| `/scenario/final-payment-reminder`         | scenario      | `src/content/scenario-pages/scenario-seeds.ts`                        | salvageable    | Useful late-sequence scenario, but currently not anchored from a dedicated payment hub or guide. |
 
 ### Existing assets to freeze in Phase 1
 
-| Route / surface | Type | Source | Status | Reason |
-| --- | --- | --- | --- | --- |
-| `/pricing` | hub | `content/pricing/hub.json` + `src/app/[locale]/(landing)/pricing/page.tsx` | not aligned with phase-1 payment | Current pricing hub is a negotiation console. Keep it for later discount / negotiation work. |
-| `/pricing/*` | scenario pages | `content/pricing/scenarios.json` + `src/data/pricing-cluster.ts` | not aligned with phase-1 payment | These pages belong to discount / pricing negotiation, not payment collection. |
-| `content/guides/guides.json` existing three guides | guide set | `content/guides/guides.json` | not aligned with phase-1 payment | Current guide system is pricing-led, not payment-led. Preserve, do not expand in this phase. |
-| `/guides` index | guide index | `src/app/[locale]/(landing)/guides/page.tsx` | not aligned with phase-1 payment | Current copy is pricing-specific and should not define the payment cluster. |
+| Route / surface                                    | Type           | Source                                                                     | Status                           | Reason                                                                                       |
+| -------------------------------------------------- | -------------- | -------------------------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------- |
+| `/pricing`                                         | hub            | `content/pricing/hub.json` + `src/app/[locale]/(landing)/pricing/page.tsx` | not aligned with phase-1 payment | Current pricing hub is a negotiation console. Keep it for later discount / negotiation work. |
+| `/pricing/*`                                       | scenario pages | `content/pricing/scenarios.json` + `src/data/pricing-cluster.ts`           | not aligned with phase-1 payment | These pages belong to discount / pricing negotiation, not payment collection.                |
+| `content/guides/guides.json` existing three guides | guide set      | `content/guides/guides.json`                                               | not aligned with phase-1 payment | Current guide system is pricing-led, not payment-led. Preserve, do not expand in this phase. |
+| `/guides` index                                    | guide index    | `src/app/[locale]/(landing)/guides/page.tsx`                               | not aligned with phase-1 payment | Current copy is pricing-specific and should not define the payment cluster.                  |
 
 ## Hard Phase Boundaries
 
@@ -275,14 +275,14 @@ Every strengthened payment scenario must include:
 
 ### Guide -> downstream targets
 
-| Guide | Primary template | Primary scenarios |
-| --- | --- | --- |
-| `/guides/how-to-ask-a-client-for-payment` | `/templates/payment-reminder` | `/scenario/ask-for-payment-politely`, `/scenario/final-payment-after-completion` |
-| `/guides/how-to-follow-up-an-unpaid-invoice` | `/templates/overdue-invoice-follow-up-examples` | `/scenario/unpaid-invoice-follow-up`, `/scenario/overdue-invoice-no-response` |
-| `/guides/how-to-remind-a-client-about-overdue-payment` | `/templates/payment-reminder` | `/scenario/payment-overdue-reminder`, `/scenario/second-payment-reminder` |
-| `/guides/when-to-ask-for-a-deposit-before-work` | `/templates/advance-payment-message-examples` | `/scenario/deposit-not-paid-yet`, `/scenario/start-before-payment` |
-| `/guides/how-to-ask-for-advance-payment-politely` | `/templates/advance-payment-message-examples` | `/scenario/deposit-not-paid-yet`, `/scenario/payment-extension-request` |
-| `/guides/how-to-ask-for-final-payment-professionally` | `/templates/payment-reminder` | `/scenario/final-payment-after-completion`, `/scenario/final-payment-reminder` |
+| Guide                                                  | Primary template                                | Primary scenarios                                                                |
+| ------------------------------------------------------ | ----------------------------------------------- | -------------------------------------------------------------------------------- |
+| `/guides/how-to-ask-a-client-for-payment`              | `/templates/payment-reminder`                   | `/scenario/ask-for-payment-politely`, `/scenario/final-payment-after-completion` |
+| `/guides/how-to-follow-up-an-unpaid-invoice`           | `/templates/overdue-invoice-follow-up-examples` | `/scenario/unpaid-invoice-follow-up`, `/scenario/overdue-invoice-no-response`    |
+| `/guides/how-to-remind-a-client-about-overdue-payment` | `/templates/payment-reminder`                   | `/scenario/payment-overdue-reminder`, `/scenario/second-payment-reminder`        |
+| `/guides/when-to-ask-for-a-deposit-before-work`        | `/templates/advance-payment-message-examples`   | `/scenario/deposit-not-paid-yet`, `/scenario/start-before-payment`               |
+| `/guides/how-to-ask-for-advance-payment-politely`      | `/templates/advance-payment-message-examples`   | `/scenario/deposit-not-paid-yet`, `/scenario/payment-extension-request`          |
+| `/guides/how-to-ask-for-final-payment-professionally`  | `/templates/payment-reminder`                   | `/scenario/final-payment-after-completion`, `/scenario/final-payment-reminder`   |
 
 ### Scenario backlink rules
 
@@ -294,13 +294,13 @@ Each strengthened payment scenario must link back to:
 
 Suggested owner mapping:
 
-| Scenario | Backlink guide | Backlink template |
-| --- | --- | --- |
-| `/scenario/ask-for-payment-politely` | `/guides/how-to-ask-a-client-for-payment` | `/templates/payment-reminder` |
-| `/scenario/deposit-not-paid-yet` | `/guides/when-to-ask-for-a-deposit-before-work` | `/templates/advance-payment-message-examples` |
-| `/scenario/payment-extension-request` | `/guides/how-to-remind-a-client-about-overdue-payment` | `/templates/payment-reminder` |
-| `/scenario/overdue-invoice-no-response` | `/guides/how-to-follow-up-an-unpaid-invoice` | `/templates/overdue-invoice-follow-up-examples` |
-| `/scenario/final-payment-after-completion` | `/guides/how-to-ask-for-final-payment-professionally` | `/templates/payment-reminder` |
+| Scenario                                   | Backlink guide                                         | Backlink template                               |
+| ------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------- |
+| `/scenario/ask-for-payment-politely`       | `/guides/how-to-ask-a-client-for-payment`              | `/templates/payment-reminder`                   |
+| `/scenario/deposit-not-paid-yet`           | `/guides/when-to-ask-for-a-deposit-before-work`        | `/templates/advance-payment-message-examples`   |
+| `/scenario/payment-extension-request`      | `/guides/how-to-remind-a-client-about-overdue-payment` | `/templates/payment-reminder`                   |
+| `/scenario/overdue-invoice-no-response`    | `/guides/how-to-follow-up-an-unpaid-invoice`           | `/templates/overdue-invoice-follow-up-examples` |
+| `/scenario/final-payment-after-completion` | `/guides/how-to-ask-for-final-payment-professionally`  | `/templates/payment-reminder`                   |
 
 ## Cannibalization Rules
 

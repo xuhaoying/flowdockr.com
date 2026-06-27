@@ -46,7 +46,9 @@ export function normalizeScopeOutput(
       source.revision_policy || fallback.revision_policy
     ).trim(),
     scope_rule: String(source.scope_rule || fallback.scope_rule).trim(),
-    client_message: String(source.client_message || fallback.client_message).trim(),
+    client_message: String(
+      source.client_message || fallback.client_message
+    ).trim(),
     contract_clause: String(
       source.contract_clause || fallback.contract_clause
     ).trim(),

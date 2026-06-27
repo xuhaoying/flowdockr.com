@@ -59,8 +59,7 @@ export type NegotiationStage = (typeof negotiationStageValues)[number];
 export type ScenarioSourceType = (typeof scenarioSourceTypeValues)[number];
 export type ScenarioStatus = (typeof scenarioStatusValues)[number];
 export type ScenarioPriority = (typeof scenarioPriorityValues)[number];
-export type ScenarioLinkCluster =
-  (typeof scenarioLinkClusterValues)[number];
+export type ScenarioLinkCluster = (typeof scenarioLinkClusterValues)[number];
 export type ScenarioIntentTier = (typeof scenarioIntentTierValues)[number];
 export type ScenarioValueIntent = (typeof scenarioValueIntentValues)[number];
 export type ScenarioCommercialPriority =

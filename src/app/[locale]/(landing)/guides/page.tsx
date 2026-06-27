@@ -1,13 +1,13 @@
+import { getAllGuides } from '@/lib/content/getGuideBySlug';
+import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
+import type { GuidePageData, ScenarioPageData } from '@/types/content';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
-import { getAllGuides } from '@/lib/content/getGuideBySlug';
-import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
 import { getMetadata } from '@/shared/lib/seo';
-import type { GuidePageData, ScenarioPageData } from '@/types/content';
 
 export const generateMetadata = getMetadata({
-  title: 'Pricing Negotiation Guides | Flowdockr',
+  title: 'Pricing Negotiation Guides | FlowDockr',
   description:
     'Practical guides for freelance pricing negotiation, discount decisions, and scope-based deal structuring.',
   canonicalUrl: '/guides',
@@ -35,14 +35,16 @@ export default async function GuidesPage({
 
   const guides = getAllGuides();
   const guideMap = new Map(guides.map((guide) => [guide.slug, guide]));
-  const recommendedGuides = RECOMMENDED_GUIDE_ORDER
-    .map((slug) => guideMap.get(slug))
-    .filter((guide): guide is GuidePageData => Boolean(guide));
+  const recommendedGuides = RECOMMENDED_GUIDE_ORDER.map((slug) =>
+    guideMap.get(slug)
+  ).filter((guide): guide is GuidePageData => Boolean(guide));
 
-  const scenariosBySlug = new Map(getAllScenarios().map((scenario) => [scenario.slug, scenario]));
-  const startingScenarios = STARTING_SCENARIO_SLUGS
-    .map((slug) => scenariosBySlug.get(slug))
-    .filter((scenario): scenario is ScenarioPageData => Boolean(scenario));
+  const scenariosBySlug = new Map(
+    getAllScenarios().map((scenario) => [scenario.slug, scenario])
+  );
+  const startingScenarios = STARTING_SCENARIO_SLUGS.map((slug) =>
+    scenariosBySlug.get(slug)
+  ).filter((scenario): scenario is ScenarioPageData => Boolean(scenario));
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -51,20 +53,27 @@ export default async function GuidesPage({
           Pricing negotiation guides
         </h1>
         <p className="max-w-3xl text-base text-slate-700">
-          Learn the decision logic behind stronger pricing conversations, then apply it
-          to a real message in a scenario page or tool workspace.
+          Learn the decision logic behind stronger pricing conversations, then
+          apply it to a real message in a scenario page or tool workspace.
         </p>
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Recommended starting path</h2>
+        <h2 className="text-xl font-semibold text-slate-900">
+          Recommended starting path
+        </h2>
         <ol className="space-y-3 text-sm text-slate-700">
           {recommendedGuides.map((guide, index) => (
-            <li key={guide.slug} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <li
+              key={guide.slug}
+              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+            >
+              <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Step {index + 1}
               </p>
-              <p className="mt-1 text-base font-semibold text-slate-900">{guide.h1}</p>
+              <p className="mt-1 text-base font-semibold text-slate-900">
+                {guide.h1}
+              </p>
               <p className="mt-1">{guide.heroSubheading}</p>
               <Link
                 href={guide.url}
@@ -79,22 +88,35 @@ export default async function GuidesPage({
 
       {guides.length === 0 ? (
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-900">Guides are loading</h2>
+          <h2 className="text-xl font-semibold text-slate-900">
+            Guides are loading
+          </h2>
           <p className="mt-2 text-sm text-slate-700">
-            Guide definitions are temporarily unavailable. Start from pricing scenarios.
+            Guide definitions are temporarily unavailable. Start from pricing
+            scenarios.
           </p>
-          <Link href="/pricing" className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2">
+          <Link
+            href="/pricing"
+            className="mt-3 inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
+          >
             Open pricing scenarios
           </Link>
         </section>
       ) : (
         <section className="grid gap-4 md:grid-cols-3">
           {guides.map((guide) => (
-            <article key={guide.slug} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">{guide.h1}</h2>
-              <p className="mt-2 text-sm text-slate-700">{guide.heroSubheading}</p>
+            <article
+              key={guide.slug}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
+              <h2 className="text-xl font-semibold text-slate-900">
+                {guide.h1}
+              </h2>
+              <p className="mt-2 text-sm text-slate-700">
+                {guide.heroSubheading}
+              </p>
 
-              <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <p className="mt-3 text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Core takeaways
               </p>
               <ul className="mt-2 space-y-1 text-sm text-slate-700">
@@ -118,9 +140,12 @@ export default async function GuidesPage({
       )}
 
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">Apply a guide to a live situation</h2>
+        <h2 className="text-xl font-semibold text-slate-900">
+          Apply a guide to a live situation
+        </h2>
         <p className="text-sm text-slate-700">
-          After reading, open a matching pricing scenario and generate a reply for your exact message.
+          After reading, open a matching pricing scenario and generate a reply
+          for your exact message.
         </p>
         <div className="grid gap-2 md:grid-cols-3">
           {startingScenarios.map((scenario) => (

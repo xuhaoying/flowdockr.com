@@ -13,7 +13,9 @@ const modelArg = argv.find((arg) => arg.startsWith('--model='));
 const maxRetriesArg = argv.find((arg) => arg.startsWith('--max-retries='));
 
 const limit = limitArg ? Number(limitArg.split('=')[1]) : null;
-const model = modelArg ? modelArg.split('=')[1] : process.env.SEO_CONTENT_MODEL || 'gpt-4.1-mini';
+const model = modelArg
+  ? modelArg.split('=')[1]
+  : process.env.SEO_CONTENT_MODEL || 'gpt-4.1-mini';
 const maxRetries = maxRetriesArg ? Number(maxRetriesArg.split('=')[1]) : 2;
 const apiKey = process.env.OPENAI_API_KEY || '';
 
@@ -87,7 +89,8 @@ async function generateWithOpenAI(job) {
 }
 
 async function generateWithRetry(job) {
-  if (dryRun) return { markdown: dryRunMarkdown(job), retries: 0, mode: 'dry-run' };
+  if (dryRun)
+    return { markdown: dryRunMarkdown(job), retries: 0, mode: 'dry-run' };
 
   let attempt = 0;
   let lastError = null;
@@ -113,7 +116,8 @@ if (!dryRun && !apiKey) {
 }
 
 const allJobs = readJsonl(JOBS_PATH);
-const jobs = limit && Number.isFinite(limit) ? allJobs.slice(0, limit) : allJobs;
+const jobs =
+  limit && Number.isFinite(limit) ? allJobs.slice(0, limit) : allJobs;
 
 const drafts = [];
 const failures = [];
@@ -172,7 +176,9 @@ summaryLines.push('');
 
 writeFileSync(OUTPUT_SUMMARY, summaryLines.join('\n'));
 
-console.log(`Draft generation complete. Drafts: ${drafts.length}, Failures: ${failures.length}`);
+console.log(
+  `Draft generation complete. Drafts: ${drafts.length}, Failures: ${failures.length}`
+);
 console.log(`Output: ${OUTPUT_DRAFTS}`);
 console.log(`Summary: ${OUTPUT_SUMMARY}`);
 

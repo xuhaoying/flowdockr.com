@@ -28,10 +28,10 @@ const negotiationClauses = [
 ];
 
 const negotiationPatterns = [
-  clause => `how to respond when ${clause}`,
-  clause => `what to say when ${clause}`,
-  clause => `reply template when ${clause}`,
-  clause => `freelancer negotiation email when ${clause}`,
+  (clause) => `how to respond when ${clause}`,
+  (clause) => `what to say when ${clause}`,
+  (clause) => `reply template when ${clause}`,
+  (clause) => `freelancer negotiation email when ${clause}`,
 ];
 
 const pricingTopics = [
@@ -64,9 +64,9 @@ const pricingTopics = [
 ];
 
 const pricingPatterns = [
-  topic => `how to price ${topic}`,
-  topic => `${topic} pricing template`,
-  topic => `${topic} rate calculator`,
+  (topic) => `how to price ${topic}`,
+  (topic) => `${topic} pricing template`,
+  (topic) => `${topic} rate calculator`,
 ];
 
 const communicationClauses = [
@@ -93,9 +93,9 @@ const communicationClauses = [
 ];
 
 const communicationPatterns = [
-  clause => `how to follow up when ${clause}`,
-  clause => `email template when ${clause}`,
-  clause => `freelancer message script when ${clause}`,
+  (clause) => `how to follow up when ${clause}`,
+  (clause) => `email template when ${clause}`,
+  (clause) => `freelancer message script when ${clause}`,
 ];
 
 const proposalScenarios = [
@@ -127,8 +127,8 @@ const proposalScenarios = [
 ];
 
 const proposalPatterns = [
-  scenario => `freelance proposal template for ${scenario}`,
-  scenario => `how to write a proposal for ${scenario}`,
+  (scenario) => `freelance proposal template for ${scenario}`,
+  (scenario) => `how to write a proposal for ${scenario}`,
 ];
 
 const rateIncreaseClauses = [
@@ -160,8 +160,8 @@ const rateIncreaseClauses = [
 ];
 
 const rateIncreasePatterns = [
-  clause => `how to raise rates when ${clause}`,
-  clause => `rate increase email template when ${clause}`,
+  (clause) => `how to raise rates when ${clause}`,
+  (clause) => `rate increase email template when ${clause}`,
 ];
 
 function generateFromClauses(clauses, patterns) {
@@ -215,11 +215,26 @@ function rowsFromKeywords(keywords, cfg) {
   });
 }
 
-const negotiationKeywords = generateFromClauses(negotiationClauses, negotiationPatterns).slice(0, 70);
-const pricingKeywords = generateFromClauses(pricingTopics, pricingPatterns).slice(0, 70);
-const communicationKeywords = generateFromClauses(communicationClauses, communicationPatterns).slice(0, 60);
-const proposalKeywords = generateFromClauses(proposalScenarios, proposalPatterns).slice(0, 50);
-const rateIncreaseKeywords = generateFromClauses(rateIncreaseClauses, rateIncreasePatterns).slice(0, 50);
+const negotiationKeywords = generateFromClauses(
+  negotiationClauses,
+  negotiationPatterns
+).slice(0, 70);
+const pricingKeywords = generateFromClauses(
+  pricingTopics,
+  pricingPatterns
+).slice(0, 70);
+const communicationKeywords = generateFromClauses(
+  communicationClauses,
+  communicationPatterns
+).slice(0, 60);
+const proposalKeywords = generateFromClauses(
+  proposalScenarios,
+  proposalPatterns
+).slice(0, 50);
+const rateIncreaseKeywords = generateFromClauses(
+  rateIncreaseClauses,
+  rateIncreasePatterns
+).slice(0, 50);
 
 const rows = [
   ...rowsFromKeywords(negotiationKeywords, {
@@ -287,7 +302,10 @@ for (const row of dedupedRows) {
   csvLines.push(values.join(','));
 }
 
-writeFileSync('product/seo/flowdockr-keyword-library-v1.csv', `${csvLines.join('\n')}\n`);
+writeFileSync(
+  'product/seo/flowdockr-keyword-library-v1.csv',
+  `${csvLines.join('\n')}\n`
+);
 
 const clusterCounts = dedupedRows.reduce((acc, row) => {
   acc[row.cluster] = (acc[row.cluster] || 0) + 1;

@@ -389,7 +389,7 @@ export function Pricing({
             return (
               <Card key={idx} className="relative mx-auto">
                 {item.label && (
-                  <span className="absolute inset-x-0 -top-3 mx-auto flex h-6 w-fit items-center rounded-full bg-linear-to-br/increasing from-purple-400 to-amber-300 px-3 py-1 text-xs font-medium text-amber-950 ring-1 ring-white/20 ring-offset-1 ring-offset-gray-950/5 ring-inset">
+                  <span className="from-brand-primary to-brand-cyan ring-offset-brand-primary/5 absolute inset-x-0 -top-3 mx-auto flex h-6 w-fit items-center rounded-full bg-linear-to-r px-3 py-1 text-xs font-medium text-white ring-1 ring-white/20 ring-offset-1 ring-inset">
                     {item.label}
                   </span>
                 )}
@@ -462,12 +462,10 @@ export function Pricing({
                       className={cn(
                         'focus-visible:ring-ring inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none',
                         'mt-4 h-9 w-full px-4 py-2',
-                        'bg-primary text-primary-foreground border-[0.5px] border-white/25 shadow-md shadow-black/20 opacity-50'
+                        'bg-primary text-primary-foreground border-[0.5px] border-white/25 opacity-50 shadow-md shadow-black/20'
                       )}
                     >
-                      <span className="text-sm">
-                        {t('current_plan')}
-                      </span>
+                      <span className="text-sm">{t('current_plan')}</span>
                     </Button>
                   ) : (
                     <Button

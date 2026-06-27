@@ -16,7 +16,6 @@ Generated: 2026-03-05
 
 ## Main Issues
 
-
 ## Verdict
 
 - Current output quality is strong enough for scaled SEO traffic tests.

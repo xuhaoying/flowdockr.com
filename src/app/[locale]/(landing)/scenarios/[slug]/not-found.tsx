@@ -3,8 +3,10 @@ import { Link } from '@/core/i18n/navigation';
 export default function ScenarioNotFound() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16 text-center">
-      <h1 className="text-3xl font-semibold tracking-tight">Scenario not found</h1>
-      <p className="mt-3 text-muted-foreground">
+      <h1 className="text-3xl font-semibold tracking-tight">
+        Scenario not found
+      </h1>
+      <p className="text-muted-foreground mt-3">
         This negotiation scenario is unavailable or moved.
       </p>
       <Link href="/pricing" className="mt-6 inline-block underline">

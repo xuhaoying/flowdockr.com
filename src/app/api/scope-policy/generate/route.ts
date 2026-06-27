@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import {
+  generateScopePolicy,
+  validateScopeInput,
+} from '@/core/flowdockr/scope';
 import { envConfigs } from '@/config';
-import { generateScopePolicy, validateScopeInput } from '@/core/flowdockr/scope';
 import { getCurrentSubscription } from '@/shared/models/subscription';
 import { getUserInfo } from '@/shared/models/user';
 
@@ -14,7 +17,8 @@ export async function POST(request: NextRequest) {
     const input = validateScopeInput(body);
 
     const isPaid = await hasPaidAccess();
-    const used = Number.parseInt(request.cookies.get(FREE_COOKIE)?.value || '0', 10) || 0;
+    const used =
+      Number.parseInt(request.cookies.get(FREE_COOKIE)?.value || '0', 10) || 0;
 
     if (!isPaid && used >= FREE_LIMIT) {
       return NextResponse.json({

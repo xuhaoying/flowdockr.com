@@ -98,7 +98,7 @@ const COLUMNS: Array<{ key: PlanKey; label: string }> = [
 
 export function FeatureComparison() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+    <section className="border-brand-lavender/25 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
       <div className="space-y-4">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
@@ -111,14 +111,14 @@ export function FeatureComparison() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] border-separate border-spacing-0 overflow-hidden rounded-2xl border border-slate-200">
             <thead>
-              <tr className="bg-slate-50">
-                <th className="border-b border-slate-200 px-4 py-3 text-left text-sm font-semibold text-slate-900">
+              <tr className="bg-brand-bg/55">
+                <th className="border-brand-lavender/20 border-b px-4 py-3 text-left text-sm font-semibold text-slate-900">
                   Feature
                 </th>
                 {COLUMNS.map((column) => (
                   <th
                     key={column.key}
-                    className="border-b border-slate-200 px-4 py-3 text-center text-sm font-semibold text-slate-900"
+                    className="border-brand-lavender/20 border-b px-4 py-3 text-center text-sm font-semibold text-slate-900"
                   >
                     {column.label}
                   </th>

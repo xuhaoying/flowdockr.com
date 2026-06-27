@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { Check, Copy, Loader2, Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { Link } from '@/core/i18n/navigation';
@@ -116,7 +116,10 @@ export function ScopePolicyGenerator() {
     if (!result || !resultAnchorRef.current) {
       return;
     }
-    resultAnchorRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    resultAnchorRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }, [result]);
 
   useEffect(() => {
@@ -237,7 +240,7 @@ export function ScopePolicyGenerator() {
             <CardDescription>{t('description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-muted-foreground text-sm font-medium">
               {t('steps.describe')}
             </p>
 
@@ -249,7 +252,9 @@ export function ScopePolicyGenerator() {
                   onValueChange={(v) => setField('project_type', v)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={t('fields.project_type_placeholder')} />
+                    <SelectValue
+                      placeholder={t('fields.project_type_placeholder')}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {PROJECT_TYPE_OPTIONS.map((key) => (
@@ -279,7 +284,9 @@ export function ScopePolicyGenerator() {
                   onValueChange={(v) => setField('revision_count', v)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={t('fields.revision_count_placeholder')} />
+                    <SelectValue
+                      placeholder={t('fields.revision_count_placeholder')}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {REVISION_OPTIONS.map((key) => (
@@ -298,7 +305,9 @@ export function ScopePolicyGenerator() {
                   onValueChange={(v) => setField('client_type', v)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={t('fields.client_type_placeholder')} />
+                    <SelectValue
+                      placeholder={t('fields.client_type_placeholder')}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {CLIENT_TYPE_OPTIONS.map((key) => (
@@ -327,7 +336,7 @@ export function ScopePolicyGenerator() {
                 )}
               </Button>
               {usage ? (
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   {usage.is_paid
                     ? t('usage.paid')
                     : t('usage.free_left', {
@@ -362,7 +371,7 @@ export function ScopePolicyGenerator() {
                 <CardDescription>{t('result.subtitle')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-5">
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className="text-muted-foreground text-sm font-medium">
                   {t('steps.copy')}
                 </p>
 

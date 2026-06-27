@@ -115,7 +115,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client says they found someone cheaper',
     slug: 'found-someone-cheaper',
     metaTitle:
-      'Client Found Someone Cheaper? Reply Without Starting a Price War | Flowdockr',
+      'Client Found Someone Cheaper? Reply Without Starting a Price War | FlowDockr',
     metaDescription:
       'Use this scenario when a client says they found someone cheaper. Compare offers without sounding threatened, and protect your positioning instead of racing down on price.',
     previewReply:
@@ -152,10 +152,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'lower-rate-after-proposal',
       'discount-request',
     ],
-    similarScenarioSlugs: [
-      'quote-too-high',
-      'same-scope-lower-price',
-    ],
+    similarScenarioSlugs: ['quote-too-high', 'same-scope-lower-price'],
     nextStepScenarioSlugs: [
       'meet-their-budget',
       'lower-rate-after-proposal',
@@ -309,7 +306,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client asks for a lower rate after your proposal',
     slug: 'lower-rate-after-proposal',
     metaTitle:
-      'Client Wants a Lower Rate After the Proposal? What to Say | Flowdockr',
+      'Client Wants a Lower Rate After the Proposal? What to Say | FlowDockr',
     metaDescription:
       'Use this scenario when a client comes back after the proposal and asks for a lower rate. Protect the integrity of the quoted plan and redirect the conversation toward real tradeoffs.',
     previewReply:
@@ -346,10 +343,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'meet-their-budget',
       'best-price-before-signing',
     ],
-    similarScenarioSlugs: [
-      'quote-too-high',
-      'same-scope-lower-price',
-    ],
+    similarScenarioSlugs: ['quote-too-high', 'same-scope-lower-price'],
     nextStepScenarioSlugs: [
       'meet-their-budget',
       'discount-request',
@@ -387,8 +381,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     id: 'scn_after_client_ghosted',
     title: 'How to reply after a client ghosts you',
     slug: 'after-client-ghosted',
-    metaTitle:
-      'Client Ghosted After Showing Interest? What to Say | Flowdockr',
+    metaTitle: 'Client Ghosted After Showing Interest? What to Say | FlowDockr',
     metaDescription:
       'Use this scenario when a client showed interest and then disappeared. Send a low-pressure follow-up that reopens the thread without sounding resentful or needy.',
     previewReply:
@@ -464,7 +457,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to follow up with a client who did not respond',
     slug: 'client-no-response-follow-up',
     metaTitle:
-      'How to Follow Up When a Client Did Not Respond to Your Last Message | Flowdockr',
+      'How to Follow Up When a Client Did Not Respond to Your Last Message | FlowDockr',
     metaDescription:
       'Use this scenario when a client did not respond to your last message and you need a short, general follow-up. Prompt a yes, no, or timing update without sounding pushy.',
     previewReply:
@@ -499,10 +492,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'reviewing-internally-no-response',
       'contract-sent-no-response',
     ],
-    similarScenarioSlugs: [
-      'after-client-ghosted',
-      'no-response-after-rate',
-    ],
+    similarScenarioSlugs: ['after-client-ghosted', 'no-response-after-rate'],
     nextStepScenarioSlugs: [
       'no-response-after-proposal',
       'reviewing-internally-no-response',
@@ -654,8 +644,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     id: 'scn_changing_requirements_response',
     title: 'Client keeps changing requirements',
     slug: 'changing-requirements-response',
-    metaTitle:
-      'Client Keeps Changing Requirements Mid-Project | Flowdockr',
+    metaTitle: 'Client Keeps Changing Requirements Mid-Project | FlowDockr',
     metaDescription:
       'Use this scenario when a client keeps changing requirements mid-project. Reset the scope conversation before the work turns into a moving target.',
     previewReply:
@@ -709,8 +698,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     id: 'scn_scope_creep_polite_response',
     title: 'How to handle scope creep politely',
     slug: 'scope-creep-polite-response',
-    metaTitle:
-      'Scope Creep Starting? What to Say Early | Flowdockr',
+    metaTitle: 'Scope Creep Starting? What to Say Early | FlowDockr',
     metaDescription:
       'Use this scenario when small extra asks are starting to stretch the project. Set the boundary early and keep the tone cooperative before the pattern gets expensive.',
     previewReply:
@@ -747,10 +735,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'extra-work-for-free',
       'out-of-scope-professionally',
     ],
-    similarScenarioSlugs: [
-      'adding-small-requests',
-      'extra-work-outside-scope',
-    ],
+    similarScenarioSlugs: ['adding-small-requests', 'extra-work-outside-scope'],
     nextStepScenarioSlugs: [
       'changing-requirements-response',
       'extra-work-for-free',
@@ -764,8 +749,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     id: 'scn_extra_work_for_free',
     title: 'Client asks for extra work for free',
     slug: 'extra-work-for-free',
-    metaTitle:
-      'Client Wants Free Additional Work? What to Say | Flowdockr',
+    metaTitle: 'Client Wants Free Additional Work? What to Say | FlowDockr',
     metaDescription:
       'Use this scenario when a client explicitly asks for extra work at no additional cost. Hold the commercial boundary clearly and offer structured options instead of absorbing the request.',
     previewReply:
@@ -821,7 +805,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'How to say that is out of scope professionally',
     slug: 'out-of-scope-professionally',
     metaTitle:
-      'How to Say “That’s Out of Scope” Without Sounding Abrupt | Flowdockr',
+      'How to Say “That’s Out of Scope” Without Sounding Abrupt | FlowDockr',
     metaDescription:
       'Use this scenario when you need to tell a client a request is out of scope. Get wording that stays respectful, practical, and easy for the client to respond to.',
     previewReply:
@@ -858,10 +842,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'changing-requirements-response',
       'unlimited-revisions',
     ],
-    similarScenarioSlugs: [
-      'extra-work-outside-scope',
-      'extra-work-for-free',
-    ],
+    similarScenarioSlugs: ['extra-work-outside-scope', 'extra-work-for-free'],
     nextStepScenarioSlugs: [
       'adding-small-requests',
       'changing-requirements-response',
@@ -923,7 +904,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     title: 'Client keeps adding small requests',
     slug: 'adding-small-requests',
     metaTitle:
-      'Client Keeps Adding Small Requests? Stop Scope Drift Early | Flowdockr',
+      'Client Keeps Adding Small Requests? Stop Scope Drift Early | FlowDockr',
     metaDescription:
       'Use this scenario when a client keeps adding “small” requests and the extras are starting to add up. Name the pattern early before it turns into silent scope creep.',
     previewReply:
@@ -958,10 +939,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
       'extra-work-for-free',
       'out-of-scope-professionally',
     ],
-    similarScenarioSlugs: [
-      'scope-creep-polite-response',
-      'extra-page-request',
-    ],
+    similarScenarioSlugs: ['scope-creep-polite-response', 'extra-page-request'],
     nextStepScenarioSlugs: [
       'changing-requirements-response',
       'extra-work-for-free',

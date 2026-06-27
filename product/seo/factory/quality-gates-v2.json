@@ -31,20 +31,13 @@
       "related_links": 4,
       "faq_questions": 2
     },
-    "required_reply_tones": [
-      "### Polite",
-      "### Firm",
-      "### Boundary-Setting"
-    ],
+    "required_reply_tones": ["### Polite", "### Firm", "### Boundary-Setting"],
     "required_cta_patterns": [
       "Generate my reply (20s)",
       "Calculate my minimum and ideal price",
       "Create my proposal draft now"
     ],
-    "required_schema_terms": [
-      "\"@type\": \"FAQPage\"",
-      "\"@type\": \"HowTo\""
-    ]
+    "required_schema_terms": ["\"@type\": \"FAQPage\"", "\"@type\": \"HowTo\""]
   },
   "tool": {
     "word_count": {
@@ -70,9 +63,7 @@
       "Calculate my minimum and ideal price",
       "Create my proposal draft now"
     ],
-    "required_schema_terms": [
-      "\"@type\": \"FAQPage\""
-    ]
+    "required_schema_terms": ["\"@type\": \"FAQPage\""]
   },
   "cluster": {
     "word_count": {
@@ -99,8 +90,6 @@
       "Calculate my minimum and ideal price",
       "Create my proposal draft now"
     ],
-    "required_schema_terms": [
-      "\"@type\": \"FAQPage\""
-    ]
+    "required_schema_terms": ["\"@type\": \"FAQPage\""]
   }
 }

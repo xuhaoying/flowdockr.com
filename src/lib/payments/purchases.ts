@@ -1,6 +1,5 @@
-import { eq } from 'drizzle-orm';
-
 import { db, purchase } from '@/lib/db';
+import { eq } from 'drizzle-orm';
 
 export async function attachStripeSessionToPurchase(params: {
   purchaseId: string;

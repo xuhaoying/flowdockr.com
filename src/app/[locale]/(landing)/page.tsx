@@ -9,9 +9,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Flowdockr | AI Negotiation Assistant for Professionals',
+  title: 'FlowDockr | AI Negotiation Assistant for Professionals',
   description:
-    'Flowdockr helps professionals prepare for difficult conversations and negotiations with AI-guided strategy, reply drafts, and scenario support.',
+    'FlowDockr helps professionals prepare for difficult conversations and negotiations with AI-guided strategy, reply drafts, and scenario support.',
   canonicalUrl: '/',
   keywords:
     'AI negotiation assistant, difficult conversations, pricing negotiation, client communication, negotiation preparation',
@@ -29,7 +29,7 @@ export default async function LandingPage({
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 md:gap-10 md:py-10">
       <HomepageHero />
 
-      <section className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-3 md:p-6">
+      <section className="border-brand-lavender/25 grid gap-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5 md:grid-cols-3 md:p-6">
         {[
           {
             title: 'Prepare before you respond',
@@ -41,12 +41,12 @@ export default async function LandingPage({
           },
           {
             title: 'Use AI with structure',
-            body: 'Flowdockr guides replies through negotiation context, risk checks, and practical tradeoffs.',
+            body: 'FlowDockr guides replies through negotiation context, risk checks, and practical tradeoffs.',
           },
         ].map((feature) => (
           <article
             key={feature.title}
-            className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+            className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4"
           >
             <h2 className="text-base font-semibold text-slate-900">
               {feature.title}
@@ -61,7 +61,7 @@ export default async function LandingPage({
       <ExampleConversation />
       <WhyItWorks />
 
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+      <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5 md:p-6">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
             Common use cases
@@ -70,7 +70,7 @@ export default async function LandingPage({
             Built for conversations where the wording matters
           </h2>
           <p className="text-sm leading-6 text-slate-700">
-            Flowdockr is useful when professionals need a calm, commercially
+            FlowDockr is useful when professionals need a calm, commercially
             sound response before a deal, payment, or relationship gets worse.
           </p>
         </div>
@@ -85,7 +85,7 @@ export default async function LandingPage({
           ].map((useCase) => (
             <div
               key={useCase}
-              className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+              className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border px-4 py-3 text-sm text-slate-700"
             >
               {useCase}
             </div>
@@ -95,24 +95,24 @@ export default async function LandingPage({
 
       <HomepageScenarioGrid />
 
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
           Professional negotiation support, not generic chat
         </h2>
         <p className="max-w-3xl text-sm leading-6 text-slate-700">
-          Start with the real message or situation. Flowdockr helps frame the
+          Start with the real message or situation. FlowDockr helps frame the
           negotiation, identify the tradeoff, and draft language you can edit
           before sending.
         </p>
         <Link
           href="/guides/how-to-negotiate-freelance-pricing"
-          className="inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:border-slate-400"
+          className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-md border bg-white px-4 py-2 text-sm font-semibold transition-colors"
         >
           Open pricing negotiation guide
         </Link>
       </section>
 
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
           Pricing preview
         </h2>
@@ -123,21 +123,21 @@ export default async function LandingPage({
         <PricingCards sourcePage="home" />
       </section>
 
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
           FAQ
         </h2>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
             Why not just use ChatGPT?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            Flowdockr is structured around real negotiation scenarios with
+            FlowDockr is structured around real negotiation scenarios with
             strategy constraints and reusable history, not just generic text
             generation.
           </p>
         </details>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
             Will replies sound robotic?
           </summary>
@@ -146,7 +146,7 @@ export default async function LandingPage({
             communication, not canned scripts.
           </p>
         </details>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
             Do I need an account before trying?
           </summary>
@@ -155,7 +155,7 @@ export default async function LandingPage({
             in when you want to save history or buy more support.
           </p>
         </details>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
             What happens after free credits are used?
           </summary>
@@ -165,14 +165,16 @@ export default async function LandingPage({
             upward.
           </p>
         </details>
-        <details className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Is Flowdockr legal or financial advice?
+            Is FlowDockr legal or financial advice?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. Flowdockr provides communication and negotiation drafting
-            support. You are responsible for reviewing outputs and making final
-            business decisions.
+            No. FlowDockr provides communication and negotiation drafting
+            support for professional client conversations. It is not a law firm,
+            financial adviser, lender, broker, debt settlement service, debt
+            collection service, bank, or money transmitter. You are responsible
+            for reviewing outputs and making final business decisions.
           </p>
         </details>
       </section>

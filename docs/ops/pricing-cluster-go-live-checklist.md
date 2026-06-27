@@ -1,6 +1,6 @@
 # Pricing Cluster Go-Live Checklist
 
-This checklist defines the minimum release gate for the Flowdockr pricing cluster.
+This checklist defines the minimum release gate for the FlowDockr pricing cluster.
 
 ## 1. Pre-release quality gates
 

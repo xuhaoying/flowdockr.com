@@ -10,8 +10,8 @@ import {
   getHomepageScenarioSurfaceGroups,
   getScenarioHubClusterSurfaceEntries,
   getScenarioHubPopularSurfaceEntries,
-  getToolSurfaceScenarioEntries,
   getToolsIndexScenarioSurfaceEntries,
+  getToolSurfaceScenarioEntries,
 } from './surfaces';
 
 describe('scenario surface allocation', () => {
@@ -153,16 +153,18 @@ describe('scenario surface allocation', () => {
 
   it('preserves support-page bridge exposure on scenario surfaces', () => {
     const paymentGroups = getRelatedScenarioGroups('ask-for-payment-politely');
-    const ghostingGroups = getRelatedScenarioGroups('client-no-response-follow-up');
+    const ghostingGroups = getRelatedScenarioGroups(
+      'client-no-response-follow-up'
+    );
 
     expect(paymentGroups[0]?.items.map((item) => item.slug)).toEqual([
       'payment-overdue-reminder',
       'unpaid-invoice-follow-up',
     ]);
     for (const slug of paymentGroups[0]?.items.map((item) => item.slug) || []) {
-      expect(getScenarioDistributionPriority(getScenarioPageBySlug(slug)!)).toBe(
-        'secondary'
-      );
+      expect(
+        getScenarioDistributionPriority(getScenarioPageBySlug(slug)!)
+      ).toBe('secondary');
     }
 
     expect(ghostingGroups.map((group) => group.id)).toEqual([

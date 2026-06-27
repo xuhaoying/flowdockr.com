@@ -2,12 +2,12 @@ import { Link } from '@/core/i18n/navigation';
 
 export function ExampleConversation() {
   return (
-    <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
       <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-        What Flowdockr produces
+        What FlowDockr produces
       </h2>
       <div className="grid gap-4 lg:grid-cols-2">
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <article className="border-brand-lavender/20 bg-brand-bg/55 rounded-xl border p-4">
           <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
             Client message
           </p>
@@ -15,7 +15,7 @@ export function ExampleConversation() {
             Your quote is higher than expected. Another freelancer can do this
             for $300.
           </p>
-          <div className="mt-4 rounded-lg border border-slate-200 bg-white p-3">
+          <div className="border-brand-lavender/20 mt-4 rounded-lg border bg-white p-3">
             <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
               User goal
             </p>
@@ -25,12 +25,12 @@ export function ExampleConversation() {
             </p>
           </div>
         </article>
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <article className="border-brand-lavender/20 bg-brand-bg/55 rounded-xl border p-4">
           <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-            Flowdockr output
+            FlowDockr output
           </p>
           <div className="mt-3 space-y-3">
-            <div className="rounded-lg border border-slate-200 bg-white p-3">
+            <div className="border-brand-lavender/20 rounded-lg border bg-white p-3">
               <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Strategy
               </p>
@@ -48,7 +48,7 @@ export function ExampleConversation() {
                 client that your first quote was inflated.
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-3">
+            <div className="border-brand-lavender/20 rounded-lg border bg-white p-3">
               <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Suggested reply
               </p>
@@ -64,7 +64,7 @@ export function ExampleConversation() {
       </div>
       <Link
         href="/scenario/quote-too-high"
-        className="inline-flex text-sm font-semibold text-slate-900 underline"
+        className="text-brand-primary inline-flex text-sm font-semibold underline"
       >
         See full scenario
       </Link>

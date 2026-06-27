@@ -12,12 +12,12 @@ export function ScenarioFAQ({ scenario }: ScenarioFAQProps) {
         {scenario.faq.map((item) => (
           <details
             key={item.question}
-            className="rounded-xl border border-foreground/10 bg-background p-4"
+            className="border-foreground/10 bg-background rounded-xl border p-4"
           >
             <summary className="cursor-pointer text-sm font-medium">
               {item.question}
             </summary>
-            <p className="mt-2 text-sm text-muted-foreground">{item.answer}</p>
+            <p className="text-muted-foreground mt-2 text-sm">{item.answer}</p>
           </details>
         ))}
       </div>

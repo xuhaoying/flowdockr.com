@@ -12,8 +12,7 @@ export type ScenarioPromptConfig = {
 
 export const scenarioPromptConfigs: Record<string, ScenarioPromptConfig> = {
   'discount-request': {
-    role:
-      'You are an expert client communication assistant for freelancers, consultants, and agencies.',
+    role: 'You are an expert client communication assistant for freelancers, consultants, and agencies.',
     scenarioContext:
       'The user is dealing with a direct discount request and needs to protect the rate without killing deal momentum.',
     userGoal: [
@@ -29,15 +28,13 @@ export const scenarioPromptConfigs: Record<string, ScenarioPromptConfig> = {
       'stay commercially realistic',
     ],
     fewShotExample: {
-      client:
-        'Can you give us 15% off if we approve this by Friday?',
+      client: 'Can you give us 15% off if we approve this by Friday?',
       reply:
         'I can keep the timeline moving, but I would not reduce the same scope without changing the structure behind it. If we need to hit a different number, the cleanest route is to narrow scope or adjust the engagement terms rather than discount the full version by default.',
     },
   },
   'extra-work-outside-scope': {
-    role:
-      'You are an expert client communication assistant for freelancers, consultants, and agencies.',
+    role: 'You are an expert client communication assistant for freelancers, consultants, and agencies.',
     scenarioContext:
       'The user is dealing with a client request that falls outside the agreed scope and needs to reset the boundary without sounding petty.',
     userGoal: [
@@ -60,8 +57,7 @@ export const scenarioPromptConfigs: Record<string, ScenarioPromptConfig> = {
     },
   },
   'ask-for-payment-politely': {
-    role:
-      'You are an expert client communication assistant for freelancers, consultants, and agencies.',
+    role: 'You are an expert client communication assistant for freelancers, consultants, and agencies.',
     scenarioContext:
       'The user is following up on a payment that is late or slipping and needs clarity without sounding weak.',
     userGoal: [
@@ -77,8 +73,7 @@ export const scenarioPromptConfigs: Record<string, ScenarioPromptConfig> = {
       'avoid emotional or vague phrasing',
     ],
     fewShotExample: {
-      client:
-        'Sorry for the delay. Finance is still sorting this on our side.',
+      client: 'Sorry for the delay. Finance is still sorting this on our side.',
       reply:
         'Thanks for the update. Please let me know the expected payment date for the outstanding invoice so I can update my records accordingly. If there is anything blocking it on your side, I am happy to help close that loop quickly.',
     },

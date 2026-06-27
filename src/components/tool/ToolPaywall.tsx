@@ -20,7 +20,7 @@ export function ToolPaywall({
   onCheckout,
 }: ToolPaywallProps) {
   return (
-    <div className="space-y-4 rounded-[18px] border border-slate-300 bg-slate-50/80 p-4 sm:p-5">
+    <div className="border-brand-lavender/30 bg-brand-bg/70 space-y-4 rounded-[18px] border p-4 sm:p-5">
       <div className="space-y-1">
         <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">
           Keep generating
@@ -36,13 +36,13 @@ export function ToolPaywall({
       </div>
 
       <ul className="grid gap-2 text-xs text-slate-600 md:grid-cols-3">
-        <li className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+        <li className="border-brand-lavender/20 rounded-xl border bg-white px-3 py-2">
           More send-ready drafts
         </li>
-        <li className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+        <li className="border-brand-lavender/20 rounded-xl border bg-white px-3 py-2">
           Extra reply variations
         </li>
-        <li className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+        <li className="border-brand-lavender/20 rounded-xl border bg-white px-3 py-2">
           Follow-up and deeper guidance
         </li>
       </ul>
@@ -67,7 +67,7 @@ export function ToolPaywall({
           <div
             key={pack.id}
             className={`rounded-[18px] border bg-white p-4 shadow-xs ${
-              pack.popular ? 'border-slate-900' : 'border-slate-300'
+              pack.popular ? 'border-brand-primary' : 'border-brand-lavender/35'
             }`}
           >
             <p className="text-sm font-semibold text-slate-900">{pack.name}</p>

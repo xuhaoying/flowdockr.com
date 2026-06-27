@@ -1,12 +1,15 @@
-import { getPricingBlueprintBySlug, getPricingScenarioBySlug } from '@/lib/pricing-cluster';
+import {
+  getPricingBlueprintBySlug,
+  getPricingScenarioBySlug,
+} from '@/lib/pricing-cluster';
 import { isDedicatedPricingGeneratorScenarioSlug } from '@/lib/pricing-generator-scenarios';
-import type {
-  PricingAnalyticsSourceSurface,
-  PricingScenarioAttribution,
-  PricingScenarioAttributionSeedInput,
-  PricingScenarioAttributionSeed,
+import {
+  pricingAnalyticsSourceSurfaces,
+  type PricingAnalyticsSourceSurface,
+  type PricingScenarioAttribution,
+  type PricingScenarioAttributionSeed,
+  type PricingScenarioAttributionSeedInput,
 } from '@/types/pricing-analytics';
-import { pricingAnalyticsSourceSurfaces } from '@/types/pricing-analytics';
 
 type PricingAnalyticsPrimitive = string | boolean;
 
@@ -36,9 +39,7 @@ export function buildPricingScenarioAttribution(
     ...seed,
     pricingFamily: scenario.schema.page.family,
     generatorScenarioSlug: scenario.generatorScenarioSlug,
-    generatorMappingKind: isDedicatedGeneratorMapping
-      ? 'dedicated'
-      : 'reused',
+    generatorMappingKind: isDedicatedGeneratorMapping ? 'dedicated' : 'reused',
     pageRole: blueprint.pageRole,
     canonicalRoute: blueprint.url,
     isDedicatedGeneratorMapping,

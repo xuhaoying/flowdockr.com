@@ -1,10 +1,10 @@
 {
   "header": {
     "brand": {
-      "title": "Flowdockr",
+      "title": "FlowDockr",
       "logo": {
-        "src": "/logo.png",
-        "alt": "Flowdockr"
+        "src": "/logo-mark.svg",
+        "alt": "FlowDockr"
       },
       "url": "/admin"
     },

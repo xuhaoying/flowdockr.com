@@ -51,7 +51,10 @@ const lines = rows.map((row) => {
       maxWords: 2200,
       language: 'en',
       structure: [
-        { type: 'h1', instruction: 'Use the exact target keyword naturally in the H1.' },
+        {
+          type: 'h1',
+          instruction: 'Use the exact target keyword naturally in the H1.',
+        },
         {
           type: 'intro',
           instruction:
@@ -60,12 +63,14 @@ const lines = rows.map((row) => {
         {
           type: 'section',
           heading: 'Why this situation happens',
-          instruction: 'Explain root causes in client psychology, project constraints, and communication gaps.',
+          instruction:
+            'Explain root causes in client psychology, project constraints, and communication gaps.',
         },
         {
           type: 'section',
           heading: 'Common mistakes freelancers make',
-          instruction: 'List 3-5 mistakes and why each one reduces trust or margin.',
+          instruction:
+            'List 3-5 mistakes and why each one reduces trust or margin.',
         },
         {
           type: 'section',
@@ -86,7 +91,8 @@ const lines = rows.map((row) => {
         },
         {
           type: 'faq',
-          instruction: 'Add 3-5 FAQs aligned to the same search intent and related long-tail variants.',
+          instruction:
+            'Add 3-5 FAQs aligned to the same search intent and related long-tail variants.',
         },
       ],
       seoRules: [

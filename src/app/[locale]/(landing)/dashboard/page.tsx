@@ -7,7 +7,7 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Dashboard | Flowdockr',
+  title: 'Dashboard | FlowDockr',
   description: 'View your credits balance and recent negotiation generations.',
   canonicalUrl: '/dashboard',
   noIndex: true,
@@ -25,15 +25,15 @@ export default async function DashboardPage({
   if (!currentUser) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-16">
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="border-brand-lavender/25 rounded-2xl border bg-white p-6 shadow-sm shadow-slate-950/5">
           <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
           <p className="text-muted-foreground mt-3 text-sm leading-6">
-            Sign in to view your Flowdockr credits, recent negotiation drafts,
+            Sign in to view your FlowDockr credits, recent negotiation drafts,
             and saved account activity.
           </p>
           <Link
             href="/signin?callbackUrl=/dashboard"
-            className="mt-6 inline-flex rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+            className="from-brand-primary to-brand-cyan shadow-brand-primary/25 mt-6 inline-flex rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
           >
             Send me a magic link
           </Link>
@@ -87,7 +87,7 @@ export default async function DashboardPage({
           Recent generations
         </h2>
         {rows.length === 0 ? (
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="border-brand-lavender/25 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
             <h3 className="text-base font-semibold text-slate-900">
               Your first negotiation output will appear here
             </h3>
@@ -98,13 +98,13 @@ export default async function DashboardPage({
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/tools/reply-generator"
-                className="inline-flex rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+                className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
               >
                 Open conversation workspace
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-900"
+                className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-md border bg-white px-4 py-2 text-sm font-semibold"
               >
                 View credit packs
               </Link>

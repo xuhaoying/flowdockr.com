@@ -1,6 +1,5 @@
-import { eq } from 'drizzle-orm';
-
 import { db, user } from '@/lib/db';
+import { eq } from 'drizzle-orm';
 
 export async function getCredits(userId: string): Promise<number> {
   const [row] = await db()

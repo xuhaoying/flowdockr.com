@@ -1,13 +1,13 @@
 import {
-  buildScopeUserPrompt,
-  getScopeSystemPrompt,
-  SCOPE_POLICY_RESPONSE_JSON_SCHEMA,
-} from './prompts';
-import {
   generateFallbackScopePolicy,
   normalizeScopeOutput,
   parseModelJsonContent,
 } from './formatter';
+import {
+  buildScopeUserPrompt,
+  getScopeSystemPrompt,
+  SCOPE_POLICY_RESPONSE_JSON_SCHEMA,
+} from './prompts';
 import { ScopeInput, ScopeOutput } from './schemas';
 
 type GenerateScopePolicyOptions = {
@@ -29,25 +29,28 @@ export async function generateScopePolicy(
   const fetcher = options.fetcher || fetch;
 
   try {
-    const response = await fetcher('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        temperature: 0.2,
-        messages: [
-          { role: 'system', content: getScopeSystemPrompt() },
-          { role: 'user', content: buildScopeUserPrompt(input) },
-        ],
-        response_format: {
-          type: 'json_schema',
-          json_schema: SCOPE_POLICY_RESPONSE_JSON_SCHEMA,
+    const response = await fetcher(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
         },
-      }),
-    });
+        body: JSON.stringify({
+          model,
+          temperature: 0.2,
+          messages: [
+            { role: 'system', content: getScopeSystemPrompt() },
+            { role: 'user', content: buildScopeUserPrompt(input) },
+          ],
+          response_format: {
+            type: 'json_schema',
+            json_schema: SCOPE_POLICY_RESPONSE_JSON_SCHEMA,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       return generateFallbackScopePolicy(input);

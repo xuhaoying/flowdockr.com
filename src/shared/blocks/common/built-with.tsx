@@ -6,7 +6,7 @@ export function BuiltWith() {
   return (
     <Button asChild variant="outline" size="sm" className="hover:bg-primary/10">
       <Link href="https://www.flowdockr.com" target="_blank">
-        Built for Flowdockr
+        Built for FlowDockr
       </Link>
     </Button>
   );

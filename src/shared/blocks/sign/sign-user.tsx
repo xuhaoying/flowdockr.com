@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
+import { usePathname } from 'next/navigation';
 import { Coins, LayoutDashboard, Loader2, LogOut, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
 
 import { signOut, useSession } from '@/core/auth/client';
 import { Link, useRouter } from '@/core/i18n/navigation';
@@ -113,10 +113,7 @@ export function SignUser({
               className="relative h-10 w-10 rounded-full p-0"
             >
               <Avatar>
-                <AvatarImage
-                  src={user.image || ''}
-                  alt={user.name || ''}
-                />
+                <AvatarImage src={user.image || ''} alt={user.name || ''} />
                 <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
               </Avatar>
             </Button>

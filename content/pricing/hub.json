@@ -4,10 +4,10 @@
   "cluster": "pricing",
   "url": "/pricing/",
   "h1": "Pricing for real client negotiations",
-  "metaTitle": "Pricing for Real Client Negotiations | Flowdockr",
+  "metaTitle": "Pricing for Real Client Negotiations | FlowDockr",
   "metaDescription": "Choose the right level of negotiation support for pricing pressure, discount requests, scope creep, and awkward client conversations.",
   "heroSubheading": "Choose the level of support you need, from quick help to deeper negotiation guidance.",
-  "intro": "Flowdockr is built for difficult client conversations, not generic AI writing. Use this console to route the exact pressure you are dealing with, respond without panic discounting, and buy negotiation support only when you need it.",
+  "intro": "FlowDockr is built for difficult client conversations, not generic AI writing. Use this console to route the exact pressure you are dealing with, respond without panic discounting, and buy negotiation support only when you need it.",
   "decisionBuckets": [
     {
       "title": "Price pushback after proposal",

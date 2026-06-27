@@ -13,7 +13,7 @@ export function buildScenarioPageMetadata(params: {
   canonical: string;
 }): Metadata {
   const { page, canonical } = params;
-  const seoTitle = page.metaTitle || `${page.title} | Flowdockr`;
+  const seoTitle = page.metaTitle || `${page.title} | FlowDockr`;
 
   return {
     title: seoTitle,

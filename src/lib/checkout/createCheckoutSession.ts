@@ -1,21 +1,21 @@
-import { and, eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
-
-import { getAnonymousSessionIdFromRequest } from '@/lib/anonymous';
 import {
   buildPricingAttributionMetadataRecord,
   buildPricingScenarioAttribution,
 } from '@/lib/analytics/pricingAttribution';
+import { getAnonymousSessionIdFromRequest } from '@/lib/anonymous';
 import { getCurrentUser } from '@/lib/auth';
 import { anonymousLinkSession, db } from '@/lib/db';
 import {
   attachStripeSessionToPurchase,
-  createCheckoutSession as createStripeCheckoutSession,
-  markPurchaseFailed,
   createPendingPurchase,
+  createCheckoutSession as createStripeCheckoutSession,
   getCreditPack,
+  markPurchaseFailed,
 } from '@/lib/payments';
 import { checkoutSchema } from '@/lib/validators';
+import { and, eq } from 'drizzle-orm';
+
 import { getUuid } from '@/shared/lib/hash';
 
 export type CreateCheckoutSessionResult =
@@ -83,9 +83,8 @@ export async function createCheckoutSession(
   const pricingAttribution = buildPricingScenarioAttribution(
     input.pricingAttribution
   );
-  const pricingMetadata = buildPricingAttributionMetadataRecord(
-    pricingAttribution
-  );
+  const pricingMetadata =
+    buildPricingAttributionMetadataRecord(pricingAttribution);
 
   const email = currentUser.email.trim().toLowerCase();
   const pendingPurchase = await createPendingPurchase({
@@ -172,14 +171,19 @@ export async function createCheckoutSession(
       success: false,
       ok: false,
       message:
-        error instanceof Error ? error.message : 'Failed to create checkout session.',
+        error instanceof Error
+          ? error.message
+          : 'Failed to create checkout session.',
       status: 500,
       error: 'CHECKOUT_SESSION_CREATE_FAILED',
     };
   }
 }
 
-function sanitizeReturnPath(value: string | undefined, request: NextRequest): string {
+function sanitizeReturnPath(
+  value: string | undefined,
+  request: NextRequest
+): string {
   if (!value) {
     return '/pricing';
   }

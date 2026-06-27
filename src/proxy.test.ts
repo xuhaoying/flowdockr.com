@@ -1,7 +1,7 @@
 // @vitest-environment node
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest, NextResponse } from 'next/server';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const intlMiddleware = vi.fn(() => NextResponse.next());
 

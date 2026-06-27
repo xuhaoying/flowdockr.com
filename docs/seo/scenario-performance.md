@@ -1,6 +1,6 @@
 # Scenario Performance Monitoring
 
-This document is the source of truth for how Flowdockr should monitor canonical scenario pages across search visibility and product usage.
+This document is the source of truth for how FlowDockr should monitor canonical scenario pages across search visibility and product usage.
 
 ## Scope
 

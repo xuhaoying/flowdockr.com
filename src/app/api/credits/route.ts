@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   ensureAnonymousUsageRecord,
   getAnonymousSessionIdFromRequest,
@@ -15,8 +14,13 @@ export async function GET(request: NextRequest) {
     const currentUser = await getCurrentUser();
     if (currentUser) {
       const billingProfile = await getUserBillingProfile(currentUser.id);
-      const freeRepliesRemaining = await getUserFreeRepliesRemaining(currentUser.id);
-      const creditsRemaining = Math.max(0, billingProfile.creditsRemaining || 0);
+      const freeRepliesRemaining = await getUserFreeRepliesRemaining(
+        currentUser.id
+      );
+      const creditsRemaining = Math.max(
+        0,
+        billingProfile.creditsRemaining || 0
+      );
       const canGenerate = creditsRemaining > 0 || freeRepliesRemaining > 0;
 
       return NextResponse.json({
@@ -98,7 +102,9 @@ export async function GET(request: NextRequest) {
         purchasedPlan: billingProfile.purchasedPlan,
         entitlements: billingProfile.entitlements,
         error:
-          error instanceof Error ? error.message : 'Failed to fetch credits usage.',
+          error instanceof Error
+            ? error.message
+            : 'Failed to fetch credits usage.',
       },
       { status: 200 }
     );

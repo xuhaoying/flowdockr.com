@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  getLegacyScenarioRedirectPath,
+  getLegacyScenariosHubRedirectPath,
+} from '@/lib/routing/legacyScenarioRedirects';
 import { getSessionCookie } from 'better-auth/cookies';
 import createIntlMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/core/i18n/config';
 import { defaultLocale } from '@/config/locale';
-import {
-  getLegacyScenarioRedirectPath,
-  getLegacyScenariosHubRedirectPath,
-} from '@/lib/routing/legacyScenarioRedirects';
 import { shouldBlockSearchIndexingForHost } from '@/shared/lib/search-indexing';
 
 const intlMiddleware = createIntlMiddleware(routing);
@@ -27,7 +27,9 @@ export async function proxy(request: NextRequest) {
 
   if (COLLAPSED_LOCALES.has(localeSegment)) {
     const redirectUrl = request.nextUrl.clone();
-    const strippedPath = normalizePath(pathname.slice(localeSegment.length + 1) || '/');
+    const strippedPath = normalizePath(
+      pathname.slice(localeSegment.length + 1) || '/'
+    );
 
     redirectUrl.pathname = strippedPath || '/';
 

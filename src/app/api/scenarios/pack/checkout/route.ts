@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
 import {
   getScenarioPackById,
   ScenarioPackId,
 } from '@/shared/lib/scenario-quota';
-import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
 import { getUserInfo } from '@/shared/models/user';
 
 type CheckoutInput = {
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
             currency: 'usd',
             unit_amount: pack.priceCents,
             product_data: {
-              name: `Flowdockr ${pack.replies} replies pack`,
+              name: `FlowDockr ${pack.replies} replies pack`,
             },
           },
         },
@@ -101,7 +101,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function sanitizeReturnPath(value: string | undefined, request: NextRequest): string {
+function sanitizeReturnPath(
+  value: string | undefined,
+  request: NextRequest
+): string {
   if (!value) {
     return '/scenarios';
   }

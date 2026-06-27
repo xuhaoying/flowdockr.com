@@ -1,4 +1,5 @@
 import { eq } from 'drizzle-orm';
+
 import { db } from '@/core/db';
 import { config } from '@/config/db/schema';
 
@@ -22,30 +23,47 @@ async function checkStripeMode() {
     }
 
     // Check if keys are test or live mode
-    const secretKeyMode = stripeSecretKey.startsWith('sk_test_') ? 'TEST' : 
-                         stripeSecretKey.startsWith('sk_live_') ? 'LIVE' : 'UNKNOWN';
-    
-    const publishableKeyMode = stripePublishableKey?.startsWith('pk_test_') ? 'TEST' : 
-                              stripePublishableKey?.startsWith('pk_live_') ? 'LIVE' : 'UNKNOWN';
+    const secretKeyMode = stripeSecretKey.startsWith('sk_test_')
+      ? 'TEST'
+      : stripeSecretKey.startsWith('sk_live_')
+        ? 'LIVE'
+        : 'UNKNOWN';
+
+    const publishableKeyMode = stripePublishableKey?.startsWith('pk_test_')
+      ? 'TEST'
+      : stripePublishableKey?.startsWith('pk_live_')
+        ? 'LIVE'
+        : 'UNKNOWN';
 
     console.log('Stripe Configuration:');
     console.log(`Secret Key Mode: ${secretKeyMode}`);
     console.log(`Secret Key: ${stripeSecretKey.substring(0, 20)}...`);
     console.log('');
     console.log(`Publishable Key Mode: ${publishableKeyMode}`);
-    console.log(`Publishable Key: ${stripePublishableKey?.substring(0, 20)}...`);
+    console.log(
+      `Publishable Key: ${stripePublishableKey?.substring(0, 20)}...`
+    );
     console.log('');
 
     if (secretKeyMode !== publishableKeyMode) {
-      console.log('⚠️  WARNING: Secret key and publishable key are in different modes!');
+      console.log(
+        '⚠️  WARNING: Secret key and publishable key are in different modes!'
+      );
     }
 
     console.log('\n📝 Note:');
-    console.log('- Promotion codes created in TEST mode can only be used with TEST mode keys');
-    console.log('- Promotion codes created in LIVE mode can only be used with LIVE mode keys');
-    console.log('- Check your Stripe dashboard to ensure you are in the correct mode when creating promotion codes');
-    console.log('- Toggle between test/live mode in the top-left corner of Stripe dashboard');
-
+    console.log(
+      '- Promotion codes created in TEST mode can only be used with TEST mode keys'
+    );
+    console.log(
+      '- Promotion codes created in LIVE mode can only be used with LIVE mode keys'
+    );
+    console.log(
+      '- Check your Stripe dashboard to ensure you are in the correct mode when creating promotion codes'
+    );
+    console.log(
+      '- Toggle between test/live mode in the top-left corner of Stripe dashboard'
+    );
   } catch (error) {
     console.error('❌ Error:', error);
   } finally {

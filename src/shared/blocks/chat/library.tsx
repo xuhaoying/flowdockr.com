@@ -48,13 +48,7 @@ export function ChatLibrary({}) {
   const [limit, setLimit] = useState(10);
 
   const fetchChats = useCallback(
-    async ({
-      page,
-      limit,
-    }: {
-      page: number;
-      limit: number;
-    }) => {
+    async ({ page, limit }: { page: number; limit: number }) => {
       try {
         const resp = await fetch('/api/chat/list', {
           method: 'POST',

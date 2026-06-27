@@ -57,7 +57,7 @@ function buildToolCta(scenario: PricingScenario): ToolCTA {
     title: titleByFamily[family] || 'Draft the right pricing reply',
     body:
       scenario.toolCta ||
-      'Paste the exact client message and a little context. Flowdockr will draft a reply that matches this pricing situation without dropping into generic filler.',
+      'Paste the exact client message and a little context. FlowDockr will draft a reply that matches this pricing situation without dropping into generic filler.',
     buttonLabel: buttonLabelByFamily[family] || 'Draft my pricing reply',
     toolSlug: isBoundaryFlow
       ? 'reply-generator'

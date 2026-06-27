@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { createCheckoutSession } from '@/lib/checkout/createCheckoutSession';
 
 export const runtime = 'nodejs';

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { PricingScenarioViewTracker } from '@/components/analytics/PricingScenarioViewTracker';
 import {
   CopyReadyReplies,
   FAQBlock,
@@ -17,11 +18,10 @@ import { CommonMistakes } from '@/components/scenario/CommonMistakes';
 import { HubBackLink } from '@/components/scenario/HubBackLink';
 import { PricingScenarioInlineTool } from '@/components/scenario/PricingScenarioInlineTool';
 import { ToolCtaBlock } from '@/components/scenario/ToolCtaBlock';
-import { PricingScenarioViewTracker } from '@/components/analytics/PricingScenarioViewTracker';
 import { PageContainer } from '@/components/shared/PageContainer';
+import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { getAllScenarioSlugs } from '@/lib/content/getAllScenarioSlugs';
 import { getScenarioBySlug } from '@/lib/content/getScenarioBySlug';
-import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import {
   getPricingBlueprintBySlug,
   getPricingScenarioBySlug,
@@ -63,7 +63,7 @@ export async function generateMetadata({
 
   if (!scenario) {
     return {
-      title: 'Pricing scenario not found | Flowdockr',
+      title: 'Pricing scenario not found | FlowDockr',
       robots: {
         index: false,
         follow: false,

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
 import {
   getScenarioPackById,
   isPackSessionRedeemed,
   markPackSessionRedeemed,
 } from '@/shared/lib/scenario-quota';
-import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
 import { grantCreditsForUser } from '@/shared/models/credit';
 import { findUserById, getUserInfo } from '@/shared/models/user';
 
@@ -17,26 +17,46 @@ export async function GET(request: NextRequest) {
   ).trim();
 
   if (!sessionId) {
-    return redirectWithStatus(request, fallbackReturnTo, 'pack_error=missing_session');
+    return redirectWithStatus(
+      request,
+      fallbackReturnTo,
+      'pack_error=missing_session'
+    );
   }
 
   try {
     const user = await getUserInfo();
     if (!user) {
-      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=no_auth');
+      return redirectWithStatus(
+        request,
+        fallbackReturnTo,
+        'pack_error=no_auth'
+      );
     }
 
     const stripe = await getScenarioPackStripeClient();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     if (session.payment_status !== 'paid' || session.status !== 'complete') {
-      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=payment_not_completed');
+      return redirectWithStatus(
+        request,
+        fallbackReturnTo,
+        'pack_error=payment_not_completed'
+      );
     }
     if (session.metadata?.flowdockr_pack !== 'scenario_reply') {
-      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=invalid_pack');
+      return redirectWithStatus(
+        request,
+        fallbackReturnTo,
+        'pack_error=invalid_pack'
+      );
     }
     if (String(session.metadata?.user_id || '').trim() !== user.id) {
-      return redirectWithStatus(request, fallbackReturnTo, 'pack_error=account_mismatch');
+      return redirectWithStatus(
+        request,
+        fallbackReturnTo,
+        'pack_error=account_mismatch'
+      );
     }
 
     const metadataReturnTo = sanitizeReturnPath(
@@ -44,14 +64,19 @@ export async function GET(request: NextRequest) {
       request
     );
     const returnTo = metadataReturnTo || fallbackReturnTo;
-    const pack = getScenarioPackById(String(session.metadata?.pack_id || '').trim());
+    const pack = getScenarioPackById(
+      String(session.metadata?.pack_id || '').trim()
+    );
     if (!pack) {
       return redirectWithStatus(request, returnTo, 'pack_error=invalid_pack');
     }
 
     const paidRedirect = NextResponse.redirect(
       new URL(
-        addQuery(returnTo, `pack_paid=1&pack_replies=${encodeURIComponent(String(pack.replies))}`),
+        addQuery(
+          returnTo,
+          `pack_paid=1&pack_replies=${encodeURIComponent(String(pack.replies))}`
+        ),
         request.nextUrl.origin
       ),
       {

@@ -41,9 +41,9 @@ export function SignUp({
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
   const isEmailAuthEnabled =
-    configs.email_auth_enabled !== 'false' ||
-    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
-  const emailVerificationEnabled = configs.email_verification_enabled === 'true';
+    configs.email_auth_enabled !== 'false' || !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
+  const emailVerificationEnabled =
+    configs.email_verification_enabled === 'true';
 
   if (callbackUrl) {
     if (
@@ -127,11 +127,11 @@ export function SignUp({
                 email
               )}&callbackUrl=${encodeURIComponent(normalizedCallbackUrl)}`;
 
-            // IMPORTANT: callbackURL must not contain its own '&' query params.
-            // We redirect to home/callbackUrl after verification; verify page is just the waiting UI.
+              // IMPORTANT: callbackURL must not contain its own '&' query params.
+              // We redirect to home/callbackUrl after verification; verify page is just the waiting UI.
               void authClient.sendVerificationEmail({
                 email,
-              callbackURL: `${base}${normalizedCallbackUrl || '/'}`,
+                callbackURL: `${base}${normalizedCallbackUrl || '/'}`,
               });
 
               // next/navigation router expects fully qualified path (including locale when non-default)
@@ -200,7 +200,7 @@ export function SignUp({
                   value={email}
                 />
                 {emailVerificationEnabled && (
-                  <p className="text-amber-600 text-xs">
+                  <p className="text-xs text-amber-600">
                     {t('email_verification_hint')}
                   </p>
                 )}

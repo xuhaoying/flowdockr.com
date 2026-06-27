@@ -19,7 +19,9 @@ function unique<T>(arr: T[]): T[] {
 
 function validatePricingTaxonomy(): Issue[] {
   const issues: Issue[] = [];
-  const scenarioBySlug = new Map(pricingScenarios.map((scenario) => [scenario.slug, scenario]));
+  const scenarioBySlug = new Map(
+    pricingScenarios.map((scenario) => [scenario.slug, scenario])
+  );
 
   for (const scenario of pricingScenarios) {
     const { schema } = scenario;
@@ -145,7 +147,11 @@ function validatePricingTaxonomy(): Issue[] {
       });
     }
 
-    if (!page.primaryKeywords.map(normalize).includes(normalize(scenario.primaryKeyword))) {
+    if (
+      !page.primaryKeywords
+        .map(normalize)
+        .includes(normalize(scenario.primaryKeyword))
+    ) {
       issues.push({
         level: 'warn',
         message: `${scenario.slug}: scenario.primaryKeyword is not included in schema.page.primaryKeywords.`,
@@ -166,7 +172,9 @@ function validatePricingTaxonomy(): Issue[] {
       });
     }
 
-    const overlap = normalizedPrimary.filter((keyword) => normalizedSupport.includes(keyword));
+    const overlap = normalizedPrimary.filter((keyword) =>
+      normalizedSupport.includes(keyword)
+    );
 
     if (overlap.length > 0) {
       issues.push({
@@ -310,7 +318,9 @@ function validatePricingTaxonomy(): Issue[] {
   }
 
   for (const family of pricingFamilies) {
-    const count = pricingScenarios.filter((scenario) => scenario.schema.page.family === family.id).length;
+    const count = pricingScenarios.filter(
+      (scenario) => scenario.schema.page.family === family.id
+    ).length;
     if (count === 0) {
       issues.push({
         level: 'error',
@@ -319,8 +329,12 @@ function validatePricingTaxonomy(): Issue[] {
     }
   }
 
-  const tier1Count = pricingScenarios.filter((scenario) => scenario.schema.page.tier === 'tier1').length;
-  const tier3Count = pricingScenarios.filter((scenario) => scenario.schema.page.tier === 'tier3').length;
+  const tier1Count = pricingScenarios.filter(
+    (scenario) => scenario.schema.page.tier === 'tier1'
+  ).length;
+  const tier3Count = pricingScenarios.filter(
+    (scenario) => scenario.schema.page.tier === 'tier3'
+  ).length;
 
   if (tier1Count < 4) {
     issues.push({
@@ -354,7 +368,9 @@ function main() {
     console.log(`${prefix} ${issue.message}`);
   }
 
-  console.log(`\nSummary: ${errors.length} error(s), ${warns.length} warning(s).`);
+  console.log(
+    `\nSummary: ${errors.length} error(s), ${warns.length} warning(s).`
+  );
 
   if (errors.length > 0) {
     process.exit(1);

@@ -3,11 +3,13 @@
 Generated: 2026-03-04
 
 ## Setup
+
 - Objective: Validate that freelancers can solve a real scope-creep moment in under 3 minutes
 - Participant profile: 5 freelancers (2 designers, 2 video editors, 1 copywriter)
 - Environment: 3 mobile sessions, 2 desktop sessions; use each participant's own device if possible
 
 ## Tasks
+
 1. Enter from article page and identify the correct action button
 2. Complete Scope Guard form with a real past project
 3. Generate output and copy the "client reply" block
@@ -15,6 +17,7 @@ Generated: 2026-03-04
 5. Click cross-sell CTA to Payment and describe expected next step
 
 ## Metrics
+
 - Task success rate by step
 - Time-to-first-output
 - Output clarity score (self-reported 1-5)

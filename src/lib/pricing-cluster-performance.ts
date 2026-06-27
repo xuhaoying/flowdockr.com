@@ -1,18 +1,16 @@
-import { gte } from 'drizzle-orm';
-
-import { envConfigs } from '@/config';
+import { getScenarioAnalyticsSlugCounts } from '@/lib/analytics/scenarioEventLog';
 import { db, generation, purchase } from '@/lib/db';
-import {
-  getScenarioAnalyticsSlugCounts,
-} from '@/lib/analytics/scenarioEventLog';
 import { parseStoredGenerationPayload } from '@/lib/generation/storedGeneration';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import {
   buildPricingClusterAuditReport,
   type PricingClusterAuditFlag,
   type PricingClusterAuditReport,
   type PricingClusterAuditRow,
 } from '@/lib/pricing-cluster-audit';
-import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
+import { gte } from 'drizzle-orm';
+
+import { envConfigs } from '@/config';
 
 export type PricingClusterPerformanceDiagnostic =
   | 'discoverability_problem'
@@ -399,8 +397,9 @@ export function buildPricingClusterPerformanceReport(params: {
     reportingWindow: {
       days,
       limit,
-      from: new Date(Date.parse(generatedAt) - days * 24 * 60 * 60 * 1000)
-        .toISOString(),
+      from: new Date(
+        Date.parse(generatedAt) - days * 24 * 60 * 60 * 1000
+      ).toISOString(),
       to: generatedAt,
     },
     filters: {
@@ -464,11 +463,13 @@ export async function getPricingClusterPerformanceReport(params?: {
     });
   }
 
-  const [analyticsSource, generationSource, purchaseSource] = await Promise.all([
-    loadPricingAnalyticsSignals({ days, limit }),
-    loadPricingGenerationSignals({ createdAfter }),
-    loadPricingPurchaseSignals({ createdAfter }),
-  ]);
+  const [analyticsSource, generationSource, purchaseSource] = await Promise.all(
+    [
+      loadPricingAnalyticsSignals({ days, limit }),
+      loadPricingGenerationSignals({ createdAfter }),
+      loadPricingPurchaseSignals({ createdAfter }),
+    ]
+  );
 
   return buildPricingClusterPerformanceReport({
     days,
@@ -579,7 +580,9 @@ function buildOperatingRow(params: {
   purchase?: PricingClusterPurchaseSignalRow;
 }): PricingClusterOperatingRow {
   const { auditRow, dataAvailability, thresholds } = params;
-  const views = dataAvailability.analyticsEvents ? params.analytics?.views || 0 : null;
+  const views = dataAvailability.analyticsEvents
+    ? params.analytics?.views || 0
+    : null;
   const generateClicks = dataAvailability.analyticsEvents
     ? params.analytics?.generateClicks || 0
     : null;
@@ -822,7 +825,8 @@ function buildPrioritizedActions(
   if (ctaPages.length > 0) {
     actions.push({
       action: 'improve_cta',
-      reason: 'High pricing-page traffic is not translating into generate starts.',
+      reason:
+        'High pricing-page traffic is not translating into generate starts.',
       slugs: ctaPages,
     });
   }
@@ -953,7 +957,8 @@ function buildOperatorGuidance(params: {
     .slice(0, 5)
     .map((page) => page.slug);
   const unavailableSources = getUnavailableSourceEntries(sourceStates);
-  const analyticsConnected = sourceStates.analyticsEvents.state !== 'unavailable';
+  const analyticsConnected =
+    sourceStates.analyticsEvents.state !== 'unavailable';
   const purchasesConnected = sourceStates.purchases.state !== 'unavailable';
 
   return {
@@ -1004,8 +1009,8 @@ function buildOperatorInterpretation(params: {
   byPurchaseSignals: string[];
 }) {
   if (params.unavailableSources.length > 0) {
-    const unavailableLabels = params.unavailableSources.map(([name, source]) =>
-      `${name} (${source.reason || 'UNKNOWN'})`
+    const unavailableLabels = params.unavailableSources.map(
+      ([name, source]) => `${name} (${source.reason || 'UNKNOWN'})`
     );
     return `Pricing-cluster performance is not fully queryable yet. Fix unavailable sources first: ${unavailableLabels.join(', ')}.`;
   }
@@ -1065,8 +1070,13 @@ function summarizeFamilyNames(rows: PricingClusterFamilyPerformanceSummary[]) {
   return rows.map((row) => row.family);
 }
 
-function aggregateFamilyHighPotentialPages(pages: PricingClusterOperatingRow[]) {
-  const familyMap = new Map<string, { family: string; slugs: string[]; views: number }>();
+function aggregateFamilyHighPotentialPages(
+  pages: PricingClusterOperatingRow[]
+) {
+  const familyMap = new Map<
+    string,
+    { family: string; slugs: string[]; views: number }
+  >();
 
   for (const page of pages) {
     if (!page.diagnostics.includes('high_potential')) {
@@ -1084,17 +1094,16 @@ function aggregateFamilyHighPotentialPages(pages: PricingClusterOperatingRow[]) 
   }
 
   return [...familyMap.values()].sort(
-    (left, right) => right.views - left.views || left.family.localeCompare(right.family)
+    (left, right) =>
+      right.views - left.views || left.family.localeCompare(right.family)
   );
 }
 
-function buildLimitations(
-  sourceStates: {
-    analyticsEvents: PricingClusterPerformanceSourceStatus;
-    generationHistory: PricingClusterPerformanceSourceStatus;
-    purchases: PricingClusterPerformanceSourceStatus;
-  }
-) {
+function buildLimitations(sourceStates: {
+  analyticsEvents: PricingClusterPerformanceSourceStatus;
+  generationHistory: PricingClusterPerformanceSourceStatus;
+  purchases: PricingClusterPerformanceSourceStatus;
+}) {
   const limitations = [
     'History saves are derived from stored generation rows with pricing attribution plus history-enabled support levels, not from a separate persisted save_history analytics table.',
     'Checkout clicks are derived from persisted purchase rows with pricing attribution metadata, so they represent checkout sessions created server-side rather than every client-side click attempt.',
@@ -1127,9 +1136,11 @@ function getUnavailableSourceEntries(sourceStates: {
   generationHistory: PricingClusterPerformanceSourceStatus;
   purchases: PricingClusterPerformanceSourceStatus;
 }) {
-  return (Object.entries(sourceStates) as Array<
-    [string, PricingClusterPerformanceSourceStatus]
-  >).filter(([, source]) => source.state === 'unavailable');
+  return (
+    Object.entries(sourceStates) as Array<
+      [string, PricingClusterPerformanceSourceStatus]
+    >
+  ).filter(([, source]) => source.state === 'unavailable');
 }
 
 function summarizeSourceCounts(
@@ -1340,7 +1351,9 @@ export function parsePricingSlugFromGenerationStrategyJson(
   const payload = parseStoredGenerationPayload(raw);
   return (
     getPricingScenarioBySlug(
-      String(payload.generationLog?.pricingAttribution?.pricingSlug || '').trim()
+      String(
+        payload.generationLog?.pricingAttribution?.pricingSlug || ''
+      ).trim()
     )?.slug || ''
   );
 }
@@ -1372,7 +1385,9 @@ export function isSuccessfulPurchase(
   status: string | null | undefined,
   creditsGranted: number | null | undefined
 ) {
-  return String(status || '').trim() === 'paid' && Number(creditsGranted || 0) > 0;
+  return (
+    String(status || '').trim() === 'paid' && Number(creditsGranted || 0) > 0
+  );
 }
 
 function getPricingPerformanceDbUnavailableReason() {
@@ -1468,7 +1483,10 @@ export function buildPricingClusterPerformanceSnapshotMarkdown(
     '',
     '## Source states',
     renderSourceLine('analyticsEvents', report.sourceStates.analyticsEvents),
-    renderSourceLine('generationHistory', report.sourceStates.generationHistory),
+    renderSourceLine(
+      'generationHistory',
+      report.sourceStates.generationHistory
+    ),
     renderSourceLine('purchases', report.sourceStates.purchases),
     '',
     '## How to interpret',

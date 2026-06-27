@@ -1,6 +1,7 @@
+import type { ScenarioHubHero as ScenarioHubHeroData } from '@/types/scenario-hub';
+
 import { Link } from '@/core/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
-import type { ScenarioHubHero as ScenarioHubHeroData } from '@/types/scenario-hub';
 
 type ScenarioHubHeroProps = {
   hero: ScenarioHubHeroData;

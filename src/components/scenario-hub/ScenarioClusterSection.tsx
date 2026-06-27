@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { ScenarioHubCluster } from '@/types/scenario-hub';
+
+import { Link } from '@/core/i18n/navigation';
 
 type ScenarioClusterSectionProps = {
   clusters: ScenarioHubCluster[];
@@ -15,7 +16,7 @@ export function ScenarioClusterSection({
     >
       <div className="space-y-6">
         <div className="max-w-3xl space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
             Scenario Clusters
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">

@@ -23,7 +23,11 @@ export async function POST(request: Request) {
       throw new Error('strategy_id is required');
     }
 
-    if (!['instant_reply', 'strong', 'warm', 'concession', 'none'].includes(adoptedScript)) {
+    if (
+      !['instant_reply', 'strong', 'warm', 'concession', 'none'].includes(
+        adoptedScript
+      )
+    ) {
       throw new Error('invalid adopted_script');
     }
 
@@ -49,7 +53,9 @@ export async function POST(request: Request) {
     }
 
     const taskInfo = task.taskInfo ? JSON.parse(task.taskInfo) : {};
-    const feedbacks = Array.isArray(taskInfo.feedbacks) ? taskInfo.feedbacks : [];
+    const feedbacks = Array.isArray(taskInfo.feedbacks)
+      ? taskInfo.feedbacks
+      : [];
     const strategyIds = Array.isArray(taskInfo.selected_strategy_ids)
       ? taskInfo.selected_strategy_ids
       : [];

@@ -11,7 +11,7 @@ vi.mock('@/config', () => ({
   envConfigs: {
     site_url: 'https://www.flowdockr.com',
     app_preview_image: '/preview.png',
-    app_name: 'Flowdockr',
+    app_name: 'FlowDockr',
   },
 }));
 

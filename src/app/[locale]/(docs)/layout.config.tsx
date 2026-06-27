@@ -11,13 +11,13 @@ export function baseOptions(locale: string): BaseLayoutProps {
       title: (
         <>
           <Image
-            src="/logo.png"
+            src="/logo-mark.svg"
             alt={envConfigs.app_name}
             width={28}
             height={28}
             className=""
           />
-          <span className="text-primary text-lg font-bold">
+          <span className="text-brand-text text-lg font-bold">
             {envConfigs.app_name}
           </span>
         </>

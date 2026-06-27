@@ -8,7 +8,7 @@ const PROBLEM_BULLETS = [
 
 export function ProblemFraming() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+    <section className="border-brand-lavender/25 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
       <div className="max-w-3xl space-y-4">
         <div className="space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
@@ -22,15 +22,15 @@ export function ProblemFraming() {
           {PROBLEM_BULLETS.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2"
+              className="bg-brand-bg/55 flex items-start gap-2 rounded-xl px-3 py-2"
             >
-              <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+              <span className="bg-brand-primary mt-1 inline-block h-1.5 w-1.5 rounded-full" />
               <span>{item}</span>
             </li>
           ))}
         </ul>
         <p className="text-sm leading-relaxed text-slate-600">
-          Flowdockr is designed for these exact moments. It helps you think
+          FlowDockr is designed for these exact moments. It helps you think
           through the negotiation, compare response styles, and keep the client
           conversation moving without giving away leverage too early.
         </p>

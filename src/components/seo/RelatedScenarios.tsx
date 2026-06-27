@@ -1,8 +1,9 @@
 'use client';
 
-import { Link } from '@/core/i18n/navigation';
 import { trackEvent } from '@/lib/analytics-client';
 import { ScenarioContent } from '@/types/scenario';
+
+import { Link } from '@/core/i18n/navigation';
 
 type RelatedScenariosProps = {
   relatedScenarios: ScenarioContent[];
@@ -27,15 +28,20 @@ export function RelatedScenarios({
       </h2>
       <ul className="grid gap-3 md:grid-cols-2">
         {relatedScenarios.map((scenario) => (
-          <li key={scenario.slug} className="rounded-xl border border-foreground/10 p-4">
+          <li
+            key={scenario.slug}
+            className="border-foreground/10 rounded-xl border p-4"
+          >
             <Link
               href={`/scenarios/${scenario.slug}`}
-              className="font-medium text-foreground hover:text-primary hover:underline"
+              className="text-foreground hover:text-primary font-medium hover:underline"
               onClick={() => onRelatedClick(scenario.slug)}
             >
               {scenario.h1}
             </Link>
-            <p className="mt-1 text-sm text-muted-foreground">{scenario.seoDescription}</p>
+            <p className="text-muted-foreground mt-1 text-sm">
+              {scenario.seoDescription}
+            </p>
           </li>
         ))}
       </ul>

@@ -15,19 +15,23 @@
 - Based on real populated data: no
 
 ## Source states
+
 - analyticsEvents: unavailable; reason=DATABASE_URL_MISSING; recordCount=null; signalCount=0; pagesWithSignals=0
 - generationHistory: unavailable; reason=DATABASE_URL_MISSING; recordCount=null; signalCount=0; pagesWithSignals=0
 - purchases: unavailable; reason=DATABASE_URL_MISSING; recordCount=null; signalCount=0; pagesWithSignals=0
 
 ## How to interpret
+
 Pricing-cluster performance is not fully queryable yet. Fix unavailable sources first: analyticsEvents (DATABASE_URL_MISSING), generationHistory (DATABASE_URL_MISSING), purchases (DATABASE_URL_MISSING).
 
 ## Verification checklist
+
 - Confirm the deployed environment has DATABASE_URL configured and the report process can open the production database.
 - Re-run `pnpm qa:pricing-performance` in the deployed environment and verify sourceStates move from unavailable to reachable_empty or populated.
 - Once sources are reachable, trigger one attributed pricing-page flow and rerun the export to confirm the first populated page row.
 
 ## First pages to inspect
+
 - By views: none
 - By generator clicks: none
 - By checkout intent: none
@@ -35,10 +39,12 @@ Pricing-cluster performance is not fully queryable yet. Fix unavailable sources 
 - Weak mapping warnings with signals: none
 
 ## First families to inspect
+
 - By views: none
 - By checkout intent: none
 
 ## Summary
+
 - Pages with traffic: 0
 - Pages with generator clicks: 0
 - Pages with checkout intent: 0
@@ -47,4 +53,5 @@ Pricing-cluster performance is not fully queryable yet. Fix unavailable sources 
 - Needs mapping upgrade pages: none
 
 ## Prioritized actions
+
 - None yet. Wait for populated source data or more traffic.

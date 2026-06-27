@@ -1,5 +1,5 @@
-import { canonicalScenarioSeeds } from '@/content/scenario-pages/scenario-seeds';
 import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
+import { canonicalScenarioSeeds } from '@/content/scenario-pages/scenario-seeds';
 import type {
   CanonicalScenario,
   ScenarioArchetype,
@@ -183,7 +183,8 @@ export function getScenarioMetaDescription(
 
   const description = [
     scenario.userSituation.trim(),
-    scenario.userGoal?.trim() || 'Get a professional reply you can adapt and send.',
+    scenario.userGoal?.trim() ||
+      'Get a professional reply you can adapt and send.',
   ].join(' ');
 
   if (description.length <= 155) {
@@ -196,7 +197,7 @@ export function getScenarioMetaDescription(
 export function getScenarioMetaTitle(
   scenario: Pick<CanonicalScenario, 'title' | 'metaTitle'>
 ): string {
-  return scenario.metaTitle?.trim() || `${scenario.title} | Flowdockr`;
+  return scenario.metaTitle?.trim() || `${scenario.title} | FlowDockr`;
 }
 
 export function getScenarioHeroDescription(
@@ -213,7 +214,10 @@ export function getScenarioHeroDescription(
 }
 
 export function getScenarioPagePromise(
-  scenario: Pick<CanonicalScenario, 'pagePromise' | 'userGoal' | 'toolPromptIntent'>
+  scenario: Pick<
+    CanonicalScenario,
+    'pagePromise' | 'userGoal' | 'toolPromptIntent'
+  >
 ): string {
   return (
     scenario.pagePromise?.trim() ||
@@ -225,7 +229,10 @@ export function getScenarioPagePromise(
 export function getRelatedScenarioSectionCopy(
   scenario: Pick<
     CanonicalScenario,
-    'cluster' | 'archetype' | 'relatedSectionTitle' | 'relatedSectionDescription'
+    | 'cluster'
+    | 'archetype'
+    | 'relatedSectionTitle'
+    | 'relatedSectionDescription'
   >
 ): {
   title: string;
@@ -400,16 +407,20 @@ export function getRelatedScenarioLinks(
   return [...explicitLinks, ...heuristicLinks].slice(0, maxLinks);
 }
 
-export function getRelatedScenarioGroups(
-  slug: string
-): ScenarioRelatedGroup[] {
+export function getRelatedScenarioGroups(slug: string): ScenarioRelatedGroup[] {
   const scenario = getScenarioPageBySlug(slug);
   if (!scenario) {
     return [];
   }
 
-  const similarItems = getScenarioLinksBySlugs(scenario.similarScenarioSlugs, 3);
-  const nextStepItems = getScenarioLinksBySlugs(scenario.nextStepScenarioSlugs, 3);
+  const similarItems = getScenarioLinksBySlugs(
+    scenario.similarScenarioSlugs,
+    3
+  );
+  const nextStepItems = getScenarioLinksBySlugs(
+    scenario.nextStepScenarioSlugs,
+    3
+  );
 
   const groups: ScenarioRelatedGroup[] = [];
 
@@ -538,9 +549,8 @@ function getScenarioLinksBySlugs(
       index,
       page: scenarioPageMap.get(relatedSlug),
     }))
-    .filter(
-      (item): item is { index: number; page: CanonicalScenario } =>
-        Boolean(item.page)
+    .filter((item): item is { index: number; page: CanonicalScenario } =>
+      Boolean(item.page)
     )
     .sort((left, right) => {
       const exposureDifference = compareScenarioPageExposure(
@@ -606,9 +616,7 @@ function mergeScenarioPages(
   );
 }
 
-function dedupeScenarioPages(
-  pages: CanonicalScenario[]
-): CanonicalScenario[] {
+function dedupeScenarioPages(pages: CanonicalScenario[]): CanonicalScenario[] {
   const seen = new Set<string>();
   const deduped: CanonicalScenario[] = [];
 
@@ -625,9 +633,7 @@ function dedupeScenarioPages(
   return deduped.reverse();
 }
 
-function normalizeScenarioPage(
-  page: CanonicalScenario
-): CanonicalScenario {
+function normalizeScenarioPage(page: CanonicalScenario): CanonicalScenario {
   const cluster = page.cluster || getScenarioLinkCluster(page);
 
   return {

@@ -4,8 +4,10 @@ import {
 } from '@/components/trust/TrustPageLayout';
 import { getPublicContactDetails } from '@/lib/publicContact';
 import {
+  FLOWDOCKR_COMPANY_JURISDICTION,
   FLOWDOCKR_COMPANY_NAME,
   FLOWDOCKR_PRODUCT_NAME,
+  FLOWDOCKR_PUBLIC_BUSINESS_ADDRESS,
   FLOWDOCKR_PUBLIC_SUPPORT_EMAIL,
   TRUST_EFFECTIVE_DATE,
 } from '@/lib/trust';
@@ -15,9 +17,9 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Contact Flowdockr Support | Auralis Labs LLC',
+  title: 'Contact FlowDockr Support | Auralis Labs LLC',
   description:
-    'Contact Flowdockr for support, billing, privacy, and legal requests. Flowdockr is operated by Auralis Labs LLC.',
+    'Contact FlowDockr for support, billing, privacy, and legal requests. FlowDockr is operated by Auralis Labs LLC.',
   canonicalUrl: '/contact',
 });
 
@@ -54,6 +56,11 @@ export default async function ContactPage({
           We handle support and billing questions manually, so include enough
           detail for us to locate the account or purchase.
         </p>
+        <p>
+          We aim to respond to support and billing messages within two business
+          days. Complex billing, payment processor, or account ownership issues
+          may require additional verification before resolution.
+        </p>
       </TrustSectionCard>
 
       <TrustSectionCard title="Privacy and legal inquiries">
@@ -79,14 +86,25 @@ export default async function ContactPage({
           {FLOWDOCKR_COMPANY_NAME}.
         </p>
         <p>
-          Business owner/operator: {FLOWDOCKR_COMPANY_NAME}. Flowdockr provides
+          Business owner/operator: {FLOWDOCKR_COMPANY_NAME}. FlowDockr provides
           AI-assisted negotiation preparation, reply drafting, and communication
           workflow support for professionals.
+        </p>
+        <p>
+          Business jurisdiction: {FLOWDOCKR_COMPANY_JURISDICTION}.{' '}
+          {FLOWDOCKR_PUBLIC_BUSINESS_ADDRESS
+            ? `Public business mailing address: ${FLOWDOCKR_PUBLIC_BUSINESS_ADDRESS}.`
+            : 'Registered mailing address and verification records are supplied through official review workflows when required.'}
         </p>
         <p>
           Registered business details, mailing address, and verification
           documents can be provided through official banking, payment processor,
           or compliance workflows when required.
+        </p>
+        <p>
+          FlowDockr sells digital software access only. It does not ship
+          physical goods, transmit money, provide loans, or provide debt
+          settlement, legal, tax, investment, or financial advisory services.
         </p>
         <p>
           For product rules and data handling details, see our{' '}
@@ -102,6 +120,16 @@ export default async function ContactPage({
             className="font-medium text-slate-900 underline underline-offset-2"
           >
             Privacy Policy
+          </Link>
+          .
+        </p>
+        <p>
+          For a concise reviewer summary, see{' '}
+          <Link
+            href="/compliance"
+            className="font-medium text-slate-900 underline underline-offset-2"
+          >
+            Business and Compliance
           </Link>
           .
         </p>

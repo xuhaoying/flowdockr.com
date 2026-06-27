@@ -6,8 +6,8 @@
     "tier": 1,
     "url": "/guides/how-to-negotiate-freelance-pricing/",
     "h1": "How to negotiate freelance pricing without undercutting yourself",
-    "metaTitle": "How to Negotiate Freelance Pricing Without Undercutting Yourself | Flowdockr",
-    "metaDescription": "Learn how to negotiate freelance pricing with clearer boundaries, stronger positioning, and smarter scope decisions. Use Flowdockr to handle pricing conversations more strategically.",
+    "metaTitle": "How to Negotiate Freelance Pricing Without Undercutting Yourself | FlowDockr",
+    "metaDescription": "Learn how to negotiate freelance pricing with clearer boundaries, stronger positioning, and smarter scope decisions. Use FlowDockr to handle pricing conversations more strategically.",
     "heroSubheading": "A practical framework for handling pricing conversations without defaulting to discounts.",
     "primaryIntent": "Teach freelancers how to structure pricing negotiations so they can protect positioning while still moving deals forward.",
     "primaryKeywords": [
@@ -93,7 +93,7 @@
     ],
     "toolCta": {
       "title": "Apply this framework to a real message",
-      "body": "Paste the exact pricing message you received. Flowdockr will help you identify the real negotiation type and draft the right response.",
+      "body": "Paste the exact pricing message you received. FlowDockr will help you identify the real negotiation type and draft the right response.",
       "buttonLabel": "Analyze this pricing message",
       "toolSlug": "reply-generator"
     },
@@ -120,8 +120,8 @@
     "tier": 1,
     "url": "/guides/when-to-discount-and-when-not-to/",
     "h1": "When to discount and when not to",
-    "metaTitle": "When to Discount and When Not to as a Freelancer | Flowdockr",
-    "metaDescription": "Learn when a discount makes strategic sense and when it weakens your positioning. Use Flowdockr to handle discount requests with clearer judgment.",
+    "metaTitle": "When to Discount and When Not to as a Freelancer | FlowDockr",
+    "metaDescription": "Learn when a discount makes strategic sense and when it weakens your positioning. Use FlowDockr to handle discount requests with clearer judgment.",
     "heroSubheading": "Discounting is not always wrong. But default discounting usually is.",
     "primaryIntent": "Help freelancers distinguish strategic discounts from weak concessions so they can make smarter pricing decisions.",
     "primaryKeywords": [
@@ -194,7 +194,7 @@
     ],
     "toolCta": {
       "title": "Test whether this discount is strategic",
-      "body": "Paste the discount request and your current deal structure. Flowdockr will help you decide whether to hold, trade, or reshape the offer.",
+      "body": "Paste the discount request and your current deal structure. FlowDockr will help you decide whether to hold, trade, or reshape the offer.",
       "buttonLabel": "Evaluate this discount request",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -221,8 +221,8 @@
     "tier": 1,
     "url": "/guides/reduce-scope-instead-of-lowering-rate/",
     "h1": "Reduce scope instead of lowering your rate",
-    "metaTitle": "Reduce Scope Instead of Lowering Your Rate | Flowdockr",
-    "metaDescription": "Learn how to protect your pricing by adjusting scope rather than lowering your rate for the same work. Use Flowdockr to structure smarter pricing replies.",
+    "metaTitle": "Reduce Scope Instead of Lowering Your Rate | FlowDockr",
+    "metaDescription": "Learn how to protect your pricing by adjusting scope rather than lowering your rate for the same work. Use FlowDockr to structure smarter pricing replies.",
     "heroSubheading": "One of the cleanest negotiation moves is not charging less. It is redefining the work honestly.",
     "primaryIntent": "Teach freelancers how to use scope reduction as a negotiation lever instead of lowering their rate for unchanged work.",
     "primaryKeywords": [
@@ -235,10 +235,7 @@
       "smaller project version",
       "how to fit a project into budget"
     ],
-    "doNotCompeteWith": [
-      "budget-lower-than-expected",
-      "more-work-same-price"
-    ],
+    "doNotCompeteWith": ["budget-lower-than-expected", "more-work-same-price"],
     "intro": "Many freelancers think the only way to save a constrained deal is to lower the price. In reality, changing the shape of the work is often cleaner, more honest, and more sustainable.",
     "coreTakeaways": [
       "A lower budget does not automatically require a lower rate.",
@@ -294,7 +291,7 @@
     ],
     "toolCta": {
       "title": "Turn a low-budget deal into a cleaner offer",
-      "body": "Paste the current budget, original scope, and your must-keep deliverables. Flowdockr will help you reframe the offer around scope instead of rate cuts.",
+      "body": "Paste the current budget, original scope, and your must-keep deliverables. FlowDockr will help you reframe the offer around scope instead of rate cuts.",
       "buttonLabel": "Restructure this offer",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -321,8 +318,8 @@
     "tier": 1,
     "url": "/guides/how-to-follow-up-an-unpaid-invoice/",
     "h1": "How to follow up an unpaid invoice before it becomes overdue",
-    "metaTitle": "How to Follow Up an Unpaid Invoice Before It Becomes Overdue | Flowdockr",
-    "metaDescription": "Learn how to send the first unpaid-invoice follow-up while the invoice is still open or only just due. Use Flowdockr to move into the right next-stage payment asset if the thread becomes overdue.",
+    "metaTitle": "How to Follow Up an Unpaid Invoice Before It Becomes Overdue | FlowDockr",
+    "metaDescription": "Learn how to send the first unpaid-invoice follow-up while the invoice is still open or only just due. Use FlowDockr to move into the right next-stage payment asset if the thread becomes overdue.",
     "heroSubheading": "This page owns the first payment-status follow-up, before you move into overdue reminders or escalation.",
     "primaryIntent": "Help freelancers send the first unpaid-invoice follow-up while the invoice is still open, newly due, or vaguely delayed, before it becomes a true overdue reminder sequence.",
     "primaryKeywords": [
@@ -416,7 +413,7 @@
     ],
     "toolCta": {
       "title": "Draft the next unpaid-invoice follow-up",
-      "body": "Paste the latest invoice thread and payment context. Flowdockr will help you draft the first follow-up without jumping too early into overdue escalation.",
+      "body": "Paste the latest invoice thread and payment context. FlowDockr will help you draft the first follow-up without jumping too early into overdue escalation.",
       "buttonLabel": "Draft this payment follow-up",
       "toolSlug": "reply-generator"
     },
@@ -443,7 +440,7 @@
     "tier": 1,
     "url": "/guides/how-to-remind-a-client-about-overdue-payment/",
     "h1": "How to remind a client about overdue payment after the due date passes",
-    "metaTitle": "How to Remind a Client About Overdue Payment After the Due Date | Flowdockr",
+    "metaTitle": "How to Remind a Client About Overdue Payment After the Due Date | FlowDockr",
     "metaDescription": "Learn how to send overdue payment reminders after the due date has passed, with a staged reminder sequence, firmer wording, and a clean handoff into the live overdue scenario.",
     "heroSubheading": "This page starts after the due date, when you need a real reminder sequence instead of a first invoice follow-up.",
     "primaryIntent": "Help freelancers handle post-due-date payment reminders with staged escalation logic instead of repeating first-follow-up language.",
@@ -542,7 +539,7 @@
     ],
     "toolCta": {
       "title": "Draft the right overdue reminder",
-      "body": "Paste the late-payment thread and say whether this is the first overdue reminder, a second reminder, or a later-stage follow-up. Flowdockr will help you match the right level of pressure.",
+      "body": "Paste the late-payment thread and say whether this is the first overdue reminder, a second reminder, or a later-stage follow-up. FlowDockr will help you match the right level of pressure.",
       "buttonLabel": "Draft this overdue reminder",
       "toolSlug": "reply-generator"
     },
@@ -569,8 +566,8 @@
     "tier": 1,
     "url": "/guides/when-to-ask-for-a-deposit-before-work/",
     "h1": "When to ask for a deposit before work",
-    "metaTitle": "When to Ask for a Deposit Before Work | Flowdockr",
-    "metaDescription": "Learn when to ask for a deposit before work starts, how to protect kickoff without sounding rigid, and how to move into the right deposit scenario in Flowdockr.",
+    "metaTitle": "When to Ask for a Deposit Before Work | FlowDockr",
+    "metaDescription": "Learn when to ask for a deposit before work starts, how to protect kickoff without sounding rigid, and how to move into the right deposit scenario in FlowDockr.",
     "heroSubheading": "A deposit is not just a payment request. It is the boundary that protects kickoff.",
     "primaryIntent": "Help freelancers decide when a deposit should be required before work starts and how to communicate that rule clearly.",
     "primaryKeywords": [
@@ -668,7 +665,7 @@
     ],
     "toolCta": {
       "title": "Draft the deposit message before kickoff slips",
-      "body": "Paste the client's latest note and where the deposit stands. Flowdockr will help you keep the start-after-payment boundary clear without sounding stiff.",
+      "body": "Paste the client's latest note and where the deposit stands. FlowDockr will help you keep the start-after-payment boundary clear without sounding stiff.",
       "buttonLabel": "Draft this deposit message",
       "toolSlug": "reply-generator"
     },

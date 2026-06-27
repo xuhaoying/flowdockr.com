@@ -4,11 +4,11 @@ const libraryPath = 'product/seo/flowdockr-keyword-library-v1.csv';
 const outputPath = 'product/seo/flowdockr-build-queue-first-100.csv';
 
 const lines = readFileSync(libraryPath, 'utf8').trim().split('\n');
-const header = lines[0].split(',').map(v => v.replace(/"/g, ''));
+const header = lines[0].split(',').map((v) => v.replace(/"/g, ''));
 
 function parseCsvLine(line) {
   const matches = [...line.matchAll(/"((?:[^"]|"")*)"(?=,|$)/g)];
-  return matches.map(m => m[1].replace(/""/g, '"'));
+  return matches.map((m) => m[1].replace(/""/g, '"'));
 }
 
 const rows = lines.slice(1).map((line) => {
@@ -28,16 +28,66 @@ const quota = {
 };
 
 const weeklyPlan = [
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 3, 'client-communication': 2, 'proposal-and-scope': 2 },
-  { 'negotiation-discount': 3, 'pricing-strategy': 2, 'client-communication': 3, 'proposal-and-scope': 2 },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 3,
+    'client-communication': 2,
+    'proposal-and-scope': 2,
+  },
+  {
+    'negotiation-discount': 3,
+    'pricing-strategy': 2,
+    'client-communication': 3,
+    'proposal-and-scope': 2,
+  },
 ];
 
 const priorityRank = { P1: 1, P2: 2, P3: 3 };
@@ -53,7 +103,7 @@ function slugify(input) {
 const pools = {};
 for (const cluster of Object.keys(quota)) {
   pools[cluster] = rows
-    .filter(r => r.cluster === cluster)
+    .filter((r) => r.cluster === cluster)
     .sort((a, b) => {
       if (priorityRank[a.priority] !== priorityRank[b.priority]) {
         return priorityRank[a.priority] - priorityRank[b.priority];
@@ -76,7 +126,7 @@ for (let week = 1; week <= 10; week++) {
   for (const cluster of Object.keys(plan)) {
     let need = plan[cluster];
     while (need > 0) {
-      const next = pools[cluster].find(r => !used.has(r.id));
+      const next = pools[cluster].find((r) => !used.has(r.id));
       if (!next) {
         throw new Error(`Keyword pool exhausted for cluster: ${cluster}`);
       }

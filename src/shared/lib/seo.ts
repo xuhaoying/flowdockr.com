@@ -124,7 +124,7 @@ export function getMetadata(
 const defaultMetadataKey = 'common.metadata';
 
 function normalizeBrandName(appName: string) {
-  return appName === 'FlowDockr' ? 'Flowdockr' : appName;
+  return appName === 'FlowDockr' ? 'FlowDockr' : appName;
 }
 
 async function getTranslatedMetadata(metadataKey: string, locale: string) {

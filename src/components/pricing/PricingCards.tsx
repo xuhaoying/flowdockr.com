@@ -57,7 +57,7 @@ export function PricingCards({
   const [error, setError] = useState('');
   const freeTrialCta = getFreeTrialCta(sourcePage);
   const wrapperClassName = showSectionHeader
-    ? 'space-y-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8'
+    ? 'space-y-5 rounded-3xl border border-brand-lavender/25 bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8'
     : 'space-y-5';
 
   useEffect(() => {
@@ -130,7 +130,7 @@ export function PricingCards({
       {showSectionHeader ? (
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
-            Pricing Cards
+            Plans
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             Choose the support depth that fits the conversation
@@ -143,7 +143,7 @@ export function PricingCards({
       ) : null}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <article className="flex flex-col rounded-3xl border border-slate-300 bg-white p-5 shadow-sm">
+        <article className="border-brand-lavender/35 flex flex-col rounded-3xl border bg-white p-5 shadow-sm shadow-slate-950/5">
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -154,7 +154,7 @@ export function PricingCards({
                   Start free
                 </p>
               </div>
-              <span className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+              <span className="border-brand-lavender/30 bg-brand-bg text-brand-primary rounded-full border px-2.5 py-1 text-[11px] font-semibold">
                 Free
               </span>
             </div>
@@ -173,13 +173,13 @@ export function PricingCards({
             <ul className="space-y-2 text-sm text-slate-700">
               {freeTrialPlan.featureSummary?.map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
+                  <span className="bg-brand-primary mt-1 inline-block h-1.5 w-1.5 rounded-full" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600">
+            <div className="border-brand-lavender/20 bg-brand-bg/55 rounded-2xl border px-3 py-3 text-xs leading-relaxed text-slate-600">
               <p className="font-semibold text-slate-900">Usage hint</p>
               <p className="mt-1">{USAGE_HINTS.free_trial}</p>
             </div>
@@ -200,8 +200,8 @@ export function PricingCards({
               key={pack.id}
               className={`flex flex-col rounded-3xl border p-5 shadow-sm ${
                 isPopular
-                  ? 'border-slate-900 bg-slate-950 text-white shadow-lg'
-                  : 'border-slate-300 bg-white'
+                  ? 'border-brand-primary from-brand-primary to-brand-purple-soft shadow-brand-primary/20 bg-linear-to-br text-white shadow-lg'
+                  : 'border-brand-lavender/35 bg-white'
               }`}
             >
               <div className="space-y-3">
@@ -227,8 +227,8 @@ export function PricingCards({
                   <span
                     className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
                       isPopular
-                        ? 'border border-white/20 bg-white/10 text-white'
-                        : 'border border-slate-200 bg-slate-100 text-slate-700'
+                        ? 'border border-white/25 bg-white/15 text-white'
+                        : 'border-brand-lavender/30 bg-brand-bg text-brand-primary border'
                     }`}
                   >
                     {pack.tagline}
@@ -269,7 +269,7 @@ export function PricingCards({
                     <li key={item} className="flex items-start gap-2">
                       <span
                         className={`mt-1 inline-block h-1.5 w-1.5 rounded-full ${
-                          isPopular ? 'bg-slate-300' : 'bg-slate-500'
+                          isPopular ? 'bg-white/80' : 'bg-brand-primary'
                         }`}
                       />
                       <span>{item}</span>
@@ -281,7 +281,7 @@ export function PricingCards({
                   className={`rounded-2xl border px-3 py-3 text-xs leading-relaxed ${
                     isPopular
                       ? 'border-white/15 bg-white/5 text-slate-200'
-                      : 'border-slate-200 bg-slate-50 text-slate-600'
+                      : 'border-brand-lavender/20 bg-brand-bg/55 text-slate-600'
                   }`}
                 >
                   <p
@@ -321,19 +321,25 @@ export function PricingCards({
                 >
                   <Link
                     href="/terms"
-                    className="underline underline-offset-2 hover:text-slate-900"
+                    className="hover:text-brand-primary underline underline-offset-2"
                   >
                     Terms
                   </Link>
                   <Link
                     href="/privacy"
-                    className="underline underline-offset-2 hover:text-slate-900"
+                    className="hover:text-brand-primary underline underline-offset-2"
                   >
                     Privacy
                   </Link>
                   <Link
+                    href="/refund"
+                    className="hover:text-brand-primary underline underline-offset-2"
+                  >
+                    Refund
+                  </Link>
+                  <Link
                     href="/contact"
-                    className="underline underline-offset-2 hover:text-slate-900"
+                    className="hover:text-brand-primary underline underline-offset-2"
                   >
                     Contact
                   </Link>

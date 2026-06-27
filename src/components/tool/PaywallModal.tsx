@@ -36,10 +36,12 @@ export function PaywallModal(props: PaywallModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>You&apos;ve used your 2 free negotiation credits</DialogTitle>
+          <DialogTitle>
+            You&apos;ve used your 2 free negotiation credits
+          </DialogTitle>
           <DialogDescription>
-            Unlock more support so you can respond with more confidence when clients
-            push on price, scope, or budget.
+            Unlock more support so you can respond with more confidence when
+            clients push on price, scope, or budget.
           </DialogDescription>
         </DialogHeader>
 
@@ -66,17 +68,19 @@ export function PaywallModal(props: PaywallModalProps) {
             >
               <p className="text-sm font-semibold">{pack.name}</p>
               {pack.badge ? (
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-[11px] font-medium tracking-wide uppercase">
                   {pack.badge}
                 </p>
               ) : null}
               <p className="mt-1 text-2xl font-bold">
                 ${(pack.priceUsdCents / 100).toFixed(0)}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {pack.credits} negotiation credits
               </p>
-              <p className="mt-2 text-xs text-muted-foreground">{pack.description}</p>
+              <p className="text-muted-foreground mt-2 text-xs">
+                {pack.description}
+              </p>
               <Button
                 type="button"
                 className="mt-3 w-full"
@@ -92,9 +96,9 @@ export function PaywallModal(props: PaywallModalProps) {
           ))}
         </div>
 
-        <p className="text-sm text-muted-foreground">
-          Pay once. Credits never expire. Pro adds multi-version replies, risk alerts,
-          and saved history.
+        <p className="text-muted-foreground text-sm">
+          Pay once. Credits never expire. Pro adds multi-version replies, risk
+          alerts, and saved history.
         </p>
       </DialogContent>
     </Dialog>

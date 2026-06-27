@@ -1,5 +1,5 @@
-import { envConfigs } from '@/config';
 import { getAuth } from '@/core/auth';
+import { envConfigs } from '@/config';
 
 function normalizeCallbackUrl(callbackUrl?: string): string {
   const fallback = `${envConfigs.app_url}/dashboard`;

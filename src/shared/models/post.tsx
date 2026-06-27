@@ -4,7 +4,12 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import moment from 'moment';
 
 import { db } from '@/core/db';
-import { i18n as docsI18n, logsSource, pagesSource, postsSource } from '@/core/docs/source';
+import {
+  i18n as docsI18n,
+  logsSource,
+  pagesSource,
+  postsSource,
+} from '@/core/docs/source';
 import { generateTOC } from '@/core/docs/toc';
 import { post } from '@/config/db/schema';
 import { MarkdownContent } from '@/shared/blocks/common/markdown-content';

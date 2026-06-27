@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
-
 import {
   ANALYTICS_ENABLED,
   GA_MEASUREMENT_ID,

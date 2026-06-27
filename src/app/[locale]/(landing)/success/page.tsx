@@ -4,7 +4,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Payment successful | Flowdockr',
+  title: 'Payment successful | FlowDockr',
   description: 'Redirecting to checkout status.',
   canonicalUrl: '/success',
   noIndex: true,

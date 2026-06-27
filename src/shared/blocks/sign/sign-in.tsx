@@ -41,8 +41,7 @@ export function SignIn({
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
   const isEmailAuthEnabled =
-    configs.email_auth_enabled !== 'false' ||
-    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
+    configs.email_auth_enabled !== 'false' || !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
 
   if (callbackUrl) {
     if (

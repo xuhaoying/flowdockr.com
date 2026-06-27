@@ -1,4 +1,4 @@
-# Flowdockr MVP Database Schema
+# FlowDockr MVP Database Schema
 
 This document defines the minimum production-safe schema for:
 

@@ -382,9 +382,9 @@ describe('ToolForm analytics funnel guard', () => {
       recommended_tone: 'professional',
       prefill_applied: true,
     });
-    expect(
-      (getClientMessageInput() as HTMLTextAreaElement).value
-    ).toBe('Hi Sarah, following up on invoice #0187, which was due on March 20.');
+    expect((getClientMessageInput() as HTMLTextAreaElement).value).toBe(
+      'Hi Sarah, following up on invoice #0187, which was due on March 20.'
+    );
 
     fireEvent.click(
       screen.getByRole('button', { name: 'Draft negotiation reply' })
@@ -442,9 +442,9 @@ describe('ToolForm analytics funnel guard', () => {
     );
 
     await waitFor(() => {
-      expect(getEventPayloads('generate_success_from_pricing_scenario')).toHaveLength(
-        1
-      );
+      expect(
+        getEventPayloads('generate_success_from_pricing_scenario')
+      ).toHaveLength(1);
     });
 
     expect(
@@ -463,12 +463,12 @@ describe('ToolForm analytics funnel guard', () => {
       pricing_slug: 'client-messaging-outside-work-hours',
       generation_id: 'gen_test_123',
     });
-    expect(getEventPayloads('save_history_from_pricing_scenario')[0]).toMatchObject(
-      {
-        pricing_slug: 'client-messaging-outside-work-hours',
-        generation_id: 'gen_test_123',
-      }
-    );
+    expect(
+      getEventPayloads('save_history_from_pricing_scenario')[0]
+    ).toMatchObject({
+      pricing_slug: 'client-messaging-outside-work-hours',
+      generation_id: 'gen_test_123',
+    });
 
     const generateCall = fetchMock.mock.calls.find(
       ([input]) => getRequestUrl(input) === '/api/generate'
@@ -496,23 +496,25 @@ describe('ToolForm analytics funnel guard', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Mock checkout' })).toBeTruthy();
+      expect(
+        screen.getByRole('button', { name: 'Mock checkout' })
+      ).toBeTruthy();
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Mock checkout' }));
 
     await waitFor(() => {
-      expect(getEventPayloads('click_checkout_from_pricing_scenario')).toHaveLength(
-        1
-      );
+      expect(
+        getEventPayloads('click_checkout_from_pricing_scenario')
+      ).toHaveLength(1);
     });
 
-    expect(getEventPayloads('click_checkout_from_pricing_scenario')[0]).toMatchObject(
-      {
-        pricing_slug: 'client-messaging-outside-work-hours',
-        source_surface: 'tool_page',
-      }
-    );
+    expect(
+      getEventPayloads('click_checkout_from_pricing_scenario')[0]
+    ).toMatchObject({
+      pricing_slug: 'client-messaging-outside-work-hours',
+      source_surface: 'tool_page',
+    });
 
     const checkoutCall = fetchMock.mock.calls.find(
       ([input]) => getRequestUrl(input) === '/api/checkout/session'

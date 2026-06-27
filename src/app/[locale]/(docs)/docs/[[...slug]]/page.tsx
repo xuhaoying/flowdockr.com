@@ -31,6 +31,9 @@ export default async function DocsContentPage(props: {
       tableOfContent={{
         style: 'clerk',
       }}
+      tableOfContentPopover={{
+        enabled: false,
+      }}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>

@@ -1,5 +1,6 @@
-import Stripe from 'stripe';
 import { eq } from 'drizzle-orm';
+import Stripe from 'stripe';
+
 import { db } from '@/core/db';
 import { config } from '@/config/db/schema';
 
@@ -41,16 +42,22 @@ async function verifyStripePromoCodes() {
     // Verify each promotion code
     for (const [productId, promoCodeId] of Object.entries(promotionCodes)) {
       console.log(`Checking ${productId}: ${promoCodeId}`);
-      
+
       try {
-        const promoCode = await stripe.promotionCodes.retrieve(promoCodeId as string);
+        const promoCode = await stripe.promotionCodes.retrieve(
+          promoCodeId as string
+        );
         console.log(`✅ Valid promotion code`);
         console.log(`   - Code: ${promoCode.code}`);
         console.log(`   - Active: ${promoCode.active}`);
-        console.log(`   - Coupon ID: ${typeof promoCode.coupon === 'string' ? promoCode.coupon : promoCode.coupon.id}`);
-        
+        console.log(
+          `   - Coupon ID: ${typeof promoCode.coupon === 'string' ? promoCode.coupon : promoCode.coupon.id}`
+        );
+
         if (typeof promoCode.coupon !== 'string') {
-          console.log(`   - Discount: ${promoCode.coupon.percent_off ? promoCode.coupon.percent_off + '%' : promoCode.coupon.amount_off + ' ' + promoCode.coupon.currency}`);
+          console.log(
+            `   - Discount: ${promoCode.coupon.percent_off ? promoCode.coupon.percent_off + '%' : promoCode.coupon.amount_off + ' ' + promoCode.coupon.currency}`
+          );
         }
       } catch (error: any) {
         console.log(`❌ Invalid promotion code: ${error.message}`);

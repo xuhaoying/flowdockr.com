@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import {
   hashRequestIp,
   hashRequestUserAgent,
@@ -10,7 +11,6 @@ import {
   consumeUsage,
   getGenerationIdentity,
 } from '@/lib/credits';
-import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { filterOutputByEntitlements } from '@/lib/generation/filterOutputByEntitlements';
 import { generateReply } from '@/lib/generation/generateReply';
 import { saveGeneration } from '@/lib/generation/saveGeneration';

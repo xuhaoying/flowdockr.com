@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { ScenarioPageData } from '@/types/content';
+
+import { Link } from '@/core/i18n/navigation';
 
 type HubBackLinkProps = {
   scenario: ScenarioPageData;

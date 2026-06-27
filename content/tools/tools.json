@@ -5,8 +5,8 @@
     "cluster": "pricing",
     "url": "/tools/reply-generator/",
     "h1": "AI reply generator for difficult client conversations",
-    "metaTitle": "AI Reply Generator for Difficult Client Conversations | Flowdockr",
-    "metaDescription": "Generate clearer replies for pricing objections, scope pressure, payment delays, and awkward client conversations. Flowdockr helps you respond with more strategy and less guesswork.",
+    "metaTitle": "AI Reply Generator for Difficult Client Conversations | FlowDockr",
+    "metaDescription": "Generate clearer replies for pricing objections, scope pressure, payment delays, and awkward client conversations. FlowDockr helps you respond with more strategy and less guesswork.",
     "heroSubheading": "Draft professional replies for difficult client conversations without starting from scratch.",
     "primaryIntent": "Provide a broad reply-generation tool that can handle multiple client communication situations, especially pricing-related ones.",
     "primaryKeywords": [
@@ -19,7 +19,7 @@
       "AI response tool",
       "difficult client response generator"
     ],
-    "intro": "Flowdockr helps you turn messy client messages into clearer next-step replies. Instead of guessing what to say, you can work from the actual context, your goal, and the tone you want to keep.",
+    "intro": "FlowDockr helps you turn messy client messages into clearer next-step replies. Instead of guessing what to say, you can work from the actual context, your goal, and the tone you want to keep.",
     "bestFor": [
       "Pricing objections",
       "Discount requests",
@@ -87,8 +87,8 @@
     "cluster": "pricing",
     "url": "/tools/price-negotiation-email-generator/",
     "h1": "Price negotiation email generator",
-    "metaTitle": "Price Negotiation Email Generator | Flowdockr",
-    "metaDescription": "Generate better price negotiation emails for quote pushback, discount requests, low-budget clients, and competitor comparisons. Flowdockr helps you protect your rate with clearer positioning.",
+    "metaTitle": "Price Negotiation Email Generator | FlowDockr",
+    "metaDescription": "Generate better price negotiation emails for quote pushback, discount requests, low-budget clients, and competitor comparisons. FlowDockr helps you protect your rate with clearer positioning.",
     "heroSubheading": "Write pricing replies that protect your rate, clarify trade-offs, and move the deal forward.",
     "primaryIntent": "Provide a pricing-specific tool page for drafting negotiation emails and replies tied to price objections, discounts, and budget pressure.",
     "primaryKeywords": [
@@ -101,7 +101,7 @@
       "negotiation reply generator",
       "how to reply to discount request"
     ],
-    "intro": "This tool is built for pricing conversations specifically. Whether the quote feels high, the client wants a discount, the budget is lower than expected, or a cheaper option is being used as leverage, Flowdockr helps you write a response that protects your position.",
+    "intro": "This tool is built for pricing conversations specifically. Whether the quote feels high, the client wants a discount, the budget is lower than expected, or a cheaper option is being used as leverage, FlowDockr helps you write a response that protects your position.",
     "bestFor": [
       "Price pushback after proposal",
       "Discount pressure before signing",

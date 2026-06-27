@@ -10,8 +10,12 @@ export function GuideHero({ guide }: GuideHeroProps) {
       <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
         {guide.h1}
       </h1>
-      <p className="max-w-4xl text-base text-slate-700">{guide.heroSubheading}</p>
-      <p className="max-w-4xl text-sm leading-relaxed text-slate-700">{guide.intro}</p>
+      <p className="max-w-4xl text-base text-slate-700">
+        {guide.heroSubheading}
+      </p>
+      <p className="max-w-4xl text-sm leading-relaxed text-slate-700">
+        {guide.intro}
+      </p>
     </section>
   );
 }

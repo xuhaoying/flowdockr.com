@@ -12,7 +12,7 @@ export function CustomFeatures({
   section: Section;
   className?: string;
 }) {
-    return (
+  return (
     <section
       id={section.id || section.name}
       className={cn('pt-24 md:pt-36', section.className, className)}
@@ -36,5 +36,6 @@ export function CustomFeatures({
           {section.description}
         </p>
       </motion.div>
-    </section>)
+    </section>
+  );
 }

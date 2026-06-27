@@ -45,5 +45,7 @@ prettier.config.*
 # Other
 coverage
 .DS_Store
+.gstack
+.playwright-cli
 
 src/shared/components

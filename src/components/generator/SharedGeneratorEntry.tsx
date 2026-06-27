@@ -1,10 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
 import { ToolForm } from '@/components/tool/ToolForm';
-import { Link } from '@/core/i18n/navigation';
 import { trackEvent } from '@/lib/analytics';
+
+import { Link } from '@/core/i18n/navigation';
 
 type SharedGeneratorEntryProps = {
   eyebrow?: string;
@@ -60,7 +60,8 @@ export function SharedGeneratorEntry({
 }: SharedGeneratorEntryProps) {
   const [prefillMessage, setPrefillMessage] = useState(initialMessage);
   const formKey = useMemo(
-    () => `${defaultScenarioSlug || analyticsScenarioSlug || 'entry'}:${prefillMessage}`,
+    () =>
+      `${defaultScenarioSlug || analyticsScenarioSlug || 'entry'}:${prefillMessage}`,
     [analyticsScenarioSlug, defaultScenarioSlug, prefillMessage]
   );
 
@@ -74,7 +75,7 @@ export function SharedGeneratorEntry({
             </p>
           ) : null}
           {title ? (
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl">
+            <h2 className="text-brand-text text-2xl font-semibold tracking-tight md:text-3xl">
               {title}
             </h2>
           ) : null}
@@ -89,7 +90,7 @@ export function SharedGeneratorEntry({
       {exampleShortcut ? (
         <button
           type="button"
-          className="inline-flex rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+          className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-full border bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition"
           onClick={() => setPrefillMessage(exampleShortcut.message)}
         >
           {exampleShortcut.label}
@@ -117,7 +118,7 @@ export function SharedGeneratorEntry({
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex rounded-full border border-slate-300 bg-white px-3 py-1.5 text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+              className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-full border bg-white px-3 py-1.5 text-slate-700 transition"
               onClick={() => {
                 if (!relatedClickEventName) {
                   return;

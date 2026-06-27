@@ -1,6 +1,7 @@
+import type { ScenarioHubCta } from '@/types/scenario-hub';
+
 import { Link } from '@/core/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
-import type { ScenarioHubCta } from '@/types/scenario-hub';
 
 type ScenarioHubCTAProps = {
   cta: ScenarioHubCta;

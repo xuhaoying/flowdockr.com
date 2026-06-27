@@ -41,7 +41,8 @@ async function main() {
       storageBackend: 'filesystem',
     },
   });
-  const summaryMarkdown = buildPricingClusterPerformanceSnapshotMarkdown(report);
+  const summaryMarkdown =
+    buildPricingClusterPerformanceSnapshotMarkdown(report);
 
   await mkdir(path.dirname(outputPath), { recursive: true });
   await mkdir(path.dirname(summaryPath), { recursive: true });

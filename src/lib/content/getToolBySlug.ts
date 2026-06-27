@@ -1,6 +1,6 @@
-import rawToolPages from '../../../content/tools/tools.json';
-
 import { toolPageDataListSchema, type ToolPageData } from '@/types/content';
+
+import rawToolPages from '../../../content/tools/tools.json';
 
 let cachedToolPages: ToolPageData[] | null = null;
 
@@ -11,7 +11,10 @@ function loadToolPages(): ToolPageData[] {
 
   const parsed = toolPageDataListSchema.safeParse(rawToolPages);
   if (!parsed.success) {
-    console.error('[content] Failed to parse tools content:', parsed.error.flatten());
+    console.error(
+      '[content] Failed to parse tools content:',
+      parsed.error.flatten()
+    );
     cachedToolPages = [];
     return cachedToolPages;
   }

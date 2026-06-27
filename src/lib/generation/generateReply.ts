@@ -1,4 +1,8 @@
-import { generateReplyWithAI } from '@/lib/generation-ai';
+import {
+  generateReplyWithAI,
+  isAIProviderTimeoutError,
+  type AIReplyAttemptMeta,
+} from '@/lib/generation-ai';
 import { Scenario } from '@/lib/scenarios';
 import type {
   GenerateReplyInput,
@@ -41,17 +45,47 @@ export async function generateReply(params: {
     userRateContext: params.userRateContext,
   };
 
-  const firstAttempt = await generateReplyWithAI(baseInput, params.scenario);
+  let firstAttempt: Awaited<ReturnType<typeof generateReplyWithAI>>;
+
+  try {
+    firstAttempt = await generateReplyWithAI(baseInput, params.scenario);
+  } catch (error) {
+    if (isAIProviderTimeoutError(error)) {
+      return buildTimeoutFallbackPipelineResult({
+        scenario: params.scenario,
+        sourcePage: params.sourcePage,
+        serviceType: params.serviceType,
+        goal: params.goal,
+        attemptMeta: error.attemptMeta,
+        timeoutMs: error.timeoutMs,
+      });
+    }
+
+    throw error;
+  }
   const firstValidation = validateGenerationResult(firstAttempt.text);
 
   if (!firstValidation.success) {
-    const secondAttempt = await generateReplyWithAI(
-      baseInput,
-      params.scenario,
-      {
+    let secondAttempt: Awaited<ReturnType<typeof generateReplyWithAI>>;
+
+    try {
+      secondAttempt = await generateReplyWithAI(baseInput, params.scenario, {
         repairNotes: buildSchemaRepairNotes(firstValidation),
+      });
+    } catch (error) {
+      if (isAIProviderTimeoutError(error)) {
+        return buildTimeoutFallbackPipelineResult({
+          scenario: params.scenario,
+          sourcePage: params.sourcePage,
+          serviceType: params.serviceType,
+          goal: params.goal,
+          attemptMeta: error.attemptMeta,
+          timeoutMs: error.timeoutMs,
+        });
       }
-    );
+
+      throw error;
+    }
     const secondValidation = validateGenerationResult(secondAttempt.text);
 
     if (!secondValidation.success) {
@@ -144,9 +178,26 @@ export async function generateReply(params: {
     };
   }
 
-  const secondAttempt = await generateReplyWithAI(baseInput, params.scenario, {
-    repairNotes: buildRubricRepairNotes(firstQuality),
-  });
+  let secondAttempt: Awaited<ReturnType<typeof generateReplyWithAI>>;
+
+  try {
+    secondAttempt = await generateReplyWithAI(baseInput, params.scenario, {
+      repairNotes: buildRubricRepairNotes(firstQuality),
+    });
+  } catch (error) {
+    if (isAIProviderTimeoutError(error)) {
+      return buildTimeoutFallbackPipelineResult({
+        scenario: params.scenario,
+        sourcePage: params.sourcePage,
+        serviceType: params.serviceType,
+        goal: params.goal,
+        attemptMeta: error.attemptMeta,
+        timeoutMs: error.timeoutMs,
+      });
+    }
+
+    throw error;
+  }
   const secondValidation = validateGenerationResult(secondAttempt.text);
   if (!secondValidation.success) {
     return buildFallbackPipelineResult({
@@ -211,8 +262,9 @@ function buildFallbackPipelineResult(params: {
   scenario: Scenario;
   sourcePage?: 'home' | 'scenario' | 'tool';
   serviceType?: GenerateReplyInput['serviceType'];
+  goal?: GenerateReplyInput['goal'];
   reason: GenerationFallbackReason;
-  attemptMeta: Awaited<ReturnType<typeof generateReplyWithAI>>;
+  attemptMeta: AIReplyAttemptMeta;
   schemaValid: boolean;
   rubricPassed: boolean;
   rubricFailReasons: string[];
@@ -224,6 +276,7 @@ function buildFallbackPipelineResult(params: {
     output: buildFallbackReply({
       scenario: params.scenario,
       serviceType: params.serviceType,
+      goal: params.goal,
       reason: params.reason,
     }),
     generationLog: {
@@ -248,6 +301,30 @@ function buildFallbackPipelineResult(params: {
         params.attemptMeta.promptMeta.usedServiceAdjustment,
     },
   };
+}
+
+function buildTimeoutFallbackPipelineResult(params: {
+  scenario: Scenario;
+  sourcePage?: 'home' | 'scenario' | 'tool';
+  serviceType?: GenerateReplyInput['serviceType'];
+  goal?: GenerateReplyInput['goal'];
+  attemptMeta: AIReplyAttemptMeta;
+  timeoutMs: number;
+}): GenerateReplyPipelineResult {
+  return buildFallbackPipelineResult({
+    scenario: params.scenario,
+    sourcePage: params.sourcePage,
+    serviceType: params.serviceType,
+    goal: params.goal,
+    reason: 'provider_timeout',
+    attemptMeta: params.attemptMeta,
+    schemaValid: false,
+    rubricPassed: false,
+    rubricFailReasons: [],
+    rubricWarningReasons: [`Provider timed out after ${params.timeoutMs}ms.`],
+    schemaRetryCount: 0,
+    rubricRetryCount: 0,
+  });
 }
 
 function buildSchemaRepairNotes(

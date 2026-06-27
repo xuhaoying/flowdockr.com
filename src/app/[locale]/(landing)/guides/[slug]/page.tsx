@@ -1,8 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
-
-import { envConfigs } from '@/config';
 import { SharedGeneratorEntry } from '@/components/generator/SharedGeneratorEntry';
 import { GuideFaq } from '@/components/guide/GuideFaq';
 import { GuideHero } from '@/components/guide/GuideHero';
@@ -10,12 +7,15 @@ import { GuideLinkGrid } from '@/components/guide/GuideLinkGrid';
 import { GuideSectionBlocks } from '@/components/guide/GuideSectionBlocks';
 import { GuideTakeaways } from '@/components/guide/GuideTakeaways';
 import { RecommendedScenarios } from '@/components/guide/RecommendedScenarios';
-import { locales } from '@/config/locale';
-import { Link } from '@/core/i18n/navigation';
 import { getAllGuideSlugs } from '@/lib/content/getAllGuideSlugs';
 import { getGuideBySlug } from '@/lib/content/getGuideBySlug';
 import { getToolBySlug } from '@/lib/content/getToolBySlug';
 import { buildGuideMetadata } from '@/lib/seo/buildGuideMetadata';
+import { setRequestLocale } from 'next-intl/server';
+
+import { Link } from '@/core/i18n/navigation';
+import { envConfigs } from '@/config';
+import { locales } from '@/config/locale';
 
 function getScenarioSlugFromHref(href: string): string | null {
   const segments = href.split('/').filter(Boolean);
@@ -52,7 +52,7 @@ export async function generateMetadata({
 
   if (!guide) {
     return {
-      title: 'Guide not found | Flowdockr',
+      title: 'Guide not found | FlowDockr',
       robots: {
         index: false,
         follow: false,
@@ -92,15 +92,20 @@ export default async function GuidePage({
     : toolBaseHref;
   const hubHref =
     guide.hubLink?.href ||
-    (guide.cluster === 'pricing' ? '/pricing/' : guide.cluster === 'payment' ? '/payment/' : '/guides/');
+    (guide.cluster === 'pricing'
+      ? '/pricing/'
+      : guide.cluster === 'payment'
+        ? '/payment/'
+        : '/guides/');
   const hubLabel =
     guide.hubLink?.label ||
     (guide.cluster === 'pricing'
       ? 'Browse pricing scenarios'
       : guide.cluster === 'payment'
-      ? 'Open payment hub'
+        ? 'Open payment hub'
         : 'Back to guides');
-  const isPriorityPricingGuide = guide.slug === 'how-to-negotiate-freelance-pricing';
+  const isPriorityPricingGuide =
+    guide.slug === 'how-to-negotiate-freelance-pricing';
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-8 md:py-10">
@@ -118,7 +123,8 @@ export default async function GuidePage({
                 The client just replied:
               </p>
               <p className="mt-2 text-base leading-7 text-slate-800">
-                “We like your work, but the price feels high. Can you do better?”
+                “We like your work, but the price feels high. Can you do
+                better?”
               </p>
               <p className="mt-4 text-sm leading-6 text-slate-700">
                 You want to keep the project moving. But lowering your price too
@@ -153,14 +159,18 @@ export default async function GuidePage({
             </h2>
             <div className="grid gap-3 md:grid-cols-2">
               <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">What not to say</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  What not to say
+                </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
                   Do not jump straight to a percentage discount or write a long
                   defensive explanation about your rate.
                 </p>
               </div>
               <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold text-slate-900">What to do instead</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  What to do instead
+                </p>
                 <p className="mt-2 text-sm leading-6 text-slate-700">
                   Hold the base price, diagnose whether the issue is budget or
                   pressure, and use scope reduction when the number truly has to
@@ -177,8 +187,8 @@ export default async function GuidePage({
               Apply the framework to adjacent situations
             </h2>
             <p className="text-sm leading-6 text-slate-700">
-              When pricing pressure changes shape, move sideways into the nearest
-              scenario instead of re-reading the whole guide.
+              When pricing pressure changes shape, move sideways into the
+              nearest scenario instead of re-reading the whole guide.
             </p>
             <RecommendedScenarios links={guide.recommendedScenarios} />
           </section>
@@ -207,12 +217,16 @@ export default async function GuidePage({
             links={guide.relatedGuides || []}
           />
 
-          <section className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900 p-5 text-white shadow-sm">
-            <h2 className="text-2xl font-semibold tracking-tight">{guide.toolCta.title}</h2>
-            <p className="text-sm leading-relaxed text-slate-200">{guide.toolCta.body}</p>
+          <section className="border-brand-lavender/30 via-brand-bg text-brand-text space-y-4 rounded-2xl border bg-linear-to-br from-white to-white p-5 shadow-sm shadow-slate-950/5">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {guide.toolCta.title}
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-700">
+              {guide.toolCta.body}
+            </p>
             <Link
               href={toolHref}
-              className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-900"
+              className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
             >
               {guide.toolCta.buttonLabel}
             </Link>
@@ -238,10 +252,16 @@ export default async function GuidePage({
       <GuideFaq faq={guide.faq} />
 
       <section className="flex flex-wrap items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <Link href="/guides/" className="text-sm font-semibold text-slate-900 underline underline-offset-2">
+        <Link
+          href="/guides/"
+          className="text-sm font-semibold text-slate-900 underline underline-offset-2"
+        >
           Back to guides
         </Link>
-        <Link href={hubHref} className="text-sm font-semibold text-slate-900 underline underline-offset-2">
+        <Link
+          href={hubHref}
+          className="text-sm font-semibold text-slate-900 underline underline-offset-2"
+        >
           {hubLabel}
         </Link>
       </section>

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import {
   createAnonymousSessionId,
   ensureAnonymousUsageRecord,
@@ -44,7 +43,9 @@ export async function POST(request: NextRequest) {
       {
         ok: false,
         message:
-          error instanceof Error ? error.message : 'Failed to initialize session.',
+          error instanceof Error
+            ? error.message
+            : 'Failed to initialize session.',
       },
       { status: 500 }
     );

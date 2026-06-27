@@ -18,12 +18,12 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'Pricing | Flowdockr',
+  title: 'Pricing | FlowDockr',
   description:
-    'Flowdockr pricing includes a free plan and one-time paid credit packs for AI negotiation support.',
+    'FlowDockr pricing includes a free plan and one-time paid credit packs for AI negotiation support.',
   canonicalUrl: '/pricing',
   keywords:
-    'Flowdockr pricing, AI negotiation assistant pricing, negotiation credits, pricing negotiation support',
+    'FlowDockr pricing, AI negotiation assistant pricing, negotiation credits, pricing negotiation support',
 });
 
 export default async function PricingHubPage({
@@ -36,52 +36,63 @@ export default async function PricingHubPage({
 
   return (
     <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 px-4 py-8 md:gap-8 md:py-10">
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-        <div className="max-w-3xl space-y-4">
-          <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
-            Pricing
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-            Start free, then buy credits when you need more negotiation support
-          </h1>
-          <p className="text-base leading-7 text-slate-700 md:text-lg">
-            Flowdockr uses a simple credit model. Free users can try the product
-            first. Paid users buy one-time credit packs through checkout for
-            additional AI negotiation drafts, strategy notes, and saved workflow
-            support.
-          </p>
-        </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
-          {[
-            {
-              title: 'Free plan',
-              body: 'Try Flowdockr with free negotiation credits before making a purchase.',
-            },
-            {
-              title: 'Paid credit packs',
-              body: 'Quick Help, Pro, and Studio are one-time purchases in USD.',
-            },
-            {
-              title: 'Checkout',
-              body: 'Payments are processed through the Flowdockr checkout flow. The product does not require an auto-renewing subscription.',
-            },
-          ].map((item) => (
-            <article
-              key={item.title}
-              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-            >
-              <h2 className="text-base font-semibold text-slate-900">
-                {item.title}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-700">
-                {item.body}
-              </p>
-            </article>
-          ))}
+      <section className="border-brand-lavender/25 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.82fr] lg:items-end">
+          <div className="max-w-3xl space-y-4">
+            <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
+              Pricing
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
+              Simple credits for real client negotiations
+            </h1>
+            <p className="text-base leading-7 text-slate-700 md:text-lg">
+              Start with 2 free drafts. Buy one-time credit packs only when you
+              need more AI negotiation replies, strategy notes, and saved
+              workflow support.
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <Link
+                href="/tools/reply-generator"
+                className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex h-11 items-center justify-center rounded-xl border border-white/20 bg-linear-to-r px-5 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md"
+              >
+                Try free draft
+              </Link>
+              <a
+                href="#pricing-cards"
+                className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex h-11 items-center justify-center rounded-xl border bg-white px-5 text-sm font-medium shadow-xs transition-colors"
+              >
+                View plans
+              </a>
+            </div>
+          </div>
+
+          <dl className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            {[
+              ['Free trial', '2 credits before checkout'],
+              ['Paid packs', 'One-time purchases in USD'],
+              ['Delivery', 'Credits added after checkout'],
+            ].map(([term, detail]) => (
+              <div
+                key={term}
+                className="border-brand-lavender/20 bg-brand-bg/55 rounded-xl border px-4 py-3"
+              >
+                <dt className="text-sm font-semibold text-slate-900">{term}</dt>
+                <dd className="mt-1 text-sm leading-6 text-slate-700">
+                  {detail}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <PricingCards
+        sourcePage="pricing"
+        showSectionHeader={true}
+        sectionId="pricing-cards"
+      />
+
+      <section className="border-brand-lavender/25 space-y-6 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
             What users pay for
@@ -91,7 +102,7 @@ export default async function PricingHubPage({
           </h2>
           <p className="text-sm leading-relaxed text-slate-700">
             Credits are used to generate and refine negotiation support inside
-            Flowdockr. Each paid plan increases the number of credits and the
+            FlowDockr. Each paid plan increases the number of credits and the
             depth of support available for harder conversations.
           </p>
         </div>
@@ -99,7 +110,7 @@ export default async function PricingHubPage({
           {[
             {
               title: 'Account credits',
-              body: 'After checkout succeeds, credits are added to your Flowdockr account and shown in your dashboard.',
+              body: 'After checkout succeeds, credits are added to your FlowDockr account and shown in your dashboard.',
             },
             {
               title: 'Negotiation output',
@@ -112,7 +123,7 @@ export default async function PricingHubPage({
           ].map((item) => (
             <article
               key={item.title}
-              className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+              className="border-brand-lavender/20 bg-brand-bg/55 rounded-xl border p-4"
             >
               <h3 className="text-base font-semibold text-slate-900">
                 {item.title}
@@ -124,24 +135,20 @@ export default async function PricingHubPage({
           ))}
         </div>
         <p className="text-sm leading-6 text-slate-700">
-          Flowdockr does not use an auto-renewing subscription today. See the{' '}
+          FlowDockr does not use an auto-renewing subscription today. There are
+          no shipping fees because this is a digital software product. See the{' '}
           <Link href="/refund" className="font-semibold underline">
             Refund Policy
           </Link>{' '}
           for refund eligibility and support timing.
         </p>
       </section>
-      <PricingCards
-        sourcePage="pricing"
-        showSectionHeader={true}
-        sectionId="pricing-cards"
-      />
       <BillingPolicy />
       <CreditExplanation />
       <FeatureComparison />
       <ProblemFraming />
       <HowItWorks />
-      <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <section className="border-brand-lavender/25 space-y-6 rounded-3xl border bg-white p-6 shadow-sm shadow-slate-950/5 md:p-8">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
             Scenario Library

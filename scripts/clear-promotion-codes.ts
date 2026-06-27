@@ -33,7 +33,9 @@ async function clearPromotionCodes() {
       });
     }
 
-    console.log('\n✅ Done! Please restart your dev server to clear the cache.');
+    console.log(
+      '\n✅ Done! Please restart your dev server to clear the cache.'
+    );
   } catch (error) {
     console.error('❌ Error:', error);
   } finally {

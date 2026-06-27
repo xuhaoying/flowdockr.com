@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
-
 import { getScenarioPageBySlug } from '@/lib/content/scenarioPages';
+import { describe, expect, it } from 'vitest';
 
 import {
   getLegacyScenarioRedirectPath,

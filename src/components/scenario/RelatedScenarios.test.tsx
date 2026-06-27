@@ -1,14 +1,14 @@
-import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+import { RelatedScenarios } from './RelatedScenarios';
 
 vi.mock('@/core/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: ReactNode }) => (
     <a href={href}>{children}</a>
   ),
 }));
-
-import { RelatedScenarios } from './RelatedScenarios';
 
 describe('RelatedScenarios', () => {
   it('renders grouped similar and next-step scenario sections when groups are provided', () => {

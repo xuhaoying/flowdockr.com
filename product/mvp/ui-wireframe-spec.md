@@ -7,11 +7,13 @@ Goal: Minimal, elegant, and task-first UX that solves one client problem in 30 s
 ## 1. Design System
 
 ### Visual Direction
+
 - Style: Minimal SaaS
 - References: Linear, Stripe, Notion, Raycast
 - Keywords: minimal, fast, professional, calm
 
 ### Color Tokens
+
 - Primary text/button: `#111827`
 - Background: `#F9FAFB`
 - Accent/focus: `#6366F1`
@@ -19,6 +21,7 @@ Goal: Minimal, elegant, and task-first UX that solves one client problem in 30 s
 - Border: `#E5E7EB`
 
 ### Typography
+
 - Primary font: Inter
 - H1: 32px / 600
 - Body: 16px / 400
@@ -27,11 +30,13 @@ Goal: Minimal, elegant, and task-first UX that solves one client problem in 30 s
 ## 2. Information Architecture (MVP)
 
 ### Live routes
+
 - `/`
 - `/scope`
 - `/guides`
 
 ### Future (hidden in MVP navigation)
+
 - `/payment`
 - `/pricing`
 - `/deal`
@@ -39,6 +44,7 @@ Goal: Minimal, elegant, and task-first UX that solves one client problem in 30 s
 ## 3. Home Wireframe
 
 ## Layout
+
 ```text
 Header
 Hero
@@ -48,12 +54,14 @@ Footer
 ```
 
 ## Hero
+
 - Title: `Stop client chaos.`
 - Subtitle: `Handle scope creep in minutes.`
 - Primary CTA: `Generate revision policy`
 - CTA target: `/scope`
 
 ## Problem section
+
 - Title: `Common situations`
 - Cards:
   - `Client keeps asking for revisions`
@@ -62,6 +70,7 @@ Footer
 - Card click target: `/scope`
 
 ## Trust section
+
 - Title: `Built for freelancers`
 - Labels:
   - Design
@@ -73,6 +82,7 @@ Footer
 ## 4. Scope Tool Wireframe (`/scope`)
 
 ## Layout
+
 ```text
 Hero
 Form
@@ -81,10 +91,12 @@ Result cards
 ```
 
 ## Hero
+
 - Title: `Stop unlimited revisions.`
 - Subtitle: `Create a clear revision policy for your client project.`
 
 ## Form fields
+
 - Project type (dropdown)
   - Logo design
   - Website design
@@ -101,20 +113,24 @@ Result cards
   - Enterprise
 
 ## Primary action
+
 - Button label: `Generate your revision policy`
 
 ## 5. Result Wireframe
 
 ## Section title
+
 - `Your revision policy`
 
 ## Result cards
+
 - Revision policy
 - Scope rule
 - Client message
 - Contract clause
 
 Each card includes:
+
 - Copy button
 - Copy feedback state: `Copied`
 
@@ -123,6 +139,7 @@ Each card includes:
 Example: `/guides/client-keeps-asking-for-revisions`
 
 ## Structure
+
 ```text
 Title
 Problem explanation
@@ -132,12 +149,14 @@ CTA block
 ```
 
 ## CTA block
+
 - Label: `Generate your revision policy`
 - Button target: `/scope`
 
 ## 7. UI Kit Spec
 
 ## Button
+
 - Background: `#111827`
 - Text: white
 - Radius: 12px
@@ -145,18 +164,21 @@ CTA block
 - Hover: opacity 0.9
 
 ## Input
+
 - Border: `#E5E7EB`
 - Radius: 10px
 - Padding: 12px
 - Focus border/ring: `#6366F1`
 
 ## Card
+
 - Background: white
 - Radius: 14px
 - Shadow: small
 - Padding: 20px
 
 ## Copy button
+
 - Border: `#E5E7EB`
 - Radius: 8px
 - Padding: `8px 12px`
@@ -177,6 +199,7 @@ CTA block
 ## 9. Mobile Wireframe
 
 ## Flow
+
 ```text
 Hero
 Form (single column)
@@ -185,6 +208,7 @@ Results (stacked cards)
 ```
 
 ## Rules
+
 - Inputs stack vertically
 - Main action width = 100%
 - No horizontal scroll
@@ -192,6 +216,7 @@ Results (stacked cards)
 ## 10. Figma Frame Structure
 
 ## Home frame
+
 ```text
 Header
 Hero
@@ -201,6 +226,7 @@ Footer
 ```
 
 ## Scope frame
+
 ```text
 Hero
 ScopeForm
@@ -208,6 +234,7 @@ ResultCards
 ```
 
 ## Reusable components
+
 ```text
 Button
 Input
@@ -219,7 +246,9 @@ CopyButton
 ## 11. Experience KPI
 
 First-run user path:
+
 - Google -> Guide -> Scope Tool -> Generate -> Copy
 
 Target:
+
 - Complete value moment within 30 seconds.

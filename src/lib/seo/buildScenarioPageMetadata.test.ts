@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
-
 import { getScenarioPageBySlug } from '@/lib/content/scenarioPages';
+import { describe, expect, it } from 'vitest';
 
 import { buildScenarioPageMetadata } from './buildScenarioPageMetadata';
 
@@ -10,7 +9,7 @@ describe('buildScenarioPageMetadata', () => {
       page: {
         title: 'Client says your quote is too high',
         metaTitle:
-          'Client Says Your Quote Is Too High? What to Say Next | Flowdockr',
+          'Client Says Your Quote Is Too High? What to Say Next | FlowDockr',
         metaDescription:
           'Use this scenario to draft a calm reply when a client says your quote is too high.',
       },
@@ -18,7 +17,7 @@ describe('buildScenarioPageMetadata', () => {
     });
 
     expect(metadata.title).toBe(
-      'Client Says Your Quote Is Too High? What to Say Next | Flowdockr'
+      'Client Says Your Quote Is Too High? What to Say Next | FlowDockr'
     );
     expect(metadata.description).toBe(
       'Use this scenario to draft a calm reply when a client says your quote is too high.'
@@ -40,7 +39,7 @@ describe('buildScenarioPageMetadata', () => {
       canonical: 'https://www.flowdockr.com/scenario/discount-request',
     });
 
-    expect(metadata.title).toBe('Client asks for a discount | Flowdockr');
+    expect(metadata.title).toBe('Client asks for a discount | FlowDockr');
     expect(metadata.description).toBe(
       'Use this scenario to reply when a client asks for a discount.'
     );
@@ -77,7 +76,7 @@ describe('buildScenarioPageMetadata', () => {
     });
 
     expect(paymentMetadata.title).toBe(
-      'Final Payment Reminder Before You Escalate | Flowdockr'
+      'Final Payment Reminder Before You Escalate | FlowDockr'
     );
     expect(paymentMetadata.description).toBe(
       'Use this scenario when earlier reminders failed and you need a final payment message that sets a deadline, asks for a concrete answer, and still sounds professional.'
@@ -87,7 +86,7 @@ describe('buildScenarioPageMetadata', () => {
     );
 
     expect(pricingMetadata.title).toBe(
-      'Can You Meet Their Budget Without Undercutting the Scope? | Flowdockr'
+      'Can You Meet Their Budget Without Undercutting the Scope? | FlowDockr'
     );
     expect(pricingMetadata.description).toBe(
       'Use this scenario when a client gives you a real budget cap and asks if you can make it work. Draft a reply that protects your pricing logic and offers a scoped alternative instead of squeezing the same work into a smaller fee.'
@@ -97,7 +96,7 @@ describe('buildScenarioPageMetadata', () => {
     );
 
     expect(depositMetadata.title).toBe(
-      'Deposit Still Not Paid? What to Say Before Kickoff | Flowdockr'
+      'Deposit Still Not Paid? What to Say Before Kickoff | FlowDockr'
     );
     expect(depositMetadata.description).toBe(
       'Use this scenario when the kickoff deposit was promised but still has not arrived. Follow up clearly and keep the start-after-payment boundary intact without sounding awkward.'

@@ -4,7 +4,8 @@ import path from 'node:path';
 const PROMPT_JOBS_PATH = 'product/seo/generated/content-prompt-jobs-v2.jsonl';
 const DEFAULT_DRAFTS_PATH = 'product/seo/generated/content-drafts-v2.jsonl';
 const SEO_PAGES_PATH = 'product/seo/factory/seo-pages.v2.csv';
-const OUTPUT_MANIFEST = 'product/seo/generated/content-publish-manifest-v2.json';
+const OUTPUT_MANIFEST =
+  'product/seo/generated/content-publish-manifest-v2.json';
 const OUTPUT_LOG = 'product/seo/generated/content-publish-log-v2.md';
 const GENERATED_AT = '2026-03-05';
 
@@ -154,7 +155,9 @@ for (const draft of drafts) {
   const finalMarkdown = ensureFrontmatter(markdown, job);
   writeFileSync(outputPath, `${finalMarkdown.trim()}\n`);
 
-  const seoRow = (job.seo_page_id && seoById.get(job.seo_page_id)) || seoByRoute.get(job.route);
+  const seoRow =
+    (job.seo_page_id && seoById.get(job.seo_page_id)) ||
+    seoByRoute.get(job.route);
   if (seoRow) {
     seoRow.status = 'generated';
     seoRow.last_generated_at = GENERATED_AT;
@@ -204,7 +207,9 @@ writeFileSync(OUTPUT_LOG, logLines.join('\n'));
 console.log(`Drafts processed: ${result.totals.drafts}`);
 console.log(`Published: ${result.totals.published}`);
 console.log(`Skipped (missing job): ${result.totals.skipped_missing_job}`);
-console.log(`Skipped (missing markdown): ${result.totals.skipped_missing_markdown}`);
+console.log(
+  `Skipped (missing markdown): ${result.totals.skipped_missing_markdown}`
+);
 console.log(`Manifest: ${OUTPUT_MANIFEST}`);
 console.log(`Log: ${OUTPUT_LOG}`);
 console.log(`Updated statuses: ${SEO_PAGES_PATH}`);

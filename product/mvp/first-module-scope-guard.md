@@ -17,6 +17,7 @@ Generated: 2026-03-04
 ## Input Form (MVP)
 
 Required fields:
+
 - `service_type` (design, video editing, copywriting, other)
 - `project_deliverables` (short text)
 - `included_revision_rounds` (number)
@@ -24,6 +25,7 @@ Required fields:
 - `current_client_request` (text)
 
 Optional fields:
+
 - `communication_tone` (firm, neutral, friendly)
 - `change_request_price_rule` (fixed fee, hourly, quote-first)
 - `existing_contract_clause` (text)

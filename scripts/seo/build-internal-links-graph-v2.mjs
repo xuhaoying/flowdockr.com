@@ -6,7 +6,8 @@ const OUTPUT_MD = 'product/seo/generated/internal-links-graph-v2.md';
 const GENERATED_AT = '2026-03-05';
 
 const TOOL_ROUTE_BY_NAME = {
-  'client-negotiation-reply-generator': '/tools/client-negotiation-reply-generator',
+  'client-negotiation-reply-generator':
+    '/tools/client-negotiation-reply-generator',
   'freelance-rate-calculator': '/tools/freelance-rate-calculator',
   'proposal-generator': '/tools/proposal-generator',
 };
@@ -77,7 +78,9 @@ for (const row of rows) {
     nodeSet.add(pillarRoute);
   }
 
-  const toolRoute = TOOL_ROUTE_BY_NAME[row.target_tool] || (row.target_tool === 'tool-page' ? row.route : '');
+  const toolRoute =
+    TOOL_ROUTE_BY_NAME[row.target_tool] ||
+    (row.target_tool === 'tool-page' ? row.route : '');
   if (toolRoute) {
     edges.push({ from, to: toolRoute, type: 'target_tool' });
     nodeSet.add(toolRoute);

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const QUEUE_PATH = 'product/seo/flowdockr-phase1-queue-30.csv';
 const OUTPUT_PATH = 'product/seo/generated/article-briefs-phase1-30.jsonl';

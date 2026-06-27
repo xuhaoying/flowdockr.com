@@ -32,7 +32,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client says your quote is too high',
     h1: 'Client says your quote is too high',
     metaTitle:
-      'Client Says Your Quote Is Too High? Reply Without Discounting Too Fast | Flowdockr',
+      'Client Says Your Quote Is Too High? Reply Without Discounting Too Fast | FlowDockr',
     metaDescription:
       'Use this scenario when a client says your quote is too high but has not given you a real budget yet. Get a reply that defends value, explains scope, and avoids a premature discount.',
     previewReply:
@@ -60,8 +60,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'You sent a detailed proposal with scope, timeline, and price. The client replies saying the quote is higher than expected, but they have not given you a real budget yet.',
     userGoal:
       'Protect the quoted price while reopening the conversation around scope and priorities.',
-    searchIntentPrimary:
-      'client says your quote is too high how to respond',
+    searchIntentPrimary: 'client says your quote is too high how to respond',
     searchIntentSecondary:
       'how to respond when a client says your quote is too high',
     strategyPrimary:
@@ -92,7 +91,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client goes quiet after you send a proposal',
     h1: 'Client goes quiet after you send a proposal',
     metaTitle:
-      'Client Goes Quiet After You Send a Proposal: How to Follow Up | Flowdockr',
+      'Client Goes Quiet After You Send a Proposal: How to Follow Up | FlowDockr',
     metaDescription:
       'Use this scenario when a client goes quiet after you send a proposal. Get a yes, no, or timeline update without sounding pushy.',
     previewReply:
@@ -107,8 +106,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     commercialPriority: 'medium',
     archetype: 'follow_up',
     negotiationStage: 'post_quote',
-    primaryClientMessage:
-      'Thanks, got it. We’ll review and get back to you.',
+    primaryClientMessage: 'Thanks, got it. We’ll review and get back to you.',
     clientMessageVariants: [
       'Thanks, got it. We’ll review and get back to you.',
       'Received, thank you. We’ll take a look internally.',
@@ -120,8 +118,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Restart the conversation and get a yes, no, or timing update without sounding needy.',
     searchIntentPrimary:
       'how to follow up after sending a proposal and getting no response',
-    searchIntentSecondary:
-      'client went quiet after proposal follow up',
+    searchIntentSecondary: 'client went quiet after proposal follow up',
     strategyPrimary:
       'Reference the proposal directly and make it easy for the client to reply with timing, questions, or a decision.',
     strategySecondary:
@@ -150,7 +147,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client ghosts after asking your rate',
     h1: 'Client ghosts after asking your rate',
     metaTitle:
-      'Client Ghosts After Asking Your Rate: How to Follow Up | Flowdockr',
+      'Client Ghosts After Asking Your Rate: How to Follow Up | FlowDockr',
     metaDescription:
       'Use this scenario when a client ghosts after asking your rate. Re-engage without sounding needy and diagnose whether price was the blocker.',
     previewReply:
@@ -205,8 +202,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'same-scope-lower-price',
     title: 'Client wants the same scope for a lower price',
     h1: 'Client wants the same scope for a lower price',
-    metaTitle:
-      'Client Wants the Same Scope for a Lower Price | Flowdockr',
+    metaTitle: 'Client Wants the Same Scope for a Lower Price | FlowDockr',
     metaDescription:
       'Use this scenario when a client wants the same scope for a lower price. Hold the line that scope and price move together.',
     previewReply:
@@ -234,8 +230,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Hold the boundary that price and scope are linked, without turning the exchange confrontational.',
     searchIntentPrimary:
       'client wants same scope for lower price how to respond',
-    searchIntentSecondary:
-      'same scope lower price client reply',
+    searchIntentSecondary: 'same scope lower price client reply',
     strategyPrimary:
       'Name clearly that the current price reflects the current scope and standard.',
     strategySecondary:
@@ -247,10 +242,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'best-price-before-signing',
       'discount-request',
     ],
-    similarScenarioSlugs: [
-      'quote-too-high',
-      'lower-rate-after-proposal',
-    ],
+    similarScenarioSlugs: ['quote-too-high', 'lower-rate-after-proposal'],
     nextStepScenarioSlugs: [
       'meet-their-budget',
       'best-price-before-signing',
@@ -264,7 +256,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client asks for a discount before starting',
     h1: 'Client asks for a discount before starting',
     metaTitle:
-      'Client Asks for a Discount Before Starting: How to Respond | Flowdockr',
+      'Client Asks for a Discount Before Starting: How to Respond | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount before starting. Hold price or trade any concession for a real scope or commitment change.',
     archetype: 'pricing_objection',
@@ -282,8 +274,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Protect the base rate or trade any concession for a real scope, timing, or commitment change.',
     searchIntentPrimary:
       'client asks for a discount before starting how to respond',
-    searchIntentSecondary:
-      'discount request before project starts',
+    searchIntentSecondary: 'discount request before project starts',
     strategyPrimary:
       'Keep the base rate intact unless there is a defined tradeoff in scope, speed, or commitment.',
     strategySecondary:
@@ -300,7 +291,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'ten-percent-off-request',
     title: 'Client asks for 10 percent off to move forward',
     h1: 'Client asks for 10 percent off to move forward',
-    metaTitle: 'Client Asks for 10 Percent Off: How to Reply | Flowdockr',
+    metaTitle: 'Client Asks for 10 Percent Off: How to Reply | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for 10 percent off to move forward. Avoid automatic discounting and reframe the tradeoff.',
     archetype: 'pricing_objection',
@@ -316,8 +307,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client is using a specific percentage discount as the condition for approval, which puts direct pressure on you to respond quickly.',
     userGoal:
       'Avoid reflexively discounting and move the conversation toward a structured tradeoff.',
-    searchIntentPrimary:
-      'client asks for 10 percent off how to respond',
+    searchIntentPrimary: 'client asks for 10 percent off how to respond',
     searchIntentSecondary: '10 percent discount request client reply',
     strategyPrimary:
       'Do not negotiate against yourself just because the ask is framed as a small percentage.',
@@ -335,8 +325,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'best-price-before-signing',
     title: 'Client asks for your best price before signing',
     h1: 'Client asks for your best price before signing',
-    metaTitle:
-      'Client Asks for Your Best Price Before Signing | Flowdockr',
+    metaTitle: 'Client Asks for Your Best Price Before Signing | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for your best price before signing. Avoid a last-minute discount becoming the default close tactic.',
     previewReply:
@@ -362,10 +351,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client is near the finish line and is using a last-minute price squeeze before approval.',
     userGoal:
       'Protect margin and keep the close moving without training the client to expect a last-minute concession.',
-    searchIntentPrimary:
-      'client asks for best price before signing',
-    searchIntentSecondary:
-      'final price before signing client reply',
+    searchIntentPrimary: 'client asks for best price before signing',
+    searchIntentSecondary: 'final price before signing client reply',
     strategyPrimary:
       'Hold the original quote unless there is a real tradeoff tied to commitment speed, scope, or terms.',
     strategySecondary:
@@ -384,8 +371,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'fixed-price-unclear-scope',
     title: 'Client wants a fixed price for an unclear project',
     h1: 'Client wants a fixed price for an unclear project',
-    metaTitle:
-      'Client Wants a Fixed Price for an Unclear Project | Flowdockr',
+    metaTitle: 'Client Wants a Fixed Price for an Unclear Project | FlowDockr',
     metaDescription:
       'Use this scenario when a client wants a fixed price for an unclear project. Protect yourself from under-scoping while still moving the deal forward.',
     archetype: 'pricing_probe',
@@ -401,10 +387,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client wants a fixed quote before the scope is stable enough to price accurately, which creates real delivery risk.',
     userGoal:
       'Protect yourself from under-scoping while still keeping the opportunity alive.',
-    searchIntentPrimary:
-      'client wants fixed price for unclear scope',
-    searchIntentSecondary:
-      'fixed price unclear project client reply',
+    searchIntentPrimary: 'client wants fixed price for unclear scope',
+    searchIntentSecondary: 'fixed price unclear project client reply',
     strategyPrimary:
       'Explain that a fixed price depends on a stable scope, assumptions, and boundaries.',
     strategySecondary:
@@ -421,8 +405,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'price-before-scope',
     title: 'Client wants a price before sharing the full scope',
     h1: 'Client wants a price before sharing the full scope',
-    metaTitle:
-      'Client Wants a Price Before Sharing the Full Scope | Flowdockr',
+    metaTitle: 'Client Wants a Price Before Sharing the Full Scope | FlowDockr',
     metaDescription:
       'Use this scenario when a client wants a price before sharing the full scope. Get clarity before committing to a misleading number.',
     archetype: 'pricing_probe',
@@ -438,10 +421,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client keeps pushing for a number before they have shared enough information to price the work responsibly.',
     userGoal:
       'Get the missing scope details before you commit to a number that can backfire later.',
-    searchIntentPrimary:
-      'client wants price before scope how to respond',
-    searchIntentSecondary:
-      'ballpark price before details client reply',
+    searchIntentPrimary: 'client wants price before scope how to respond',
+    searchIntentSecondary: 'ballpark price before details client reply',
     strategyPrimary:
       'Clarify what assumptions a number would depend on so the conversation stays grounded in scope.',
     strategySecondary:
@@ -459,7 +440,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client says they are reviewing internally and then disappears',
     h1: 'Client says they are reviewing internally and then disappears',
     metaTitle:
-      'Reviewing Internally Then No Response: How to Follow Up | Flowdockr',
+      'Reviewing Internally Then No Response: How to Follow Up | FlowDockr',
     metaDescription:
       'Use this scenario when a client says they are reviewing internally and then disappears. Prompt a decision or concrete next step.',
     previewReply:
@@ -485,10 +466,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client gave a plausible reason for delay, but now the internal review has stretched into silence and you need a reply that closes the loop.',
     userGoal:
       'Prompt a concrete timing update or decision without sounding impatient.',
-    searchIntentPrimary:
-      'client reviewing internally no response',
-    searchIntentSecondary:
-      'reviewing internally and disappeared client',
+    searchIntentPrimary: 'client reviewing internally no response',
+    searchIntentSecondary: 'reviewing internally and disappeared client',
     strategyPrimary:
       'Acknowledge that internal review can take time, then ask a focused question that helps the client close the loop.',
     strategySecondary:
@@ -516,8 +495,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'contract-sent-no-response',
     title: 'Client asks for the contract and then disappears',
     h1: 'Client asks for the contract and then disappears',
-    metaTitle:
-      'Client Asked for the Contract Then Disappeared | Flowdockr',
+    metaTitle: 'Client Asked for the Contract Then Disappeared | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for the contract and then disappears. Recover the deal and surface any hidden friction.',
     previewReply:
@@ -542,10 +520,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The deal looked close enough for paperwork, but after you sent the contract the client stopped responding.',
     userGoal:
       'Recover the deal and find out whether there is hidden friction on the contract, budget, or timing side.',
-    searchIntentPrimary:
-      'client asked for contract then disappeared',
-    searchIntentSecondary:
-      'follow up after sending contract no response',
+    searchIntentPrimary: 'client asked for contract then disappeared',
+    searchIntentSecondary: 'follow up after sending contract no response',
     strategyPrimary:
       'Reference the contract step directly so the client can tell you whether the blocker is legal, internal, or commercial.',
     strategySecondary:
@@ -573,8 +549,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'overdue-invoice-no-response',
     title: 'Client has not paid the invoice and stopped replying',
     h1: 'Client has not paid the invoice and stopped replying',
-    metaTitle:
-      'Client Not Paying the Invoice? What to Say Next | Flowdockr',
+    metaTitle: 'Client Not Paying the Invoice? What to Say Next | FlowDockr',
     metaDescription:
       'Use this scenario to write an overdue invoice follow-up when a client stopped replying. Ask for a payment date clearly without sounding vague, awkward, or hostile.',
     previewReply:
@@ -602,10 +577,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'You sent the invoice and at least one reminder, but payment is now overdue and the client has stopped responding.',
     userGoal:
       'Push for payment while keeping the message clear, professional, and specific about next action.',
-    searchIntentPrimary:
-      'client has not paid invoice and stopped replying',
-    searchIntentSecondary:
-      'overdue invoice no response client follow up',
+    searchIntentPrimary: 'client has not paid invoice and stopped replying',
+    searchIntentSecondary: 'overdue invoice no response client follow up',
     strategyPrimary:
       'Treat this as a payment-status message, not a relationship check-in.',
     strategySecondary:
@@ -633,8 +606,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'extra-revision-rounds',
     title: 'Client wants more revisions than agreed',
     h1: 'Client wants more revisions than agreed',
-    metaTitle:
-      'Client Wants More Revisions Than Agreed | Flowdockr',
+    metaTitle: 'Client Wants More Revisions Than Agreed | FlowDockr',
     metaDescription:
       'Use this scenario when a client wants more revisions than agreed. Enforce the revision boundary and offer a paid path forward.',
     cluster: 'scope',
@@ -654,10 +626,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The agreement includes a fixed number of revision rounds, but the client is now asking for more as if they are included.',
     userGoal:
       'Reinforce the revision boundary and give the client a clean paid option for continuing.',
-    searchIntentPrimary:
-      'client wants more revisions than agreed',
-    searchIntentSecondary:
-      'extra revision rounds client response',
+    searchIntentPrimary: 'client wants more revisions than agreed',
+    searchIntentSecondary: 'extra revision rounds client response',
     strategyPrimary:
       'Reference the agreed revision scope and keep the boundary factual rather than emotional.',
     strategySecondary:
@@ -675,7 +645,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client expects ongoing support after the project ends',
     h1: 'Client expects ongoing support after the project ends',
     metaTitle:
-      'Client Expects Ongoing Support After the Project Ends | Flowdockr',
+      'Client Expects Ongoing Support After the Project Ends | FlowDockr',
     metaDescription:
       'Use this scenario when a client expects ongoing support after the project ends. Draw a clean line between project delivery and ongoing support.',
     archetype: 'scope_control',
@@ -691,10 +661,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The project is ending, but the client is starting to treat you like open-ended support without a maintenance or retainer agreement.',
     userGoal:
       'Separate project delivery from ongoing support and set a cleaner commercial boundary.',
-    searchIntentPrimary:
-      'client expects ongoing support after project ends',
-    searchIntentSecondary:
-      'post project support client reply',
+    searchIntentPrimary: 'client expects ongoing support after project ends',
+    searchIntentSecondary: 'post project support client reply',
     strategyPrimary:
       'Clarify that the current project has an endpoint and that ongoing support needs its own scope or retainer.',
     strategySecondary:
@@ -712,7 +680,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client asks for a discount in exchange for future work',
     h1: 'Client asks for a discount in exchange for future work',
     metaTitle:
-      'Discount in Exchange for Future Work: How to Respond | Flowdockr',
+      'Discount in Exchange for Future Work: How to Respond | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount in exchange for future work. Convert vague promises into real commitments before changing price.',
     archetype: 'pricing_objection',
@@ -728,10 +696,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client is asking for a lower rate now based on future work that is still vague and uncommitted.',
     userGoal:
       'Convert vague future-work promises into a defined commitment before you trade price.',
-    searchIntentPrimary:
-      'client asks for discount in exchange for future work',
-    searchIntentSecondary:
-      'future work discount request client reply',
+    searchIntentPrimary: 'client asks for discount in exchange for future work',
+    searchIntentSecondary: 'future work discount request client reply',
     strategyPrimary:
       'Do not treat possible future work as the same thing as an actual commitment.',
     strategySecondary:
@@ -749,7 +715,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client asks for a discount after approving the scope',
     h1: 'Client asks for a discount after approving the scope',
     metaTitle:
-      'Client Asks for a Discount After Approving the Scope | Flowdockr',
+      'Client Asks for a Discount After Approving the Scope | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for a discount after approving the scope. Do not let a late-stage ask reset the deal terms.',
     archetype: 'pricing_objection',
@@ -765,10 +731,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client has already accepted the scope and only at the final step asks for a discount before committing.',
     userGoal:
       'Prevent a late-stage discount ask from quietly resetting the terms of the deal.',
-    searchIntentPrimary:
-      'client asks for discount after approving scope',
-    searchIntentSecondary:
-      'late stage discount request client reply',
+    searchIntentPrimary: 'client asks for discount after approving scope',
+    searchIntentSecondary: 'late stage discount request client reply',
     strategyPrimary:
       'Make it clear that the current price reflects the already approved scope.',
     strategySecondary:
@@ -785,12 +749,11 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'out-of-budget-but-interested',
     title: 'Client says it is out of budget but still interested',
     h1: 'Client says it is out of budget but still interested',
-    metaTitle:
-      'Out of Budget but Still Interested? What to Say | Flowdockr',
+    metaTitle: 'Out of Budget but Still Interested? What to Say | FlowDockr',
     metaDescription:
       'Use this scenario to reply when a client says they want to work with you but the current proposal is out of budget. Keep the deal alive without shrinking the same scope into a weaker price.',
     previewReply:
-      'I appreciate that, and I\'m glad there\'s real interest here. Rather than reduce the same scope and weaken the result, the better move is to look at a smaller first phase or a leaner version that fits the budget more cleanly.',
+      "I appreciate that, and I'm glad there's real interest here. Rather than reduce the same scope and weaken the result, the better move is to look at a smaller first phase or a leaner version that fits the budget more cleanly.",
     heroDescription:
       'Use this scenario when the client wants to move forward, but the current proposal is out of budget. Get a reply that keeps momentum without defaulting to a discount.',
     pagePromise:
@@ -812,10 +775,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'The client is giving a real buying signal, but the current version does not fit budget and they want help finding another path.',
     userGoal:
       'Keep the deal alive without shrinking the same scope into a weaker price.',
-    searchIntentPrimary:
-      'client says out of budget but still interested',
-    searchIntentSecondary:
-      'out of budget but interested client reply',
+    searchIntentPrimary: 'client says out of budget but still interested',
+    searchIntentSecondary: 'out of budget but interested client reply',
     strategyPrimary:
       'Treat the interest as real and shift the conversation toward a leaner scope, phased rollout, or smaller first step.',
     strategySecondary:
@@ -835,7 +796,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client asks for one more page after scope is agreed',
     h1: 'Client asks for one more page after scope is agreed',
     metaTitle:
-      'Client Asks for One More Page After Scope Is Agreed | Flowdockr',
+      'Client Asks for One More Page After Scope Is Agreed | FlowDockr',
     metaDescription:
       'Use this scenario when a client asks for one more page after scope is already agreed. Make the scope change explicit and billable.',
     previewReply:
@@ -861,10 +822,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'You already aligned on project scope and pricing, but before kickoff the client casually adds another page and treats it like a minor extra.',
     userGoal:
       'Acknowledge the request while making the scope change explicit and billable.',
-    searchIntentPrimary:
-      'client asks for one more page after scope agreed',
-    searchIntentSecondary:
-      'extra page request client reply',
+    searchIntentPrimary: 'client asks for one more page after scope agreed',
+    searchIntentSecondary: 'extra page request client reply',
     strategyPrimary:
       'Name the additional deliverable clearly instead of absorbing it as a casual add-on.',
     strategySecondary:
@@ -884,7 +843,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     title: 'Client adds urgent work but expects the same budget',
     h1: 'Client adds urgent work but expects the same budget',
     metaTitle:
-      'Client Adds Urgent Work but Expects the Same Budget | Flowdockr',
+      'Client Adds Urgent Work but Expects the Same Budget | FlowDockr',
     metaDescription:
       'Use this scenario when a client adds urgent work but expects the same budget. Flag both the scope increase and urgency cost clearly.',
     archetype: 'scope_control',
@@ -900,10 +859,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'Mid-project, the client adds urgent work with a tighter deadline and assumes it fits within the original quote.',
     userGoal:
       'Flag both the scope increase and urgency cost without escalating the tone.',
-    searchIntentPrimary:
-      'client adds urgent work but expects same budget',
-    searchIntentSecondary:
-      'urgent add on same budget client reply',
+    searchIntentPrimary: 'client adds urgent work but expects same budget',
+    searchIntentSecondary: 'urgent add on same budget client reply',
     strategyPrimary:
       'Separate the urgency issue from the scope issue so both tradeoffs stay visible.',
     strategySecondary:
@@ -920,8 +877,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     slug: 'help-define-scope',
     title: 'Client says they need help figuring out the scope',
     h1: 'Client says they need help figuring out the scope',
-    metaTitle:
-      'Client Needs Help Figuring Out the Scope | Flowdockr',
+    metaTitle: 'Client Needs Help Figuring Out the Scope | FlowDockr',
     metaDescription:
       'Use this scenario when a client says they need help figuring out the scope. Turn ambiguity into a structured discovery step instead of free consulting.',
     archetype: 'pricing_probe',
@@ -937,10 +893,8 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
       'A lead is interested but does not have a stable brief yet and wants you to help shape what the project should include.',
     userGoal:
       'Turn ambiguity into a structured discovery step instead of free consulting.',
-    searchIntentPrimary:
-      'client needs help figuring out scope',
-    searchIntentSecondary:
-      'help client define project scope reply',
+    searchIntentPrimary: 'client needs help figuring out scope',
+    searchIntentSecondary: 'help client define project scope reply',
     strategyPrimary:
       'Treat scope definition as real strategic work rather than an informal pre-sales extra.',
     strategySecondary:

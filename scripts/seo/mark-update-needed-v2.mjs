@@ -99,7 +99,9 @@ if (!selected.length) {
   lines.push('- none');
 } else {
   for (const row of selected.slice(0, 200)) {
-    lines.push(`- ${row.id} ${row.route} (impressions=${row.gsc_impressions}, ctr=${row.ctr})`);
+    lines.push(
+      `- ${row.id} ${row.route} (impressions=${row.gsc_impressions}, ctr=${row.ctr})`
+    );
   }
 }
 lines.push('');

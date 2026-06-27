@@ -1,5 +1,9 @@
 export type ScenarioRiskLevel = 'low' | 'medium' | 'high';
-export type ScenarioToneProfile = 'firm' | 'calm' | 'warm-firm' | 'decision-oriented';
+export type ScenarioToneProfile =
+  | 'firm'
+  | 'calm'
+  | 'warm-firm'
+  | 'decision-oriented';
 export type ToneProfile = ScenarioToneProfile;
 export type ScenarioCategory = 'negotiation' | 'pricing' | 'difficult-clients';
 export type ScenarioSlug = string;

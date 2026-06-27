@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">FlowDockr app icon</title>
+  <desc id="desc">A rounded white app icon containing the FlowDockr F ribbon mark.</desc>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="#FFFFFF"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="#E6E8F4"/>
+  <g transform="translate(10 9) scale(1.75)">
+    <path d="M11.2 31.8C8.1 30.5 6.6 27.6 6.8 23.1C7.1 13.8 14.8 8.4 24.3 8.4H54.8C54.5 18.4 47.4 25.9 37.8 26.2H24.8C18.2 26.2 13.8 28.1 11.2 31.8Z" fill="#8A7BFF"/>
+    <path d="M7.8 23.5C8.8 14.4 16.1 9.8 24.4 9.8H52.9C51.9 14.8 49.2 19.4 45.1 22.3H23.8C17.5 22.3 12.3 22.8 7.8 23.5Z" fill="#B39DFF" opacity="0.52"/>
+    <path d="M9.1 24.5C11.4 18.7 17.1 15.6 24.7 15.6H51.8C50.2 19.2 47.6 22.1 44.1 23.7H24.4C17.8 23.7 12.8 24.1 9.1 24.5Z" fill="#FFFFFF" opacity="0.24"/>
+    <path d="M39.7 25.6C47.1 23.4 52.2 17.1 54.3 8.4H54.8C54.5 18.4 47.4 25.9 37.8 26.2H24.8C18.2 26.2 13.8 28.1 11.2 31.8C14.2 27.6 18.9 25.6 27.1 25.6H39.7Z" fill="#6C63FF" opacity="0.34"/>
+    <path d="M14.4 44.8C16.2 36.7 23.2 31.5 32.2 31.5H51.1C49.8 39.2 43.8 44.7 35.5 44.7H14.4Z" fill="#57D0E6"/>
+    <path d="M15.1 43C18 36 24.3 31.5 32.2 31.5H43.8C40.3 35.6 34.9 37.9 28.8 37.9H22.8C18.5 37.9 16 39.5 15.1 43Z" fill="#8A7BFF" opacity="0.5"/>
+    <path d="M15.3 42.3C18.6 35.7 25.2 31.8 33.6 31.8H45.3C41.8 36.1 36.2 38.5 29.5 38.5H22.9C19 38.5 16.6 39.8 15.3 42.3Z" fill="#FFFFFF" opacity="0.32"/>
+    <path d="M9.5 56.4V43.7C9.5 35.5 15.9 30.8 25.5 30.8H36.5C34.9 42.7 25.8 53 9.5 56.4Z" fill="#6C63FF"/>
+    <path d="M9.5 56.4V44.4C9.5 39.3 11.8 35.6 16.3 33.5C18.9 38.7 17.3 47.7 9.5 56.4Z" fill="#B39DFF" opacity="0.36"/>
+  </g>
+</svg>

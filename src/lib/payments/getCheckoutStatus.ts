@@ -1,11 +1,10 @@
-import { eq } from 'drizzle-orm';
-
-import { getUserBillingProfile } from '@/lib/billing';
-import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
-import { db, purchase, user } from '@/lib/db';
 import { isPricingAnalyticsSourceSurface } from '@/lib/analytics/pricingAttribution';
+import { getUserBillingProfile } from '@/lib/billing';
+import { db, purchase, user } from '@/lib/db';
+import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 import type { CheckoutStatusResponse, PurchaseStatus } from '@/types/payments';
 import type { PricingScenarioAttributionSeedInput } from '@/types/pricing-analytics';
+import { eq } from 'drizzle-orm';
 
 function normalizePurchaseStatus(status: string): PurchaseStatus {
   if (status === 'paid') {

@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import { Scenario } from '@/types/scenario';
+
+import { Link } from '@/core/i18n/navigation';
 
 type ScenarioCardProps = {
   scenario: Scenario;
@@ -18,7 +19,10 @@ const CATEGORY_LABEL: Record<Scenario['category'], string> = {
   'difficult-clients': 'Difficult clients',
 };
 
-export function ScenarioCard({ scenario, ctaLabel = 'Open scenario' }: ScenarioCardProps) {
+export function ScenarioCard({
+  scenario,
+  ctaLabel = 'Open scenario',
+}: ScenarioCardProps) {
   return (
     <article className="rounded-lg border border-slate-200 p-4">
       <div className="mb-2 flex items-center justify-between gap-2">

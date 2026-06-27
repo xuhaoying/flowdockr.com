@@ -1,5 +1,6 @@
-import { Link } from '@/core/i18n/navigation';
 import type { NextDecisionLink } from '@/types/content';
+
+import { Link } from '@/core/i18n/navigation';
 
 type GuideLinkGridProps = {
   title: string;

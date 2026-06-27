@@ -1,6 +1,9 @@
-import { render, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { render, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { CheckoutCompletedTracker } from './CheckoutCompletedTracker';
+import { CheckoutStatusCard } from './CheckoutStatusCard';
 
 const { trackEvent } = vi.hoisted(() => ({
   trackEvent: vi.fn(),
@@ -22,9 +25,6 @@ vi.mock('@/core/i18n/navigation', () => ({
     <a href={href}>{children}</a>
   ),
 }));
-
-import { CheckoutCompletedTracker } from './CheckoutCompletedTracker';
-import { CheckoutStatusCard } from './CheckoutStatusCard';
 
 function buildJsonResponse(payload: unknown) {
   return {

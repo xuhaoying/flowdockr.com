@@ -24,8 +24,8 @@
     ],
     "url": "/pricing/price-pushback-after-proposal/",
     "h1": "Price pushback after proposal",
-    "metaTitle": "How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr",
-    "metaDescription": "Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with Flowdockr.",
+    "metaTitle": "How to Respond When a Prospect Says Your Quote Is Too High | FlowDockr",
+    "metaDescription": "Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with FlowDockr.",
     "heroSubheading": "Handle price pushback after sending a proposal without discounting too early.",
     "situationSummary": "This usually happens after a prospect reviews your proposal and says the price feels high. In many cases, this is a negotiation signal rather than a true rejection.",
     "commonClientMessages": [
@@ -110,7 +110,7 @@
     ],
     "toolCta": {
       "title": "Generate a tailored reply",
-      "body": "Paste the prospect's exact message, your quote, and the tone you want. Flowdockr will draft a reply that protects your rate without sounding defensive.",
+      "body": "Paste the prospect's exact message, your quote, and the tone you want. FlowDockr will draft a reply that protects your rate without sounding defensive.",
       "buttonLabel": "Generate my reply",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -141,8 +141,8 @@
     ],
     "url": "/pricing/discount-pressure-before-signing/",
     "h1": "Discount pressure before signing",
-    "metaTitle": "How to Handle Discount Pressure Before Signing | Flowdockr",
-    "metaDescription": "Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with Flowdockr.",
+    "metaTitle": "How to Handle Discount Pressure Before Signing | FlowDockr",
+    "metaDescription": "Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with FlowDockr.",
     "heroSubheading": "Keep the deal moving without training the client to expect last-minute concessions.",
     "situationSummary": "The prospect is close to moving forward, but asks for a discount before committing. This is a leverage moment, not just a wording problem.",
     "coreFear": [
@@ -217,7 +217,7 @@
     ],
     "toolCta": {
       "title": "Draft a closing-stage reply",
-      "body": "Paste the exact discount request and your current offer. Flowdockr will help you reply without weakening your position right before the deal closes.",
+      "body": "Paste the exact discount request and your current offer. FlowDockr will help you reply without weakening your position right before the deal closes.",
       "buttonLabel": "Draft my closing reply",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -248,8 +248,8 @@
     ],
     "url": "/pricing/budget-lower-than-expected/",
     "h1": "Budget lower than expected",
-    "metaTitle": "How to Respond When the Budget Is Lower Than Your Quote | Flowdockr",
-    "metaDescription": "Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with Flowdockr.",
+    "metaTitle": "How to Respond When the Budget Is Lower Than Your Quote | FlowDockr",
+    "metaDescription": "Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with FlowDockr.",
     "heroSubheading": "Protect your pricing logic by reshaping the project, not shrinking your value.",
     "situationSummary": "The client budget is genuinely below your quote. The real decision is whether to restructure the work, not whether to panic-cut your rate.",
     "coreFear": [
@@ -324,7 +324,7 @@
     ],
     "toolCta": {
       "title": "Restructure the reply around budget",
-      "body": "Paste the client's budget, your original quote, and what parts of the project matter most. Flowdockr will help you draft a reply that restructures the work without underpricing yourself.",
+      "body": "Paste the client's budget, your original quote, and what parts of the project matter most. FlowDockr will help you draft a reply that restructures the work without underpricing yourself.",
       "buttonLabel": "Restructure my reply",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -355,8 +355,8 @@
     ],
     "url": "/pricing/cheaper-competitor-comparison/",
     "h1": "Cheaper competitor comparison",
-    "metaTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr",
-    "metaDescription": "Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with Flowdockr.",
+    "metaTitle": "How to Respond When a Prospect Says Someone Else Is Cheaper | FlowDockr",
+    "metaDescription": "Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with FlowDockr.",
     "heroSubheading": "Stay out of commodity pricing and bring the conversation back to fit, quality, and outcomes.",
     "situationSummary": "The prospect introduces a cheaper competitor into the conversation. Your job is not to win a price war, but to clarify differences and reposition the decision.",
     "coreFear": [
@@ -431,7 +431,7 @@
     ],
     "toolCta": {
       "title": "Draft a competitor-comparison reply",
-      "body": "Paste the competitor comparison message and your offer details. Flowdockr will help you reply without slipping into a defensive price war.",
+      "body": "Paste the competitor comparison message and your offer details. FlowDockr will help you reply without slipping into a defensive price war.",
       "buttonLabel": "Draft comparison reply",
       "toolSlug": "price-negotiation-email-generator"
     },
@@ -459,8 +459,8 @@
     "doNotCompeteWith": ["budget-lower-than-expected"],
     "url": "/pricing/more-work-same-price/",
     "h1": "More work for the same price",
-    "metaTitle": "How to Respond When They Want More Work for the Same Price | Flowdockr",
-    "metaDescription": "Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with Flowdockr.",
+    "metaTitle": "How to Respond When They Want More Work for the Same Price | FlowDockr",
+    "metaDescription": "Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with FlowDockr.",
     "heroSubheading": "Protect the project boundary before 'just one more thing' becomes a new scope.",
     "situationSummary": "The client wants additional work, revisions, or deliverables without changing the budget. This is where pricing pressure starts to merge with scope creep.",
     "coreFear": [
@@ -535,7 +535,7 @@
     ],
     "toolCta": {
       "title": "Respond to an expanded-scope request",
-      "body": "Paste the extra request and your original scope. Flowdockr will help you respond clearly without sounding defensive or opening the door to unpaid work.",
+      "body": "Paste the extra request and your original scope. FlowDockr will help you respond clearly without sounding defensive or opening the door to unpaid work.",
       "buttonLabel": "Draft a boundary reply",
       "toolSlug": "reply-generator"
     },
@@ -566,8 +566,8 @@
     ],
     "url": "/pricing/free-trial-work-request/",
     "h1": "Free trial work request",
-    "metaTitle": "How to Respond to a Free Trial Work Request | Flowdockr",
-    "metaDescription": "Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with Flowdockr.",
+    "metaTitle": "How to Respond to a Free Trial Work Request | FlowDockr",
+    "metaDescription": "Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with FlowDockr.",
     "heroSubheading": "Stay professional without normalizing unpaid proof-of-work.",
     "situationSummary": "The prospect wants proof before hiring, but the request crosses into unpaid work. The key is to protect your boundary without sounding hostile.",
     "coreFear": [
@@ -642,7 +642,7 @@
     ],
     "toolCta": {
       "title": "Set a boundary without sounding hostile",
-      "body": "Paste the free-trial request and your preferred boundary. Flowdockr will draft a response that stays professional without giving away unpaid work.",
+      "body": "Paste the free-trial request and your preferred boundary. FlowDockr will draft a response that stays professional without giving away unpaid work.",
       "buttonLabel": "Draft my boundary reply",
       "toolSlug": "reply-generator"
     },
@@ -674,8 +674,8 @@
     ],
     "url": "/pricing/can-you-do-it-cheaper/",
     "h1": "Can you do it cheaper?",
-    "metaTitle": "How to Respond When They Ask \"Can You Do It Cheaper?\" | Flowdockr",
-    "metaDescription": "Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with Flowdockr.",
+    "metaTitle": "How to Respond When They Ask \"Can You Do It Cheaper?\" | FlowDockr",
+    "metaDescription": "Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with FlowDockr.",
     "heroSubheading": "A common question - but not always the same decision problem underneath.",
     "situationSummary": "This is a broad, everyday pricing question. The real job of this page is to help the user identify whether the issue is generic pushback, real budget mismatch, or direct discount pressure.",
     "coreFear": [
@@ -750,7 +750,7 @@
     ],
     "toolCta": {
       "title": "Figure out what this message really means",
-      "body": "Paste the exact message and Flowdockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure - then draft the right reply.",
+      "body": "Paste the exact message and FlowDockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure - then draft the right reply.",
       "buttonLabel": "Interpret this message",
       "toolSlug": "reply-generator"
     },
@@ -781,8 +781,8 @@
     ],
     "url": "/pricing/small-discount-before-closing/",
     "h1": "Small discount before closing",
-    "metaTitle": "How to Handle a Small Discount Request Right Before Closing | Flowdockr",
-    "metaDescription": "Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using Flowdockr.",
+    "metaTitle": "How to Handle a Small Discount Request Right Before Closing | FlowDockr",
+    "metaDescription": "Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using FlowDockr.",
     "heroSubheading": "The request sounds small - but the pricing signal it sends is not.",
     "situationSummary": "The deal is almost closed, and the prospect asks for one last small reduction. The challenge is to protect your anchor without derailing momentum.",
     "coreFear": [
@@ -857,7 +857,7 @@
     ],
     "toolCta": {
       "title": "Close without weakening your price",
-      "body": "Paste the final discount request and your current offer. Flowdockr will help you close professionally without undermining your pricing at the last minute.",
+      "body": "Paste the final discount request and your current offer. FlowDockr will help you close professionally without undermining your pricing at the last minute.",
       "buttonLabel": "Draft my closing response",
       "toolSlug": "price-negotiation-email-generator"
     },

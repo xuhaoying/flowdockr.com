@@ -29,9 +29,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'price-pushback-after-proposal',
     title: 'Price pushback after proposal',
     seoTitle:
-      'How to Respond When a Prospect Says Your Quote Is Too High | Flowdockr',
+      'How to Respond When a Prospect Says Your Quote Is Too High | FlowDockr',
     metaDescription:
-      'Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with Flowdockr.',
+      'Learn how to respond when a prospect says your quote is too high after reviewing your proposal. Protect your rate, keep the deal alive, and generate a tailored reply with FlowDockr.',
     primaryKeyword: 'quote too high',
     keywordVariants: [
       'price too high',
@@ -133,7 +133,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'quote-too-high',
     toolCta:
-      'Paste the prospect’s exact message, your quote, and the tone you want. Flowdockr will draft a reply that protects your rate without sounding defensive.',
+      'Paste the prospect’s exact message, your quote, and the tone you want. FlowDockr will draft a reply that protects your rate without sounding defensive.',
   },
 
   {
@@ -141,9 +141,9 @@ const corePricingScenarios: PricingScenario[] = [
     featured: true,
     slug: 'discount-pressure-before-signing',
     title: 'Discount pressure before signing',
-    seoTitle: 'How to Handle Discount Pressure Before Signing | Flowdockr',
+    seoTitle: 'How to Handle Discount Pressure Before Signing | FlowDockr',
     metaDescription:
-      'Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with Flowdockr.',
+      'Learn how to respond when a prospect asks for a discount right before signing. Protect your margin, keep leverage, and generate a tailored reply with FlowDockr.',
     primaryKeyword: 'ask for discount before signing',
     keywordVariants: [
       'discount before closing',
@@ -244,7 +244,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'discount-request',
     toolCta:
-      'Paste the exact discount request and your current offer. Flowdockr will help you reply without weakening your position right before the deal closes.',
+      'Paste the exact discount request and your current offer. FlowDockr will help you reply without weakening your position right before the deal closes.',
   },
 
   {
@@ -253,9 +253,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'budget-lower-than-expected',
     title: 'Budget lower than expected',
     seoTitle:
-      'How to Respond When the Budget Is Lower Than Your Quote | Flowdockr',
+      'How to Respond When the Budget Is Lower Than Your Quote | FlowDockr',
     metaDescription:
-      'Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with Flowdockr.',
+      'Learn how to handle low-budget projects without lowering your rate by default. Use scope reduction, option framing, and tailored replies with FlowDockr.',
     primaryKeyword: 'budget lower than quote',
     keywordVariants: [
       'lower budget than expected',
@@ -355,7 +355,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'budget-limited',
     toolCta:
-      'Paste the client’s budget, your original quote, and what parts of the project matter most. Flowdockr will help you draft a reply that restructures the work without underpricing yourself.',
+      'Paste the client’s budget, your original quote, and what parts of the project matter most. FlowDockr will help you draft a reply that restructures the work without underpricing yourself.',
   },
 
   {
@@ -364,9 +364,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'cheaper-competitor-comparison',
     title: 'Cheaper competitor comparison',
     seoTitle:
-      'How to Respond When a Prospect Says Someone Else Is Cheaper | Flowdockr',
+      'How to Respond When a Prospect Says Someone Else Is Cheaper | FlowDockr',
     metaDescription:
-      'Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with Flowdockr.',
+      'Learn how to respond when a prospect compares your price to a cheaper competitor. Reframe value, avoid price wars, and generate a tailored reply with FlowDockr.',
     primaryKeyword: 'another freelancer is cheaper',
     keywordVariants: [
       'competitor quoted less',
@@ -467,7 +467,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'cheaper-freelancer',
     toolCta:
-      'Paste the competitor comparison message and your offer details. Flowdockr will help you reply without slipping into a defensive price war.',
+      'Paste the competitor comparison message and your offer details. FlowDockr will help you reply without slipping into a defensive price war.',
   },
 
   {
@@ -475,9 +475,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'more-work-same-price',
     title: 'More work for the same price',
     seoTitle:
-      'How to Respond When They Want More Work for the Same Price | Flowdockr',
+      'How to Respond When They Want More Work for the Same Price | FlowDockr',
     metaDescription:
-      'Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with Flowdockr.',
+      'Learn how to handle extra requests without opening the door to unpaid scope creep. Set boundaries, re-quote clearly, and generate a tailored reply with FlowDockr.',
     primaryKeyword: 'more work same price',
     keywordVariants: [
       'extra deliverables same budget',
@@ -574,16 +574,16 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'extra-work-outside-scope',
     toolCta:
-      'Paste the extra request and your original scope. Flowdockr will help you respond clearly without sounding defensive or opening the door to unpaid work.',
+      'Paste the extra request and your original scope. FlowDockr will help you respond clearly without sounding defensive or opening the door to unpaid work.',
   },
 
   {
     tier: 'tier2',
     slug: 'free-trial-work-request',
     title: 'Free trial work request',
-    seoTitle: 'How to Respond to a Free Trial Work Request | Flowdockr',
+    seoTitle: 'How to Respond to a Free Trial Work Request | FlowDockr',
     metaDescription:
-      'Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with Flowdockr.',
+      'Learn how to respond when a prospect asks for unpaid trial work. Protect your boundaries, offer paid alternatives, and generate a tailored reply with FlowDockr.',
     primaryKeyword: 'free trial work request',
     keywordVariants: [
       'unpaid sample work',
@@ -677,7 +677,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'free-sample-request-response',
     toolCta:
-      'Paste the free-trial request and your preferred boundary. Flowdockr will draft a response that stays professional without giving away unpaid work.',
+      'Paste the free-trial request and your preferred boundary. FlowDockr will draft a response that stays professional without giving away unpaid work.',
   },
 
   {
@@ -685,9 +685,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'can-you-do-it-cheaper',
     title: 'Can you do it cheaper?',
     seoTitle:
-      'How to Respond When They Ask “Can You Do It Cheaper?” | Flowdockr',
+      'How to Respond When They Ask “Can You Do It Cheaper?” | FlowDockr',
     metaDescription:
-      'Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with Flowdockr.',
+      'Learn how to respond when someone asks if you can do it cheaper. Use scope options, protect your pricing, and find the right next move with FlowDockr.',
     primaryKeyword: 'can you do it cheaper',
     keywordVariants: [
       'can you make it cheaper',
@@ -783,7 +783,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'discount-request',
     toolCta:
-      'Paste the exact message and Flowdockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure, then draft the right reply.',
+      'Paste the exact message and FlowDockr will help you figure out whether this is price pushback, budget mismatch, or discount pressure, then draft the right reply.',
   },
 
   {
@@ -791,9 +791,9 @@ const corePricingScenarios: PricingScenario[] = [
     slug: 'small-discount-before-closing',
     title: 'Small discount before closing',
     seoTitle:
-      'How to Handle a Small Discount Request Right Before Closing | Flowdockr',
+      'How to Handle a Small Discount Request Right Before Closing | FlowDockr',
     metaDescription:
-      'Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using Flowdockr.',
+      'Learn how to respond when a prospect asks for one last small discount before signing. Protect your price anchor and close without unnecessary concessions using FlowDockr.',
     primaryKeyword: 'small discount before signing',
     keywordVariants: [
       'final small discount request',
@@ -889,7 +889,7 @@ const corePricingScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'discount-request',
     toolCta:
-      'Paste the final discount request and your current offer. Flowdockr will help you close professionally without undermining your pricing at the last minute.',
+      'Paste the final discount request and your current offer. FlowDockr will help you close professionally without undermining your pricing at the last minute.',
   },
 ];
 
@@ -899,9 +899,9 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     featured: true,
     slug: 'client-asking-for-extra-work',
     title: 'How to respond when a client asks for extra work',
-    seoTitle: 'How to Respond When a Client Asks for Extra Work | Flowdockr',
+    seoTitle: 'How to Respond When a Client Asks for Extra Work | FlowDockr',
     metaDescription:
-      'Learn how to respond when a client asks for extra work outside the original agreement. Set a clean scope boundary, protect the relationship, and draft the reply with Flowdockr.',
+      'Learn how to respond when a client asks for extra work outside the original agreement. Set a clean scope boundary, protect the relationship, and draft the reply with FlowDockr.',
     primaryKeyword: 'how to respond to client asking for extra work',
     keywordVariants: [
       'client asks for extra work what to say',
@@ -1003,16 +1003,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'extra-work-outside-scope',
     toolCta:
-      'Paste the extra request and the original scope. Flowdockr will help you write a reply that keeps the relationship intact without silently expanding the project.',
+      'Paste the extra request and the original scope. FlowDockr will help you write a reply that keeps the relationship intact without silently expanding the project.',
   },
 
   {
     tier: 'tier2',
     slug: 'say-no-to-scope-creep-politely',
     title: 'How to say no to scope creep politely',
-    seoTitle: 'How to Say No to Scope Creep Politely | Flowdockr',
+    seoTitle: 'How to Say No to Scope Creep Politely | FlowDockr',
     metaDescription:
-      'Learn how to say no to scope creep politely without sounding defensive. Use clear scope language, client-safe wording, and Flowdockr to draft the reply.',
+      'Learn how to say no to scope creep politely without sounding defensive. Use clear scope language, client-safe wording, and FlowDockr to draft the reply.',
     primaryKeyword: 'how to say no to scope creep politely',
     keywordVariants: [
       'polite scope creep response',
@@ -1114,16 +1114,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'set-boundaries-politely',
     toolCta:
-      'Paste the exact scope-creep message and the tone you want. Flowdockr will draft a reply that stays polite without making the boundary disappear.',
+      'Paste the exact scope-creep message and the tone you want. FlowDockr will draft a reply that stays polite without making the boundary disappear.',
   },
 
   {
     tier: 'tier3',
     slug: 'more-work-than-agreed',
     title: 'Client wants more work than agreed',
-    seoTitle: 'Client Wants More Work Than Agreed? What to Say | Flowdockr',
+    seoTitle: 'Client Wants More Work Than Agreed? What to Say | FlowDockr',
     metaDescription:
-      'Learn what to say when a client wants more work than agreed. Keep the agreement visible, avoid unpaid expansion, and draft the reply with Flowdockr.',
+      'Learn what to say when a client wants more work than agreed. Keep the agreement visible, avoid unpaid expansion, and draft the reply with FlowDockr.',
     primaryKeyword: 'client asking for more work than agreed what to say',
     keywordVariants: [
       'more work than agreed reply',
@@ -1226,7 +1226,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'extra-work-outside-scope',
     toolCta:
-      'Paste the client message and the original agreement details. Flowdockr will help you reply clearly when the request no longer matches what was agreed.',
+      'Paste the client message and the original agreement details. FlowDockr will help you reply clearly when the request no longer matches what was agreed.',
   },
 
   {
@@ -1234,9 +1234,9 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     slug: 'client-requesting-additional-revisions',
     title: 'How to handle a client requesting additional revisions',
     seoTitle:
-      'How to Handle a Client Requesting Additional Revisions | Flowdockr',
+      'How to Handle a Client Requesting Additional Revisions | FlowDockr',
     metaDescription:
-      'Learn how to respond when a client asks for additional revisions beyond the expected rounds. Protect approvals, timeline, and scope with Flowdockr.',
+      'Learn how to respond when a client asks for additional revisions beyond the expected rounds. Protect approvals, timeline, and scope with FlowDockr.',
     primaryKeyword: 'how to handle client requesting additional revisions',
     keywordVariants: [
       'client asking for more revisions',
@@ -1339,16 +1339,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'unlimited-revisions',
     toolCta:
-      'Paste the revision request and what rounds were originally included. Flowdockr will help you reply without drifting into unlimited revisions by default.',
+      'Paste the revision request and what rounds were originally included. FlowDockr will help you reply without drifting into unlimited revisions by default.',
   },
 
   {
     tier: 'tier2',
     slug: 'refuse-extra-work-without-losing-client',
     title: 'How to refuse extra work without losing the client',
-    seoTitle: 'How to Refuse Extra Work Without Losing the Client | Flowdockr',
+    seoTitle: 'How to Refuse Extra Work Without Losing the Client | FlowDockr',
     metaDescription:
-      'Learn how to refuse extra work without losing the client. Use polite but firm wording, offer clean alternatives, and draft the reply with Flowdockr.',
+      'Learn how to refuse extra work without losing the client. Use polite but firm wording, offer clean alternatives, and draft the reply with FlowDockr.',
     primaryKeyword: 'how to refuse extra work without losing client',
     keywordVariants: [
       'refuse extra work politely',
@@ -1451,7 +1451,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'set-boundaries-politely',
     toolCta:
-      'Paste the exact extra-work request and the relationship context. Flowdockr will help you refuse the added work without making the reply feel cold or reactive.',
+      'Paste the exact extra-work request and the relationship context. FlowDockr will help you refuse the added work without making the reply feel cold or reactive.',
   },
 
   {
@@ -1459,9 +1459,9 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     featured: true,
     slug: 'client-asking-for-discount',
     title: 'How to respond when a client asks for a discount',
-    seoTitle: 'How to Respond When a Client Asks for a Discount | Flowdockr',
+    seoTitle: 'How to Respond When a Client Asks for a Discount | FlowDockr',
     metaDescription:
-      'Learn how to respond when a client asks for a discount. Protect your rate, diagnose the real issue, and draft the right reply with Flowdockr.',
+      'Learn how to respond when a client asks for a discount. Protect your rate, diagnose the real issue, and draft the right reply with FlowDockr.',
     primaryKeyword: 'how to respond to client asking for discount',
     keywordVariants: [
       'client asks for discount what to say',
@@ -1564,16 +1564,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: pricingGuideLinks,
     generatorScenarioSlug: 'discount-request',
     toolCta:
-      'Paste the exact discount ask and the current offer. Flowdockr will help you reply without slipping into an automatic concession.',
+      'Paste the exact discount ask and the current offer. FlowDockr will help you reply without slipping into an automatic concession.',
   },
 
   {
     tier: 'tier2',
     slug: 'say-no-to-low-budget-client',
     title: 'How to say no to a low-budget client',
-    seoTitle: 'How to Say No to a Low-Budget Client | Flowdockr',
+    seoTitle: 'How to Say No to a Low-Budget Client | FlowDockr',
     metaDescription:
-      'Learn how to say no to a low-budget client politely. Protect your economics, avoid weak-fit work, and draft the reply with Flowdockr.',
+      'Learn how to say no to a low-budget client politely. Protect your economics, avoid weak-fit work, and draft the reply with FlowDockr.',
     primaryKeyword: 'how to say no to low budget client',
     keywordVariants: [
       'decline low budget client politely',
@@ -1676,16 +1676,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'say-no-to-low-budget-client',
     toolCta:
-      'Paste the budget message and your minimum workable range. Flowdockr will help you say no cleanly without making the reply feel hostile or defensive.',
+      'Paste the budget message and your minimum workable range. FlowDockr will help you say no cleanly without making the reply feel hostile or defensive.',
   },
 
   {
     tier: 'tier3',
     slug: 'client-negotiating-price',
     title: 'Client is negotiating price: what to say',
-    seoTitle: 'Client Negotiating Price? What to Say Next | Flowdockr',
+    seoTitle: 'Client Negotiating Price? What to Say Next | FlowDockr',
     metaDescription:
-      'Learn what to say when a client is negotiating price. Diagnose the pressure, protect your anchor, and draft the right response with Flowdockr.',
+      'Learn what to say when a client is negotiating price. Diagnose the pressure, protect your anchor, and draft the right response with FlowDockr.',
     primaryKeyword: 'client negotiating price what to say',
     keywordVariants: [
       'client negotiating price reply',
@@ -1788,16 +1788,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: pricingGuideLinks,
     generatorScenarioSlug: 'discount-request',
     toolCta:
-      'Paste the negotiation message and your current offer. Flowdockr will help you identify the real pressure and draft the right next reply.',
+      'Paste the negotiation message and your current offer. FlowDockr will help you identify the real pressure and draft the right next reply.',
   },
 
   {
     tier: 'tier2',
     slug: 'decline-underpaid-project-politely',
     title: 'How to decline an underpaid project politely',
-    seoTitle: 'How to Decline an Underpaid Project Politely | Flowdockr',
+    seoTitle: 'How to Decline an Underpaid Project Politely | FlowDockr',
     metaDescription:
-      'Learn how to decline an underpaid project politely without sounding bitter. Protect your positioning and draft the reply with Flowdockr.',
+      'Learn how to decline an underpaid project politely without sounding bitter. Protect your positioning and draft the reply with FlowDockr.',
     primaryKeyword: 'how to decline underpaid project politely',
     keywordVariants: [
       'underpaid project what to say',
@@ -1900,16 +1900,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: scopeGuideLinks,
     generatorScenarioSlug: 'do-it-for-less',
     toolCta:
-      'Paste the budget message and your scope notes. Flowdockr will help you decline the underpaid version cleanly without sounding bitter or apologetic.',
+      'Paste the budget message and your scope notes. FlowDockr will help you decline the underpaid version cleanly without sounding bitter or apologetic.',
   },
 
   {
     tier: 'tier2',
     slug: 'stand-firm-on-pricing',
     title: 'How to stand firm on pricing as a freelancer',
-    seoTitle: 'How to Stand Firm on Pricing as a Freelancer | Flowdockr',
+    seoTitle: 'How to Stand Firm on Pricing as a Freelancer | FlowDockr',
     metaDescription:
-      'Learn how to stand firm on pricing as a freelancer without sounding rigid. Use calm language, clear structure, and Flowdockr to draft the reply.',
+      'Learn how to stand firm on pricing as a freelancer without sounding rigid. Use calm language, clear structure, and FlowDockr to draft the reply.',
     primaryKeyword: 'how to stand firm on pricing freelance',
     keywordVariants: [
       'stand firm on pricing what to say',
@@ -2012,16 +2012,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     guideLinks: pricingGuideLinks,
     generatorScenarioSlug: 'stand-firm-on-pricing',
     toolCta:
-      'Paste the latest pricing pushback and your current offer. Flowdockr will help you hold the line in a way that sounds structured instead of stiff.',
+      'Paste the latest pricing pushback and your current offer. FlowDockr will help you hold the line in a way that sounds structured instead of stiff.',
   },
 
   {
     tier: 'tier2',
     slug: 'client-messaging-outside-work-hours',
     title: 'Client messaging outside work hours: what to say',
-    seoTitle: 'Client Messaging Outside Work Hours? What to Say | Flowdockr',
+    seoTitle: 'Client Messaging Outside Work Hours? What to Say | FlowDockr',
     metaDescription:
-      'Learn what to say when a client messages outside work hours. Set a calm boundary, reset expectations, and draft the reply with Flowdockr.',
+      'Learn what to say when a client messages outside work hours. Set a calm boundary, reset expectations, and draft the reply with FlowDockr.',
     primaryKeyword: 'client messaging outside work hours what to say',
     keywordVariants: [
       'client texting after hours what to say',
@@ -2123,7 +2123,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'client-messaging-outside-work-hours',
     toolCta:
-      'Paste the after-hours message and the boundary you want to keep. Flowdockr will draft a reply that resets expectations without sounding sharp.',
+      'Paste the after-hours message and the boundary you want to keep. FlowDockr will draft a reply that resets expectations without sounding sharp.',
   },
 
   {
@@ -2131,9 +2131,9 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     featured: true,
     slug: 'set-boundaries-with-demanding-client',
     title: 'How to set boundaries with a demanding client',
-    seoTitle: 'How to Set Boundaries With a Demanding Client | Flowdockr',
+    seoTitle: 'How to Set Boundaries With a Demanding Client | FlowDockr',
     metaDescription:
-      'Learn how to set boundaries with a demanding client without escalating the relationship. Protect time, tone, and expectations with Flowdockr.',
+      'Learn how to set boundaries with a demanding client without escalating the relationship. Protect time, tone, and expectations with FlowDockr.',
     primaryKeyword: 'how to set boundaries with demanding client',
     keywordVariants: [
       'demanding client boundaries',
@@ -2235,16 +2235,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'set-boundaries-with-demanding-client',
     toolCta:
-      'Paste the demanding message pattern and the boundary you want to hold. Flowdockr will help you reset expectations without escalating the relationship.',
+      'Paste the demanding message pattern and the boundary you want to hold. FlowDockr will help you reset expectations without escalating the relationship.',
   },
 
   {
     tier: 'tier2',
     slug: 'tell-client-you-are-unavailable',
     title: 'How to tell a client you are unavailable',
-    seoTitle: 'How to Tell a Client You Are Unavailable | Flowdockr',
+    seoTitle: 'How to Tell a Client You Are Unavailable | FlowDockr',
     metaDescription:
-      'Learn how to tell a client you are unavailable without sounding flaky or guilty. Set the expectation clearly and draft the reply with Flowdockr.',
+      'Learn how to tell a client you are unavailable without sounding flaky or guilty. Set the expectation clearly and draft the reply with FlowDockr.',
     primaryKeyword: 'how to tell client you are unavailable',
     keywordVariants: [
       'tell client unavailable professionally',
@@ -2345,16 +2345,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'tell-client-you-are-unavailable',
     toolCta:
-      'Paste the client message and the next time you can realistically respond. Flowdockr will help you say unavailable clearly without sounding flaky.',
+      'Paste the client message and the next time you can realistically respond. FlowDockr will help you say unavailable clearly without sounding flaky.',
   },
 
   {
     tier: 'tier2',
     slug: 'urgent-request-last-minute',
     title: 'How to respond to an urgent last-minute request',
-    seoTitle: 'How to Respond to an Urgent Last-Minute Request | Flowdockr',
+    seoTitle: 'How to Respond to an Urgent Last-Minute Request | FlowDockr',
     metaDescription:
-      'Learn how to respond to an urgent last-minute client request without overpromising. Protect scope, time, and urgency tradeoffs with Flowdockr.',
+      'Learn how to respond to an urgent last-minute client request without overpromising. Protect scope, time, and urgency tradeoffs with FlowDockr.',
     primaryKeyword: 'how to respond to urgent request last minute',
     keywordVariants: [
       'last minute urgent client request reply',
@@ -2455,16 +2455,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'urgent-request-last-minute',
     toolCta:
-      'Paste the urgent request and the real timeline constraints. Flowdockr will help you answer quickly without overpromising or giving away rush work for free.',
+      'Paste the urgent request and the real timeline constraints. FlowDockr will help you answer quickly without overpromising or giving away rush work for free.',
   },
 
   {
     tier: 'tier3',
     slug: 'client-expects-immediate-response',
     title: 'Client expects an immediate response: what to say',
-    seoTitle: 'Client Expects an Immediate Response? What to Say | Flowdockr',
+    seoTitle: 'Client Expects an Immediate Response? What to Say | FlowDockr',
     metaDescription:
-      'Learn what to say when a client expects an immediate response. Set reply-time boundaries clearly and draft the message with Flowdockr.',
+      'Learn what to say when a client expects an immediate response. Set reply-time boundaries clearly and draft the message with FlowDockr.',
     primaryKeyword: 'client expects immediate response what to say',
     keywordVariants: [
       'client expects instant reply',
@@ -2565,7 +2565,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'client-expects-immediate-response',
     toolCta:
-      'Paste the message and the response rhythm you want to keep. Flowdockr will help you reset immediate-response expectations without sounding checked out.',
+      'Paste the message and the response rhythm you want to keep. FlowDockr will help you reset immediate-response expectations without sounding checked out.',
   },
 
   {
@@ -2573,9 +2573,9 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     featured: true,
     slug: 'say-no-to-client-professionally',
     title: 'How to say no to a client professionally',
-    seoTitle: 'How to Say No to a Client Professionally | Flowdockr',
+    seoTitle: 'How to Say No to a Client Professionally | FlowDockr',
     metaDescription:
-      'Learn how to say no to a client professionally without sounding awkward or harsh. Decline cleanly, protect your positioning, and draft the reply with Flowdockr.',
+      'Learn how to say no to a client professionally without sounding awkward or harsh. Decline cleanly, protect your positioning, and draft the reply with FlowDockr.',
     primaryKeyword: 'how to say no to a client professionally',
     keywordVariants: [
       'say no to client politely',
@@ -2677,16 +2677,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'say-no-to-client-professionally',
     toolCta:
-      'Paste the inquiry and the reason you want to decline. Flowdockr will help you say no professionally without sounding awkward, guilty, or overly sharp.',
+      'Paste the inquiry and the reason you want to decline. FlowDockr will help you say no professionally without sounding awkward, guilty, or overly sharp.',
   },
 
   {
     tier: 'tier2',
     slug: 'decline-project-politely',
     title: 'How to decline a project politely',
-    seoTitle: 'How to Decline a Project Politely | Flowdockr',
+    seoTitle: 'How to Decline a Project Politely | FlowDockr',
     metaDescription:
-      'Learn how to decline a project politely without leaving the client confused. Close the loop cleanly and draft the reply with Flowdockr.',
+      'Learn how to decline a project politely without leaving the client confused. Close the loop cleanly and draft the reply with FlowDockr.',
     primaryKeyword: 'how to decline a project politely',
     keywordVariants: [
       'decline project professionally',
@@ -2788,16 +2788,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'decline-project-politely',
     toolCta:
-      'Paste the project request and how direct you want to be. Flowdockr will help you decline politely without leaving the thread confusingly open.',
+      'Paste the project request and how direct you want to be. FlowDockr will help you decline politely without leaving the thread confusingly open.',
   },
 
   {
     tier: 'tier2',
     slug: 'reject-client-without-burning-bridge',
     title: 'How to reject a client without burning the bridge',
-    seoTitle: 'How to Reject a Client Without Burning the Bridge | Flowdockr',
+    seoTitle: 'How to Reject a Client Without Burning the Bridge | FlowDockr',
     metaDescription:
-      'Learn how to reject a client without burning the bridge. Keep the tone positive, hold the no clearly, and draft the reply with Flowdockr.',
+      'Learn how to reject a client without burning the bridge. Keep the tone positive, hold the no clearly, and draft the reply with FlowDockr.',
     primaryKeyword: 'how to reject a client without burning bridge',
     keywordVariants: [
       'reject client without burning bridge',
@@ -2899,16 +2899,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'reject-client-without-burning-bridge',
     toolCta:
-      'Paste the inquiry and the relationship context. Flowdockr will help you reject the client cleanly while keeping the tone respectful and bridge-safe.',
+      'Paste the inquiry and the relationship context. FlowDockr will help you reject the client cleanly while keeping the tone respectful and bridge-safe.',
   },
 
   {
     tier: 'tier3',
     slug: 'turn-down-freelance-work-nicely',
     title: 'How to turn down freelance work nicely',
-    seoTitle: 'How to Turn Down Freelance Work Nicely | Flowdockr',
+    seoTitle: 'How to Turn Down Freelance Work Nicely | FlowDockr',
     metaDescription:
-      'Learn how to turn down freelance work nicely without sounding vague. Keep the no clear, kind, and professional with Flowdockr.',
+      'Learn how to turn down freelance work nicely without sounding vague. Keep the no clear, kind, and professional with FlowDockr.',
     primaryKeyword: 'how to turn down freelance work nicely',
     keywordVariants: [
       'turn down freelance work politely',
@@ -3008,16 +3008,16 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'turn-down-freelance-work-nicely',
     toolCta:
-      'Paste the project request and the tone you want. Flowdockr will help you turn the work down nicely without making the no ambiguous.',
+      'Paste the project request and the tone you want. FlowDockr will help you turn the work down nicely without making the no ambiguous.',
   },
 
   {
     tier: 'tier2',
     slug: 'refuse-project-due-to-workload',
     title: 'How to refuse a project due to workload',
-    seoTitle: 'How to Refuse a Project Due to Workload | Flowdockr',
+    seoTitle: 'How to Refuse a Project Due to Workload | FlowDockr',
     metaDescription:
-      'Learn how to refuse a project due to workload without sounding chaotic or unreliable. Protect capacity and draft the reply with Flowdockr.',
+      'Learn how to refuse a project due to workload without sounding chaotic or unreliable. Protect capacity and draft the reply with FlowDockr.',
     primaryKeyword: 'how to refuse a project due to workload',
     keywordVariants: [
       'decline project due to workload',
@@ -3119,7 +3119,7 @@ const boundaryScopeControlScenarios: PricingScenario[] = [
     ],
     generatorScenarioSlug: 'refuse-project-due-to-workload',
     toolCta:
-      'Paste the project request and your workload context. Flowdockr will help you say no in a way that sounds responsible rather than overloaded.',
+      'Paste the project request and your workload context. FlowDockr will help you say no in a way that sounds responsible rather than overloaded.',
   },
 ];
 

@@ -118,11 +118,11 @@ const siteUrl = getSiteUrl(appUrl);
 export const envConfigs: ConfigMap = {
   app_url: appUrl,
   site_url: siteUrl,
-  app_name: process.env.NEXT_PUBLIC_APP_NAME ?? 'Flowdockr',
+  app_name: process.env.NEXT_PUBLIC_APP_NAME ?? 'FlowDockr',
   app_description:
     process.env.NEXT_PUBLIC_APP_DESCRIPTION ?? 'Client Work OS for freelancers',
-  app_logo: process.env.NEXT_PUBLIC_APP_LOGO ?? '/logo.png',
-  app_favicon: process.env.NEXT_PUBLIC_APP_FAVICON ?? '/favicon.ico',
+  app_logo: process.env.NEXT_PUBLIC_APP_LOGO ?? '/logo.svg',
+  app_favicon: process.env.NEXT_PUBLIC_APP_FAVICON ?? '/favicon.svg',
   app_preview_image:
     process.env.NEXT_PUBLIC_APP_PREVIEW_IMAGE ?? '/preview.png',
   theme: process.env.NEXT_PUBLIC_THEME ?? 'default',

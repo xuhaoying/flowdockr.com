@@ -29,8 +29,7 @@ export function SignInForm({
 
   const isGoogleAuthEnabled = configs.google_auth_enabled === 'true';
   const isEmailAuthEnabled =
-    configs.email_auth_enabled !== 'false' ||
-    !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
+    configs.email_auth_enabled !== 'false' || !isGoogleAuthEnabled; // no social providers enabled, auto enable email auth
 
   if (callbackUrl) {
     if (
@@ -67,7 +66,10 @@ export function SignInForm({
         }),
       });
 
-      const payload = (await response.json()) as { ok: boolean; message?: string };
+      const payload = (await response.json()) as {
+        ok: boolean;
+        message?: string;
+      };
       if (!response.ok || !payload.ok) {
         throw new Error(payload.message || 'Failed to send magic link.');
       }
@@ -109,12 +111,16 @@ export function SignInForm({
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading || email.trim().length < 5}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loading || email.trim().length < 5}
+            >
               {loading ? 'Sending...' : 'Send magic link'}
             </Button>
 
             {sent ? (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Check your inbox for a secure sign-in link.
               </p>
             ) : null}
