@@ -73,9 +73,12 @@ const PROVIDER_OUTPUT = {
 
 describe('/api/generate route smoke', () => {
   beforeEach(() => {
+    vi.useRealTimers();
+    vi.clearAllMocks();
     process.env.FAL_API_KEY = 'test-fal-key';
     process.env.OPENAI_API_KEY = '';
     process.env.FLOWDOCKR_MODEL = 'gpt-5-mini';
+    delete process.env.FLOWDOCKR_AI_TIMEOUT_MS;
     delete process.env.FLOWDOCKR_DEBUG_OUTBOUND;
 
     mocks.getGenerationIdentity.mockResolvedValue({
@@ -204,5 +207,79 @@ describe('/api/generate route smoke', () => {
     expect(successLogCall?.[1]).toContain('"rubric_warning_reasons":');
     expect(successLogCall?.[1]).not.toContain('"rubric_passed"');
     expect(successLogCall?.[1]).not.toContain('"rubric_fail_reasons"');
+  });
+
+  it('returns a fallback reply before the 30s function limit when the provider hangs', async () => {
+    vi.useFakeTimers();
+    const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+    const providerFetch = vi.fn(
+      async (_input: RequestInfo | URL, init?: RequestInit) => {
+        return new Promise<Response>((_resolve, reject) => {
+          init?.signal?.addEventListener(
+            'abort',
+            () => {
+              reject(new DOMException('Aborted', 'AbortError'));
+            },
+            { once: true }
+          );
+        });
+      }
+    );
+
+    vi.stubGlobal('fetch', providerFetch);
+
+    const request = new NextRequest('http://localhost/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        scenarioSlug: 'quote-too-high',
+        message:
+          'Your quote feels too high for what we expected. If you can bring it down a bit, we can probably move this forward this week.',
+        sourcePage: 'tool',
+        serviceType: 'developer',
+        goal: 'protect_price',
+      }),
+    });
+
+    const responsePromise = POST(request);
+    await vi.advanceTimersByTimeAsync(20_000);
+    const response = await responsePromise;
+    const payload = (await response.json()) as {
+      success: boolean;
+      scenarioSlug: string;
+      reply: string;
+      generationId?: string;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload).toMatchObject({
+      success: true,
+      scenarioSlug: 'quote-too-high',
+      generationId: 'gen_smoke_123',
+    });
+    expect(payload.reply).toContain('commercial logic');
+    expect(providerFetch).toHaveBeenCalledTimes(1);
+    expect(mocks.consumeUsage).toHaveBeenCalledTimes(1);
+    expect(mocks.saveGeneration).toHaveBeenCalledTimes(1);
+
+    const savedGeneration = mocks.saveGeneration.mock.calls[0]?.[0];
+    expect(savedGeneration.confidence).toBe('low');
+    expect(savedGeneration.generationLog).toMatchObject({
+      fallbackUsed: true,
+      fallbackReason: 'provider_timeout',
+      rubricWarningReasons: ['Provider timed out after 20000ms.'],
+    });
+
+    const fallbackLogCall = infoSpy.mock.calls.find(
+      ([tag, body]) =>
+        tag === '[flowdockr.generate]' &&
+        typeof body === 'string' &&
+        body.includes('"event":"generation_fallback_used"')
+    );
+    expect(fallbackLogCall).toBeTruthy();
+
+    vi.useRealTimers();
   });
 });

@@ -17,9 +17,9 @@ type OpenAIResponsePayload = {
 
 const DEFAULT_MODEL = 'gpt-5-mini';
 const DEFAULT_FAL_OPENROUTER_MODEL = 'openai/gpt-4.1-mini';
-const DEFAULT_PROVIDER_TIMEOUT_MS = 30_000;
+const DEFAULT_PROVIDER_TIMEOUT_MS = 20_000;
 const MIN_PROVIDER_TIMEOUT_MS = 5_000;
-const MAX_PROVIDER_TIMEOUT_MS = 40_000;
+const MAX_PROVIDER_TIMEOUT_MS = 25_000;
 const OPENAI_RESPONSES_ENDPOINT = 'https://api.openai.com/v1/responses';
 const FAL_OPENROUTER_RESPONSES_ENDPOINT =
   'https://fal.run/openrouter/router/openai/v1/responses';

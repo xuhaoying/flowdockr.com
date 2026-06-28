@@ -116,4 +116,39 @@ describe('generateReplyWithAI outbound debug boundary', () => {
       expect.not.stringContaining('Your quote seems a bit high.')
     );
   });
+
+  it('uses a default provider timeout safely below the 30s Vercel function limit', async () => {
+    vi.useFakeTimers();
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (_input: RequestInfo | URL, init?: RequestInit) => {
+        return new Promise<Response>((_resolve, reject) => {
+          init?.signal?.addEventListener('abort', () => {
+            reject(new DOMException('Aborted', 'AbortError'));
+          });
+        });
+      })
+    );
+
+    const generationPromise = generateReplyWithAI(
+      {
+        scenarioSlug: 'quote-too-high',
+        message: 'Your quote seems a bit high.',
+        sourcePage: 'tool',
+        serviceType: 'developer',
+        goal: 'protect_price',
+      },
+      getScenarioBySlug('quote-too-high')!
+    );
+    const rejectionAssertion = expect(generationPromise).rejects.toMatchObject({
+      name: 'AIProviderTimeoutError',
+      timeoutMs: 20_000,
+    });
+
+    await vi.advanceTimersByTimeAsync(30_000);
+    await rejectionAssertion;
+
+    vi.useRealTimers();
+  });
 });
