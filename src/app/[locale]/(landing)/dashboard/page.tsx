@@ -33,7 +33,7 @@ export default async function DashboardPage({
           </p>
           <Link
             href="/signin?callbackUrl=/dashboard"
-            className="from-brand-primary to-brand-cyan shadow-brand-primary/25 mt-6 inline-flex rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
+            className="from-brand-primary to-brand-cyan shadow-brand-primary/25 mt-6 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
           >
             Send me a magic link
           </Link>
@@ -98,13 +98,13 @@ export default async function DashboardPage({
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/tools/reply-generator"
-                className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
+                className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
               >
                 Open conversation workspace
               </Link>
               <Link
                 href="/pricing"
-                className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-md border bg-white px-4 py-2 text-sm font-semibold"
+                className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-md border bg-white px-4 py-2 text-sm font-semibold"
               >
                 View credit packs
               </Link>

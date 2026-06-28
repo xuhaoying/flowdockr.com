@@ -156,7 +156,7 @@ export async function SavedDealsPanel() {
 
                   <Link
                     href={`/tools/reply-generator?scenario=${encodeURIComponent(row.scenarioSlug)}`}
-                    className="inline-flex h-9 items-center rounded-md border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 transition-colors hover:border-slate-400"
+                    className="inline-flex min-h-11 items-center rounded-md border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 transition-colors hover:border-slate-400"
                   >
                     Open workspace
                   </Link>

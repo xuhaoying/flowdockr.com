@@ -226,7 +226,7 @@ export default async function GuidePage({
             </p>
             <Link
               href={toolHref}
-              className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
+              className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
             >
               {guide.toolCta.buttonLabel}
             </Link>

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { PublicFooter } from '@/components/layout/PublicFooter';
 import { PublicHeader } from '@/components/layout/PublicHeader';
 
-import { LocaleDetector } from '@/shared/blocks/common';
+import { LocaleDetector } from '@/shared/blocks/common/locale-detector';
 
 export default function LandingLayout({ children }: { children: ReactNode }) {
   return (

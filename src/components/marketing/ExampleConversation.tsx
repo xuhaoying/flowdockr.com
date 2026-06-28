@@ -64,7 +64,7 @@ export function ExampleConversation() {
       </div>
       <Link
         href="/scenario/quote-too-high"
-        className="text-brand-primary inline-flex text-sm font-semibold underline"
+        className="text-brand-primary inline-flex min-h-11 items-center text-sm font-semibold underline"
       >
         See full scenario
       </Link>

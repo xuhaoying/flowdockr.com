@@ -50,11 +50,11 @@ export function CookieConsentBanner({ privacyHref }: CookieConsentBannerProps) {
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-50 w-auto sm:right-4 sm:left-auto sm:max-w-md">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:right-4 sm:left-auto sm:max-w-md sm:px-0">
       <div
         role="dialog"
         aria-label="Cookie and analytics consent"
-        className="border-brand-lavender/30 rounded-2xl border bg-white/95 p-3 shadow-lg shadow-slate-950/10 backdrop-blur sm:p-4"
+        className="border-brand-lavender/30 pointer-events-auto rounded-2xl border bg-white/95 p-3 shadow-lg shadow-slate-950/10 backdrop-blur sm:p-4"
       >
         <p className="text-sm font-semibold text-slate-900">
           Optional analytics
@@ -75,7 +75,7 @@ export function CookieConsentBanner({ privacyHref }: CookieConsentBannerProps) {
             type="button"
             variant="outline"
             size="sm"
-            className="min-h-10 flex-1 rounded-xl"
+            className="min-h-11 flex-1 rounded-xl"
             onClick={() => updateConsent('declined')}
           >
             Keep essential only
@@ -83,7 +83,7 @@ export function CookieConsentBanner({ privacyHref }: CookieConsentBannerProps) {
           <Button
             type="button"
             size="sm"
-            className="min-h-10 flex-1 rounded-xl"
+            className="min-h-11 flex-1 rounded-xl"
             onClick={() => updateConsent('accepted')}
           >
             Allow analytics

@@ -137,7 +137,10 @@ export default async function PricingHubPage({
         <p className="text-sm leading-6 text-slate-700">
           FlowDockr does not use an auto-renewing subscription today. There are
           no shipping fees because this is a digital software product. See the{' '}
-          <Link href="/refund" className="font-semibold underline">
+          <Link
+            href="/refund"
+            className="-mx-2 inline-flex min-h-11 items-center px-2 font-semibold underline"
+          >
             Refund Policy
           </Link>{' '}
           for refund eligibility and support timing.

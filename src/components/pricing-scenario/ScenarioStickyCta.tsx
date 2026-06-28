@@ -7,7 +7,7 @@ export function ScenarioStickyCta() {
       </p>
       <a
         href="#pricing-tool"
-        className="from-brand-primary to-brand-cyan shadow-brand-primary/25 mt-3 inline-flex rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
+        className="from-brand-primary to-brand-cyan shadow-brand-primary/25 mt-3 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
       >
         Generate my reply
       </a>

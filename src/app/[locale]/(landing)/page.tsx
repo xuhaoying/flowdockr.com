@@ -106,7 +106,7 @@ export default async function LandingPage({
         </p>
         <Link
           href="/guides/how-to-negotiate-freelance-pricing"
-          className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-md border bg-white px-4 py-2 text-sm font-semibold transition-colors"
+          className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-md border bg-white px-4 py-2 text-sm font-semibold transition-colors"
         >
           Open pricing negotiation guide
         </Link>

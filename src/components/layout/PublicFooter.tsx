@@ -61,7 +61,7 @@ export function PublicFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-brand-primary block"
+              className="hover:text-brand-primary flex min-h-11 items-center"
             >
               {link.label}
             </Link>
@@ -74,7 +74,7 @@ export function PublicFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-brand-primary block"
+              className="hover:text-brand-primary flex min-h-11 items-center"
             >
               {link.label}
             </Link>
@@ -87,7 +87,7 @@ export function PublicFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-brand-primary block"
+              className="hover:text-brand-primary flex min-h-11 items-center"
             >
               {link.label}
             </Link>

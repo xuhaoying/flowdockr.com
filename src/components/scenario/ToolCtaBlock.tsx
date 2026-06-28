@@ -26,13 +26,13 @@ export function ToolCtaBlock({ scenario }: ToolCtaBlockProps) {
       <div className="flex flex-wrap gap-3">
         <a
           href="#scenario-inline-tool"
-          className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
+          className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
         >
           {scenario.toolCta.buttonLabel}
         </a>
         <Link
           href={pricingToolHref}
-          className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex items-center rounded-md border bg-white px-4 py-2 text-sm font-semibold"
+          className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-md border bg-white px-4 py-2 text-sm font-semibold"
         >
           Open full workspace
         </Link>
