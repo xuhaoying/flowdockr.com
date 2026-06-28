@@ -64,7 +64,7 @@ export function CookieConsentBanner({ privacyHref }: CookieConsentBannerProps) {
           you allow them. Read the{' '}
           <Link
             href={privacyHref}
-            className="font-medium text-slate-900 underline underline-offset-2"
+            className="-mx-2 inline-flex min-h-11 items-center px-2 font-medium text-slate-900 underline underline-offset-2"
           >
             Privacy Policy
           </Link>
