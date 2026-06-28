@@ -23,7 +23,7 @@ export function PricingScenarioCard({
       <p className="mt-2 text-sm text-slate-700">{scenario.shortDescription}</p>
       <Link
         href={`/pricing/${scenario.slug}`}
-        className="text-brand-primary mt-3 inline-flex text-sm font-semibold underline underline-offset-2"
+        className="text-brand-primary mt-3 inline-flex min-h-11 items-center text-sm font-semibold underline underline-offset-2"
       >
         Open scenario
       </Link>

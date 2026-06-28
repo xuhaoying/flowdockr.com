@@ -67,7 +67,7 @@ export function BillingPolicy() {
               If you need help with billing, credits, or account access, use our{' '}
               <Link
                 href="/contact"
-                className="text-brand-primary font-medium underline underline-offset-2"
+                className="text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 font-medium underline underline-offset-2"
               >
                 contact page
               </Link>
@@ -101,25 +101,25 @@ export function BillingPolicy() {
           <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-700">
             <Link
               href="/terms"
-              className="text-brand-primary font-medium underline underline-offset-2"
+              className="text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 font-medium underline underline-offset-2"
             >
               Terms of Service
             </Link>
             <Link
               href="/privacy"
-              className="text-brand-primary font-medium underline underline-offset-2"
+              className="text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 font-medium underline underline-offset-2"
             >
               Privacy Policy
             </Link>
             <Link
               href="/refund"
-              className="text-brand-primary font-medium underline underline-offset-2"
+              className="text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 font-medium underline underline-offset-2"
             >
               Refund Policy
             </Link>
             <Link
               href="/contact"
-              className="text-brand-primary font-medium underline underline-offset-2"
+              className="text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 font-medium underline underline-offset-2"
             >
               Contact
             </Link>

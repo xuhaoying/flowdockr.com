@@ -264,13 +264,13 @@ export default async function ToolPage({
       <section className="flex flex-wrap items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <Link
           href="/tools/"
-          className="text-sm font-semibold text-slate-900 underline underline-offset-2"
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-900 underline underline-offset-2"
         >
           Back to tools
         </Link>
         <Link
           href="/scenario/"
-          className="text-sm font-semibold text-slate-900 underline underline-offset-2"
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-900 underline underline-offset-2"
         >
           Browse scenarios
         </Link>

@@ -14,22 +14,10 @@ vi.mock('@/core/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: ReactNode }) => (
     <a href={href}>{children}</a>
   ),
-  usePathname: () => '/',
-}));
-
-vi.mock('@/core/auth/client', () => ({
-  useSession: () => ({
-    data: null,
-    isPending: false,
-  }),
 }));
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'en',
-}));
-
-vi.mock('@/shared/blocks/sign/sign-user', () => ({
-  SignUser: () => <div data-testid="sign-user" />,
 }));
 
 describe('public marketing entry alignment', () => {

@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
+import { AppContextProvider } from '@/shared/contexts/app';
 import { getLocalPage } from '@/shared/models/post';
 
 // dynamic page metadata
@@ -111,7 +112,11 @@ export default async function DynamicPage({
   if (staticPage) {
     const Page = await getThemePage('static-page');
 
-    return <Page locale={locale} post={staticPage} />;
+    return (
+      <AppContextProvider>
+        <Page locale={locale} post={staticPage} />
+      </AppContextProvider>
+    );
   }
 
   // 2. static page not found
@@ -130,7 +135,11 @@ export default async function DynamicPage({
     // return dynamic page
     if (t.has('page')) {
       const Page = await getThemePage('dynamic-page');
-      return <Page locale={locale} page={t.raw('page')} />;
+      return (
+        <AppContextProvider>
+          <Page locale={locale} page={t.raw('page')} />
+        </AppContextProvider>
+      );
     }
   } catch (error) {
     // Translation not found, continue to 404

@@ -86,7 +86,7 @@ export function ToolPaywall({
             <Button
               type="button"
               size="sm"
-              className="mt-4 h-9 w-full rounded-lg"
+              className="mt-4 min-h-11 w-full rounded-lg"
               variant={pack.popular ? 'default' : 'outline'}
               onClick={() => onCheckout(pack.id)}
               disabled={loadingPackageId !== null}

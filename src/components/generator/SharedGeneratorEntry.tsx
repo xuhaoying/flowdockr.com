@@ -90,7 +90,7 @@ export function SharedGeneratorEntry({
       {exampleShortcut ? (
         <button
           type="button"
-          className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-full border bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition"
+          className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-full border bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition"
           onClick={() => setPrefillMessage(exampleShortcut.message)}
         >
           {exampleShortcut.label}
@@ -118,7 +118,7 @@ export function SharedGeneratorEntry({
             <Link
               key={item.href}
               href={item.href}
-              className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex rounded-full border bg-white px-3 py-1.5 text-slate-700 transition"
+              className="border-brand-lavender/35 hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-full border bg-white px-3 py-1.5 text-slate-700 transition"
               onClick={() => {
                 if (!relatedClickEventName) {
                   return;

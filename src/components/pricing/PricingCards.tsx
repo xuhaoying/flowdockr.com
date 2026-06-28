@@ -321,25 +321,25 @@ export function PricingCards({
                 >
                   <Link
                     href="/terms"
-                    className="hover:text-brand-primary underline underline-offset-2"
+                    className="hover:text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 underline underline-offset-2"
                   >
                     Terms
                   </Link>
                   <Link
                     href="/privacy"
-                    className="hover:text-brand-primary underline underline-offset-2"
+                    className="hover:text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 underline underline-offset-2"
                   >
                     Privacy
                   </Link>
                   <Link
                     href="/refund"
-                    className="hover:text-brand-primary underline underline-offset-2"
+                    className="hover:text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 underline underline-offset-2"
                   >
                     Refund
                   </Link>
                   <Link
                     href="/contact"
-                    className="hover:text-brand-primary underline underline-offset-2"
+                    className="hover:text-brand-primary -mx-2 inline-flex min-h-11 items-center px-2 underline underline-offset-2"
                   >
                     Contact
                   </Link>
