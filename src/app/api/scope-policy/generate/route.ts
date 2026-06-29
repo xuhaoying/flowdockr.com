@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { hashRequestIp, hashRequestUserAgent } from '@/lib/anonymous';
+import { consumeFixedWindowRateLimit } from '@/lib/rate-limit';
 
 import {
   generateScopePolicy,
@@ -10,6 +12,7 @@ import { getUserInfo } from '@/shared/models/user';
 
 const FREE_LIMIT = 2;
 const FREE_COOKIE = 'flowdockr_scope_free_count';
+const FREE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,23 +20,34 @@ export async function POST(request: NextRequest) {
     const input = validateScopeInput(body);
 
     const isPaid = await hasPaidAccess();
-    const used =
+    const cookieUsed =
       Number.parseInt(request.cookies.get(FREE_COOKIE)?.value || '0', 10) || 0;
+    let used = cookieUsed;
 
-    if (!isPaid && used >= FREE_LIMIT) {
-      return NextResponse.json({
-        code: -1,
-        message: 'Free plan limit reached. Upgrade to continue generating.',
-        data: {
-          upgrade_required: true,
-          usage: {
-            limit: FREE_LIMIT,
-            used,
-            remaining: 0,
-            is_paid: false,
-          },
-        },
+    if (!isPaid) {
+      const quota = await consumeFixedWindowRateLimit({
+        bucket: 'scope-policy:free',
+        key: `${hashRequestIp(request)}:${hashRequestUserAgent(request)}`,
+        limit: FREE_LIMIT,
+        windowMs: FREE_WINDOW_MS,
       });
+      used = Math.max(cookieUsed, Math.min(quota.count, FREE_LIMIT));
+
+      if (!quota.allowed || cookieUsed >= FREE_LIMIT) {
+        return NextResponse.json({
+          code: -1,
+          message: 'Free plan limit reached. Upgrade to continue generating.',
+          data: {
+            upgrade_required: true,
+            usage: {
+              limit: FREE_LIMIT,
+              used,
+              remaining: 0,
+              is_paid: false,
+            },
+          },
+        });
+      }
     }
 
     const output = await generateScopePolicy(input, {
@@ -41,7 +55,7 @@ export async function POST(request: NextRequest) {
       model: process.env.SCOPE_GUARD_MODEL,
     });
 
-    const nextUsed = isPaid ? used : used + 1;
+    const nextUsed = isPaid ? used : Math.max(used, 1);
 
     const response = NextResponse.json({
       code: 0,

@@ -201,6 +201,10 @@ export async function POST(req: Request) {
       paymentType === PaymentType.SUBSCRIPTION
         ? `${callbackBaseUrl}/settings/billing`
         : `${callbackBaseUrl}/settings/payments`;
+    const clientMetadata =
+      metadata && typeof metadata === 'object' && !Array.isArray(metadata)
+        ? metadata
+        : {};
 
     // build checkout order
     const checkoutOrder: PaymentOrder = {
@@ -211,10 +215,10 @@ export async function POST(req: Request) {
       },
       type: paymentType,
       metadata: {
+        ...clientMetadata,
         app_name: configs.app_name,
         order_no: orderNo,
         user_id: user.id,
-        ...(metadata || {}),
       },
       successUrl: `${configs.app_url}/api/payment/callback?order_no=${orderNo}`,
       cancelUrl: `${callbackBaseUrl}/pricing`,
