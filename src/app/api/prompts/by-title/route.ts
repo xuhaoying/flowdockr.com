@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { prompt } from '@/config/db/schema';
+import { PromptStatus } from '@/shared/models/prompt';
 
 export async function GET(request: NextRequest) {
   try {
@@ -17,9 +18,22 @@ export async function GET(request: NextRequest) {
     }
 
     const result = await db()
-      .select()
+      .select({
+        id: prompt.id,
+        title: prompt.title,
+        description: prompt.description,
+        image: prompt.image,
+        promptTitle: prompt.promptTitle,
+        promptDescription: prompt.promptDescription,
+        status: prompt.status,
+      })
       .from(prompt)
-      .where(eq(prompt.promptTitle, title))
+      .where(
+        and(
+          eq(prompt.promptTitle, title),
+          eq(prompt.status, PromptStatus.PUBLISHED)
+        )
+      )
       .limit(1);
 
     if (!result || result.length === 0) {

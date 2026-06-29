@@ -7,6 +7,12 @@ import {
 } from '@/lib/analytics/scenarioEventLog';
 import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 
+import {
+  PermissionDeniedError,
+  PERMISSIONS,
+  requirePermission,
+} from '@/core/rbac';
+
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
@@ -66,6 +72,8 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    await requirePermission({ code: PERMISSIONS.ADMIN_ACCESS });
+
     const { searchParams } = request.nextUrl;
     const days = Number.parseInt(searchParams.get('days') || '30', 10);
     const limit = Number.parseInt(searchParams.get('limit') || '200', 10);
@@ -98,6 +106,13 @@ export async function GET(request: NextRequest) {
       eventCounts: result.eventCounts,
     });
   } catch (error) {
+    if (error instanceof PermissionDeniedError) {
+      return NextResponse.json(
+        { ok: false, message: 'Forbidden.' },
+        { status: 403 }
+      );
+    }
+
     return NextResponse.json(
       {
         ok: false,
