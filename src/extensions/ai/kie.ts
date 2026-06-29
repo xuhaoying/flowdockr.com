@@ -245,7 +245,11 @@ export class KieProvider implements AIProvider {
       }
     }
 
-    console.log('kie input', apiUrl, payload);
+    console.info('kie request', {
+      model: params.model,
+      mediaType: params.mediaType,
+      inputKeys: Object.keys(payload.input || {}),
+    });
 
     const resp = await fetch(apiUrl, {
       method: 'POST',
