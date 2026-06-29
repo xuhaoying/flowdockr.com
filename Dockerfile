@@ -2,12 +2,12 @@ FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat && yarn global add pnpm@10.12.4
+RUN apk add --no-cache libc6-compat && corepack enable && corepack prepare pnpm@10.12.4 --activate
 
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json pnpm-lock.yaml* source.config.ts next.config.mjs ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml source.config.ts next.config.mjs ./
 RUN pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed
@@ -40,6 +40,7 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV ALLOW_INDEXING=false
 
 # server.js is created by next build from the standalone output
 CMD ["node", "server.js"]

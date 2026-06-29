@@ -7,6 +7,7 @@ const rootDir = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   resolve: {
     alias: {
+      '@/.source': path.resolve(rootDir, 'vitest.source-stub.ts'),
       '@': path.resolve(rootDir, 'src'),
     },
   },
