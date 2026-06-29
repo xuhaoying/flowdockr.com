@@ -158,7 +158,6 @@ export function ToolForm({
   const [message, setMessage] = useState(initialMessage);
   const [usage, setUsage] = useState<UsageState>(INITIAL_USAGE);
   const [upgradeVisible, setUpgradeVisible] = useState(false);
-  const [checkoutEmail, setCheckoutEmail] = useState('');
   const [checkoutLoading, setCheckoutLoading] =
     useState<CreditPackageId | null>(null);
   const [projectType, setProjectType] = useState<DealProjectType>('other');
@@ -1039,8 +1038,6 @@ export function ToolForm({
           {paywallVisible && (
             <ToolPaywall
               loggedIn={usage.loggedIn}
-              email={checkoutEmail}
-              onEmailChange={setCheckoutEmail}
               loadingPackageId={checkoutLoading}
               onCheckout={onCheckout}
             />

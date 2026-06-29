@@ -32,6 +32,19 @@ export function CookieConsentBanner({ privacyHref }: CookieConsentBannerProps) {
     }
   }, []);
 
+  useEffect(() => {
+    if (isDismissed) {
+      document.body.removeAttribute('data-cookie-banner-visible');
+      return;
+    }
+
+    document.body.setAttribute('data-cookie-banner-visible', 'true');
+
+    return () => {
+      document.body.removeAttribute('data-cookie-banner-visible');
+    };
+  }, [isDismissed]);
+
   const updateConsent = (value: Exclude<TrackingConsent, null>) => {
     writeConsentCookie(value);
 

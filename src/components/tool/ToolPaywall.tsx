@@ -2,20 +2,15 @@ import { CREDIT_PACKAGE_LIST } from '@/lib/credits/packages';
 import { CreditPackageId } from '@/types/billing';
 
 import { Button } from '@/shared/components/ui/button';
-import { Input } from '@/shared/components/ui/input';
 
 type ToolPaywallProps = {
   loggedIn: boolean;
-  email: string;
-  onEmailChange: (value: string) => void;
   loadingPackageId: CreditPackageId | null;
   onCheckout: (packageId: CreditPackageId) => void;
 };
 
 export function ToolPaywall({
   loggedIn,
-  email,
-  onEmailChange,
   loadingPackageId,
   onCheckout,
 }: ToolPaywallProps) {
@@ -48,18 +43,10 @@ export function ToolPaywall({
       </ul>
 
       {!loggedIn ? (
-        <label className="block space-y-1">
-          <span className="text-xs font-medium text-slate-700">
-            Email for checkout
-          </span>
-          <Input
-            type="email"
-            value={email}
-            onChange={(event) => onEmailChange(event.target.value)}
-            placeholder="you@domain.com"
-            className="h-11 rounded-xl border-slate-300 shadow-xs"
-          />
-        </label>
+        <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          Sign in before checkout so purchased credits can be attached to your
+          account.
+        </div>
       ) : null}
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -89,11 +76,13 @@ export function ToolPaywall({
               className="mt-4 min-h-11 w-full rounded-lg"
               variant={pack.popular ? 'default' : 'outline'}
               onClick={() => onCheckout(pack.id)}
-              disabled={loadingPackageId !== null}
+              disabled={!loggedIn || loadingPackageId !== null}
             >
               {loadingPackageId === pack.id
                 ? 'Redirecting...'
-                : pack.ctaLabel || 'Buy credits'}
+                : loggedIn
+                  ? pack.ctaLabel || 'Buy credits'
+                  : 'Sign in to buy'}
             </Button>
           </div>
         ))}

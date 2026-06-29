@@ -32,6 +32,7 @@ export function CheckoutStatusCard({
     creditsGranted: false,
     creditsAdded: 0,
   });
+  const [timedOut, setTimedOut] = useState(false);
   const attemptsRef = useRef(0);
 
   const queryString = useMemo(() => {
@@ -63,6 +64,7 @@ export function CheckoutStatusCard({
     }
 
     attemptsRef.current = 0;
+    setTimedOut(false);
     let aborted = false;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
@@ -96,6 +98,8 @@ export function CheckoutStatusCard({
           timeoutId = setTimeout(() => {
             void tick();
           }, 1800);
+        } else if (!isFinalSuccess && !isFinalFailure) {
+          setTimedOut(true);
         }
       } catch {
         if (aborted) {
@@ -112,6 +116,8 @@ export function CheckoutStatusCard({
           timeoutId = setTimeout(() => {
             void tick();
           }, 1800);
+        } else {
+          setTimedOut(true);
         }
       }
     };
@@ -131,6 +137,8 @@ export function CheckoutStatusCard({
     status.status === 'failed' ||
     status.status === 'canceled' ||
     status.status === 'refunded';
+  const isDelayed =
+    timedOut && hasCheckoutReference && !isFinalized && !isFinalFailure;
   const purchaseTrackedRef = useRef(false);
 
   useEffect(() => {
@@ -160,9 +168,11 @@ export function CheckoutStatusCard({
       <h1 className="text-3xl font-semibold tracking-tight">
         {isFinalized
           ? 'Payment successful'
-          : hasCheckoutReference
-            ? 'Finalizing your credits'
-            : 'Payment status unavailable'}
+          : isDelayed
+            ? 'Still confirming payment'
+            : hasCheckoutReference
+              ? 'Finalizing your credits'
+              : 'Payment status unavailable'}
       </h1>
 
       {!hasCheckoutReference ? (
@@ -174,8 +184,9 @@ export function CheckoutStatusCard({
 
       {!isFinalized && !isFinalFailure && hasCheckoutReference ? (
         <p className="text-muted-foreground">
-          Payment completed. We are confirming your negotiation credits and
-          support level. This usually takes a few seconds.
+          {isDelayed
+            ? 'We could not confirm the credit grant automatically. Refresh this page in a minute or contact support if your payment receipt arrived but credits did not.'
+            : 'Payment completed. We are confirming your negotiation credits and support level. This usually takes a few seconds.'}
         </p>
       ) : null}
 
@@ -219,10 +230,16 @@ export function CheckoutStatusCard({
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <Button asChild>
-          <Link href={continuePath}>Continue negotiating</Link>
-        </Button>
-        {isFinalFailure ? (
+        {isFinalized ? (
+          <Button asChild>
+            <Link href={continuePath}>Continue negotiating</Link>
+          </Button>
+        ) : (
+          <Button type="button" disabled>
+            Continue negotiating
+          </Button>
+        )}
+        {isFinalFailure || isDelayed ? (
           <Button asChild variant="outline">
             <Link href="/pricing">View pricing</Link>
           </Button>

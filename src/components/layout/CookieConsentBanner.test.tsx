@@ -16,6 +16,7 @@ describe('CookieConsentBanner', () => {
   beforeEach(() => {
     refresh.mockReset();
     window.localStorage.clear();
+    document.body.removeAttribute('data-cookie-banner-visible');
     document.cookie = `${TRACKING_CONSENT_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax`;
   });
 
@@ -25,6 +26,7 @@ describe('CookieConsentBanner', () => {
     expect(
       screen.getByRole('dialog', { name: /cookie and analytics consent/i })
     ).toBeTruthy();
+    expect(document.body.dataset.cookieBannerVisible).toBe('true');
 
     fireEvent.click(
       screen.getByRole('button', { name: /keep essential only/i })
@@ -39,6 +41,7 @@ describe('CookieConsentBanner', () => {
     });
 
     expect(document.cookie).toContain(`${TRACKING_CONSENT_COOKIE}=declined`);
+    expect(document.body.dataset.cookieBannerVisible).toBeUndefined();
     expect(window.localStorage.getItem(TRACKING_CONSENT_COOKIE)).toBe(
       'declined'
     );
@@ -79,5 +82,6 @@ describe('CookieConsentBanner', () => {
     });
 
     expect(document.cookie).toContain(`${TRACKING_CONSENT_COOKIE}=declined`);
+    expect(document.body.dataset.cookieBannerVisible).toBeUndefined();
   });
 });

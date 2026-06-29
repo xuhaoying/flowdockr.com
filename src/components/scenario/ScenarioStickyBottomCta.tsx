@@ -10,13 +10,15 @@ export function ScenarioStickyBottomCta() {
 
   useEffect(() => {
     const computeVisibility = () => {
+      const cookieBannerVisible =
+        document.body.dataset.cookieBannerVisible === 'true';
       const heroCta = document.getElementById('scenario-hero-primary-cta');
       const tool = document.getElementById('scenario-inline-tool');
       const resultReady = document.querySelector(
         '#tool-result-panel[data-result-ready="true"]'
       );
 
-      if (resultReady) {
+      if (resultReady || cookieBannerVisible) {
         setVisible(false);
         return;
       }
@@ -44,7 +46,7 @@ export function ScenarioStickyBottomCta() {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ['data-result-ready'],
+      attributeFilter: ['data-result-ready', 'data-cookie-banner-visible'],
     });
 
     return () => {
