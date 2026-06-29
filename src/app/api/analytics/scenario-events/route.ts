@@ -57,15 +57,17 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.warn(
+      'scenario analytics event was not recorded:',
+      error instanceof Error ? error.message : error
+    );
+
     return NextResponse.json(
       {
         ok: false,
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Failed to record scenario analytics event.',
+        message: 'Scenario analytics event was not recorded.',
       },
-      { status: 500 }
+      { status: 202 }
     );
   }
 }
