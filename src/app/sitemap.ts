@@ -2,6 +2,10 @@ import { MetadataRoute } from 'next';
 import { getAllGuides } from '@/lib/content/getGuideBySlug';
 import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
 import { getAllScenarioPages } from '@/lib/content/scenarioPages';
+import {
+  isPricingScenarioSitemapEligible,
+  isScenarioPageSitemapEligible,
+} from '@/lib/seo/indexing';
 
 import { envConfigs } from '@/config';
 
@@ -78,22 +82,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const canonicalScenarioRoutes: MetadataRoute.Sitemap =
-    getAllScenarioPages().map((scenario) => ({
+  const canonicalScenarioRoutes: MetadataRoute.Sitemap = getAllScenarioPages()
+    .filter(isScenarioPageSitemapEligible)
+    .map((scenario) => ({
       url: `${baseUrl}/scenario/${scenario.slug}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     }));
 
-  const scenarioRoutes: MetadataRoute.Sitemap = getAllScenarios().map(
-    (scenario) => ({
+  const scenarioRoutes: MetadataRoute.Sitemap = getAllScenarios()
+    .filter(isPricingScenarioSitemapEligible)
+    .map((scenario) => ({
       url: `${baseUrl}${normalizeRoutePath(scenario.url)}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.85,
-    })
-  );
+    }));
 
   const guideRoutes: MetadataRoute.Sitemap = getAllGuides().map((guide) => ({
     url: `${baseUrl}${normalizeRoutePath(guide.url)}`,

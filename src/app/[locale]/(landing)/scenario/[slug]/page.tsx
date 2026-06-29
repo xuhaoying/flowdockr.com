@@ -4,12 +4,14 @@ import { ScenarioViewTracker } from '@/components/analytics/ScenarioViewTracker'
 import { PaymentScenarioSupport } from '@/components/scenario/PaymentScenarioSupport';
 import { RelatedScenarios } from '@/components/scenario/RelatedScenarios';
 import { ScenarioClientMessages } from '@/components/scenario/ScenarioClientMessages';
+import { ScenarioDetailSections } from '@/components/scenario/ScenarioDetailSections';
 import { ScenarioHero } from '@/components/scenario/ScenarioHero';
 import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
 import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { getPaymentScenarioSupport } from '@/lib/content/paymentCluster';
+import { getScenarioDetailContent } from '@/lib/content/scenarioDetailContent';
 import {
   getAllScenarioPageSlugs,
   getNegotiationStageLabel,
@@ -25,6 +27,8 @@ import {
 } from '@/lib/content/scenarioPages';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
 import { buildScenarioPageMetadata } from '@/lib/seo/buildScenarioPageMetadata';
+import { buildFaqPageSchema } from '@/lib/seo/buildScenarioSchema';
+import { getScenarioPageCanonicalUrl } from '@/lib/seo/indexing';
 import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
@@ -72,14 +76,6 @@ type ScenarioPageParams = {
   slug: string;
 };
 
-function normalizePath(path: string): string {
-  if (path.length > 1 && path.endsWith('/')) {
-    return path.slice(0, -1);
-  }
-
-  return path;
-}
-
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -100,7 +96,7 @@ export async function generateMetadata({
 }: {
   params: Promise<ScenarioPageParams>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
 
   if (SCENARIO_ALIAS_REDIRECTS[slug] || LEGACY_SCENARIO_REDIRECTS[slug]) {
     return {
@@ -123,7 +119,7 @@ export async function generateMetadata({
     };
   }
 
-  const canonical = `${envConfigs.site_url}${normalizePath(`/scenario/${page.slug}`)}`;
+  const canonical = getScenarioPageCanonicalUrl(page, envConfigs.site_url);
 
   return buildScenarioPageMetadata({
     page: {
@@ -152,6 +148,8 @@ export default async function ScenarioPage({
   if (page) {
     const generatorScenario = getGeneratorScenarioBySlug(page.slug);
     const previewReply = page.previewReply || generatorScenario?.exampleReply;
+    const detailContent = getScenarioDetailContent(page, generatorScenario);
+    const faqSchema = buildFaqPageSchema(detailContent.faq);
     const relatedSection = getRelatedScenarioSectionCopy(page);
     const pagePromise = getScenarioPagePromise(page);
     const paymentSupport = getPaymentScenarioSupport(page.slug);
@@ -163,6 +161,10 @@ export default async function ScenarioPage({
 
     return (
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
         <PageContainer className="max-w-6xl gap-6 py-8 md:gap-8 md:py-12">
           <ScenarioViewTracker scenarioSlug={page.slug} />
           <ScenarioHero
@@ -224,6 +226,7 @@ export default async function ScenarioPage({
             primaryClientMessage={page.primaryClientMessage}
             clientMessageVariants={page.clientMessageVariants}
           />
+          <ScenarioDetailSections content={detailContent} />
           <RelatedScenarios
             items={relatedItems}
             groups={relatedGroups}

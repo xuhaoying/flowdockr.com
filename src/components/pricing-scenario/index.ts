@@ -4,6 +4,7 @@ export { HowToSchema } from './HowToSchema';
 export { NextDecisionPaths } from './NextDecisionPaths';
 export { PossibleGoals } from './PossibleGoals';
 export { RelatedGuides } from './RelatedGuides';
+export { RelatedScenarioScripts } from './RelatedScenarioScripts';
 export { ScenarioHero } from './ScenarioHero';
 export { ScenarioStickyCta } from './ScenarioStickyCta';
 export { SituationSnapshot } from './SituationSnapshot';

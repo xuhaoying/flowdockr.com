@@ -7,6 +7,7 @@ import {
   NextDecisionPaths,
   PossibleGoals,
   RelatedGuides,
+  RelatedScenarioScripts,
   ScenarioHero,
   SituationSnapshot,
   StrategyPaths,
@@ -22,12 +23,17 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { getAllScenarioSlugs } from '@/lib/content/getAllScenarioSlugs';
 import { getScenarioBySlug } from '@/lib/content/getScenarioBySlug';
+import { getPricingRelatedScenarioScripts } from '@/lib/content/pricingRelatedScenarios';
 import {
   getPricingBlueprintBySlug,
   getPricingScenarioBySlug,
 } from '@/lib/pricing-cluster';
 import { buildScenarioMetadata } from '@/lib/seo/buildScenarioMetadata';
-import { buildScenarioHowToSchema } from '@/lib/seo/buildScenarioSchema';
+import {
+  buildFaqPageSchema,
+  buildScenarioHowToSchema,
+} from '@/lib/seo/buildScenarioSchema';
+import { getPricingScenarioCanonicalUrl } from '@/lib/seo/indexing';
 import { setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
@@ -37,14 +43,6 @@ type PricingScenarioPageParams = {
   locale: string;
   slug: string;
 };
-
-function normalizePath(path: string): string {
-  if (path.length > 1 && path.endsWith('/')) {
-    return path.slice(0, -1);
-  }
-
-  return path;
-}
 
 export const dynamicParams = false;
 
@@ -71,7 +69,10 @@ export async function generateMetadata({
     };
   }
 
-  const canonical = `${envConfigs.site_url}${normalizePath(scenario.url)}`;
+  const canonical = getPricingScenarioCanonicalUrl(
+    scenario,
+    envConfigs.site_url
+  );
 
   return buildScenarioMetadata({
     scenario,
@@ -106,12 +107,26 @@ export default async function PricingScenarioPage({
     metaDescription: page.metaDescription,
     strategyPaths: page.strategyPaths,
   });
+  const faqSchema = buildFaqPageSchema(
+    scenario.faq.map((item) => ({
+      question: item.q,
+      answer: item.a,
+    }))
+  );
+  const relatedScenarioScripts = getPricingRelatedScenarioScripts(
+    scenario.slug,
+    scenario.generatorScenarioSlug
+  );
 
   return (
     <PageContainer>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {pricingAttribution ? (
         <PricingScenarioViewTracker attribution={pricingAttribution} />
@@ -124,6 +139,7 @@ export default async function PricingScenarioPage({
       <SituationSnapshot scenario={scenario} />
       <WhatsReallyHappening scenario={scenario} />
       <CommonClientMessages scenario={page} />
+      <RelatedScenarioScripts items={relatedScenarioScripts} />
       <PossibleGoals scenario={scenario} />
       <StrategyPaths scenario={scenario} />
       <CopyReadyReplies scenario={scenario} />
