@@ -36,6 +36,27 @@
       "when": 1772899200000,
       "tag": "0004_flowdockr_scenario_analytics_event",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1782738188000,
+      "tag": "0005_flowdockr_rate_limit_counter",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1782738189000,
+      "tag": "0006_flowdockr_scenario_pack_redemption",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1782738190000,
+      "tag": "0007_flowdockr_user_free_usage",
+      "breakpoints": true
     }
   ]
 }
