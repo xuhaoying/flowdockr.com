@@ -6,7 +6,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const limitMock = vi.fn();
 const whereMock = vi.fn(() => ({ limit: limitMock }));
 const fromMock = vi.fn(() => ({ where: whereMock }));
-const selectMock = vi.fn(() => ({ from: fromMock }));
+const selectMock = vi.fn((_fields?: Record<string, unknown>) => ({
+  from: fromMock,
+}));
 
 vi.mock('@/core/db', () => ({
   db: vi.fn(() => ({
