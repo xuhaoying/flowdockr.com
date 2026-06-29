@@ -8,8 +8,11 @@ export async function consumeCredit(params: {
   userId: string;
   scenarioSlug: string;
   sourcePage: 'home' | 'scenario' | 'tool';
+  amount?: number;
+  reason?: string;
 }): Promise<number> {
   const { userId, scenarioSlug, sourcePage } = params;
+  const amount = Math.max(1, Math.floor(params.amount || 1));
 
   return db().transaction(async (tx: any) => {
     const [lockedUser] = await tx
@@ -22,11 +25,11 @@ export async function consumeCredit(params: {
       .limit(1)
       .for('update');
 
-    if (!lockedUser || lockedUser.creditsBalance <= 0) {
+    if (!lockedUser || lockedUser.creditsBalance < amount) {
       throw new Error('NO_CREDITS');
     }
 
-    const nextCredits = lockedUser.creditsBalance - 1;
+    const nextCredits = lockedUser.creditsBalance - amount;
 
     const updateResult = await tx
       .update(user)
@@ -44,12 +47,13 @@ export async function consumeCredit(params: {
       id: getUuid(),
       userId,
       type: 'generation_charge',
-      amount: -1,
+      amount: -amount,
       balanceAfter: nextCredits,
-      reason: 'Negotiation reply generation',
+      reason: params.reason || 'Negotiation reply generation',
       metadata: JSON.stringify({
         scenarioSlug,
         source: sourcePage,
+        amount,
       }),
     });
 

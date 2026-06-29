@@ -12,6 +12,7 @@ const mocks = vi.hoisted(() => ({
   canGenerate: vi.fn(),
   consumeUsage: vi.fn(),
   getGenerationIdentity: vi.fn(),
+  grantCredits: vi.fn(),
   getDefaultBillingProfile: vi.fn(),
   getUserBillingProfile: vi.fn(),
   saveGeneration: vi.fn(),
@@ -27,6 +28,7 @@ vi.mock('@/lib/credits', () => ({
   canGenerate: mocks.canGenerate,
   consumeUsage: mocks.consumeUsage,
   getGenerationIdentity: mocks.getGenerationIdentity,
+  grantCredits: mocks.grantCredits,
 }));
 
 vi.mock('@/lib/billing', () => ({
@@ -101,6 +103,7 @@ describe('/api/generate route smoke', () => {
       freeRepliesRemaining: 1,
       modeUsed: 'free',
     });
+    mocks.grantCredits.mockResolvedValue(3);
     mocks.getDefaultBillingProfile.mockReturnValue({
       creditsRemaining: 0,
       creditsTotal: 0,
@@ -281,5 +284,72 @@ describe('/api/generate route smoke', () => {
     expect(fallbackLogCall).toBeTruthy();
 
     vi.useRealTimers();
+  });
+
+  it('refunds a paid credit when provider generation fails before output', async () => {
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    const providerFetch = vi.fn(async () => {
+      throw new Error('provider unavailable');
+    });
+    vi.stubGlobal('fetch', providerFetch);
+
+    mocks.getGenerationIdentity.mockResolvedValue({
+      isLoggedIn: true,
+      userId: 'user_paid_123',
+    });
+    mocks.canGenerate.mockResolvedValue({
+      isLoggedIn: true,
+      userId: 'user_paid_123',
+      creditsRemaining: 4,
+      freeRepliesRemaining: 0,
+      canGenerate: true,
+      requiresUpgrade: false,
+      mode: 'paid',
+    });
+    mocks.consumeUsage.mockResolvedValue({
+      creditsRemaining: 3,
+      freeRepliesRemaining: 0,
+      modeUsed: 'paid',
+    });
+    mocks.grantCredits.mockResolvedValue(4);
+
+    const request = new NextRequest('http://localhost/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        scenarioSlug: 'quote-too-high',
+        message:
+          'Your quote feels too high for what we expected. If you can bring it down a bit, we can probably move this forward this week.',
+        sourcePage: 'tool',
+        serviceType: 'developer',
+      }),
+    });
+
+    const response = await POST(request);
+    const payload = (await response.json()) as {
+      success: boolean;
+      error?: string;
+      creditsRemaining?: number;
+    };
+
+    expect(response.status).toBe(200);
+    expect(payload).toMatchObject({
+      success: false,
+      error: 'GENERATION_FAILED',
+      creditsRemaining: 4,
+    });
+    expect(mocks.grantCredits).toHaveBeenCalledWith({
+      userId: 'user_paid_123',
+      credits: 1,
+      type: 'generation_refund',
+      reason: 'Refund failed negotiation reply generation',
+      metadata: expect.objectContaining({
+        scenarioSlug: 'quote-too-high',
+        sourcePage: 'tool',
+        errorCode: 'GENERATION_FAILED',
+      }),
+    });
   });
 });

@@ -4,6 +4,7 @@ export { consumeUsage } from './consumeUsage';
 export { consumeFreeUsage, getFreeUsage } from './getFreeUsage';
 export { getGenerationIdentity } from './getGenerationIdentity';
 export { getCredits } from './getCredits';
+export { grantCredits, grantCreditsTx } from './grantCredits';
 export { getUserFreeRepliesRemaining } from './getUserFreeReplies';
 export {
   CREDIT_PACKAGE_LIST,
