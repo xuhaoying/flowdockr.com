@@ -25,14 +25,23 @@ function normalizePurchaseStatus(status: string): PurchaseStatus {
 export async function getCheckoutStatus(params: {
   sessionId?: string;
   purchaseId?: string;
+  userId: string;
 }): Promise<CheckoutStatusResponse> {
   const sessionId = String(params.sessionId || '').trim();
   const purchaseId = String(params.purchaseId || '').trim();
+  const userId = String(params.userId || '').trim();
 
   if (!sessionId && !purchaseId) {
     return {
       success: false,
       error: 'INVALID_INPUT',
+    };
+  }
+
+  if (!userId) {
+    return {
+      success: false,
+      error: 'UNAUTHORIZED',
     };
   }
 
@@ -66,6 +75,13 @@ export async function getCheckoutStatus(params: {
       status: 'pending',
       creditsGranted: false,
       creditsAdded: 0,
+    };
+  }
+
+  if (record.userId !== userId) {
+    return {
+      success: false,
+      error: 'FORBIDDEN',
     };
   }
 
