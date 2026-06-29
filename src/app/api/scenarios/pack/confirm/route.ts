@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { redeemScenarioPackPurchase } from '@/lib/payments/redeemScenarioPack';
 
 import { getScenarioPackStripeClient } from '@/shared/lib/scenario-pack-payment';
-import {
-  getScenarioPackById,
-  isPackSessionRedeemed,
-  markPackSessionRedeemed,
-} from '@/shared/lib/scenario-quota';
-import { grantCreditsForUser } from '@/shared/models/credit';
-import { findUserById, getUserInfo } from '@/shared/models/user';
+import { getScenarioPackById } from '@/shared/lib/scenario-quota';
+import { getUserInfo } from '@/shared/models/user';
 
 export async function GET(request: NextRequest) {
   const rawReturnTo = request.nextUrl.searchParams.get('return_to') || '';
@@ -84,21 +80,13 @@ export async function GET(request: NextRequest) {
       }
     );
 
-    if (isPackSessionRedeemed(sessionId)) {
-      return paidRedirect;
-    }
-
-    const dbUser = await findUserById(user.id);
-    if (!dbUser) {
-      return redirectWithStatus(request, returnTo, 'pack_error=user_not_found');
-    }
-
-    await grantCreditsForUser({
-      user: dbUser,
+    await redeemScenarioPackPurchase({
+      stripeCheckoutSessionId: sessionId,
+      userId: user.id,
+      packId: pack.id,
       credits: pack.replies,
-      description: `scenario reply credits pack: ${pack.id}`,
+      source: 'scenario_pack_confirm',
     });
-    markPackSessionRedeemed(sessionId);
 
     return paidRedirect;
   } catch (error) {
