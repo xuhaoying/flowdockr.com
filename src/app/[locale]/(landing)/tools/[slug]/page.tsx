@@ -23,8 +23,11 @@ import type { DealTone } from '@/types/deals';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
+import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
+import { AppContextProvider } from '@/shared/contexts/app';
+import { getLocalPage, getLocalPageSlugs } from '@/shared/models/post';
 
 const defaultGeneratorScenarioByToolSlug: Record<string, string> = {
   'reply-generator': 'discount-request',
@@ -91,7 +94,13 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const slugs = getAllToolSlugs();
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  const toolPageSlugs = getLocalPageSlugs()
+    .filter((slug) => slug.startsWith('tools/'))
+    .map((slug) => slug.replace(/^tools\//, ''));
+  const allSlugs = Array.from(new Set([...slugs, ...toolPageSlugs]));
+  return locales.flatMap((locale) =>
+    allSlugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({
@@ -99,10 +108,21 @@ export async function generateMetadata({
 }: {
   params: Promise<ToolPageParams>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const tool = getToolBySlug(slug);
 
   if (!tool) {
+    const staticPage = await getLocalPage({ slug: `tools/${slug}`, locale });
+    if (staticPage) {
+      return {
+        title: staticPage.title,
+        description: staticPage.description,
+        alternates: {
+          canonical: `${envConfigs.site_url}/tools/${slug}`,
+        },
+      };
+    }
+
     return {
       title: 'Tool not found | FlowDockr',
       robots: {
@@ -139,6 +159,16 @@ export default async function ToolPage({
 
   const tool = getToolBySlug(slug);
   if (!tool) {
+    const staticPage = await getLocalPage({ slug: `tools/${slug}`, locale });
+    if (staticPage) {
+      const StaticPage = await getThemePage('static-page');
+      return (
+        <AppContextProvider>
+          <StaticPage locale={locale} post={staticPage} />
+        </AppContextProvider>
+      );
+    }
+
     notFound();
   }
 

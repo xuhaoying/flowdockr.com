@@ -1,8 +1,8 @@
+import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
-import { Empty } from '@/shared/blocks/common';
 import { getPost } from '@/shared/models/post';
 import { DynamicPage } from '@/shared/types/blocks/landing';
 
@@ -19,8 +19,12 @@ export async function generateMetadata({
   const post = await getPost({ slug, locale });
   if (!post) {
     return {
-      title: `${slug} | ${t('title')}`,
+      title: 'Post not found | FlowDockr',
       description: t('description'),
+      robots: {
+        index: false,
+        follow: false,
+      },
       alternates: {
         canonical: canonicalUrl,
       },
@@ -47,7 +51,7 @@ export default async function BlogDetailPage({
   const post = await getPost({ slug, locale });
 
   if (!post) {
-    return <Empty message={`Post not found`} />;
+    notFound();
   }
 
   // build page sections

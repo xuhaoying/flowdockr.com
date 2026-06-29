@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { isLocalPageIndexable } from '@/lib/seo/indexing';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
@@ -34,6 +35,16 @@ export async function generateMetadata({
 
   // return static page metadata
   if (staticPage) {
+    if (!isLocalPageIndexable(staticPageSlug)) {
+      return {
+        title: 'Page not found | FlowDockr',
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
     title = staticPage.title || '';
     description = staticPage.description || '';
 
@@ -110,6 +121,10 @@ export default async function DynamicPage({
 
   // return static page
   if (staticPage) {
+    if (!isLocalPageIndexable(staticPageSlug)) {
+      notFound();
+    }
+
     const Page = await getThemePage('static-page');
 
     return (

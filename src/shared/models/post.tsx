@@ -316,6 +316,14 @@ export async function getLocalPage({
   return post;
 }
 
+export function getLocalPageSlugs(locale = docsI18n.defaultLanguage || 'en') {
+  const contentLocale = resolveContentLocale(locale);
+  return pagesSource
+    .getPages(contentLocale)
+    .map((page) => page.url.replace(/^\/+/, '').replace(/\/+$/, ''))
+    .filter(Boolean);
+}
+
 // get posts and categories, both from local files and database
 export async function getPostsAndCategories({
   page = 1,

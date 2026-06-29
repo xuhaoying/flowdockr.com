@@ -36,8 +36,11 @@ import {
 import { getPricingScenarioCanonicalUrl } from '@/lib/seo/indexing';
 import { setRequestLocale } from 'next-intl/server';
 
+import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
+import { AppContextProvider } from '@/shared/contexts/app';
+import { getLocalPage, getLocalPageSlugs } from '@/shared/models/post';
 
 type PricingScenarioPageParams = {
   locale: string;
@@ -48,7 +51,13 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const slugs = getAllScenarioSlugs();
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  const pricingPageSlugs = getLocalPageSlugs()
+    .filter((slug) => slug.startsWith('pricing/'))
+    .map((slug) => slug.replace(/^pricing\//, ''));
+  const allSlugs = Array.from(new Set([...slugs, ...pricingPageSlugs]));
+  return locales.flatMap((locale) =>
+    allSlugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({
@@ -56,10 +65,21 @@ export async function generateMetadata({
 }: {
   params: Promise<PricingScenarioPageParams>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const scenario = getScenarioBySlug(slug);
 
   if (!scenario) {
+    const staticPage = await getLocalPage({ slug: `pricing/${slug}`, locale });
+    if (staticPage) {
+      return {
+        title: staticPage.title,
+        description: staticPage.description,
+        alternates: {
+          canonical: `${envConfigs.site_url}/pricing/${slug}`,
+        },
+      };
+    }
+
     return {
       title: 'Pricing scenario not found | FlowDockr',
       robots: {
@@ -93,6 +113,16 @@ export default async function PricingScenarioPage({
   const blueprint = getPricingBlueprintBySlug(slug);
 
   if (!page || !scenario || !blueprint) {
+    const staticPage = await getLocalPage({ slug: `pricing/${slug}`, locale });
+    if (staticPage) {
+      const StaticPage = await getThemePage('static-page');
+      return (
+        <AppContextProvider>
+          <StaticPage locale={locale} post={staticPage} />
+        </AppContextProvider>
+      );
+    }
+
     notFound();
   }
 
