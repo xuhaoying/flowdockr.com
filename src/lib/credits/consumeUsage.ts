@@ -1,7 +1,13 @@
+import { consumeFixedWindowRateLimit } from '@/lib/rate-limit';
 import type { CreditStatus } from '@/types/credits';
 
+import {
+  ANONYMOUS_GENERATION_RATE_LIMIT_BUCKET,
+  ANONYMOUS_GENERATION_RATE_LIMIT_WINDOW_MS,
+} from './canGenerate';
 import { consumeCredit } from './consumeCredit';
-import { consumeFreeUsage } from './getFreeUsage';
+import { consumeFreeUsage, FREE_REPLY_LIMIT } from './getFreeUsage';
+import { consumeUserFreeUsage } from './getUserFreeReplies';
 
 export async function consumeUsage(params: {
   status: CreditStatus;
@@ -39,15 +45,36 @@ export async function consumeUsage(params: {
   }
 
   if (status.isLoggedIn) {
+    if (!status.userId) {
+      throw new Error('IDENTITY_MISSING');
+    }
+
+    const usage = await consumeUserFreeUsage(status.userId);
+
     return {
       creditsRemaining: status.creditsRemaining,
-      freeRepliesRemaining: Math.max(0, status.freeRepliesRemaining - 1),
+      freeRepliesRemaining: usage.freeRepliesRemaining,
       modeUsed: 'free',
     };
   }
 
   if (!status.anonymousId) {
     throw new Error('IDENTITY_MISSING');
+  }
+
+  if (!ipHash || !userAgentHash) {
+    throw new Error('FREE_LIMIT_REACHED');
+  }
+
+  const rateLimit = await consumeFixedWindowRateLimit({
+    bucket: ANONYMOUS_GENERATION_RATE_LIMIT_BUCKET,
+    key: `${ipHash}:${userAgentHash}`,
+    limit: FREE_REPLY_LIMIT,
+    windowMs: ANONYMOUS_GENERATION_RATE_LIMIT_WINDOW_MS,
+  });
+
+  if (!rateLimit.allowed) {
+    throw new Error('FREE_LIMIT_REACHED');
   }
 
   const usage = await consumeFreeUsage({

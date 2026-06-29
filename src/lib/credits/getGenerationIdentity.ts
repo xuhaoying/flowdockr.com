@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import {
   createAnonymousSessionId,
   getAnonymousSessionIdFromRequest,
+  hashRequestIp,
+  hashRequestUserAgent,
 } from '@/lib/anonymous';
 import { getCurrentUser } from '@/lib/auth';
 import type { GenerationIdentity } from '@/types/credits';
@@ -22,6 +24,8 @@ export async function getGenerationIdentity(
     return {
       isLoggedIn: false,
       anonymousId: fromCookie,
+      ipHash: hashRequestIp(request),
+      userAgentHash: hashRequestUserAgent(request),
       createdAnonymousId: false,
     };
   }
@@ -29,6 +33,8 @@ export async function getGenerationIdentity(
   return {
     isLoggedIn: false,
     anonymousId: createAnonymousSessionId(),
+    ipHash: hashRequestIp(request),
+    userAgentHash: hashRequestUserAgent(request),
     createdAnonymousId: true,
   };
 }
