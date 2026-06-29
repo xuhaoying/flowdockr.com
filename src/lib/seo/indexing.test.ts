@@ -7,8 +7,11 @@ import {
   getPricingScenarioCanonicalUrl,
   getScenarioPageCanonicalPath,
   getScenarioPageCanonicalUrl,
+  isLocalPageIndexable,
+  isLocalPageSitemapEligible,
   isPricingScenarioSitemapEligible,
   isScenarioPageSitemapEligible,
+  normalizeLocalPageSitemapSlug,
 } from './indexing';
 
 describe('seo indexing rules', () => {
@@ -77,5 +80,22 @@ describe('seo indexing rules', () => {
     expect(
       getPricingScenarioCanonicalUrl(cheaperEntry!, 'https://example.com/')
     ).toBe('https://example.com/pricing/client-asking-for-discount');
+  });
+
+  it('keeps generated dry-run local pages out of indexing surfaces', () => {
+    expect(normalizeLocalPageSitemapSlug('/en/pricing/playbooks/')).toBe(
+      'pricing/playbooks'
+    );
+    expect(isLocalPageSitemapEligible('/en/privacy-policy')).toBe(false);
+    expect(isLocalPageSitemapEligible('/en/terms-of-service')).toBe(false);
+    expect(isLocalPageIndexable('negotiation/client-asks-discount')).toBe(
+      false
+    );
+    expect(
+      isLocalPageSitemapEligible('/negotiation/client-asks-discount/')
+    ).toBe(false);
+    expect(
+      isLocalPageSitemapEligible('negotiation/client-asking-for-discount')
+    ).toBe(true);
   });
 });

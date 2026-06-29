@@ -28,6 +28,41 @@ const pricingCanonicalPathBySlug: Record<string, string> = {
   'turn-down-freelance-work-nicely': '/pricing/say-no-to-client-professionally',
 };
 
+const nonIndexableLocalPageSlugs = new Set([
+  'privacy-policy',
+  'terms-of-service',
+  'negotiation/client-asks-cheaper-option',
+  'negotiation/client-asks-discount',
+  'negotiation/client-compares-freelancers',
+  'negotiation/client-says-budget-too-low',
+  'negotiation/client-says-price-too-high',
+]);
+
+export function isLocalPageIndexable(slug: string): boolean {
+  const normalizedSlug = normalizeLocalPageSitemapSlug(slug);
+  return (
+    Boolean(normalizedSlug) && !nonIndexableLocalPageSlugs.has(normalizedSlug)
+  );
+}
+
+export function isLocalPageSitemapEligible(slug: string): boolean {
+  return isLocalPageIndexable(slug);
+}
+
+export function normalizeLocalPageSitemapSlug(slug: string): string {
+  const normalizedSlug = normalizeLocalPageSlug(slug);
+
+  if (normalizedSlug === 'en') {
+    return '';
+  }
+
+  if (normalizedSlug.startsWith('en/')) {
+    return normalizedSlug.slice('en/'.length);
+  }
+
+  return normalizedSlug;
+}
+
 export function isScenarioPageSitemapEligible(
   page: CanonicalScenario
 ): boolean {
@@ -103,4 +138,8 @@ function normalizeSeoPath(path: string): string {
   }
 
   return normalizedPath;
+}
+
+function normalizeLocalPageSlug(slug: string): string {
+  return slug.replace(/^\/+/, '').replace(/\/+$/, '');
 }

@@ -3,11 +3,14 @@ import { getAllGuides } from '@/lib/content/getGuideBySlug';
 import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
 import { getAllScenarioPages } from '@/lib/content/scenarioPages';
 import {
+  isLocalPageSitemapEligible,
   isPricingScenarioSitemapEligible,
   isScenarioPageSitemapEligible,
+  normalizeLocalPageSitemapSlug,
 } from '@/lib/seo/indexing';
 
 import { envConfigs } from '@/config';
+import { getLocalPageSlugs } from '@/shared/models/post';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = envConfigs.site_url.replace(/\/$/, '');
@@ -107,11 +110,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  const localPageRoutes: MetadataRoute.Sitemap = getLocalPageSlugs()
+    .map(normalizeLocalPageSitemapSlug)
+    .filter(isLocalPageSitemapEligible)
+    .filter((slug, index, slugs) => slugs.indexOf(slug) === index)
+    .map((slug) => ({
+      url: `${baseUrl}${normalizeRoutePath(slug)}`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: getLocalPagePriority(slug),
+    }));
+
   return [
     ...staticRoutes,
     ...canonicalScenarioRoutes,
     ...scenarioRoutes,
     ...guideRoutes,
+    ...localPageRoutes,
   ];
 }
 
@@ -125,4 +140,20 @@ function normalizeRoutePath(path: string): string {
   }
 
   return path;
+}
+
+function getLocalPagePriority(slug: string): number {
+  if (slug === 'tools' || slug === 'pricing/playbooks') {
+    return 0.8;
+  }
+
+  if (
+    slug.startsWith('tools/') ||
+    slug.startsWith('pricing/') ||
+    slug.startsWith('negotiation/')
+  ) {
+    return 0.7;
+  }
+
+  return 0.6;
 }

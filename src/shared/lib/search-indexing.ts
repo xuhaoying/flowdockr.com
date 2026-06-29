@@ -13,7 +13,7 @@ function normalizeHostname(hostname: string) {
 }
 
 function getIndexingOverride() {
-  const value = process.env.NEXT_PUBLIC_ALLOW_INDEXING;
+  const value = process.env.ALLOW_INDEXING;
   return value === 'true' || value === 'false' ? value : undefined;
 }
 
