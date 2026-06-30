@@ -23,8 +23,8 @@ describe('search indexing gate', () => {
     }
   });
 
-  it('allows indexing only for the official production host when explicitly enabled', () => {
-    process.env.ALLOW_INDEXING = 'true';
+  it('allows indexing for the official production host by default', () => {
+    delete process.env.ALLOW_INDEXING;
 
     expect(shouldBlockSearchIndexingForHost('www.flowdockr.com')).toBe(false);
     expect(isSearchIndexingEnabledForHost('www.flowdockr.com')).toBe(true);
@@ -34,15 +34,15 @@ describe('search indexing gate', () => {
     expect(shouldBlockSearchIndexingForHost('localhost:3000')).toBe(true);
   });
 
-  it('blocks indexing when the override is not explicitly enabled', () => {
-    process.env.ALLOW_INDEXING = '';
+  it('blocks indexing when the override is explicitly disabled', () => {
+    process.env.ALLOW_INDEXING = 'false';
 
     expect(shouldBlockSearchIndexingForHost('www.flowdockr.com')).toBe(true);
     expect(isSearchIndexingEnabledForHost('www.flowdockr.com')).toBe(false);
   });
 
   it('does not trust public build-time indexing variables', () => {
-    delete process.env.ALLOW_INDEXING;
+    process.env.ALLOW_INDEXING = 'false';
     process.env.NEXT_PUBLIC_ALLOW_INDEXING = 'true';
 
     expect(shouldBlockSearchIndexingForHost('www.flowdockr.com')).toBe(true);

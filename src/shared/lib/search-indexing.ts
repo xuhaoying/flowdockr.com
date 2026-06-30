@@ -21,12 +21,12 @@ export function shouldBlockSearchIndexingForHost(hostname: string) {
   const normalizedHostname = normalizeHostname(hostname);
   const isOfficialProductionHost =
     normalizedHostname === FLOWDOCKR_PRODUCTION_HOSTNAME;
-  const isIndexingExplicitlyEnabled = getIndexingOverride() === 'true';
+  const isIndexingExplicitlyDisabled = getIndexingOverride() === 'false';
 
   return (
     !normalizedHostname ||
     !isOfficialProductionHost ||
-    !isIndexingExplicitlyEnabled
+    isIndexingExplicitlyDisabled
   );
 }
 
