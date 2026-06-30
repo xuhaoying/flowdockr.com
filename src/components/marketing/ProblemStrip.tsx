@@ -5,9 +5,12 @@ const PRESSURE_ITEMS = [
   { label: 'Client asks for a discount', slug: 'discount-request' },
   { label: 'Client found someone cheaper', slug: 'found-someone-cheaper' },
   { label: 'Ask for payment politely', slug: 'ask-for-payment-politely' },
-  { label: 'Final payment reminder', slug: 'final-payment-reminder' },
+  {
+    label: 'Overdue invoice no response',
+    slug: 'overdue-invoice-no-response',
+  },
+  { label: 'Payment before starting work', slug: 'start-before-payment' },
   { label: 'Client wants extra work for free', slug: 'extra-work-for-free' },
-  { label: 'Unlimited revisions request', slug: 'unlimited-revisions' },
   {
     label: 'That request is out of scope',
     slug: 'out-of-scope-professionally',

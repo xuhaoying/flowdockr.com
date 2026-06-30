@@ -34,31 +34,31 @@ export type ScenarioSurfaceGroup = {
 const HOMEPAGE_SURFACE_GROUPS = [
   {
     id: 'pricing',
-    title: 'Pricing pushback',
+    title: 'Discount and price pushback',
     description:
-      'Primary money conversations where protecting rate and scope matters most.',
+      'Templates for protecting your rate when a client asks for a lower price.',
     slugs: ['quote-too-high', 'discount-request', 'found-someone-cheaper'],
   },
   {
     id: 'payment',
-    title: 'Payment pressure',
+    title: 'Payment templates',
     description:
-      'High-anxiety payment follow-ups where clear wording directly protects cash flow.',
+      'Payment reminder and deposit messages where wording directly protects cash flow.',
     slugs: [
       'ask-for-payment-politely',
-      'final-payment-reminder',
-      'deposit-not-paid-yet',
+      'overdue-invoice-no-response',
+      'start-before-payment',
     ],
   },
   {
     id: 'scope',
-    title: 'Scope boundaries',
+    title: 'Scope creep templates',
     description:
-      'Boundary-setting pages for unpaid extras, revision drift, and out-of-scope asks.',
+      'Boundary-setting replies for unpaid extras and out-of-scope requests.',
     slugs: [
       'extra-work-for-free',
-      'unlimited-revisions',
       'out-of-scope-professionally',
+      'scope-creep-polite-response',
     ],
   },
 ] as const;
@@ -72,10 +72,12 @@ const TOOLS_INDEX_STARTING_SCENARIO_SLUGS = [
 
 const TOOL_SURFACE_SCENARIO_SLUGS: Record<string, string[]> = {
   'reply-generator': [
-    'quote-too-high',
     'ask-for-payment-politely',
+    'overdue-invoice-no-response',
     'out-of-scope-professionally',
-    'extra-work-outside-scope',
+    'extra-work-for-free',
+    'discount-request',
+    'start-before-payment',
   ],
   'price-negotiation-email-generator': [
     'discount-request',

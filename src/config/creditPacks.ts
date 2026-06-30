@@ -67,7 +67,7 @@ export const freeTrialPlan: FreeTrialPlan = {
   tagline: 'Single response only',
   badge: 'Start free',
   featureSummary: [
-    '2 negotiation credits',
+    '2 message credits',
     'Single response output',
     'Basic scenario support',
     'No saved history',
@@ -92,11 +92,11 @@ export const creditPacks: PurchasablePlanConfig[] = [
     active: true,
     description:
       'For occasional freelancers who need one clear answer right now.',
-    tagline: 'Best for one-off deal pressure',
+    tagline: 'Best for one-off message pressure',
     badge: 'First purchase',
     ctaLabel: 'Buy Quick Help',
     featureSummary: [
-      '8 negotiation credits',
+      '8 message credits',
       'Single structured reply',
       'Short strategy explanation',
       'No full history',
@@ -117,17 +117,16 @@ export const creditPacks: PurchasablePlanConfig[] = [
       process.env.STRIPE_PRICE_PRO_50 ||
       '',
     active: true,
-    description:
-      'For ongoing client work that needs stronger negotiation support.',
+    description: 'For ongoing client work that needs stronger reply support.',
     tagline: 'Most balanced support level',
     badge: 'Most Popular',
     popular: true,
     ctaLabel: 'Buy Pro',
     featureSummary: [
-      '24 negotiation credits',
+      '24 message credits',
       'Multi-version replies',
       'Strategy explanation + risk alerts',
-      'Saved negotiation history',
+      'Saved message history',
     ],
     entitlements: entitlementsBySupportLevel.pro,
   },
@@ -143,18 +142,18 @@ export const creditPacks: PurchasablePlanConfig[] = [
     active: true,
     description:
       'For agencies and high-frequency deal operators who want a full support layer.',
-    tagline: 'For the whole client negotiation workflow',
+    tagline: 'For the whole client communication workflow',
     badge: 'Advanced',
     ctaLabel: 'Buy Studio',
     featureSummary: [
-      '60 negotiation credits',
+      '60 message credits',
       'Everything in Pro',
-      'Advanced negotiation modes',
+      'Advanced reply modes',
       'Best for multi-client work',
     ],
     advancedModeLabels: [
-      'Proposal negotiation',
-      'Scope change negotiation',
+      'Proposal replies',
+      'Scope change replies',
       'Rush pricing support',
       'Payment follow-up',
       'Client type analysis',

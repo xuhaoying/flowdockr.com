@@ -31,21 +31,21 @@ describe('scenario surface allocation', () => {
       'discount-request',
       'found-someone-cheaper',
       'ask-for-payment-politely',
-      'final-payment-reminder',
-      'deposit-not-paid-yet',
+      'overdue-invoice-no-response',
+      'start-before-payment',
       'extra-work-for-free',
-      'unlimited-revisions',
       'out-of-scope-professionally',
+      'scope-creep-polite-response',
     ]);
     expect(hubPopularSlugs).toEqual([
-      'discount-request',
       'lower-rate-after-proposal',
       'payment-extension-request',
-      'start-before-payment',
       'deposit-not-paid-yet',
       'found-someone-cheaper',
       'quote-too-high',
+      'start-before-payment',
       'ask-for-payment-politely',
+      'discount-request',
     ]);
     expect(toolsIndexSlugs).toEqual([
       'quote-too-high',
@@ -104,15 +104,15 @@ describe('scenario surface allocation', () => {
 
     expect(paymentClusterTop).toEqual([
       'payment-extension-request',
-      'start-before-payment',
-      'pay-later-request',
       'deposit-not-paid-yet',
+      'pay-later-request',
+      'start-before-payment',
     ]);
     expect(pricingObjectionTop).toEqual([
-      'discount-request',
       'lower-rate-after-proposal',
-      'best-price-before-signing',
       'quote-too-high',
+      'best-price-before-signing',
+      'discount-request',
     ]);
   });
 
@@ -125,10 +125,11 @@ describe('scenario surface allocation', () => {
     ).map((item) => item.slug);
 
     expect(replyGeneratorSlugs).toEqual([
-      'quote-too-high',
       'ask-for-payment-politely',
+      'overdue-invoice-no-response',
       'out-of-scope-professionally',
-      'extra-work-outside-scope',
+      'extra-work-for-free',
+      'discount-request',
     ]);
     expect(pricingEmailSlugs).toEqual([
       'discount-request',
@@ -141,9 +142,9 @@ describe('scenario surface allocation', () => {
     expect(replyGeneratorSlugs).not.toEqual(pricingEmailSlugs);
     expect(
       getScenarioDistributionPriority(
-        getScenarioPageBySlug('extra-work-outside-scope')!
+        getScenarioPageBySlug('discount-request')!
       )
-    ).toBe('secondary');
+    ).toBe('primary');
     expect(
       getScenarioDistributionPriority(
         getScenarioPageBySlug('same-scope-lower-price')!

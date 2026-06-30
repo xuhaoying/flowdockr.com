@@ -31,8 +31,11 @@ describe('public marketing entry alignment', () => {
 
     expect(
       screen
-        .getAllByRole('link', { name: 'Browse reply scenarios' })
-        .every((link) => link.getAttribute('href') === '/scenario')
+        .getAllByRole('link', { name: 'Browse templates' })
+        .every(
+          (link) =>
+            link.getAttribute('href') === '/client-communication-templates'
+        )
     ).toBe(true);
     expect(
       screen
@@ -126,6 +129,8 @@ describe('public marketing entry alignment', () => {
       .filter((link) =>
         [
           'Client says your quote is too high',
+          'Ask for payment politely',
+          'Say work is out of scope',
           'Client asks for a discount',
           'Client wants extra work for free',
         ].includes(link.textContent || '')

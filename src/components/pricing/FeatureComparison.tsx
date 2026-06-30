@@ -18,7 +18,7 @@ type ComparisonRow = BooleanRow | TextRow;
 
 const ROWS: ComparisonRow[] = [
   {
-    feature: 'Negotiation credits included',
+    feature: 'Message credits included',
     type: 'text',
     values: {
       free: '2',
@@ -58,7 +58,7 @@ const ROWS: ComparisonRow[] = [
     },
   },
   {
-    feature: 'Saved negotiation history',
+    feature: 'Saved message history',
     type: 'boolean',
     values: {
       free: false,

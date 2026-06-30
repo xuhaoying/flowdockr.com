@@ -123,7 +123,7 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
     heroDescription:
       'Use this scenario when a client brings up a cheaper competitor and you need to protect your positioning without sounding threatened or defensive. Get a reply you can adapt and send.',
     pagePromise:
-      'Generate a competitor-comparison reply that defends value without starting a price war.',
+      'Copy a professional reply that compares scope, process, and fit without sounding threatened by a cheaper option.',
     cluster: 'pricing',
     intentTier: 'core',
     valueIntent: 'money',
@@ -747,17 +747,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
   }),
   createBatchScenario({
     id: 'scn_extra_work_for_free',
-    title: 'Client asks for extra work for free',
+    title: 'How to say no to extra work for free',
     slug: 'extra-work-for-free',
-    metaTitle: 'Client Wants Free Additional Work? What to Say | FlowDockr',
+    h1: 'How to say no to extra work for free',
+    metaTitle:
+      'How to Say No to Extra Work for Free: Client Email Templates | FlowDockr',
     metaDescription:
-      'Use this scenario when a client explicitly asks for extra work at no additional cost. Hold the commercial boundary clearly and offer structured options instead of absorbing the request.',
+      'Use polite templates to tell a client that extra work requires additional budget, a revised scope, or a new agreement.',
     previewReply:
       'I can help with that, but I would treat it as additional work rather than fold it into the existing fee. The cleanest options are to add it as a separate item, swap it against something already included, or save it for a later phase.',
     heroDescription:
-      'Use this scenario when a client asks for extra work for free and you need to protect the project economics without sounding hostile or petty. Get a reply that keeps the boundary professional.',
+      'Use this scenario when a client asks for extra work for free and you need to protect the project economics without sounding hostile or petty.',
     pagePromise:
-      'Generate a free-extra-work reply that protects margin and keeps the relationship workable.',
+      'Copy a polite no-extra-work-for-free template or generate a custom client reply.',
     cluster: 'scope',
     intentTier: 'core',
     valueIntent: 'boundary',
@@ -802,18 +804,19 @@ export const canonicalScenarioBatchOne: CanonicalScenario[] = [
   }),
   createBatchScenario({
     id: 'scn_out_of_scope_professionally',
-    title: 'How to say that is out of scope professionally',
+    title: 'How to say work is out of scope professionally',
     slug: 'out-of-scope-professionally',
+    h1: 'How to say work is out of scope professionally',
     metaTitle:
-      'How to Say “That’s Out of Scope” Without Sounding Abrupt | FlowDockr',
+      'How to Say Work Is Out of Scope Professionally: Email Templates | FlowDockr',
     metaDescription:
-      'Use this scenario when you need to tell a client a request is out of scope. Get wording that stays respectful, practical, and easy for the client to respond to.',
+      'Use polite email templates to tell a client that extra work is out of scope, requires additional budget, or needs a revised project agreement.',
     previewReply:
       'That request sits outside the scope we originally agreed, so I would treat it as an add-on rather than fold it into the current plan. If you want to include it, I can map out the cleanest way to do that.',
     heroDescription:
-      'Use this scenario when the wording itself is the problem: you need to tell a client something is out of scope without sounding blunt. Get wording that is clear, respectful, and useful.',
+      'Use this scenario when you need to tell a client something is out of scope without sounding blunt. Copy a template or generate wording for the exact request.',
     pagePromise:
-      'Generate an out-of-scope reply that sounds clear and professional instead of abrupt.',
+      'Copy an out-of-scope email template or generate a professional scope creep reply.',
     cluster: 'scope',
     intentTier: 'core',
     valueIntent: 'boundary',

@@ -12,7 +12,7 @@ export function ScenarioHubHero({ hero }: ScenarioHubHeroProps) {
     <section className="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm md:px-8 md:py-10">
       <div className="max-w-3xl space-y-4">
         <p className="inline-flex w-fit rounded-full border border-slate-300 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-          Scenario-based negotiation support
+          Scenario-based reply support
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
           {hero.title}

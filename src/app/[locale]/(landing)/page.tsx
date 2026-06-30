@@ -9,12 +9,13 @@ import { Link } from '@/core/i18n/navigation';
 import { getMetadata } from '@/shared/lib/seo';
 
 export const generateMetadata = getMetadata({
-  title: 'FlowDockr | AI Negotiation Assistant for Professionals',
+  title:
+    'Professional Message Generator for Awkward Work Situations | FlowDockr',
   description:
-    'FlowDockr helps professionals prepare for difficult conversations and negotiations with AI-guided strategy, reply drafts, and scenario support.',
+    'Generate polite, professional emails and replies for asking for payment, saying no, handling scope creep, following up, and setting boundaries with clients or coworkers.',
   canonicalUrl: '/',
   keywords:
-    'AI negotiation assistant, difficult conversations, pricing negotiation, client communication, negotiation preparation',
+    'professional message generator, payment reminder email, scope creep email template, client communication templates, reply generator',
 });
 
 export default async function LandingPage({
@@ -32,16 +33,16 @@ export default async function LandingPage({
       <section className="border-brand-lavender/25 grid gap-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5 md:grid-cols-3 md:p-6">
         {[
           {
-            title: 'Prepare before you respond',
-            body: 'Turn a messy message or high-stakes conversation into a clearer plan, tone, and next step.',
+            title: 'Start from the awkward situation',
+            body: 'Choose the real scenario: payment reminder, scope creep, discount request, follow-up, or a polite no.',
           },
           {
-            title: 'Negotiate without sounding aggressive',
-            body: 'Keep commercial boundaries clear while preserving trust with clients, partners, and buyers.',
+            title: 'Copy wording that sounds professional',
+            body: 'Use templates that are direct enough to protect the boundary and calm enough to preserve the relationship.',
           },
           {
-            title: 'Use AI with structure',
-            body: 'FlowDockr guides replies through negotiation context, risk checks, and practical tradeoffs.',
+            title: 'Generate a custom reply',
+            body: 'Paste the actual message and get a tailored draft you can edit before sending.',
           },
         ].map((feature) => (
           <article
@@ -64,24 +65,24 @@ export default async function LandingPage({
       <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5 md:p-6">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
-            Common use cases
+            Popular client communication scenarios
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-            Built for conversations where the wording matters
+            Get to the template before the explanation
           </h2>
           <p className="text-sm leading-6 text-slate-700">
-            FlowDockr is useful when professionals need a calm, commercially
-            sound response before a deal, payment, or relationship gets worse.
+            FlowDockr is organized around the messages freelancers, consultants,
+            agencies, and small business owners need to send under pressure.
           </p>
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {[
             'A prospect says the quote is too high.',
+            'A client asks for payment before it is comfortable to follow up.',
+            'An overdue invoice needs a firm but polite reminder.',
+            'A client asks for extra work without extra budget.',
+            'A request needs to be marked out of scope professionally.',
             'A client asks for a discount or cheaper option.',
-            'A customer wants extra work without changing scope.',
-            'A payment follow-up needs to stay firm and polite.',
-            'A vendor or partner conversation needs a clear concession path.',
-            'A manager, consultant, or founder needs to rehearse a difficult conversation.',
           ].map((useCase) => (
             <div
               key={useCase}
@@ -97,18 +98,18 @@ export default async function LandingPage({
 
       <section className="border-brand-lavender/25 space-y-4 rounded-2xl border bg-white p-5 shadow-sm shadow-slate-950/5">
         <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Professional negotiation support, not generic chat
+          Templates for freelancers and consultants
         </h2>
         <p className="max-w-3xl text-sm leading-6 text-slate-700">
-          Start with the real message or situation. FlowDockr helps frame the
-          negotiation, identify the tradeoff, and draft language you can edit
-          before sending.
+          The strongest early cluster is client communication: payment, scope,
+          discount pressure, and boundary-setting messages with real commercial
+          consequences.
         </p>
         <Link
-          href="/guides/how-to-negotiate-freelance-pricing"
+          href="/client-communication-templates"
           className="border-brand-lavender/45 text-brand-text hover:border-brand-primary/55 hover:text-brand-primary inline-flex min-h-11 items-center rounded-md border bg-white px-4 py-2 text-sm font-semibold transition-colors"
         >
-          Open pricing negotiation guide
+          Open client communication templates
         </Link>
       </section>
 
@@ -118,7 +119,7 @@ export default async function LandingPage({
         </h2>
         <p className="text-sm text-slate-700">
           Start free. Paid credit packs are one-time purchases processed through
-          checkout when you need more negotiation support.
+          checkout when you need more reply support.
         </p>
         <PricingCards sourcePage="home" />
       </section>
@@ -129,21 +130,22 @@ export default async function LandingPage({
         </h2>
         <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Why not just use ChatGPT?
+            What is FlowDockr for?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            FlowDockr is structured around real negotiation scenarios with
-            strategy constraints and reusable history, not just generic text
-            generation.
+            FlowDockr helps you write polite professional messages for awkward
+            work situations such as payment reminders, scope creep, discount
+            requests, follow-ups, and boundary-setting.
           </p>
         </details>
         <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
           <summary className="cursor-pointer text-sm font-semibold text-slate-900">
-            Will replies sound robotic?
+            Is this only for freelancers?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. Outputs are concise, editable drafts designed for normal client
-            communication, not canned scripts.
+            The current focus is freelancers, consultants, agencies, and small
+            business owners, but many templates also work for coworker, manager,
+            and vendor conversations.
           </p>
         </details>
         <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
@@ -151,8 +153,8 @@ export default async function LandingPage({
             Do I need an account before trying?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. You can start with 2 free negotiation credits first, then sign
-            in when you want to save history or buy more support.
+            No. You can start with 2 free message drafts first, then sign in
+            when you want to save history or buy more support.
           </p>
         </details>
         <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
@@ -161,8 +163,7 @@ export default async function LandingPage({
           </summary>
           <p className="mt-2 text-sm text-slate-700">
             You&apos;ll see a pack comparison and can continue with Quick Help,
-            Pro, or Studio. Saved negotiation history is included from Pro
-            upward.
+            Pro, or Studio. Saved message history is included from Pro upward.
           </p>
         </details>
         <details className="border-brand-lavender/20 bg-brand-bg/55 rounded-lg border p-4">
@@ -170,11 +171,11 @@ export default async function LandingPage({
             Is FlowDockr legal or financial advice?
           </summary>
           <p className="mt-2 text-sm text-slate-700">
-            No. FlowDockr provides communication and negotiation drafting
-            support for professional client conversations. It is not a law firm,
-            financial adviser, lender, broker, debt settlement service, debt
-            collection service, bank, or money transmitter. You are responsible
-            for reviewing outputs and making final business decisions.
+            No. FlowDockr provides communication drafting support for
+            professional client conversations. It is not a law firm, financial
+            adviser, lender, broker, debt settlement service, debt collection
+            service, bank, or money transmitter. You are responsible for
+            reviewing outputs and making final business decisions.
           </p>
         </details>
       </section>

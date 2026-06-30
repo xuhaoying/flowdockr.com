@@ -9,6 +9,7 @@ import { ScenarioHero } from '@/components/scenario/ScenarioHero';
 import { ScenarioInlineTool } from '@/components/scenario/ScenarioInlineTool';
 import { ScenarioOverview } from '@/components/scenario/ScenarioOverview';
 import { ScenarioStickyBottomCta } from '@/components/scenario/ScenarioStickyBottomCta';
+import { ScenarioTemplatePreview } from '@/components/scenario/ScenarioTemplatePreview';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { getPaymentScenarioSupport } from '@/lib/content/paymentCluster';
 import { getScenarioDetailContent } from '@/lib/content/scenarioDetailContent';
@@ -175,16 +176,19 @@ export default async function ScenarioPage({
             )}
             primaryClientMessage={page.primaryClientMessage}
             description={getScenarioHeroDescription(page)}
-            ctaLabel="Generate a better reply"
+            ctaLabel="Generate a custom reply"
           />
           <ScenarioOverview
             userSituation={page.userSituation}
             replyGoal={page.userGoal || page.strategyPrimary}
           />
+          <ScenarioTemplatePreview
+            templates={detailContent.copyReadyTemplates || []}
+          />
           <ScenarioInlineTool
             analyticsScenarioSlug={page.slug}
             defaultScenarioSlug={page.slug}
-            title="Paste the client message and draft the reply now"
+            title="Paste the message or situation and draft the reply now"
             description={pagePromise}
             primaryClientMessage={page.primaryClientMessage}
           />

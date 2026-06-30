@@ -4,79 +4,94 @@
     "pageType": "tool",
     "cluster": "pricing",
     "url": "/tools/reply-generator/",
-    "h1": "AI reply generator for difficult client conversations",
-    "metaTitle": "AI Reply Generator for Difficult Client Conversations | FlowDockr",
-    "metaDescription": "Generate clearer replies for pricing objections, scope pressure, payment delays, and awkward client conversations. FlowDockr helps you respond with more strategy and less guesswork.",
-    "heroSubheading": "Draft professional replies for difficult client conversations without starting from scratch.",
-    "primaryIntent": "Provide a broad reply-generation tool that can handle multiple client communication situations, especially pricing-related ones.",
+    "h1": "Professional Reply Generator",
+    "metaTitle": "Professional Reply Generator for Difficult Work Messages | FlowDockr",
+    "metaDescription": "Generate polite, professional replies for difficult client, coworker, and manager conversations. Choose a situation, tone, and length.",
+    "heroSubheading": "Turn awkward client, coworker, or manager situations into polite, professional replies.",
+    "primaryIntent": "Provide a broad reply-generation tool for awkward professional messages, especially high-intent client communication situations.",
     "primaryKeywords": [
-      "AI reply generator",
+      "professional reply generator",
       "client reply generator",
       "professional response generator"
     ],
     "supportKeywords": [
       "email reply generator",
-      "AI response tool",
-      "difficult client response generator"
+      "difficult work message generator",
+      "awkward professional reply generator"
     ],
-    "intro": "FlowDockr helps you turn messy client messages into clearer next-step replies. Instead of guessing what to say, you can work from the actual context, your goal, and the tone you want to keep.",
+    "intro": "FlowDockr helps you turn difficult professional messages into clear replies you can edit and send. Choose the situation, paste the real wording, and keep the tone matched to the relationship.",
     "bestFor": [
-      "Pricing objections",
+      "Ask for payment",
+      "Overdue invoices",
+      "Out-of-scope requests",
+      "Extra work for free",
       "Discount requests",
-      "Low-budget conversations",
-      "Scope pressure",
-      "Awkward follow-ups"
+      "Polite follow-ups"
     ],
     "inputs": [
       {
         "name": "scenario",
-        "label": "Situation type",
-        "placeholder": "Select or auto-detect the scenario",
+        "label": "Situation",
+        "placeholder": "Ask for payment, overdue invoice, out of scope, extra work for free, discount request, follow up, say no politely",
         "required": false
       },
       {
         "name": "clientMessage",
-        "label": "Client message",
-        "placeholder": "Paste the exact client message here",
+        "label": "Message or situation",
+        "placeholder": "Paste the client message, rough draft, or situation here",
         "required": true
       },
       {
         "name": "projectContext",
-        "label": "Project context",
-        "placeholder": "Add quote, scope, timeline, or budget context",
+        "label": "Context",
+        "placeholder": "Add invoice, scope, deadline, relationship, audience, or background context",
         "required": false
       },
       {
         "name": "goal",
         "label": "Your goal",
-        "placeholder": "Protect price, clarify scope, keep deal alive, etc.",
+        "placeholder": "Ask for payment, say no, protect scope, follow up, keep the relationship warm, etc.",
         "required": false
       },
       {
         "name": "tone",
         "label": "Preferred tone",
-        "placeholder": "Warm, concise, firm, calm, direct",
+        "placeholder": "Friendly, professional, firm, warm, or direct",
         "required": false
       }
     ],
     "exampleUseCases": [
-      "Price pushback after proposal",
-      "Can you do it cheaper?",
-      "More work for the same price",
-      "Free trial work request"
+      "Ask for payment politely",
+      "Follow up on an overdue invoice",
+      "Say work is out of scope",
+      "Say no to extra work for free",
+      "Respond to a discount request",
+      "Ask for payment before starting work"
     ],
     "relatedScenarios": [
       {
-        "href": "/pricing/price-pushback-after-proposal/",
-        "label": "Price pushback after proposal"
+        "href": "/scenario/ask-for-payment-politely",
+        "label": "Ask for payment politely"
       },
       {
-        "href": "/pricing/can-you-do-it-cheaper/",
-        "label": "Can you do it cheaper?"
+        "href": "/scenario/overdue-invoice-no-response",
+        "label": "Overdue invoice follow-up"
       },
       {
-        "href": "/pricing/free-trial-work-request/",
-        "label": "Free trial work request"
+        "href": "/scenario/out-of-scope-professionally",
+        "label": "Say work is out of scope"
+      },
+      {
+        "href": "/scenario/extra-work-for-free",
+        "label": "Say no to extra work for free"
+      },
+      {
+        "href": "/scenario/discount-request",
+        "label": "Respond to discount requests"
+      },
+      {
+        "href": "/scenario/start-before-payment",
+        "label": "Payment before starting work"
       }
     ],
     "notes": "General-purpose tool page. Must feel like a real software tool page, not a thin CTA wrapper."

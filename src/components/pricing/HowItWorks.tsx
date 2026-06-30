@@ -3,7 +3,7 @@ const STEPS = [
     step: '1',
     title: 'Describe the situation',
     description:
-      'Paste the client message and choose the negotiation scenario you are dealing with.',
+      'Paste the client message, rough draft, or situation you are dealing with.',
   },
   {
     step: '2',

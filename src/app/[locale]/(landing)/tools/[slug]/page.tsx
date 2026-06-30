@@ -30,7 +30,7 @@ import { AppContextProvider } from '@/shared/contexts/app';
 import { getLocalPage, getLocalPageSlugs } from '@/shared/models/post';
 
 const defaultGeneratorScenarioByToolSlug: Record<string, string> = {
-  'reply-generator': 'discount-request',
+  'reply-generator': 'ask-for-payment-politely',
   'price-negotiation-email-generator': 'quote-too-high',
 };
 
@@ -58,6 +58,15 @@ const REPLY_GENERATOR_PREFILLS: Record<
     taskContext: 'Goal: protect scope and keep the next step clear.',
     workspaceDescription:
       'Loaded a starting out-of-scope reply draft. Recommended tone: Firm. Edit the message or paste the exact client request before generating.',
+  },
+  'ask-for-payment-politely': {
+    message:
+      'Hi Sarah, following up on invoice #0187, which was due last Friday. Could you confirm when payment is scheduled?',
+    tone: 'professional',
+    taskContext:
+      'Goal: ask for payment clearly without sounding rude or apologetic.',
+    workspaceDescription:
+      'Loaded a polite payment reminder draft. Recommended tone: Professional. Replace it with the real client thread or edit from this example.',
   },
   'client-no-response-follow-up': {
     message:
@@ -264,11 +273,14 @@ export default async function ToolPage({
               }
             : undefined
         }
-        showScenarioSelector={false}
+        showScenarioSelector={tool.slug === 'reply-generator'}
+        showAdvancedFields={tool.slug === 'reply-generator'}
         placeholder={clientMessageInput?.placeholder}
+        submitLabel="Generate professional reply"
+        workspaceTitle="Paste the message or situation"
         workspaceDescription={
           replyGeneratorPrefill?.workspaceDescription ||
-          '2 free negotiation credits. No subscription required.'
+          'Choose a situation, paste the real wording or rough draft, and generate a reply you can edit before sending.'
         }
       />
 
@@ -286,7 +298,7 @@ export default async function ToolPage({
         </h2>
         <p className="text-sm text-slate-700">
           Start with 2 free drafts, then use credits when you need more active
-          deal output.
+          reply drafts.
         </p>
         <PricingCards sourcePage="tool" />
       </section>

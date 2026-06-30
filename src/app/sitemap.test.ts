@@ -1,4 +1,5 @@
 import { scenarioPages } from '@/content/scenario-pages';
+import { getAllTools } from '@/lib/content/getToolBySlug';
 import { pricingScenarioPages } from '@/lib/content/pricingScenarios';
 import {
   isLocalPageSitemapEligible,
@@ -59,6 +60,20 @@ describe('scenario sitemap coverage', () => {
       );
 
       expect(hasLocalPageUrl).toBe(isLocalPageSitemapEligible(slug));
+    }
+  });
+
+  it('includes the client templates hub and dynamic tool pages', () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    expect(
+      urls.some((url) => url.endsWith('/client-communication-templates'))
+    ).toBe(true);
+
+    for (const tool of getAllTools()) {
+      expect(
+        urls.some((url) => url.endsWith(tool.url.replace(/\/$/, '')))
+      ).toBe(true);
     }
   });
 });

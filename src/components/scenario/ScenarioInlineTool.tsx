@@ -40,7 +40,7 @@ export function ScenarioInlineTool({
           defaultScenarioSlug={defaultScenarioSlug}
           placeholder={`Paste the exact version of "${primaryClientMessage}" or the closest message from the thread...`}
           submitLabel="Generate reply"
-          workspaceTitle="Client message"
+          workspaceTitle="Message or situation"
           workspaceDescription="Paste the exact wording from the conversation and generate a stronger reply you can edit before sending."
           analyticsEvents={{
             generateClick: 'scenario_generate_clicked',

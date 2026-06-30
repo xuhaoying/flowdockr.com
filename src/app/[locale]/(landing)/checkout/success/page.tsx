@@ -14,7 +14,7 @@ import { getMetadata } from '@/shared/lib/seo';
 export const generateMetadata = getMetadata({
   title: 'Payment successful | FlowDockr',
   description:
-    'Your FlowDockr negotiation credits and support level are being confirmed.',
+    'Your FlowDockr message credits and support level are being confirmed.',
   canonicalUrl: '/checkout/success',
   noIndex: true,
 });

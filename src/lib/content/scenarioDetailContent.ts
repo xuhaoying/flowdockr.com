@@ -7,6 +7,12 @@ export type ScenarioToneExample = {
   bestFor: string;
 };
 
+export type ScenarioCopyReadyTemplate = {
+  title: string;
+  text: string;
+  bestFor: string;
+};
+
 export type ScenarioFaqItem = {
   question: string;
   answer: string;
@@ -26,6 +32,7 @@ export type ScenarioDetailContent = {
     title: string;
     body: string;
   }>;
+  copyReadyTemplates?: ScenarioCopyReadyTemplate[];
   toneExamples: ScenarioToneExample[];
   mistakes: string[];
   faq: ScenarioFaqItem[];
@@ -39,6 +46,409 @@ type GeneratorScenarioDetail = {
 };
 
 const scenarioDetailOverrides: Record<string, ScenarioDetailContent> = {
+  'ask-for-payment-politely': {
+    intentSummary:
+      'Use this when you need to ask a client for payment without sounding rude, apologetic, or vague. The fastest useful answer is a specific payment reminder the client can act on.',
+    useWhen: [
+      'You sent an invoice or payment request and need a professional follow-up.',
+      'The client has acknowledged the work, but payment timing is unclear.',
+      'You want a polite payment reminder email, overdue invoice follow-up, or short message you can adapt quickly.',
+    ],
+    notFor: [
+      'A client who has fully stopped responding after multiple overdue reminders.',
+      'A pre-kickoff deposit boundary where work should not start yet.',
+      'A legal collections process or formal demand letter.',
+    ],
+    steps: [
+      {
+        title: 'Name the invoice or payment step',
+        body: 'Reference the invoice number, due date, milestone, or agreed payment term so the message is concrete.',
+      },
+      {
+        title: 'Ask for a date or blocker',
+        body: 'The reply should move toward a payment date, status update, or clear issue to resolve.',
+      },
+      {
+        title: 'Stay polite but not optional',
+        body: 'Do not apologize for following up. Keep the tone calm while making the next action clear.',
+      },
+    ],
+    copyReadyTemplates: [
+      {
+        title: 'Friendly payment reminder email',
+        text: 'Hi [Name], I hope you are well. I am following up on invoice [number], which was due on [date]. Could you let me know when payment is scheduled on your side? Thank you.',
+        bestFor:
+          'Use when this is the first reminder and the relationship is still warm.',
+      },
+      {
+        title: 'First invoice follow-up email',
+        text: 'Hi [Name], just checking in on invoice [number] for [project/work]. It looks like it is still open on my side. Could you confirm whether it has been queued for payment?',
+        bestFor:
+          'Use when you want to confirm status without sounding escalated.',
+      },
+      {
+        title: 'Overdue invoice email template',
+        text: 'Hi [Name], I am following up because invoice [number] is now overdue. Please let me know the expected payment date, or if anything is blocking payment so we can close it out.',
+        bestFor:
+          'Use when the due date has passed and you need a clearer response.',
+      },
+      {
+        title: 'Short payment reminder message',
+        text: 'Hi [Name], quick reminder that invoice [number] is still open. Could you confirm the payment date when you have a moment?',
+        bestFor: 'Use for Slack, SMS, WhatsApp, or a short email bump.',
+      },
+      {
+        title: 'Firm but polite payment request',
+        text: 'Hi [Name], invoice [number] remains unpaid, so I need to confirm the payment timeline before I continue with the next step. Please send the expected payment date by [day].',
+        bestFor: 'Use when payment is affecting your ability to continue work.',
+      },
+      {
+        title: 'Final reminder before pausing work',
+        text: 'Hi [Name], this is a final reminder that invoice [number] is still overdue. If payment is not completed by [date], I will need to pause remaining work until the account is current.',
+        bestFor:
+          'Use when you need to set a clear consequence before stopping work.',
+      },
+      {
+        title: 'Payment reminder for a long-term client',
+        text: 'Hi [Name], I wanted to quickly flag invoice [number], which still appears unpaid on my side. I know timing can slip, so could you confirm when it will be processed?',
+        bestFor:
+          'Use when you want to protect the relationship while still being specific.',
+      },
+      {
+        title: 'Client has gone silent',
+        text: 'Hi [Name], I have followed up a couple of times on invoice [number] and have not heard back. Please confirm the payment status or the right person to contact so we can resolve this.',
+        bestFor:
+          'Use when the client is no longer replying to earlier reminders.',
+      },
+      {
+        title: 'Payment before starting work',
+        text: 'Hi [Name], I can start as soon as the deposit/payment is complete. Once that step is handled, I will confirm kickoff timing and begin the work.',
+        bestFor:
+          'Use when the client expects work to begin before payment is complete.',
+      },
+      {
+        title: 'Follow-up after promised payment date',
+        text: 'Hi [Name], following up because the payment date we discussed was [date], and I do not see the payment reflected yet. Could you send an updated payment timeline today?',
+        bestFor: 'Use when the client already promised a date and missed it.',
+      },
+    ],
+    toneExamples: [
+      {
+        tone: 'Concise',
+        text: 'Hi [Name], following up on invoice [number], which is still open on my side. Could you confirm the expected payment date?',
+        bestFor: 'Use when you need a short professional reminder.',
+      },
+      {
+        tone: 'Warm',
+        text: 'Hi [Name], I hope you are well. I wanted to check on invoice [number] and confirm when payment is expected. If anything is holding it up, let me know and I can help close the loop.',
+        bestFor:
+          'Use when the relationship is good and the delay may be administrative.',
+      },
+      {
+        tone: 'Firm',
+        text: 'Hi [Name], invoice [number] remains overdue. Please confirm the payment date by [day] so I can plan the remaining work and close out the account properly.',
+        bestFor:
+          'Use when the due date has passed and the client needs a concrete ask.',
+      },
+    ],
+    mistakes: [
+      'Apologizing for following up when payment is already due.',
+      'Sending a vague nudge that does not mention the invoice, due date, or requested action.',
+      'Threatening escalation before asking for a concrete payment date or blocker.',
+    ],
+    faq: [
+      {
+        question: 'How do you politely ask a client for payment?',
+        answer:
+          'Reference the invoice or payment step, ask for the expected payment date, and keep the tone calm. The message should be specific without sounding accusatory.',
+      },
+      {
+        question: 'How do you remind someone to pay an invoice?',
+        answer:
+          'Say that the invoice is still open, include the invoice number or due date, and ask whether payment has been scheduled.',
+      },
+      {
+        question: 'How do you write a friendly payment reminder?',
+        answer:
+          'Open warmly, keep the reminder short, and ask for a simple confirmation of payment timing. Avoid over-explaining why you need to be paid.',
+      },
+      {
+        question: 'What should I say when an invoice is overdue?',
+        answer:
+          'State that the invoice is overdue and ask for a payment date or any blocker preventing payment. If the delay affects work, say that clearly.',
+      },
+      {
+        question: 'How do I ask for payment without sounding rude?',
+        answer:
+          'Use factual language instead of emotional language: invoice number, due date, requested payment date, and next step.',
+      },
+    ],
+    distinctions: [
+      {
+        href: '/scenario/overdue-invoice-no-response',
+        label: 'Overdue invoice no response',
+        description:
+          'Use when the client has stopped replying and a normal reminder is no longer enough.',
+      },
+      {
+        href: '/scenario/start-before-payment',
+        label: 'Payment before starting work',
+        description:
+          'Use when the issue is pre-kickoff payment or deposit protection.',
+      },
+      {
+        href: '/scenario/discount-request',
+        label: 'Discount request',
+        description:
+          'Use when the client is trying to lower the price rather than delaying payment.',
+      },
+      {
+        href: '/tools/reply-generator',
+        label: 'Professional reply generator',
+        description:
+          'Paste the real thread and generate a custom payment reminder.',
+      },
+    ],
+  },
+  'out-of-scope-professionally': {
+    intentSummary:
+      'Use this when a client request is outside the agreed scope and you need language that protects the boundary without sounding abrupt.',
+    useWhen: [
+      'The client asks for work that was not included in the original agreement.',
+      'You are open to helping, but only with additional budget, a scope change, or a tradeoff.',
+      'The request could become scope creep if you absorb it silently.',
+    ],
+    notFor: [
+      'A pure discount request where scope has not changed.',
+      'A late-payment conversation where the issue is money already owed.',
+      'A one-off courtesy fix you have already decided to include.',
+    ],
+    steps: [
+      {
+        title: 'Confirm the boundary',
+        body: 'Name the request as outside the agreed scope or not included in the original deliverables.',
+      },
+      {
+        title: 'Keep the tone useful',
+        body: 'Do not just say no. Offer an add-on, swap, revised agreement, or later phase.',
+      },
+      {
+        title: 'Make the client choose',
+        body: 'Give a simple decision path so the conversation moves from pressure to scope control.',
+      },
+    ],
+    copyReadyTemplates: [
+      {
+        title: 'Short out-of-scope email template',
+        text: 'Hi [Name], that request sits outside the scope we agreed for this phase. I can help with it, but I would need to quote it separately or adjust the current scope.',
+        bestFor: 'Use when the boundary is clear and you need a direct reply.',
+      },
+      {
+        title: 'Friendly out-of-scope reply',
+        text: 'That makes sense as an addition. To keep the project clean, I would separate it from the current scope and either add it as a paid item or save it for a later phase.',
+        bestFor:
+          'Use when you want the client to feel heard before you set the boundary.',
+      },
+      {
+        title: 'Firm but professional scope creep reply',
+        text: 'I cannot fold that into the existing scope at no extra cost. If you want to include it, the next step is to update the scope, timeline, and budget.',
+        bestFor: 'Use when the client is treating added work as included.',
+      },
+      {
+        title: 'Additional budget template',
+        text: 'Happy to help with that. Because it was not part of the original scope, it would require additional budget. I can send a quick estimate before we move forward.',
+        bestFor:
+          'Use when the cleanest path is quoting the added work separately.',
+      },
+      {
+        title: 'Original scope reminder',
+        text: 'The current agreement covers [included work]. This new request is outside that scope, so I would treat it as an add-on rather than include it under the existing fee.',
+        bestFor:
+          'Use when you need to reference the agreement without sounding defensive.',
+      },
+      {
+        title: 'Reduce scope instead of lowering rate',
+        text: 'If the budget needs to stay the same, we can reduce or swap scope rather than add this on top. I can suggest the cleanest tradeoff if helpful.',
+        bestFor:
+          'Use when the client wants more work but cannot increase budget.',
+      },
+    ],
+    toneExamples: [
+      {
+        tone: 'Concise',
+        text: 'That sits outside the agreed scope, so I would treat it as an add-on rather than include it in the current fee.',
+        bestFor: 'Use when the client already understands the agreement.',
+      },
+      {
+        tone: 'Warm',
+        text: 'I can see why that would be useful. To keep the project clear, I would separate it from the current scope and decide whether to add it now, swap priorities, or handle it later.',
+        bestFor: 'Use when you want the boundary to feel collaborative.',
+      },
+      {
+        tone: 'Firm',
+        text: 'I cannot include that under the current scope by default. If it needs to be added, we should update scope, timeline, and budget before I begin.',
+        bestFor: 'Use when the client has repeated out-of-scope requests.',
+      },
+    ],
+    mistakes: [
+      'Calling the client difficult or accusing them of scope creep.',
+      'Saying yes before clarifying whether the work is an add-on, swap, or later phase.',
+      'Explaining the agreement so defensively that the reply feels like an argument.',
+    ],
+    faq: [
+      {
+        question: 'How do you say work is out of scope professionally?',
+        answer:
+          'Say that the request sits outside the agreed scope, then offer a practical next step such as an add-on quote, scope swap, or later phase.',
+      },
+      {
+        question: 'How do you tell a client extra work requires more budget?',
+        answer:
+          'Keep it factual: the request was not included in the original scope, so adding it requires updated budget, timeline, or deliverables.',
+      },
+      {
+        question: 'What if the client says it should be included?',
+        answer:
+          'Reference the agreed deliverables and move the conversation to options. Avoid arguing about intent; focus on what changes if the work is added.',
+      },
+      {
+        question: 'How do you prevent scope creep next time?',
+        answer:
+          'Define included deliverables, revision limits, approval points, and change-request pricing before work starts.',
+      },
+    ],
+    distinctions: [
+      {
+        href: '/scenario/extra-work-for-free',
+        label: 'Extra work for free',
+        description:
+          'Use when the client explicitly wants added work without additional budget.',
+      },
+      {
+        href: '/guides/reduce-scope-instead-of-lowering-rate',
+        label: 'Reduce scope instead of lowering rate',
+        description:
+          'Use when the commercial answer is a smaller scope, not a lower price.',
+      },
+      {
+        href: '/scenario/discount-request',
+        label: 'Discount request',
+        description:
+          'Use when the client is pushing on price rather than adding scope.',
+      },
+      {
+        href: '/tools/reply-generator',
+        label: 'Professional reply generator',
+        description:
+          'Paste the real request and generate a custom out-of-scope reply.',
+      },
+    ],
+  },
+  'extra-work-for-free': {
+    intentSummary:
+      'Use this when a client asks for extra work without extra budget and you need a polite no that protects the project economics.',
+    useWhen: [
+      'The client asks to add work at no additional cost.',
+      'The request may sound small, but it changes scope, effort, or timeline.',
+      'You want to offer a paid add-on, scope swap, or later phase instead of absorbing it.',
+    ],
+    notFor: [
+      'A minor correction that is clearly inside the original brief.',
+      'A discount request where the deliverables have not changed.',
+      'A payment reminder or deposit issue.',
+    ],
+    steps: [
+      {
+        title: 'Separate the extra from the included work',
+        body: 'Make it clear that you can help, but the request is additional work.',
+      },
+      {
+        title: 'Offer structured options',
+        body: 'Give the client a paid add-on, a swap within the current scope, or a later phase.',
+      },
+      {
+        title: 'Avoid making free work the baseline',
+        body: 'If you choose a courtesy exception, name it as one-time so it does not reset expectations.',
+      },
+    ],
+    copyReadyTemplates: [
+      {
+        title: 'Polite no to unpaid extra work',
+        text: 'I can help with that, but I would treat it as additional work rather than include it in the current fee. I can quote it separately or we can swap it against something already included.',
+        bestFor: 'Use when you want a firm boundary without closing the door.',
+      },
+      {
+        title: 'Additional budget required',
+        text: 'That addition is outside the agreed scope, so it would require additional budget. If you want to include it, I can send a quick estimate before moving forward.',
+        bestFor: 'Use when the request should become a paid add-on.',
+      },
+      {
+        title: 'One-time courtesy boundary',
+        text: 'I can include this small item as a one-time courtesy, but anything beyond this would need to be scoped separately so the project stays aligned.',
+        bestFor:
+          'Use only when you intentionally choose to make a small exception.',
+      },
+    ],
+    toneExamples: [
+      {
+        tone: 'Concise',
+        text: 'I can help with that, but it would be additional work rather than part of the current fee.',
+        bestFor: 'Use when the request is straightforward.',
+      },
+      {
+        tone: 'Warm',
+        text: 'I understand why that would be useful. Since it adds to the original scope, I would suggest we either quote it separately or trade it against another item.',
+        bestFor: 'Use when the client is reasonable and collaborative.',
+      },
+      {
+        tone: 'Firm',
+        text: 'I cannot add extra work for free under the current agreement. If you want to include it, we need to update scope and budget first.',
+        bestFor: 'Use when the client is pressing for free work.',
+      },
+    ],
+    mistakes: [
+      'Saying yes because the request sounds small before checking the total effort.',
+      'Using vague wording like "I will see what I can do" when the answer needs a boundary.',
+      'Giving away custom work while calling it normal service.',
+    ],
+    faq: [
+      {
+        question: 'How do you say no to extra work for free?',
+        answer:
+          'Acknowledge the request, state that it is additional work, and offer a paid add-on or scope tradeoff.',
+      },
+      {
+        question: 'Can I make a one-time exception?',
+        answer:
+          'Yes, but name it as a one-time courtesy so it does not become the new expectation.',
+      },
+      {
+        question: 'What if the client says it will only take a minute?',
+        answer:
+          'Do not debate the minute count. Point back to scope, priority, and whether it replaces or adds to the agreed work.',
+      },
+    ],
+    distinctions: [
+      {
+        href: '/scenario/out-of-scope-professionally',
+        label: 'Out of scope professionally',
+        description:
+          'Use when the main challenge is saying the request is outside scope.',
+      },
+      {
+        href: '/guides/reduce-scope-instead-of-lowering-rate',
+        label: 'Reduce scope instead of lowering rate',
+        description:
+          'Use when the client needs a smaller version rather than free additions.',
+      },
+      {
+        href: '/scenario/discount-request',
+        label: 'Discount request',
+        description:
+          'Use when the client is asking for a lower price rather than added work.',
+      },
+    ],
+  },
   'discount-request': {
     intentSummary:
       'Use this when the client is asking for a discount before the terms are firm and you need to stay cooperative without making your rate feel arbitrary.',

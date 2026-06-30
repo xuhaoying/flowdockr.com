@@ -63,8 +63,8 @@ export async function SavedDealsPanel() {
           Negotiation history
         </h2>
         <p className="mt-2 text-sm text-slate-700">
-          Saved negotiation history is available on Pro and Studio. Quick Help
-          is built for one-off support, not a reusable library.
+          Saved message history is available on Pro and Studio. Quick Help is
+          built for one-off support, not a reusable library.
         </p>
         <Link
           href="/pricing"

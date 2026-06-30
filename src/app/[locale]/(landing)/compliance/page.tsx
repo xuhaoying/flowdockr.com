@@ -106,7 +106,7 @@ export default async function CompliancePage({
           Checkout is handled by a payment processor such as Stripe when
           enabled. FlowDockr does not store full card numbers. After a
           successful checkout, credits are delivered inside the user account and
-          can be used to generate additional replies and negotiation support.
+          can be used to generate additional replies and support.
         </p>
         <p>
           Taxes, payment method availability, and processor-specific checkout

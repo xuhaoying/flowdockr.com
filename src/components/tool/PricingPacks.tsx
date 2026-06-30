@@ -86,7 +86,7 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
               ${(pack.priceUsdCents / 100).toFixed(0)}
             </p>
             <p className="text-muted-foreground mt-1 text-sm">
-              {pack.credits} negotiation credits
+              {pack.credits} message credits
             </p>
             <p className="text-muted-foreground mt-3 text-sm">
               {pack.description}
@@ -117,8 +117,8 @@ export function PricingPacks({ scenarioSlug = '' }: PricingPacksProps) {
       </div>
 
       <p className="text-muted-foreground text-sm">
-        Pay once. Credits never expire. Pro unlocks the most complete
-        negotiation support layer.
+        Pay once. Credits never expire. Pro unlocks the most complete reply
+        support layer.
       </p>
 
       {error ? (

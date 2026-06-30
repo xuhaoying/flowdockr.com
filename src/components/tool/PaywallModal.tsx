@@ -26,9 +26,7 @@ export function PaywallModal(props: PaywallModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>
-            You&apos;ve used your 2 free negotiation credits
-          </DialogTitle>
+          <DialogTitle>You&apos;ve used your 2 free message drafts</DialogTitle>
           <DialogDescription>
             Unlock more support so you can respond with more confidence when
             clients push on price, scope, or budget.
@@ -58,7 +56,7 @@ export function PaywallModal(props: PaywallModalProps) {
                 ${(pack.priceUsdCents / 100).toFixed(0)}
               </p>
               <p className="text-muted-foreground text-sm">
-                {pack.credits} negotiation credits
+                {pack.credits} message credits
               </p>
               <p className="text-muted-foreground mt-2 text-xs">
                 {pack.description}

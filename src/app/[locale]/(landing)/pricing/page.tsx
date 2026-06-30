@@ -20,10 +20,10 @@ import { getMetadata } from '@/shared/lib/seo';
 export const generateMetadata = getMetadata({
   title: 'Pricing | FlowDockr',
   description:
-    'FlowDockr pricing includes a free plan and one-time paid credit packs for AI negotiation support.',
+    'FlowDockr pricing includes a free plan and one-time paid credit packs for professional reply support.',
   canonicalUrl: '/pricing',
   keywords:
-    'FlowDockr pricing, AI negotiation assistant pricing, negotiation credits, pricing negotiation support',
+    'FlowDockr pricing, professional reply generator pricing, message credits, client communication support',
 });
 
 export default async function PricingHubPage({
@@ -43,12 +43,12 @@ export default async function PricingHubPage({
               Pricing
             </p>
             <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-              Simple credits for real client negotiations
+              Simple credits for difficult client messages
             </h1>
             <p className="text-base leading-7 text-slate-700 md:text-lg">
               Start with 2 free drafts. Buy one-time credit packs only when you
-              need more AI negotiation replies, strategy notes, and saved
-              workflow support.
+              need more professional replies, strategy notes, and saved workflow
+              support.
             </p>
             <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <Link
@@ -98,10 +98,10 @@ export default async function PricingHubPage({
             What users pay for
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-            Negotiation credits for real professional conversations
+            Message credits for real professional conversations
           </h2>
           <p className="text-sm leading-relaxed text-slate-700">
-            Credits are used to generate and refine negotiation support inside
+            Credits are used to generate and refine reply support inside
             FlowDockr. Each paid plan increases the number of credits and the
             depth of support available for harder conversations.
           </p>

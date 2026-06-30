@@ -21,11 +21,11 @@ export function ToolPaywall({
           Keep generating
         </p>
         <p className="text-sm font-semibold text-slate-900">
-          You&apos;ve used your 2 free negotiation drafts
+          You&apos;ve used your 2 free message drafts
         </p>
         <p className="text-sm leading-6 text-slate-700">
           Buy a one-time pack to keep drafting replies, generate more useful
-          variations, and unlock richer negotiation help when you need it. No
+          variations, and unlock richer reply help when you need it. No
           subscription required.
         </p>
       </div>
@@ -67,7 +67,7 @@ export function ToolPaywall({
               ${(pack.priceUsdCents / 100).toFixed(0)}
             </p>
             <p className="text-xs text-slate-600">
-              {pack.credits} negotiation credits
+              {pack.credits} message credits
             </p>
             <p className="mt-2 text-xs text-slate-600">{pack.description}</p>
             <Button

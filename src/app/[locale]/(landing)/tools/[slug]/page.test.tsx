@@ -68,9 +68,11 @@ describe('tool page', () => {
     expect(
       screen.getByRole('heading', { name: 'Expected inputs' })
     ).toBeTruthy();
-    expect(screen.getByText('Client message')).toBeTruthy();
+    expect(screen.getByText('Message or situation')).toBeTruthy();
     expect(
-      screen.getByText('Paste the exact client message here')
+      screen.getByText(
+        'Paste the client message, rough draft, or situation here'
+      )
     ).toBeTruthy();
   });
 });

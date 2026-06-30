@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getAllGuides } from '@/lib/content/getGuideBySlug';
 import { getAllScenarios } from '@/lib/content/getScenarioBySlug';
+import { getAllTools } from '@/lib/content/getToolBySlug';
 import { getAllScenarioPages } from '@/lib/content/scenarioPages';
 import {
   isLocalPageSitemapEligible,
@@ -78,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${baseUrl}/client-communication-templates`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/guides`,
       lastModified: now,
       changeFrequency: 'weekly',
@@ -110,6 +117,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  const toolRoutes: MetadataRoute.Sitemap = getAllTools().map((tool) => ({
+    url: `${baseUrl}${normalizeRoutePath(tool.url)}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: tool.slug === 'reply-generator' ? 0.9 : 0.75,
+  }));
+
   const localPageRoutes: MetadataRoute.Sitemap = getLocalPageSlugs()
     .map(normalizeLocalPageSitemapSlug)
     .filter(isLocalPageSitemapEligible)
@@ -126,6 +140,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...canonicalScenarioRoutes,
     ...scenarioRoutes,
     ...guideRoutes,
+    ...toolRoutes,
     ...localPageRoutes,
   ];
 }

@@ -92,7 +92,7 @@ export function OutputPanel({
     <div className="border-brand-lavender/45 rounded-[18px] border border-dashed bg-white p-5 text-sm text-slate-700 shadow-xs">
       Start by pasting a real client message on the left, then click
       <span className="px-1 font-medium text-slate-900">
-        Generate strategic reply
+        Generate professional reply
       </span>
       You will get a send-ready reply plus strategy logic in one pass.
     </div>
@@ -103,14 +103,14 @@ export function OutputPanel({
       <CardHeader>
         <CardTitle>Generated output</CardTitle>
         <CardDescription>
-          Structured for real client negotiations, not generic writing.
+          Structured for difficult client conversations, not generic writing.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {isGenerating && !result ? (
           <div className="border-brand-lavender/20 space-y-3 rounded-[18px] border bg-white p-4 shadow-xs sm:p-5">
             <p className="text-sm font-medium text-slate-900">
-              Building your negotiation reply...
+              Building your professional reply...
             </p>
             <div className="space-y-2">
               <div className="h-3 w-full animate-pulse rounded bg-slate-200" />

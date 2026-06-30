@@ -186,14 +186,14 @@ export function CheckoutStatusCard({
         <p className="text-muted-foreground">
           {isDelayed
             ? 'We could not confirm the credit grant automatically. Refresh this page in a minute or contact support if your payment receipt arrived but credits did not.'
-            : 'Payment completed. We are confirming your negotiation credits and support level. This usually takes a few seconds.'}
+            : 'Payment completed. We are confirming your message credits and support level. This usually takes a few seconds.'}
         </p>
       ) : null}
 
       {isFinalized ? (
         <p className="text-muted-foreground">
-          Your negotiation credits are now available. You can continue with
-          deeper client support right away.
+          Your message credits are now available. You can continue with deeper
+          client support right away.
         </p>
       ) : null}
 

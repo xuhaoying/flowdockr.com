@@ -31,7 +31,7 @@ export function ProblemFraming() {
         </ul>
         <p className="text-sm leading-relaxed text-slate-600">
           FlowDockr is designed for these exact moments. It helps you think
-          through the negotiation, compare response styles, and keep the client
+          through the reply, compare response styles, and keep the client
           conversation moving without giving away leverage too early.
         </p>
       </div>

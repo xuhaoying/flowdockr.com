@@ -15,7 +15,7 @@ export function PopularScenarios({ items }: PopularScenariosProps) {
             Most Common Scenarios
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
-            Start with the negotiation situations freelancers run into most
+            Start with the reply situations freelancers run into most
           </h2>
         </div>
 

@@ -22,7 +22,7 @@ export function ToolHero({ tool }: ToolHeroProps) {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Button asChild size="lg" className="w-full sm:w-auto">
-            <a href="#tool-workspace">Start with your client message</a>
+            <a href="#tool-workspace">Start with your message</a>
           </Button>
           <p className="text-sm text-slate-600">
             Start with 2 free drafts. No subscription required.
@@ -32,10 +32,10 @@ export function ToolHero({ tool }: ToolHeroProps) {
 
       <CardContent className="flex flex-wrap gap-2 px-5 py-4 text-xs md:px-6">
         <span className="border-brand-lavender/35 bg-brand-bg text-brand-primary rounded-full border px-2.5 py-1 font-medium">
-          Paste exact client wording
+          Paste message or situation
         </span>
         <span className="border-brand-lavender/35 bg-brand-bg text-brand-primary rounded-full border px-2.5 py-1 font-medium">
-          Get negotiation-aware draft
+          Get professional draft
         </span>
       </CardContent>
     </Card>
