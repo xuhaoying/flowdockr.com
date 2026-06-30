@@ -2,7 +2,9 @@ import { getAllGuides } from '../../src/lib/content/getGuideBySlug';
 import { getPricingHub } from '../../src/lib/content/getPricingHub';
 import { getAllScenarios } from '../../src/lib/content/getScenarioBySlug';
 import { getAllTools } from '../../src/lib/content/getToolBySlug';
+import { getAllScenarioPageSlugs } from '../../src/lib/content/scenarioPages';
 import { buildPricingClusterAuditReport } from '../../src/lib/pricing-cluster-audit';
+import { isPricingScenarioSitemapEligible } from '../../src/lib/seo/indexing';
 
 type Issue = {
   level: 'error' | 'warn';
@@ -40,6 +42,11 @@ function findDuplicateValues(values: string[]): string[] {
   return [...duplicates];
 }
 
+function getLastPathSegment(path: string): string | null {
+  const segments = normalizePath(path).split('/').filter(Boolean);
+  return segments.at(-1) ?? null;
+}
+
 function validatePricingContent(): Issue[] {
   const issues: Issue[] = [];
 
@@ -47,6 +54,7 @@ function validatePricingContent(): Issue[] {
   const guides = getAllGuides().filter((guide) => guide.cluster === 'pricing');
   const tools = getAllTools();
   const hub = getPricingHub();
+  const canonicalScenarioSlugsSet = new Set(getAllScenarioPageSlugs());
 
   if (scenarios.length < 8) {
     pushWarn(
@@ -82,6 +90,9 @@ function validatePricingContent(): Issue[] {
 
   const scenarioSlugsSet = new Set(scenarioSlugs);
   const toolSlugsSet = new Set(toolSlugs);
+  const scenarioBySlug = new Map(
+    scenarios.map((scenario) => [scenario.slug, scenario])
+  );
   const pageRoleByScenarioSlug = new Map(
     scenarios.map((scenario) => [scenario.slug, scenario.pageRole])
   );
@@ -264,7 +275,11 @@ function validatePricingContent(): Issue[] {
       );
     }
 
-    if (!page.includedInSitemap) {
+    const pricingScenario = scenarioBySlug.get(page.slug);
+    const shouldBeInSitemap =
+      !pricingScenario || isPricingScenarioSitemapEligible(pricingScenario);
+
+    if (shouldBeInSitemap && !page.includedInSitemap) {
       pushError(issues, `${page.slug}: pricing page is missing from sitemap.`);
     }
 
@@ -430,7 +445,15 @@ function validatePricingContent(): Issue[] {
     }
 
     for (const link of tool.relatedScenarios) {
-      if (!scenarioUrlSet.has(normalizePath(link.href))) {
+      const href = normalizePath(link.href);
+      const scenarioSlug = href.startsWith('/scenario/')
+        ? getLastPathSegment(href)
+        : null;
+
+      if (
+        !scenarioUrlSet.has(href) &&
+        (!scenarioSlug || !canonicalScenarioSlugsSet.has(scenarioSlug))
+      ) {
         pushError(
           issues,
           `${tool.slug}: relatedScenarios contains unknown scenario href '${link.href}'.`
