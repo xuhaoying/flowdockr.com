@@ -12,29 +12,6 @@ const withNextIntl = createNextIntlPlugin({
   requestConfig: './src/core/i18n/request.ts',
 });
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || '';
-let appHostname = '';
-
-try {
-  appHostname = new URL(appUrl).hostname.toLowerCase();
-} catch {
-  appHostname = '';
-}
-
-const indexingOverride = process.env.NEXT_PUBLIC_ALLOW_INDEXING;
-const forceAllowIndexing = indexingOverride === 'true';
-const forceBlockIndexing = indexingOverride === 'false';
-const isProductionBuild = process.env.NODE_ENV === 'production';
-const isVercelProduction = process.env.VERCEL
-  ? process.env.VERCEL_ENV === 'production'
-  : true;
-const isVercelPreviewDomain = appHostname.endsWith('.vercel.app');
-
-const shouldBlockSearchIndexing =
-  forceBlockIndexing ||
-  (!forceAllowIndexing &&
-    (!isProductionBuild || !isVercelProduction || isVercelPreviewDomain));
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: process.env.VERCEL ? undefined : 'standalone',
@@ -56,19 +33,6 @@ const nextConfig = {
   },
   async headers() {
     const headers = [
-      ...(shouldBlockSearchIndexing
-        ? [
-            {
-              source: '/:path*',
-              headers: [
-                {
-                  key: 'X-Robots-Tag',
-                  value: 'noindex, nofollow, noarchive, nosnippet',
-                },
-              ],
-            },
-          ]
-        : []),
       {
         source: '/imgs/:path*',
         headers: [

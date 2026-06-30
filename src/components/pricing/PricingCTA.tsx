@@ -10,7 +10,8 @@ export function PricingCTA() {
         </h2>
         <p className="text-sm leading-relaxed text-slate-700">
           If you are deciding whether FlowDockr fits your workflow, the fastest
-          way to tell is to run one real negotiation situation through the tool.
+          way to tell is to run one real difficult client message through the
+          tool.
         </p>
         <Button asChild>
           <Link href="/tools/reply-generator">Start with a scenario</Link>

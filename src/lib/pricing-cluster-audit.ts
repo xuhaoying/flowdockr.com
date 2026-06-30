@@ -1,4 +1,3 @@
-import sitemap from '@/app/sitemap';
 import { getPricingHub } from '@/lib/content/getPricingHub';
 import { pricingScenarioPages } from '@/lib/content/pricingScenarios';
 import {
@@ -8,6 +7,7 @@ import {
 } from '@/lib/pricing-cluster';
 import { dedicatedPricingGeneratorScenarioSlugs } from '@/lib/pricing-generator-scenarios';
 import { getScenarioBySlug as getGeneratorScenarioBySlug } from '@/lib/scenarios';
+import { isPricingScenarioSitemapEligible } from '@/lib/seo/indexing';
 
 type GeneratorMappingKind = 'dedicated' | 'reused';
 type GeneratorFit = 'strong' | 'reused' | 'weak';
@@ -100,7 +100,9 @@ export function buildPricingClusterAuditReport(): PricingClusterAuditReport {
     pricingScenarioPages.map((item) => item.slug)
   );
   const sitemapUrls = new Set(
-    sitemap().map((entry) => normalizePath(String(entry.url || '')))
+    pricingScenarioPages
+      .filter(isPricingScenarioSitemapEligible)
+      .map((scenario) => normalizePath(scenario.url))
   );
   const hubFeaturedPaths = new Set(
     hub.featuredScenarios.map((path) => normalizePath(path))

@@ -33,7 +33,7 @@ export function ScenarioHero({ scenario }: ScenarioHeroProps) {
         {scenario.heroSubtitle}
       </p>
       <a
-        href="#pricing-tool"
+        href="#scenario-inline-tool"
         className="inline-flex text-sm font-semibold text-slate-900 underline underline-offset-2"
       >
         Paste your client message

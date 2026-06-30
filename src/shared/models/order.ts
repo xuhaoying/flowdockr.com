@@ -1,3 +1,4 @@
+import { grantCreditsTx } from '@/lib/credits/grantCredits';
 import { and, count, desc, eq, or } from 'drizzle-orm';
 
 import { db } from '@/core/db';
@@ -231,6 +232,35 @@ export async function updateOrderInTransaction({
       credit: null,
     };
 
+    // Claim the order before creating any side effects. Duplicate webhooks
+    // must fail here so they cannot mint subscription or credit rows.
+    const [orderResult] = await tx
+      .update(order)
+      .set(updateOrder)
+      .where(
+        and(
+          eq(order.orderNo, orderNo),
+          updateOrder.status === OrderStatus.PAID
+            ? or(
+                eq(order.status, OrderStatus.CREATED),
+                eq(order.status, OrderStatus.PENDING)
+              )
+            : undefined
+        )
+      )
+      .returning();
+
+    if (!orderResult) {
+      console.log(
+        updateOrder.status === OrderStatus.PAID
+          ? `Order ${orderNo} already paid or not in CREATED status, skipping update`
+          : `Order ${orderNo} not found, skipping update`
+      );
+      return result;
+    }
+
+    result.order = orderResult;
+
     // deal with subscription
     if (newSubscription) {
       let existingSubscription: any = null;
@@ -278,39 +308,22 @@ export async function updateOrderInTransaction({
           .returning();
 
         existingCredit = creditResult;
+
+        await grantCreditsTx(tx, {
+          userId: newCredit.userId,
+          credits: newCredit.credits,
+          type: 'legacy_payment_credit_grant',
+          reason: newCredit.description || 'Legacy payment credit grant',
+          metadata: {
+            source: 'updateOrderInTransaction',
+            orderNo,
+            legacyCreditId: newCredit.id,
+          },
+        });
       }
 
       result.credit = existingCredit;
     }
-
-    // update order with optimistic lock
-    // only update if status is not PAID (prevent duplicate processing)
-    const [orderResult] = await tx
-      .update(order)
-      .set(updateOrder)
-      .where(
-        and(
-          eq(order.orderNo, orderNo),
-          // Only update if not already paid (optimistic lock)
-          updateOrder.status === OrderStatus.PAID
-            ? or(
-                eq(order.status, OrderStatus.CREATED),
-                eq(order.status, OrderStatus.PENDING)
-              )
-            : undefined
-        )
-      )
-      .returning();
-
-    // If no order was updated and we're trying to set status to PAID,
-    // it means the order was already processed
-    if (!orderResult && updateOrder.status === OrderStatus.PAID) {
-      console.log(
-        `Order ${orderNo} already paid or not in CREATED status, skipping update`
-      );
-    }
-
-    result.order = orderResult;
 
     return result;
   });
@@ -401,6 +414,19 @@ export async function updateSubscriptionInTransaction({
           .returning();
 
         existingCredit = creditResult;
+
+        await grantCreditsTx(tx, {
+          userId: newCredit.userId,
+          credits: newCredit.credits,
+          type: 'legacy_subscription_credit_grant',
+          reason: newCredit.description || 'Legacy subscription credit grant',
+          metadata: {
+            source: 'updateSubscriptionInTransaction',
+            subscriptionNo,
+            orderNo: result.order?.orderNo,
+            legacyCreditId: newCredit.id,
+          },
+        });
       }
 
       result.credit = existingCredit;

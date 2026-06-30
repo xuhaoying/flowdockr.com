@@ -4,10 +4,10 @@ import { Link } from '@/core/i18n/navigation';
 import { Button } from '@/shared/components/ui/button';
 
 const NAV_ITEMS = [
-  { href: '/scenario', label: 'Use Cases' },
+  { href: '/client-communication-templates', label: 'Templates' },
+  { href: '/scenario', label: 'Scenarios' },
+  { href: '/tools/reply-generator', label: 'Generator' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 export function PublicHeader() {
@@ -52,7 +52,7 @@ export function PublicHeader() {
               <Link href="/signin">Sign in</Link>
             </Button>
             <Button asChild size="sm" className="min-h-11 flex-1 sm:flex-none">
-              <Link href="/tools/reply-generator">Try FlowDockr</Link>
+              <Link href="/tools/reply-generator">Generate reply</Link>
             </Button>
           </div>
         </div>

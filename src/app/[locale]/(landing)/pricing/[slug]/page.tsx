@@ -7,6 +7,7 @@ import {
   NextDecisionPaths,
   PossibleGoals,
   RelatedGuides,
+  RelatedScenarioScripts,
   ScenarioHero,
   SituationSnapshot,
   StrategyPaths,
@@ -22,35 +23,41 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import { buildPricingScenarioAttribution } from '@/lib/analytics/pricingAttribution';
 import { getAllScenarioSlugs } from '@/lib/content/getAllScenarioSlugs';
 import { getScenarioBySlug } from '@/lib/content/getScenarioBySlug';
+import { getPricingRelatedScenarioScripts } from '@/lib/content/pricingRelatedScenarios';
 import {
   getPricingBlueprintBySlug,
   getPricingScenarioBySlug,
 } from '@/lib/pricing-cluster';
 import { buildScenarioMetadata } from '@/lib/seo/buildScenarioMetadata';
-import { buildScenarioHowToSchema } from '@/lib/seo/buildScenarioSchema';
+import {
+  buildFaqPageSchema,
+  buildScenarioHowToSchema,
+} from '@/lib/seo/buildScenarioSchema';
+import { getPricingScenarioCanonicalUrl } from '@/lib/seo/indexing';
 import { setRequestLocale } from 'next-intl/server';
 
+import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
+import { AppContextProvider } from '@/shared/contexts/app';
+import { getLocalPage, getLocalPageSlugs } from '@/shared/models/post';
 
 type PricingScenarioPageParams = {
   locale: string;
   slug: string;
 };
 
-function normalizePath(path: string): string {
-  if (path.length > 1 && path.endsWith('/')) {
-    return path.slice(0, -1);
-  }
-
-  return path;
-}
-
 export const dynamicParams = false;
 
 export function generateStaticParams() {
   const slugs = getAllScenarioSlugs();
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  const pricingPageSlugs = getLocalPageSlugs()
+    .filter((slug) => slug.startsWith('pricing/'))
+    .map((slug) => slug.replace(/^pricing\//, ''));
+  const allSlugs = Array.from(new Set([...slugs, ...pricingPageSlugs]));
+  return locales.flatMap((locale) =>
+    allSlugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({
@@ -58,10 +65,21 @@ export async function generateMetadata({
 }: {
   params: Promise<PricingScenarioPageParams>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const scenario = getScenarioBySlug(slug);
 
   if (!scenario) {
+    const staticPage = await getLocalPage({ slug: `pricing/${slug}`, locale });
+    if (staticPage) {
+      return {
+        title: staticPage.title,
+        description: staticPage.description,
+        alternates: {
+          canonical: `${envConfigs.site_url}/pricing/${slug}`,
+        },
+      };
+    }
+
     return {
       title: 'Pricing scenario not found | FlowDockr',
       robots: {
@@ -71,7 +89,10 @@ export async function generateMetadata({
     };
   }
 
-  const canonical = `${envConfigs.site_url}${normalizePath(scenario.url)}`;
+  const canonical = getPricingScenarioCanonicalUrl(
+    scenario,
+    envConfigs.site_url
+  );
 
   return buildScenarioMetadata({
     scenario,
@@ -92,6 +113,16 @@ export default async function PricingScenarioPage({
   const blueprint = getPricingBlueprintBySlug(slug);
 
   if (!page || !scenario || !blueprint) {
+    const staticPage = await getLocalPage({ slug: `pricing/${slug}`, locale });
+    if (staticPage) {
+      const StaticPage = await getThemePage('static-page');
+      return (
+        <AppContextProvider>
+          <StaticPage locale={locale} post={staticPage} />
+        </AppContextProvider>
+      );
+    }
+
     notFound();
   }
 
@@ -106,12 +137,26 @@ export default async function PricingScenarioPage({
     metaDescription: page.metaDescription,
     strategyPaths: page.strategyPaths,
   });
+  const faqSchema = buildFaqPageSchema(
+    scenario.faq.map((item) => ({
+      question: item.q,
+      answer: item.a,
+    }))
+  );
+  const relatedScenarioScripts = getPricingRelatedScenarioScripts(
+    scenario.slug,
+    scenario.generatorScenarioSlug
+  );
 
   return (
     <PageContainer>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {pricingAttribution ? (
         <PricingScenarioViewTracker attribution={pricingAttribution} />
@@ -124,6 +169,7 @@ export default async function PricingScenarioPage({
       <SituationSnapshot scenario={scenario} />
       <WhatsReallyHappening scenario={scenario} />
       <CommonClientMessages scenario={page} />
+      <RelatedScenarioScripts items={relatedScenarioScripts} />
       <PossibleGoals scenario={scenario} />
       <StrategyPaths scenario={scenario} />
       <CopyReadyReplies scenario={scenario} />

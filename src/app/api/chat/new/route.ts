@@ -4,6 +4,9 @@ import { respData, respErr } from '@/shared/lib/resp';
 import { ChatStatus, createChat, NewChat } from '@/shared/models/chat';
 import { getUserInfo } from '@/shared/models/user';
 
+const DEFAULT_CHAT_MODEL = 'openai/gpt-4.1-mini';
+const DEFAULT_ALLOWED_CHAT_MODELS = [DEFAULT_CHAT_MODEL, 'openai/gpt-4o-mini'];
+
 export async function POST(req: Request) {
   try {
     const { message, body } = await req.json();
@@ -23,6 +26,7 @@ export async function POST(req: Request) {
 
     // todo: get provider from settings
     const provider = 'openrouter';
+    const safeModel = resolveAllowedChatModel(body.model);
 
     // todo: auto generate title
     const title = message.text.substring(0, 100);
@@ -43,12 +47,15 @@ export async function POST(req: Request) {
       status: ChatStatus.CREATED,
       createdAt: currentTime,
       updatedAt: currentTime,
-      model: body.model,
+      model: safeModel,
       provider: provider,
       title: title,
       parts: '',
       // parts: JSON.stringify(parts),
-      metadata: JSON.stringify(body),
+      metadata: JSON.stringify({
+        ...body,
+        model: safeModel,
+      }),
       content: JSON.stringify(message),
     };
 
@@ -59,4 +66,20 @@ export async function POST(req: Request) {
     console.log('new chat failed:', e);
     return respErr(`new chat failed: ${e.message}`);
   }
+}
+
+function resolveAllowedChatModel(requestedModel: unknown): string {
+  const allowedModels = String(process.env.FLOWDOCKR_ALLOWED_CHAT_MODELS || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const allowlist = new Set(
+    allowedModels.length > 0 ? allowedModels : DEFAULT_ALLOWED_CHAT_MODELS
+  );
+
+  if (typeof requestedModel !== 'string' || !allowlist.has(requestedModel)) {
+    return DEFAULT_CHAT_MODEL;
+  }
+
+  return requestedModel;
 }

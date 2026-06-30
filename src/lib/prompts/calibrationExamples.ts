@@ -427,7 +427,7 @@ export function formatCalibrationExamples(scenarioSlug: string): {
       ...examples.map((example) =>
         [
           `[${example.kind.toUpperCase()}]`,
-          `Client message: "${example.clientMessage}"`,
+          `User input: "${example.clientMessage}"`,
           `Example reply: "${example.sampleReply}"`,
           ...example.notes.map((note) => `- ${note}`),
         ].join('\n')

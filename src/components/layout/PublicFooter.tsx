@@ -3,22 +3,28 @@ import Image from 'next/image';
 import { Link } from '@/core/i18n/navigation';
 
 const PRIMARY_LINKS = [
+  { href: '/client-communication-templates', label: 'Templates' },
+  { href: '/tools/reply-generator', label: 'Reply generator' },
+  { href: '/tools', label: 'Tools' },
+  { href: '/scenario', label: 'Scenario hub' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
-  { href: '/scenario', label: 'Scenario hub' },
-  { href: '/tools', label: 'Tools' },
 ];
 
 const USE_CASE_LINKS = [
   {
-    href: '/scenario/quote-too-high',
-    label: 'Client says your quote is too high',
+    href: '/scenario/ask-for-payment-politely',
+    label: 'Ask for payment politely',
   },
-  { href: '/scenario/discount-request', label: 'Client asks for a discount' },
+  {
+    href: '/scenario/out-of-scope-professionally',
+    label: 'Say work is out of scope',
+  },
   {
     href: '/scenario/extra-work-for-free',
     label: 'Client wants extra work for free',
   },
+  { href: '/scenario/discount-request', label: 'Client asks for a discount' },
 ];
 
 const LEGAL_LINKS = [
@@ -43,8 +49,8 @@ export function PublicFooter() {
             className="h-9 w-auto"
           />
           <p className="text-sm text-slate-600">
-            AI negotiation assistant for professionals preparing for difficult
-            conversations, pricing pushback, and client decisions.
+            Professional message templates and reply generator for awkward work
+            and client conversations.
           </p>
           <p className="mt-3 text-sm text-slate-600">
             FlowDockr is a product of Auralis Labs LLC.

@@ -9,36 +9,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/components/ui/dialog';
-import { Input } from '@/shared/components/ui/input';
 
 type PaywallModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   loggedIn: boolean;
-  email: string;
-  onEmailChange: (email: string) => void;
   checkoutLoadingPackageId: CreditPackageId | null;
   onCheckout: (packageId: CreditPackageId) => void;
 };
 
 export function PaywallModal(props: PaywallModalProps) {
-  const {
-    open,
-    onOpenChange,
-    loggedIn,
-    email,
-    onEmailChange,
-    checkoutLoadingPackageId,
-    onCheckout,
-  } = props;
+  const { open, onOpenChange, loggedIn, checkoutLoadingPackageId, onCheckout } =
+    props;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>
-            You&apos;ve used your 2 free negotiation credits
-          </DialogTitle>
+          <DialogTitle>You&apos;ve used your 2 free message drafts</DialogTitle>
           <DialogDescription>
             Unlock more support so you can respond with more confidence when
             clients push on price, scope, or budget.
@@ -46,17 +34,9 @@ export function PaywallModal(props: PaywallModalProps) {
         </DialogHeader>
 
         {!loggedIn ? (
-          <div className="space-y-2">
-            <label htmlFor="checkout_email" className="text-sm font-medium">
-              Email for checkout and account creation
-            </label>
-            <Input
-              id="checkout_email"
-              type="email"
-              value={email}
-              onChange={(event) => onEmailChange(event.target.value)}
-              placeholder="you@domain.com"
-            />
+          <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+            Sign in before checkout so purchased credits can be attached to your
+            account.
           </div>
         ) : null}
 
@@ -76,7 +56,7 @@ export function PaywallModal(props: PaywallModalProps) {
                 ${(pack.priceUsdCents / 100).toFixed(0)}
               </p>
               <p className="text-muted-foreground text-sm">
-                {pack.credits} negotiation credits
+                {pack.credits} message credits
               </p>
               <p className="text-muted-foreground mt-2 text-xs">
                 {pack.description}
@@ -86,11 +66,13 @@ export function PaywallModal(props: PaywallModalProps) {
                 className="mt-3 w-full"
                 variant={pack.popular ? 'default' : 'outline'}
                 onClick={() => onCheckout(pack.id)}
-                disabled={checkoutLoadingPackageId !== null}
+                disabled={!loggedIn || checkoutLoadingPackageId !== null}
               >
                 {checkoutLoadingPackageId === pack.id
                   ? 'Redirecting...'
-                  : pack.ctaLabel || 'Unlock credits'}
+                  : loggedIn
+                    ? pack.ctaLabel || 'Unlock credits'
+                    : 'Sign in to buy'}
               </Button>
             </div>
           ))}

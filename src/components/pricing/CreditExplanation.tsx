@@ -1,5 +1,5 @@
 const FLOW_STEPS = [
-  'Client message',
+  'Message or situation',
   'Review strategy',
   'Compare responses',
   'Send reply',
@@ -11,17 +11,17 @@ export function CreditExplanation() {
       <div className="max-w-3xl space-y-4">
         <div className="space-y-2">
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">
-            How Negotiation Credits Work
+            How Message Credits Work
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             One credit covers one full generation
           </h2>
         </div>
         <p className="text-sm leading-relaxed text-slate-700">
-          A negotiation credit is used when you generate a complete support
-          output for one situation. That includes the suggested approach, the
-          visible response options, and any plan-specific guidance shown on the
-          result page. Credits do not expire.
+          A message credit is used when you generate a complete support output
+          for one situation. That includes the suggested approach, the visible
+          response options, and any plan-specific guidance shown on the result
+          page. Credits do not expire.
         </p>
         <div className="flex flex-col gap-2 text-sm text-slate-700 md:flex-row md:items-center">
           {FLOW_STEPS.map((step, index) => (

@@ -10,6 +10,7 @@ import {
   canGenerate,
   consumeUsage,
   getGenerationIdentity,
+  grantCredits,
 } from '@/lib/credits';
 import { filterOutputByEntitlements } from '@/lib/generation/filterOutputByEntitlements';
 import { generateReply } from '@/lib/generation/generateReply';
@@ -57,6 +58,7 @@ function trackGenerationEvent(
     | 'generation_schema_retry'
     | 'generation_rubric_retry'
     | 'generation_fallback_used'
+    | 'generation_credit_refunded'
     | 'generation_saved_failed',
   payload: Record<string, unknown>
 ) {
@@ -106,6 +108,53 @@ function buildGenerationObservabilityPayload(params: {
     schema_retry_count: generationLog.schemaRetryCount,
     rubric_retry_count: generationLog.rubricRetryCount,
   };
+}
+
+async function refundPaidGenerationUsage(params: {
+  usageResult: Awaited<ReturnType<typeof consumeUsage>>;
+  userId?: string;
+  scenarioSlug: string;
+  sourcePage: 'home' | 'scenario' | 'tool';
+  errorCode: 'GENERATION_FAILED' | 'PARSE_FAILED';
+  errorMessage: string;
+}): Promise<number | undefined> {
+  if (params.usageResult.modeUsed !== 'paid' || !params.userId) {
+    return undefined;
+  }
+
+  try {
+    const creditsRemaining = await grantCredits({
+      userId: params.userId,
+      credits: 1,
+      type: 'generation_refund',
+      reason: 'Refund failed negotiation reply generation',
+      metadata: {
+        scenarioSlug: params.scenarioSlug,
+        sourcePage: params.sourcePage,
+        errorCode: params.errorCode,
+        errorMessage: params.errorMessage,
+      },
+    });
+
+    trackGenerationEvent('generation_credit_refunded', {
+      scenarioSlug: params.scenarioSlug,
+      sourcePage: params.sourcePage,
+      error: params.errorCode,
+      creditsRemaining,
+    });
+
+    return creditsRemaining;
+  } catch (refundError) {
+    trackGenerationEvent('generation_credit_refunded', {
+      scenarioSlug: params.scenarioSlug,
+      sourcePage: params.sourcePage,
+      error: 'REFUND_FAILED',
+      refund_error:
+        refundError instanceof Error ? refundError.message : 'UNKNOWN',
+    });
+
+    return undefined;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -177,49 +226,6 @@ export async function POST(request: NextRequest) {
       isLoggedIn: status.isLoggedIn,
     });
 
-    const billingProfile =
-      status.isLoggedIn && status.userId
-        ? await getUserBillingProfile(status.userId)
-        : getDefaultBillingProfile();
-    const pricingAttribution = buildPricingScenarioAttribution(
-      input.pricingAttribution
-    );
-
-    let pipeline: Awaited<ReturnType<typeof generateReply>>;
-    try {
-      pipeline = await generateReply({
-        scenario,
-        message: input.message,
-        sourcePage: input.sourcePage,
-        serviceType: input.serviceType,
-        tone: input.tone,
-        goal: input.goal,
-        userRateContext: input.userRateContext,
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : '';
-      const parseFailure = message.includes('FAILED_TO_PARSE_GENERATION');
-      trackGenerationEvent(
-        parseFailure ? 'generation_failed_parse' : 'generation_failed_model',
-        {
-          scenarioSlug: input.scenarioSlug,
-          sourcePage: input.sourcePage,
-          mode: status.mode,
-          isLoggedIn: status.isLoggedIn,
-          model: configuredModel,
-          service_type: input.serviceType,
-          error: message || 'UNKNOWN',
-        }
-      );
-
-      return NextResponse.json(
-        buildFailureResponse({
-          scenarioSlug: input.scenarioSlug,
-          error: parseFailure ? 'PARSE_FAILED' : 'GENERATION_FAILED',
-        })
-      );
-    }
-
     const ipHash = hashRequestIp(request);
     const userAgentHash = hashRequestUserAgent(request);
 
@@ -271,6 +277,61 @@ export async function POST(request: NextRequest) {
           error: 'INTERNAL_ERROR',
         }),
         { status: 500 }
+      );
+    }
+
+    const billingProfile =
+      status.isLoggedIn && status.userId
+        ? await getUserBillingProfile(status.userId)
+        : getDefaultBillingProfile();
+    const pricingAttribution = buildPricingScenarioAttribution(
+      input.pricingAttribution
+    );
+
+    let pipeline: Awaited<ReturnType<typeof generateReply>>;
+    try {
+      pipeline = await generateReply({
+        scenario,
+        message: input.message,
+        sourcePage: input.sourcePage,
+        serviceType: input.serviceType,
+        tone: input.tone,
+        goal: input.goal,
+        userRateContext: input.userRateContext,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : '';
+      const parseFailure = message.includes('FAILED_TO_PARSE_GENERATION');
+      const errorCode = parseFailure ? 'PARSE_FAILED' : 'GENERATION_FAILED';
+      const refundedCreditsRemaining = await refundPaidGenerationUsage({
+        usageResult,
+        userId: status.userId,
+        scenarioSlug: input.scenarioSlug,
+        sourcePage: input.sourcePage,
+        errorCode,
+        errorMessage: message || 'UNKNOWN',
+      });
+
+      trackGenerationEvent(
+        parseFailure ? 'generation_failed_parse' : 'generation_failed_model',
+        {
+          scenarioSlug: input.scenarioSlug,
+          sourcePage: input.sourcePage,
+          mode: status.mode,
+          isLoggedIn: status.isLoggedIn,
+          model: configuredModel,
+          service_type: input.serviceType,
+          error: message || 'UNKNOWN',
+          refunded: refundedCreditsRemaining !== undefined,
+        }
+      );
+
+      return NextResponse.json(
+        buildFailureResponse({
+          scenarioSlug: input.scenarioSlug,
+          error: errorCode,
+          creditsRemaining: refundedCreditsRemaining,
+        })
       );
     }
 

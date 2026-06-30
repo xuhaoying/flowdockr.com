@@ -69,6 +69,7 @@ const EXPANDED_CLUSTER_SLUGS = {
 
 const HIGH_VALUE_SCENARIO_SLUGS = [
   'ask-for-payment-politely',
+  'overdue-invoice-no-response',
   'final-payment-reminder',
   'deposit-not-paid-yet',
   'start-before-payment',
@@ -87,6 +88,7 @@ const HIGH_VALUE_SCENARIO_SLUGS = [
 
 const PRIMARY_ATTACK_PAGE_SLUGS = [
   'ask-for-payment-politely',
+  'overdue-invoice-no-response',
   'final-payment-reminder',
   'start-before-payment',
   'deposit-not-paid-yet',

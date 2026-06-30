@@ -242,7 +242,7 @@ describe('ToolForm analytics funnel guard', () => {
       screen.queryByText('Quote / scope / deal context (optional)')
     ).toBeNull();
     expect(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     ).toBeTruthy();
   });
 
@@ -256,7 +256,7 @@ describe('ToolForm analytics funnel guard', () => {
       target: { value: 'Your quote is too high for us.' },
     });
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {
@@ -282,7 +282,7 @@ describe('ToolForm analytics funnel guard', () => {
       target: { value: 'Your quote is too high for us.' },
     });
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {
@@ -331,7 +331,7 @@ describe('ToolForm analytics funnel guard', () => {
       target: { value: 'Your quote is too high for us.' },
     });
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {
@@ -387,7 +387,7 @@ describe('ToolForm analytics funnel guard', () => {
     );
 
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {
@@ -438,7 +438,7 @@ describe('ToolForm analytics funnel guard', () => {
       target: { value: 'Can you answer tonight? I need this now.' },
     });
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {
@@ -565,7 +565,7 @@ describe('ToolForm analytics funnel guard', () => {
       target: { value: 'Your quote is too high for us.' },
     });
     fireEvent.click(
-      screen.getByRole('button', { name: 'Draft negotiation reply' })
+      screen.getByRole('button', { name: 'Generate professional reply' })
     );
 
     await waitFor(() => {

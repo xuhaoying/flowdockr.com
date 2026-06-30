@@ -40,7 +40,7 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
     heroDescription:
       'Use this scenario when a client says your quote is too high, but the pushback is still vague and no real budget has been shared. Get a reply that protects value without sounding defensive.',
     pagePromise:
-      'Generate a price-defense reply that re-anchors value before the negotiation turns into a discount discussion.',
+      'Copy a professional reply that explains your price, clarifies scope, and avoids discounting before you understand the real constraint.',
     cluster: 'pricing',
     intentTier: 'core',
     valueIntent: 'money',
@@ -547,21 +547,24 @@ export const scenarioDatasetV1Top20: CanonicalScenario[] = [
   createDatasetScenario({
     id: 'scn_v1_overdue_invoice_no_response',
     slug: 'overdue-invoice-no-response',
-    title: 'Client has not paid the invoice and stopped replying',
-    h1: 'Client has not paid the invoice and stopped replying',
-    metaTitle: 'Client Not Paying the Invoice? What to Say Next | FlowDockr',
+    title: 'Overdue invoice email templates when a client does not respond',
+    h1: 'Overdue invoice email templates when a client does not respond',
+    metaTitle:
+      'Overdue Invoice Email Templates When a Client Does Not Respond | FlowDockr',
     metaDescription:
-      'Use this scenario to write an overdue invoice follow-up when a client stopped replying. Ask for a payment date clearly without sounding vague, awkward, or hostile.',
+      'Send polite but firm overdue invoice follow-up emails when a client has not paid or replied.',
     previewReply:
       'Hi [Name] — following up on invoice [number], which is now overdue. Please let me know the payment date on your side, or tell me if anything is blocking it so we can close it out quickly.',
     heroDescription:
-      'Use this scenario when a client is late paying and the thread has gone quiet. Get a professional overdue invoice follow-up you can send without sounding rude.',
+      'Use this scenario when a client is late paying and the thread has gone quiet. Copy an overdue invoice template or generate a firm follow-up.',
     pagePromise:
-      'Generate a clear payment follow-up that asks for a date, surfaces blockers, and keeps the message professional.',
+      'Generate an overdue invoice follow-up that asks for a payment date, surfaces blockers, and stays professional.',
     cluster: 'payment',
-    intentTier: 'supporting',
+    intentTier: 'core',
     valueIntent: 'money',
-    commercialPriority: 'medium',
+    commercialPriority: 'high',
+    distributionPriority: 'primary',
+    clusterCore: true,
     relatedSectionTitle: 'More client payment scripts',
     relatedSectionDescription:
       'Related payment reminders, unpaid invoice follow-ups, and deposit conversations.',

@@ -1,7 +1,8 @@
+import { grantCreditsTx } from '@/lib/credits/grantCredits';
 import { and, asc, count, desc, eq, gt, isNull, or, sum } from 'drizzle-orm';
 
 import { db } from '@/core/db';
-import { credit } from '@/config/db/schema';
+import { credit, user as userTable } from '@/config/db/schema';
 import { getSnowId, getUuid } from '@/shared/lib/hash';
 
 import { getAllConfigs } from './config';
@@ -268,6 +269,12 @@ export async function consumeCredits({
       }
     }
 
+    if (remainingToConsume > 0) {
+      throw new Error(
+        `Insufficient locked credits, ${credits - remainingToConsume} < ${credits}`
+      );
+    }
+
     // 3. create consumed credit
     const consumedCredit: NewCredit = {
       id: getUuid(),
@@ -297,27 +304,15 @@ export async function consumeCredits({
 
 // get remaining credits
 export async function getRemainingCredits(userId: string): Promise<number> {
-  const currentTime = new Date();
-
   const [result] = await db()
     .select({
-      total: sum(credit.remainingCredits),
+      creditsBalance: userTable.creditsBalance,
     })
-    .from(credit)
-    .where(
-      and(
-        eq(credit.userId, userId),
-        eq(credit.transactionType, CreditTransactionType.GRANT),
-        eq(credit.status, CreditStatus.ACTIVE),
-        gt(credit.remainingCredits, 0),
-        or(
-          isNull(credit.expiresAt), // Never expires
-          gt(credit.expiresAt, currentTime) // Not yet expired
-        )
-      )
-    );
+    .from(userTable)
+    .where(eq(userTable.id, userId))
+    .limit(1);
 
-  return parseInt(result?.total || '0');
+  return Math.max(0, Number(result?.creditsBalance || 0));
 }
 
 // grant credits for new user
@@ -391,7 +386,19 @@ export async function grantCreditsForUser({
     status: CreditStatus.ACTIVE,
   };
 
-  await createCredit(newCredit);
+  await db().transaction(async (tx: any) => {
+    await tx.insert(credit).values(newCredit);
+    await grantCreditsTx(tx, {
+      userId: user.id,
+      credits,
+      type: 'legacy_credit_grant',
+      reason: creditDescription,
+      metadata: {
+        source: 'grantCreditsForUser',
+        legacyCreditId: newCredit.id,
+      },
+    });
+  });
 
   return newCredit;
 }

@@ -453,32 +453,26 @@ export class PayPalProvider implements PaymentProvider {
         );
 
         if (verifyResponse.verification_status !== 'SUCCESS') {
-          // In production, always reject invalid signatures
-          if (this.configs.environment === 'production') {
+          // Only local development may bypass PayPal sandbox signature issues.
+          if (!allowUnsignedPayPalWebhook()) {
             throw new Error(
               `Invalid webhook signature: ${verifyResponse.verification_status}`
             );
           }
 
-          // In sandbox, log warning but continue processing
-          // PayPal sandbox signature verification is known to be unreliable
           console.warn(
-            `PayPal webhook signature verification failed in sandbox: ${verifyResponse.verification_status}. ` +
-              'Continuing anyway as this is a known issue with PayPal sandbox.'
+            `PayPal webhook signature verification bypassed locally: ${verifyResponse.verification_status}.`
           );
         }
       } else {
-        // No signature headers - this is a simulated/test event from PayPal Dashboard
-        if (this.configs.environment === 'production') {
-          // In production, reject events without signature headers
+        if (!allowUnsignedPayPalWebhook()) {
           throw new Error(
             'Missing webhook signature headers - rejecting event'
           );
         }
 
-        // In sandbox, allow events without headers (simulated events from Dashboard)
         console.warn(
-          'PayPal webhook: No signature headers present (simulated event). Skipping verification in sandbox.'
+          'PayPal webhook signature headers bypassed for local development.'
         );
       }
 
@@ -1219,4 +1213,11 @@ export class PayPalProvider implements PaymentProvider {
  */
 export function createPayPalProvider(configs: PayPalConfigs): PayPalProvider {
   return new PayPalProvider(configs);
+}
+
+function allowUnsignedPayPalWebhook(): boolean {
+  return (
+    process.env.NODE_ENV === 'development' &&
+    process.env.PAYPAL_ALLOW_UNSIGNED_WEBHOOKS === 'true'
+  );
 }

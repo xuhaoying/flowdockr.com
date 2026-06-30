@@ -6,15 +6,15 @@ export function PricingHero() {
     <section className="border-brand-lavender/25 rounded-3xl border bg-white px-6 py-8 shadow-sm shadow-slate-950/5 md:px-8 md:py-10">
       <div className="max-w-3xl space-y-4">
         <p className="border-brand-lavender/40 bg-brand-bg text-brand-primary inline-flex w-fit rounded-full border px-2.5 py-1 text-xs font-medium">
-          Negotiation support plans
+          Reply support plans
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-          Pricing for real client negotiations
+          Pricing for difficult client messages
         </h1>
         <p className="text-base text-slate-700 md:text-lg">
           FlowDockr helps freelancers and agencies handle pricing pressure,
           discount requests, scope creep, demanding-client boundaries, and
-          difficult no-thanks conversations with clearer negotiation guidance.
+          difficult no-thanks conversations with clearer professional replies.
         </p>
         <p className="max-w-2xl text-sm leading-relaxed text-slate-600">
           Review the situation, compare response strategies, and choose a reply

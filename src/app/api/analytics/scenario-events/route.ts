@@ -7,6 +7,12 @@ import {
 } from '@/lib/analytics/scenarioEventLog';
 import { getPricingScenarioBySlug } from '@/lib/pricing-cluster';
 
+import {
+  PermissionDeniedError,
+  PERMISSIONS,
+  requirePermission,
+} from '@/core/rbac';
+
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
@@ -51,21 +57,25 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.warn(
+      'scenario analytics event was not recorded:',
+      error instanceof Error ? error.message : error
+    );
+
     return NextResponse.json(
       {
         ok: false,
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Failed to record scenario analytics event.',
+        message: 'Scenario analytics event was not recorded.',
       },
-      { status: 500 }
+      { status: 202 }
     );
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
+    await requirePermission({ code: PERMISSIONS.ADMIN_ACCESS });
+
     const { searchParams } = request.nextUrl;
     const days = Number.parseInt(searchParams.get('days') || '30', 10);
     const limit = Number.parseInt(searchParams.get('limit') || '200', 10);
@@ -98,6 +108,13 @@ export async function GET(request: NextRequest) {
       eventCounts: result.eventCounts,
     });
   } catch (error) {
+    if (error instanceof PermissionDeniedError) {
+      return NextResponse.json(
+        { ok: false, message: 'Forbidden.' },
+        { status: 403 }
+      );
+    }
+
     return NextResponse.json(
       {
         ok: false,

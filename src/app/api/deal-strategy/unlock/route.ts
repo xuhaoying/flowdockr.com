@@ -1,6 +1,7 @@
+import { consumeCredit, getCredits } from '@/lib/credits';
+
 import { respData, respErr } from '@/shared/lib/resp';
 import { findAITaskById, updateAITaskById } from '@/shared/models/ai_task';
-import { consumeCredits, getRemainingCredits } from '@/shared/models/credit';
 import { getUserInfo } from '@/shared/models/user';
 
 type UnlockBody = {
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
     }
 
     if (taskInfo?.unlocked) {
-      const remainingCredits = await getRemainingCredits(user.id);
+      const remainingCredits = await getCredits(user.id);
       return respData({
         strategy_id: strategyId,
         unlocked: true,
@@ -48,16 +49,13 @@ export async function POST(request: Request) {
       });
     }
 
-    await consumeCredits({
-      userId: user.id,
-      credits: 1,
-      scene: 'deal-strategy-unlock',
-      description: 'unlock deal strategy pack',
-      metadata: JSON.stringify({
-        type: 'deal-strategy-unlock',
-        strategyId,
-      }),
-    });
+    if (!taskInfo?.generation_charged) {
+      await consumeCredit({
+        userId: user.id,
+        scenarioSlug: 'deal-strategy-unlock',
+        sourcePage: 'tool',
+      });
+    }
 
     const nextTaskInfo = {
       ...taskInfo,
@@ -69,7 +67,7 @@ export async function POST(request: Request) {
       taskInfo: JSON.stringify(nextTaskInfo),
     });
 
-    const remainingCredits = await getRemainingCredits(user.id);
+    const remainingCredits = await getCredits(user.id);
 
     return respData({
       strategy_id: strategyId,
@@ -81,7 +79,10 @@ export async function POST(request: Request) {
   } catch (e: any) {
     const msg = e?.message || 'unlock failed';
 
-    if (String(msg).toLowerCase().includes('insufficient credits')) {
+    if (
+      String(msg).toLowerCase().includes('insufficient credits') ||
+      msg === 'NO_CREDITS'
+    ) {
       return respErr('insufficient credits');
     }
 

@@ -145,18 +145,18 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
   },
   {
     id: 'scn_discount_request',
-    title: 'Client asks for a discount',
+    title: 'How to respond to discount requests professionally',
     slug: 'discount-request',
-    metaTitle:
-      'How to Respond When a Client Asks for a Discount (Without Weakening Your Rate) | FlowDockr',
+    h1: 'How to respond to discount requests professionally',
+    metaTitle: 'How to Respond to Discount Requests Professionally | FlowDockr',
     metaDescription:
-      'Use this scenario when a client asks for a discount before committing. Get a reply that protects your rate, slows the concession, and gives you cleaner tradeoff language you can send.',
+      'Copy polite email templates for handling client discount requests without lowering your value or damaging the relationship.',
     previewReply:
       "I'm open to finding a structure that works, but I do not usually reduce the same scope without changing something real behind it. If budget is the issue, we can look at priorities, timing, or a smaller first phase rather than discount the full version by default.",
     heroDescription:
-      'Use this scenario when a client asks for a discount and you need to stay cooperative without teaching them that your rate is flexible on command. Get a reply you can adapt and send.',
+      'Use this scenario when a client asks for a discount and you need to stay cooperative without teaching them that your rate is flexible on command.',
     pagePromise:
-      'Generate a discount reply that protects margin, slows the concession, and keeps you in control of the negotiation.',
+      'Generate a professional discount-request reply that protects value and offers clean tradeoffs.',
     cluster: 'pricing',
     intentTier: 'core',
     valueIntent: 'money',
@@ -596,18 +596,18 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
   },
   {
     id: 'scn_start_before_payment',
-    title: 'Client asks you to start work before payment',
+    title: 'How to ask for payment before starting work',
     slug: 'start-before-payment',
-    metaTitle:
-      'Client Wants You to Start Before Payment? What to Say | FlowDockr',
+    h1: 'How to ask for payment before starting work',
+    metaTitle: 'How to Ask for Payment Before Starting Work | FlowDockr',
     metaDescription:
-      'Use this scenario when a client asks you to begin before the deposit is paid. Hold the pre-kickoff boundary clearly and show the fastest proper next step.',
+      'Use professional email templates to request a deposit, upfront payment, or signed agreement before beginning client work.',
     previewReply:
       "I'm happy to reserve the time, but I start once the deposit and kickoff step are in place. As soon as those are handled, I can begin right away and the project stays protected on both sides.",
     heroDescription:
-      'Use this scenario when a client wants you to begin immediately, but the deposit or kickoff step is still open. Get wording that holds the boundary without killing momentum.',
+      'Use this scenario when a client wants you to begin immediately, but the deposit, upfront payment, or signed kickoff step is still open.',
     pagePromise:
-      'Generate a pre-kickoff payment reply that keeps work tied to deposit completion.',
+      'Generate a pre-kickoff payment reply that keeps work tied to deposit, upfront payment, or signed agreement completion.',
     cluster: 'payment',
     intentTier: 'core',
     valueIntent: 'money',
@@ -655,19 +655,19 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
   },
   {
     id: 'scn_ask_for_payment_politely',
-    title: 'How to ask a client for payment politely',
+    title: 'How to ask for payment politely',
     slug: 'ask-for-payment-politely',
-    h1: 'How to ask a client for payment politely',
+    h1: 'How to ask for payment politely',
     metaTitle:
-      'How to Ask a Client for Payment Politely (Without Sounding Awkward or Too Soft) | FlowDockr',
+      'How to Ask for Payment Politely: 12 Client Email Templates | FlowDockr',
     metaDescription:
-      'Use this scenario to write a polite payment reminder when a client is slow to pay. Get professional wording you can actually send without sounding awkward, apologetic, or too soft.',
+      'Copy polite payment reminder emails for clients, overdue invoices, unpaid work, and follow-ups. Generate a professional payment request message in seconds.',
     previewReply:
       'Hi [Name] — just following up on invoice [number]. I wanted to check whether you have an estimated payment date on your side. If anything is holding it up, let me know and I can help close the loop cleanly.',
     heroDescription:
-      'Use this scenario when you need to ask for payment clearly, but you do not want the message to sound awkward, emotional, or overly soft. Get a payment follow-up you can adapt and send right away.',
+      'Need to ask a client for payment without sounding rude? Use these professional payment reminder templates or generate a custom message.',
     pagePromise:
-      'Generate a polite payment follow-up that asks for timing clearly without over-escalating too soon.',
+      'Copy polite payment reminder templates or generate a professional client payment request in seconds.',
     cluster: 'payment',
     intentTier: 'core',
     valueIntent: 'money',
@@ -687,21 +687,22 @@ export const canonicalScenarioSeeds: CanonicalScenario[] = [
       'Finance is running behind, but we should have this handled shortly.',
     ],
     userSituation:
-      'You sent the invoice, payment is taking longer than expected, and you need a clear nudge that does not sound rude or apologetic.',
+      'You sent the invoice, payment is taking longer than expected, and you need wording that asks clearly without sounding rude or apologetic.',
     userGoal:
       'Ask for payment clearly while keeping the tone professional and calm.',
     searchIntentPrimary: 'how to ask client for payment politely',
-    searchIntentSecondary: 'payment reminder without sounding rude',
+    searchIntentSecondary: 'payment reminder email template',
     strategyPrimary:
       'Keep the reminder short, specific, and centered on the payment date or blocker.',
     strategySecondary:
       'Do not apologize for following up or make the ask sound optional.',
     relatedScenarioSlugs: [
+      'overdue-invoice-no-response',
+      'start-before-payment',
       'unpaid-invoice-follow-up',
       'payment-overdue-reminder',
       'second-payment-reminder',
       'final-payment-reminder',
-      'payment-extension-request',
     ],
     similarScenarioSlugs: [
       'unpaid-invoice-follow-up',

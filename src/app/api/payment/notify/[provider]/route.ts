@@ -5,6 +5,7 @@ import {
 import {
   findOrderByOrderNo,
   findOrderByTransactionId,
+  type Order,
 } from '@/shared/models/order';
 import { findSubscriptionByProviderSubscriptionId } from '@/shared/models/subscription';
 import {
@@ -53,7 +54,7 @@ export async function POST(
 
     if (eventType === PaymentEventType.CHECKOUT_SUCCESS) {
       // one-time payment or subscription first payment
-      const orderNo = session.metadata.order_no;
+      const orderNo = session.metadata?.order_no;
 
       if (!orderNo) {
         throw new Error('order no not found');
@@ -63,6 +64,8 @@ export async function POST(
       if (!order) {
         throw new Error('order not found');
       }
+
+      validateCheckoutSessionForOrder({ provider, order, session });
 
       await handleCheckoutSuccess({
         order,
@@ -174,6 +177,8 @@ export async function POST(
           throw new Error('order not found');
         }
 
+        validateCheckoutSessionForOrder({ provider, order, session });
+
         // handleCheckoutSuccess has idempotency check and optimistic lock
         await handleCheckoutSuccess({
           order,
@@ -236,4 +241,50 @@ export async function POST(
       }
     );
   }
+}
+
+function validateCheckoutSessionForOrder({
+  provider,
+  order,
+  session,
+}: {
+  provider: string;
+  order: Order;
+  session: any;
+}) {
+  if (
+    provider !== order.paymentProvider ||
+    session.provider !== order.paymentProvider
+  ) {
+    throw new Error('payment provider mismatch');
+  }
+
+  const providerSessionId = getProviderSessionId(session);
+  if (order.paymentSessionId && providerSessionId !== order.paymentSessionId) {
+    throw new Error('payment session mismatch');
+  }
+
+  const paymentAmount = Number(session.paymentInfo?.paymentAmount || 0);
+  if (order.amount > 0 && paymentAmount !== order.amount) {
+    throw new Error('payment amount mismatch');
+  }
+
+  const paymentCurrency = String(session.paymentInfo?.paymentCurrency || '')
+    .trim()
+    .toLowerCase();
+  if (
+    order.amount > 0 &&
+    (!paymentCurrency || paymentCurrency !== order.currency.toLowerCase())
+  ) {
+    throw new Error('payment currency mismatch');
+  }
+}
+
+function getProviderSessionId(session: any): string {
+  return String(
+    session.paymentResult?.id ||
+      session.paymentInfo?.transactionId ||
+      session.metadata?.checkout_id ||
+      ''
+  ).trim();
 }

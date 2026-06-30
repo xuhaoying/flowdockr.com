@@ -1,6 +1,10 @@
-import { md5 } from '@/shared/lib/hash';
+import { getUuid } from '@/shared/lib/hash';
 import { respData, respErr } from '@/shared/lib/resp';
+import { getUserInfo } from '@/shared/models/user';
 import { getStorageService } from '@/shared/services/storage';
+
+const MAX_FILES_PER_REQUEST = 5;
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 const extFromMime = (mimeType: string) => {
   const map: Record<string, string> = {
@@ -9,7 +13,6 @@ const extFromMime = (mimeType: string) => {
     'image/png': 'png',
     'image/webp': 'webp',
     'image/gif': 'gif',
-    'image/svg+xml': 'svg',
     'image/avif': 'avif',
     'image/heic': 'heic',
     'image/heif': 'heif',
@@ -19,20 +22,26 @@ const extFromMime = (mimeType: string) => {
 
 export async function POST(req: Request) {
   try {
+    const user = await getUserInfo();
+    if (!user) {
+      return Response.json(
+        { code: -1, message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const formData = await req.formData();
     const files = formData.getAll('files') as File[];
 
-    console.log('[API] Received files:', files.length);
-    files.forEach((file, i) => {
-      console.log(`[API] File ${i}:`, {
-        name: file.name,
-        type: file.type,
-        size: file.size,
-      });
-    });
-
     if (!files || files.length === 0) {
       return respErr('No files provided');
+    }
+
+    if (files.length > MAX_FILES_PER_REQUEST) {
+      return Response.json(
+        { code: -1, message: 'Too many files provided' },
+        { status: 413 }
+      );
     }
 
     const storageService = await getStorageService();
@@ -40,33 +49,22 @@ export async function POST(req: Request) {
 
     for (const file of files) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
+      const ext = extFromMime(file.type);
+      if (!ext) {
         return respErr(`File ${file.name} is not an image`);
+      }
+
+      if (file.size <= 0 || file.size > MAX_FILE_SIZE_BYTES) {
+        return Response.json(
+          { code: -1, message: `File ${file.name} is too large` },
+          { status: 413 }
+        );
       }
 
       // Convert file to buffer
       const arrayBuffer = await file.arrayBuffer();
       const body = new Uint8Array(arrayBuffer);
-
-      const digest = md5(body);
-      const ext = extFromMime(file.type) || file.name.split('.').pop() || 'bin';
-      const key = `${digest}.${ext}`;
-
-      // If the same image already exists, reuse its URL to save storage space.
-      // (Still depends on provider supporting signed HEAD + public url generation.)
-      const exists = await storageService.exists({ key });
-      if (exists) {
-        const publicUrl = storageService.getPublicUrl({ key });
-        if (publicUrl) {
-          uploadResults.push({
-            url: publicUrl,
-            key,
-            filename: file.name,
-            deduped: true,
-          });
-          continue;
-        }
-      }
+      const key = `uploads/${user.id}/${getUuid()}.${ext}`;
 
       // Upload to storage
       const result = await storageService.uploadFile({
@@ -81,8 +79,6 @@ export async function POST(req: Request) {
         return respErr(result.error || 'Upload failed');
       }
 
-      console.log('[API] Upload success:', result.url);
-
       uploadResults.push({
         url: result.url,
         key: result.key,
@@ -90,11 +86,6 @@ export async function POST(req: Request) {
         deduped: false,
       });
     }
-
-    console.log(
-      '[API] All uploads complete. Returning URLs:',
-      uploadResults.map((r) => r.url)
-    );
 
     return respData({
       urls: uploadResults.map((r) => r.url),

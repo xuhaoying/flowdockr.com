@@ -59,8 +59,8 @@ export default async function ToolsPage({
             When to use this page
           </h2>
           <p className="mt-1 text-sm text-slate-700">
-            You already have a client message and want a negotiation-aware draft
-            quickly.
+            You already have a client message or rough draft and want a cleaner
+            professional reply quickly.
           </p>
         </article>
         <article className="border-brand-lavender/25 rounded-xl border bg-white p-4 shadow-sm shadow-slate-950/5">

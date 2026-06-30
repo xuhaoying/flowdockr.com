@@ -1,6 +1,8 @@
 export type GenerationIdentity = {
   userId?: string;
   anonymousId?: string;
+  ipHash?: string;
+  userAgentHash?: string;
   isLoggedIn: boolean;
   createdAnonymousId?: boolean;
 };

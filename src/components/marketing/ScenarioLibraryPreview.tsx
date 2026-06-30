@@ -21,8 +21,7 @@ export function ScenarioLibraryPreview() {
           Scenario library preview
         </h2>
         <p className="text-sm text-slate-700">
-          Real negotiation situations designed for search intent and immediate
-          action.
+          Real reply situations designed for search intent and immediate action.
         </p>
       </div>
 

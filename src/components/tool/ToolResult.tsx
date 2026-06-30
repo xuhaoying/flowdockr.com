@@ -112,7 +112,7 @@ export function ToolResult({
           </Badge>
         </div>
         <CardTitle className="text-lg tracking-tight text-slate-900">
-          Negotiation support for this situation
+          Professional reply support for this situation
         </CardTitle>
         <p className="max-w-xl text-sm leading-6 text-slate-600">
           Review the suggested approach and choose the response that best fits
@@ -250,8 +250,7 @@ export function ToolResult({
                     Alternate versions
                   </h4>
                   <p className="text-sm leading-6 text-slate-600">
-                    Compare tone-adjusted options without losing the negotiation
-                    logic.
+                    Compare tone-adjusted options without losing the main point.
                   </p>
                 </div>
 
@@ -302,7 +301,7 @@ export function ToolResult({
                   </h4>
                 </div>
                 <p className="mt-1 text-sm text-amber-900/85">
-                  Common negotiation mistakes in this situation.
+                  Common mistakes in this situation.
                 </p>
                 <ul className="mt-3 space-y-2 text-sm text-amber-900">
                   {riskInsights.map((item) => (
@@ -327,7 +326,7 @@ export function ToolResult({
                   </h4>
                 </div>
                 <p className="mt-1 text-sm text-sky-900/85">
-                  How you might respond if the negotiation continues.
+                  How you might respond if the conversation continues.
                 </p>
                 <div className="mt-3 space-y-3">
                   <div className="rounded-[18px] border border-sky-200 bg-white p-4 shadow-xs">
@@ -347,7 +346,7 @@ export function ToolResult({
                   {followUpSuggestion.direction ? (
                     <div className="rounded-[18px] border border-sky-200 bg-white p-4 shadow-xs">
                       <p className="text-xs font-semibold tracking-wide text-sky-700 uppercase">
-                        Negotiation direction
+                        Next-step direction
                       </p>
                       <p className="mt-1 text-sm leading-relaxed text-sky-950">
                         {followUpSuggestion.direction}
@@ -368,8 +367,8 @@ export function ToolResult({
                   <Button asChild variant="outline" className="rounded-xl">
                     <Link href="/history">
                       {savedHint
-                        ? 'Saved to negotiation history'
-                        : 'Save to negotiation history'}
+                        ? 'Saved to message history'
+                        : 'Save to message history'}
                     </Link>
                   </Button>
                 </div>
@@ -380,17 +379,17 @@ export function ToolResult({
               <div className="border-brand-lavender/20 rounded-[18px] border bg-white p-5 text-sm text-slate-700 shadow-xs">
                 <p className="font-semibold text-slate-900">
                   {supportLevel === 'quick_help'
-                    ? 'Upgrade to Pro for deeper negotiation support.'
+                    ? 'Upgrade to Pro for deeper reply support.'
                     : supportLevel === 'pro'
                       ? 'Upgrade to Studio for follow-up support and advanced framing.'
-                      : 'Upgrade for deeper negotiation support.'}
+                      : 'Upgrade for deeper reply support.'}
                 </p>
                 <p className="mt-1">
                   {supportLevel === 'quick_help'
-                    ? 'Unlock three reply versions, risk insights, and saved negotiation history.'
+                    ? 'Unlock three reply versions, risk insights, and saved message history.'
                     : supportLevel === 'pro'
                       ? 'Unlock follow-up suggestions and the most advanced scenario support.'
-                      : 'Unlock strategy explanations, response variants, risk alerts, and saved negotiation history.'}
+                      : 'Unlock strategy explanations, response variants, risk alerts, and saved message history.'}
                 </p>
                 <Button asChild variant="outline" className="mt-4 rounded-xl">
                   <Link href="/pricing">
@@ -482,7 +481,7 @@ function buildWhyThisWorks(params: {
   return [
     "Acknowledges the client's concern in a calm way.",
     'Reframes the conversation around scope, budget, and value.',
-    'Keeps the negotiation collaborative before you make concessions.',
+    'Keeps the conversation collaborative before you make concessions.',
   ];
 }
 
@@ -504,7 +503,7 @@ function buildStrategyInsight(params: {
   }
 
   if (params.primaryVersionKey === 'firm' || params.selectedTone === 'firm') {
-    return 'The goal here is to defend your price while keeping control of the negotiation.';
+    return 'The goal here is to defend your price while keeping control of the conversation.';
   }
 
   if (

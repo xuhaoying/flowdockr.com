@@ -1,32 +1,78 @@
-import { scenarioDatasetV1 } from '@/content/scenario-pages/scenario-dataset-v1';
-import { pricingScenarios } from '@/lib/pricing-cluster';
+import { scenarioPages } from '@/content/scenario-pages';
+import { getAllTools } from '@/lib/content/getToolBySlug';
+import { pricingScenarioPages } from '@/lib/content/pricingScenarios';
+import {
+  isLocalPageSitemapEligible,
+  isPricingScenarioSitemapEligible,
+  isScenarioPageSitemapEligible,
+  normalizeLocalPageSitemapSlug,
+} from '@/lib/seo/indexing';
 import { describe, expect, it } from 'vitest';
+
+import { getLocalPageSlugs } from '@/shared/models/post';
 
 import sitemap from './sitemap';
 
 describe('scenario sitemap coverage', () => {
-  it('includes every canonical dataset v1 scenario route', () => {
+  it('only includes scenario pages selected for indexing', () => {
     const urls = sitemap().map((entry) => entry.url);
 
-    for (const scenario of scenarioDatasetV1) {
-      expect(
-        urls.some((url) => url.endsWith(`/scenario/${scenario.slug}`))
-      ).toBe(true);
+    for (const scenario of scenarioPages) {
+      const hasScenarioUrl = urls.some((url) =>
+        url.endsWith(`/scenario/${scenario.slug}`)
+      );
+
+      expect(hasScenarioUrl).toBe(isScenarioPageSitemapEligible(scenario));
     }
   });
 
-  it('only emits english canonical urls', () => {
+  it('only emits canonical default-locale urls', () => {
     const urls = sitemap().map((entry) => entry.url);
+    const paths = urls.map((url) => new URL(url).pathname);
 
     expect(urls.some((url) => /\/(?:es|zh)(?:\/|$)/.test(url))).toBe(false);
+    expect(
+      paths.some((path) => path === '/en' || path.startsWith('/en/'))
+    ).toBe(false);
+    expect(paths).not.toContain('/privacy-policy');
+    expect(paths).not.toContain('/terms-of-service');
   });
 
-  it('includes every canonical pricing cluster route', () => {
+  it('only includes pricing pages selected for indexing', () => {
     const urls = sitemap().map((entry) => entry.url);
 
-    for (const scenario of pricingScenarios) {
+    for (const scenario of pricingScenarioPages) {
+      const hasPricingUrl = urls.some((url) =>
+        url.endsWith(`/pricing/${scenario.slug}`)
+      );
+
+      expect(hasPricingUrl).toBe(isPricingScenarioSitemapEligible(scenario));
+    }
+  });
+
+  it('includes only indexable local content pages', () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    for (const slug of getLocalPageSlugs()) {
+      const normalizedSlug = normalizeLocalPageSitemapSlug(slug);
+      const hasLocalPageUrl = urls.some((url) =>
+        normalizedSlug ? url.endsWith(`/${normalizedSlug}`) : false
+      );
+
+      expect(hasLocalPageUrl).toBe(isLocalPageSitemapEligible(slug));
+    }
+  });
+
+  it('includes the client templates hub and dynamic tool pages', () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    expect(
+      urls.some((url) => url.endsWith('/client-communication-templates'))
+    ).toBe(true);
+
+    for (const tool of getAllTools()) {
       expect(
-        urls.some((url) => url.endsWith(`/pricing/${scenario.slug}`))
+        urls.some((url) => url.endsWith(tool.url.replace(/\/$/, '')))
       ).toBe(true);
     }
   });

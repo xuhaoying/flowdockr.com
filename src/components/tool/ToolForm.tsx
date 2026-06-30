@@ -141,9 +141,9 @@ export function ToolForm({
   rateContextPlaceholder = 'Example: Quote was $2,400 for strategy, copy, and 2 revision rounds over 10 days.',
   sourcePage,
   sourceAttribution,
-  workspaceTitle = 'Paste the exact client message',
-  workspaceDescription = '2 free negotiation credits. No subscription required.',
-  submitLabel = 'Draft negotiation reply',
+  workspaceTitle = 'Paste the message or situation',
+  workspaceDescription = '2 free message drafts. No subscription required.',
+  submitLabel = 'Generate professional reply',
   analyticsEvents,
 }: ToolFormProps) {
   const fallbackSlug = scenarios[0]?.slug || 'quote-too-high';
@@ -158,7 +158,6 @@ export function ToolForm({
   const [message, setMessage] = useState(initialMessage);
   const [usage, setUsage] = useState<UsageState>(INITIAL_USAGE);
   const [upgradeVisible, setUpgradeVisible] = useState(false);
-  const [checkoutEmail, setCheckoutEmail] = useState('');
   const [checkoutLoading, setCheckoutLoading] =
     useState<CreditPackageId | null>(null);
   const [projectType, setProjectType] = useState<DealProjectType>('other');
@@ -635,9 +634,7 @@ export function ToolForm({
       );
       setUpgradeVisible(false);
       setSavedHint(
-        response.entitlements?.historyEnabled
-          ? 'Saved to negotiation history.'
-          : ''
+        response.entitlements?.historyEnabled ? 'Saved to message history.' : ''
       );
 
       setUsage((prev) => {
@@ -875,7 +872,7 @@ export function ToolForm({
                 setResult(null);
                 setSavedHint('');
               }}
-              label="Pricing situation"
+              label="Situation"
             />
           ) : null}
 
@@ -888,11 +885,11 @@ export function ToolForm({
           <label className="block space-y-2.5">
             <div className="space-y-1">
               <span className="text-sm font-medium text-slate-800">
-                Client message
+                Message or situation
               </span>
               <p className="text-xs text-slate-600">
-                Paste the exact wording so the reply matches the pressure in the
-                conversation.
+                Paste the message you received, your rough draft, or a short
+                situation description.
               </p>
             </div>
             <Textarea
@@ -1039,8 +1036,6 @@ export function ToolForm({
           {paywallVisible && (
             <ToolPaywall
               loggedIn={usage.loggedIn}
-              email={checkoutEmail}
-              onEmailChange={setCheckoutEmail}
               loadingPackageId={checkoutLoading}
               onCheckout={onCheckout}
             />
@@ -1124,9 +1119,9 @@ function toUserErrorMessage(errorCode: string) {
     case 'SCENARIO_NOT_FOUND':
       return 'Scenario not found. Please select another scenario.';
     case 'FREE_LIMIT_REACHED':
-      return "You've used your 2 free negotiation credits. Buy more credits to keep generating.";
+      return "You've used your 2 free message drafts. Buy more credits to keep generating.";
     case 'INSUFFICIENT_CREDITS':
-      return 'No credits available. Buy more negotiation credits to continue generating.';
+      return 'No credits available. Buy more message credits to continue generating.';
     case 'PARSE_FAILED':
       return 'Generation format was invalid. Please try again.';
     case 'INTERNAL_ERROR':

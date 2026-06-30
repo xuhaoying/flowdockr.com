@@ -32,7 +32,7 @@ export function ScenarioHero({
             </li>
             <li>/</li>
             <li>
-              <Link href="/scenario">Negotiation situations</Link>
+              <Link href="/scenario">Reply scenarios</Link>
             </li>
             <li>/</li>
             <li className="text-slate-900">{title}</li>
@@ -76,7 +76,7 @@ export function ScenarioHero({
             size="lg"
             className="w-full sm:w-auto"
           >
-            <Link href="/scenario">Browse all situations</Link>
+            <Link href="/client-communication-templates">Browse templates</Link>
           </Button>
         </div>
 

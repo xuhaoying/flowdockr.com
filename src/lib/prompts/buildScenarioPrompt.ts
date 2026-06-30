@@ -82,17 +82,23 @@ export function buildScenarioPrompt(params: {
     );
   }
 
-  sections.push(`User's client message:\n"""\n${message}\n"""`);
+  sections.push(
+    `User input (client message, rough draft, or situation):\n"""\n${message}\n"""`
+  );
   sections.push(
     [
       'Task:',
-      'Write three sendable reply variants plus the strategy block.',
+      'Write three sendable professional message variants plus the strategy block.',
       '',
       'Important requirements:',
-      '- Match the exact pressure in the client message.',
+      '- First infer whether the user input is a message they received, a rough draft they want to send, or a short situation description.',
+      '- If it is a received message, write replies to that message.',
+      '- If it is a rough draft, rewrite it into cleaner sendable versions without reversing sender and recipient.',
+      '- If it is a situation description, draft the outgoing message the user should send.',
+      '- Match the exact pressure, goal, and relationship context in the input.',
       '- Protect value, scope, payment, or boundaries where appropriate.',
       '- Keep the relationship constructive without sounding weak.',
-      '- Keep the replies concise, natural, and directly sendable.',
+      '- Keep the messages concise, natural, and directly sendable.',
       '- Do not invent project facts or offer unstructured concessions.',
       '- Prefer a concrete next step over vague politeness.',
     ].join('\n')

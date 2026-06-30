@@ -8,6 +8,7 @@ import {
   pgTable,
   text,
   timestamp,
+  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 
 import { envConfigs } from '@/config';
@@ -575,6 +576,29 @@ export const webhookEvent = table(
   ]
 );
 
+export const rateLimitCounter = table(
+  'rate_limit_counter',
+  {
+    id: text('id').primaryKey(),
+    bucket: text('bucket').notNull(),
+    keyHash: text('key_hash').notNull(),
+    windowStart: timestamp('window_start').notNull(),
+    count: integer('count').notNull().default(0),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex('uniq_rate_limit_counter_window').on(
+      table.bucket,
+      table.keyHash,
+      table.windowStart
+    ),
+    index('idx_rate_limit_counter_updated').on(table.updatedAt),
+  ]
+);
+
 export const creditTransaction = table(
   'credit_transaction',
   {
@@ -621,6 +645,28 @@ export const anonymousUsage = table(
   ]
 );
 
+export const userFreeUsage = table(
+  'user_free_usage',
+  {
+    userId: text('user_id')
+      .primaryKey()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    freeGenerationsUsed: integer('free_generations_used').default(0).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    check(
+      'chk_user_free_usage_non_negative',
+      sql`${table.freeGenerationsUsed} >= 0`
+    ),
+    index('idx_user_free_usage_updated').on(table.updatedAt),
+  ]
+);
+
 export const anonymousLinkSession = table(
   'anonymous_link_session',
   {
@@ -634,6 +680,33 @@ export const anonymousLinkSession = table(
   (table) => [
     index('idx_anon_link_user').on(table.userId),
     index('idx_anon_link_session').on(table.anonymousSessionId),
+  ]
+);
+
+export const scenarioPackRedemption = table(
+  'scenario_pack_redemption',
+  {
+    id: text('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    stripeCheckoutSessionId: text('stripe_checkout_session_id')
+      .notNull()
+      .unique(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    packId: text('pack_id').notNull(),
+    creditsGranted: integer('credits_granted').notNull(),
+    creditId: text('credit_id'),
+  },
+  (table) => [
+    check(
+      'chk_scenario_pack_redemption_credits_positive',
+      sql`${table.creditsGranted} > 0`
+    ),
+    index('idx_scenario_pack_redemption_user_created').on(
+      table.userId,
+      table.createdAt
+    ),
   ]
 );
 

@@ -9,7 +9,7 @@ const FAQ_ITEMS = [
   {
     value: 'credits',
     question: 'Do credits expire?',
-    answer: 'No. Negotiation credits do not expire.',
+    answer: 'No. Message credits do not expire.',
   },
   {
     value: 'subscription',
@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
     value: 'ai-tool',
     question: 'Is this just an AI writing tool?',
     answer:
-      'No. FlowDockr is built around negotiation guidance, response strategy, and client conversation decisions rather than generic writing prompts.',
+      'No. FlowDockr is built around response strategy and client conversation decisions rather than generic writing prompts.',
   },
   {
     value: 'when-to-use',

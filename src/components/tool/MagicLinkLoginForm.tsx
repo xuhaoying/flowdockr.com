@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { trackEvent } from '@/lib/analytics-client';
 
 import { Button } from '@/shared/components/ui/button';
@@ -16,7 +16,13 @@ export function MagicLinkLoginForm({ callbackUrl }: MagicLinkLoginFormProps) {
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
 
-  const sendMagicLink = async () => {
+  const sendMagicLink = async (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+
+    if (loading || email.trim().length < 5) {
+      return;
+    }
+
     setLoading(true);
     setError('');
 
@@ -57,7 +63,7 @@ export function MagicLinkLoginForm({ callbackUrl }: MagicLinkLoginFormProps) {
   };
 
   return (
-    <div className="space-y-4 rounded-lg border p-6">
+    <form className="space-y-4 rounded-lg border p-6" onSubmit={sendMagicLink}>
       <div className="space-y-2">
         <label htmlFor="login_email" className="text-sm font-medium">
           Email
@@ -68,14 +74,12 @@ export function MagicLinkLoginForm({ callbackUrl }: MagicLinkLoginFormProps) {
           placeholder="you@domain.com"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          autoComplete="email"
+          required
         />
       </div>
 
-      <Button
-        type="button"
-        onClick={sendMagicLink}
-        disabled={loading || email.trim().length < 5}
-      >
+      <Button type="submit" disabled={loading || email.trim().length < 5}>
         {loading ? 'Sending...' : 'Send magic link'}
       </Button>
 
@@ -90,6 +94,6 @@ export function MagicLinkLoginForm({ callbackUrl }: MagicLinkLoginFormProps) {
           {error}
         </div>
       ) : null}
-    </div>
+    </form>
   );
 }

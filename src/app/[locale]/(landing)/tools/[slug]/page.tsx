@@ -23,11 +23,14 @@ import type { DealTone } from '@/types/deals';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
+import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
+import { AppContextProvider } from '@/shared/contexts/app';
+import { getLocalPage, getLocalPageSlugs } from '@/shared/models/post';
 
 const defaultGeneratorScenarioByToolSlug: Record<string, string> = {
-  'reply-generator': 'discount-request',
+  'reply-generator': 'ask-for-payment-politely',
   'price-negotiation-email-generator': 'quote-too-high',
 };
 
@@ -55,6 +58,15 @@ const REPLY_GENERATOR_PREFILLS: Record<
     taskContext: 'Goal: protect scope and keep the next step clear.',
     workspaceDescription:
       'Loaded a starting out-of-scope reply draft. Recommended tone: Firm. Edit the message or paste the exact client request before generating.',
+  },
+  'ask-for-payment-politely': {
+    message:
+      'Hi Sarah, following up on invoice #0187, which was due last Friday. Could you confirm when payment is scheduled?',
+    tone: 'professional',
+    taskContext:
+      'Goal: ask for payment clearly without sounding rude or apologetic.',
+    workspaceDescription:
+      'Loaded a polite payment reminder draft. Recommended tone: Professional. Replace it with the real client thread or edit from this example.',
   },
   'client-no-response-follow-up': {
     message:
@@ -91,7 +103,13 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const slugs = getAllToolSlugs();
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  const toolPageSlugs = getLocalPageSlugs()
+    .filter((slug) => slug.startsWith('tools/'))
+    .map((slug) => slug.replace(/^tools\//, ''));
+  const allSlugs = Array.from(new Set([...slugs, ...toolPageSlugs]));
+  return locales.flatMap((locale) =>
+    allSlugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({
@@ -99,10 +117,21 @@ export async function generateMetadata({
 }: {
   params: Promise<ToolPageParams>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const tool = getToolBySlug(slug);
 
   if (!tool) {
+    const staticPage = await getLocalPage({ slug: `tools/${slug}`, locale });
+    if (staticPage) {
+      return {
+        title: staticPage.title,
+        description: staticPage.description,
+        alternates: {
+          canonical: `${envConfigs.site_url}/tools/${slug}`,
+        },
+      };
+    }
+
     return {
       title: 'Tool not found | FlowDockr',
       robots: {
@@ -139,6 +168,16 @@ export default async function ToolPage({
 
   const tool = getToolBySlug(slug);
   if (!tool) {
+    const staticPage = await getLocalPage({ slug: `tools/${slug}`, locale });
+    if (staticPage) {
+      const StaticPage = await getThemePage('static-page');
+      return (
+        <AppContextProvider>
+          <StaticPage locale={locale} post={staticPage} />
+        </AppContextProvider>
+      );
+    }
+
     notFound();
   }
 
@@ -234,11 +273,14 @@ export default async function ToolPage({
               }
             : undefined
         }
-        showScenarioSelector={false}
+        showScenarioSelector={tool.slug === 'reply-generator'}
+        showAdvancedFields={tool.slug === 'reply-generator'}
         placeholder={clientMessageInput?.placeholder}
+        submitLabel="Generate professional reply"
+        workspaceTitle="Paste the message or situation"
         workspaceDescription={
           replyGeneratorPrefill?.workspaceDescription ||
-          '2 free negotiation credits. No subscription required.'
+          'Choose a situation, paste the real wording or rough draft, and generate a reply you can edit before sending.'
         }
       />
 
@@ -256,7 +298,7 @@ export default async function ToolPage({
         </h2>
         <p className="text-sm text-slate-700">
           Start with 2 free drafts, then use credits when you need more active
-          deal output.
+          reply drafts.
         </p>
         <PricingCards sourcePage="tool" />
       </section>

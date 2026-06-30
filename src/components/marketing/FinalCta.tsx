@@ -7,15 +7,16 @@ export function FinalCta() {
         Paste the message before you answer
       </h2>
       <p className="mt-2 max-w-2xl text-sm text-slate-700">
-        One rushed concession can reset your pricing for the whole deal. Draft a
-        negotiation-aware reply first, then send with a clear position.
+        Payment reminders, scope boundaries, discount requests, and follow-ups
+        all get harder when you are typing under pressure. Draft the reply
+        first, then send the version that sounds clear and professional.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
-          href="/scenario"
+          href="/client-communication-templates"
           className="from-brand-primary to-brand-cyan shadow-brand-primary/25 inline-flex min-h-11 items-center rounded-md bg-linear-to-r px-4 py-2 text-sm font-semibold text-white shadow-sm"
         >
-          Browse reply scenarios
+          Browse templates
         </Link>
         <Link
           href="/tools/reply-generator"

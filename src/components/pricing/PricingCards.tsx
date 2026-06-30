@@ -17,13 +17,12 @@ type PricingCardsProps = {
 };
 
 const USAGE_HINTS: Record<string, string> = {
-  free_trial:
-    'Best when you want to test one real negotiation situation first.',
+  free_trial: 'Best when you want to test one real client message first.',
   quick_help:
     'Best when you need one clear response for a live client conversation.',
   pro: 'Best when you want deeper support and need to compare response styles.',
   studio:
-    'Best when the negotiation is ongoing and you want next-step support as well.',
+    'Best when the conversation is ongoing and you want next-step support as well.',
 };
 
 const CTA_LABELS: Record<string, string> = {
@@ -137,7 +136,7 @@ export function PricingCards({
           </h2>
           <p className="text-sm leading-relaxed text-slate-700">
             Start free, then move into the support level that matches how often
-            you handle difficult client negotiations.
+            you handle difficult client conversations.
           </p>
         </div>
       ) : null}
@@ -162,7 +161,7 @@ export function PricingCards({
             <div>
               <p className="text-3xl font-bold text-slate-900">$0</p>
               <p className="mt-1 text-sm text-slate-700">
-                {freeTrialPlan.credits} negotiation credits
+                {freeTrialPlan.credits} message credits
               </p>
             </div>
 
@@ -248,7 +247,7 @@ export function PricingCards({
                       isPopular ? 'text-slate-200' : 'text-slate-700'
                     }`}
                   >
-                    {pack.credits} negotiation credits
+                    {pack.credits} message credits
                   </p>
                 </div>
 

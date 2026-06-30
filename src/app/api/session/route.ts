@@ -18,19 +18,32 @@ export async function POST(request: NextRequest) {
       created = true;
     }
 
-    const usage = await ensureAnonymousUsageRecord({
-      anonymousSessionId,
-      request,
-    });
+    let freeGenerationsUsed = 0;
+    let degraded = false;
+
+    try {
+      const usage = await ensureAnonymousUsageRecord({
+        anonymousSessionId,
+        request,
+      });
+      freeGenerationsUsed = usage.freeGenerationsUsed || 0;
+    } catch (error) {
+      degraded = true;
+      console.warn(
+        'anonymous session usage bootstrap failed:',
+        error instanceof Error ? error.message : 'UNKNOWN'
+      );
+    }
 
     const response = NextResponse.json({
       ok: true,
       anonymousSessionId,
       remainingFreeGenerations: Math.max(
         0,
-        FREE_GENERATION_LIMIT - (usage.freeGenerationsUsed || 0)
+        FREE_GENERATION_LIMIT - freeGenerationsUsed
       ),
       created,
+      degraded,
     });
 
     if (created) {

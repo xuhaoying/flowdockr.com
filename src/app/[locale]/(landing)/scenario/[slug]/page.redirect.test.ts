@@ -135,4 +135,17 @@ describe('scenario page canonical redirects', () => {
       `${envConfigs.site_url}/scenario/discount-request`
     );
   });
+
+  it('canonicalizes thin scenario variants to the selected pillar page', async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({
+        locale: defaultLocale,
+        slug: 'ten-percent-off-request',
+      }),
+    });
+
+    expect(metadata.alternates?.canonical).toBe(
+      `${envConfigs.site_url}/pricing/small-discount-before-closing`
+    );
+  });
 });

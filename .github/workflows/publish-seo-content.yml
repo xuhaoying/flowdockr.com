@@ -21,7 +21,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.12.4
           run_install: false
 
       - name: Setup Node
@@ -34,9 +34,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Generate sitemap v2
-        run: pnpm seo:factory:sitemap
-
       - name: Build
         run: pnpm build
 
@@ -47,7 +44,6 @@ jobs:
           name: seo-publish-context
           path: |
             product/seo/generated
-            public/sitemap.xml
 
       - name: Vercel deploy placeholder
         run: echo "Add Vercel deploy integration step here (project-specific token/project id)."

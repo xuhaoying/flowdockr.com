@@ -80,7 +80,9 @@ export class GeminiProvider implements AIProvider {
             });
           }
         } catch (e) {
-          console.error('failed to fetch image input', imageUrl, e);
+          console.error('failed to fetch image input', {
+            error: e instanceof Error ? e.message : 'UNKNOWN',
+          });
         }
       }
     }

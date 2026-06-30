@@ -1,9 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getUuid } from '@/shared/lib/hash';
+import { getUserInfo } from '@/shared/models/user';
 import { getStorageService } from '@/shared/services/storage';
+
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_IMAGE_TYPES: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+  'image/gif': 'gif',
+  'image/avif': 'avif',
+  'image/heic': 'heic',
+  'image/heif': 'heif',
+};
 
 export async function POST(request: NextRequest) {
   try {
+    const user = await getUserInfo();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
 
@@ -11,14 +29,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
+    const ext = ALLOWED_IMAGE_TYPES[file.type];
+    if (!ext) {
+      return NextResponse.json(
+        { error: 'Unsupported image type' },
+        { status: 400 }
+      );
+    }
+
+    if (file.size <= 0 || file.size > MAX_FILE_SIZE_BYTES) {
+      return NextResponse.json({ error: 'File is too large' }, { status: 413 });
+    }
+
     const storageService = await getStorageService();
 
     const now = new Date();
     const dateFolder = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(2, 8);
-    const ext = file.name.split('.').pop();
-    const key = `${dateFolder}/${timestamp}-${randomStr}.${ext}`;
+    const key = `uploads/${user.id}/${dateFolder}/${getUuid()}.${ext}`;
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
